@@ -6,13 +6,13 @@
     <h1 class="page-title">{{ _('Logfile viewer') }}</h1>
   </div>
   <div class="page-actions">
-    {%- if log_enable %}<a class="btn btn-sm" href="{{ url_for('admin.download_log', logtype=0) }}" id="log_file_0">{{ ui.icon('download') }}{{ _('Download Calibre-Web Log') }}</a>{% endif %}
+    {%- if log_enable %}<a class="btn btn-sm" href="{{ url_for('admin.download_log', logtype=0) }}" id="log_file_0">{{ ui.icon('download') }}{{ _('Download Scriptorium Log') }}</a>{% endif %}
     {%- if accesslog_enable %}<a class="btn btn-sm" href="{{ url_for('admin.download_log', logtype=1) }}" id="log_file_1">{{ ui.icon('download') }}{{ _('Download Access Log') }}</a>{% endif %}
   </div>
 </div>
 {%- if log_enable or accesslog_enable %}
 <div class="segmented" role="group" aria-label="{{ _('Log') }}" id="log_group">
-  {%- if log_enable %}<label><input type="radio" name="log_radio" value="0" checked data-log-url="{{ url_for('admin.send_logfile', logtype=0) }}"><span>{{ _('Calibre-Web Log') }}</span></label>{% endif %}
+  {%- if log_enable %}<label><input type="radio" name="log_radio" value="0" checked data-log-url="{{ url_for('admin.send_logfile', logtype=0) }}"><span>{{ _('Scriptorium Log') }}</span></label>{% endif %}
   {%- if accesslog_enable %}<label><input type="radio" name="log_radio" value="1" {% if not log_enable %}checked{% endif %} data-log-url="{{ url_for('admin.send_logfile', logtype=1) }}"><span>{{ _('Access Log') }}</span></label>{% endif %}
 </div>
 <pre class="log-view" id="renderer" aria-live="polite"></pre>

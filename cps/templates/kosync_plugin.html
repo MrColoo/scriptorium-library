@@ -5,13 +5,13 @@
   <div>
     <span class="page-eyebrow"><a href="{{ url_for('web.profile') }}#kobo">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Profile') }}</a></span>
     <h1 class="page-title">{{ _('Sync with KOReader') }}</h1>
-    <span class="page-subtitle">{{ _('The CWA plugin keeps your reading position in step between KOReader and this library.') }}</span>
+    <span class="page-subtitle">{{ _('The Scriptorium plugin keeps your reading position in step between KOReader and this library.') }}</span>
   </div>
 </div>
 
 {%- if not kosync_enabled %}
 <div class="alert alert--warning">{{ ui.icon('alert') }}<div class="alert-body"><strong>{{ _('KOReader Sync is disabled.') }}</strong>
-  {%- if current_user.role_admin() %}<a href="{{ url_for('cwa_settings.set_cwa_settings') }}">{{ _('Open CWA Settings') }}</a>{% else %}{{ _('Ask an administrator to turn it on.') }}{% endif %}</div></div>
+  {%- if current_user.role_admin() %}<a href="{{ url_for('cwa_settings.set_cwa_settings') }}">{{ _('Open Automation Settings') }}</a>{% else %}{{ _('Ask an administrator to turn it on.') }}{% endif %}</div></div>
 {%- endif %}
 
 <ol class="steps">
@@ -21,9 +21,9 @@
       <h3>{{ _('Download the plugin') }}</h3>
       <p class="muted">{{ _('Works with KOReader on Kobo, Kindle, PocketBook, Android and other supported devices.') }}</p>
       {%- if kosync_enabled %}
-      <div><a class="btn btn-primary" href="{{ url_for('static', filename='koplugin.zip') }}" download>{{ ui.icon('download') }}{{ _('Download CWA Sync Plugin') }}</a></div>
+      <div><a class="btn btn-primary" href="{{ url_for('static', filename='koplugin.zip') }}" download>{{ ui.icon('download') }}{{ _('Download Scriptorium Sync Plugin') }}</a></div>
       {%- else %}
-      <p class="hint">{{ _('Download is available after enabling KOReader Sync in CWA Settings.') }}</p>
+      <p class="hint">{{ _('Download is available after enabling KOReader Sync in Automation Settings.') }}</p>
       {%- endif %}
     </div>
   </li>
@@ -42,7 +42,7 @@
     <span class="step-marker">3</span>
     <div class="step-body">
       <h3>{{ _('Sign in from KOReader') }}</h3>
-      <p class="muted">{{ _('Open a book, tap the top of the screen, open the Tools menu and choose “CWA Progress Sync”. Enter:') }}</p>
+      <p class="muted">{{ _('Open a book, tap the top of the screen, open the Tools menu and choose “Scriptorium Sync”. Enter:') }}</p>
       <dl class="dl">
         <dt>{{ _('Server URL') }}</dt>
         <dd><div class="code-line"><code id="kosync-url">{{ request.url_root }}</code><button class="btn btn-sm" type="button" data-copy-target="#kosync-url">{{ ui.icon('copy') }}{{ _('Copy') }}</button></div></dd>

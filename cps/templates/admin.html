@@ -9,7 +9,7 @@
     <span class="page-subtitle">{{ _('Users, library, automation and server.') }}</span>
   </div>
   <div class="page-actions">
-    <a class="btn btn-sm" href="{{ url_for('cwa_check_status.cwa_flash_status') }}" id="check_mon_srvs">{{ ui.icon('activity') }}{{ _('Check CWA Status') }}</a>
+    <a class="btn btn-sm" href="{{ url_for('cwa_check_status.cwa_flash_status') }}" id="check_mon_srvs">{{ ui.icon('activity') }}{{ _('Check Service Status') }}</a>
     <a class="btn btn-sm" href="{{ url_for('cwa_stats.cwa_stats_show') }}" id="cwa_stats">{{ ui.icon('chart') }}{{ _('Statistics') }}</a>
   </div>
 </div>
@@ -152,7 +152,7 @@
         <table class="table" id="update_table">
           <thead><tr><th>{{ _('Component') }}</th><th>{{ _('Version') }}</th></tr></thead>
           <tbody>
-            <tr><td class="cell-strong">Calibre-Web Automated</td><td class="mono">{{ cwa_version }}</td></tr>
+            <tr><td class="cell-strong">Scriptorium</td><td class="mono">{{ cwa_version }}</td></tr>
             <tr><td class="cell-strong">Calibre</td><td class="mono">{{ calibre_version }}</td></tr>
             <tr><td class="cell-strong">Kepubify</td><td class="mono">{{ kepubify_version }}</td></tr>
           </tbody>

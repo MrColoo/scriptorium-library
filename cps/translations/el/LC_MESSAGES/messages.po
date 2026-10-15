@@ -1,13 +1,13 @@
 # Greek Translations for Calibre-Web.
 # Copyright (C) 2020 Ozzie Isaacs
-# This file is distributed under the same license as the Calibre-Web project.
+# This file is distributed under the same license as the Calibre-Web
+# project.
 # Depountis Georgios 2020.
 msgid ""
 msgstr ""
-"Project-Id-Version:  Calibre-Web Automated\n"
-"Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
-"Automated\n"
-"POT-Creation-Date: 2026-10-15 22:38+0200\n"
+"Project-Id-Version: Calibre-Web Automated\n"
+"Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
+"POT-Creation-Date: 2026-10-15 23:47+0200\n"
 "PO-Revision-Date: 2025-09-03 14:59+0200\n"
 "Last-Translator: Depountis Georgios\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.13.1\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: cps/about.py:65 cps/templates/admin.html:13
 #: cps/templates/cwa_stats_full.html:6 cps/templates/cwa_stats_tabs.html:33
@@ -215,8 +215,8 @@ msgstr ""
 
 #: cps/admin.py:920 cps/admin.py:2462
 #, fuzzy
-msgid "Calibre-Web Automated configuration updated"
-msgstr "Ενημερώθηκε η διαμόρφωση Calibre-Web"
+msgid "Scriptorium configuration updated"
+msgstr "Ενημερώθηκε η διαμόρφωση Scriptorium"
 
 #: cps/admin.py:932
 msgid "Do you really want to delete the Kobo Token?"
@@ -275,14 +275,14 @@ msgstr "Είσαι σίγουρος/η πως θέλεις να κάνεις κ�
 
 #: cps/admin.py:955
 msgid ""
-"Calibre-Web Automated will search for updated Covers and update Cover "
-"Thumbnails, this may take a while?"
+"Scriptorium will search for updated Covers and update Cover Thumbnails, this "
+"may take a while?"
 msgstr ""
 
 #: cps/admin.py:958
 msgid ""
-"Are you sure you want delete Calibre-Web Automated's sync database to force "
-"a full sync with your Kobo Reader?"
+"Are you sure you want delete Scriptorium's sync database to force a full "
+"sync with your Kobo Reader?"
 msgstr ""
 
 #: cps/admin.py:1193 cps/admin.py:1199 cps/admin.py:1208 cps/admin.py:1217
@@ -836,7 +836,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:159
+#: cps/templates/layout.html:162
 msgid "Customize"
 msgstr ""
 
@@ -974,7 +974,7 @@ msgstr ""
 
 #: cps/cwa_functions.py:999
 #, fuzzy
-msgid "Calibre-Web Automated User Settings"
+msgid "Automation Settings"
 msgstr "Calibre E-Book Ρυθμίσεις Μετατροπέα"
 
 #: cps/cwa_functions.py:1045 cps/cwa_functions.py:1047
@@ -1046,8 +1046,8 @@ msgstr "ʼΑγνωστο"
 
 #: cps/cwa_functions.py:1271
 #, fuzzy
-msgid "Calibre-Web Automated Stats & Activity"
-msgstr "Calibre-Web δοκιμαστικό e-mail"
+msgid "Stats & Activity"
+msgstr "Scriptorium δοκιμαστικό e-mail"
 
 #: cps/cwa_functions.py:1655
 msgid "Full Enforcement History"
@@ -1283,7 +1283,7 @@ msgstr ""
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr ""
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:272
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:276
 msgid "Upload done, processing, please wait..."
 msgstr "Το ανέβασμα έγινε, γίνεται επεξεργασία, παρακαλούμε περίμενε..."
 
@@ -1457,8 +1457,8 @@ msgstr "Αποστολή στο Kindle"
 
 #: cps/helper.py:114 cps/helper.py:141 cps/helper.py:254
 #, fuzzy
-msgid "This Email has been sent via Calibre-Web Automated."
-msgstr "Αυτό το e-mail έχει σταλεί μέσω Calibre-Web."
+msgid "This Email has been sent via Scriptorium."
+msgstr "Αυτό το e-mail έχει σταλεί μέσω Scriptorium."
 
 #: cps/helper.py:129
 #, fuzzy, python-format
@@ -1472,8 +1472,8 @@ msgstr "%(format)s η δομή δεν βρέθηκε για την ταυτότ�
 
 #: cps/helper.py:139
 #, fuzzy
-msgid "Calibre-Web Automated Test Email"
-msgstr "Calibre-Web δοκιμαστικό e-mail"
+msgid "Scriptorium Test Email"
+msgstr "Scriptorium δοκιμαστικό e-mail"
 
 #: cps/helper.py:140
 #, fuzzy
@@ -1482,8 +1482,8 @@ msgstr "Δοκιμαστικό e-mail"
 
 #: cps/helper.py:157
 #, fuzzy
-msgid "Get Started with Calibre-Web Automated"
-msgstr "Ξεκινήστε με το Calibre-Web"
+msgid "Get Started with Scriptorium"
+msgstr "Ξεκινήστε με το Scriptorium"
 
 #: cps/helper.py:162
 #, fuzzy, python-format
@@ -1641,8 +1641,8 @@ msgstr "Σφάλμα εκτέλεσης UnRar"
 #: cps/helper.py:1361
 #, python-format
 msgid ""
-"Unsupported architecture detected: %(arch)s. CWA is optimized for x86_64 and "
-"aarch64."
+"Unsupported architecture detected: %(arch)s. Scriptorium is optimized for "
+"x86_64 and aarch64."
 msgstr ""
 
 #: cps/helper.py:1370
@@ -1680,8 +1680,8 @@ msgstr ""
 #: cps/kobo_auth.py:110
 #, fuzzy
 msgid ""
-"Please access Calibre-Web Automated from non localhost to get valid "
-"api_endpoint for kobo device"
+"Please access Scriptorium from non localhost to get valid api_endpoint for "
+"kobo device"
 msgstr ""
 "Παρακαλούμε λάβε πρόσβαση στο calibre-web από ένα μη τοπικό εξηπηρετητή για "
 "να λάβεις μια έγκυρη api_endpoint για συσκευή kobo"
@@ -1854,8 +1854,8 @@ msgid "{} Stars"
 msgstr ""
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:168
-#: cps/templates/layout.html:223 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:171
+#: cps/templates/layout.html:226 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2251
 msgid "Login"
 msgstr "Σύνδεση"
@@ -2053,7 +2053,7 @@ msgstr ""
 
 #: cps/search.py:53 cps/search.py:440 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:219 cps/templates/search.html:5
+#: cps/templates/layout.html:222 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "Αναζήτηση"
@@ -2082,10 +2082,10 @@ msgid "Read Status = '%(status)s'"
 msgstr ""
 
 #: cps/search.py:354
-msgid "Error on search for custom columns, please restart Calibre-Web"
+msgid "Error on search for custom columns, please restart Scriptorium"
 msgstr ""
 
-#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:137
+#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:140
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2212,7 +2212,7 @@ msgstr ""
 "Σφάλμα κατά το άνοιγμα του ραφιού. Το ράφι δεν υπάρχει ή δεν είναι προσβάσιμο"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:121 cps/templates/tasks.html:5
+#: cps/templates/layout.html:123 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Εργασίες"
 
@@ -2385,7 +2385,7 @@ msgstr ""
 msgid "Error creating shelf"
 msgstr "Σφάλμα Κατεβάσματος Φόντου"
 
-#: cps/templates/layout.html:106 cps/web.py:1210
+#: cps/templates/layout.html:108 cps/web.py:1210
 #, fuzzy
 msgid "Create Magic Shelf"
 msgstr "Δημιούργησε ένα Ράφι"
@@ -2509,7 +2509,7 @@ msgstr "Το βιβλίο έχει επιτυχώς μπει σε σειρά γ�
 msgid "Please wait one minute to register next user"
 msgstr ""
 
-#: cps/templates/layout.html:170 cps/templates/login.html:77
+#: cps/templates/layout.html:173 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2130 cps/web.py:2134
 #: cps/web.py:2139 cps/web.py:2143 cps/web.py:2149 cps/web.py:2174
 #: cps/web.py:2178 cps/web.py:2191 cps/web.py:2194
@@ -2855,8 +2855,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr ""
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:144
-#: cps/templates/layout.html:145 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:147
+#: cps/templates/layout.html:148 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Ανέβασμα"
 
@@ -2958,11 +2958,11 @@ msgstr "Προσθήκη τιμών ειδικά κατασκευασμένων 
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:188
-#: cps/templates/layout.html:191 cps/templates/layout.html:194
-#: cps/templates/layout.html:197 cps/templates/layout.html:200
-#: cps/templates/layout.html:203 cps/templates/layout.html:240
-#: cps/templates/layout.html:268 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:191
+#: cps/templates/layout.html:194 cps/templates/layout.html:197
+#: cps/templates/layout.html:200 cps/templates/layout.html:203
+#: cps/templates/layout.html:206 cps/templates/layout.html:244
+#: cps/templates/layout.html:272 cps/templates/read.html:58
 msgid "Close"
 msgstr "Κλείσιμο"
 
@@ -3000,7 +3000,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:249
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:253
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
@@ -3059,7 +3059,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:124
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:126
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -3074,7 +3074,7 @@ msgid "Users, library, automation and server."
 msgstr ""
 
 #: cps/templates/admin.html:12
-msgid "Check CWA Status"
+msgid "Check Service Status"
 msgstr ""
 
 #: cps/templates/admin.html:20 cps/templates/user_edit.html:11
@@ -3216,7 +3216,7 @@ msgstr "Βιβλία ανά Σελίδα"
 msgid "Uploads"
 msgstr "Ανεβάσμένα"
 
-#: cps/templates/admin.html:106 cps/templates/layout.html:158
+#: cps/templates/admin.html:106 cps/templates/layout.html:161
 #, fuzzy
 msgid "Kobo sync"
 msgstr "Ενεργοποίηση συγχρονισμού Kobo"
@@ -3299,7 +3299,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Ενεργοποίηση συγχρονισμού Kobo"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:119 cps/templates/layout.html:163
+#: cps/templates/layout.html:121 cps/templates/layout.html:166
 msgid "System"
 msgstr ""
 
@@ -3337,17 +3337,17 @@ msgstr "Κλείσιμο"
 msgid "Are you sure you want to restart?"
 msgstr "Είσαι σίγουρος/η πως θέλεις να κάνεις επανεκκίνηση"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:275
+#: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:246 cps/templates/layout.html:85
+#: cps/templates/detail.html:246 cps/templates/layout.html:87
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Ράφια"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:136
+#: cps/templates/appearance.html:14 cps/templates/layout.html:139
 msgid "Search titles, authors, series…"
 msgstr ""
 
@@ -3463,7 +3463,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:157
+#: cps/templates/layout.html:160
 #, fuzzy
 msgid "Profile"
 msgstr "Η διεύθυνση email σου"
@@ -3544,16 +3544,16 @@ msgstr "Αξιολογήσεις"
 msgid "Preview"
 msgstr "Προηγούμενο"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:162
+#: cps/templates/appearance.html:156 cps/templates/layout.html:165
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:164
+#: cps/templates/appearance.html:157 cps/templates/layout.html:167
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Φωτεινό"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:165
+#: cps/templates/appearance.html:158 cps/templates/layout.html:168
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Σκοτεινό"
@@ -3916,7 +3916,7 @@ msgid "Add to shelf"
 msgstr "Προσθήκη στο ράφι"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:42
-#: cps/templates/layout.html:225
+#: cps/templates/layout.html:228
 #, fuzzy
 msgid "More"
 msgstr "Περισσότερα από"
@@ -4076,9 +4076,9 @@ msgstr "Τοποθεσία Βάσης Δεδομένων Calibre"
 
 #: cps/templates/config_db.html:18
 msgid ""
-"Inside the container this lives under /calibre-library. CWA finds and mounts "
-"the library there on start: the largest one if there are several, a new one "
-"if there is none."
+"Inside the container this lives under /calibre-library. Scriptorium finds "
+"and mounts the library there on start: the largest one if there are several, "
+"a new one if there is none."
 msgstr ""
 
 #: cps/templates/config_db.html:21
@@ -4126,7 +4126,7 @@ msgstr ""
 #: cps/templates/config_db.html:67
 msgid ""
 "Make sure no other program (including the Calibre desktop app) uses the same "
-"library while CWA runs."
+"library while Scriptorium runs."
 msgstr ""
 
 #: cps/templates/config_db.html:68
@@ -4138,7 +4138,7 @@ msgstr ""
 #: cps/templates/config_db.html:69
 msgid ""
 "Check that the path above points to the folder that contains metadata.db and "
-"that CWA can read and write it."
+"that Scriptorium can read and write it."
 msgstr ""
 
 #: cps/templates/config_db.html:70
@@ -4188,7 +4188,7 @@ msgid "Ok"
 msgstr "Βιβλίο"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:270 cps/templates/login.html:35
+#: cps/templates/layout.html:274 cps/templates/login.html:35
 #: cps/templates/user_edit.html:46 cps/templates/user_edit.html:57
 #, fuzzy
 msgid "Show password"
@@ -5049,7 +5049,8 @@ msgid "Time of Day:"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:67
-msgid "What CWA does on its own when books arrive, plus maintenance jobs."
+msgid ""
+"What Scriptorium does on its own when books arrive, plus maintenance jobs."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:72
@@ -5078,11 +5079,11 @@ msgstr "Πίσω"
 
 #: cps/templates/cwa_settings.html:88
 #, fuzzy
-msgid "Enable/Disable Calibre-Web Automated Services"
-msgstr "Calibre-Web Φύλλο Καταγραφής:"
+msgid "Enable/Disable Automation Services"
+msgstr "Scriptorium Φύλλο Καταγραφής:"
 
 #: cps/templates/cwa_settings.html:90
-msgid "Enable CWA Auto-Convert"
+msgid "Enable Auto-Convert"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:90
@@ -5090,7 +5091,7 @@ msgid "New books are converted to the target format below."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
-msgid "Enable CWA Automatic Cover & Metadata Enforcement Service"
+msgid "Enable Automatic Cover & Metadata Enforcement Service"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
@@ -5100,7 +5101,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
-msgid "Enable CWA Kindle EPUB Fixer"
+msgid "Enable Kindle EPUB Fixer"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
@@ -5118,7 +5119,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
-msgid "Enable KOReader Sync (CWA Plugin)"
+msgid "Enable KOReader Sync (Scriptorium Plugin)"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
@@ -5146,7 +5147,7 @@ msgid "Removes leftover references to books deleted from the library."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:102
-msgid "Enable CWA Update Notifications"
+msgid "Enable Update Notifications"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:103
@@ -5154,7 +5155,7 @@ msgid "Enable Contribute Translations Notifications"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:110
-msgid "CWA Auto-Ingest Automerge"
+msgid "Auto-Ingest Automerge"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:112
@@ -5209,7 +5210,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
-msgid "CWA Auto-Ingest - Ignored Formats"
+msgid "Auto-Ingest - Ignored Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
@@ -5228,7 +5229,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
-msgid "CWA Auto-Convert - Ignored Formats"
+msgid "Auto-Convert - Ignored Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
@@ -5236,7 +5237,7 @@ msgid "Books in these formats are imported as they are, without conversion."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
-msgid "CWA Auto-Convert - Retained Formats"
+msgid "Auto-Convert - Retained Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
@@ -5354,7 +5355,7 @@ msgid "Pause between requests to the Hardcover API (0–60)."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:182
-msgid "CWA Duplicate Detection System"
+msgid "Duplicate Detection System"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:184
@@ -5379,7 +5380,7 @@ msgid "Legacy SQL only (experimental)"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:195
-msgid "CWA Duplicate Detection Criteria"
+msgid "Duplicate Detection Criteria"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:196
@@ -5506,7 +5507,7 @@ msgid "Automatic Backup Settings"
 msgstr "OAuth Ρυθμίσεις"
 
 #: cps/templates/cwa_settings.html:251
-msgid "Enable CWA Import Auto-Backup"
+msgid "Enable Import Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:251
@@ -5515,7 +5516,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:252
-msgid "Enable CWA Conversion Auto-Backup"
+msgid "Enable Conversion Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:252
@@ -5523,7 +5524,7 @@ msgid "Keeps the original of every converted file."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
-msgid "Enable CWA EPUB Fixer Auto-Backup"
+msgid "Enable EPUB Fixer Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
@@ -5531,7 +5532,7 @@ msgid "Keeps the original of every EPUB the fixer changed."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
-msgid "Enable CWA Auto-Zip Backups"
+msgid "Enable Auto-Zip Backups"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
@@ -5623,7 +5624,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:59
-#: cps/templates/layout.html:56 cps/templates/layout.html:218
+#: cps/templates/layout.html:58 cps/templates/layout.html:221
 #, fuzzy
 msgid "Library"
 msgstr "Στη Βιβλιοθήκη"
@@ -5877,23 +5878,23 @@ msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:156
 #, fuzzy
-msgid "Calibre-Web Automated Conversion History"
-msgstr "Ενημερώθηκε η διαμόρφωση Calibre-Web"
+msgid "Conversion History"
+msgstr "Ενημερώθηκε η διαμόρφωση Scriptorium"
 
 #: cps/templates/cwa_stats_tabs.html:157
 #, fuzzy
-msgid "Calibre-Web Automated Import History"
-msgstr "Calibre-Web δοκιμαστικό e-mail"
+msgid "Import History"
+msgstr "Scriptorium δοκιμαστικό e-mail"
 
 #: cps/templates/cwa_stats_tabs.html:158
 #, fuzzy
-msgid "Calibre-Web Automated EPUB Fixer History"
+msgid "EPUB Fixer History"
 msgstr "Calibre E-Book Ρυθμίσεις Μετατροπέα"
 
 #: cps/templates/cwa_stats_tabs.html:159
 #, fuzzy
-msgid "Calibre-Web Automated Cover & Metadata Enforcement History"
-msgstr "Calibre-Web δοκιμαστικό e-mail"
+msgid "Cover & Metadata Enforcement History"
+msgstr "Scriptorium δοκιμαστικό e-mail"
 
 #: cps/templates/cwa_stats_tabs.html:177
 msgid "No data for this period yet."
@@ -5992,7 +5993,7 @@ msgstr "Διάβασε στο Πρόγραμμα Περιήγησης"
 msgid "Listen"
 msgstr ""
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:87
+#: cps/templates/detail.html:117 cps/templates/layout.html:89
 #: cps/templates/user_edit.html:176
 #, fuzzy
 msgid "Create Shelf"
@@ -6059,7 +6060,7 @@ msgstr "Δημιούργησε ένα Ράφι"
 msgid "Reading progress"
 msgstr "Πρόοδος"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:271
+#: cps/templates/detail.html:207 cps/templates/layout.html:275
 #, fuzzy
 msgid "Show more"
 msgstr "Προβολή αδιάβαστων"
@@ -6135,7 +6136,7 @@ msgstr ""
 msgid ""
 "It builds the index that keeps duplicate checks fast during imports and "
 "metadata edits. On large libraries it can take a few minutes; you can keep "
-"using CWA meanwhile."
+"using Scriptorium meanwhile."
 msgstr ""
 
 #: cps/templates/duplicates.html:27 cps/templates/duplicates.html:130
@@ -6144,7 +6145,7 @@ msgid "Duplicate scan is running."
 msgstr "Διαγραφή Βιβλίου"
 
 #: cps/templates/duplicates.html:30
-msgid "You can keep using CWA while it runs."
+msgid "You can keep using Scriptorium while it runs."
 msgstr ""
 
 #: cps/templates/duplicates.html:37
@@ -6421,7 +6422,7 @@ msgid "(Magic)"
 msgstr ""
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:94
+#: cps/templates/layout.html:96
 msgid "(Public)"
 msgstr "(Δημόσιο)"
 
@@ -6463,7 +6464,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:274
+#: cps/templates/grid.html:21 cps/templates/layout.html:278
 #: cps/templates/list.html:27
 msgid "Filter"
 msgstr ""
@@ -6577,9 +6578,7 @@ msgstr ""
 
 #: cps/templates/http_error.html:19
 #, fuzzy
-msgid ""
-"Calibre-Web Automated Instance is unconfigured, please contact your "
-"administrator"
+msgid "Scriptorium Instance is unconfigured, please contact your administrator"
 msgstr ""
 "Ο διακομιστής E-Mail δεν έχει διαμορφωθεί, παρακαλούμε επικοινώνησε με το "
 "διαχειριστή σου!"
@@ -6660,8 +6659,8 @@ msgstr "Αποστολή στο Kindle"
 
 #: cps/templates/kosync_plugin.html:8
 msgid ""
-"The CWA plugin keeps your reading position in step between KOReader and this "
-"library."
+"The Scriptorium plugin keeps your reading position in step between KOReader "
+"and this library."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:13
@@ -6670,7 +6669,7 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:14
 #, fuzzy
-msgid "Open CWA Settings"
+msgid "Open Automation Settings"
 msgstr "Ρυθμίσεις"
 
 #: cps/templates/kosync_plugin.html:14
@@ -6690,11 +6689,12 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:24
 #, fuzzy
-msgid "Download CWA Sync Plugin"
+msgid "Download Scriptorium Sync Plugin"
 msgstr "Ενεργοποίηση Πρόσβασης Φύλλου Καταγραφής"
 
 #: cps/templates/kosync_plugin.html:26
-msgid "Download is available after enabling KOReader Sync in CWA Settings."
+msgid ""
+"Download is available after enabling KOReader Sync in Automation Settings."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:33
@@ -6724,8 +6724,8 @@ msgstr "Αποστολή στο Kindle"
 
 #: cps/templates/kosync_plugin.html:45
 msgid ""
-"Open a book, tap the top of the screen, open the Tools menu and choose “CWA "
-"Progress Sync”. Enter:"
+"Open a book, tap the top of the screen, open the Tools menu and choose "
+"“Scriptorium Sync”. Enter:"
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:47
@@ -6774,153 +6774,158 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:46
+#: cps/templates/layout.html:48
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:50
+#: cps/templates/layout.html:52
 #, fuzzy
 msgid "Library navigation"
 msgstr "Στατιστικά Βιβλιοθήκης"
 
-#: cps/templates/layout.html:75
+#: cps/templates/layout.html:77
 msgid "Browse"
 msgstr "Περιήγηση"
 
-#: cps/templates/layout.html:98
+#: cps/templates/layout.html:100
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:104 cps/templates/user_edit.html:309
+#: cps/templates/layout.html:106 cps/templates/user_edit.html:309
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Ράφια"
 
-#: cps/templates/layout.html:132
+#: cps/templates/layout.html:129 cps/templates/layout.html:234
+#: cps/templates/stats.html:6
+msgid "Based on"
+msgstr ""
+
+#: cps/templates/layout.html:135
 msgid "Toggle Navigation"
 msgstr "Αλλαγή Θέσης Περιήγησης"
 
-#: cps/templates/layout.html:135
+#: cps/templates/layout.html:138
 msgid "Search Library"
 msgstr "Αναζήτηση Βιβλιοθήκης"
 
-#: cps/templates/layout.html:137
+#: cps/templates/layout.html:140
 #, fuzzy
 msgid "Advanced"
 msgstr "Προχωρημένη Αναζήτηση"
 
-#: cps/templates/layout.html:141
+#: cps/templates/layout.html:144
 #, fuzzy
 msgid "Refresh Library"
 msgstr "Αναζήτηση Βιβλιοθήκης"
 
-#: cps/templates/layout.html:151 cps/templates/user_edit.html:19
+#: cps/templates/layout.html:154 cps/templates/user_edit.html:19
 #: cps/templates/user_edit.html:32
 msgid "Account"
 msgstr "Λογαριασμός"
 
-#: cps/templates/layout.html:173
+#: cps/templates/layout.html:176
 msgid "Logout"
 msgstr "Αποσύνδεση"
 
-#: cps/templates/layout.html:193
+#: cps/templates/layout.html:196
 msgid "See Changelog"
 msgstr ""
 
-#: cps/templates/layout.html:196
+#: cps/templates/layout.html:199
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Διαγραφή Βιβλίου"
 
-#: cps/templates/layout.html:199
+#: cps/templates/layout.html:202
 msgid "Contribute here!"
 msgstr ""
 
-#: cps/templates/layout.html:217
+#: cps/templates/layout.html:220
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Βασική Διαμόρφωση"
 
-#: cps/templates/layout.html:221
+#: cps/templates/layout.html:224
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:246
+#: cps/templates/layout.html:250
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Είσαι πραγματικά σίγουρος/η;"
 
-#: cps/templates/layout.html:250 cps/templates/layout.html:268
+#: cps/templates/layout.html:254 cps/templates/layout.html:272
 #, fuzzy
 msgid "Confirm"
 msgstr "Διαμόρφωση"
 
-#: cps/templates/layout.html:256
+#: cps/templates/layout.html:260
 msgid "Uploading..."
 msgstr "Φόρτωση..."
 
-#: cps/templates/layout.html:259
+#: cps/templates/layout.html:263
 msgid "Please do not refresh the page"
 msgstr "Παρακαλούμε μην ανανεώσεις τη σελίδα"
 
-#: cps/templates/layout.html:262
+#: cps/templates/layout.html:266
 msgid "Drop books to add them to the library"
-msgstr ""
-
-#: cps/templates/layout.html:268
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "Αναζήτηση Βιβλιοθήκης"
-
-#: cps/templates/layout.html:269
-msgid "Could not copy, select the text and copy it manually"
-msgstr ""
-
-#: cps/templates/layout.html:270
-#, fuzzy
-msgid "Hide password"
-msgstr "Κωδικός"
-
-#: cps/templates/layout.html:271
-#, fuzzy
-msgid "Show less"
-msgstr "Προβολή Όλων"
-
-#: cps/templates/layout.html:271 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
 msgstr ""
 
 #: cps/templates/layout.html:272
 #, fuzzy
+msgid "Copied to clipboard"
+msgstr "Αναζήτηση Βιβλιοθήκης"
+
+#: cps/templates/layout.html:273
+msgid "Could not copy, select the text and copy it manually"
+msgstr ""
+
+#: cps/templates/layout.html:274
+#, fuzzy
+msgid "Hide password"
+msgstr "Κωδικός"
+
+#: cps/templates/layout.html:275
+#, fuzzy
+msgid "Show less"
+msgstr "Προβολή Όλων"
+
+#: cps/templates/layout.html:275 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:276
+#, fuzzy
 msgid "Upload failed"
 msgstr "Η ενημέρωση απέτυχε:"
 
-#: cps/templates/layout.html:273
+#: cps/templates/layout.html:277
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "%(name)s's προφίλ"
 
-#: cps/templates/layout.html:274 cps/templates/search_form.html:7
+#: cps/templates/layout.html:278 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr ""
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:278
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Ο Νέος Κωδικός έχει σταλεί στη διεύθυνση email σου"
 
-#: cps/templates/layout.html:275
+#: cps/templates/layout.html:279
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy
 msgid "Review"
 msgstr "Προηγούμενο"
@@ -7052,8 +7057,8 @@ msgstr ""
 
 #: cps/templates/logviewer.html:9
 #, fuzzy
-msgid "Download Calibre-Web Log"
-msgstr "Προβολή Φύλλου Καταγραφής Calibre-Web:"
+msgid "Download Scriptorium Log"
+msgstr "Προβολή Φύλλου Καταγραφής Scriptorium:"
 
 #: cps/templates/logviewer.html:10
 #, fuzzy
@@ -7067,8 +7072,8 @@ msgstr "Σύνδεση"
 
 #: cps/templates/logviewer.html:15
 #, fuzzy
-msgid "Calibre-Web Log"
-msgstr "Προβολή Φύλλου Καταγραφής Calibre-Web:"
+msgid "Scriptorium Log"
+msgstr "Προβολή Φύλλου Καταγραφής Scriptorium:"
 
 #: cps/templates/logviewer.html:16
 #, fuzzy
@@ -7211,7 +7216,7 @@ msgstr "Διαμόρφωση"
 msgid "Value"
 msgstr ""
 
-#: cps/templates/magic_shelf_edit.html:84
+#: cps/templates/magic_shelf_edit.html:84 cps/templates/stats.html:6
 msgid "and"
 msgstr ""
 
@@ -7354,8 +7359,8 @@ msgstr ""
 
 #: cps/templates/osd.xml:5
 #, fuzzy
-msgid "Calibre-Web Automated eBook Catalog"
-msgstr "Calibre-Web Κατάλογος eBook"
+msgid "Scriptorium eBook Catalog"
+msgstr "Scriptorium Κατάλογος eBook"
 
 #: cps/templates/profile_pictures.html:7
 msgid ""
@@ -7931,10 +7936,6 @@ msgstr ""
 msgid "About"
 msgstr "Σχετικά"
 
-#: cps/templates/stats.html:6
-msgid "Powered by"
-msgstr ""
-
 #: cps/templates/stats.html:10
 msgid "Library Statistics"
 msgstr "Στατιστικά Βιβλιοθήκης"
@@ -8255,7 +8256,8 @@ msgid "Using KOReader?"
 msgstr "PDF πρόγραμμα ανάγνωσης"
 
 #: cps/templates/user_edit.html:212
-msgid "Reading progress can also sync from KOReader with the CWA plugin."
+msgid ""
+"Reading progress can also sync from KOReader with the Scriptorium plugin."
 msgstr ""
 
 #: cps/templates/user_edit.html:213
@@ -8497,22 +8499,18 @@ msgid ""
 "too."
 msgstr ""
 
-#, fuzzy
 #~ msgid "Send to eReader Email"
 #~ msgstr "Διεύθυνση E-mail Αποστολής στο Kindle"
 
-#, fuzzy
 #~ msgid "Send to eReader Subject"
 #~ msgstr "Αποστολή στο Kindle"
 
-#, fuzzy
 #~ msgid "Email Server Settings&nbsp;&nbsp;📬"
 #~ msgstr "Ρυθμίσεις E-mail Διακομιστή"
 
 #~ msgid "Calibre Database Directory"
 #~ msgstr "Ευρετήριο Βάσης Δεδομένων Calibre"
 
-#, fuzzy
 #~ msgid "CWA Settings"
 #~ msgstr "Ρυθμίσεις"
 
@@ -8522,19 +8520,15 @@ msgstr ""
 #~ msgid "Edit UI Configuration"
 #~ msgstr "Επεξεργασία Διαμόρφωσης UI"
 
-#, fuzzy
 #~ msgid "Edit Calibre Database Configuration"
 #~ msgstr "Επεξεργασία Βασικής Διαμόρφωσης"
 
-#, fuzzy
 #~ msgid "Show CWA Stats"
 #~ msgstr "Ρυθμίσεις"
 
-#, fuzzy
 #~ msgid "CWA Discord Server"
 #~ msgstr "Ανακάλυψε"
 
-#, fuzzy
 #~ msgid "Administration&nbsp;&nbsp;🚀"
 #~ msgstr "Διοίκηση"
 
@@ -8562,7 +8556,6 @@ msgstr ""
 #~ msgid "Delete formats:"
 #~ msgstr "Διαγραφή μορφών:"
 
-#, fuzzy
 #~ msgid "select an option"
 #~ msgstr "διάλεξε μια επιλογή"
 
@@ -8588,19 +8581,15 @@ msgstr ""
 #~ msgid "This Field is Required"
 #~ msgstr "Αυτό το Πεδίο Απαιτείται"
 
-#, fuzzy
 #~ msgid "Unarchive"
 #~ msgstr "Αρχειοθετήθηκε"
 
-#, fuzzy
 #~ msgid "Mark as read"
 #~ msgstr "Σήμανση ως Αδιάβαστο"
 
-#, fuzzy
 #~ msgid "Mark as unread"
 #~ msgstr "Σήμανση ως Αδιάβαστο"
 
-#, fuzzy
 #~ msgid "Select all"
 #~ msgstr "Δημιούργησε ένα Ράφι"
 
@@ -8628,11 +8617,9 @@ msgstr ""
 #~ msgid "Enter Publishers"
 #~ msgstr "Εισαγωγή Εκδοτών"
 
-#, fuzzy
 #~ msgid "Enter comments"
 #~ msgstr "Όνομα domain"
 
-#, fuzzy
 #~ msgid "Enter "
 #~ msgstr "Αναγνωριστικά"
 
@@ -8642,7 +8629,6 @@ msgstr ""
 #~ msgid "Into Book with Title:"
 #~ msgstr "Μέσα σε Βιβλίο με Τίτλο:"
 
-#, fuzzy
 #~ msgid "Select a Shelf"
 #~ msgstr "Δημιούργησε ένα Ράφι"
 
@@ -8652,173 +8638,134 @@ msgstr ""
 #~ msgid "Logfile Configuration"
 #~ msgstr "Διαμόρφωση αρχείου καταγραφής"
 
-#, fuzzy
 #~ msgid "Feature Configuration"
 #~ msgstr "Διαμόρφωση Διακομιστή"
 
-#, fuzzy
 #~ msgid "Manual Endpoint Configuration"
 #~ msgstr "Επεξεργασία Διαμόρφωσης UI"
 
-#, fuzzy
 #~ msgid "Field Mapping Configuration"
 #~ msgstr "Προβολή Διαμόρφωσης"
 
-#, fuzzy
 #~ msgid "Default Theme"
 #~ msgstr "Διαγραφή"
 
 #~ msgid "caliBlur! Dark Theme"
 #~ msgstr "caliBlur! Σκοτεινό θέμα"
 
-#, fuzzy
 #~ msgid "Language & Display"
 #~ msgstr "Σελίδα διαχειριστή"
 
-#, fuzzy
 #~ msgid "Default interface language for new users."
 #~ msgstr "Προκαθορισμένες Ρυθμίσεις για Νέους Χρήστες"
 
-#, fuzzy
 #~ msgid "Default book language filter for new users."
 #~ msgstr "Προκαθορισμένες Ορατότηες για Νέους Χρήστες"
 
-#, fuzzy
 #~ msgid "Enter a search term"
 #~ msgstr "Επιλογή ενός ονόματος χρήστη"
 
-#, fuzzy
 #~ msgid "Error starting EPUB Fixer"
 #~ msgstr "Σφάλμα Κατεβάσματος Φόντου"
 
-#, fuzzy
 #~ msgid "Metadata Fields to Update"
 #~ msgstr "Τα μεταδεδομένα ενημερώθηκαν επιτυχώς"
 
-#, fuzzy
 #~ msgid "Web UI Settings"
 #~ msgstr "Ρυθμίσεις"
 
-#, fuzzy
 #~ msgid "Automatic Duplicate Scanning"
 #~ msgstr "OAuth Ρυθμίσεις"
 
-#, fuzzy
 #~ msgid "Rate Limiting"
 #~ msgstr "Αξιολόγηση"
 
-#, fuzzy
 #~ msgid "Marked as read"
 #~ msgstr "Σήμανση ως Αδιάβαστο"
 
-#, fuzzy
 #~ msgid "Marked as unread"
 #~ msgstr "Σήμανση ως Αδιάβαστο"
 
-#, fuzzy
 #~ msgid "Restored from archive"
 #~ msgstr "Επαναφορά από το αρχείο"
 
-#, fuzzy
 #~ msgid "Rating updated"
 #~ msgstr "Ενημερώθηκαν οι ρυθμίσεις E-mail διακομιστή"
 
-#, fuzzy
 #~ msgid "Rating cleared"
 #~ msgstr "Βαθμολογία Πάνω από"
 
 #~ msgid "Description:"
 #~ msgstr "Περιγραφή"
 
-#, fuzzy
 #~ msgid "Select All"
 #~ msgstr "Δημιούργησε ένα Ράφι"
 
-#, fuzzy
 #~ msgid "Failed to update shelves"
 #~ msgstr "Αποτυχία δημιουργίας πορείας για φόντο"
 
-#, fuzzy
 #~ msgid "Scan for Duplicates Now"
 #~ msgstr "Προβολή Βιβλίων με Κορυφαία Αξιολόγηση"
 
-#, fuzzy
 #~ msgid "Select None"
 #~ msgstr "Δημιούργησε ένα Ράφι"
 
-#, fuzzy
 #~ msgid "View book details"
 #~ msgstr "Λεπτομέρειες Βιβλίου"
 
-#, fuzzy
 #~ msgid "Edit book metadata"
 #~ msgstr "επεξεργασία μεταδεδομένων"
 
-#, fuzzy
 #~ msgid "Archive/delete book"
 #~ msgstr "Συγχώνευση επιλεγμένων βιβλίων"
 
-#, fuzzy
 #~ msgid "No Duplicate Books Found"
 #~ msgstr "Δεν Βρέθηκαν Αποτελέσματα"
 
-#, fuzzy
 #~ msgid "The following books will be permanently deleted:"
 #~ msgstr "Αυτό το βιβλίο θα διαγραφεί για πάντα από τη βάση δεδομένων"
 
-#, fuzzy
 #~ msgid "The following book will be kept:"
 #~ msgstr "Αυτό το βιβλίο θα διαγραφεί για πάντα από τη βάση δεδομένων"
 
-#, fuzzy
 #~ msgid "The following books will be merged into it (and then deleted):"
 #~ msgstr "Αυτό το βιβλίο θα διαγραφεί για πάντα από τη βάση δεδομένων"
 
 #~ msgid "Enter domainname"
 #~ msgstr "Όνομα domain"
 
-#, fuzzy
 #~ msgid "Reject All Pending"
 #~ msgstr "Δημιούργησε ένα Ράφι"
 
-#, fuzzy
 #~ msgid "Processing..."
 #~ msgstr "Φόρτωση..."
 
-#, fuzzy
 #~ msgid "Failed to reject match"
 #~ msgstr "Αποτυχία δημιουργίας πορείας για φόντο"
 
-#, fuzzy
 #~ msgid ""
 #~ "Are you sure you want to reject all pending matches? This cannot be "
 #~ "undone."
 #~ msgstr "Είσαι σίγουρος/η πως θέλεις να διαγράψεις αυτό το ράφι;"
 
-#, fuzzy
 #~ msgid "✗ Reject All Pending"
 #~ msgstr "Δημιούργησε ένα Ράφι"
 
-#, fuzzy
 #~ msgid "Failed to reject all pending matches"
 #~ msgstr "Αποτυχία δημιουργίας πορείας για φόντο"
 
 #~ msgid "Home"
 #~ msgstr "Κεντρική"
 
-#, fuzzy
 #~ msgid "Switch Theme"
 #~ msgstr "Σταθερό Θέμα"
 
-#, fuzzy
 #~ msgid "Duplicate Books Detected"
 #~ msgstr "Διαγραφή Βιβλίου"
 
-#, fuzzy
 #~ msgid "Duplicate Groups Found"
 #~ msgstr "Δεν Βρέθηκαν Αποτελέσματα"
 
-#, fuzzy
 #~ msgid "Sign in to your library"
 #~ msgstr "Σειρές σε αυτή τη Βιβλιοθήκη"
 
@@ -8866,35 +8813,27 @@ msgstr ""
 #~ "Τα βιβλία πρέπει πρώτα να αρχειοθετηθούν και να συγχρονιστεί η συσκευή "
 #~ "πριν μπορέσει να διαγραφεί με ασφάλεια το βιβλίο."
 
-#, fuzzy
 #~ msgid "Choose File Location"
 #~ msgstr "Προβολή επιλογών μορφής αρχείου"
 
-#, fuzzy
 #~ msgid "name"
 #~ msgstr "Όνομα Χρήστη"
 
-#, fuzzy
 #~ msgid "Parent Directory"
 #~ msgstr "Ευρετήριο Βάσης Δεδομένων Calibre"
 
-#, fuzzy
 #~ msgid "Default"
 #~ msgstr "Διαγραφή"
 
-#, fuzzy
 #~ msgid "Arial"
 #~ msgstr "Κάθετο"
 
-#, fuzzy
 #~ msgid "Spread"
 #~ msgstr "Διαβάστηκε"
 
-#, fuzzy
 #~ msgid "Comic Reader"
 #~ msgstr "PDF πρόγραμμα ανάγνωσης"
 
-#, fuzzy
 #~ msgid "txt Reader"
 #~ msgstr "PDF πρόγραμμα ανάγνωσης"
 
@@ -8922,7 +8861,6 @@ msgstr ""
 #~ msgid "Exclude Series"
 #~ msgstr "Εξαίρεση Σειρών"
 
-#, fuzzy
 #~ msgid "Exclude Shelves"
 #~ msgstr "Εξαίρεση Σειρών"
 
@@ -8944,15 +8882,12 @@ msgstr ""
 #~ msgid "Series in this Library"
 #~ msgstr "Σειρές σε αυτή τη Βιβλιοθήκη"
 
-#, fuzzy
 #~ msgid "eReader Configuration"
 #~ msgstr "Διαμόρφωση Διακομιστή"
 
-#, fuzzy
 #~ msgid "Send to eReader Email Address"
 #~ msgstr "Διεύθυνση E-mail Αποστολής στο Kindle"
 
-#, fuzzy
 #~ msgid "Book Language Filter"
 #~ msgstr "Γλώσσα Βιβλίων"
 
@@ -8962,56 +8897,44 @@ msgstr ""
 #~ msgid "Create/View"
 #~ msgstr "Δημιουγία/Προβολή"
 
-#, fuzzy
 #~ msgid "Sidebar Display Settings"
 #~ msgstr "OAuth Ρυθμίσεις"
 
-#, fuzzy
 #~ msgid "Public Shelves:"
 #~ msgstr "Δημόσιο Ράφι"
 
 #~ msgid "Generate Kobo Auth URL"
 #~ msgstr "Δημιουργία Kobo Auth URL"
 
-#, fuzzy
 #~ msgid "Enter Username"
 #~ msgstr "Επιλογή ενός ονόματος χρήστη"
 
-#, fuzzy
 #~ msgid "Enter Email"
 #~ msgstr "Δοκιμαστικό e-mail"
 
-#, fuzzy
 #~ msgid "Enter eReader Email"
 #~ msgstr "Διεύθυνση E-mail Αποστολής στο Kindle"
 
-#, fuzzy
 #~ msgid "Enter eReader Email Subject"
 #~ msgstr "Διεύθυνση E-mail Αποστολής στο Kindle"
 
-#, fuzzy
 #~ msgid "Edit Allowed Tags"
 #~ msgstr "Επιλογή Ετικετών Επιτρέπεται/Απορρίπτεται"
 
-#, fuzzy
 #~ msgid "Edit Denied Tags"
 #~ msgstr "Επιλογή Ετικετών Επιτρέπεται/Απορρίπτεται"
 
-#, fuzzy
 #~ msgid "Edit Allowed Column Values"
 #~ msgstr ""
 #~ "Προσθήκη τιμών ειδικά κατασκευασμένων στηλών Επιτρέπεται/Απορρίπτεται"
 
-#, fuzzy
 #~ msgid "Edit Denied Column Values"
 #~ msgstr ""
 #~ "Προσθήκη τιμών ειδικά κατασκευασμένων στηλών Επιτρέπεται/Απορρίπτεται"
 
-#, fuzzy
 #~ msgid "Error scheduling EPUB Fixer"
 #~ msgstr "Σφάλμα Κατεβάσματος Φόντου"
 
-#, fuzzy
 #~ msgid "Cancel Scan"
 #~ msgstr "Ακύρωση"
 
@@ -9062,11 +8985,9 @@ msgstr ""
 #~ msgid "Books organized in shelves"
 #~ msgstr "Βιβλία οργανωμένα σε ράφια"
 
-#, fuzzy
 #~ msgid "Connection successful!"
 #~ msgstr "Σφάλμα σύνδεσης"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Automated."
 #~ msgstr "Αυτό το e-mail έχει σταλεί μέσω Calibre-Web."
 
@@ -9074,33 +8995,27 @@ msgstr ""
 #~ msgstr ""
 #~ "Η σύνδεση απέτυχε, Δεν Υπάρχει Συνδεδεμένος Χρήστης Με Λογαριασμό OAuth"
 
-#, python-format
 #~ msgid "File %(file)s uploaded"
 #~ msgstr "Το αρχείο %(file)s ανέβηκε"
 
-#, fuzzy
 #~ msgid "Mark selected books as read"
 #~ msgstr "Συγχώνευση επιλεγμένων βιβλίων"
 
-#, fuzzy
 #~ msgid "Mark Book as Read or Unread"
 #~ msgstr "Σήμανση ως Αδιάβαστο"
 
 #~ msgid "Calibre-Web configuration updated"
 #~ msgstr "Ενημερώθηκε η διαμόρφωση Calibre-Web"
 
-#, fuzzy
 #~ msgid "Calibre-Web Test Email"
 #~ msgstr "Calibre-Web δοκιμαστικό e-mail"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Calibre-Web."
 #~ msgstr "Αυτό το e-mail έχει σταλεί μέσω Calibre-Web."
 
 #~ msgid "Get Started with Calibre-Web"
 #~ msgstr "Ξεκινήστε με το Calibre-Web"
 
-#, fuzzy
 #~ msgid ""
 #~ "Please access Calibre-Web from non localhost to get valid api_endpoint "
 #~ "for kobo device"
@@ -9108,43 +9023,33 @@ msgstr ""
 #~ "Παρακαλούμε λάβε πρόσβαση στο calibre-web από ένα μη τοπικό εξηπηρετητή "
 #~ "για να λάβεις μια έγκυρη api_endpoint για συσκευή kobo"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autmoated."
 #~ msgstr "Αυτό το e-mail έχει σταλεί μέσω Calibre-Web."
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Automated."
 #~ msgstr "Αυτό το e-mail έχει σταλεί μέσω Calibre-Web."
 
-#, fuzzy
 #~ msgid "Downloads per User"
 #~ msgstr "Κατεβασμένα"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autoated."
 #~ msgstr "Αυτό το e-mail έχει σταλεί μέσω Calibre-Web."
 
-#, fuzzy
 #~ msgid "unknown error"
 #~ msgstr "Σφάλμα σύνδεσης"
 
-#, fuzzy
 #~ msgid "Could not open file {filename!r}: {message}"
 #~ msgstr "Δεν μπόρεσε να συνδεθεί: %(message)s"
 
-#, fuzzy
 #~ msgid "{value!r} is not a valid boolean."
 #~ msgstr "Το E-mail δεν είναι από έγκυρο domain"
 
-#, fuzzy
 #~ msgid "directory"
 #~ msgstr "Κατεύθυνση"
 
-#, fuzzy
 #~ msgid "{name} {filename!r} is not writable."
 #~ msgstr "Η DB δεν μπορεί να Γραφτεί"
 
-#, fuzzy
 #~ msgid "Repeat for confirmation"
 #~ msgstr "Διαμόρφωση Λειτουργίας"
 

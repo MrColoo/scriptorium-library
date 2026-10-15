@@ -5,10 +5,9 @@
 # FIRST AUTHOR Arief Hidayat<arihid95@gmail.com>, 2021-2023.
 msgid ""
 msgstr ""
-"Project-Id-Version:  Calibre-Web Automated\n"
-"Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
-"Automated\n"
-"POT-Creation-Date: 2026-10-15 22:38+0200\n"
+"Project-Id-Version: Calibre-Web Automated\n"
+"Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
+"POT-Creation-Date: 2026-10-15 23:47+0200\n"
 "PO-Revision-Date: 2023-01-21 10:00+0700\n"
 "Last-Translator: Arief Hidayat<arihid95@gmail.com>\n"
 "Language-Team: Arief Hidayat <arihid95@gmail.com>\n"
@@ -17,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Generated-By: Babel 2.13.1\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: cps/about.py:65 cps/templates/admin.html:13
 #: cps/templates/cwa_stats_full.html:6 cps/templates/cwa_stats_tabs.html:33
@@ -214,8 +213,8 @@ msgstr "Kolom Dibatasi Tidak Valid"
 
 #: cps/admin.py:920 cps/admin.py:2462
 #, fuzzy
-msgid "Calibre-Web Automated configuration updated"
-msgstr "Pengaturan Calibre-Web telah diperbarui"
+msgid "Scriptorium configuration updated"
+msgstr "Pengaturan Scriptorium telah diperbarui"
 
 #: cps/admin.py:932
 msgid "Do you really want to delete the Kobo Token?"
@@ -280,19 +279,19 @@ msgstr "Apakah Anda yakin ingin mengubah lokasi perpustakaan Calibre?"
 #: cps/admin.py:955
 #, fuzzy
 msgid ""
-"Calibre-Web Automated will search for updated Covers and update Cover "
-"Thumbnails, this may take a while?"
+"Scriptorium will search for updated Covers and update Cover Thumbnails, this "
+"may take a while?"
 msgstr ""
-"Calibre-Web akan mencari Sampul yang diperbarui dan memperbarui Thumbnail "
+"Scriptorium akan mencari Sampul yang diperbarui dan memperbarui Thumbnail "
 "Sampul, ini mungkin memakan waktu cukup lama?"
 
 #: cps/admin.py:958
 #, fuzzy
 msgid ""
-"Are you sure you want delete Calibre-Web Automated's sync database to force "
-"a full sync with your Kobo Reader?"
+"Are you sure you want delete Scriptorium's sync database to force a full "
+"sync with your Kobo Reader?"
 msgstr ""
-"Apakah Anda yakin ingin menghapus database sinkronisasi Calibre-Web untuk "
+"Apakah Anda yakin ingin menghapus database sinkronisasi Scriptorium untuk "
 "memaksakan sinkronisasi penuh dengan Kobo Reader Anda?"
 
 #: cps/admin.py:1193 cps/admin.py:1199 cps/admin.py:1208 cps/admin.py:1217
@@ -827,7 +826,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:159
+#: cps/templates/layout.html:162
 #, fuzzy
 msgid "Customize"
 msgstr "Filter Kustom"
@@ -966,7 +965,7 @@ msgstr ""
 
 #: cps/cwa_functions.py:999
 #, fuzzy
-msgid "Calibre-Web Automated User Settings"
+msgid "Automation Settings"
 msgstr "Pengaturan Konverter E-Book Caliber"
 
 #: cps/cwa_functions.py:1045 cps/cwa_functions.py:1047
@@ -1038,8 +1037,8 @@ msgstr "Tidak diketahui"
 
 #: cps/cwa_functions.py:1271
 #, fuzzy
-msgid "Calibre-Web Automated Stats & Activity"
-msgstr "Email tes Calibre-Web"
+msgid "Stats & Activity"
+msgstr "Email tes Scriptorium"
 
 #: cps/cwa_functions.py:1655
 msgid "Full Enforcement History"
@@ -1277,7 +1276,7 @@ msgstr ""
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr ""
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:272
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:276
 msgid "Upload done, processing, please wait..."
 msgstr "Unggahan selesai, harap tunggu, data sedang diproses..."
 
@@ -1446,8 +1445,8 @@ msgstr "Kirim ke E-Reader"
 
 #: cps/helper.py:114 cps/helper.py:141 cps/helper.py:254
 #, fuzzy
-msgid "This Email has been sent via Calibre-Web Automated."
-msgstr "Email ini telah dikirim melalui Calibre-Web."
+msgid "This Email has been sent via Scriptorium."
+msgstr "Email ini telah dikirim melalui Scriptorium."
 
 #: cps/helper.py:129
 #, fuzzy, python-format
@@ -1461,8 +1460,8 @@ msgstr "%(format)s format tidak ditemukan untuk id buku: %(book)d"
 
 #: cps/helper.py:139
 #, fuzzy
-msgid "Calibre-Web Automated Test Email"
-msgstr "Email tes Calibre-Web"
+msgid "Scriptorium Test Email"
+msgstr "Email tes Scriptorium"
 
 #: cps/helper.py:140
 #, fuzzy
@@ -1471,8 +1470,8 @@ msgstr "Email tes"
 
 #: cps/helper.py:157
 #, fuzzy
-msgid "Get Started with Calibre-Web Automated"
-msgstr "Memulai dengan Calibre-Web"
+msgid "Get Started with Scriptorium"
+msgstr "Memulai dengan Scriptorium"
 
 #: cps/helper.py:162
 #, fuzzy, python-format
@@ -1634,8 +1633,8 @@ msgstr "Kesalahan saat menjalankan UnRar"
 #: cps/helper.py:1361
 #, python-format
 msgid ""
-"Unsupported architecture detected: %(arch)s. CWA is optimized for x86_64 and "
-"aarch64."
+"Unsupported architecture detected: %(arch)s. Scriptorium is optimized for "
+"x86_64 and aarch64."
 msgstr ""
 
 #: cps/helper.py:1370
@@ -1673,8 +1672,8 @@ msgstr "Antrian semua buku untuk cadangan metadata"
 #: cps/kobo_auth.py:110
 #, fuzzy
 msgid ""
-"Please access Calibre-Web Automated from non localhost to get valid "
-"api_endpoint for kobo device"
+"Please access Scriptorium from non localhost to get valid api_endpoint for "
+"kobo device"
 msgstr ""
 "Mohon akses calibre-web dari non localhost untuk mendapatkan api_endpoint "
 "yang valid untuk perangkat kobo"
@@ -1843,8 +1842,8 @@ msgid "{} Stars"
 msgstr "{}★"
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:168
-#: cps/templates/layout.html:223 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:171
+#: cps/templates/layout.html:226 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2251
 msgid "Login"
 msgstr "Masuk"
@@ -2042,7 +2041,7 @@ msgstr ""
 
 #: cps/search.py:53 cps/search.py:440 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:219 cps/templates/search.html:5
+#: cps/templates/layout.html:222 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "Telusuri"
@@ -2071,11 +2070,11 @@ msgid "Read Status = '%(status)s'"
 msgstr "Status Baca = %(status)s"
 
 #: cps/search.py:354
-msgid "Error on search for custom columns, please restart Calibre-Web"
+msgid "Error on search for custom columns, please restart Scriptorium"
 msgstr ""
-"Terjadi kesalahan saat mencari kolom khusus, harap mulai ulang Calibre-Web"
+"Terjadi kesalahan saat mencari kolom khusus, harap mulai ulang Scriptorium"
 
-#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:137
+#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:140
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2196,7 +2195,7 @@ msgstr ""
 "Terjadi kesalahan saat membuka rak. Rak tidak ada atau tidak dapat diakses"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:121 cps/templates/tasks.html:5
+#: cps/templates/layout.html:123 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Tugas"
 
@@ -2366,7 +2365,7 @@ msgstr ""
 msgid "Error creating shelf"
 msgstr "Kesalahan menghapus Rak"
 
-#: cps/templates/layout.html:106 cps/web.py:1210
+#: cps/templates/layout.html:108 cps/web.py:1210
 #, fuzzy
 msgid "Create Magic Shelf"
 msgstr "Buat Rak"
@@ -2489,7 +2488,7 @@ msgstr "Buku telah diantrikan untuk dikirim ke %(eReadermail)s"
 msgid "Please wait one minute to register next user"
 msgstr ""
 
-#: cps/templates/layout.html:170 cps/templates/login.html:77
+#: cps/templates/layout.html:173 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2130 cps/web.py:2134
 #: cps/web.py:2139 cps/web.py:2143 cps/web.py:2149 cps/web.py:2174
 #: cps/web.py:2178 cps/web.py:2191 cps/web.py:2194
@@ -2822,8 +2821,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "Menghapus cache thumbnail sampul"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:144
-#: cps/templates/layout.html:145 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:147
+#: cps/templates/layout.html:148 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Unggah"
 
@@ -2925,11 +2924,11 @@ msgstr "Nilai Kolom yang Diizinkan"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:188
-#: cps/templates/layout.html:191 cps/templates/layout.html:194
-#: cps/templates/layout.html:197 cps/templates/layout.html:200
-#: cps/templates/layout.html:203 cps/templates/layout.html:240
-#: cps/templates/layout.html:268 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:191
+#: cps/templates/layout.html:194 cps/templates/layout.html:197
+#: cps/templates/layout.html:200 cps/templates/layout.html:203
+#: cps/templates/layout.html:206 cps/templates/layout.html:244
+#: cps/templates/layout.html:272 cps/templates/read.html:58
 msgid "Close"
 msgstr "Tutup"
 
@@ -2967,7 +2966,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:249
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:253
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
@@ -3026,7 +3025,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:124
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:126
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -3042,7 +3041,7 @@ msgstr ""
 
 #: cps/templates/admin.html:12
 #, fuzzy
-msgid "Check CWA Status"
+msgid "Check Service Status"
 msgstr "Status Arsip"
 
 #: cps/templates/admin.html:20 cps/templates/user_edit.html:11
@@ -3185,7 +3184,7 @@ msgstr "Buku per halaman"
 msgid "Uploads"
 msgstr "Unggah"
 
-#: cps/templates/admin.html:106 cps/templates/layout.html:158
+#: cps/templates/admin.html:106 cps/templates/layout.html:161
 #, fuzzy
 msgid "Kobo sync"
 msgstr "Aktifkan sinkronisasi Kobo"
@@ -3268,7 +3267,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Aktifkan sinkronisasi Kobo"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:119 cps/templates/layout.html:163
+#: cps/templates/layout.html:121 cps/templates/layout.html:166
 msgid "System"
 msgstr ""
 
@@ -3304,17 +3303,17 @@ msgstr "Matikan"
 msgid "Are you sure you want to restart?"
 msgstr "Apa Anda yakin untuk memulai ulang?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:275
+#: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:246 cps/templates/layout.html:85
+#: cps/templates/detail.html:246 cps/templates/layout.html:87
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Rak"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:136
+#: cps/templates/appearance.html:14 cps/templates/layout.html:139
 msgid "Search titles, authors, series…"
 msgstr ""
 
@@ -3430,7 +3429,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:157
+#: cps/templates/layout.html:160
 #, fuzzy
 msgid "Profile"
 msgstr "Alamat email Anda"
@@ -3511,16 +3510,16 @@ msgstr "Peringkat"
 msgid "Preview"
 msgstr "Sebelumnya"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:162
+#: cps/templates/appearance.html:156 cps/templates/layout.html:165
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:164
+#: cps/templates/appearance.html:157 cps/templates/layout.html:167
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Terang"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:165
+#: cps/templates/appearance.html:158 cps/templates/layout.html:168
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Gelap"
@@ -3883,7 +3882,7 @@ msgid "Add to shelf"
 msgstr "Tambah ke rak"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:42
-#: cps/templates/layout.html:225
+#: cps/templates/layout.html:228
 #, fuzzy
 msgid "More"
 msgstr "Lainnya oleh"
@@ -4045,9 +4044,9 @@ msgstr "Lokasi Database Calibre"
 
 #: cps/templates/config_db.html:18
 msgid ""
-"Inside the container this lives under /calibre-library. CWA finds and mounts "
-"the library there on start: the largest one if there are several, a new one "
-"if there is none."
+"Inside the container this lives under /calibre-library. Scriptorium finds "
+"and mounts the library there on start: the largest one if there are several, "
+"a new one if there is none."
 msgstr ""
 
 #: cps/templates/config_db.html:21
@@ -4095,7 +4094,7 @@ msgstr ""
 #: cps/templates/config_db.html:67
 msgid ""
 "Make sure no other program (including the Calibre desktop app) uses the same "
-"library while CWA runs."
+"library while Scriptorium runs."
 msgstr ""
 
 #: cps/templates/config_db.html:68
@@ -4107,7 +4106,7 @@ msgstr ""
 #: cps/templates/config_db.html:69
 msgid ""
 "Check that the path above points to the folder that contains metadata.db and "
-"that CWA can read and write it."
+"that Scriptorium can read and write it."
 msgstr ""
 
 #: cps/templates/config_db.html:70
@@ -4154,7 +4153,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:270 cps/templates/login.html:35
+#: cps/templates/layout.html:274 cps/templates/login.html:35
 #: cps/templates/user_edit.html:46 cps/templates/user_edit.html:57
 #, fuzzy
 msgid "Show password"
@@ -5011,7 +5010,8 @@ msgid "Time of Day:"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:67
-msgid "What CWA does on its own when books arrive, plus maintenance jobs."
+msgid ""
+"What Scriptorium does on its own when books arrive, plus maintenance jobs."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:72
@@ -5040,11 +5040,11 @@ msgstr "Kembali"
 
 #: cps/templates/cwa_settings.html:88
 #, fuzzy
-msgid "Enable/Disable Calibre-Web Automated Services"
-msgstr "Log Calibre-Web: "
+msgid "Enable/Disable Automation Services"
+msgstr "Log Scriptorium: "
 
 #: cps/templates/cwa_settings.html:90
-msgid "Enable CWA Auto-Convert"
+msgid "Enable Auto-Convert"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:90
@@ -5052,7 +5052,7 @@ msgid "New books are converted to the target format below."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
-msgid "Enable CWA Automatic Cover & Metadata Enforcement Service"
+msgid "Enable Automatic Cover & Metadata Enforcement Service"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
@@ -5062,7 +5062,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
-msgid "Enable CWA Kindle EPUB Fixer"
+msgid "Enable Kindle EPUB Fixer"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
@@ -5080,7 +5080,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
-msgid "Enable KOReader Sync (CWA Plugin)"
+msgid "Enable KOReader Sync (Scriptorium Plugin)"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
@@ -5109,7 +5109,7 @@ msgid "Removes leftover references to books deleted from the library."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:102
-msgid "Enable CWA Update Notifications"
+msgid "Enable Update Notifications"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:103
@@ -5117,7 +5117,7 @@ msgid "Enable Contribute Translations Notifications"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:110
-msgid "CWA Auto-Ingest Automerge"
+msgid "Auto-Ingest Automerge"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:112
@@ -5172,7 +5172,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
-msgid "CWA Auto-Ingest - Ignored Formats"
+msgid "Auto-Ingest - Ignored Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
@@ -5191,7 +5191,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
-msgid "CWA Auto-Convert - Ignored Formats"
+msgid "Auto-Convert - Ignored Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
@@ -5199,7 +5199,7 @@ msgid "Books in these formats are imported as they are, without conversion."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
-msgid "CWA Auto-Convert - Retained Formats"
+msgid "Auto-Convert - Retained Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
@@ -5317,7 +5317,7 @@ msgid "Pause between requests to the Hardcover API (0–60)."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:182
-msgid "CWA Duplicate Detection System"
+msgid "Duplicate Detection System"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:184
@@ -5342,7 +5342,7 @@ msgid "Legacy SQL only (experimental)"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:195
-msgid "CWA Duplicate Detection Criteria"
+msgid "Duplicate Detection Criteria"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:196
@@ -5469,7 +5469,7 @@ msgid "Automatic Backup Settings"
 msgstr "Pengaturan OAuth"
 
 #: cps/templates/cwa_settings.html:251
-msgid "Enable CWA Import Auto-Backup"
+msgid "Enable Import Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:251
@@ -5478,7 +5478,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:252
-msgid "Enable CWA Conversion Auto-Backup"
+msgid "Enable Conversion Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:252
@@ -5486,7 +5486,7 @@ msgid "Keeps the original of every converted file."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
-msgid "Enable CWA EPUB Fixer Auto-Backup"
+msgid "Enable EPUB Fixer Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
@@ -5494,7 +5494,7 @@ msgid "Keeps the original of every EPUB the fixer changed."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
-msgid "Enable CWA Auto-Zip Backups"
+msgid "Enable Auto-Zip Backups"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
@@ -5586,7 +5586,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:59
-#: cps/templates/layout.html:56 cps/templates/layout.html:218
+#: cps/templates/layout.html:58 cps/templates/layout.html:221
 #, fuzzy
 msgid "Library"
 msgstr "Dalam Pustaka"
@@ -5840,23 +5840,23 @@ msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:156
 #, fuzzy
-msgid "Calibre-Web Automated Conversion History"
-msgstr "Pengaturan Calibre-Web telah diperbarui"
+msgid "Conversion History"
+msgstr "Pengaturan Scriptorium telah diperbarui"
 
 #: cps/templates/cwa_stats_tabs.html:157
 #, fuzzy
-msgid "Calibre-Web Automated Import History"
-msgstr "Email tes Calibre-Web"
+msgid "Import History"
+msgstr "Email tes Scriptorium"
 
 #: cps/templates/cwa_stats_tabs.html:158
 #, fuzzy
-msgid "Calibre-Web Automated EPUB Fixer History"
+msgid "EPUB Fixer History"
 msgstr "Pengaturan Konverter E-Book Caliber"
 
 #: cps/templates/cwa_stats_tabs.html:159
 #, fuzzy
-msgid "Calibre-Web Automated Cover & Metadata Enforcement History"
-msgstr "Email tes Calibre-Web"
+msgid "Cover & Metadata Enforcement History"
+msgstr "Email tes Scriptorium"
 
 #: cps/templates/cwa_stats_tabs.html:177
 msgid "No data for this period yet."
@@ -5955,7 +5955,7 @@ msgstr "Baca di Peramban"
 msgid "Listen"
 msgstr "Daftar"
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:87
+#: cps/templates/detail.html:117 cps/templates/layout.html:89
 #: cps/templates/user_edit.html:176
 #, fuzzy
 msgid "Create Shelf"
@@ -6022,7 +6022,7 @@ msgstr "Buat Rak"
 msgid "Reading progress"
 msgstr "Kemajuan"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:271
+#: cps/templates/detail.html:207 cps/templates/layout.html:275
 #, fuzzy
 msgid "Show more"
 msgstr "Tampilkan belum dibaca"
@@ -6098,7 +6098,7 @@ msgstr ""
 msgid ""
 "It builds the index that keeps duplicate checks fast during imports and "
 "metadata edits. On large libraries it can take a few minutes; you can keep "
-"using CWA meanwhile."
+"using Scriptorium meanwhile."
 msgstr ""
 
 #: cps/templates/duplicates.html:27 cps/templates/duplicates.html:130
@@ -6107,7 +6107,7 @@ msgid "Duplicate scan is running."
 msgstr "Hapus"
 
 #: cps/templates/duplicates.html:30
-msgid "You can keep using CWA while it runs."
+msgid "You can keep using Scriptorium while it runs."
 msgstr ""
 
 #: cps/templates/duplicates.html:37
@@ -6382,7 +6382,7 @@ msgid "(Magic)"
 msgstr ""
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:94
+#: cps/templates/layout.html:96
 msgid "(Public)"
 msgstr "(Publik)"
 
@@ -6421,7 +6421,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:274
+#: cps/templates/grid.html:21 cps/templates/layout.html:278
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6535,10 +6535,8 @@ msgstr ""
 
 #: cps/templates/http_error.html:19
 #, fuzzy
-msgid ""
-"Calibre-Web Automated Instance is unconfigured, please contact your "
-"administrator"
-msgstr "Instans Calibre-Web belum diatur, harap hubungi administrator Anda"
+msgid "Scriptorium Instance is unconfigured, please contact your administrator"
+msgstr "Instans Scriptorium belum diatur, harap hubungi administrator Anda"
 
 #: cps/templates/http_error.html:28
 msgid "Return to Home"
@@ -6615,8 +6613,8 @@ msgstr "Kirim ke E-Reader"
 
 #: cps/templates/kosync_plugin.html:8
 msgid ""
-"The CWA plugin keeps your reading position in step between KOReader and this "
-"library."
+"The Scriptorium plugin keeps your reading position in step between KOReader "
+"and this library."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:13
@@ -6625,7 +6623,7 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:14
 #, fuzzy
-msgid "Open CWA Settings"
+msgid "Open Automation Settings"
 msgstr "Pengaturan"
 
 #: cps/templates/kosync_plugin.html:14
@@ -6645,11 +6643,12 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:24
 #, fuzzy
-msgid "Download CWA Sync Plugin"
+msgid "Download Scriptorium Sync Plugin"
 msgstr "Unduh Log Akses"
 
 #: cps/templates/kosync_plugin.html:26
-msgid "Download is available after enabling KOReader Sync in CWA Settings."
+msgid ""
+"Download is available after enabling KOReader Sync in Automation Settings."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:33
@@ -6679,8 +6678,8 @@ msgstr "Kirim ke E-Reader"
 
 #: cps/templates/kosync_plugin.html:45
 msgid ""
-"Open a book, tap the top of the screen, open the Tools menu and choose “CWA "
-"Progress Sync”. Enter:"
+"Open a book, tap the top of the screen, open the Tools menu and choose "
+"“Scriptorium Sync”. Enter:"
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:47
@@ -6729,153 +6728,158 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:46
+#: cps/templates/layout.html:48
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:50
+#: cps/templates/layout.html:52
 #, fuzzy
 msgid "Library navigation"
 msgstr "Statistik Pustaka"
 
-#: cps/templates/layout.html:75
+#: cps/templates/layout.html:77
 msgid "Browse"
 msgstr "Jelajahi"
 
-#: cps/templates/layout.html:98
+#: cps/templates/layout.html:100
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:104 cps/templates/user_edit.html:309
+#: cps/templates/layout.html:106 cps/templates/user_edit.html:309
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Rak"
 
-#: cps/templates/layout.html:132
+#: cps/templates/layout.html:129 cps/templates/layout.html:234
+#: cps/templates/stats.html:6
+msgid "Based on"
+msgstr ""
+
+#: cps/templates/layout.html:135
 msgid "Toggle Navigation"
 msgstr "Alihkan Navigasi"
 
-#: cps/templates/layout.html:135
+#: cps/templates/layout.html:138
 msgid "Search Library"
 msgstr "Cari di Pustaka"
 
-#: cps/templates/layout.html:137
+#: cps/templates/layout.html:140
 #, fuzzy
 msgid "Advanced"
 msgstr "Penelusuran Lanjutan"
 
-#: cps/templates/layout.html:141
+#: cps/templates/layout.html:144
 #, fuzzy
 msgid "Refresh Library"
 msgstr "Cari di Pustaka"
 
-#: cps/templates/layout.html:151 cps/templates/user_edit.html:19
+#: cps/templates/layout.html:154 cps/templates/user_edit.html:19
 #: cps/templates/user_edit.html:32
 msgid "Account"
 msgstr "Akun"
 
-#: cps/templates/layout.html:173
+#: cps/templates/layout.html:176
 msgid "Logout"
 msgstr "Keluar"
 
-#: cps/templates/layout.html:193
+#: cps/templates/layout.html:196
 msgid "See Changelog"
 msgstr ""
 
-#: cps/templates/layout.html:196
+#: cps/templates/layout.html:199
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Hapus"
 
-#: cps/templates/layout.html:199
+#: cps/templates/layout.html:202
 msgid "Contribute here!"
 msgstr ""
 
-#: cps/templates/layout.html:217
+#: cps/templates/layout.html:220
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Pengaturan Dasar"
 
-#: cps/templates/layout.html:221
+#: cps/templates/layout.html:224
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:246
+#: cps/templates/layout.html:250
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Apakah Anda yakin?"
 
-#: cps/templates/layout.html:250 cps/templates/layout.html:268
+#: cps/templates/layout.html:254 cps/templates/layout.html:272
 #, fuzzy
 msgid "Confirm"
 msgstr "Pengaturan"
 
-#: cps/templates/layout.html:256
+#: cps/templates/layout.html:260
 msgid "Uploading..."
 msgstr "Mengunggah..."
 
-#: cps/templates/layout.html:259
+#: cps/templates/layout.html:263
 msgid "Please do not refresh the page"
 msgstr "Harap jangan segarkan halaman"
 
-#: cps/templates/layout.html:262
+#: cps/templates/layout.html:266
 msgid "Drop books to add them to the library"
-msgstr ""
-
-#: cps/templates/layout.html:268
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "Cari di Pustaka"
-
-#: cps/templates/layout.html:269
-msgid "Could not copy, select the text and copy it manually"
-msgstr ""
-
-#: cps/templates/layout.html:270
-#, fuzzy
-msgid "Hide password"
-msgstr "Kata Sandi"
-
-#: cps/templates/layout.html:271
-#, fuzzy
-msgid "Show less"
-msgstr "Tampilkan semua"
-
-#: cps/templates/layout.html:271 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
 msgstr ""
 
 #: cps/templates/layout.html:272
 #, fuzzy
+msgid "Copied to clipboard"
+msgstr "Cari di Pustaka"
+
+#: cps/templates/layout.html:273
+msgid "Could not copy, select the text and copy it manually"
+msgstr ""
+
+#: cps/templates/layout.html:274
+#, fuzzy
+msgid "Hide password"
+msgstr "Kata Sandi"
+
+#: cps/templates/layout.html:275
+#, fuzzy
+msgid "Show less"
+msgstr "Tampilkan semua"
+
+#: cps/templates/layout.html:275 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:276
+#, fuzzy
 msgid "Upload failed"
 msgstr "Pembaruan gagal:"
 
-#: cps/templates/layout.html:273
+#: cps/templates/layout.html:277
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "Profil %(name)s"
 
-#: cps/templates/layout.html:274 cps/templates/search_form.html:7
+#: cps/templates/layout.html:278 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr ""
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:278
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Kata Sandi baru telah dikirimkan ke alamat email Anda"
 
-#: cps/templates/layout.html:275
+#: cps/templates/layout.html:279
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy
 msgid "Review"
 msgstr "Sebelumnya"
@@ -7006,8 +7010,8 @@ msgid "Continue as guest"
 msgstr ""
 
 #: cps/templates/logviewer.html:9
-msgid "Download Calibre-Web Log"
-msgstr "Unduh Calibre-Web Log"
+msgid "Download Scriptorium Log"
+msgstr "Unduh Scriptorium Log"
 
 #: cps/templates/logviewer.html:10
 msgid "Download Access Log"
@@ -7020,7 +7024,7 @@ msgstr "Masuk"
 
 #: cps/templates/logviewer.html:15
 #, fuzzy
-msgid "Calibre-Web Log"
+msgid "Scriptorium Log"
 msgstr "Tampilkan Log Caliber-Web:"
 
 #: cps/templates/logviewer.html:16
@@ -7165,7 +7169,7 @@ msgstr "Pengaturan"
 msgid "Value"
 msgstr ""
 
-#: cps/templates/magic_shelf_edit.html:84
+#: cps/templates/magic_shelf_edit.html:84 cps/templates/stats.html:6
 msgid "and"
 msgstr ""
 
@@ -7308,8 +7312,8 @@ msgstr ""
 
 #: cps/templates/osd.xml:5
 #, fuzzy
-msgid "Calibre-Web Automated eBook Catalog"
-msgstr "Katalog eBook Calibre-Web"
+msgid "Scriptorium eBook Catalog"
+msgstr "Katalog eBook Scriptorium"
 
 #: cps/templates/profile_pictures.html:7
 msgid ""
@@ -7886,10 +7890,6 @@ msgstr ""
 msgid "About"
 msgstr "Tentang"
 
-#: cps/templates/stats.html:6
-msgid "Powered by"
-msgstr ""
-
 #: cps/templates/stats.html:10
 msgid "Library Statistics"
 msgstr "Statistik Pustaka"
@@ -8213,7 +8213,8 @@ msgid "Using KOReader?"
 msgstr "Pembaca DJVU"
 
 #: cps/templates/user_edit.html:212
-msgid "Reading progress can also sync from KOReader with the CWA plugin."
+msgid ""
+"Reading progress can also sync from KOReader with the Scriptorium plugin."
 msgstr ""
 
 #: cps/templates/user_edit.html:213
@@ -8449,18 +8450,15 @@ msgstr ""
 #~ msgid "Send to eReader Email"
 #~ msgstr "Alamat E-mail untuk Kirim ke E-Reader"
 
-#, fuzzy
 #~ msgid "Send to eReader Subject"
 #~ msgstr "Kirim ke E-Reader"
 
-#, fuzzy
 #~ msgid "Email Server Settings&nbsp;&nbsp;📬"
 #~ msgstr "Pengaturan Server Email"
 
 #~ msgid "Calibre Database Directory"
 #~ msgstr "Jalur Database Calibre"
 
-#, fuzzy
 #~ msgid "CWA Settings"
 #~ msgstr "Pengaturan"
 
@@ -8473,29 +8471,24 @@ msgstr ""
 #~ msgid "Edit Calibre Database Configuration"
 #~ msgstr "Edit Pengaturan Basis Data Caliber"
 
-#, fuzzy
 #~ msgid "Scheduled Tasks&nbsp;&nbsp;⌛"
 #~ msgstr "Tugas Terjadwal"
 
 #~ msgid "Generate series cover thumbnails"
 #~ msgstr "Buat thumbnail sampul seri"
 
-#, fuzzy
 #~ msgid "Show CWA Stats"
 #~ msgstr "Pengaturan"
 
-#, fuzzy
 #~ msgid "CWA Discord Server"
 #~ msgstr "Temukan"
 
-#, fuzzy
 #~ msgid "Administration&nbsp;&nbsp;🚀"
 #~ msgstr "Administrasi"
 
 #~ msgid "View Logs"
 #~ msgstr "Tampilkan Log"
 
-#, fuzzy
 #~ msgid "Version Information&nbsp;&nbsp;📜"
 #~ msgstr "Informasi Versi"
 
@@ -8538,7 +8531,6 @@ msgstr ""
 #~ msgid "Delete formats:"
 #~ msgstr "Hapus format:"
 
-#, fuzzy
 #~ msgid "select an option"
 #~ msgstr "pilih opsi"
 
@@ -8564,19 +8556,15 @@ msgstr ""
 #~ msgid "This Field is Required"
 #~ msgstr "Isian Ini Diperlukan"
 
-#, fuzzy
 #~ msgid "Unarchive"
 #~ msgstr "Diarsipkan"
 
-#, fuzzy
 #~ msgid "Mark as read"
 #~ msgstr "Tandai sebagai Belum dibaca"
 
-#, fuzzy
 #~ msgid "Mark as unread"
 #~ msgstr "Tandai sebagai Belum dibaca"
 
-#, fuzzy
 #~ msgid "Select all"
 #~ msgstr "Buat Rak"
 
@@ -8616,7 +8604,6 @@ msgstr ""
 #~ msgid "Into Book with Title:"
 #~ msgstr "Ke dalam Buku dengan Judul:"
 
-#, fuzzy
 #~ msgid "Select a Shelf"
 #~ msgstr "Buat Rak"
 
@@ -8626,168 +8613,130 @@ msgstr ""
 #~ msgid "Logfile Configuration"
 #~ msgstr "Pengaturan Logfile"
 
-#, fuzzy
 #~ msgid "Feature Configuration"
 #~ msgstr "Pengaturan Server"
 
-#, fuzzy
 #~ msgid "Manual Endpoint Configuration"
 #~ msgstr "Edit Pengaturan Antarmuka"
 
-#, fuzzy
 #~ msgid "Field Mapping Configuration"
 #~ msgstr "Pengaturan Tampilan"
 
-#, fuzzy
 #~ msgid "Default Theme"
 #~ msgstr "Hapus"
 
 #~ msgid "caliBlur! Dark Theme"
 #~ msgstr "Tema Gelap caliBlur!"
 
-#, fuzzy
 #~ msgid "Language & Display"
 #~ msgstr "Halaman Admin"
 
-#, fuzzy
 #~ msgid "Default interface language for new users."
 #~ msgstr "Pengaturan Default untuk Pengguna Baru"
 
-#, fuzzy
 #~ msgid "Default book language filter for new users."
 #~ msgstr "Visibilitas Default untuk Pengguna Baru"
 
-#, fuzzy
 #~ msgid "Enter a search term"
 #~ msgstr "Masukkan Nama Pengguna"
 
-#, fuzzy
 #~ msgid "Error starting EPUB Fixer"
 #~ msgstr "Kesalahan menghapus Rak"
 
-#, fuzzy
 #~ msgid "Metadata Fields to Update"
 #~ msgstr "Metadata berhasil diperbarui"
 
-#, fuzzy
 #~ msgid "Web UI Settings"
 #~ msgstr "Pengaturan"
 
-#, fuzzy
 #~ msgid "Automatic Duplicate Scanning"
 #~ msgstr "Pengaturan OAuth"
 
-#, fuzzy
 #~ msgid "Rate Limiting"
 #~ msgstr "Rating"
 
-#, fuzzy
 #~ msgid "Marked as read"
 #~ msgstr "Tandai sebagai Belum dibaca"
 
-#, fuzzy
 #~ msgid "Marked as unread"
 #~ msgstr "Tandai sebagai Belum dibaca"
 
-#, fuzzy
 #~ msgid "Restored from archive"
 #~ msgstr "Pulihkan dari arsip"
 
-#, fuzzy
 #~ msgid "Rating updated"
 #~ msgstr "Pengaturan Basis Data diperbarui"
 
-#, fuzzy
 #~ msgid "Rating cleared"
 #~ msgstr "Peringkat Diatas"
 
 #~ msgid "Description:"
 #~ msgstr "Deskripsi:"
 
-#, fuzzy
 #~ msgid "Select All"
 #~ msgstr "Buat Rak"
 
-#, fuzzy
 #~ msgid "Failed to update shelves"
 #~ msgstr "Gagal membuat jalur untuk sampul"
 
-#, fuzzy
 #~ msgid "Scan for Duplicates Now"
 #~ msgstr "Tampilkan Buku Berperingkat Teratas"
 
-#, fuzzy
 #~ msgid "Select None"
 #~ msgstr "Pilih"
 
-#, fuzzy
 #~ msgid "View book details"
 #~ msgstr "Detail Buku"
 
-#, fuzzy
 #~ msgid "Edit book metadata"
 #~ msgstr "edit metadata"
 
-#, fuzzy
 #~ msgid "Archive/delete book"
 #~ msgstr "Gabungkan buku terpiih"
 
-#, fuzzy
 #~ msgid "No Duplicate Books Found"
 #~ msgstr "Tidak ada hasil yang ditemukan"
 
-#, fuzzy
 #~ msgid "The following books will be permanently deleted:"
 #~ msgstr "Buku ini akan dihapus secara permanen dari basis data"
 
-#, fuzzy
 #~ msgid "Merge Books"
 #~ msgstr "Buku yang Belum Dibaca"
 
-#, fuzzy
 #~ msgid "The following book will be kept:"
 #~ msgstr "Buku ini akan dihapus secara permanen dari basis data"
 
-#, fuzzy
 #~ msgid "The following books will be merged into it (and then deleted):"
 #~ msgstr "Buku ini akan dihapus secara permanen dari basis data"
 
 #~ msgid "Enter domainname"
 #~ msgstr "Masukkan Nama Domain"
 
-#, fuzzy
 #~ msgid "Reject All Pending"
 #~ msgstr "Buat Rak"
 
-#, fuzzy
 #~ msgid "Processing..."
 #~ msgstr "Memuat..."
 
-#, fuzzy
 #~ msgid ""
 #~ "Are you sure you want to reject all matches for this book? This cannot be "
 #~ "undone."
 #~ msgstr "Apakah Anda yakin ingin merubah peran untuk pengguna yang dipilih?"
 
-#, fuzzy
 #~ msgid "Failed to reject match"
 #~ msgstr "Gagal membuat jalur untuk sampul"
 
-#, fuzzy
 #~ msgid ""
 #~ "Are you sure you want to reject all pending matches? This cannot be "
 #~ "undone."
 #~ msgstr "Apakah Anda yakin ingin merubah peran untuk pengguna yang dipilih?"
 
-#, fuzzy
 #~ msgid "✗ Reject All Pending"
 #~ msgstr "Buat Rak"
 
-#, fuzzy
 #~ msgid "Failed to reject all pending matches"
 #~ msgstr "Gagal membuat jalur untuk sampul"
 
-#, fuzzy
 #~ msgid "Show this shelf in your sidebar"
 #~ msgstr "Sinkronkan rak ini dengan perangkat Kobo"
 
@@ -8812,19 +8761,15 @@ msgstr ""
 #~ msgid "Home"
 #~ msgstr "Beranda"
 
-#, fuzzy
 #~ msgid "Switch Theme"
 #~ msgstr "Tema Standar"
 
-#, fuzzy
 #~ msgid "Duplicate Books Detected"
 #~ msgstr "Hapus"
 
-#, fuzzy
 #~ msgid "Duplicate Groups Found"
 #~ msgstr "Tidak ada hasil yang ditemukan"
 
-#, fuzzy
 #~ msgid "Sign in to your library"
 #~ msgstr "Seri dalam Pustaka Ini"
 
@@ -8883,15 +8828,12 @@ msgstr ""
 #~ msgid "Parent Directory"
 #~ msgstr "Direktori Induk"
 
-#, fuzzy
 #~ msgid "Default"
 #~ msgstr "Hapus"
 
-#, fuzzy
 #~ msgid "Arial"
 #~ msgstr "Vertical"
 
-#, fuzzy
 #~ msgid "Spread"
 #~ msgstr "Baca"
 
@@ -8949,11 +8891,9 @@ msgstr ""
 #~ msgid "Enable Change order"
 #~ msgstr "Aktifkan Ubah urutan"
 
-#, fuzzy
 #~ msgid "Sort according to book added to shelf, newest first"
 #~ msgstr "Urutkan menurut tanggal buku, terbaru dulu"
 
-#, fuzzy
 #~ msgid "Sort according to book added to shelf, oldest first"
 #~ msgstr "Urutkan menurut tanggal buku, terlama dulu"
 
@@ -8973,15 +8913,12 @@ msgstr ""
 #~ "Jika ini adalah tugas terjadwal, ini akan dijalankan ulang selama waktu "
 #~ "terjadwal berikutnya."
 
-#, fuzzy
 #~ msgid "eReader Configuration"
 #~ msgstr "Pengaturan Server"
 
-#, fuzzy
 #~ msgid "Send to eReader Email Address"
 #~ msgstr "Alamat E-mail untuk Kirim ke E-Reader"
 
-#, fuzzy
 #~ msgid "Book Language Filter"
 #~ msgstr "Tidak Ada Bahasa Buku yang Valid Diberikan"
 
@@ -8994,15 +8931,12 @@ msgstr ""
 #~ msgid "Sync only books in selected shelves with Kobo"
 #~ msgstr "Sinkronkan hanya buku di rak yang dipilih dengan Kobo"
 
-#, fuzzy
 #~ msgid "Sidebar Display Settings"
 #~ msgstr "Pengaturan OAuth"
 
-#, fuzzy
 #~ msgid "Magic Shelves Order"
 #~ msgstr "Sinkronkan Rak yang dipilih dengan Kob"
 
-#, fuzzy
 #~ msgid "Public Shelves:"
 #~ msgstr "Edit Rak Publik"
 
@@ -9015,15 +8949,12 @@ msgstr ""
 #~ msgid "Enter Username"
 #~ msgstr "Masukkan Nama Pengguna"
 
-#, fuzzy
 #~ msgid "Enter Email"
 #~ msgstr "Email tes"
 
-#, fuzzy
 #~ msgid "Enter eReader Email"
 #~ msgstr "Alamat E-mail untuk Kirim ke E-Reader"
 
-#, fuzzy
 #~ msgid "Enter eReader Email Subject"
 #~ msgstr "Alamat E-mail untuk Kirim ke E-Reader"
 
@@ -9039,11 +8970,9 @@ msgstr ""
 #~ msgid "Edit Denied Column Values"
 #~ msgstr "Edit Nilai Kolom yang Ditolak"
 
-#, fuzzy
 #~ msgid "Error scheduling EPUB Fixer"
 #~ msgstr "Kesalahan menghapus Rak"
 
-#, fuzzy
 #~ msgid "Cancel Scan"
 #~ msgstr "Batal"
 
@@ -9098,11 +9027,9 @@ msgstr ""
 #~ msgid "Books organized in shelves"
 #~ msgstr "本棚に整理された本"
 
-#, fuzzy
 #~ msgid "Connection successful!"
 #~ msgstr "Kesalahan koneksi"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Automated."
 #~ msgstr "Email ini telah dikirim melalui Calibre-Web."
 
@@ -9112,19 +9039,15 @@ msgstr ""
 #~ msgid "Generate Thumbnails"
 #~ msgstr "Buat thumbnail sampul buku"
 
-#, python-format
 #~ msgid "File %(file)s uploaded"
 #~ msgstr "Berkas %(file)s telah diunggah"
 
-#, fuzzy
 #~ msgid "Mark selected books as read"
 #~ msgstr "Gabungkan buku terpiih"
 
-#, fuzzy
 #~ msgid "Mark Book as Read or Unread"
 #~ msgstr "Tandai sebagai Belum dibaca"
 
-#, fuzzy, python-format
 #~ msgid "%(seriesindex)s is not a valid number, skipping"
 #~ msgstr "%(seriesindex)s dilewati karena bukan angka yang valid"
 
@@ -9138,11 +9061,9 @@ msgstr ""
 #~ "Apakah Anda yakin ingin menghapus database sinkronisasi Calibre-Web untuk "
 #~ "memaksakan sinkronisasi penuh dengan Kobo Reader Anda?"
 
-#, fuzzy
 #~ msgid "Calibre-Web Test Email"
 #~ msgstr "Email tes Calibre-Web"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Calibre-Web."
 #~ msgstr "Email ini telah dikirim melalui Calibre-Web."
 
@@ -9163,47 +9084,36 @@ msgstr ""
 #~ "Calibre-Web akan mencari Sampul yang diperbarui dan memperbarui Thumbnail "
 #~ "Sampul, ini mungkin memakan waktu cukup lama?"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autmoated."
 #~ msgstr "Email ini telah dikirim melalui Calibre-Web."
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Automated."
 #~ msgstr "Email ini telah dikirim melalui Calibre-Web."
 
-#, fuzzy
 #~ msgid "Downloads per User"
 #~ msgstr "Unduhan"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autoated."
 #~ msgstr "Email ini telah dikirim melalui Calibre-Web."
 
-#, fuzzy
 #~ msgid "unknown error"
 #~ msgstr "Kesalahan koneksi"
 
-#, fuzzy
 #~ msgid "Could not open file {filename!r}: {message}"
 #~ msgstr "Tidak dapat login: %(message)s"
 
-#, fuzzy
 #~ msgid "{value!r} is not a valid boolean."
 #~ msgstr "Email bukan dari domain yang valid"
 
-#, fuzzy
 #~ msgid "directory"
 #~ msgstr "Arah Baca"
 
-#, fuzzy
 #~ msgid "{name} {filename!r} is not writable."
 #~ msgstr "Basis Data tidak dapat ditulisi"
 
-#, fuzzy
 #~ msgid "Repeat for confirmation"
 #~ msgstr "Pengaturan Fitur"
 
-#, fuzzy
 #~ msgid "Value must be an iterable."
 #~ msgstr "Nilai harus benar atau salah"
 

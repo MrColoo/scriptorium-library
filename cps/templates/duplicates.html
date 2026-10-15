@@ -17,7 +17,7 @@
 <div class="alert alert--warning" id="dup-setup-notice">{{ ui.icon('info') }}
   <div class="alert-body">
     <strong>{{ _('Duplicate scanning needs a one-time full scan.') }}</strong>
-    {{ _('It builds the index that keeps duplicate checks fast during imports and metadata edits. On large libraries it can take a few minutes; you can keep using CWA meanwhile.') }}
+    {{ _('It builds the index that keeps duplicate checks fast during imports and metadata edits. On large libraries it can take a few minutes; you can keep using Scriptorium meanwhile.') }}
   </div>
 </div>
 {%- endif %}
@@ -27,7 +27,7 @@
     <h2 class="card-title" data-scan-title>{{ _('Duplicate scan is running.') }}</h2>
     <a class="btn btn-sm btn-ghost" href="{{ url_for('tasks.get_tasks_status') }}">{{ _('Tasks') }}</a>
   </div>
-  <p class="muted" data-scan-message>{{ _('You can keep using CWA while it runs.') }}</p>
+  <p class="muted" data-scan-message>{{ _('You can keep using Scriptorium while it runs.') }}</p>
   <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-scan-progress><span style="width: 0%"></span></div>
 </section>
 

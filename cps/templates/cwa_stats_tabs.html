@@ -153,10 +153,10 @@
     </dl>
   </section>
   {%- endif %}
-  {{ history(_('Calibre-Web Automated Conversion History'), headers_conversion, data_conversions, url_for('cwa_stats.show_full_conversions')) }}
-  {{ history(_('Calibre-Web Automated Import History'), headers_import, data_imports, url_for('cwa_stats.show_full_imports')) }}
-  {{ history(_('Calibre-Web Automated EPUB Fixer History'), headers_epub_fixer, data_epub_fixer, url_for('cwa_stats.show_full_epub_fixer')) }}
-  {{ history(_('Calibre-Web Automated Cover & Metadata Enforcement History'), headers_enforcement, data_enforcement, url_for('cwa_stats.show_full_enforcement')) }}
+  {{ history(_('Conversion History'), headers_conversion, data_conversions, url_for('cwa_stats.show_full_conversions')) }}
+  {{ history(_('Import History'), headers_import, data_imports, url_for('cwa_stats.show_full_imports')) }}
+  {{ history(_('EPUB Fixer History'), headers_epub_fixer, data_epub_fixer, url_for('cwa_stats.show_full_epub_fixer')) }}
+  {{ history(_('Cover & Metadata Enforcement History'), headers_enforcement, data_enforcement, url_for('cwa_stats.show_full_enforcement')) }}
 </div>
 {% endblock %}
 

@@ -6,10 +6,9 @@
 # SECOND AUTHOR SkyLull <https://github.com/SkyLull>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version:  Calibre-Web Automated\n"
-"Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
-"Automated\n"
-"POT-Creation-Date: 2026-10-15 22:38+0200\n"
+"Project-Id-Version: Calibre-Web Automated\n"
+"Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
+"POT-Creation-Date: 2026-10-15 23:47+0200\n"
 "PO-Revision-Date: 2026-05-17 20:18+0800\n"
 "Last-Translator: SkyLull <https://github.com/SkyLull>\n"
 "Language-Team: zh_Hans_TW <LL@li.org>\n"
@@ -18,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Generated-By: Babel 2.13.1\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: cps/about.py:65 cps/templates/admin.html:13
 #: cps/templates/cwa_stats_full.html:6 cps/templates/cwa_stats_tabs.html:33
@@ -209,8 +208,8 @@ msgid "Invalid Restricted Column"
 msgstr "無效的限制列"
 
 #: cps/admin.py:920 cps/admin.py:2462
-msgid "Calibre-Web Automated configuration updated"
-msgstr "Calibre-Web Automated 設定已更新"
+msgid "Scriptorium configuration updated"
+msgstr "Scriptorium 設定已更新"
 
 #: cps/admin.py:932
 msgid "Do you really want to delete the Kobo Token?"
@@ -265,18 +264,16 @@ msgstr "您確定要更改 Calibre 儲存庫位置嗎？"
 
 #: cps/admin.py:955
 msgid ""
-"Calibre-Web Automated will search for updated Covers and update Cover "
-"Thumbnails, this may take a while?"
+"Scriptorium will search for updated Covers and update Cover Thumbnails, this "
+"may take a while?"
 msgstr ""
-"Calibre-Web Automated 將搜尋更新的封面並更新封面縮圖，這可能需要一些時間，確"
-"定繼續？"
+"Scriptorium 將搜尋更新的封面並更新封面縮圖，這可能需要一些時間，確定繼續？"
 
 #: cps/admin.py:958
 msgid ""
-"Are you sure you want delete Calibre-Web Automated's sync database to force "
-"a full sync with your Kobo Reader?"
-msgstr ""
-"確定要刪除 Calibre-Web Automated 的同步資料庫以強制與 Kobo 閱讀器完整同步嗎？"
+"Are you sure you want delete Scriptorium's sync database to force a full "
+"sync with your Kobo Reader?"
+msgstr "確定要刪除 Scriptorium 的同步資料庫以強制與 Kobo 閱讀器完整同步嗎？"
 
 #: cps/admin.py:1193 cps/admin.py:1199 cps/admin.py:1208 cps/admin.py:1217
 #: cps/templates/_restrictions.html:22 cps/templates/_restrictions.html:27
@@ -802,7 +799,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:159
+#: cps/templates/layout.html:162
 #, fuzzy
 msgid "Customize"
 msgstr "自訂篩選器"
@@ -938,8 +935,8 @@ msgid "Invalid cron expression for duplicate scans. Changes were not saved."
 msgstr "重複掃描的 cron 運算式無效。變更未儲存。"
 
 #: cps/cwa_functions.py:999
-msgid "Calibre-Web Automated User Settings"
-msgstr "Calibre-Web Automated 使用者設定"
+msgid "Automation Settings"
+msgstr "Scriptorium 使用者設定"
 
 #: cps/cwa_functions.py:1045 cps/cwa_functions.py:1047
 #: cps/cwa_functions.py:1051 cps/cwa_functions.py:1053
@@ -1003,8 +1000,8 @@ msgid "Unknown User"
 msgstr "未知使用者"
 
 #: cps/cwa_functions.py:1271
-msgid "Calibre-Web Automated Stats & Activity"
-msgstr "Calibre-Web Automated 統計與活動"
+msgid "Stats & Activity"
+msgstr "Scriptorium 統計與活動"
 
 #: cps/cwa_functions.py:1655
 #, fuzzy
@@ -1239,7 +1236,7 @@ msgstr "格式上傳的書籍 ID 缺失或無效"
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr "無法上傳格式：書籍已不存在於書庫中"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:272
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:276
 msgid "Upload done, processing, please wait..."
 msgstr "上傳完成，正在處理中，請稍候..."
 
@@ -1397,8 +1394,8 @@ msgid "Send to eReader"
 msgstr "傳送到閱讀器"
 
 #: cps/helper.py:114 cps/helper.py:141 cps/helper.py:254
-msgid "This Email has been sent via Calibre-Web Automated."
-msgstr "此電子郵件已透過 Calibre-Web Automated 傳送。"
+msgid "This Email has been sent via Scriptorium."
+msgstr "此電子郵件已透過 Scriptorium 傳送。"
 
 #: cps/helper.py:129
 #, fuzzy, python-format
@@ -1411,16 +1408,16 @@ msgid "Conversion failed for book id: %(book)d"
 msgstr "找不到id為 %(book)d 的書籍的 %(format)s 格式"
 
 #: cps/helper.py:139
-msgid "Calibre-Web Automated Test Email"
-msgstr "Calibre-Web Automated 測試郵件"
+msgid "Scriptorium Test Email"
+msgstr "Scriptorium 測試郵件"
 
 #: cps/helper.py:140
 msgid "Test Email"
 msgstr "測試郵件"
 
 #: cps/helper.py:157
-msgid "Get Started with Calibre-Web Automated"
-msgstr "開啟 Calibre-Web 之旅"
+msgid "Get Started with Scriptorium"
+msgstr "開啟 Scriptorium 之旅"
 
 #: cps/helper.py:162
 #, python-format
@@ -1566,10 +1563,11 @@ msgstr "執行UnRar時出錯"
 #: cps/helper.py:1361
 #, python-format
 msgid ""
-"Unsupported architecture detected: %(arch)s. CWA is optimized for x86_64 and "
-"aarch64."
+"Unsupported architecture detected: %(arch)s. Scriptorium is optimized for "
+"x86_64 and aarch64."
 msgstr ""
-"偵測到不支援的處理器架構：%(arch)s。CWA 僅針對 x86_64 和 aarch64 進行最佳化。"
+"偵測到不支援的處理器架構：%(arch)s。Scriptorium 僅針對 x86_64 和 aarch64 進行"
+"最佳化。"
 
 #: cps/helper.py:1370
 msgid "Could not find the specified directory"
@@ -1603,10 +1601,10 @@ msgstr "將所有書籍排入中繼資料備份佇列"
 
 #: cps/kobo_auth.py:110
 msgid ""
-"Please access Calibre-Web Automated from non localhost to get valid "
-"api_endpoint for kobo device"
+"Please access Scriptorium from non localhost to get valid api_endpoint for "
+"kobo device"
 msgstr ""
-"請不要使用 localhost 存取 Calibre-Web Automated，以便 Kobo 裝置能取得有效的 "
+"請不要使用 localhost 存取 Scriptorium，以便 Kobo 裝置能取得有效的 "
 "api_endpoint"
 
 #: cps/kobo_auth.py:129
@@ -1778,8 +1776,8 @@ msgid "{} Stars"
 msgstr "{} 星"
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:168
-#: cps/templates/layout.html:223 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:171
+#: cps/templates/layout.html:226 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2251
 msgid "Login"
 msgstr "登入"
@@ -1967,7 +1965,7 @@ msgstr ""
 
 #: cps/search.py:53 cps/search.py:440 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:219 cps/templates/search.html:5
+#: cps/templates/layout.html:222 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "搜尋"
@@ -1996,10 +1994,10 @@ msgid "Read Status = '%(status)s'"
 msgstr "閱讀狀態 = 「%(status)s」"
 
 #: cps/search.py:354
-msgid "Error on search for custom columns, please restart Calibre-Web"
-msgstr "搜詢自訂欄位時出錯，請重新啟動 Calibre-Web"
+msgid "Error on search for custom columns, please restart Scriptorium"
+msgstr "搜詢自訂欄位時出錯，請重新啟動 Scriptorium"
 
-#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:137
+#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:140
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2119,7 +2117,7 @@ msgid "Error opening shelf. Shelf does not exist or is not accessible"
 msgstr "開啟書架出錯。書架不存在或不可存取"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:121 cps/templates/tasks.html:5
+#: cps/templates/layout.html:123 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "任務列表"
 
@@ -2282,7 +2280,7 @@ msgstr "書架名稱過長（最多 100 個字元）"
 msgid "Error creating shelf"
 msgstr "建立書架時出錯"
 
-#: cps/templates/layout.html:106 cps/web.py:1210
+#: cps/templates/layout.html:108 cps/web.py:1210
 msgid "Create Magic Shelf"
 msgstr "建立智慧書架"
 
@@ -2391,7 +2389,7 @@ msgstr "成功！書籍已排入傳送至所選地址的佇列！"
 msgid "Please wait one minute to register next user"
 msgstr "請等待一分鐘後再註冊下一位使用者"
 
-#: cps/templates/layout.html:170 cps/templates/login.html:77
+#: cps/templates/layout.html:173 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2130 cps/web.py:2134
 #: cps/web.py:2139 cps/web.py:2143 cps/web.py:2149 cps/web.py:2174
 #: cps/web.py:2178 cps/web.py:2191 cps/web.py:2194
@@ -2704,8 +2702,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "正在清除封面縮圖快取"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:144
-#: cps/templates/layout.html:145 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:147
+#: cps/templates/layout.html:148 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "上傳"
 
@@ -2809,11 +2807,11 @@ msgstr "顯示欄位值"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:188
-#: cps/templates/layout.html:191 cps/templates/layout.html:194
-#: cps/templates/layout.html:197 cps/templates/layout.html:200
-#: cps/templates/layout.html:203 cps/templates/layout.html:240
-#: cps/templates/layout.html:268 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:191
+#: cps/templates/layout.html:194 cps/templates/layout.html:197
+#: cps/templates/layout.html:200 cps/templates/layout.html:203
+#: cps/templates/layout.html:206 cps/templates/layout.html:244
+#: cps/templates/layout.html:272 cps/templates/read.html:58
 msgid "Close"
 msgstr "關閉"
 
@@ -2851,7 +2849,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:249
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:253
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
@@ -2909,7 +2907,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:124
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:126
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -2923,8 +2921,8 @@ msgid "Users, library, automation and server."
 msgstr ""
 
 #: cps/templates/admin.html:12
-msgid "Check CWA Status"
-msgstr "檢查 CWA 狀態"
+msgid "Check Service Status"
+msgstr "檢查 Scriptorium 狀態"
 
 #: cps/templates/admin.html:20 cps/templates/user_edit.html:11
 msgid "Users"
@@ -3067,7 +3065,7 @@ msgstr "每頁書籍數"
 msgid "Uploads"
 msgstr "上傳"
 
-#: cps/templates/admin.html:106 cps/templates/layout.html:158
+#: cps/templates/admin.html:106 cps/templates/layout.html:161
 #, fuzzy
 msgid "Kobo sync"
 msgstr "啟用Kobo同步"
@@ -3151,7 +3149,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "執行 Hardcover 自動擷取"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:119 cps/templates/layout.html:163
+#: cps/templates/layout.html:121 cps/templates/layout.html:166
 msgid "System"
 msgstr ""
 
@@ -3187,17 +3185,17 @@ msgstr "關閉伺服器"
 msgid "Are you sure you want to restart?"
 msgstr "您確定要重新啟動嗎？"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:275
+#: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:246 cps/templates/layout.html:85
+#: cps/templates/detail.html:246 cps/templates/layout.html:87
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "書架列表"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:136
+#: cps/templates/appearance.html:14 cps/templates/layout.html:139
 #, fuzzy
 msgid "Search titles, authors, series…"
 msgstr "依標題/作者搜尋"
@@ -3315,7 +3313,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:157
+#: cps/templates/layout.html:160
 #, fuzzy
 msgid "Profile"
 msgstr "個人資料"
@@ -3395,16 +3393,16 @@ msgstr "評分"
 msgid "Preview"
 msgstr "預覽"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:162
+#: cps/templates/appearance.html:156 cps/templates/layout.html:165
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:164
+#: cps/templates/appearance.html:157 cps/templates/layout.html:167
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "淺色"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:165
+#: cps/templates/appearance.html:158 cps/templates/layout.html:168
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "深色"
@@ -3767,7 +3765,7 @@ msgid "Add to shelf"
 msgstr "加入至書架"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:42
-#: cps/templates/layout.html:225
+#: cps/templates/layout.html:228
 #, fuzzy
 msgid "More"
 msgstr "更多來自"
@@ -3925,9 +3923,9 @@ msgstr "Calibre 資料庫位置（metadata.db 檔案）"
 
 #: cps/templates/config_db.html:18
 msgid ""
-"Inside the container this lives under /calibre-library. CWA finds and mounts "
-"the library there on start: the largest one if there are several, a new one "
-"if there is none."
+"Inside the container this lives under /calibre-library. Scriptorium finds "
+"and mounts the library there on start: the largest one if there are several, "
+"a new one if there is none."
 msgstr ""
 
 #: cps/templates/config_db.html:21
@@ -3975,7 +3973,7 @@ msgstr ""
 #: cps/templates/config_db.html:67
 msgid ""
 "Make sure no other program (including the Calibre desktop app) uses the same "
-"library while CWA runs."
+"library while Scriptorium runs."
 msgstr ""
 
 #: cps/templates/config_db.html:68
@@ -3987,7 +3985,7 @@ msgstr ""
 #: cps/templates/config_db.html:69
 msgid ""
 "Check that the path above points to the folder that contains metadata.db and "
-"that CWA can read and write it."
+"that Scriptorium can read and write it."
 msgstr ""
 
 #: cps/templates/config_db.html:70
@@ -4031,7 +4029,7 @@ msgid "Ok"
 msgstr "確定"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:270 cps/templates/login.html:35
+#: cps/templates/layout.html:274 cps/templates/login.html:35
 #: cps/templates/user_edit.html:46 cps/templates/user_edit.html:57
 #, fuzzy
 msgid "Show password"
@@ -4873,7 +4871,8 @@ msgid "Time of Day:"
 msgstr "時段："
 
 #: cps/templates/cwa_settings.html:67
-msgid "What CWA does on its own when books arrive, plus maintenance jobs."
+msgid ""
+"What Scriptorium does on its own when books arrive, plus maintenance jobs."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:72
@@ -4902,20 +4901,20 @@ msgid "Backups"
 msgstr "返回"
 
 #: cps/templates/cwa_settings.html:88
-msgid "Enable/Disable Calibre-Web Automated Services"
-msgstr "啟用/停用 Calibre-Web Automated 服務"
+msgid "Enable/Disable Automation Services"
+msgstr "啟用/停用 Scriptorium 服務"
 
 #: cps/templates/cwa_settings.html:90
-msgid "Enable CWA Auto-Convert"
-msgstr "啟用 CWA 自動轉換"
+msgid "Enable Auto-Convert"
+msgstr "啟用 Scriptorium 自動轉換"
 
 #: cps/templates/cwa_settings.html:90
 msgid "New books are converted to the target format below."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
-msgid "Enable CWA Automatic Cover & Metadata Enforcement Service"
-msgstr "啟用 CWA 自動封面與中繼資料強制服務"
+msgid "Enable Automatic Cover & Metadata Enforcement Service"
+msgstr "啟用 Scriptorium 自動封面與中繼資料強制服務"
 
 #: cps/templates/cwa_settings.html:91
 msgid ""
@@ -4924,8 +4923,8 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
-msgid "Enable CWA Kindle EPUB Fixer"
-msgstr "啟用 CWA Kindle EPUB 修復工具"
+msgid "Enable Kindle EPUB Fixer"
+msgstr "啟用 Scriptorium Kindle EPUB 修復工具"
 
 #: cps/templates/cwa_settings.html:92
 msgid "Fixes common EPUB problems that make Amazon reject books sent by email."
@@ -4942,8 +4941,8 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
-msgid "Enable KOReader Sync (CWA Plugin)"
-msgstr "啟用 KOReader 同步（CWA 插件）"
+msgid "Enable KOReader Sync (Scriptorium Plugin)"
+msgstr "啟用 KOReader 同步（Scriptorium 插件）"
 
 #: cps/templates/cwa_settings.html:96
 msgid ""
@@ -4969,16 +4968,16 @@ msgid "Removes leftover references to books deleted from the library."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:102
-msgid "Enable CWA Update Notifications"
-msgstr "啟用 CWA 更新通知"
+msgid "Enable Update Notifications"
+msgstr "啟用 Scriptorium 更新通知"
 
 #: cps/templates/cwa_settings.html:103
 msgid "Enable Contribute Translations Notifications"
 msgstr "啟用翻譯貢獻通知"
 
 #: cps/templates/cwa_settings.html:110
-msgid "CWA Auto-Ingest Automerge"
-msgstr "CWA 自動擷取自動合併"
+msgid "Auto-Ingest Automerge"
+msgstr "Scriptorium 自動擷取自動合併"
 
 #: cps/templates/cwa_settings.html:112
 msgid "Creates a duplicate record, keeping both copies"
@@ -5032,8 +5031,8 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
-msgid "CWA Auto-Ingest - Ignored Formats"
-msgstr "CWA 自動擷取 - 忽略的格式"
+msgid "Auto-Ingest - Ignored Formats"
+msgstr "Scriptorium 自動擷取 - 忽略的格式"
 
 #: cps/templates/cwa_settings.html:124
 msgid "Files in these formats are left in the ingest folder."
@@ -5050,16 +5049,16 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
-msgid "CWA Auto-Convert - Ignored Formats"
-msgstr "CWA 自動轉換 - 忽略的格式"
+msgid "Auto-Convert - Ignored Formats"
+msgstr "Scriptorium 自動轉換 - 忽略的格式"
 
 #: cps/templates/cwa_settings.html:136
 msgid "Books in these formats are imported as they are, without conversion."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
-msgid "CWA Auto-Convert - Retained Formats"
-msgstr "CWA 自動轉換 - 保留的格式"
+msgid "Auto-Convert - Retained Formats"
+msgstr "Scriptorium 自動轉換 - 保留的格式"
 
 #: cps/templates/cwa_settings.html:137
 msgid ""
@@ -5175,8 +5174,8 @@ msgid "Pause between requests to the Hardcover API (0–60)."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:182
-msgid "CWA Duplicate Detection System"
-msgstr "CWA 重複偵測系統"
+msgid "Duplicate Detection System"
+msgstr "Scriptorium 重複偵測系統"
 
 #: cps/templates/cwa_settings.html:184
 msgid "Enable Duplicate Detection"
@@ -5199,8 +5198,8 @@ msgid "Legacy SQL only (experimental)"
 msgstr "僅舊版 SQL（實驗性）"
 
 #: cps/templates/cwa_settings.html:195
-msgid "CWA Duplicate Detection Criteria"
-msgstr "CWA 重複偵測條件"
+msgid "Duplicate Detection Criteria"
+msgstr "Scriptorium 重複偵測條件"
 
 #: cps/templates/cwa_settings.html:196
 msgid "Books count as duplicates when all selected fields match."
@@ -5320,8 +5319,8 @@ msgid "Automatic Backup Settings"
 msgstr "自動備份設定"
 
 #: cps/templates/cwa_settings.html:251
-msgid "Enable CWA Import Auto-Backup"
-msgstr "啟用 CWA 匯入自動備份"
+msgid "Enable Import Auto-Backup"
+msgstr "啟用 Scriptorium 匯入自動備份"
 
 #: cps/templates/cwa_settings.html:251
 #, fuzzy
@@ -5331,24 +5330,24 @@ msgstr ""
 "啟用後，所有匯入檔案的副本將儲存在 <i>/config/processed_books/imported</i>"
 
 #: cps/templates/cwa_settings.html:252
-msgid "Enable CWA Conversion Auto-Backup"
-msgstr "啟用 CWA 轉換自動備份"
+msgid "Enable Conversion Auto-Backup"
+msgstr "啟用 Scriptorium 轉換自動備份"
 
 #: cps/templates/cwa_settings.html:252
 msgid "Keeps the original of every converted file."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
-msgid "Enable CWA EPUB Fixer Auto-Backup"
-msgstr "啟用 CWA EPUB 修復自動備份"
+msgid "Enable EPUB Fixer Auto-Backup"
+msgstr "啟用 Scriptorium EPUB 修復自動備份"
 
 #: cps/templates/cwa_settings.html:253
 msgid "Keeps the original of every EPUB the fixer changed."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
-msgid "Enable CWA Auto-Zip Backups"
-msgstr "啟用 CWA 自動壓縮備份"
+msgid "Enable Auto-Zip Backups"
+msgstr "啟用 Scriptorium 自動壓縮備份"
 
 #: cps/templates/cwa_settings.html:254
 msgid "Compresses the backups once a day to save space."
@@ -5440,7 +5439,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:59
-#: cps/templates/layout.html:56 cps/templates/layout.html:218
+#: cps/templates/layout.html:58 cps/templates/layout.html:221
 #, fuzzy
 msgid "Library"
 msgstr "在書庫中"
@@ -5696,23 +5695,23 @@ msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:156
 #, fuzzy
-msgid "Calibre-Web Automated Conversion History"
-msgstr "Calibre-Web Automated - 完整轉換歷史"
+msgid "Conversion History"
+msgstr "Scriptorium - 完整轉換歷史"
 
 #: cps/templates/cwa_stats_tabs.html:157
 #, fuzzy
-msgid "Calibre-Web Automated Import History"
-msgstr "Calibre-Web Automated - 完整匯入歷史"
+msgid "Import History"
+msgstr "Scriptorium - 完整匯入歷史"
 
 #: cps/templates/cwa_stats_tabs.html:158
 #, fuzzy
-msgid "Calibre-Web Automated EPUB Fixer History"
-msgstr "Calibre-Web Automated - EPUB 修復工具服務"
+msgid "EPUB Fixer History"
+msgstr "Scriptorium - EPUB 修復工具服務"
 
 #: cps/templates/cwa_stats_tabs.html:159
 #, fuzzy
-msgid "Calibre-Web Automated Cover & Metadata Enforcement History"
-msgstr "Calibre-Web Automated - 完整強制執行歷史"
+msgid "Cover & Metadata Enforcement History"
+msgstr "Scriptorium - 完整強制執行歷史"
 
 #: cps/templates/cwa_stats_tabs.html:177
 msgid "No data for this period yet."
@@ -5816,7 +5815,7 @@ msgstr "瀏覽器線上閱讀"
 msgid "Listen"
 msgstr "清單"
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:87
+#: cps/templates/detail.html:117 cps/templates/layout.html:89
 #: cps/templates/user_edit.html:176
 msgid "Create Shelf"
 msgstr "建立書架"
@@ -5882,7 +5881,7 @@ msgstr "建立書架"
 msgid "Reading progress"
 msgstr "KOReader 進度"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:271
+#: cps/templates/detail.html:207 cps/templates/layout.html:275
 #, fuzzy
 msgid "Show more"
 msgstr "顯示未讀"
@@ -5959,7 +5958,7 @@ msgstr ""
 msgid ""
 "It builds the index that keeps duplicate checks fast during imports and "
 "metadata edits. On large libraries it can take a few minutes; you can keep "
-"using CWA meanwhile."
+"using Scriptorium meanwhile."
 msgstr ""
 
 #: cps/templates/duplicates.html:27 cps/templates/duplicates.html:130
@@ -5968,7 +5967,7 @@ msgid "Duplicate scan is running."
 msgstr "刪除書籍"
 
 #: cps/templates/duplicates.html:30
-msgid "You can keep using CWA while it runs."
+msgid "You can keep using Scriptorium while it runs."
 msgstr ""
 
 #: cps/templates/duplicates.html:37
@@ -6251,7 +6250,7 @@ msgid "(Magic)"
 msgstr "（智慧）"
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:94
+#: cps/templates/layout.html:96
 msgid "(Public)"
 msgstr "(公共)"
 
@@ -6288,7 +6287,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:274
+#: cps/templates/grid.html:21 cps/templates/layout.html:278
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6405,10 +6404,8 @@ msgid "Reject every pending match? Those books will not be suggested again."
 msgstr ""
 
 #: cps/templates/http_error.html:19
-msgid ""
-"Calibre-Web Automated Instance is unconfigured, please contact your "
-"administrator"
-msgstr "Calibre-Web 實例未設定，請聯繫您的系統管理員！"
+msgid "Scriptorium Instance is unconfigured, please contact your administrator"
+msgstr "Scriptorium 實例未設定，請聯繫您的系統管理員！"
 
 #: cps/templates/http_error.html:28
 msgid "Return to Home"
@@ -6483,8 +6480,8 @@ msgstr "傳送到閱讀器"
 
 #: cps/templates/kosync_plugin.html:8
 msgid ""
-"The CWA plugin keeps your reading position in step between KOReader and this "
-"library."
+"The Scriptorium plugin keeps your reading position in step between KOReader "
+"and this library."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:13
@@ -6492,8 +6489,8 @@ msgid "KOReader Sync is disabled."
 msgstr "KOReader 同步已停用。"
 
 #: cps/templates/kosync_plugin.html:14
-msgid "Open CWA Settings"
-msgstr "開啟 CWA 設定"
+msgid "Open Automation Settings"
+msgstr "開啟 Scriptorium 設定"
 
 #: cps/templates/kosync_plugin.html:14
 msgid "Ask an administrator to turn it on."
@@ -6512,12 +6509,13 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:24
 #, fuzzy
-msgid "Download CWA Sync Plugin"
+msgid "Download Scriptorium Sync Plugin"
 msgstr "KOReader 同步插件"
 
 #: cps/templates/kosync_plugin.html:26
-msgid "Download is available after enabling KOReader Sync in CWA Settings."
-msgstr "在 CWA 設定中啟用 KOReader 同步後即可下載。"
+msgid ""
+"Download is available after enabling KOReader Sync in Automation Settings."
+msgstr "在 Scriptorium 設定中啟用 KOReader 同步後即可下載。"
 
 #: cps/templates/kosync_plugin.html:33
 #, fuzzy
@@ -6546,8 +6544,8 @@ msgstr "正傳送到閱讀器..."
 
 #: cps/templates/kosync_plugin.html:45
 msgid ""
-"Open a book, tap the top of the screen, open the Tools menu and choose “CWA "
-"Progress Sync”. Enter:"
+"Open a book, tap the top of the screen, open the Tools menu and choose "
+"“Scriptorium Sync”. Enter:"
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:47
@@ -6597,152 +6595,157 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:46
+#: cps/templates/layout.html:48
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:50
+#: cps/templates/layout.html:52
 #, fuzzy
 msgid "Library navigation"
 msgstr "書庫統計"
 
-#: cps/templates/layout.html:75
+#: cps/templates/layout.html:77
 msgid "Browse"
 msgstr "瀏覽"
 
-#: cps/templates/layout.html:98
+#: cps/templates/layout.html:100
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:104 cps/templates/user_edit.html:309
+#: cps/templates/layout.html:106 cps/templates/user_edit.html:309
 #, fuzzy
 msgid "Smart shelves"
 msgstr "書架列表"
 
-#: cps/templates/layout.html:132
+#: cps/templates/layout.html:129 cps/templates/layout.html:234
+#: cps/templates/stats.html:6
+msgid "Based on"
+msgstr ""
+
+#: cps/templates/layout.html:135
 msgid "Toggle Navigation"
 msgstr "切換導覽列"
 
-#: cps/templates/layout.html:135
+#: cps/templates/layout.html:138
 msgid "Search Library"
 msgstr "搜尋書庫"
 
-#: cps/templates/layout.html:137
+#: cps/templates/layout.html:140
 #, fuzzy
 msgid "Advanced"
 msgstr "進階搜尋"
 
-#: cps/templates/layout.html:141
+#: cps/templates/layout.html:144
 msgid "Refresh Library"
 msgstr "重整書庫"
 
-#: cps/templates/layout.html:151 cps/templates/user_edit.html:19
+#: cps/templates/layout.html:154 cps/templates/user_edit.html:19
 #: cps/templates/user_edit.html:32
 msgid "Account"
 msgstr "帳號"
 
-#: cps/templates/layout.html:173
+#: cps/templates/layout.html:176
 msgid "Logout"
 msgstr "登出"
 
-#: cps/templates/layout.html:193
+#: cps/templates/layout.html:196
 msgid "See Changelog"
 msgstr "查看更新紀錄"
 
-#: cps/templates/layout.html:196
+#: cps/templates/layout.html:199
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "刪除書籍"
 
-#: cps/templates/layout.html:199
+#: cps/templates/layout.html:202
 msgid "Contribute here!"
 msgstr "在此貢獻！"
 
-#: cps/templates/layout.html:217
+#: cps/templates/layout.html:220
 #, fuzzy
 msgid "Quick navigation"
 msgstr "基本設定"
 
-#: cps/templates/layout.html:221
+#: cps/templates/layout.html:224
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:246
+#: cps/templates/layout.html:250
 #, fuzzy
 msgid "Are you sure?"
 msgstr "您真的確定？"
 
-#: cps/templates/layout.html:250 cps/templates/layout.html:268
+#: cps/templates/layout.html:254 cps/templates/layout.html:272
 #, fuzzy
 msgid "Confirm"
 msgstr "配置"
 
-#: cps/templates/layout.html:256
+#: cps/templates/layout.html:260
 msgid "Uploading..."
 msgstr "正在上傳..."
 
-#: cps/templates/layout.html:259
+#: cps/templates/layout.html:263
 msgid "Please do not refresh the page"
 msgstr "請不要重新整理頁面"
 
-#: cps/templates/layout.html:262
+#: cps/templates/layout.html:266
 msgid "Drop books to add them to the library"
-msgstr ""
-
-#: cps/templates/layout.html:268
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "UUID 已複製到剪貼簿"
-
-#: cps/templates/layout.html:269
-msgid "Could not copy, select the text and copy it manually"
-msgstr ""
-
-#: cps/templates/layout.html:270
-#, fuzzy
-msgid "Hide password"
-msgstr "密碼"
-
-#: cps/templates/layout.html:271
-#, fuzzy
-msgid "Show less"
-msgstr "顯示全部"
-
-#: cps/templates/layout.html:271 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
 msgstr ""
 
 #: cps/templates/layout.html:272
 #, fuzzy
+msgid "Copied to clipboard"
+msgstr "UUID 已複製到剪貼簿"
+
+#: cps/templates/layout.html:273
+msgid "Could not copy, select the text and copy it manually"
+msgstr ""
+
+#: cps/templates/layout.html:274
+#, fuzzy
+msgid "Hide password"
+msgstr "密碼"
+
+#: cps/templates/layout.html:275
+#, fuzzy
+msgid "Show less"
+msgstr "顯示全部"
+
+#: cps/templates/layout.html:275 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:276
+#, fuzzy
 msgid "Upload failed"
 msgstr "更新失敗："
 
-#: cps/templates/layout.html:273
+#: cps/templates/layout.html:277
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "前 %(count)s 名"
 
-#: cps/templates/layout.html:274 cps/templates/search_form.html:7
+#: cps/templates/layout.html:278 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "任意"
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:278
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "新密碼已發送到您的郵箱"
 
-#: cps/templates/layout.html:275
+#: cps/templates/layout.html:279
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "重複掃描完成：%(count)s 個群組"
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy
 msgid "Review"
 msgstr "預覽"
@@ -6873,8 +6876,8 @@ msgid "Continue as guest"
 msgstr ""
 
 #: cps/templates/logviewer.html:9
-msgid "Download Calibre-Web Log"
-msgstr "下載 Calibre-Web 紀錄"
+msgid "Download Scriptorium Log"
+msgstr "下載 Scriptorium 紀錄"
 
 #: cps/templates/logviewer.html:10
 msgid "Download Access Log"
@@ -6887,8 +6890,8 @@ msgstr "登入"
 
 #: cps/templates/logviewer.html:15
 #, fuzzy
-msgid "Calibre-Web Log"
-msgstr "Calibre-Web 紀錄： "
+msgid "Scriptorium Log"
+msgstr "Scriptorium 紀錄： "
 
 #: cps/templates/logviewer.html:16
 #, fuzzy
@@ -7032,7 +7035,7 @@ msgstr "配置"
 msgid "Value"
 msgstr ""
 
-#: cps/templates/magic_shelf_edit.html:84
+#: cps/templates/magic_shelf_edit.html:84 cps/templates/stats.html:6
 msgid "and"
 msgstr ""
 
@@ -7176,8 +7179,8 @@ msgid "is older than"
 msgstr ""
 
 #: cps/templates/osd.xml:5
-msgid "Calibre-Web Automated eBook Catalog"
-msgstr "Calibre-Web Automated 電子書書目"
+msgid "Scriptorium eBook Catalog"
+msgstr "Scriptorium 電子書書目"
 
 #: cps/templates/profile_pictures.html:7
 msgid ""
@@ -7751,10 +7754,6 @@ msgstr ""
 msgid "About"
 msgstr "關於"
 
-#: cps/templates/stats.html:6
-msgid "Powered by"
-msgstr ""
-
 #: cps/templates/stats.html:10
 msgid "Library Statistics"
 msgstr "書庫統計"
@@ -8081,7 +8080,8 @@ msgid "Using KOReader?"
 msgstr "DJVU 閱讀器"
 
 #: cps/templates/user_edit.html:212
-msgid "Reading progress can also sync from KOReader with the CWA plugin."
+msgid ""
+"Reading progress can also sync from KOReader with the Scriptorium plugin."
 msgstr ""
 
 #: cps/templates/user_edit.html:213
@@ -8339,7 +8339,6 @@ msgstr ""
 #~ "ℹ️ 您的主題已更新為 caliBlur（深色）。在我們開發 v5.0.0 的新前端期間，主題"
 #~ "切換已暫時停用。"
 
-#, python-format
 #~ msgid "Magic Shelf&nbsp&nbsp&nbsp—&nbsp&nbsp&nbsp%(icon)s %(name)s"
 #~ msgstr "智慧書架&nbsp&nbsp&nbsp—&nbsp&nbsp&nbsp%(icon)s %(name)s"
 
@@ -8841,7 +8840,6 @@ msgstr ""
 #~ msgid "(1-28)"
 #~ msgstr "（1-28）"
 
-#, python-format
 #~ msgid "(Server timezone: %(tz)s)"
 #~ msgstr "（伺服器時區：%(tz)s）"
 
@@ -9378,7 +9376,6 @@ msgstr ""
 #~ "false positives."
 #~ msgstr "此搜尋會尋找書名和作者完全相同的書籍，以避免誤判。"
 
-#, fuzzy
 #~ msgid "Selected strategy:"
 #~ msgstr "刪除格式:"
 
@@ -9422,7 +9419,6 @@ msgstr ""
 #~ msgid "Review Required"
 #~ msgstr "需要覆核"
 
-#, python-format
 #~ msgid ""
 #~ "%(count)s book(s) have ambiguous Hardcover matches. Please review each "
 #~ "match and select the correct result, or skip/reject if no good match "
@@ -9556,7 +9552,6 @@ msgstr ""
 #~ msgid "View & Resolve Duplicates"
 #~ msgstr "檢視及解決重複"
 
-#, fuzzy
 #~ msgid "Sign in to your library"
 #~ msgstr "叢書在此書庫中"
 
@@ -9808,7 +9803,6 @@ msgstr ""
 #~ msgid "Public Shelves:"
 #~ msgstr "公開書架："
 
-#, python-format
 #~ msgid "%(visible)s of %(total)s public shelves visible"
 #~ msgstr "%(total)s 個公開書架中有 %(visible)s 個可見"
 
@@ -9905,95 +9899,75 @@ msgstr ""
 #~ msgid "Books organized in shelves"
 #~ msgstr "書架上的書"
 
-#, fuzzy
 #~ msgid "Connection successful!"
 #~ msgstr "連接錯誤"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Automated."
 #~ msgstr "此郵件已經通過Calibre-Web發送。"
 
 #~ msgid "Login failed, No User Linked With OAuth Account"
 #~ msgstr "登入失敗，沒有用戶與OAuth帳戶關聯"
 
-#, python-format
 #~ msgid "File %(file)s uploaded"
 #~ msgstr "文件 %(file)s 已上傳"
 
-#, fuzzy
 #~ msgid "Mark selected books as read"
 #~ msgstr "合併選中的書籍"
 
-#, fuzzy
 #~ msgid "Mark Book as Read or Unread"
 #~ msgstr "標為未讀"
 
-#, fuzzy, python-format
 #~ msgid "%(seriesindex)s is not a valid number, skipping"
 #~ msgstr "%(seriesindex)s 不是一個有效的數值，忽略"
 
 #~ msgid "Calibre-Web configuration updated"
 #~ msgstr "Calibre-Web配置已更新"
 
-#, fuzzy
 #~ msgid "Calibre-Web Test Email"
 #~ msgstr "Calibre-Web測試郵件"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Calibre-Web."
 #~ msgstr "此郵件已經通過Calibre-Web發送。"
 
 #~ msgid "Get Started with Calibre-Web"
 #~ msgstr "開啟Calibre-Web之旅"
 
-#, fuzzy
 #~ msgid ""
 #~ "Please access Calibre-Web from non localhost to get valid api_endpoint "
 #~ "for kobo device"
 #~ msgstr ""
 #~ "請不要使用localhost訪問Calibre-Web，以便Kobo設備能獲取有效的api_endpoint"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autmoated."
 #~ msgstr "此郵件已經通過Calibre-Web發送。"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Automated."
 #~ msgstr "此郵件已經通過Calibre-Web發送。"
 
-#, fuzzy
 #~ msgid "Downloads per User"
 #~ msgstr "下載次數"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autoated."
 #~ msgstr "此郵件已經通過Calibre-Web發送。"
 
-#, fuzzy
 #~ msgid "unknown error"
 #~ msgstr "連接錯誤"
 
-#, fuzzy
 #~ msgid "Could not open file {filename!r}: {message}"
 #~ msgstr "無法登入：%(message)s"
 
-#, fuzzy
 #~ msgid "{value!r} is not a valid boolean."
 #~ msgstr "郵箱不在有效網域中"
 
-#, fuzzy
 #~ msgid "directory"
 #~ msgstr "方向"
 
-#, fuzzy
 #~ msgid "{name} {filename!r} is not writable."
 #~ msgstr "數據庫不可寫入"
 
-#, fuzzy
 #~ msgid "Repeat for confirmation"
 #~ msgstr "功能配置"
 
-#, fuzzy
 #~ msgid "Value must be an iterable."
 #~ msgstr "值必須是 true 或 false"
 

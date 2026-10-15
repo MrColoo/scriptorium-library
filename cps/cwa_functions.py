@@ -996,7 +996,7 @@ def set_cwa_settings():
 
     next_scan_run = get_next_duplicate_scan_run(cwa_settings)
 
-    return render_title_template("cwa_settings.html", title=_("Calibre-Web Automated User Settings"), page="cwa-settings",
+    return render_title_template("cwa_settings.html", title=_("Automation Settings"), page="cwa-settings",
                                     cwa_settings=cwa_settings, ignorable_formats=ignorable_formats, target_formats=target_formats,
                                     automerge_options=automerge_options, autoingest_options=autoingest_options,
                                     hardcover_token_available=hardcover_token_available,
@@ -1268,7 +1268,7 @@ def cwa_stats_show():
         log.debug(f"Error fetching Hardcover stats: {e}")
         hardcover_stats = None
 
-    return render_title_template("cwa_stats_tabs.html", title=_("Calibre-Web Automated Stats & Activity"),
+    return render_title_template("cwa_stats_tabs.html", title=_("Stats & Activity"),
                                 page="cwa-stats",
                                 active_tab=active_tab,
                                 dashboard_stats=dashboard_stats,

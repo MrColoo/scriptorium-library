@@ -5,9 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
-"Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
-"Automated\n"
-"POT-Creation-Date: 2026-10-15 22:38+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
+"POT-Creation-Date: 2026-10-15 23:47+0200\n"
 "PO-Revision-Date: 2026-07-02 22:04+0200\n"
 "Last-Translator: Demelja <deemmel@gmail.com>\n"
 "Language-Team: Demelja, deemmel@gmail.com\n"
@@ -17,8 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Generated-By: Babel 2.13.1\n"
-"X-Generator: Poedit 3.6\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: cps/about.py:65 cps/templates/admin.html:13
 #: cps/templates/cwa_stats_full.html:6 cps/templates/cwa_stats_tabs.html:33
@@ -212,8 +210,8 @@ msgid "Invalid Restricted Column"
 msgstr "Неправильний параметр Недоступне"
 
 #: cps/admin.py:920 cps/admin.py:2462
-msgid "Calibre-Web Automated configuration updated"
-msgstr "Конфігурація CWA оновлена"
+msgid "Scriptorium configuration updated"
+msgstr "Конфігурація Scriptorium оновлена"
 
 #: cps/admin.py:932
 msgid "Do you really want to delete the Kobo Token?"
@@ -274,17 +272,18 @@ msgstr "Ви справді хочете змінити розташування
 
 #: cps/admin.py:955
 msgid ""
-"Calibre-Web Automated will search for updated Covers and update Cover "
-"Thumbnails, this may take a while?"
-msgstr "CWA буде шукати обкладинки і оновлювати мініатюри, це потребує часу?"
+"Scriptorium will search for updated Covers and update Cover Thumbnails, this "
+"may take a while?"
+msgstr ""
+"Scriptorium буде шукати обкладинки і оновлювати мініатюри, це потребує часу?"
 
 #: cps/admin.py:958
 msgid ""
-"Are you sure you want delete Calibre-Web Automated's sync database to force "
-"a full sync with your Kobo Reader?"
+"Are you sure you want delete Scriptorium's sync database to force a full "
+"sync with your Kobo Reader?"
 msgstr ""
-"Ви справді хочете видалити дані синхронізації CWA і ініціювати синхронізацію "
-"з вашим Kobo Reader?"
+"Ви справді хочете видалити дані синхронізації Scriptorium і ініціювати "
+"синхронізацію з вашим Kobo Reader?"
 
 #: cps/admin.py:1193 cps/admin.py:1199 cps/admin.py:1208 cps/admin.py:1217
 #: cps/templates/_restrictions.html:22 cps/templates/_restrictions.html:27
@@ -839,7 +838,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:159
+#: cps/templates/layout.html:162
 msgid "Customize"
 msgstr ""
 
@@ -976,7 +975,7 @@ msgid "Invalid cron expression for duplicate scans. Changes were not saved."
 msgstr "Неправильний вираз cron для повторного сканування. Зміни не збережено."
 
 #: cps/cwa_functions.py:999
-msgid "Calibre-Web Automated User Settings"
+msgid "Automation Settings"
 msgstr "Налаштування Користувача"
 
 #: cps/cwa_functions.py:1045 cps/cwa_functions.py:1047
@@ -1041,8 +1040,8 @@ msgid "Unknown User"
 msgstr "Невідомий користувач"
 
 #: cps/cwa_functions.py:1271
-msgid "Calibre-Web Automated Stats & Activity"
-msgstr "CWA статистики та події"
+msgid "Stats & Activity"
+msgstr "Scriptorium статистики та події"
 
 #: cps/cwa_functions.py:1655
 #, fuzzy
@@ -1284,7 +1283,7 @@ msgstr ""
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr ""
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:272
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:276
 msgid "Upload done, processing, please wait..."
 msgstr ""
 
@@ -1445,7 +1444,7 @@ msgid "Send to eReader"
 msgstr "Відправити на Kindle"
 
 #: cps/helper.py:114 cps/helper.py:141 cps/helper.py:254
-msgid "This Email has been sent via Calibre-Web Automated."
+msgid "This Email has been sent via Scriptorium."
 msgstr ""
 
 #: cps/helper.py:129
@@ -1460,7 +1459,7 @@ msgstr ""
 
 #: cps/helper.py:139
 #, fuzzy
-msgid "Calibre-Web Automated Test Email"
+msgid "Scriptorium Test Email"
 msgstr "Зберегти налаштування і відправити тестове повідомлення"
 
 #: cps/helper.py:140
@@ -1469,7 +1468,7 @@ msgid "Test Email"
 msgstr "Kindle"
 
 #: cps/helper.py:157
-msgid "Get Started with Calibre-Web Automated"
+msgid "Get Started with Scriptorium"
 msgstr ""
 
 #: cps/helper.py:162
@@ -1616,8 +1615,8 @@ msgstr ""
 #: cps/helper.py:1361
 #, python-format
 msgid ""
-"Unsupported architecture detected: %(arch)s. CWA is optimized for x86_64 and "
-"aarch64."
+"Unsupported architecture detected: %(arch)s. Scriptorium is optimized for "
+"x86_64 and aarch64."
 msgstr ""
 
 #: cps/helper.py:1370
@@ -1652,8 +1651,8 @@ msgstr ""
 
 #: cps/kobo_auth.py:110
 msgid ""
-"Please access Calibre-Web Automated from non localhost to get valid "
-"api_endpoint for kobo device"
+"Please access Scriptorium from non localhost to get valid api_endpoint for "
+"kobo device"
 msgstr ""
 
 #: cps/kobo_auth.py:129
@@ -1817,8 +1816,8 @@ msgid "{} Stars"
 msgstr "{} зірок"
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:168
-#: cps/templates/layout.html:223 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:171
+#: cps/templates/layout.html:226 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2251
 msgid "Login"
 msgstr "Ім'я користувача"
@@ -2016,7 +2015,7 @@ msgstr ""
 
 #: cps/search.py:53 cps/search.py:440 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:219 cps/templates/search.html:5
+#: cps/templates/layout.html:222 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "Пошук"
@@ -2045,10 +2044,10 @@ msgid "Read Status = '%(status)s'"
 msgstr ""
 
 #: cps/search.py:354
-msgid "Error on search for custom columns, please restart Calibre-Web"
+msgid "Error on search for custom columns, please restart Scriptorium"
 msgstr ""
 
-#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:137
+#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:140
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2171,7 +2170,7 @@ msgstr ""
 "Помилка при відкриванні полиці. Полиця не існує або до неї відсутній доступ"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:121 cps/templates/tasks.html:5
+#: cps/templates/layout.html:123 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Завдання"
 
@@ -2336,7 +2335,7 @@ msgstr ""
 msgid "Error creating shelf"
 msgstr ""
 
-#: cps/templates/layout.html:106 cps/web.py:1210
+#: cps/templates/layout.html:108 cps/web.py:1210
 #, fuzzy
 msgid "Create Magic Shelf"
 msgstr "створити книжкову полицю"
@@ -2451,7 +2450,7 @@ msgstr ""
 msgid "Please wait one minute to register next user"
 msgstr ""
 
-#: cps/templates/layout.html:170 cps/templates/login.html:77
+#: cps/templates/layout.html:173 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2130 cps/web.py:2134
 #: cps/web.py:2139 cps/web.py:2143 cps/web.py:2149 cps/web.py:2174
 #: cps/web.py:2178 cps/web.py:2191 cps/web.py:2194
@@ -2779,8 +2778,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr ""
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:144
-#: cps/templates/layout.html:145 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:147
+#: cps/templates/layout.html:148 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Додати нову книгу"
 
@@ -2882,11 +2881,11 @@ msgstr "Дозволені значення стовпців"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:188
-#: cps/templates/layout.html:191 cps/templates/layout.html:194
-#: cps/templates/layout.html:197 cps/templates/layout.html:200
-#: cps/templates/layout.html:203 cps/templates/layout.html:240
-#: cps/templates/layout.html:268 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:191
+#: cps/templates/layout.html:194 cps/templates/layout.html:197
+#: cps/templates/layout.html:200 cps/templates/layout.html:203
+#: cps/templates/layout.html:206 cps/templates/layout.html:244
+#: cps/templates/layout.html:272 cps/templates/read.html:58
 msgid "Close"
 msgstr "Закрити"
 
@@ -2924,7 +2923,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:249
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:253
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
@@ -2983,7 +2982,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:124
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:126
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -2997,7 +2996,7 @@ msgid "Users, library, automation and server."
 msgstr ""
 
 #: cps/templates/admin.html:12
-msgid "Check CWA Status"
+msgid "Check Service Status"
 msgstr ""
 
 #: cps/templates/admin.html:20 cps/templates/user_edit.html:11
@@ -3142,7 +3141,7 @@ msgstr "Кількість книг на сторінці"
 msgid "Uploads"
 msgstr "Загрузка на сервер"
 
-#: cps/templates/admin.html:106 cps/templates/layout.html:158
+#: cps/templates/admin.html:106 cps/templates/layout.html:161
 #, fuzzy
 msgid "Kobo sync"
 msgstr "Дозволити завантаження книг на сервер"
@@ -3226,7 +3225,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Налаштування OAuth"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:119 cps/templates/layout.html:163
+#: cps/templates/layout.html:121 cps/templates/layout.html:166
 msgid "System"
 msgstr ""
 
@@ -3265,17 +3264,17 @@ msgstr "Вимкнути"
 msgid "Are you sure you want to restart?"
 msgstr "Впевнені що хочете перезавантажити?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:275
+#: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:246 cps/templates/layout.html:85
+#: cps/templates/detail.html:246 cps/templates/layout.html:87
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Полиці"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:136
+#: cps/templates/appearance.html:14 cps/templates/layout.html:139
 msgid "Search titles, authors, series…"
 msgstr ""
 
@@ -3391,7 +3390,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:157
+#: cps/templates/layout.html:160
 #, fuzzy
 msgid "Profile"
 msgstr "Ваш профіль"
@@ -3472,16 +3471,16 @@ msgstr "Рейтинги"
 msgid "Preview"
 msgstr "Попередній перегляд"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:162
+#: cps/templates/appearance.html:156 cps/templates/layout.html:165
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:164
+#: cps/templates/appearance.html:157 cps/templates/layout.html:167
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Ясний"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:165
+#: cps/templates/appearance.html:158 cps/templates/layout.html:168
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr ""
@@ -3846,7 +3845,7 @@ msgid "Add to shelf"
 msgstr "Додати на книжкову полицю"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:42
-#: cps/templates/layout.html:225
+#: cps/templates/layout.html:228
 #, fuzzy
 msgid "More"
 msgstr "Більше за"
@@ -4008,9 +4007,9 @@ msgstr "Розташування БД Calibre"
 
 #: cps/templates/config_db.html:18
 msgid ""
-"Inside the container this lives under /calibre-library. CWA finds and mounts "
-"the library there on start: the largest one if there are several, a new one "
-"if there is none."
+"Inside the container this lives under /calibre-library. Scriptorium finds "
+"and mounts the library there on start: the largest one if there are several, "
+"a new one if there is none."
 msgstr ""
 
 #: cps/templates/config_db.html:21
@@ -4058,7 +4057,7 @@ msgstr ""
 #: cps/templates/config_db.html:67
 msgid ""
 "Make sure no other program (including the Calibre desktop app) uses the same "
-"library while CWA runs."
+"library while Scriptorium runs."
 msgstr ""
 
 #: cps/templates/config_db.html:68
@@ -4070,7 +4069,7 @@ msgstr ""
 #: cps/templates/config_db.html:69
 msgid ""
 "Check that the path above points to the folder that contains metadata.db and "
-"that CWA can read and write it."
+"that Scriptorium can read and write it."
 msgstr ""
 
 #: cps/templates/config_db.html:70
@@ -4117,7 +4116,7 @@ msgid "Ok"
 msgstr "Так"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:270 cps/templates/login.html:35
+#: cps/templates/layout.html:274 cps/templates/login.html:35
 #: cps/templates/user_edit.html:46 cps/templates/user_edit.html:57
 #, fuzzy
 msgid "Show password"
@@ -4975,7 +4974,8 @@ msgid "Time of Day:"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:67
-msgid "What CWA does on its own when books arrive, plus maintenance jobs."
+msgid ""
+"What Scriptorium does on its own when books arrive, plus maintenance jobs."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:72
@@ -5003,11 +5003,11 @@ msgstr "Назад"
 
 #: cps/templates/cwa_settings.html:88
 #, fuzzy
-msgid "Enable/Disable Calibre-Web Automated Services"
+msgid "Enable/Disable Automation Services"
 msgstr "Зберегти налаштування і відправити тестове повідомлення"
 
 #: cps/templates/cwa_settings.html:90
-msgid "Enable CWA Auto-Convert"
+msgid "Enable Auto-Convert"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:90
@@ -5015,7 +5015,7 @@ msgid "New books are converted to the target format below."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
-msgid "Enable CWA Automatic Cover & Metadata Enforcement Service"
+msgid "Enable Automatic Cover & Metadata Enforcement Service"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
@@ -5025,7 +5025,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
-msgid "Enable CWA Kindle EPUB Fixer"
+msgid "Enable Kindle EPUB Fixer"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
@@ -5043,7 +5043,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
-msgid "Enable KOReader Sync (CWA Plugin)"
+msgid "Enable KOReader Sync (Scriptorium Plugin)"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
@@ -5071,7 +5071,7 @@ msgid "Removes leftover references to books deleted from the library."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:102
-msgid "Enable CWA Update Notifications"
+msgid "Enable Update Notifications"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:103
@@ -5079,7 +5079,7 @@ msgid "Enable Contribute Translations Notifications"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:110
-msgid "CWA Auto-Ingest Automerge"
+msgid "Auto-Ingest Automerge"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:112
@@ -5134,7 +5134,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
-msgid "CWA Auto-Ingest - Ignored Formats"
+msgid "Auto-Ingest - Ignored Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
@@ -5153,7 +5153,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
-msgid "CWA Auto-Convert - Ignored Formats"
+msgid "Auto-Convert - Ignored Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
@@ -5161,7 +5161,7 @@ msgid "Books in these formats are imported as they are, without conversion."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
-msgid "CWA Auto-Convert - Retained Formats"
+msgid "Auto-Convert - Retained Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
@@ -5280,7 +5280,7 @@ msgid "Pause between requests to the Hardcover API (0–60)."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:182
-msgid "CWA Duplicate Detection System"
+msgid "Duplicate Detection System"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:184
@@ -5305,7 +5305,7 @@ msgid "Legacy SQL only (experimental)"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:195
-msgid "CWA Duplicate Detection Criteria"
+msgid "Duplicate Detection Criteria"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:196
@@ -5432,7 +5432,7 @@ msgid "Automatic Backup Settings"
 msgstr "Налаштування OAuth"
 
 #: cps/templates/cwa_settings.html:251
-msgid "Enable CWA Import Auto-Backup"
+msgid "Enable Import Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:251
@@ -5441,7 +5441,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:252
-msgid "Enable CWA Conversion Auto-Backup"
+msgid "Enable Conversion Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:252
@@ -5449,7 +5449,7 @@ msgid "Keeps the original of every converted file."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
-msgid "Enable CWA EPUB Fixer Auto-Backup"
+msgid "Enable EPUB Fixer Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
@@ -5457,7 +5457,7 @@ msgid "Keeps the original of every EPUB the fixer changed."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
-msgid "Enable CWA Auto-Zip Backups"
+msgid "Enable Auto-Zip Backups"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
@@ -5549,7 +5549,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:59
-#: cps/templates/layout.html:56 cps/templates/layout.html:218
+#: cps/templates/layout.html:58 cps/templates/layout.html:221
 #, fuzzy
 msgid "Library"
 msgstr "У бібліотеці"
@@ -5801,23 +5801,23 @@ msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:156
 #, fuzzy
-msgid "Calibre-Web Automated Conversion History"
-msgstr "CWA - повна історія конвертацій"
+msgid "Conversion History"
+msgstr "Scriptorium - повна історія конвертацій"
 
 #: cps/templates/cwa_stats_tabs.html:157
 #, fuzzy
-msgid "Calibre-Web Automated Import History"
-msgstr "CWA - повна історія імпорту"
+msgid "Import History"
+msgstr "Scriptorium - повна історія імпорту"
 
 #: cps/templates/cwa_stats_tabs.html:158
 #, fuzzy
-msgid "Calibre-Web Automated EPUB Fixer History"
+msgid "EPUB Fixer History"
 msgstr "Зберегти налаштування і відправити тестове повідомлення"
 
 #: cps/templates/cwa_stats_tabs.html:159
 #, fuzzy
-msgid "Calibre-Web Automated Cover & Metadata Enforcement History"
-msgstr "CWA - повна історія застосувань"
+msgid "Cover & Metadata Enforcement History"
+msgstr "Scriptorium - повна історія застосувань"
 
 #: cps/templates/cwa_stats_tabs.html:177
 msgid "No data for this period yet."
@@ -5917,7 +5917,7 @@ msgstr "Відкрити в браузері"
 msgid "Listen"
 msgstr "Список"
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:87
+#: cps/templates/detail.html:117 cps/templates/layout.html:89
 #: cps/templates/user_edit.html:176
 msgid "Create Shelf"
 msgstr "Створити книжкову полицю"
@@ -5983,7 +5983,7 @@ msgstr "Створити Книжкову полицю"
 msgid "Reading progress"
 msgstr "Прогрес"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:271
+#: cps/templates/detail.html:207 cps/templates/layout.html:275
 #, fuzzy
 msgid "Show more"
 msgstr "Показати не прочитані"
@@ -6059,7 +6059,7 @@ msgstr ""
 msgid ""
 "It builds the index that keeps duplicate checks fast during imports and "
 "metadata edits. On large libraries it can take a few minutes; you can keep "
-"using CWA meanwhile."
+"using Scriptorium meanwhile."
 msgstr ""
 
 #: cps/templates/duplicates.html:27 cps/templates/duplicates.html:130
@@ -6068,7 +6068,7 @@ msgid "Duplicate scan is running."
 msgstr "Видалити книгу"
 
 #: cps/templates/duplicates.html:30
-msgid "You can keep using CWA while it runs."
+msgid "You can keep using Scriptorium while it runs."
 msgstr ""
 
 #: cps/templates/duplicates.html:37
@@ -6342,7 +6342,7 @@ msgid "(Magic)"
 msgstr ""
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:94
+#: cps/templates/layout.html:96
 msgid "(Public)"
 msgstr "(Публічно)"
 
@@ -6381,7 +6381,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:274
+#: cps/templates/grid.html:21 cps/templates/layout.html:278
 #: cps/templates/list.html:27
 msgid "Filter"
 msgstr ""
@@ -6496,9 +6496,7 @@ msgstr ""
 
 #: cps/templates/http_error.html:19
 #, fuzzy
-msgid ""
-"Calibre-Web Automated Instance is unconfigured, please contact your "
-"administrator"
+msgid "Scriptorium Instance is unconfigured, please contact your administrator"
 msgstr "Папка Calibre DB"
 
 #: cps/templates/http_error.html:28
@@ -6579,8 +6577,8 @@ msgstr "Відправити на Kindle"
 
 #: cps/templates/kosync_plugin.html:8
 msgid ""
-"The CWA plugin keeps your reading position in step between KOReader and this "
-"library."
+"The Scriptorium plugin keeps your reading position in step between KOReader "
+"and this library."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:13
@@ -6589,7 +6587,7 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:14
 #, fuzzy
-msgid "Open CWA Settings"
+msgid "Open Automation Settings"
 msgstr "Налаштування"
 
 #: cps/templates/kosync_plugin.html:14
@@ -6609,11 +6607,12 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:24
 #, fuzzy
-msgid "Download CWA Sync Plugin"
+msgid "Download Scriptorium Sync Plugin"
 msgstr "Завантаження історії доступу"
 
 #: cps/templates/kosync_plugin.html:26
-msgid "Download is available after enabling KOReader Sync in CWA Settings."
+msgid ""
+"Download is available after enabling KOReader Sync in Automation Settings."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:33
@@ -6643,8 +6642,8 @@ msgstr "Відправити на Kindle"
 
 #: cps/templates/kosync_plugin.html:45
 msgid ""
-"Open a book, tap the top of the screen, open the Tools menu and choose “CWA "
-"Progress Sync”. Enter:"
+"Open a book, tap the top of the screen, open the Tools menu and choose "
+"“Scriptorium Sync”. Enter:"
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:47
@@ -6693,155 +6692,160 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:46
+#: cps/templates/layout.html:48
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:50
+#: cps/templates/layout.html:52
 #, fuzzy
 msgid "Library navigation"
 msgstr "Статистика бібліотеки Calibre"
 
-#: cps/templates/layout.html:75
+#: cps/templates/layout.html:77
 msgid "Browse"
 msgstr "Перегляд"
 
-#: cps/templates/layout.html:98
+#: cps/templates/layout.html:100
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:104 cps/templates/user_edit.html:309
+#: cps/templates/layout.html:106 cps/templates/user_edit.html:309
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Полиці"
 
-#: cps/templates/layout.html:132
+#: cps/templates/layout.html:129 cps/templates/layout.html:234
+#: cps/templates/stats.html:6
+msgid "Based on"
+msgstr ""
+
+#: cps/templates/layout.html:135
 msgid "Toggle Navigation"
 msgstr "Включити навігацію"
 
-#: cps/templates/layout.html:135
+#: cps/templates/layout.html:138
 #, fuzzy
 msgid "Search Library"
 msgstr "У бібліотеці"
 
-#: cps/templates/layout.html:137
+#: cps/templates/layout.html:140
 #, fuzzy
 msgid "Advanced"
 msgstr "Розширений пошук"
 
-#: cps/templates/layout.html:141
+#: cps/templates/layout.html:144
 #, fuzzy
 msgid "Refresh Library"
 msgstr "Серій в цій бібліотеці"
 
-#: cps/templates/layout.html:151 cps/templates/user_edit.html:19
+#: cps/templates/layout.html:154 cps/templates/user_edit.html:19
 #: cps/templates/user_edit.html:32
 msgid "Account"
 msgstr ""
 
-#: cps/templates/layout.html:173
+#: cps/templates/layout.html:176
 msgid "Logout"
 msgstr "Вийти"
 
-#: cps/templates/layout.html:193
+#: cps/templates/layout.html:196
 msgid "See Changelog"
 msgstr ""
 
-#: cps/templates/layout.html:196
+#: cps/templates/layout.html:199
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Видалити книгу"
 
-#: cps/templates/layout.html:199
+#: cps/templates/layout.html:202
 msgid "Contribute here!"
 msgstr ""
 
-#: cps/templates/layout.html:217
+#: cps/templates/layout.html:220
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Базова Конфігурація"
 
-#: cps/templates/layout.html:221
+#: cps/templates/layout.html:224
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:246
+#: cps/templates/layout.html:250
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Ви впевнені?"
 
-#: cps/templates/layout.html:250 cps/templates/layout.html:268
+#: cps/templates/layout.html:254 cps/templates/layout.html:272
 #, fuzzy
 msgid "Confirm"
 msgstr "Налаштування сервера"
 
-#: cps/templates/layout.html:256
+#: cps/templates/layout.html:260
 msgid "Uploading..."
 msgstr "Завантаження..."
 
-#: cps/templates/layout.html:259
+#: cps/templates/layout.html:263
 #, fuzzy
 msgid "Please do not refresh the page"
 msgstr "Встановлення оновлень, будь-ласка, не оновлюйте сторінку"
 
-#: cps/templates/layout.html:262
+#: cps/templates/layout.html:266
 msgid "Drop books to add them to the library"
-msgstr ""
-
-#: cps/templates/layout.html:268
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "У бібліотеці"
-
-#: cps/templates/layout.html:269
-msgid "Could not copy, select the text and copy it manually"
-msgstr ""
-
-#: cps/templates/layout.html:270
-#, fuzzy
-msgid "Hide password"
-msgstr "Пароль"
-
-#: cps/templates/layout.html:271
-#, fuzzy
-msgid "Show less"
-msgstr "Показати всі"
-
-#: cps/templates/layout.html:271 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
 msgstr ""
 
 #: cps/templates/layout.html:272
 #, fuzzy
+msgid "Copied to clipboard"
+msgstr "У бібліотеці"
+
+#: cps/templates/layout.html:273
+msgid "Could not copy, select the text and copy it manually"
+msgstr ""
+
+#: cps/templates/layout.html:274
+#, fuzzy
+msgid "Hide password"
+msgstr "Пароль"
+
+#: cps/templates/layout.html:275
+#, fuzzy
+msgid "Show less"
+msgstr "Показати всі"
+
+#: cps/templates/layout.html:275 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:276
+#, fuzzy
 msgid "Upload failed"
 msgstr "Оновлення неуспішне:"
 
-#: cps/templates/layout.html:273
+#: cps/templates/layout.html:277
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "Профіль %(name)s"
 
-#: cps/templates/layout.html:274 cps/templates/search_form.html:7
+#: cps/templates/layout.html:278 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr ""
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:278
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Kindle"
 
-#: cps/templates/layout.html:275
+#: cps/templates/layout.html:279
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy
 msgid "Review"
 msgstr "Попередній перегляд"
@@ -6971,7 +6975,7 @@ msgid "Continue as guest"
 msgstr ""
 
 #: cps/templates/logviewer.html:9
-msgid "Download Calibre-Web Log"
+msgid "Download Scriptorium Log"
 msgstr ""
 
 #: cps/templates/logviewer.html:10
@@ -6984,7 +6988,7 @@ msgid "Log"
 msgstr "Ім'я користувача"
 
 #: cps/templates/logviewer.html:15
-msgid "Calibre-Web Log"
+msgid "Scriptorium Log"
 msgstr ""
 
 #: cps/templates/logviewer.html:16
@@ -7128,7 +7132,7 @@ msgstr "Налаштування сервера"
 msgid "Value"
 msgstr ""
 
-#: cps/templates/magic_shelf_edit.html:84
+#: cps/templates/magic_shelf_edit.html:84 cps/templates/stats.html:6
 msgid "and"
 msgstr ""
 
@@ -7271,7 +7275,7 @@ msgstr ""
 
 #: cps/templates/osd.xml:5
 #, fuzzy
-msgid "Calibre-Web Automated eBook Catalog"
+msgid "Scriptorium eBook Catalog"
 msgstr "Зберегти налаштування і відправити тестове повідомлення"
 
 #: cps/templates/profile_pictures.html:7
@@ -7839,10 +7843,6 @@ msgstr ""
 msgid "About"
 msgstr "Про програму"
 
-#: cps/templates/stats.html:6
-msgid "Powered by"
-msgstr ""
-
 #: cps/templates/stats.html:10
 msgid "Library Statistics"
 msgstr "Статистика бібліотеки Calibre"
@@ -8159,7 +8159,8 @@ msgid "Using KOReader?"
 msgstr "Засіб для читання DJVU файлів"
 
 #: cps/templates/user_edit.html:212
-msgid "Reading progress can also sync from KOReader with the CWA plugin."
+msgid ""
+"Reading progress can also sync from KOReader with the Scriptorium plugin."
 msgstr ""
 
 #: cps/templates/user_edit.html:213
@@ -8388,57 +8389,45 @@ msgid ""
 "too."
 msgstr ""
 
-#, fuzzy
 #~ msgid "Send to eReader Email"
 #~ msgstr "Kindle"
 
-#, fuzzy
 #~ msgid "Send to eReader Subject"
 #~ msgstr "Відправити на Kindle"
 
-#, fuzzy
 #~ msgid "Email Server Settings&nbsp;&nbsp;📬"
 #~ msgstr "Змінити налаштування SMTP"
 
 #~ msgid "Calibre Database Directory"
 #~ msgstr "Папка Calibre DB"
 
-#, fuzzy
 #~ msgid "CWA Settings"
 #~ msgstr "Налаштування"
 
-#, fuzzy
 #~ msgid "Edit Basic Configuration"
 #~ msgstr "Настройки сервера"
 
-#, fuzzy
 #~ msgid "Edit UI Configuration"
 #~ msgstr "Конфігурація інтерфейсу"
 
-#, fuzzy
 #~ msgid "Edit Calibre Database Configuration"
 #~ msgstr "Особливі налаштування"
 
-#, fuzzy
 #~ msgid "Scheduled Tasks&nbsp;&nbsp;⌛"
 #~ msgstr "Заплановані завдання"
 
-#, fuzzy
 #~ msgid "Show CWA Stats"
 #~ msgstr "Налаштування"
 
-#, fuzzy
 #~ msgid "CWA Discord Server"
 #~ msgstr "Огляд"
 
-#, fuzzy
 #~ msgid "Administration&nbsp;&nbsp;🚀"
 #~ msgstr "Адміністрування"
 
 #~ msgid "View Logs"
 #~ msgstr "Переглянути логи"
 
-#, fuzzy
 #~ msgid "Version Information&nbsp;&nbsp;📜"
 #~ msgstr "Інформація про версію"
 
@@ -8466,57 +8455,45 @@ msgstr ""
 #~ msgid "Keyword"
 #~ msgstr "Ключове слово"
 
-#, fuzzy
 #~ msgid "Unarchive"
 #~ msgstr "Заархівовано"
 
-#, fuzzy
 #~ msgid "Mark as read"
 #~ msgstr "Відмітити як не прочитане"
 
-#, fuzzy
 #~ msgid "Mark as unread"
 #~ msgstr "Відмітити як не прочитане"
 
-#, fuzzy
 #~ msgid "Select all"
 #~ msgstr "створити книжкову полицю"
 
-#, fuzzy
 #~ msgid "Enter Title"
 #~ msgstr "Kindle"
 
-#, fuzzy
 #~ msgid "Enter Authors"
 #~ msgstr "Автори"
 
-#, fuzzy
 #~ msgid "Enter Categories"
 #~ msgstr "Категорії"
 
-#, fuzzy
 #~ msgid "Enter Languages"
 #~ msgstr "Виключити мови"
 
 #~ msgid "Publishing Date"
 #~ msgstr "Дата публікації"
 
-#, fuzzy
 #~ msgid "Enter Publishers"
 #~ msgstr "Видавництва"
 
 #~ msgid "Enter comments"
 #~ msgstr "Введіть коментар"
 
-#, fuzzy
 #~ msgid "Enter "
 #~ msgstr "Зареєструватись"
 
-#, fuzzy
 #~ msgid "Into Book with Title:"
 #~ msgstr "Назва книги"
 
-#, fuzzy
 #~ msgid "Select a Shelf"
 #~ msgstr "створити книжкову полицю"
 
@@ -8526,131 +8503,101 @@ msgstr ""
 #~ msgid "Logfile Configuration"
 #~ msgstr "Logfile налаштування"
 
-#, fuzzy
 #~ msgid "Feature Configuration"
 #~ msgstr "Налаштування серверу"
 
-#, fuzzy
 #~ msgid "Manual Endpoint Configuration"
 #~ msgstr "Конфігурація інтерфейсу"
 
-#, fuzzy
 #~ msgid "Field Mapping Configuration"
 #~ msgstr "Переглянути налаштування"
 
-#, fuzzy
 #~ msgid "Default Theme"
 #~ msgstr "Видалити"
 
-#, fuzzy
 #~ msgid "Language & Display"
 #~ msgstr "Сторінка адміністратора"
 
-#, fuzzy
 #~ msgid "Default interface language for new users."
 #~ msgstr "Налаштування по замовчуванню для нових користувачів"
 
-#, fuzzy
 #~ msgid "Default book language filter for new users."
 #~ msgstr "Можливості за замовчуванням для нових користувачів"
 
-#, fuzzy
 #~ msgid "Enter a search term"
 #~ msgstr "Виберіть ім'я користувача"
 
-#, fuzzy
 #~ msgid "Web UI Settings"
 #~ msgstr "Налаштування"
 
-#, fuzzy
 #~ msgid "Automatic Duplicate Scanning"
 #~ msgstr "Налаштування OAuth"
 
-#, fuzzy
 #~ msgid "Rate Limiting"
 #~ msgstr "Рейтинг"
 
-#, fuzzy
 #~ msgid "Marked as read"
 #~ msgstr "Відмітити як не прочитане"
 
-#, fuzzy
 #~ msgid "Marked as unread"
 #~ msgstr "Відмітити як не прочитане"
 
-#, fuzzy
 #~ msgid "Restored from archive"
 #~ msgstr "Відновити з архіву"
 
-#, fuzzy
 #~ msgid "Rating updated"
 #~ msgstr "З'єднання з базою даних закрите"
 
-#, fuzzy
 #~ msgid "Rating cleared"
 #~ msgstr "Рейтинг: Відсутній"
 
 #~ msgid "Description:"
 #~ msgstr "Опис:"
 
-#, fuzzy
 #~ msgid "Select All"
 #~ msgstr "створити книжкову полицю"
 
-#, fuzzy
 #~ msgid "Scan for Duplicates Now"
 #~ msgstr "Показувати книги з найвищим рейтингом"
 
-#, fuzzy
 #~ msgid "Select None"
 #~ msgstr "Обрати..."
 
-#, fuzzy
 #~ msgid "View book details"
 #~ msgstr "Деталі"
 
-#, fuzzy
 #~ msgid "Edit book metadata"
 #~ msgstr "змінити метадані"
 
-#, fuzzy
 #~ msgid "Archive/delete book"
 #~ msgstr "Архівні книжки"
 
-#, fuzzy
 #~ msgid "No Duplicate Books Found"
 #~ msgstr "Результати для:"
 
-#, fuzzy
 #~ msgid "The following books will be permanently deleted:"
 #~ msgstr "Книга буде видалена з БД Calibre"
 
-#, fuzzy
 #~ msgid "The following book will be kept:"
 #~ msgstr "Книга буде видалена з БД Calibre"
 
-#, fuzzy
 #~ msgid "The following books will be merged into it (and then deleted):"
 #~ msgstr "Книга буде видалена з БД Calibre"
 
 #~ msgid "Enter domainname"
 #~ msgstr "Введіть домен"
 
-#, fuzzy
 #~ msgid "Reject All Pending"
 #~ msgstr "створити книжкову полицю"
 
-#, fuzzy
 #~ msgid "Processing..."
 #~ msgstr "Завантаження..."
 
-#, fuzzy
 #~ msgid ""
 #~ "Are you sure you want to reject all pending matches? This cannot be "
 #~ "undone."
 #~ msgstr "Ви справді хочете видалити книжкову полицю?"
 
-#, fuzzy
 #~ msgid "✗ Reject All Pending"
 #~ msgstr "створити книжкову полицю"
 
@@ -8663,18 +8610,15 @@ msgstr ""
 #~ msgid "Duplicate Groups Found"
 #~ msgstr "Виявлено дублікати груп"
 
-#, fuzzy
 #~ msgid "Sign in to your library"
 #~ msgstr "Серій в цій бібліотеці"
 
-#, fuzzy
 #~ msgid "Select Allowed/Denied Tags"
 #~ msgstr "Дозволені теги"
 
 #~ msgid "Enter Tag"
 #~ msgstr "Введіть тег"
 
-#, fuzzy
 #~ msgid "This book format will be permanently erased from database"
 #~ msgstr "Книга буде видалена з БД Calibre"
 
@@ -8690,7 +8634,6 @@ msgstr ""
 #~ msgid "name"
 #~ msgstr "ім'я"
 
-#, fuzzy
 #~ msgid "Parent Directory"
 #~ msgstr "Папка Calibre DB"
 
@@ -8700,7 +8643,6 @@ msgstr ""
 #~ msgid "Arial"
 #~ msgstr "Arial"
 
-#, fuzzy
 #~ msgid "Spread"
 #~ msgstr "Прочитано"
 
@@ -8767,11 +8709,9 @@ msgstr ""
 #~ msgid "Create/View"
 #~ msgstr "Створити/Переглянути"
 
-#, fuzzy
 #~ msgid "Sidebar Display Settings"
 #~ msgstr "Налаштування OAuth"
 
-#, fuzzy
 #~ msgid "Public Shelves:"
 #~ msgstr "Змінити книжкову полицю"
 
@@ -8832,46 +8772,35 @@ msgstr ""
 #~ msgid "Click the cover to load metadata to the form"
 #~ msgstr "Натисніть на обкладинку, щоб отримати метадані"
 
-#, fuzzy
 #~ msgid "Cancel Scan"
 #~ msgstr "Скасувати"
 
-#, fuzzy
 #~ msgid "Books ordered by publisher"
 #~ msgstr "Книги відсортовані за автором"
 
-#, fuzzy
 #~ msgid "Books ordered by Languages"
 #~ msgstr "Книги відсортовані за серією"
 
-#, fuzzy
 #~ msgid "Books ordered by Rating"
 #~ msgstr "Книги відсортовані за категоріями"
 
-#, fuzzy
 #~ msgid "Books ordered by file formats"
 #~ msgstr "Книги відсортовані за серією"
 
-#, fuzzy
 #~ msgid "Books organized in shelves"
 #~ msgstr "Книги відсортовані за серією"
 
-#, fuzzy
 #~ msgid "Connection successful!"
 #~ msgstr "Помилка зʼєднання"
 
-#, fuzzy
 #~ msgid "Mark Book as Read or Unread"
 #~ msgstr "Відмітити як не прочитане"
 
-#, fuzzy
 #~ msgid "Downloads per User"
 #~ msgstr "Завантаження"
 
-#, fuzzy
 #~ msgid "directory"
 #~ msgstr "Напрям"
 
-#, fuzzy
 #~ msgid "Repeat for confirmation"
 #~ msgstr "Особливі налаштування"

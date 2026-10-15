@@ -15,7 +15,7 @@
     <div class="field">
       <label for="config_calibre_dir">{{ _('Location of Calibre Database (metadata.db file)') }}</label>
       <input class="input input-mono" type="text" id="config_calibre_dir" name="config_calibre_dir" value="{{ config.config_calibre_dir or '' }}" required>
-      <span class="field-hint">{{ _('Inside the container this lives under /calibre-library. CWA finds and mounts the library there on start: the largest one if there are several, a new one if there is none.') }}</span>
+      <span class="field-hint">{{ _('Inside the container this lives under /calibre-library. Scriptorium finds and mounts the library there on start: the largest one if there are several, a new one if there is none.') }}</span>
     </div>
     <div>
       {{ ui.switch('config_calibre_split', _('Separate Book Files from Library'), config.config_calibre_split, _('Keep metadata.db in /calibre-library and the book files somewhere else, for example a /books volume.')) }}
@@ -64,9 +64,9 @@
 <details class="card">
   <summary class="card-title" style="cursor: pointer;">{{ _('Library not opening? Troubleshooting') }}</summary>
   <ul class="bullets">
-    <li>{{ _('Make sure no other program (including the Calibre desktop app) uses the same library while CWA runs.') }}</li>
+    <li>{{ _('Make sure no other program (including the Calibre desktop app) uses the same library while Scriptorium runs.') }}</li>
     <li>{{ _('On network shares, unionfs or mergerfs, set NETWORK_SHARE_MODE=true in your docker compose file.') }}</li>
-    <li>{{ _('Check that the path above points to the folder that contains metadata.db and that CWA can read and write it.') }}</li>
+    <li>{{ _('Check that the path above points to the folder that contains metadata.db and that Scriptorium can read and write it.') }}</li>
     <li>{{ _('If metadata.db is corrupted, restore it from a backup, or use the last-resort restore below.') }}</li>
     <li>{{ _('In docker compose, change only the left side of the volume paths; the right side (/calibre-library, /cwa-book-ingest, /config) must stay as it is.') }}</li>
   </ul>

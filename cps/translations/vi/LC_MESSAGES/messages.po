@@ -2,10 +2,9 @@
 # Ha Link<halink0803@gmail.com>
 msgid ""
 msgstr ""
-"Project-Id-Version:  Calibre-Web Automated\n"
-"Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
-"Automated\n"
-"POT-Creation-Date: 2026-10-15 22:38+0200\n"
+"Project-Id-Version: Calibre-Web Automated\n"
+"Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
+"POT-Creation-Date: 2026-10-15 23:47+0200\n"
 "PO-Revision-Date: 2022-09-20 21:36+0700\n"
 "Last-Translator: Ha Link <halink0803@gmail.com>\n"
 "Language-Team: \n"
@@ -15,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Generated-By: Babel 2.13.1\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: cps/about.py:65 cps/templates/admin.html:13
 #: cps/templates/cwa_stats_full.html:6 cps/templates/cwa_stats_tabs.html:33
@@ -208,8 +207,8 @@ msgstr "Cột bị hạn chế không hợp lệ"
 
 #: cps/admin.py:920 cps/admin.py:2462
 #, fuzzy
-msgid "Calibre-Web Automated configuration updated"
-msgstr "Thiết lập Calibre-Web đã cập nhật"
+msgid "Scriptorium configuration updated"
+msgstr "Thiết lập Scriptorium đã cập nhật"
 
 #: cps/admin.py:932
 msgid "Do you really want to delete the Kobo Token?"
@@ -272,17 +271,17 @@ msgstr "Bạn có chắc chắn muốn thay đổi vị trí thư viện Calibre
 
 #: cps/admin.py:955
 msgid ""
-"Calibre-Web Automated will search for updated Covers and update Cover "
-"Thumbnails, this may take a while?"
+"Scriptorium will search for updated Covers and update Cover Thumbnails, this "
+"may take a while?"
 msgstr ""
 
 #: cps/admin.py:958
 #, fuzzy
 msgid ""
-"Are you sure you want delete Calibre-Web Automated's sync database to force "
-"a full sync with your Kobo Reader?"
+"Are you sure you want delete Scriptorium's sync database to force a full "
+"sync with your Kobo Reader?"
 msgstr ""
-"Bạn có chắc chắn muốn xóa cơ sở dữ liệu đồng bộ của Calibre-Web để bắt buộc "
+"Bạn có chắc chắn muốn xóa cơ sở dữ liệu đồng bộ của Scriptorium để bắt buộc "
 "đồng bộ hóa hoàn toàn với Kobo Reader của mình không?"
 
 #: cps/admin.py:1193 cps/admin.py:1199 cps/admin.py:1208 cps/admin.py:1217
@@ -807,7 +806,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:159
+#: cps/templates/layout.html:162
 msgid "Customize"
 msgstr ""
 
@@ -944,7 +943,7 @@ msgid "Invalid cron expression for duplicate scans. Changes were not saved."
 msgstr ""
 
 #: cps/cwa_functions.py:999
-msgid "Calibre-Web Automated User Settings"
+msgid "Automation Settings"
 msgstr ""
 
 #: cps/cwa_functions.py:1045 cps/cwa_functions.py:1047
@@ -1016,8 +1015,8 @@ msgstr "Không rõ"
 
 #: cps/cwa_functions.py:1271
 #, fuzzy
-msgid "Calibre-Web Automated Stats & Activity"
-msgstr "Calibre-Web test e-mail"
+msgid "Stats & Activity"
+msgstr "Scriptorium test e-mail"
 
 #: cps/cwa_functions.py:1655
 msgid "Full Enforcement History"
@@ -1255,7 +1254,7 @@ msgstr ""
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr ""
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:272
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:276
 msgid "Upload done, processing, please wait..."
 msgstr "Tải lên xong, đang xử lý, đợi chút ..."
 
@@ -1416,8 +1415,8 @@ msgstr "Gửi tới Kindle"
 
 #: cps/helper.py:114 cps/helper.py:141 cps/helper.py:254
 #, fuzzy
-msgid "This Email has been sent via Calibre-Web Automated."
-msgstr "E-mail này được gửi từ Calibre-Web."
+msgid "This Email has been sent via Scriptorium."
+msgstr "E-mail này được gửi từ Scriptorium."
 
 #: cps/helper.py:129
 #, python-format
@@ -1431,8 +1430,8 @@ msgstr ""
 
 #: cps/helper.py:139
 #, fuzzy
-msgid "Calibre-Web Automated Test Email"
-msgstr "Calibre-Web test e-mail"
+msgid "Scriptorium Test Email"
+msgstr "Scriptorium test e-mail"
 
 #: cps/helper.py:140
 #, fuzzy
@@ -1441,8 +1440,8 @@ msgstr "Test e-mail"
 
 #: cps/helper.py:157
 #, fuzzy
-msgid "Get Started with Calibre-Web Automated"
-msgstr "Bắt đầu với Calibre-Web"
+msgid "Get Started with Scriptorium"
+msgstr "Bắt đầu với Scriptorium"
 
 #: cps/helper.py:162
 #, fuzzy, python-format
@@ -1591,8 +1590,8 @@ msgstr ""
 #: cps/helper.py:1361
 #, python-format
 msgid ""
-"Unsupported architecture detected: %(arch)s. CWA is optimized for x86_64 and "
-"aarch64."
+"Unsupported architecture detected: %(arch)s. Scriptorium is optimized for "
+"x86_64 and aarch64."
 msgstr ""
 
 #: cps/helper.py:1370
@@ -1627,8 +1626,8 @@ msgstr ""
 
 #: cps/kobo_auth.py:110
 msgid ""
-"Please access Calibre-Web Automated from non localhost to get valid "
-"api_endpoint for kobo device"
+"Please access Scriptorium from non localhost to get valid api_endpoint for "
+"kobo device"
 msgstr ""
 
 #: cps/kobo_auth.py:129
@@ -1794,8 +1793,8 @@ msgid "{} Stars"
 msgstr "{} sao"
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:168
-#: cps/templates/layout.html:223 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:171
+#: cps/templates/layout.html:226 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2251
 msgid "Login"
 msgstr "Đăng nhập"
@@ -1993,7 +1992,7 @@ msgstr ""
 
 #: cps/search.py:53 cps/search.py:440 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:219 cps/templates/search.html:5
+#: cps/templates/layout.html:222 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "Tìm kiếm"
@@ -2022,10 +2021,10 @@ msgid "Read Status = '%(status)s'"
 msgstr "Trạng thái đọc = %(status)s"
 
 #: cps/search.py:354
-msgid "Error on search for custom columns, please restart Calibre-Web"
+msgid "Error on search for custom columns, please restart Scriptorium"
 msgstr ""
 
-#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:137
+#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:140
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2145,7 +2144,7 @@ msgid "Error opening shelf. Shelf does not exist or is not accessible"
 msgstr ""
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:121 cps/templates/tasks.html:5
+#: cps/templates/layout.html:123 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Nhiệm vụ"
 
@@ -2314,7 +2313,7 @@ msgstr ""
 msgid "Error creating shelf"
 msgstr "Lỗi tải xuống ảnh bìa"
 
-#: cps/templates/layout.html:106 cps/web.py:1210
+#: cps/templates/layout.html:108 cps/web.py:1210
 #, fuzzy
 msgid "Create Magic Shelf"
 msgstr "Tạo một giá sách"
@@ -2433,7 +2432,7 @@ msgstr ""
 msgid "Please wait one minute to register next user"
 msgstr ""
 
-#: cps/templates/layout.html:170 cps/templates/login.html:77
+#: cps/templates/layout.html:173 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2130 cps/web.py:2134
 #: cps/web.py:2139 cps/web.py:2143 cps/web.py:2149 cps/web.py:2174
 #: cps/web.py:2178 cps/web.py:2191 cps/web.py:2194
@@ -2763,8 +2762,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr ""
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:144
-#: cps/templates/layout.html:145 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:147
+#: cps/templates/layout.html:148 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Tải lên"
 
@@ -2866,11 +2865,11 @@ msgstr "Giá trị cột được cho phép"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:188
-#: cps/templates/layout.html:191 cps/templates/layout.html:194
-#: cps/templates/layout.html:197 cps/templates/layout.html:200
-#: cps/templates/layout.html:203 cps/templates/layout.html:240
-#: cps/templates/layout.html:268 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:191
+#: cps/templates/layout.html:194 cps/templates/layout.html:197
+#: cps/templates/layout.html:200 cps/templates/layout.html:203
+#: cps/templates/layout.html:206 cps/templates/layout.html:244
+#: cps/templates/layout.html:272 cps/templates/read.html:58
 msgid "Close"
 msgstr "Đóng"
 
@@ -2908,7 +2907,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:249
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:253
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
@@ -2967,7 +2966,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:124
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:126
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -2982,7 +2981,7 @@ msgid "Users, library, automation and server."
 msgstr ""
 
 #: cps/templates/admin.html:12
-msgid "Check CWA Status"
+msgid "Check Service Status"
 msgstr ""
 
 #: cps/templates/admin.html:20 cps/templates/user_edit.html:11
@@ -3126,7 +3125,7 @@ msgstr "Sách mỗi trang"
 msgid "Uploads"
 msgstr "Tải lên"
 
-#: cps/templates/admin.html:106 cps/templates/layout.html:158
+#: cps/templates/admin.html:106 cps/templates/layout.html:161
 #, fuzzy
 msgid "Kobo sync"
 msgstr "Token đồng bộ Kobo"
@@ -3209,7 +3208,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Mở thay đổi thứ tự"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:119 cps/templates/layout.html:163
+#: cps/templates/layout.html:121 cps/templates/layout.html:166
 msgid "System"
 msgstr ""
 
@@ -3246,17 +3245,17 @@ msgstr "Tắt"
 msgid "Are you sure you want to restart?"
 msgstr "Bạn có chắc chắn muốn khởi động lại?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:275
+#: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:246 cps/templates/layout.html:85
+#: cps/templates/detail.html:246 cps/templates/layout.html:87
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Giá sách"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:136
+#: cps/templates/appearance.html:14 cps/templates/layout.html:139
 msgid "Search titles, authors, series…"
 msgstr ""
 
@@ -3372,7 +3371,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:157
+#: cps/templates/layout.html:160
 #, fuzzy
 msgid "Profile"
 msgstr "Địa chỉ email của bạn"
@@ -3453,16 +3452,16 @@ msgstr "Đánh giá"
 msgid "Preview"
 msgstr "Trước"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:162
+#: cps/templates/appearance.html:156 cps/templates/layout.html:165
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:164
+#: cps/templates/appearance.html:157 cps/templates/layout.html:167
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Sáng"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:165
+#: cps/templates/appearance.html:158 cps/templates/layout.html:168
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Tối"
@@ -3826,7 +3825,7 @@ msgid "Add to shelf"
 msgstr "Thêm vào giá sách"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:42
-#: cps/templates/layout.html:225
+#: cps/templates/layout.html:228
 #, fuzzy
 msgid "More"
 msgstr "Cùng tác giả"
@@ -3988,9 +3987,9 @@ msgstr "Vị trí cơ sở dữ liệu của Calibre"
 
 #: cps/templates/config_db.html:18
 msgid ""
-"Inside the container this lives under /calibre-library. CWA finds and mounts "
-"the library there on start: the largest one if there are several, a new one "
-"if there is none."
+"Inside the container this lives under /calibre-library. Scriptorium finds "
+"and mounts the library there on start: the largest one if there are several, "
+"a new one if there is none."
 msgstr ""
 
 #: cps/templates/config_db.html:21
@@ -4038,7 +4037,7 @@ msgstr ""
 #: cps/templates/config_db.html:67
 msgid ""
 "Make sure no other program (including the Calibre desktop app) uses the same "
-"library while CWA runs."
+"library while Scriptorium runs."
 msgstr ""
 
 #: cps/templates/config_db.html:68
@@ -4050,7 +4049,7 @@ msgstr ""
 #: cps/templates/config_db.html:69
 msgid ""
 "Check that the path above points to the folder that contains metadata.db and "
-"that CWA can read and write it."
+"that Scriptorium can read and write it."
 msgstr ""
 
 #: cps/templates/config_db.html:70
@@ -4097,7 +4096,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:270 cps/templates/login.html:35
+#: cps/templates/layout.html:274 cps/templates/login.html:35
 #: cps/templates/user_edit.html:46 cps/templates/user_edit.html:57
 #, fuzzy
 msgid "Show password"
@@ -4959,7 +4958,8 @@ msgid "Time of Day:"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:67
-msgid "What CWA does on its own when books arrive, plus maintenance jobs."
+msgid ""
+"What Scriptorium does on its own when books arrive, plus maintenance jobs."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:72
@@ -4988,11 +4988,11 @@ msgstr "Quay lại"
 
 #: cps/templates/cwa_settings.html:88
 #, fuzzy
-msgid "Enable/Disable Calibre-Web Automated Services"
-msgstr "Calibre-Web Log: "
+msgid "Enable/Disable Automation Services"
+msgstr "Scriptorium Log: "
 
 #: cps/templates/cwa_settings.html:90
-msgid "Enable CWA Auto-Convert"
+msgid "Enable Auto-Convert"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:90
@@ -5000,7 +5000,7 @@ msgid "New books are converted to the target format below."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
-msgid "Enable CWA Automatic Cover & Metadata Enforcement Service"
+msgid "Enable Automatic Cover & Metadata Enforcement Service"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
@@ -5010,7 +5010,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
-msgid "Enable CWA Kindle EPUB Fixer"
+msgid "Enable Kindle EPUB Fixer"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
@@ -5028,7 +5028,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
-msgid "Enable KOReader Sync (CWA Plugin)"
+msgid "Enable KOReader Sync (Scriptorium Plugin)"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
@@ -5057,7 +5057,7 @@ msgid "Removes leftover references to books deleted from the library."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:102
-msgid "Enable CWA Update Notifications"
+msgid "Enable Update Notifications"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:103
@@ -5065,7 +5065,7 @@ msgid "Enable Contribute Translations Notifications"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:110
-msgid "CWA Auto-Ingest Automerge"
+msgid "Auto-Ingest Automerge"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:112
@@ -5120,7 +5120,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
-msgid "CWA Auto-Ingest - Ignored Formats"
+msgid "Auto-Ingest - Ignored Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
@@ -5139,7 +5139,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
-msgid "CWA Auto-Convert - Ignored Formats"
+msgid "Auto-Convert - Ignored Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
@@ -5147,7 +5147,7 @@ msgid "Books in these formats are imported as they are, without conversion."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
-msgid "CWA Auto-Convert - Retained Formats"
+msgid "Auto-Convert - Retained Formats"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
@@ -5265,7 +5265,7 @@ msgid "Pause between requests to the Hardcover API (0–60)."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:182
-msgid "CWA Duplicate Detection System"
+msgid "Duplicate Detection System"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:184
@@ -5290,7 +5290,7 @@ msgid "Legacy SQL only (experimental)"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:195
-msgid "CWA Duplicate Detection Criteria"
+msgid "Duplicate Detection Criteria"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:196
@@ -5417,7 +5417,7 @@ msgid "Automatic Backup Settings"
 msgstr "Thiết lập OAuth"
 
 #: cps/templates/cwa_settings.html:251
-msgid "Enable CWA Import Auto-Backup"
+msgid "Enable Import Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:251
@@ -5426,7 +5426,7 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:252
-msgid "Enable CWA Conversion Auto-Backup"
+msgid "Enable Conversion Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:252
@@ -5434,7 +5434,7 @@ msgid "Keeps the original of every converted file."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
-msgid "Enable CWA EPUB Fixer Auto-Backup"
+msgid "Enable EPUB Fixer Auto-Backup"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
@@ -5442,7 +5442,7 @@ msgid "Keeps the original of every EPUB the fixer changed."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
-msgid "Enable CWA Auto-Zip Backups"
+msgid "Enable Auto-Zip Backups"
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
@@ -5535,7 +5535,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:59
-#: cps/templates/layout.html:56 cps/templates/layout.html:218
+#: cps/templates/layout.html:58 cps/templates/layout.html:221
 #, fuzzy
 msgid "Library"
 msgstr "Trong thư viện"
@@ -5789,23 +5789,23 @@ msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:156
 #, fuzzy
-msgid "Calibre-Web Automated Conversion History"
-msgstr "Thiết lập Calibre-Web đã cập nhật"
+msgid "Conversion History"
+msgstr "Thiết lập Scriptorium đã cập nhật"
 
 #: cps/templates/cwa_stats_tabs.html:157
 #, fuzzy
-msgid "Calibre-Web Automated Import History"
-msgstr "Calibre-Web test e-mail"
+msgid "Import History"
+msgstr "Scriptorium test e-mail"
 
 #: cps/templates/cwa_stats_tabs.html:158
 #, fuzzy
-msgid "Calibre-Web Automated EPUB Fixer History"
-msgstr "Calibre-Web test e-mail"
+msgid "EPUB Fixer History"
+msgstr "Scriptorium test e-mail"
 
 #: cps/templates/cwa_stats_tabs.html:159
 #, fuzzy
-msgid "Calibre-Web Automated Cover & Metadata Enforcement History"
-msgstr "Calibre-Web test e-mail"
+msgid "Cover & Metadata Enforcement History"
+msgstr "Scriptorium test e-mail"
 
 #: cps/templates/cwa_stats_tabs.html:177
 msgid "No data for this period yet."
@@ -5905,7 +5905,7 @@ msgstr "Đọc trên trình duyệt"
 msgid "Listen"
 msgstr ""
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:87
+#: cps/templates/detail.html:117 cps/templates/layout.html:89
 #: cps/templates/user_edit.html:176
 #, fuzzy
 msgid "Create Shelf"
@@ -5972,7 +5972,7 @@ msgstr "Tạo một giá sách"
 msgid "Reading progress"
 msgstr "Tiến độ"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:271
+#: cps/templates/detail.html:207 cps/templates/layout.html:275
 #, fuzzy
 msgid "Show more"
 msgstr "Hiện thị sách chưa đọc"
@@ -6048,7 +6048,7 @@ msgstr ""
 msgid ""
 "It builds the index that keeps duplicate checks fast during imports and "
 "metadata edits. On large libraries it can take a few minutes; you can keep "
-"using CWA meanwhile."
+"using Scriptorium meanwhile."
 msgstr ""
 
 #: cps/templates/duplicates.html:27 cps/templates/duplicates.html:130
@@ -6057,7 +6057,7 @@ msgid "Duplicate scan is running."
 msgstr "Xoá sách"
 
 #: cps/templates/duplicates.html:30
-msgid "You can keep using CWA while it runs."
+msgid "You can keep using Scriptorium while it runs."
 msgstr ""
 
 #: cps/templates/duplicates.html:37
@@ -6333,7 +6333,7 @@ msgid "(Magic)"
 msgstr ""
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:94
+#: cps/templates/layout.html:96
 msgid "(Public)"
 msgstr "(Công khai)"
 
@@ -6373,7 +6373,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:274
+#: cps/templates/grid.html:21 cps/templates/layout.html:278
 #: cps/templates/list.html:27
 msgid "Filter"
 msgstr ""
@@ -6487,10 +6487,8 @@ msgstr ""
 
 #: cps/templates/http_error.html:19
 #, fuzzy
-msgid ""
-"Calibre-Web Automated Instance is unconfigured, please contact your "
-"administrator"
-msgstr "Thiết lập Calibre-Web đã cập nhật"
+msgid "Scriptorium Instance is unconfigured, please contact your administrator"
+msgstr "Thiết lập Scriptorium đã cập nhật"
 
 #: cps/templates/http_error.html:28
 msgid "Return to Home"
@@ -6569,8 +6567,8 @@ msgstr "Gửi tới Kindle"
 
 #: cps/templates/kosync_plugin.html:8
 msgid ""
-"The CWA plugin keeps your reading position in step between KOReader and this "
-"library."
+"The Scriptorium plugin keeps your reading position in step between KOReader "
+"and this library."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:13
@@ -6579,7 +6577,7 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:14
 #, fuzzy
-msgid "Open CWA Settings"
+msgid "Open Automation Settings"
 msgstr "Thiết lập"
 
 #: cps/templates/kosync_plugin.html:14
@@ -6599,11 +6597,12 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:24
 #, fuzzy
-msgid "Download CWA Sync Plugin"
+msgid "Download Scriptorium Sync Plugin"
 msgstr "Tải xuống log truy cập"
 
 #: cps/templates/kosync_plugin.html:26
-msgid "Download is available after enabling KOReader Sync in CWA Settings."
+msgid ""
+"Download is available after enabling KOReader Sync in Automation Settings."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:33
@@ -6633,8 +6632,8 @@ msgstr "Gửi tới Kindle"
 
 #: cps/templates/kosync_plugin.html:45
 msgid ""
-"Open a book, tap the top of the screen, open the Tools menu and choose “CWA "
-"Progress Sync”. Enter:"
+"Open a book, tap the top of the screen, open the Tools menu and choose "
+"“Scriptorium Sync”. Enter:"
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:47
@@ -6683,152 +6682,157 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:46
+#: cps/templates/layout.html:48
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:50
+#: cps/templates/layout.html:52
 #, fuzzy
 msgid "Library navigation"
 msgstr "Thống kê thư viện"
 
-#: cps/templates/layout.html:75
+#: cps/templates/layout.html:77
 msgid "Browse"
 msgstr "Tìm kiếm"
 
-#: cps/templates/layout.html:98
+#: cps/templates/layout.html:100
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:104 cps/templates/user_edit.html:309
+#: cps/templates/layout.html:106 cps/templates/user_edit.html:309
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Giá sách"
 
-#: cps/templates/layout.html:132
-msgid "Toggle Navigation"
+#: cps/templates/layout.html:129 cps/templates/layout.html:234
+#: cps/templates/stats.html:6
+msgid "Based on"
 msgstr ""
 
 #: cps/templates/layout.html:135
+msgid "Toggle Navigation"
+msgstr ""
+
+#: cps/templates/layout.html:138
 msgid "Search Library"
 msgstr "Tìm kiếm thư viện"
 
-#: cps/templates/layout.html:137
+#: cps/templates/layout.html:140
 #, fuzzy
 msgid "Advanced"
 msgstr "Tìm kiếm nâng cao"
 
-#: cps/templates/layout.html:141
+#: cps/templates/layout.html:144
 #, fuzzy
 msgid "Refresh Library"
 msgstr "Tìm kiếm thư viện"
 
-#: cps/templates/layout.html:151 cps/templates/user_edit.html:19
+#: cps/templates/layout.html:154 cps/templates/user_edit.html:19
 #: cps/templates/user_edit.html:32
 msgid "Account"
 msgstr "Tài khoản"
 
-#: cps/templates/layout.html:173
+#: cps/templates/layout.html:176
 msgid "Logout"
 msgstr "Đăng xuất"
 
-#: cps/templates/layout.html:193
+#: cps/templates/layout.html:196
 msgid "See Changelog"
 msgstr ""
 
-#: cps/templates/layout.html:196
+#: cps/templates/layout.html:199
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Xoá sách"
 
-#: cps/templates/layout.html:199
+#: cps/templates/layout.html:202
 msgid "Contribute here!"
 msgstr ""
 
-#: cps/templates/layout.html:217
+#: cps/templates/layout.html:220
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Thiết lập cơ bản"
 
-#: cps/templates/layout.html:221
+#: cps/templates/layout.html:224
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:246
+#: cps/templates/layout.html:250
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Bạn có thực sự chắc chắn?"
 
-#: cps/templates/layout.html:250 cps/templates/layout.html:268
+#: cps/templates/layout.html:254 cps/templates/layout.html:272
 msgid "Confirm"
 msgstr ""
 
-#: cps/templates/layout.html:256
+#: cps/templates/layout.html:260
 msgid "Uploading..."
 msgstr "Đang tải lên..."
 
-#: cps/templates/layout.html:259
+#: cps/templates/layout.html:263
 msgid "Please do not refresh the page"
 msgstr "Làm ơn đừng load lại trang"
 
-#: cps/templates/layout.html:262
+#: cps/templates/layout.html:266
 msgid "Drop books to add them to the library"
-msgstr ""
-
-#: cps/templates/layout.html:268
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "Tìm kiếm thư viện"
-
-#: cps/templates/layout.html:269
-msgid "Could not copy, select the text and copy it manually"
-msgstr ""
-
-#: cps/templates/layout.html:270
-#, fuzzy
-msgid "Hide password"
-msgstr "Mật khẩu"
-
-#: cps/templates/layout.html:271
-#, fuzzy
-msgid "Show less"
-msgstr "Hiển thị tất cả"
-
-#: cps/templates/layout.html:271 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
 msgstr ""
 
 #: cps/templates/layout.html:272
 #, fuzzy
+msgid "Copied to clipboard"
+msgstr "Tìm kiếm thư viện"
+
+#: cps/templates/layout.html:273
+msgid "Could not copy, select the text and copy it manually"
+msgstr ""
+
+#: cps/templates/layout.html:274
+#, fuzzy
+msgid "Hide password"
+msgstr "Mật khẩu"
+
+#: cps/templates/layout.html:275
+#, fuzzy
+msgid "Show less"
+msgstr "Hiển thị tất cả"
+
+#: cps/templates/layout.html:275 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:276
+#, fuzzy
 msgid "Upload failed"
 msgstr "Cập nhật thất bại:"
 
-#: cps/templates/layout.html:273
+#: cps/templates/layout.html:277
 #, python-format
 msgid "%(count)s files"
 msgstr ""
 
-#: cps/templates/layout.html:274 cps/templates/search_form.html:7
+#: cps/templates/layout.html:278 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr ""
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:278
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Mật khẩu mới đã được gửi đến email của bạn"
 
-#: cps/templates/layout.html:275
+#: cps/templates/layout.html:279
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy
 msgid "Review"
 msgstr "Trước"
@@ -6959,8 +6963,8 @@ msgid "Continue as guest"
 msgstr ""
 
 #: cps/templates/logviewer.html:9
-msgid "Download Calibre-Web Log"
-msgstr "Tải xuống Calibre-Web Log"
+msgid "Download Scriptorium Log"
+msgstr "Tải xuống Scriptorium Log"
 
 #: cps/templates/logviewer.html:10
 msgid "Download Access Log"
@@ -6973,8 +6977,8 @@ msgstr "Đăng nhập"
 
 #: cps/templates/logviewer.html:15
 #, fuzzy
-msgid "Calibre-Web Log"
-msgstr "Hiển thị Calibre-Web Log: "
+msgid "Scriptorium Log"
+msgstr "Hiển thị Scriptorium Log: "
 
 #: cps/templates/logviewer.html:16
 #, fuzzy
@@ -7118,7 +7122,7 @@ msgstr "Thiết lập UI"
 msgid "Value"
 msgstr ""
 
-#: cps/templates/magic_shelf_edit.html:84
+#: cps/templates/magic_shelf_edit.html:84 cps/templates/stats.html:6
 msgid "and"
 msgstr ""
 
@@ -7259,8 +7263,8 @@ msgstr ""
 
 #: cps/templates/osd.xml:5
 #, fuzzy
-msgid "Calibre-Web Automated eBook Catalog"
-msgstr "Calibre-Web test e-mail"
+msgid "Scriptorium eBook Catalog"
+msgstr "Scriptorium test e-mail"
 
 #: cps/templates/profile_pictures.html:7
 msgid ""
@@ -7839,10 +7843,6 @@ msgstr ""
 msgid "About"
 msgstr "About"
 
-#: cps/templates/stats.html:6
-msgid "Powered by"
-msgstr ""
-
 #: cps/templates/stats.html:10
 msgid "Library Statistics"
 msgstr "Thống kê thư viện"
@@ -8165,7 +8165,8 @@ msgid "Using KOReader?"
 msgstr "Trình đọc DJVU"
 
 #: cps/templates/user_edit.html:212
-msgid "Reading progress can also sync from KOReader with the CWA plugin."
+msgid ""
+"Reading progress can also sync from KOReader with the Scriptorium plugin."
 msgstr ""
 
 #: cps/templates/user_edit.html:213
@@ -8399,22 +8400,18 @@ msgid ""
 "too."
 msgstr ""
 
-#, fuzzy
 #~ msgid "Send to eReader Email"
 #~ msgstr "Kindle"
 
-#, fuzzy
 #~ msgid "Send to eReader Subject"
 #~ msgstr "Gửi tới Kindle"
 
-#, fuzzy
 #~ msgid "Email Server Settings&nbsp;&nbsp;📬"
 #~ msgstr "Thiết lập máy chủ email"
 
 #~ msgid "Calibre Database Directory"
 #~ msgstr "Thư mục cơ sở dữ liệu Calibre"
 
-#, fuzzy
 #~ msgid "CWA Settings"
 #~ msgstr "Thiết lập"
 
@@ -8427,22 +8424,18 @@ msgstr ""
 #~ msgid "Edit Calibre Database Configuration"
 #~ msgstr "Chỉnh sửa thiết lập cơ sở dữ liệu Calibre"
 
-#, fuzzy
 #~ msgid "Show CWA Stats"
 #~ msgstr "Thiết lập"
 
-#, fuzzy
 #~ msgid "CWA Discord Server"
 #~ msgstr "Khám phá"
 
-#, fuzzy
 #~ msgid "Administration&nbsp;&nbsp;🚀"
 #~ msgstr "Quản trị"
 
 #~ msgid "View Logs"
 #~ msgstr "Xem logs"
 
-#, fuzzy
 #~ msgid "Version Information&nbsp;&nbsp;📜"
 #~ msgstr "Thiết lập máy chủ"
 
@@ -8464,7 +8457,6 @@ msgstr ""
 #~ msgid "Delete formats:"
 #~ msgstr "Xoá định dạng:"
 
-#, fuzzy
 #~ msgid "select an option"
 #~ msgstr "chọn một lựa chọn"
 
@@ -8489,19 +8481,15 @@ msgstr ""
 #~ msgid "This Field is Required"
 #~ msgstr "Đây là trường bắt buộc"
 
-#, fuzzy
 #~ msgid "Unarchive"
 #~ msgstr "Lưu trữ"
 
-#, fuzzy
 #~ msgid "Mark as read"
 #~ msgstr "Đánh dấu chưa đọc"
 
-#, fuzzy
 #~ msgid "Mark as unread"
 #~ msgstr "Đánh dấu chưa đọc"
 
-#, fuzzy
 #~ msgid "Select all"
 #~ msgstr "Tạo một giá sách"
 
@@ -8535,140 +8523,108 @@ msgstr ""
 #~ msgid "Enter "
 #~ msgstr "Nhập "
 
-#, fuzzy
 #~ msgid "Into Book with Title:"
 #~ msgstr "Tên sách"
 
-#, fuzzy
 #~ msgid "Select a Shelf"
 #~ msgstr "Tạo một giá sách"
 
-#, fuzzy
 #~ msgid "Server Configuration"
 #~ msgstr "Thiết lập"
 
-#, fuzzy
 #~ msgid "Logfile Configuration"
 #~ msgstr "Thiết lập"
 
-#, fuzzy
 #~ msgid "Feature Configuration"
 #~ msgstr "Thiết lập cơ sở dữ lieu :)))"
 
-#, fuzzy
 #~ msgid "Manual Endpoint Configuration"
 #~ msgstr "Chỉnh sửa thiết lập UI"
 
-#, fuzzy
 #~ msgid "Field Mapping Configuration"
 #~ msgstr "Thiết lập"
 
-#, fuzzy
 #~ msgid "Default Theme"
 #~ msgstr "Xoá"
 
 #~ msgid "caliBlur! Dark Theme"
 #~ msgstr "calibur! Theme tối"
 
-#, fuzzy
 #~ msgid "Language & Display"
 #~ msgstr "Trang admin"
 
-#, fuzzy
 #~ msgid "Enter a search term"
 #~ msgstr "Nhập tên người dùng"
 
-#, fuzzy
 #~ msgid "Error starting EPUB Fixer"
 #~ msgstr "Lỗi tải xuống ảnh bìa"
 
-#, fuzzy
 #~ msgid "Metadata Fields to Update"
 #~ msgstr "Metadata đã được cập nhật thành công"
 
-#, fuzzy
 #~ msgid "Web UI Settings"
 #~ msgstr "Thiết lập"
 
-#, fuzzy
 #~ msgid "Automatic Duplicate Scanning"
 #~ msgstr "Thiết lập OAuth"
 
-#, fuzzy
 #~ msgid "Rate Limiting"
 #~ msgstr "Đánh giá"
 
-#, fuzzy
 #~ msgid "Marked as read"
 #~ msgstr "Đánh dấu chưa đọc"
 
-#, fuzzy
 #~ msgid "Marked as unread"
 #~ msgstr "Đánh dấu chưa đọc"
 
-#, fuzzy
 #~ msgid "Restored from archive"
 #~ msgstr "Khôi phục từ lưu trữ"
 
-#, fuzzy
 #~ msgid "Rating updated"
 #~ msgstr "Thiết lập cơ sở dữ lieu đã được cập nhật"
 
-#, fuzzy
 #~ msgid "Rating cleared"
 #~ msgstr "Đánh giá cao hơn"
 
 #~ msgid "Description:"
 #~ msgstr "Mô tả:"
 
-#, fuzzy
 #~ msgid "Select All"
 #~ msgstr "Tạo một giá sách"
 
-#, fuzzy
 #~ msgid "Failed to update shelves"
 #~ msgstr "Tạo đường dẫn cho ảnh bìa thất bại"
 
-#, fuzzy
 #~ msgid "Scan for Duplicates Now"
 #~ msgstr "Hiện thị top những sách được đánh giá cao"
 
-#, fuzzy
 #~ msgid "Select None"
 #~ msgstr "Chọn"
 
-#, fuzzy
 #~ msgid "View book details"
 #~ msgstr "Chi tiết sách"
 
-#, fuzzy
 #~ msgid "Edit book metadata"
 #~ msgstr "Chỉnh sửa Metadata"
 
-#, fuzzy
 #~ msgid "Archive/delete book"
 #~ msgstr "Gộp những sách đã chọn"
 
-#, fuzzy
 #~ msgid "No Duplicate Books Found"
 #~ msgstr "Không tìm thấy kết quả"
 
-#, fuzzy
 #~ msgid "Merge Books"
 #~ msgstr "Sách chưa đọc"
 
 #~ msgid "Enter domainname"
 #~ msgstr "Nhập tên domain"
 
-#, fuzzy
 #~ msgid "Reject All Pending"
 #~ msgstr "Tạo một giá sách"
 
-#, fuzzy
 #~ msgid "Processing..."
 #~ msgstr "Đang tải..."
 
-#, fuzzy
 #~ msgid ""
 #~ "Are you sure you want to reject all matches for this book? This cannot be "
 #~ "undone."
@@ -8676,11 +8632,9 @@ msgstr ""
 #~ "Bạn có chắc chắn muốn thay đổi vai trò đã chọn cho (những) người dùng đã "
 #~ "chọn không?"
 
-#, fuzzy
 #~ msgid "Failed to reject match"
 #~ msgstr "Tạo đường dẫn cho ảnh bìa thất bại"
 
-#, fuzzy
 #~ msgid ""
 #~ "Are you sure you want to reject all pending matches? This cannot be "
 #~ "undone."
@@ -8688,34 +8642,27 @@ msgstr ""
 #~ "Bạn có chắc chắn muốn thay đổi vai trò đã chọn cho (những) người dùng đã "
 #~ "chọn không?"
 
-#, fuzzy
 #~ msgid "✗ Reject All Pending"
 #~ msgstr "Tạo một giá sách"
 
-#, fuzzy
 #~ msgid "Failed to reject all pending matches"
 #~ msgstr "Tạo đường dẫn cho ảnh bìa thất bại"
 
-#, fuzzy
 #~ msgid "Show this shelf in your sidebar"
 #~ msgstr "Đồng bộ giá sách này với thiết bị Kobo"
 
 #~ msgid "Home"
 #~ msgstr "Trang chủ"
 
-#, fuzzy
 #~ msgid "Switch Theme"
 #~ msgstr "Chủ đề mặc định"
 
-#, fuzzy
 #~ msgid "Duplicate Books Detected"
 #~ msgstr "Xoá sách"
 
-#, fuzzy
 #~ msgid "Duplicate Groups Found"
 #~ msgstr "Không tìm thấy kết quả"
 
-#, fuzzy
 #~ msgid "Sign in to your library"
 #~ msgstr "Các series trong thư viện"
 
@@ -8725,15 +8672,12 @@ msgstr ""
 #~ msgid "Show Access Log: "
 #~ msgstr "Hiển thị log truy cập: "
 
-#, fuzzy
 #~ msgid "Select Allowed/Denied Tags"
 #~ msgstr "Chỉnh sửa những tags đươc cho phép"
 
-#, fuzzy
 #~ msgid "Select Allowed/Denied Custom Column Values"
 #~ msgstr "Thêm cho phép/từ chối giá trị cột tuỳ biến"
 
-#, fuzzy
 #~ msgid "Select Allowed/Denied Custom Column Values of User"
 #~ msgstr "Thêm cho phép/từ chối giá trị cột tuỳ biến"
 
@@ -8752,15 +8696,12 @@ msgstr ""
 #~ msgid "Parent Directory"
 #~ msgstr "Thư mục cha"
 
-#, fuzzy
 #~ msgid "Default"
 #~ msgstr "Xoá"
 
-#, fuzzy
 #~ msgid "Arial"
 #~ msgstr "Dọc"
 
-#, fuzzy
 #~ msgid "Spread"
 #~ msgstr "Đọc"
 
@@ -8791,11 +8732,9 @@ msgstr ""
 #~ msgid "Published Date To"
 #~ msgstr "Ngày phát hành tới"
 
-#, fuzzy
 #~ msgid "Exclude Shelves"
 #~ msgstr "Giá sách"
 
-#, fuzzy
 #~ msgid "Exclude Languages"
 #~ msgstr "Nhập ngôn ngữ"
 
@@ -8817,15 +8756,12 @@ msgstr ""
 #~ msgid "Series in this Library"
 #~ msgstr "Các series trong thư viện"
 
-#, fuzzy
 #~ msgid "eReader Configuration"
 #~ msgstr "Thiết lập"
 
-#, fuzzy
 #~ msgid "Send to eReader Email Address"
 #~ msgstr "Kindle"
 
-#, fuzzy
 #~ msgid "Book Language Filter"
 #~ msgstr "Ngôn ngữ sách không hợp lệ"
 
@@ -8838,15 +8774,12 @@ msgstr ""
 #~ msgid "Sync only books in selected shelves with Kobo"
 #~ msgstr "Đồng bộ sách trên những giá được chọn với Kobo"
 
-#, fuzzy
 #~ msgid "Sidebar Display Settings"
 #~ msgstr "Thiết lập OAuth"
 
-#, fuzzy
 #~ msgid "Magic Shelves Order"
 #~ msgstr "Đồng bộ những giá sách đã chọn với Kobo"
 
-#, fuzzy
 #~ msgid "Public Shelves:"
 #~ msgstr "Chỉnh sửa giá sách công khai"
 
@@ -8856,15 +8789,12 @@ msgstr ""
 #~ msgid "Enter Username"
 #~ msgstr "Nhập tên người dùng"
 
-#, fuzzy
 #~ msgid "Enter Email"
 #~ msgstr "Test e-mail"
 
-#, fuzzy
 #~ msgid "Enter eReader Email"
 #~ msgstr "Kindle"
 
-#, fuzzy
 #~ msgid "Enter eReader Email Subject"
 #~ msgstr "Kindle"
 
@@ -8880,11 +8810,9 @@ msgstr ""
 #~ msgid "Edit Denied Column Values"
 #~ msgstr "Chỉnh sửa những cột giá trị bị từ chối"
 
-#, fuzzy
 #~ msgid "Error scheduling EPUB Fixer"
 #~ msgstr "Lỗi tải xuống ảnh bìa"
 
-#, fuzzy
 #~ msgid "Cancel Scan"
 #~ msgstr "Huỷ bỏ"
 
@@ -8924,23 +8852,18 @@ msgstr ""
 #~ msgid "Books organized in shelves"
 #~ msgstr "Sách tổ chức theo giá sách"
 
-#, fuzzy
 #~ msgid "Connection successful!"
 #~ msgstr "Lỗi kết nối"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Automated."
 #~ msgstr "E-mail này được gửi từ Calibre-Web."
 
-#, python-format
 #~ msgid "File %(file)s uploaded"
 #~ msgstr "File %(file)s đã được tải lên"
 
-#, fuzzy
 #~ msgid "Mark selected books as read"
 #~ msgstr "Gộp những sách đã chọn"
 
-#, fuzzy
 #~ msgid "Mark Book as Read or Unread"
 #~ msgstr "Đánh dấu chưa đọc"
 
@@ -8954,54 +8877,42 @@ msgstr ""
 #~ "Bạn có chắc chắn muốn xóa cơ sở dữ liệu đồng bộ của Calibre-Web để bắt "
 #~ "buộc đồng bộ hóa hoàn toàn với Kobo Reader của mình không?"
 
-#, fuzzy
 #~ msgid "Calibre-Web Test Email"
 #~ msgstr "Calibre-Web test e-mail"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Calibre-Web."
 #~ msgstr "E-mail này được gửi từ Calibre-Web."
 
 #~ msgid "Get Started with Calibre-Web"
 #~ msgstr "Bắt đầu với Calibre-Web"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autmoated."
 #~ msgstr "E-mail này được gửi từ Calibre-Web."
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Automated."
 #~ msgstr "E-mail này được gửi từ Calibre-Web."
 
-#, fuzzy
 #~ msgid "Downloads per User"
 #~ msgstr "Tải xuống"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autoated."
 #~ msgstr "E-mail này được gửi từ Calibre-Web."
 
-#, fuzzy
 #~ msgid "unknown error"
 #~ msgstr "Lỗi kết nối"
 
-#, fuzzy
 #~ msgid "Could not open file {filename!r}: {message}"
 #~ msgstr "Không thể đăng nhập: %(message)s"
 
-#, fuzzy
 #~ msgid "{value!r} is not a valid boolean."
 #~ msgstr "Địa chỉ email không hợp lệ"
 
-#, fuzzy
 #~ msgid "directory"
 #~ msgstr "Hướng"
 
-#, fuzzy
 #~ msgid "Repeat for confirmation"
 #~ msgstr "Thiết lập máy chủ"
 
-#, fuzzy
 #~ msgid "Value must be an iterable."
 #~ msgstr "Giá trị phải là true hoặc false"
 

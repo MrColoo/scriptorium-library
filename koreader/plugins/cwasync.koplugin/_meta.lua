@@ -3,6 +3,6 @@
 local _ = require("gettext")
 return {
     name = "cwasync",
-    fullname = _("CWA Progress Sync"),
+    fullname = _("Scriptorium Sync"),
     description = _([[Synchronizes your reading progress to Calibre Web Automated and across your KOReader devices.]]),
 }

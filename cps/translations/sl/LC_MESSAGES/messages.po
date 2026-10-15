@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
-"Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
-"Automated\n"
-"POT-Creation-Date: 2026-10-15 22:38+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
+"POT-Creation-Date: 2026-10-15 23:47+0200\n"
 "PO-Revision-Date: 2025-08-11 07:03+0000\n"
 "Last-Translator: Andrej Kralj\n"
 "Language-Team: Slovenian\n"
@@ -17,11 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.13.1\n"
-"\n"
-"X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Parser: loco_parse_po\n"
-"X-Loco-Source-Locale: sl_SI\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: cps/about.py:65 cps/templates/admin.html:13
 #: cps/templates/cwa_stats_full.html:6 cps/templates/cwa_stats_tabs.html:33
@@ -222,8 +217,8 @@ msgstr "Neveljavni stolpec za omejitev"
 
 #: cps/admin.py:920 cps/admin.py:2462
 #, fuzzy
-msgid "Calibre-Web Automated configuration updated"
-msgstr "Posodobljena nastavitev Calibre-Web"
+msgid "Scriptorium configuration updated"
+msgstr "Posodobljena nastavitev Scriptorium"
 
 #: cps/admin.py:932
 msgid "Do you really want to delete the Kobo Token?"
@@ -290,20 +285,20 @@ msgstr "Ste prepričani, da želite spremeniti lokacijo knjižnice Calibre?"
 #: cps/admin.py:955
 #, fuzzy
 msgid ""
-"Calibre-Web Automated will search for updated Covers and update Cover "
-"Thumbnails, this may take a while?"
+"Scriptorium will search for updated Covers and update Cover Thumbnails, this "
+"may take a while?"
 msgstr ""
-"Calibre-Web bo poiskal posodobljene naslovnice in posodobil sličice "
+"Scriptorium bo poiskal posodobljene naslovnice in posodobil sličice "
 "naslovnic, kar lahko traja nekaj časa."
 
 #: cps/admin.py:958
 #, fuzzy
 msgid ""
-"Are you sure you want delete Calibre-Web Automated's sync database to force "
-"a full sync with your Kobo Reader?"
+"Are you sure you want delete Scriptorium's sync database to force a full "
+"sync with your Kobo Reader?"
 msgstr ""
 "Ali ste prepričani, da želite izbrisati sinhronizacijsko podatkovno bazo "
-"Calibre-Web, da bi vsilili popolno sinhronizacijo z bralnikom Kobo?"
+"Scriptorium, da bi vsilili popolno sinhronizacijo z bralnikom Kobo?"
 
 #: cps/admin.py:1193 cps/admin.py:1199 cps/admin.py:1208 cps/admin.py:1217
 #: cps/templates/_restrictions.html:22 cps/templates/_restrictions.html:27
@@ -860,7 +855,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:159
+#: cps/templates/layout.html:162
 #, fuzzy
 msgid "Customize"
 msgstr "Filter po meri"
@@ -1002,7 +997,7 @@ msgstr ""
 
 #: cps/cwa_functions.py:999
 #, fuzzy
-msgid "Calibre-Web Automated User Settings"
+msgid "Automation Settings"
 msgstr "Nastavitve pretvornika e-knjig Calibre"
 
 #: cps/cwa_functions.py:1045 cps/cwa_functions.py:1047
@@ -1074,8 +1069,8 @@ msgstr "Neznano"
 
 #: cps/cwa_functions.py:1271
 #, fuzzy
-msgid "Calibre-Web Automated Stats & Activity"
-msgstr "Avtomatizirana statistika in arhiv strežnikov Calibre-Web"
+msgid "Stats & Activity"
+msgstr "Avtomatizirana statistika in arhiv strežnikov Scriptorium"
 
 #: cps/cwa_functions.py:1655
 #, fuzzy
@@ -1328,7 +1323,7 @@ msgstr "Manjkajoč ali neveljaven ID knjige za nalaganje formata"
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr "Formata ni mogoče naložiti: Knjiga ne obstaja več v knjižnici"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:272
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:276
 msgid "Upload done, processing, please wait..."
 msgstr "Prenos opravljen, obdelujem, prosim počakajte..."
 
@@ -1497,8 +1492,8 @@ msgstr "Pošlji v e-bralnik"
 
 #: cps/helper.py:114 cps/helper.py:141 cps/helper.py:254
 #, fuzzy
-msgid "This Email has been sent via Calibre-Web Automated."
-msgstr "To e-poštno sporočilo je bilo poslano prek programa Calibre-Web."
+msgid "This Email has been sent via Scriptorium."
+msgstr "To e-poštno sporočilo je bilo poslano prek programa Scriptorium."
 
 #: cps/helper.py:129
 #, fuzzy, python-format
@@ -1512,8 +1507,8 @@ msgstr "Vrsta %(format)s ni najdena za id knjige: %(book)d"
 
 #: cps/helper.py:139
 #, fuzzy
-msgid "Calibre-Web Automated Test Email"
-msgstr "Testna e-pošta Calibre-Web"
+msgid "Scriptorium Test Email"
+msgstr "Testna e-pošta Scriptorium"
 
 #: cps/helper.py:140
 msgid "Test Email"
@@ -1521,8 +1516,8 @@ msgstr "Testna e-pošta"
 
 #: cps/helper.py:157
 #, fuzzy
-msgid "Get Started with Calibre-Web Automated"
-msgstr "Začnite s programom Calibre-Web"
+msgid "Get Started with Scriptorium"
+msgstr "Začnite s programom Scriptorium"
 
 #: cps/helper.py:162
 #, python-format
@@ -1682,11 +1677,11 @@ msgstr "Napaka pri izvajanju UnRar"
 #: cps/helper.py:1361
 #, python-format
 msgid ""
-"Unsupported architecture detected: %(arch)s. CWA is optimized for x86_64 and "
-"aarch64."
+"Unsupported architecture detected: %(arch)s. Scriptorium is optimized for "
+"x86_64 and aarch64."
 msgstr ""
-"Zaznana nepodprta arhitektura: %(arch)s. CWA je optimiziran za x86_64 in "
-"aarch64."
+"Zaznana nepodprta arhitektura: %(arch)s. Scriptorium je optimiziran za "
+"x86_64 in aarch64."
 
 #: cps/helper.py:1370
 msgid "Could not find the specified directory"
@@ -1721,10 +1716,10 @@ msgstr "Vse knjige v vrsti za varnostno kopiranje metapodatkov"
 #: cps/kobo_auth.py:110
 #, fuzzy
 msgid ""
-"Please access Calibre-Web Automated from non localhost to get valid "
-"api_endpoint for kobo device"
+"Please access Scriptorium from non localhost to get valid api_endpoint for "
+"kobo device"
 msgstr ""
-"Dostopajte do Calibre-Web z nelokalnega gostitelja, da pridobite veljavno "
+"Dostopajte do Scriptorium z nelokalnega gostitelja, da pridobite veljavno "
 "api_endpoint za napravo kobo"
 
 #: cps/kobo_auth.py:129
@@ -1912,8 +1907,8 @@ msgid "{} Stars"
 msgstr "{} zvezdic"
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:168
-#: cps/templates/layout.html:223 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:171
+#: cps/templates/layout.html:226 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2251
 msgid "Login"
 msgstr "Prijava"
@@ -2102,7 +2097,7 @@ msgstr ""
 
 #: cps/search.py:53 cps/search.py:440 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:219 cps/templates/search.html:5
+#: cps/templates/layout.html:222 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "Iskanje"
@@ -2131,10 +2126,10 @@ msgid "Read Status = '%(status)s'"
 msgstr "Prebrani status = '%(status)s'"
 
 #: cps/search.py:354
-msgid "Error on search for custom columns, please restart Calibre-Web"
-msgstr "Napaka pri iskanju stolpcev po meri, ponovno zaženite Calibre-Web"
+msgid "Error on search for custom columns, please restart Scriptorium"
+msgstr "Napaka pri iskanju stolpcev po meri, ponovno zaženite Scriptorium"
 
-#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:137
+#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:140
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2255,7 +2250,7 @@ msgid "Error opening shelf. Shelf does not exist or is not accessible"
 msgstr "Napaka pri odpiranju police. Polica ne obstaja ali ni dostopna"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:121 cps/templates/tasks.html:5
+#: cps/templates/layout.html:123 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Opravila"
 
@@ -2427,7 +2422,7 @@ msgstr "Ime police je predolgo (največ 100 znakov)"
 msgid "Error creating shelf"
 msgstr "Napaka pri brisanju police"
 
-#: cps/templates/layout.html:106 cps/web.py:1210
+#: cps/templates/layout.html:108 cps/web.py:1210
 #, fuzzy
 msgid "Create Magic Shelf"
 msgstr "Ustvari polico"
@@ -2551,7 +2546,7 @@ msgstr "Uspeh! Knjiga je v vrsti za pošiljanje v %(eReadermail)s"
 msgid "Please wait one minute to register next user"
 msgstr "Počakajte eno minuto za registracijo naslednjega uporabnika"
 
-#: cps/templates/layout.html:170 cps/templates/login.html:77
+#: cps/templates/layout.html:173 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2130 cps/web.py:2134
 #: cps/web.py:2139 cps/web.py:2143 cps/web.py:2149 cps/web.py:2174
 #: cps/web.py:2178 cps/web.py:2191 cps/web.py:2194
@@ -2880,8 +2875,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "Čiščenje predpomnilnika sličic naslovnice"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:144
-#: cps/templates/layout.html:145 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:147
+#: cps/templates/layout.html:148 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Naloži"
 
@@ -2985,11 +2980,11 @@ msgstr "Dovoljene vrednosti stolpcev"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:188
-#: cps/templates/layout.html:191 cps/templates/layout.html:194
-#: cps/templates/layout.html:197 cps/templates/layout.html:200
-#: cps/templates/layout.html:203 cps/templates/layout.html:240
-#: cps/templates/layout.html:268 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:191
+#: cps/templates/layout.html:194 cps/templates/layout.html:197
+#: cps/templates/layout.html:200 cps/templates/layout.html:203
+#: cps/templates/layout.html:206 cps/templates/layout.html:244
+#: cps/templates/layout.html:272 cps/templates/read.html:58
 msgid "Close"
 msgstr "Zapri"
 
@@ -3027,7 +3022,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:249
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:253
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
@@ -3087,7 +3082,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:124
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:126
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -3103,7 +3098,7 @@ msgstr ""
 
 #: cps/templates/admin.html:12
 #, fuzzy
-msgid "Check CWA Status"
+msgid "Check Service Status"
 msgstr "Stanje arhiva"
 
 #: cps/templates/admin.html:20 cps/templates/user_edit.html:11
@@ -3249,7 +3244,7 @@ msgstr "Število knjig na stran"
 msgid "Uploads"
 msgstr "Nalaganje"
 
-#: cps/templates/admin.html:106 cps/templates/layout.html:158
+#: cps/templates/admin.html:106 cps/templates/layout.html:161
 #, fuzzy
 msgid "Kobo sync"
 msgstr "Omogoči sinhronizacijo s Kobo"
@@ -3333,7 +3328,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Hardcover API žeton"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:119 cps/templates/layout.html:163
+#: cps/templates/layout.html:121 cps/templates/layout.html:166
 msgid "System"
 msgstr ""
 
@@ -3369,17 +3364,17 @@ msgstr "Izklop"
 msgid "Are you sure you want to restart?"
 msgstr "Ali ste prepričani, da želite znova zagnati računalnik?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:275
+#: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:246 cps/templates/layout.html:85
+#: cps/templates/detail.html:246 cps/templates/layout.html:87
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Police"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:136
+#: cps/templates/appearance.html:14 cps/templates/layout.html:139
 #, fuzzy
 msgid "Search titles, authors, series…"
 msgstr "Iskanje po naslovu/avtorju"
@@ -3497,7 +3492,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:157
+#: cps/templates/layout.html:160
 #, fuzzy
 msgid "Profile"
 msgstr "Vaš e-poštni naslov"
@@ -3579,16 +3574,16 @@ msgstr "Ocene"
 msgid "Preview"
 msgstr "Prejšnji"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:162
+#: cps/templates/appearance.html:156 cps/templates/layout.html:165
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:164
+#: cps/templates/appearance.html:157 cps/templates/layout.html:167
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Svetlo"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:165
+#: cps/templates/appearance.html:158 cps/templates/layout.html:168
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Temno"
@@ -3954,7 +3949,7 @@ msgid "Add to shelf"
 msgstr "Dodaj na polico"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:42
-#: cps/templates/layout.html:225
+#: cps/templates/layout.html:228
 #, fuzzy
 msgid "More"
 msgstr "Več po"
@@ -4117,9 +4112,9 @@ msgstr "Lokacija podatkovne zbirke Calibre"
 
 #: cps/templates/config_db.html:18
 msgid ""
-"Inside the container this lives under /calibre-library. CWA finds and mounts "
-"the library there on start: the largest one if there are several, a new one "
-"if there is none."
+"Inside the container this lives under /calibre-library. Scriptorium finds "
+"and mounts the library there on start: the largest one if there are several, "
+"a new one if there is none."
 msgstr ""
 
 #: cps/templates/config_db.html:21
@@ -4167,7 +4162,7 @@ msgstr ""
 #: cps/templates/config_db.html:67
 msgid ""
 "Make sure no other program (including the Calibre desktop app) uses the same "
-"library while CWA runs."
+"library while Scriptorium runs."
 msgstr ""
 
 #: cps/templates/config_db.html:68
@@ -4179,7 +4174,7 @@ msgstr ""
 #: cps/templates/config_db.html:69
 msgid ""
 "Check that the path above points to the folder that contains metadata.db and "
-"that CWA can read and write it."
+"that Scriptorium can read and write it."
 msgstr ""
 
 #: cps/templates/config_db.html:70
@@ -4226,7 +4221,7 @@ msgid "Ok"
 msgstr "V redu"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:270 cps/templates/login.html:35
+#: cps/templates/layout.html:274 cps/templates/login.html:35
 #: cps/templates/user_edit.html:46 cps/templates/user_edit.html:57
 #, fuzzy
 msgid "Show password"
@@ -5119,7 +5114,8 @@ msgid "Time of Day:"
 msgstr "Čas dneva:"
 
 #: cps/templates/cwa_settings.html:67
-msgid "What CWA does on its own when books arrive, plus maintenance jobs."
+msgid ""
+"What Scriptorium does on its own when books arrive, plus maintenance jobs."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:72
@@ -5149,21 +5145,22 @@ msgstr "Nazaj"
 
 #: cps/templates/cwa_settings.html:88
 #, fuzzy
-msgid "Enable/Disable Calibre-Web Automated Services"
+msgid "Enable/Disable Automation Services"
 msgstr "Nastavitve pretvornika e-knjig Calibre"
 
 #: cps/templates/cwa_settings.html:90
-msgid "Enable CWA Auto-Convert"
-msgstr "Omogoči samodejno pretvorbo CWA"
+msgid "Enable Auto-Convert"
+msgstr "Omogoči samodejno pretvorbo Scriptorium"
 
 #: cps/templates/cwa_settings.html:90
 msgid "New books are converted to the target format below."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
-msgid "Enable CWA Automatic Cover & Metadata Enforcement Service"
+msgid "Enable Automatic Cover & Metadata Enforcement Service"
 msgstr ""
-"Omogoči storitev CWA za samodejno uveljavljanje ovitkov in metapodatkov"
+"Omogoči storitev Scriptorium za samodejno uveljavljanje ovitkov in "
+"metapodatkov"
 
 #: cps/templates/cwa_settings.html:91
 msgid ""
@@ -5173,8 +5170,8 @@ msgstr ""
 
 #: cps/templates/cwa_settings.html:92
 #, fuzzy
-msgid "Enable CWA Kindle EPUB Fixer"
-msgstr "CWA Storitev popravljanja datotek EPUB za pošiljanje v Kindle"
+msgid "Enable Kindle EPUB Fixer"
+msgstr "Scriptorium Storitev popravljanja datotek EPUB za pošiljanje v Kindle"
 
 #: cps/templates/cwa_settings.html:92
 msgid "Fixes common EPUB problems that make Amazon reject books sent by email."
@@ -5192,7 +5189,7 @@ msgstr ""
 
 #: cps/templates/cwa_settings.html:96
 #, fuzzy
-msgid "Enable KOReader Sync (CWA Plugin)"
+msgid "Enable KOReader Sync (Scriptorium Plugin)"
 msgstr "Vtičnik za sinhronizacijo KOReader"
 
 #: cps/templates/cwa_settings.html:96
@@ -5221,16 +5218,16 @@ msgid "Removes leftover references to books deleted from the library."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:102
-msgid "Enable CWA Update Notifications"
-msgstr "Omogoči obvestila o posodobitvah CWA"
+msgid "Enable Update Notifications"
+msgstr "Omogoči obvestila o posodobitvah Scriptorium"
 
 #: cps/templates/cwa_settings.html:103
 msgid "Enable Contribute Translations Notifications"
 msgstr "Omogoči obvestila za prispevanje prevodov"
 
 #: cps/templates/cwa_settings.html:110
-msgid "CWA Auto-Ingest Automerge"
-msgstr "Samodejno združevanje pri uvozu CWA"
+msgid "Auto-Ingest Automerge"
+msgstr "Samodejno združevanje pri uvozu Scriptorium"
 
 #: cps/templates/cwa_settings.html:112
 msgid "Creates a duplicate record, keeping both copies"
@@ -5284,8 +5281,8 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
-msgid "CWA Auto-Ingest - Ignored Formats"
-msgstr "Samodejni uvoz CWA - prezrti formati"
+msgid "Auto-Ingest - Ignored Formats"
+msgstr "Samodejni uvoz Scriptorium - prezrti formati"
 
 #: cps/templates/cwa_settings.html:124
 msgid "Files in these formats are left in the ingest folder."
@@ -5303,16 +5300,16 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
-msgid "CWA Auto-Convert - Ignored Formats"
-msgstr "Samodejna pretvorba CWA - prezrti formati"
+msgid "Auto-Convert - Ignored Formats"
+msgstr "Samodejna pretvorba Scriptorium - prezrti formati"
 
 #: cps/templates/cwa_settings.html:136
 msgid "Books in these formats are imported as they are, without conversion."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
-msgid "CWA Auto-Convert - Retained Formats"
-msgstr "Samodejna pretvorba CWA - ohranjeni formati"
+msgid "Auto-Convert - Retained Formats"
+msgstr "Samodejna pretvorba Scriptorium - ohranjeni formati"
 
 #: cps/templates/cwa_settings.html:137
 msgid ""
@@ -5435,8 +5432,8 @@ msgid "Pause between requests to the Hardcover API (0–60)."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:182
-msgid "CWA Duplicate Detection System"
-msgstr "Sistem CWA za zaznavanje dvojnikov"
+msgid "Duplicate Detection System"
+msgstr "Sistem Scriptorium za zaznavanje dvojnikov"
 
 #: cps/templates/cwa_settings.html:184
 #, fuzzy
@@ -5460,8 +5457,8 @@ msgid "Legacy SQL only (experimental)"
 msgstr "Samo zastarel SQL (eksperimentalno)"
 
 #: cps/templates/cwa_settings.html:195
-msgid "CWA Duplicate Detection Criteria"
-msgstr "Kriteriji CWA za zaznavanje dvojnikov"
+msgid "Duplicate Detection Criteria"
+msgstr "Kriteriji Scriptorium za zaznavanje dvojnikov"
 
 #: cps/templates/cwa_settings.html:196
 msgid "Books count as duplicates when all selected fields match."
@@ -5590,8 +5587,8 @@ msgid "Automatic Backup Settings"
 msgstr "Nastavitve OAuth"
 
 #: cps/templates/cwa_settings.html:251
-msgid "Enable CWA Import Auto-Backup"
-msgstr "Omogoči samodejno varnostno kopiranje uvoza CWA"
+msgid "Enable Import Auto-Backup"
+msgstr "Omogoči samodejno varnostno kopiranje uvoza Scriptorium"
 
 #: cps/templates/cwa_settings.html:251
 #, fuzzy
@@ -5602,24 +5599,24 @@ msgstr ""
 "processed_books/imported</i>"
 
 #: cps/templates/cwa_settings.html:252
-msgid "Enable CWA Conversion Auto-Backup"
-msgstr "Omogoči samodejno varnostno kopiranje pretvorb CWA"
+msgid "Enable Conversion Auto-Backup"
+msgstr "Omogoči samodejno varnostno kopiranje pretvorb Scriptorium"
 
 #: cps/templates/cwa_settings.html:252
 msgid "Keeps the original of every converted file."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
-msgid "Enable CWA EPUB Fixer Auto-Backup"
-msgstr "Omogoči samodejno varnostno kopiranje CWA EPUB popravljalnika"
+msgid "Enable EPUB Fixer Auto-Backup"
+msgstr "Omogoči samodejno varnostno kopiranje Scriptorium EPUB popravljalnika"
 
 #: cps/templates/cwa_settings.html:253
 msgid "Keeps the original of every EPUB the fixer changed."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
-msgid "Enable CWA Auto-Zip Backups"
-msgstr "Omogoči samodejno stiskanje (Zip) varnostnih kopij CWA"
+msgid "Enable Auto-Zip Backups"
+msgstr "Omogoči samodejno stiskanje (Zip) varnostnih kopij Scriptorium"
 
 #: cps/templates/cwa_settings.html:254
 msgid "Compresses the backups once a day to save space."
@@ -5712,7 +5709,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:59
-#: cps/templates/layout.html:56 cps/templates/layout.html:218
+#: cps/templates/layout.html:58 cps/templates/layout.html:221
 #, fuzzy
 msgid "Library"
 msgstr "V knjižnici"
@@ -5968,25 +5965,24 @@ msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:156
 #, fuzzy
-msgid "Calibre-Web Automated Conversion History"
-msgstr "Calibre-Web Automated - Celotna zgodovina pretvorb"
+msgid "Conversion History"
+msgstr "Scriptorium - Celotna zgodovina pretvorb"
 
 #: cps/templates/cwa_stats_tabs.html:157
 #, fuzzy
-msgid "Calibre-Web Automated Import History"
-msgstr "Calibre-Web Automated - Celotna zgodovina uvoza"
+msgid "Import History"
+msgstr "Scriptorium - Celotna zgodovina uvoza"
 
 #: cps/templates/cwa_stats_tabs.html:158
 #, fuzzy
-msgid "Calibre-Web Automated EPUB Fixer History"
+msgid "EPUB Fixer History"
 msgstr ""
-"Calibre-Web Automated - Storitev za popravljanje datotek EPUB za pošiljanje "
-"v Kindle"
+"Scriptorium - Storitev za popravljanje datotek EPUB za pošiljanje v Kindle"
 
 #: cps/templates/cwa_stats_tabs.html:159
 #, fuzzy
-msgid "Calibre-Web Automated Cover & Metadata Enforcement History"
-msgstr "Calibre-Web Automated - Celotna zgodovina uveljavljanja"
+msgid "Cover & Metadata Enforcement History"
+msgstr "Scriptorium - Celotna zgodovina uveljavljanja"
 
 #: cps/templates/cwa_stats_tabs.html:177
 msgid "No data for this period yet."
@@ -6091,7 +6087,7 @@ msgstr "Preberi v brskalniku"
 msgid "Listen"
 msgstr "Seznam"
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:87
+#: cps/templates/detail.html:117 cps/templates/layout.html:89
 #: cps/templates/user_edit.html:176
 #, fuzzy
 msgid "Create Shelf"
@@ -6158,7 +6154,7 @@ msgstr "Ustvari polico"
 msgid "Reading progress"
 msgstr "Napredek"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:271
+#: cps/templates/detail.html:207 cps/templates/layout.html:275
 #, fuzzy
 msgid "Show more"
 msgstr "Prikaži neprebrane"
@@ -6237,7 +6233,7 @@ msgstr ""
 msgid ""
 "It builds the index that keeps duplicate checks fast during imports and "
 "metadata edits. On large libraries it can take a few minutes; you can keep "
-"using CWA meanwhile."
+"using Scriptorium meanwhile."
 msgstr ""
 
 #: cps/templates/duplicates.html:27 cps/templates/duplicates.html:130
@@ -6246,7 +6242,7 @@ msgid "Duplicate scan is running."
 msgstr "Izbriši knjigo"
 
 #: cps/templates/duplicates.html:30
-msgid "You can keep using CWA while it runs."
+msgid "You can keep using Scriptorium while it runs."
 msgstr ""
 
 #: cps/templates/duplicates.html:37
@@ -6530,7 +6526,7 @@ msgid "(Magic)"
 msgstr "(Čarobno)"
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:94
+#: cps/templates/layout.html:96
 msgid "(Public)"
 msgstr "(Javno)"
 
@@ -6570,7 +6566,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:274
+#: cps/templates/grid.html:21 cps/templates/layout.html:278
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6690,10 +6686,8 @@ msgstr ""
 
 #: cps/templates/http_error.html:19
 #, fuzzy
-msgid ""
-"Calibre-Web Automated Instance is unconfigured, please contact your "
-"administrator"
-msgstr "Instanca Calibre-Web ni nastavljena, obrni se na skrbnika"
+msgid "Scriptorium Instance is unconfigured, please contact your administrator"
+msgstr "Instanca Scriptorium ni nastavljena, obrni se na skrbnika"
 
 #: cps/templates/http_error.html:28
 msgid "Return to Home"
@@ -6771,8 +6765,8 @@ msgstr "Pošlji v e-bralnik"
 
 #: cps/templates/kosync_plugin.html:8
 msgid ""
-"The CWA plugin keeps your reading position in step between KOReader and this "
-"library."
+"The Scriptorium plugin keeps your reading position in step between KOReader "
+"and this library."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:13
@@ -6782,7 +6776,7 @@ msgstr "Standardna prijava je onemogočena."
 
 #: cps/templates/kosync_plugin.html:14
 #, fuzzy
-msgid "Open CWA Settings"
+msgid "Open Automation Settings"
 msgstr "Nastavitve"
 
 #: cps/templates/kosync_plugin.html:14
@@ -6802,11 +6796,12 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:24
 #, fuzzy
-msgid "Download CWA Sync Plugin"
+msgid "Download Scriptorium Sync Plugin"
 msgstr "Vtičnik za sinhronizacijo KOReader"
 
 #: cps/templates/kosync_plugin.html:26
-msgid "Download is available after enabling KOReader Sync in CWA Settings."
+msgid ""
+"Download is available after enabling KOReader Sync in Automation Settings."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:33
@@ -6836,8 +6831,8 @@ msgstr "Pošlji v e-bralnik"
 
 #: cps/templates/kosync_plugin.html:45
 msgid ""
-"Open a book, tap the top of the screen, open the Tools menu and choose “CWA "
-"Progress Sync”. Enter:"
+"Open a book, tap the top of the screen, open the Tools menu and choose "
+"“Scriptorium Sync”. Enter:"
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:47
@@ -6887,152 +6882,157 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:46
+#: cps/templates/layout.html:48
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:50
+#: cps/templates/layout.html:52
 #, fuzzy
 msgid "Library navigation"
 msgstr "Statistika knjižnice"
 
-#: cps/templates/layout.html:75
+#: cps/templates/layout.html:77
 msgid "Browse"
 msgstr "Brskaj"
 
-#: cps/templates/layout.html:98
+#: cps/templates/layout.html:100
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:104 cps/templates/user_edit.html:309
+#: cps/templates/layout.html:106 cps/templates/user_edit.html:309
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Police"
 
-#: cps/templates/layout.html:132
+#: cps/templates/layout.html:129 cps/templates/layout.html:234
+#: cps/templates/stats.html:6
+msgid "Based on"
+msgstr ""
+
+#: cps/templates/layout.html:135
 msgid "Toggle Navigation"
 msgstr "Preklopi navigacijo"
 
-#: cps/templates/layout.html:135
+#: cps/templates/layout.html:138
 msgid "Search Library"
 msgstr "Iskanje po knjižnici"
 
-#: cps/templates/layout.html:137
+#: cps/templates/layout.html:140
 #, fuzzy
 msgid "Advanced"
 msgstr "Napredno iskanje"
 
-#: cps/templates/layout.html:141
+#: cps/templates/layout.html:144
 #, fuzzy
 msgid "Refresh Library"
 msgstr "Iskanje po knjižnici"
 
-#: cps/templates/layout.html:151 cps/templates/user_edit.html:19
+#: cps/templates/layout.html:154 cps/templates/user_edit.html:19
 #: cps/templates/user_edit.html:32
 msgid "Account"
 msgstr "Račun"
 
-#: cps/templates/layout.html:173
+#: cps/templates/layout.html:176
 msgid "Logout"
 msgstr "Odjava"
 
-#: cps/templates/layout.html:193
+#: cps/templates/layout.html:196
 msgid "See Changelog"
 msgstr "Poglej dnevnik sprememb"
 
-#: cps/templates/layout.html:196
+#: cps/templates/layout.html:199
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Dvojniki"
 
-#: cps/templates/layout.html:199
+#: cps/templates/layout.html:202
 msgid "Contribute here!"
 msgstr "Prispevajte tukaj!"
 
-#: cps/templates/layout.html:217
+#: cps/templates/layout.html:220
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Osnovne nastavitve"
 
-#: cps/templates/layout.html:221
+#: cps/templates/layout.html:224
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:246
+#: cps/templates/layout.html:250
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Ste res prepričani?"
 
-#: cps/templates/layout.html:250 cps/templates/layout.html:268
+#: cps/templates/layout.html:254 cps/templates/layout.html:272
 msgid "Confirm"
 msgstr ""
 
-#: cps/templates/layout.html:256
+#: cps/templates/layout.html:260
 msgid "Uploading..."
 msgstr "Nalaganje..."
 
-#: cps/templates/layout.html:259
+#: cps/templates/layout.html:263
 msgid "Please do not refresh the page"
 msgstr "Ne osvežuj strani"
 
-#: cps/templates/layout.html:262
+#: cps/templates/layout.html:266
 msgid "Drop books to add them to the library"
-msgstr ""
-
-#: cps/templates/layout.html:268
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "UUID kopiran v odložišče"
-
-#: cps/templates/layout.html:269
-msgid "Could not copy, select the text and copy it manually"
-msgstr ""
-
-#: cps/templates/layout.html:270
-#, fuzzy
-msgid "Hide password"
-msgstr "Geslo"
-
-#: cps/templates/layout.html:271
-#, fuzzy
-msgid "Show less"
-msgstr "Pokaži vse"
-
-#: cps/templates/layout.html:271 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
 msgstr ""
 
 #: cps/templates/layout.html:272
 #, fuzzy
+msgid "Copied to clipboard"
+msgstr "UUID kopiran v odložišče"
+
+#: cps/templates/layout.html:273
+msgid "Could not copy, select the text and copy it manually"
+msgstr ""
+
+#: cps/templates/layout.html:274
+#, fuzzy
+msgid "Hide password"
+msgstr "Geslo"
+
+#: cps/templates/layout.html:275
+#, fuzzy
+msgid "Show less"
+msgstr "Pokaži vse"
+
+#: cps/templates/layout.html:275 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:276
+#, fuzzy
 msgid "Upload failed"
 msgstr "Posodobitev ni uspela:"
 
-#: cps/templates/layout.html:273
+#: cps/templates/layout.html:277
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "Najboljših %(count)s"
 
-#: cps/templates/layout.html:274 cps/templates/search_form.html:7
+#: cps/templates/layout.html:278 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "Vse"
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:278
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Novo geslo je bilo poslano na vaš e-poštni naslov"
 
-#: cps/templates/layout.html:275
+#: cps/templates/layout.html:279
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "Iskanje dvojnikov končano: %(count)s skupin"
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy
 msgid "Review"
 msgstr "Prejšnji"
@@ -7165,8 +7165,8 @@ msgid "Continue as guest"
 msgstr ""
 
 #: cps/templates/logviewer.html:9
-msgid "Download Calibre-Web Log"
-msgstr "Prenos Calibre-Web Log"
+msgid "Download Scriptorium Log"
+msgstr "Prenos Scriptorium Log"
 
 #: cps/templates/logviewer.html:10
 msgid "Download Access Log"
@@ -7179,8 +7179,8 @@ msgstr "Prijava"
 
 #: cps/templates/logviewer.html:15
 #, fuzzy
-msgid "Calibre-Web Log"
-msgstr "Prikaži dnevnik Calibre-Web:"
+msgid "Scriptorium Log"
+msgstr "Prikaži dnevnik Scriptorium:"
 
 #: cps/templates/logviewer.html:16
 #, fuzzy
@@ -7327,7 +7327,7 @@ msgstr "Nastavitve uporabniškega vmesnika"
 msgid "Value"
 msgstr ""
 
-#: cps/templates/magic_shelf_edit.html:84
+#: cps/templates/magic_shelf_edit.html:84 cps/templates/stats.html:6
 msgid "and"
 msgstr ""
 
@@ -7472,8 +7472,8 @@ msgstr ""
 
 #: cps/templates/osd.xml:5
 #, fuzzy
-msgid "Calibre-Web Automated eBook Catalog"
-msgstr "Katalog e-knjig Calibre-Web"
+msgid "Scriptorium eBook Catalog"
+msgstr "Katalog e-knjig Scriptorium"
 
 #: cps/templates/profile_pictures.html:7
 msgid ""
@@ -8051,10 +8051,6 @@ msgstr ""
 msgid "About"
 msgstr "O programu"
 
-#: cps/templates/stats.html:6
-msgid "Powered by"
-msgstr ""
-
 #: cps/templates/stats.html:10
 msgid "Library Statistics"
 msgstr "Statistika knjižnice"
@@ -8388,7 +8384,8 @@ msgid "Using KOReader?"
 msgstr "Bralnik DJVU"
 
 #: cps/templates/user_edit.html:212
-msgid "Reading progress can also sync from KOReader with the CWA plugin."
+msgid ""
+"Reading progress can also sync from KOReader with the Scriptorium plugin."
 msgstr ""
 
 #: cps/templates/user_edit.html:213
@@ -8651,7 +8648,6 @@ msgstr ""
 #~ "ℹ️ Vaša tema je bila posodobljena na caliBlur (Dark). Preklapljanje tem je "
 #~ "začasno onemogočeno, dokler razvijamo nov vmesnik za v5.0.0."
 
-#, python-format
 #~ msgid "Magic Shelf&nbsp&nbsp&nbsp—&nbsp&nbsp&nbsp%(icon)s %(name)s"
 #~ msgstr "Čarobna polica&nbsp&nbsp&nbsp—&nbsp&nbsp&nbsp%(icon)s %(name)s"
 
@@ -8661,11 +8657,9 @@ msgstr ""
 #~ msgid "Send to eReader Email"
 #~ msgstr "Pošlji v e-pošto e-bralnika"
 
-#, fuzzy
 #~ msgid "Send to eReader Subject"
 #~ msgstr "Pošlji v e-bralnik"
 
-#, fuzzy
 #~ msgid "Email Server Settings&nbsp;&nbsp;📬"
 #~ msgstr "Nastavitve e-poštnega strežnika"
 
@@ -8675,7 +8669,6 @@ msgstr ""
 #~ msgid "Calibre Database Directory"
 #~ msgstr "Imenik zbirk podatkov Calibre"
 
-#, fuzzy
 #~ msgid "CWA Settings"
 #~ msgstr "Nastavitve"
 
@@ -8688,7 +8681,6 @@ msgstr ""
 #~ msgid "Edit Calibre Database Configuration"
 #~ msgstr "Urejanje nastavitev podatkovne zbirke Calibre"
 
-#, fuzzy
 #~ msgid "Scheduled Tasks&nbsp;&nbsp;⌛"
 #~ msgstr "Načrtovana opravila"
 
@@ -8698,7 +8690,6 @@ msgstr ""
 #~ msgid "CWA Admin Functions&nbsp;&nbsp;⚡"
 #~ msgstr "Skrbniške funkcije CWA ⚡"
 
-#, fuzzy
 #~ msgid "Show CWA Stats"
 #~ msgstr "Nastavitve"
 
@@ -8708,18 +8699,15 @@ msgstr ""
 #~ msgid "CWA GitHub"
 #~ msgstr "CWA GitHub"
 
-#, fuzzy
 #~ msgid "CWA Discord Server"
 #~ msgstr "Odkrivanje"
 
-#, fuzzy
 #~ msgid "Administration&nbsp;&nbsp;🚀"
 #~ msgstr "Administracija"
 
 #~ msgid "View Logs"
 #~ msgstr "Prikaži dnevnike"
 
-#, fuzzy
 #~ msgid "Version Information&nbsp;&nbsp;📜"
 #~ msgstr "Informacije o različici"
 
@@ -8791,19 +8779,15 @@ msgstr ""
 #~ msgid "This Field is Required"
 #~ msgstr "To polje je obvezno"
 
-#, fuzzy
 #~ msgid "Unarchive"
 #~ msgstr "Arhiv"
 
-#, fuzzy
 #~ msgid "Mark as read"
 #~ msgstr "Označi kot neprebrano"
 
-#, fuzzy
 #~ msgid "Mark as unread"
 #~ msgstr "Označi kot neprebrano"
 
-#, fuzzy
 #~ msgid "Select all"
 #~ msgstr "Ustvari polico"
 
@@ -8868,7 +8852,6 @@ msgstr ""
 #~ "Za avtorje, oznake/kategorije, jezike in založnike je podprtih več "
 #~ "vrednosti. Uporabite vrednosti, ločene z vejico (npr. \"Ime1, Ime2\")."
 
-#, fuzzy
 #~ msgid "Select a Shelf"
 #~ msgstr "Ustvari polico"
 
@@ -8922,11 +8905,9 @@ msgstr ""
 #~ msgid "Logfile Configuration"
 #~ msgstr "Nastavitev dnevniške datoteke"
 
-#, fuzzy
 #~ msgid "Feature Configuration"
 #~ msgstr "Nastavitve strežnika"
 
-#, fuzzy
 #~ msgid "Manual Endpoint Configuration"
 #~ msgstr "Urejanje nastavitev uporabniškega vmesnika"
 
@@ -8937,7 +8918,6 @@ msgstr ""
 #~ "Zahtevano, če: dostopate preko več imen gostiteljev, ste za povratnim "
 #~ "proksijem ali prejemate napake \"neveljaven preusmeritveni URI\"."
 
-#, fuzzy
 #~ msgid "Field Mapping Configuration"
 #~ msgstr "Prikaži nastavitve"
 
@@ -8954,7 +8934,6 @@ msgstr ""
 #~ "Največje število avtorjev v podrobnostih knjige pred skrajšanjem. "
 #~ "Nastavite na 0 za onemogočanje."
 
-#, fuzzy
 #~ msgid "Default Theme"
 #~ msgstr "Privzeto"
 
@@ -8979,15 +8958,12 @@ msgstr ""
 #~ "Omejitev vidnosti knjig na podlagi vrednosti v Calibre tekstovnem stolpcu "
 #~ "po meri."
 
-#, fuzzy
 #~ msgid "Language & Display"
 #~ msgstr "Prikaz ene strani"
 
-#, fuzzy
 #~ msgid "Default interface language for new users."
 #~ msgstr "Privzete nastavitve za nove uporabnike"
 
-#, fuzzy
 #~ msgid "Default book language filter for new users."
 #~ msgstr "Privzete vidnosti za nove uporabnike"
 
@@ -8999,15 +8975,12 @@ msgstr ""
 #~ msgid "Schedule 15m"
 #~ msgstr "Urnik 15 min"
 
-#, fuzzy
 #~ msgid "Enter a search term"
 #~ msgstr "Vnesi uporabniško ime"
 
-#, fuzzy
 #~ msgid "Failed to search library"
 #~ msgstr "Iskanje po knjižnici"
 
-#, fuzzy
 #~ msgid "Error starting EPUB Fixer"
 #~ msgstr "Napaka pri brisanju police"
 
@@ -9073,7 +9046,6 @@ msgstr ""
 #~ msgid "(1-28)"
 #~ msgstr "(1-28)"
 
-#, python-format
 #~ msgid "(Server timezone: %(tz)s)"
 #~ msgstr "(Časovni pas strežnika: %(tz)s)"
 
@@ -9099,7 +9071,6 @@ msgstr ""
 #~ "so boljše kakovosti (npr. daljši opisi, višja ločljivost ovitkov). Ko je "
 #~ "onemogočeno, bodo podatki zamenjani neposredno od ponudnika."
 
-#, fuzzy
 #~ msgid "Metadata Fields to Update"
 #~ msgstr "Metapodatki so bili uspešno posodobljeni"
 
@@ -9191,7 +9162,6 @@ msgstr ""
 #~ "ji Hardcover omogočajo sinhronizacijo napredka branja in opomb z "
 #~ "aplikacijo Hardcover.app pri uporabi združljivih e-bralnikov."
 
-#, fuzzy
 #~ msgid "Hardcover Token Required"
 #~ msgstr "Hardcover API žeton"
 
@@ -9263,7 +9233,6 @@ msgstr ""
 #~ "zaženete v skrbniški plošči. Na strani Statistika CWA preverite napredek "
 #~ "in preglejte ujemanja, ki čakajo na ročno odobritev."
 
-#, fuzzy
 #~ msgid "Web UI Settings"
 #~ msgstr "Nastavitve"
 
@@ -9405,7 +9374,6 @@ msgstr ""
 #~ "Hibridni način uporablja hiter SQL predfilter za zožitev kandidatov, nato "
 #~ "pa uporabi zanesljivo Python logiko za končne rezultate."
 
-#, fuzzy
 #~ msgid "Automatic Duplicate Scanning"
 #~ msgstr "Nastavitve OAuth"
 
@@ -9529,7 +9497,6 @@ msgstr ""
 #~ "Izberite, katero knjigo želite obdržati pri samodejnem razreševanju "
 #~ "dvojnikov."
 
-#, fuzzy
 #~ msgid "Rate Limiting"
 #~ msgstr "Ocena"
 
@@ -9547,23 +9514,18 @@ msgstr ""
 #~ "Samodejna razrešitev se zažene, ko iskanje dvojnikov zazna nove dvojnike. "
 #~ "Opuščene skupine dvojnikov se nikoli ne razrešijo samodejno."
 
-#, fuzzy
 #~ msgid "Marked as read"
 #~ msgstr "Označi kot neprebrano"
 
-#, fuzzy
 #~ msgid "Marked as unread"
 #~ msgstr "Označi kot neprebrano"
 
-#, fuzzy
 #~ msgid "Restored from archive"
 #~ msgstr "Obnovi iz arhiva"
 
-#, fuzzy
 #~ msgid "Rating updated"
 #~ msgstr "Posodobljene nastavitve zbirke podatkov"
 
-#, fuzzy
 #~ msgid "Rating cleared"
 #~ msgstr "Zgornja ocena"
 
@@ -9576,7 +9538,6 @@ msgstr ""
 #~ msgid "Description:"
 #~ msgstr "Opis:"
 
-#, fuzzy
 #~ msgid "Select All"
 #~ msgstr "Ustvari polico"
 
@@ -9589,18 +9550,15 @@ msgstr ""
 #~ msgid "Enter one or more email addresses separated by commas"
 #~ msgstr "Vnesite enega ali več e-poštnih naslovov, ločenih z vejico"
 
-#, fuzzy
 #~ msgid "Failed to update shelves"
 #~ msgstr "Nisem uspel ustvariti poti za naslovnice"
 
 #~ msgid "CWA Duplicates Manager"
 #~ msgstr "CWA upravitelj dvojnikov"
 
-#, fuzzy
 #~ msgid "Scan for Duplicates Now"
 #~ msgstr "Prikaži najbolje ocenjene knjige"
 
-#, fuzzy
 #~ msgid "Select None"
 #~ msgstr "Izberi"
 
@@ -9649,19 +9607,15 @@ msgstr ""
 #~ msgid "Dismiss"
 #~ msgstr "Opusti"
 
-#, fuzzy
 #~ msgid "View book details"
 #~ msgstr "Podrobnosti o knjigi"
 
-#, fuzzy
 #~ msgid "Edit book metadata"
 #~ msgstr "urejanje metapodatkov"
 
-#, fuzzy
 #~ msgid "Archive/delete book"
 #~ msgstr "Združevanje izbranih knjig"
 
-#, fuzzy
 #~ msgid "No Duplicate Books Found"
 #~ msgstr "Ni bilo najdenih rezultatov"
 
@@ -9677,30 +9631,24 @@ msgstr ""
 #~ "To iskanje išče knjige z identičnimi naslovi IN avtorji, da prepreči "
 #~ "napačne rezultate."
 
-#, fuzzy
 #~ msgid "Execute Auto-Resolution"
 #~ msgstr "Izvedi razrešitev"
 
-#, fuzzy
 #~ msgid "Selected strategy:"
 #~ msgstr "Brisanje vrste:"
 
 #~ msgid "This action cannot be undone!"
 #~ msgstr "Tega dejanja ni mogoče razveljaviti!"
 
-#, fuzzy
 #~ msgid "The following books will be permanently deleted:"
 #~ msgstr "Naslednje knjige bodo izbrisane:"
 
-#, fuzzy
 #~ msgid "Merge Books"
 #~ msgstr "Neprebrane knjige"
 
-#, fuzzy
 #~ msgid "The following book will be kept:"
 #~ msgstr "Naslednje knjige bodo izbrisane:"
 
-#, fuzzy
 #~ msgid "The following books will be merged into it (and then deleted):"
 #~ msgstr "Naslednje knjige bodo izbrisane:"
 
@@ -9739,7 +9687,6 @@ msgstr ""
 #~ "Ujemanja z visoko stopnjo zaupanja se uveljavijo samodejno; ta pa "
 #~ "zahtevajo ročno potrditev."
 
-#, fuzzy
 #~ msgid "Reject All Pending"
 #~ msgstr "Ustvari polico"
 
@@ -9752,7 +9699,6 @@ msgstr ""
 #~ msgid "Match Reason"
 #~ msgstr "Razlog ujemanja"
 
-#, fuzzy
 #~ msgid "View on Hardcover"
 #~ msgstr "Oglej si knjigo po shranjevanju"
 
@@ -9762,7 +9708,6 @@ msgstr ""
 #~ msgid "Skip for Now"
 #~ msgstr "Preskoči za zdaj"
 
-#, fuzzy
 #~ msgid "Processing..."
 #~ msgstr "Nalaganje..."
 
@@ -9772,7 +9717,6 @@ msgstr ""
 #~ msgid "Failed to apply match"
 #~ msgstr "Napaka pri uveljavljanju ujemanja"
 
-#, fuzzy
 #~ msgid ""
 #~ "Are you sure you want to reject all matches for this book? This cannot be "
 #~ "undone."
@@ -9783,11 +9727,9 @@ msgstr ""
 #~ msgid "✗ Reject All Matches"
 #~ msgstr "✗ Zavrni vsa ujemanja"
 
-#, fuzzy
 #~ msgid "Failed to reject match"
 #~ msgstr "Nisem uspel ustvariti poti za naslovnice"
 
-#, fuzzy
 #~ msgid ""
 #~ "Are you sure you want to reject all pending matches? This cannot be "
 #~ "undone."
@@ -9795,11 +9737,9 @@ msgstr ""
 #~ "Ali ste prepričani, da želite spremeniti izbrano vlogo za izbranega(-e) "
 #~ "uporabnika(-e)?"
 
-#, fuzzy
 #~ msgid "✗ Reject All Pending"
 #~ msgstr "Ustvari polico"
 
-#, fuzzy
 #~ msgid "Failed to reject all pending matches"
 #~ msgstr "Nisem uspel ustvariti poti za naslovnice"
 
@@ -9820,7 +9760,6 @@ msgstr ""
 #~ msgid "Hide this shelf from your sidebar"
 #~ msgstr "Skrij to polico iz stranske vrstice"
 
-#, fuzzy
 #~ msgid "Show this shelf in your sidebar"
 #~ msgstr "Sinhronizacija te police z napravo Kobo"
 
@@ -9845,21 +9784,18 @@ msgstr ""
 #~ msgid "Home"
 #~ msgstr "Domov"
 
-#, fuzzy
 #~ msgid "Switch Theme"
 #~ msgstr "Standardna tema"
 
 #~ msgid "Magic Shelves ✨"
 #~ msgstr "Čarobne police ✨"
 
-#, fuzzy
 #~ msgid "Duplicate Books Detected"
 #~ msgstr "Izbriši knjigo"
 
 #~ msgid "You have unresolved duplicate books in your library"
 #~ msgstr "V vaši knjižnici so nerazrešeni dvojniki knjig"
 
-#, fuzzy
 #~ msgid "Duplicate Groups Found"
 #~ msgstr "Ni bilo najdenih rezultatov"
 
@@ -9869,7 +9805,6 @@ msgstr ""
 #~ msgid "View & Resolve Duplicates"
 #~ msgstr "Ogled in razreševanje dvojnikov"
 
-#, fuzzy
 #~ msgid "Sign in to your library"
 #~ msgstr "Serij v tej knjižnici"
 
@@ -10028,11 +9963,9 @@ msgstr ""
 #~ "Če želite spremeniti svoj e-poštni naslov ali geslo, lahko to storite "
 #~ "tukaj."
 
-#, fuzzy
 #~ msgid "eReader Configuration"
 #~ msgstr "Nastavitve strežnika"
 
-#, fuzzy
 #~ msgid "Send to eReader Email Address"
 #~ msgstr "Pošlji v e-pošto e-bralnika"
 
@@ -10045,7 +9978,6 @@ msgstr ""
 #~ msgstr ""
 #~ "E-poštni naslovi za vaše e-bralnike. Več naslovov ločite z vejicami."
 
-#, fuzzy
 #~ msgid ""
 #~ "When disabled, emails will be sent to all configured eReader addresses "
 #~ "without prompting."
@@ -10063,7 +9995,6 @@ msgstr ""
 #~ msgid "Language & Theme Preferences"
 #~ msgstr "Nastavitve jezika in teme"
 
-#, fuzzy
 #~ msgid "Book Language Filter"
 #~ msgstr "Ni navedenega veljavnega jezika knjige"
 
@@ -10082,7 +10013,6 @@ msgstr ""
 #~ msgid "Sync only books in selected shelves with Kobo"
 #~ msgstr "Sinhroniziranje samo knjig na izbranih policah s Kobo"
 
-#, fuzzy
 #~ msgid "Sidebar Display Settings"
 #~ msgstr "Varnostne nastavitve"
 
@@ -10112,7 +10042,6 @@ msgstr ""
 #~ msgid "Configure what actions this user is allowed to perform."
 #~ msgstr "Nastavite, katera dejanja sme izvajati ta uporabnik."
 
-#, fuzzy
 #~ msgid "Magic Shelves Order"
 #~ msgstr "Čarobne police ✨"
 
@@ -10131,11 +10060,9 @@ msgstr ""
 #~ msgid "Default System Shelves:"
 #~ msgstr "Privzete sistemske police:"
 
-#, fuzzy
 #~ msgid "Public Shelves:"
 #~ msgstr "Urejanje javnih polic"
 
-#, python-format
 #~ msgid "%(visible)s of %(total)s public shelves visible"
 #~ msgstr "%(visible)s od %(total)s javnih polic je vidnih"
 
@@ -10154,7 +10081,6 @@ msgstr ""
 #~ msgid "Enter eReader Email"
 #~ msgstr "Vnesi e-pošto e-bralnika"
 
-#, fuzzy
 #~ msgid "Enter eReader Email Subject"
 #~ msgstr "Vnesi e-pošto e-bralnika"
 
@@ -10173,14 +10099,12 @@ msgstr ""
 #~ msgid "Error scheduling Convert Library"
 #~ msgstr "Napaka pri načrtovanju pretvorbe knjižnice"
 
-#, fuzzy
 #~ msgid "Error scheduling EPUB Fixer"
 #~ msgstr "Napaka pri brisanju police"
 
 #~ msgid "Scanning for duplicates"
 #~ msgstr "Iskanje dvojnikov"
 
-#, fuzzy
 #~ msgid "Cancel Scan"
 #~ msgstr "Prekliči"
 
@@ -10235,11 +10159,9 @@ msgstr ""
 #~ msgid "Books organized in shelves"
 #~ msgstr "Knjige, urejene po policah"
 
-#, fuzzy
 #~ msgid "Connection successful!"
 #~ msgstr "Napaka povezave"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Automated."
 #~ msgstr "To e-poštno sporočilo je bilo poslano prek programa Calibre-Web."
 
@@ -10286,11 +10208,9 @@ msgstr ""
 #~ "Osvežitev knjižnice 🔄 Prišlo je do nepričakovane napake, preverite "
 #~ "dnevnike ⛔"
 
-#, python-format
 #~ msgid "File %(file)s uploaded"
 #~ msgstr "Prenesena datoteka %(file)s"
 
-#, fuzzy
 #~ msgid "Mark selected books as read"
 #~ msgstr "Združevanje izbranih knjig"
 

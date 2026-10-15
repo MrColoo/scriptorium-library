@@ -26,6 +26,7 @@
   <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='icon.svg') }}">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
   <meta name="theme-color" content="#0E1016">
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.webmanifest') }}">
   <link rel="preload" href="{{ url_for('static', filename='fonts/geist-latin-wght-normal.woff2').split('?')[0] }}" as="font" type="font/woff2" crossorigin>
   <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
@@ -125,6 +126,7 @@
       <a class="nav-link" href="{{ url_for('admin.admin') }}"{% if page in ['admin', 'config', 'newuser', 'user', 'mailset', 'cwa-settings', 'cwa-stats', 'logfile'] %} aria-current="page"{% endif %}>{{ ui.icon('settings') }}<span class="nav-label">{{ _('Settings') }}</span></a>
       {%- endif %}
     </nav>
+    <p class="credit">{{ _('Based on') }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated" rel="noopener" target="_blank">Calibre-Web-Automated</a></p>
   </aside>
   <div class="nav-scrim" aria-hidden="true"></div>
 
@@ -158,6 +160,7 @@
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}">{{ ui.icon('user') }}<span class="grow">{{ _('Profile') }}</span></a>
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}#kobo">{{ ui.icon('device') }}<span class="grow">{{ _('Kobo sync') }}</span></a>
             <a class="menu-item" role="menuitem" href="{{ url_for('appearance.customize') }}">{{ ui.icon('sparkles') }}<span class="grow">{{ _('Customize') }}</span></a>
+            <a class="menu-item" role="menuitem" href="{{ url_for('about.package_versions') }}">{{ ui.icon('info') }}<span class="grow">{{ _('About') }} {{ instance }}</span></a>
             {%- endif %}
             <div class="menu-sep"></div>
             <div class="menu-label">{{ _('Appearance') }}</div>
@@ -191,13 +194,13 @@
         <div class="alert alert--warning" role="alert">{{ ui.icon('alert') }}<div class="alert-body">{{ message }}</div>
           <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
           {%- elif category == 'cwa_update' %}
-        <div class="alert alert--info">{{ ui.icon('bell') }}<div class="alert-body">{{ message }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated/releases" rel="noopener" target="_blank">{{ _('See Changelog') }}</a></div>
+        <div class="alert alert--info">{{ ui.icon('bell') }}<div class="alert-body">{{ message }} <a href="https://github.com/Mrcoloo/scriptorium-library/releases" rel="noopener" target="_blank">{{ _('See Changelog') }}</a></div>
           <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
           {%- elif category == 'duplicate_scan_setup' %}
         <div class="alert alert--info">{{ ui.icon('copy') }}<div class="alert-body">{{ message }} <a href="{{ url_for('duplicates.show_duplicates') }}">{{ _('Open Duplicates') }}</a></div>
           <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss data-dismiss-url="{{ url_for('duplicates.dismiss_duplicate_scan_setup_notice') }}" aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
           {%- elif category == 'translation_missing' %}
-        <div class="alert alert--info">{{ ui.icon('language') }}<div class="alert-body">{{ message }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated/wiki/Contributing-Translations" rel="noopener" target="_blank">{{ _('Contribute here!') }}</a></div>
+        <div class="alert alert--info">{{ ui.icon('language') }}<div class="alert-body">{{ message }} <a href="https://github.com/Mrcoloo/scriptorium-library/blob/main/CONTRIBUTING.md#translations" rel="noopener" target="_blank">{{ _('Contribute here!') }}</a></div>
           <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
           {%- else %}
         <div class="alert alert--info">{{ ui.icon('info') }}<div class="alert-body">{{ message }}</div>
@@ -229,6 +232,7 @@
 {% else %}
 <main id="main" class="auth" tabindex="-1">
   {{ self.body() }}
+  <p class="credit credit--auth">{{ _('Based on') }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated" rel="noopener" target="_blank">Calibre-Web-Automated</a></p>
 </main>
 {% endif %}
 

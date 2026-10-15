@@ -1,18 +1,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: CWA\n"
-"Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
-"Automated\n"
-"POT-Creation-Date: 2026-10-15 22:38+0200\n"
-"PO-Revision-Date: \n"
+"Project-Id-Version:  CWA\n"
+"Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
+"POT-Creation-Date: 2026-10-15 23:47+0200\n"
+"PO-Revision-Date: 2026-10-15 00:00+0000\n"
 "Last-Translator: PetriiCzech <petriiczech@gmail.com>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.8\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: cps/about.py:65 cps/templates/admin.html:13
 #: cps/templates/cwa_stats_full.html:6 cps/templates/cwa_stats_tabs.html:33
@@ -211,8 +211,8 @@ msgid "Invalid Restricted Column"
 msgstr "Neplatný omezený sloupec"
 
 #: cps/admin.py:920 cps/admin.py:2462
-msgid "Calibre-Web Automated configuration updated"
-msgstr "Konfigurace Calibre-Web Automated aktualizována"
+msgid "Scriptorium configuration updated"
+msgstr "Konfigurace Scriptorium aktualizována"
 
 #: cps/admin.py:932
 msgid "Do you really want to delete the Kobo Token?"
@@ -269,19 +269,19 @@ msgstr "Opravdu chcete změnit umístění knihovny Calibre?"
 
 #: cps/admin.py:955
 msgid ""
-"Calibre-Web Automated will search for updated Covers and update Cover "
-"Thumbnails, this may take a while?"
+"Scriptorium will search for updated Covers and update Cover Thumbnails, this "
+"may take a while?"
 msgstr ""
-"Calibre-Web Automated vyhledá aktualizované obálky a aktualizuje miniatury "
-"obálek, může to chvíli trvat?"
+"Scriptorium vyhledá aktualizované obálky a aktualizuje miniatury obálek, "
+"může to chvíli trvat?"
 
 #: cps/admin.py:958
 msgid ""
-"Are you sure you want delete Calibre-Web Automated's sync database to force "
-"a full sync with your Kobo Reader?"
+"Are you sure you want delete Scriptorium's sync database to force a full "
+"sync with your Kobo Reader?"
 msgstr ""
-"Jste si jisti, že chcete smazat synchronizační databázi Calibre-Web "
-"Automated a vynutit tak úplnou synchronizaci s vaší čtečkou Kobo?"
+"Jste si jisti, že chcete smazat synchronizační databázi Scriptorium a "
+"vynutit tak úplnou synchronizaci s vaší čtečkou Kobo?"
 
 #: cps/admin.py:1193 cps/admin.py:1199 cps/admin.py:1208 cps/admin.py:1217
 #: cps/templates/_restrictions.html:22 cps/templates/_restrictions.html:27
@@ -838,7 +838,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:159
+#: cps/templates/layout.html:162
 #, fuzzy
 msgid "Customize"
 msgstr "Vlastní filtr"
@@ -975,8 +975,8 @@ msgid "Invalid cron expression for duplicate scans. Changes were not saved."
 msgstr "Neplatný výraz cron pro duplicitní skeny. Změny nebyly uloženy."
 
 #: cps/cwa_functions.py:999
-msgid "Calibre-Web Automated User Settings"
-msgstr "Uživatelské nastavení Calibre-Web Automated"
+msgid "Automation Settings"
+msgstr "Uživatelské nastavení Scriptorium"
 
 #: cps/cwa_functions.py:1045 cps/cwa_functions.py:1047
 #: cps/cwa_functions.py:1051 cps/cwa_functions.py:1053
@@ -1040,8 +1040,8 @@ msgid "Unknown User"
 msgstr "Neznámý uživatel"
 
 #: cps/cwa_functions.py:1271
-msgid "Calibre-Web Automated Stats & Activity"
-msgstr "Statistika a aktivity Calibre-Web Automated"
+msgid "Stats & Activity"
+msgstr "Statistika a aktivity Scriptorium"
 
 #: cps/cwa_functions.py:1655
 #, fuzzy
@@ -1281,7 +1281,7 @@ msgstr "Chybějící nebo neplatné ID knihy pro nahrání formátu"
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr "Nelze nahrát formát: Kniha již v knihovně neexistuje"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:272
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:276
 msgid "Upload done, processing, please wait..."
 msgstr "Nahrávání hotovo, zpracovávám, čekejte prosím..."
 
@@ -1448,8 +1448,8 @@ msgid "Send to eReader"
 msgstr "Poslat do čtečky knih"
 
 #: cps/helper.py:114 cps/helper.py:141 cps/helper.py:254
-msgid "This Email has been sent via Calibre-Web Automated."
-msgstr "Tento e-mail byl odeslán přes Calibre-Web."
+msgid "This Email has been sent via Scriptorium."
+msgstr "Tento e-mail byl odeslán přes Scriptorium."
 
 #: cps/helper.py:129
 #, fuzzy, python-format
@@ -1462,16 +1462,16 @@ msgid "Conversion failed for book id: %(book)d"
 msgstr "%(format)s formát pro knihu: %(book)d nenalezen"
 
 #: cps/helper.py:139
-msgid "Calibre-Web Automated Test Email"
-msgstr "Calibre-Web zkušební e-mail"
+msgid "Scriptorium Test Email"
+msgstr "Scriptorium zkušební e-mail"
 
 #: cps/helper.py:140
 msgid "Test Email"
 msgstr "Zkušební e-mail"
 
 #: cps/helper.py:157
-msgid "Get Started with Calibre-Web Automated"
-msgstr "Začínáme s Calibre-Web"
+msgid "Get Started with Scriptorium"
+msgstr "Začínáme s Scriptorium"
 
 #: cps/helper.py:162
 #, python-format
@@ -1624,11 +1624,11 @@ msgstr "Chyba provádění UnRar"
 #: cps/helper.py:1361
 #, python-format
 msgid ""
-"Unsupported architecture detected: %(arch)s. CWA is optimized for x86_64 and "
-"aarch64."
+"Unsupported architecture detected: %(arch)s. Scriptorium is optimized for "
+"x86_64 and aarch64."
 msgstr ""
-"Detekována nepodporovaná architektura: %(arch)s. CWA je optimalizováno pro "
-"x86_64 a aarch64."
+"Detekována nepodporovaná architektura: %(arch)s. Scriptorium je "
+"optimalizováno pro x86_64 a aarch64."
 
 #: cps/helper.py:1370
 msgid "Could not find the specified directory"
@@ -1662,11 +1662,11 @@ msgstr "Zařadit všechny knihy do fronty pro zálohování metadat"
 
 #: cps/kobo_auth.py:110
 msgid ""
-"Please access Calibre-Web Automated from non localhost to get valid "
-"api_endpoint for kobo device"
+"Please access Scriptorium from non localhost to get valid api_endpoint for "
+"kobo device"
 msgstr ""
-"Pro získání platného api_endpointu pro zařízení kobo prosím použijte Calibre-"
-"Web Automated z jiného než lokálního hostitele"
+"Pro získání platného api_endpointu pro zařízení kobo prosím použijte "
+"Scriptorium z jiného než lokálního hostitele"
 
 #: cps/kobo_auth.py:129
 msgid "Kobo Setup"
@@ -1853,8 +1853,8 @@ msgid "{} Stars"
 msgstr "{} hvězdiček"
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:168
-#: cps/templates/layout.html:223 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:171
+#: cps/templates/layout.html:226 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2251
 msgid "Login"
 msgstr "Přihlásit"
@@ -2042,7 +2042,7 @@ msgstr ""
 
 #: cps/search.py:53 cps/search.py:440 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:219 cps/templates/search.html:5
+#: cps/templates/layout.html:222 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "Hledat"
@@ -2071,10 +2071,10 @@ msgid "Read Status = '%(status)s'"
 msgstr "Stav čtení = '%(status)s'"
 
 #: cps/search.py:354
-msgid "Error on search for custom columns, please restart Calibre-Web"
-msgstr "Chyba při hledání vlastních sloupců, restartujte prosím Calibre-Web"
+msgid "Error on search for custom columns, please restart Scriptorium"
+msgstr "Chyba při hledání vlastních sloupců, restartujte prosím Scriptorium"
 
-#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:137
+#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:140
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2194,7 +2194,7 @@ msgid "Error opening shelf. Shelf does not exist or is not accessible"
 msgstr "Chyba otevírání police. Police neexistuje nebo není přístupná"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:121 cps/templates/tasks.html:5
+#: cps/templates/layout.html:123 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Úlohy"
 
@@ -2361,7 +2361,7 @@ msgstr "Název police je příliš dlouhý (max. 100 znaků)"
 msgid "Error creating shelf"
 msgstr "Chyba při vytváření police"
 
-#: cps/templates/layout.html:106 cps/web.py:1210
+#: cps/templates/layout.html:108 cps/web.py:1210
 msgid "Create Magic Shelf"
 msgstr "Vytvořit polici"
 
@@ -2474,7 +2474,7 @@ msgstr "Hotovo! Kniha byla zařazena do fronty k odeslání na vybranou adresu!"
 msgid "Please wait one minute to register next user"
 msgstr "Počkejte prosím minutu s registrací dalšího uživatele"
 
-#: cps/templates/layout.html:170 cps/templates/login.html:77
+#: cps/templates/layout.html:173 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2130 cps/web.py:2134
 #: cps/web.py:2139 cps/web.py:2143 cps/web.py:2149 cps/web.py:2174
 #: cps/web.py:2178 cps/web.py:2191 cps/web.py:2194
@@ -2802,8 +2802,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "Mazání mezipaměti miniatur obálek"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:144
-#: cps/templates/layout.html:145 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:147
+#: cps/templates/layout.html:148 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Nahrávat"
 
@@ -2907,11 +2907,11 @@ msgstr "Povolené hodnoty sloupců"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:188
-#: cps/templates/layout.html:191 cps/templates/layout.html:194
-#: cps/templates/layout.html:197 cps/templates/layout.html:200
-#: cps/templates/layout.html:203 cps/templates/layout.html:240
-#: cps/templates/layout.html:268 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:191
+#: cps/templates/layout.html:194 cps/templates/layout.html:197
+#: cps/templates/layout.html:200 cps/templates/layout.html:203
+#: cps/templates/layout.html:206 cps/templates/layout.html:244
+#: cps/templates/layout.html:272 cps/templates/read.html:58
 msgid "Close"
 msgstr "Zavřít"
 
@@ -2949,7 +2949,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:249
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:253
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
@@ -3007,7 +3007,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:124
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:126
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -3021,8 +3021,8 @@ msgid "Users, library, automation and server."
 msgstr ""
 
 #: cps/templates/admin.html:12
-msgid "Check CWA Status"
-msgstr "Zkontrolovat stav CWA"
+msgid "Check Service Status"
+msgstr "Zkontrolovat stav Scriptorium"
 
 #: cps/templates/admin.html:20 cps/templates/user_edit.html:11
 msgid "Users"
@@ -3165,7 +3165,7 @@ msgstr "Knihy na stránku"
 msgid "Uploads"
 msgstr "Nahrávání"
 
-#: cps/templates/admin.html:106 cps/templates/layout.html:158
+#: cps/templates/admin.html:106 cps/templates/layout.html:161
 #, fuzzy
 msgid "Kobo sync"
 msgstr "Povolit Kobo synchronizaci"
@@ -3249,7 +3249,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Spustit automatické načítání vázané knihy"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:119 cps/templates/layout.html:163
+#: cps/templates/layout.html:121 cps/templates/layout.html:166
 msgid "System"
 msgstr ""
 
@@ -3285,17 +3285,17 @@ msgstr "Vypnout"
 msgid "Are you sure you want to restart?"
 msgstr "Opravdu chcete restartovat?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:275
+#: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:246 cps/templates/layout.html:85
+#: cps/templates/detail.html:246 cps/templates/layout.html:87
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Police"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:136
+#: cps/templates/appearance.html:14 cps/templates/layout.html:139
 #, fuzzy
 msgid "Search titles, authors, series…"
 msgstr "Hledat podle názvu/autora"
@@ -3413,7 +3413,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:157
+#: cps/templates/layout.html:160
 #, fuzzy
 msgid "Profile"
 msgstr "Tvůj profil"
@@ -3493,16 +3493,16 @@ msgstr "Hodnocení"
 msgid "Preview"
 msgstr "Náhled"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:162
+#: cps/templates/appearance.html:156 cps/templates/layout.html:165
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:164
+#: cps/templates/appearance.html:157 cps/templates/layout.html:167
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Světlý"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:165
+#: cps/templates/appearance.html:158 cps/templates/layout.html:168
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Tmavý"
@@ -3538,6 +3538,7 @@ msgid "%(num)s book in the library"
 msgid_plural "%(num)s books in the library"
 msgstr[0] "Knih v této knihovně"
 msgstr[1] "Knih v této knihovně"
+msgstr[2] ""
 
 #: cps/templates/author.html:13
 msgid "About the author"
@@ -3866,7 +3867,7 @@ msgid "Add to shelf"
 msgstr "Přidat do police"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:42
-#: cps/templates/layout.html:225
+#: cps/templates/layout.html:228
 #, fuzzy
 msgid "More"
 msgstr "Více od"
@@ -4025,9 +4026,9 @@ msgstr "Umístění Calibre databáze (metadata.db)"
 
 #: cps/templates/config_db.html:18
 msgid ""
-"Inside the container this lives under /calibre-library. CWA finds and mounts "
-"the library there on start: the largest one if there are several, a new one "
-"if there is none."
+"Inside the container this lives under /calibre-library. Scriptorium finds "
+"and mounts the library there on start: the largest one if there are several, "
+"a new one if there is none."
 msgstr ""
 
 #: cps/templates/config_db.html:21
@@ -4075,7 +4076,7 @@ msgstr ""
 #: cps/templates/config_db.html:67
 msgid ""
 "Make sure no other program (including the Calibre desktop app) uses the same "
-"library while CWA runs."
+"library while Scriptorium runs."
 msgstr ""
 
 #: cps/templates/config_db.html:68
@@ -4087,7 +4088,7 @@ msgstr ""
 #: cps/templates/config_db.html:69
 msgid ""
 "Check that the path above points to the folder that contains metadata.db and "
-"that CWA can read and write it."
+"that Scriptorium can read and write it."
 msgstr ""
 
 #: cps/templates/config_db.html:70
@@ -4131,7 +4132,7 @@ msgid "Ok"
 msgstr "OK"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:270 cps/templates/login.html:35
+#: cps/templates/layout.html:274 cps/templates/login.html:35
 #: cps/templates/user_edit.html:46 cps/templates/user_edit.html:57
 #, fuzzy
 msgid "Show password"
@@ -5000,7 +5001,8 @@ msgid "Time of Day:"
 msgstr "Denní doba:"
 
 #: cps/templates/cwa_settings.html:67
-msgid "What CWA does on its own when books arrive, plus maintenance jobs."
+msgid ""
+"What Scriptorium does on its own when books arrive, plus maintenance jobs."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:72
@@ -5029,20 +5031,20 @@ msgid "Backups"
 msgstr "Zpět"
 
 #: cps/templates/cwa_settings.html:88
-msgid "Enable/Disable Calibre-Web Automated Services"
-msgstr "Povolit/zakázat automatizované služby Calibre-Web"
+msgid "Enable/Disable Automation Services"
+msgstr "Povolit/zakázat automatizované služby Scriptorium"
 
 #: cps/templates/cwa_settings.html:90
-msgid "Enable CWA Auto-Convert"
-msgstr "Povolit automatický převod CWA"
+msgid "Enable Auto-Convert"
+msgstr "Povolit automatický převod Scriptorium"
 
 #: cps/templates/cwa_settings.html:90
 msgid "New books are converted to the target format below."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:91
-msgid "Enable CWA Automatic Cover & Metadata Enforcement Service"
-msgstr "Povolit službu automatického krytí a vynucení metadat CWA"
+msgid "Enable Automatic Cover & Metadata Enforcement Service"
+msgstr "Povolit službu automatického krytí a vynucení metadat Scriptorium"
 
 #: cps/templates/cwa_settings.html:91
 msgid ""
@@ -5051,8 +5053,8 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:92
-msgid "Enable CWA Kindle EPUB Fixer"
-msgstr "Povolit opravu EPUB pro Kindle od CWA"
+msgid "Enable Kindle EPUB Fixer"
+msgstr "Povolit opravu EPUB pro Kindle od Scriptorium"
 
 #: cps/templates/cwa_settings.html:92
 msgid "Fixes common EPUB problems that make Amazon reject books sent by email."
@@ -5069,8 +5071,8 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:96
-msgid "Enable KOReader Sync (CWA Plugin)"
-msgstr "Povolit synchronizaci KOReaderu (plugin CWA)"
+msgid "Enable KOReader Sync (Scriptorium Plugin)"
+msgstr "Povolit synchronizaci KOReaderu (plugin Scriptorium)"
 
 #: cps/templates/cwa_settings.html:96
 msgid ""
@@ -5096,16 +5098,16 @@ msgid "Removes leftover references to books deleted from the library."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:102
-msgid "Enable CWA Update Notifications"
-msgstr "Povolit oznámení o aktualizacích CWA"
+msgid "Enable Update Notifications"
+msgstr "Povolit oznámení o aktualizacích Scriptorium"
 
 #: cps/templates/cwa_settings.html:103
 msgid "Enable Contribute Translations Notifications"
 msgstr "Povolit oznámení o přispívání překladů"
 
 #: cps/templates/cwa_settings.html:110
-msgid "CWA Auto-Ingest Automerge"
-msgstr "Automatické sloučení CWA"
+msgid "Auto-Ingest Automerge"
+msgstr "Automatické sloučení Scriptorium"
 
 #: cps/templates/cwa_settings.html:112
 msgid "Creates a duplicate record, keeping both copies"
@@ -5159,8 +5161,8 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:124
-msgid "CWA Auto-Ingest - Ignored Formats"
-msgstr "Automatické ingestování CWA – Ignorované formáty"
+msgid "Auto-Ingest - Ignored Formats"
+msgstr "Automatické ingestování Scriptorium – Ignorované formáty"
 
 #: cps/templates/cwa_settings.html:124
 msgid "Files in these formats are left in the ingest folder."
@@ -5177,16 +5179,16 @@ msgid ""
 msgstr ""
 
 #: cps/templates/cwa_settings.html:136
-msgid "CWA Auto-Convert - Ignored Formats"
-msgstr "Automatický převod CWA – Ignorované formáty"
+msgid "Auto-Convert - Ignored Formats"
+msgstr "Automatický převod Scriptorium – Ignorované formáty"
 
 #: cps/templates/cwa_settings.html:136
 msgid "Books in these formats are imported as they are, without conversion."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:137
-msgid "CWA Auto-Convert - Retained Formats"
-msgstr "Automatický převod CWA – zachované formáty"
+msgid "Auto-Convert - Retained Formats"
+msgstr "Automatický převod Scriptorium – zachované formáty"
 
 #: cps/templates/cwa_settings.html:137
 msgid ""
@@ -5302,8 +5304,8 @@ msgid "Pause between requests to the Hardcover API (0–60)."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:182
-msgid "CWA Duplicate Detection System"
-msgstr "Systém detekce duplikátů CWA"
+msgid "Duplicate Detection System"
+msgstr "Systém detekce duplikátů Scriptorium"
 
 #: cps/templates/cwa_settings.html:184
 msgid "Enable Duplicate Detection"
@@ -5326,8 +5328,8 @@ msgid "Legacy SQL only (experimental)"
 msgstr "Pouze starší SQL (experimentální)"
 
 #: cps/templates/cwa_settings.html:195
-msgid "CWA Duplicate Detection Criteria"
-msgstr "Kritéria detekce duplikátů CWA"
+msgid "Duplicate Detection Criteria"
+msgstr "Kritéria detekce duplikátů Scriptorium"
 
 #: cps/templates/cwa_settings.html:196
 msgid "Books count as duplicates when all selected fields match."
@@ -5449,8 +5451,8 @@ msgid "Automatic Backup Settings"
 msgstr "Nastavení automatického zálohování"
 
 #: cps/templates/cwa_settings.html:251
-msgid "Enable CWA Import Auto-Backup"
-msgstr "Povolit automatické zálohování importu CWA"
+msgid "Enable Import Auto-Backup"
+msgstr "Povolit automatické zálohování importu Scriptorium"
 
 #: cps/templates/cwa_settings.html:251
 #, fuzzy
@@ -5461,24 +5463,24 @@ msgstr ""
 "uložena v souboru <i>/config/processed_books/imported</i>"
 
 #: cps/templates/cwa_settings.html:252
-msgid "Enable CWA Conversion Auto-Backup"
-msgstr "Povolit automatické zálohování konverze CWA"
+msgid "Enable Conversion Auto-Backup"
+msgstr "Povolit automatické zálohování konverze Scriptorium"
 
 #: cps/templates/cwa_settings.html:252
 msgid "Keeps the original of every converted file."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:253
-msgid "Enable CWA EPUB Fixer Auto-Backup"
-msgstr "Povolit automatické zálohování opravy EPUB CWA"
+msgid "Enable EPUB Fixer Auto-Backup"
+msgstr "Povolit automatické zálohování opravy EPUB Scriptorium"
 
 #: cps/templates/cwa_settings.html:253
 msgid "Keeps the original of every EPUB the fixer changed."
 msgstr ""
 
 #: cps/templates/cwa_settings.html:254
-msgid "Enable CWA Auto-Zip Backups"
-msgstr "Povolit automatické komprimování záloh CWA"
+msgid "Enable Auto-Zip Backups"
+msgstr "Povolit automatické komprimování záloh Scriptorium"
 
 #: cps/templates/cwa_settings.html:254
 msgid "Compresses the backups once a day to save space."
@@ -5508,6 +5510,7 @@ msgid "%(num)s entry"
 msgid_plural "%(num)s entries"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: cps/templates/cwa_stats_full.html:18 cps/templates/cwa_stats_tabs.html:21
 #: cps/templates/cwa_stats_tabs.html:131
@@ -5571,7 +5574,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:59
-#: cps/templates/layout.html:56 cps/templates/layout.html:218
+#: cps/templates/layout.html:58 cps/templates/layout.html:221
 #, fuzzy
 msgid "Library"
 msgstr "V knihovně"
@@ -5827,23 +5830,23 @@ msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:156
 #, fuzzy
-msgid "Calibre-Web Automated Conversion History"
-msgstr "Calibre-Web Automated – Kompletní historie konverzí"
+msgid "Conversion History"
+msgstr "Scriptorium – Kompletní historie konverzí"
 
 #: cps/templates/cwa_stats_tabs.html:157
 #, fuzzy
-msgid "Calibre-Web Automated Import History"
-msgstr "Calibre-Web Automated - Úplná historie importu"
+msgid "Import History"
+msgstr "Scriptorium - Úplná historie importu"
 
 #: cps/templates/cwa_stats_tabs.html:158
 #, fuzzy
-msgid "Calibre-Web Automated EPUB Fixer History"
-msgstr "Calibre-Web Automated - EPUB Fixer služba"
+msgid "EPUB Fixer History"
+msgstr "Scriptorium - EPUB Fixer služba"
 
 #: cps/templates/cwa_stats_tabs.html:159
 #, fuzzy
-msgid "Calibre-Web Automated Cover & Metadata Enforcement History"
-msgstr "Calibre-Web Automated – Úplná historie vymáhání"
+msgid "Cover & Metadata Enforcement History"
+msgstr "Scriptorium – Úplná historie vymáhání"
 
 #: cps/templates/cwa_stats_tabs.html:177
 msgid "No data for this period yet."
@@ -5938,6 +5941,7 @@ msgid "%(num)s star"
 msgid_plural "%(num)s stars"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: cps/templates/detail.html:68 cps/templates/detail.html:71
 msgid "Read in Browser"
@@ -5948,7 +5952,7 @@ msgstr "Číst v prohližeči"
 msgid "Listen"
 msgstr "Seznam"
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:87
+#: cps/templates/detail.html:117 cps/templates/layout.html:89
 #: cps/templates/user_edit.html:176
 msgid "Create Shelf"
 msgstr "Vytvořit polici"
@@ -6014,7 +6018,7 @@ msgstr "Vytvořit polici"
 msgid "Reading progress"
 msgstr "Průběh KOReader"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:271
+#: cps/templates/detail.html:207 cps/templates/layout.html:275
 #, fuzzy
 msgid "Show more"
 msgstr "Zobrazit nepřečtené"
@@ -6093,7 +6097,7 @@ msgstr ""
 msgid ""
 "It builds the index that keeps duplicate checks fast during imports and "
 "metadata edits. On large libraries it can take a few minutes; you can keep "
-"using CWA meanwhile."
+"using Scriptorium meanwhile."
 msgstr ""
 
 #: cps/templates/duplicates.html:27 cps/templates/duplicates.html:130
@@ -6102,7 +6106,7 @@ msgid "Duplicate scan is running."
 msgstr "Smazat knihu"
 
 #: cps/templates/duplicates.html:30
-msgid "You can keep using CWA while it runs."
+msgid "You can keep using Scriptorium while it runs."
 msgstr ""
 
 #: cps/templates/duplicates.html:37
@@ -6206,6 +6210,7 @@ msgid "%(num)s copy"
 msgid_plural "%(num)s copies"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: cps/templates/duplicates.html:72
 msgid "Select at least two books in this group"
@@ -6386,7 +6391,7 @@ msgid "(Magic)"
 msgstr "(Kouzlo)"
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:94
+#: cps/templates/layout.html:96
 msgid "(Public)"
 msgstr "(Veřejné)"
 
@@ -6408,6 +6413,7 @@ msgid "%(num)s series"
 msgid_plural "%(num)s series"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: cps/templates/grid.html:9 cps/templates/list.html:11
 #: cps/templates/user_table.html:25
@@ -6426,7 +6432,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:274
+#: cps/templates/grid.html:21 cps/templates/layout.html:278
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6448,6 +6454,7 @@ msgid "%(num)s book"
 msgid_plural "%(num)s books"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: cps/templates/grid.html:51 cps/templates/list.html:60
 #, fuzzy
@@ -6545,12 +6552,10 @@ msgid "Reject every pending match? Those books will not be suggested again."
 msgstr ""
 
 #: cps/templates/http_error.html:19
-msgid ""
-"Calibre-Web Automated Instance is unconfigured, please contact your "
-"administrator"
+msgid "Scriptorium Instance is unconfigured, please contact your administrator"
 msgstr ""
-"Calibre-Web Automated Instance není nakonfigurována, kontaktujte prosím "
-"svého administrátora"
+"Scriptorium Instance není nakonfigurována, kontaktujte prosím svého "
+"administrátora"
 
 #: cps/templates/http_error.html:28
 msgid "Return to Home"
@@ -6625,8 +6630,8 @@ msgstr "Poslat do čtečky knih"
 
 #: cps/templates/kosync_plugin.html:8
 msgid ""
-"The CWA plugin keeps your reading position in step between KOReader and this "
-"library."
+"The Scriptorium plugin keeps your reading position in step between KOReader "
+"and this library."
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:13
@@ -6634,8 +6639,8 @@ msgid "KOReader Sync is disabled."
 msgstr "Synchronizace KOReaderu je zakázána."
 
 #: cps/templates/kosync_plugin.html:14
-msgid "Open CWA Settings"
-msgstr "Otevřít nastavení CWA"
+msgid "Open Automation Settings"
+msgstr "Otevřít nastavení Scriptorium"
 
 #: cps/templates/kosync_plugin.html:14
 msgid "Ask an administrator to turn it on."
@@ -6654,13 +6659,15 @@ msgstr ""
 
 #: cps/templates/kosync_plugin.html:24
 #, fuzzy
-msgid "Download CWA Sync Plugin"
+msgid "Download Scriptorium Sync Plugin"
 msgstr "Synchronizační plugin KOReaderu"
 
 #: cps/templates/kosync_plugin.html:26
-msgid "Download is available after enabling KOReader Sync in CWA Settings."
+msgid ""
+"Download is available after enabling KOReader Sync in Automation Settings."
 msgstr ""
-"Stahování je k dispozici po povolení synchronizace KOReader v nastavení CWA."
+"Stahování je k dispozici po povolení synchronizace KOReader v nastavení "
+"Scriptorium."
 
 #: cps/templates/kosync_plugin.html:33
 #, fuzzy
@@ -6689,8 +6696,8 @@ msgstr "Odesílání do čtečky knih ..."
 
 #: cps/templates/kosync_plugin.html:45
 msgid ""
-"Open a book, tap the top of the screen, open the Tools menu and choose “CWA "
-"Progress Sync”. Enter:"
+"Open a book, tap the top of the screen, open the Tools menu and choose "
+"“Scriptorium Sync”. Enter:"
 msgstr ""
 
 #: cps/templates/kosync_plugin.html:47
@@ -6740,152 +6747,157 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:46
+#: cps/templates/layout.html:48
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:50
+#: cps/templates/layout.html:52
 #, fuzzy
 msgid "Library navigation"
 msgstr "Statistika knihovny"
 
-#: cps/templates/layout.html:75
+#: cps/templates/layout.html:77
 msgid "Browse"
 msgstr "Procházet"
 
-#: cps/templates/layout.html:98
+#: cps/templates/layout.html:100
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:104 cps/templates/user_edit.html:309
+#: cps/templates/layout.html:106 cps/templates/user_edit.html:309
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Police"
 
-#: cps/templates/layout.html:132
+#: cps/templates/layout.html:129 cps/templates/layout.html:234
+#: cps/templates/stats.html:6
+msgid "Based on"
+msgstr ""
+
+#: cps/templates/layout.html:135
 msgid "Toggle Navigation"
 msgstr "Přepnout navigaci"
 
-#: cps/templates/layout.html:135
+#: cps/templates/layout.html:138
 msgid "Search Library"
 msgstr "Hledat v knihovně"
 
-#: cps/templates/layout.html:137
+#: cps/templates/layout.html:140
 #, fuzzy
 msgid "Advanced"
 msgstr "Rozšířené hledání"
 
-#: cps/templates/layout.html:141
+#: cps/templates/layout.html:144
 msgid "Refresh Library"
 msgstr "Obnovit knihovnu"
 
-#: cps/templates/layout.html:151 cps/templates/user_edit.html:19
+#: cps/templates/layout.html:154 cps/templates/user_edit.html:19
 #: cps/templates/user_edit.html:32
 msgid "Account"
 msgstr "Účet"
 
-#: cps/templates/layout.html:173
+#: cps/templates/layout.html:176
 msgid "Logout"
 msgstr "Odhlásit se"
 
-#: cps/templates/layout.html:193
+#: cps/templates/layout.html:196
 msgid "See Changelog"
 msgstr "Zobrazit seznam změn"
 
-#: cps/templates/layout.html:196
+#: cps/templates/layout.html:199
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Smazat knihu"
 
-#: cps/templates/layout.html:199
+#: cps/templates/layout.html:202
 msgid "Contribute here!"
 msgstr "Přispějte zde!"
 
-#: cps/templates/layout.html:217
+#: cps/templates/layout.html:220
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Základní konfigurace"
 
-#: cps/templates/layout.html:221
+#: cps/templates/layout.html:224
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:246
+#: cps/templates/layout.html:250
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Jste si opravdu jisti?"
 
-#: cps/templates/layout.html:250 cps/templates/layout.html:268
+#: cps/templates/layout.html:254 cps/templates/layout.html:272
 #, fuzzy
 msgid "Confirm"
 msgstr "Konfigurace"
 
-#: cps/templates/layout.html:256
+#: cps/templates/layout.html:260
 msgid "Uploading..."
 msgstr "Nahrávání..."
 
-#: cps/templates/layout.html:259
+#: cps/templates/layout.html:263
 msgid "Please do not refresh the page"
 msgstr "Prosím neobnovujte stránku"
 
-#: cps/templates/layout.html:262
+#: cps/templates/layout.html:266
 msgid "Drop books to add them to the library"
-msgstr ""
-
-#: cps/templates/layout.html:268
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "UUID zkopírováno do schránky"
-
-#: cps/templates/layout.html:269
-msgid "Could not copy, select the text and copy it manually"
-msgstr ""
-
-#: cps/templates/layout.html:270
-#, fuzzy
-msgid "Hide password"
-msgstr "Heslo"
-
-#: cps/templates/layout.html:271
-#, fuzzy
-msgid "Show less"
-msgstr "Zobrazit vše"
-
-#: cps/templates/layout.html:271 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
 msgstr ""
 
 #: cps/templates/layout.html:272
 #, fuzzy
+msgid "Copied to clipboard"
+msgstr "UUID zkopírováno do schránky"
+
+#: cps/templates/layout.html:273
+msgid "Could not copy, select the text and copy it manually"
+msgstr ""
+
+#: cps/templates/layout.html:274
+#, fuzzy
+msgid "Hide password"
+msgstr "Heslo"
+
+#: cps/templates/layout.html:275
+#, fuzzy
+msgid "Show less"
+msgstr "Zobrazit vše"
+
+#: cps/templates/layout.html:275 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:276
+#, fuzzy
 msgid "Upload failed"
 msgstr "Aktualizace selhala:"
 
-#: cps/templates/layout.html:273
+#: cps/templates/layout.html:277
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "Nejlepší %(count)s"
 
-#: cps/templates/layout.html:274 cps/templates/search_form.html:7
+#: cps/templates/layout.html:278 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "Žádný"
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:278
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Nové heslo bylo zasláno na vaši emailovou adresu"
 
-#: cps/templates/layout.html:275
+#: cps/templates/layout.html:279
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "Duplicitní skenování dokončeno: %(count)s skupin"
 
-#: cps/templates/layout.html:276
+#: cps/templates/layout.html:280
 #, fuzzy
 msgid "Review"
 msgstr "Náhled"
@@ -7018,8 +7030,8 @@ msgid "Continue as guest"
 msgstr ""
 
 #: cps/templates/logviewer.html:9
-msgid "Download Calibre-Web Log"
-msgstr "Stáhnout Calibre-Web log"
+msgid "Download Scriptorium Log"
+msgstr "Stáhnout Scriptorium log"
 
 #: cps/templates/logviewer.html:10
 msgid "Download Access Log"
@@ -7032,8 +7044,8 @@ msgstr "Přihlásit"
 
 #: cps/templates/logviewer.html:15
 #, fuzzy
-msgid "Calibre-Web Log"
-msgstr "Zobrazit Calibre-Web log: "
+msgid "Scriptorium Log"
+msgstr "Zobrazit Scriptorium log: "
 
 #: cps/templates/logviewer.html:16
 #, fuzzy
@@ -7178,7 +7190,7 @@ msgstr "Konfigurace"
 msgid "Value"
 msgstr ""
 
-#: cps/templates/magic_shelf_edit.html:84
+#: cps/templates/magic_shelf_edit.html:84 cps/templates/stats.html:6
 msgid "and"
 msgstr ""
 
@@ -7322,8 +7334,8 @@ msgid "is older than"
 msgstr ""
 
 #: cps/templates/osd.xml:5
-msgid "Calibre-Web Automated eBook Catalog"
-msgstr "Calibre-Web katalog eknih"
+msgid "Scriptorium eBook Catalog"
+msgstr "Scriptorium katalog eknih"
 
 #: cps/templates/profile_pictures.html:7
 msgid ""
@@ -7712,6 +7724,7 @@ msgid "%(num)s result"
 msgid_plural "%(num)s results"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: cps/templates/search.html:14
 #, fuzzy
@@ -7899,10 +7912,6 @@ msgstr ""
 #: cps/templates/stats.html:5
 msgid "About"
 msgstr "O knihovně"
-
-#: cps/templates/stats.html:6
-msgid "Powered by"
-msgstr ""
 
 #: cps/templates/stats.html:10
 msgid "Library Statistics"
@@ -8232,7 +8241,8 @@ msgid "Using KOReader?"
 msgstr "DJVU čtečka"
 
 #: cps/templates/user_edit.html:212
-msgid "Reading progress can also sync from KOReader with the CWA plugin."
+msgid ""
+"Reading progress can also sync from KOReader with the Scriptorium plugin."
 msgstr ""
 
 #: cps/templates/user_edit.html:213
@@ -8493,7 +8503,6 @@ msgstr ""
 #~ "ℹ️ Vaše téma bylo aktualizováno na caliBlur (tmavé). Přepínání témat je "
 #~ "dočasně zakázáno, protože vyvíjíme nové rozhraní pro verzi 5.0.0."
 
-#, python-format
 #~ msgid "Magic Shelf&nbsp&nbsp&nbsp—&nbsp&nbsp&nbsp%(icon)s %(name)s"
 #~ msgstr "Kouzelná police&nbsp&nbsp&nbsp—&nbsp&nbsp&nbsp%(icon)s %(name)s"
 
@@ -9018,7 +9027,6 @@ msgstr ""
 #~ msgid "(1-28)"
 #~ msgstr "(1–28)"
 
-#, python-format
 #~ msgid "(Server timezone: %(tz)s)"
 #~ msgstr "(Časové pásmo serveru: %(tz)s)"
 
@@ -9632,7 +9640,6 @@ msgstr ""
 #~ "Toto vyhledávání hledá knihy se shodnými názvy A autory, aby se předešlo "
 #~ "falešně pozitivním výsledkům."
 
-#, fuzzy
 #~ msgid "Selected strategy:"
 #~ msgstr "Smazat formáty:"
 
@@ -9678,7 +9685,6 @@ msgstr ""
 #~ msgid "Review Required"
 #~ msgstr "Vyžaduje se kontrola"
 
-#, python-format
 #~ msgid ""
 #~ "%(count)s book(s) have ambiguous Hardcover matches. Please review each "
 #~ "match and select the correct result, or skip/reject if no good match "
@@ -9821,7 +9827,6 @@ msgstr ""
 #~ msgid "View & Resolve Duplicates"
 #~ msgstr "Zobrazit a vyřešit duplikáty"
 
-#, fuzzy
 #~ msgid "Sign in to your library"
 #~ msgstr "Sérií v této knihovně"
 
@@ -10095,7 +10100,6 @@ msgstr ""
 #~ msgid "Public Shelves:"
 #~ msgstr "Veřejná police:"
 
-#, python-format
 #~ msgid "%(visible)s of %(total)s public shelves visible"
 #~ msgstr "Viditelné %(visible)s z %(total)s veřejných polic"
 
@@ -10186,40 +10190,33 @@ msgstr ""
 #~ msgid "Books organized in shelves"
 #~ msgstr "Knihy organizované v policích"
 
-#, fuzzy
 #~ msgid "Connection successful!"
 #~ msgstr "Chyba připojení"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Automated."
 #~ msgstr "Tento e-mail byl odeslán přes Calibre-Web."
 
 #~ msgid "Login failed, No User Linked With OAuth Account"
 #~ msgstr "Přihlášení selhalo, žádný uživatel s OAuth účtem"
 
-#, python-format
 #~ msgid "File %(file)s uploaded"
 #~ msgstr "Soubor %(file)s nahrán"
 
-#, fuzzy
 #~ msgid "Mark Book as Read or Unread"
 #~ msgstr "Označit jako nepřečtené"
 
 #~ msgid "Calibre-Web configuration updated"
 #~ msgstr "Konfigurace Calibre-Web aktualizována"
 
-#, fuzzy
 #~ msgid "Calibre-Web Test Email"
 #~ msgstr "Calibre-Web zkušební e-mail"
 
-#, fuzzy
 #~ msgid "This Email has been sent via Calibre-Web."
 #~ msgstr "Tento e-mail byl odeslán přes Calibre-Web."
 
 #~ msgid "Get Started with Calibre-Web"
 #~ msgstr "Začínáme s Calibre-Web"
 
-#, fuzzy
 #~ msgid ""
 #~ "Please access Calibre-Web from non localhost to get valid api_endpoint "
 #~ "for kobo device"
@@ -10227,43 +10224,33 @@ msgstr ""
 #~ "Pro získání platného api_endpoint pro zařízení Kobo, přístupte na calibre-"
 #~ "web bez localhost"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autmoated."
 #~ msgstr "Tento e-mail byl odeslán přes Calibre-Web."
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Automated."
 #~ msgstr "Tento e-mail byl odeslán přes Calibre-Web."
 
-#, fuzzy
 #~ msgid "Downloads per User"
 #~ msgstr "Stáhnutí"
 
-#, fuzzy
 #~ msgid "This Email has been sent via  Autoated."
 #~ msgstr "Tento e-mail byl odeslán přes Calibre-Web."
 
-#, fuzzy
 #~ msgid "unknown error"
 #~ msgstr "Chyba připojení"
 
-#, fuzzy
 #~ msgid "Could not open file {filename!r}: {message}"
 #~ msgstr "Nelze se přihlásit: %(message)s"
 
-#, fuzzy
 #~ msgid "{value!r} is not a valid boolean."
 #~ msgstr "E-mail není z platné domény"
 
-#, fuzzy
 #~ msgid "directory"
 #~ msgstr "Směr"
 
-#, fuzzy
 #~ msgid "{name} {filename!r} is not writable."
 #~ msgstr "Databáze není zapisovatelná"
 
-#, fuzzy
 #~ msgid "Repeat for confirmation"
 #~ msgstr "Konfigurace funkcí"
 

@@ -16,7 +16,7 @@
       <div class="stack-sm">
         <p class="mono muted">{{ error_code }}</p>
         <h1>{{ error_name }}</h1>
-        {%- if unconfigured %}<p>{{ _('Calibre-Web Automated Instance is unconfigured, please contact your administrator') }}</p>{% endif %}
+        {%- if unconfigured %}<p>{{ _('Scriptorium Instance is unconfigured, please contact your administrator') }}</p>{% endif %}
       </div>
     </div>
     {%- if error_stack %}
@@ -30,7 +30,7 @@
       <a class="btn btn-primary" href="{{ url_for('web.logout') }}">{{ _('Logout User') }}</a>
       {%- endif %}
       {%- if issue %}
-      <a class="btn" href="https://github.com/crocodilestick/Calibre-Web-Automated/issues/new/choose" rel="noopener" target="_blank">{{ _('Create Issue') }}</a>
+      <a class="btn" href="https://github.com/Mrcoloo/scriptorium-library/issues/new/choose" rel="noopener" target="_blank">{{ _('Create Issue') }}</a>
       {%- endif %}
     </div>
   </div>

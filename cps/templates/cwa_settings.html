@@ -64,7 +64,7 @@
   <div>
     <span class="page-eyebrow"><a href="{{ url_for('admin.admin') }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Settings') }}</a></span>
     <h1 class="page-title">{{ _('Automation') }}</h1>
-    <span class="page-subtitle">{{ _('What CWA does on its own when books arrive, plus maintenance jobs.') }}</span>
+    <span class="page-subtitle">{{ _('What Scriptorium does on its own when books arrive, plus maintenance jobs.') }}</span>
   </div>
 </div>
 
@@ -85,21 +85,21 @@
   <input type="hidden" name="duplicate_detection_use_sql" value="1">
 
   <section class="card" id="services" aria-labelledby="services-h">
-    <h2 class="card-title" id="services-h">{{ _('Enable/Disable Calibre-Web Automated Services') }}</h2>
+    <h2 class="card-title" id="services-h">{{ _('Enable/Disable Automation Services') }}</h2>
     <div>
-      {{ toggle('auto_convert', _('Enable CWA Auto-Convert'), _('New books are converted to the target format below.')) }}
-      {{ toggle('auto_metadata_enforcement', _('Enable CWA Automatic Cover & Metadata Enforcement Service'), _('When you edit a book, the new cover and metadata are written into the book file too, so e-readers show them.')) }}
-      {{ toggle('kindle_epub_fixer', _('Enable CWA Kindle EPUB Fixer'), _('Fixes common EPUB problems that make Amazon reject books sent by email.')) }}
+      {{ toggle('auto_convert', _('Enable Auto-Convert'), _('New books are converted to the target format below.')) }}
+      {{ toggle('auto_metadata_enforcement', _('Enable Automatic Cover & Metadata Enforcement Service'), _('When you edit a book, the new cover and metadata are written into the book file too, so e-readers show them.')) }}
+      {{ toggle('kindle_epub_fixer', _('Enable Kindle EPUB Fixer'), _('Fixes common EPUB problems that make Amazon reject books sent by email.')) }}
       <div class="setting-body" data-show-if="kindle_epub_fixer">
         {{ toggle('kindle_epub_fixer_aggressive', _('Enable Aggressive EPUB Fixer Mode (riskier)'), _('Also rewrites markup that is valid but often breaks on Kindle. Can change how some books look.')) }}
       </div>
-      {{ toggle('koreader_sync_enabled', _('Enable KOReader Sync (CWA Plugin)'), _('Lets the KOReader plugin sync reading progress. The first start after enabling it indexes every book, which can briefly lock the library.')) }}
+      {{ toggle('koreader_sync_enabled', _('Enable KOReader Sync (Scriptorium Plugin)'), _('Lets the KOReader plugin sync reading progress. The first start after enabling it indexes every book, which can briefly lock the library.')) }}
       {{ toggle('config_kobo_sync_magic_shelves', _('Sync Magic Shelves to Kobo'), _('Smart shelves with Kobo sync turned on appear as collections on the device.'), checked=config.config_kobo_sync_magic_shelves) }}
       {{ toggle('archived_cleanup_enabled', _('Enable Archived Book Cleanup'), _('Removes leftover references to books deleted from the library.')) }}
       <div class="setting-body" data-show-if="archived_cleanup_enabled">
         {{ schedule('archived_cleanup_schedule', 'daily', 'sunday', 3) }}
       </div>
-      {{ toggle('cwa_update_notifications', _('Enable CWA Update Notifications')) }}
+      {{ toggle('cwa_update_notifications', _('Enable Update Notifications')) }}
       {{ toggle('contribute_translations_notifications', _('Enable Contribute Translations Notifications')) }}
     </div>
   </section>
@@ -107,7 +107,7 @@
   <section class="card" id="ingest" aria-labelledby="ingest-h">
     <h2 class="card-title" id="ingest-h">{{ _('Import') }}</h2>
     <div class="field">
-      <label for="auto_ingest_automerge">{{ _('CWA Auto-Ingest Automerge') }}</label>
+      <label for="auto_ingest_automerge">{{ _('Auto-Ingest Automerge') }}</label>
       <select class="select" name="auto_ingest_automerge" id="auto_ingest_automerge">
         {%- for value, label in [('new_record', _('Creates a duplicate record, keeping both copies')), ('ignore', _('Discards duplicate import, keeps library copy')), ('overwrite', _('Overwrites library copy with newly imported file'))] %}
         <option value="{{ value }}" {% if cwa_settings['auto_ingest_automerge'] == value %}selected{% endif %}>{{ label }}</option>
@@ -121,7 +121,7 @@
       {{ number('ingest_stale_temp_interval', _('Stale temp cleanup interval (seconds):'), _('How often to look for stale temporary files. 0 turns it off.'), 0, 86400, default=600) }}
       {{ number('auto_send_delay_minutes', _('Auto-Send Delay for New Books'), _('Wait this many minutes before emailing new books, so metadata fetching and conversion can finish (1–60).'), 1, 60, default=5) }}
     </div>
-    {{ formats('ignore_ingest_', _('CWA Auto-Ingest - Ignored Formats'), _('Files in these formats are left in the ingest folder.'), cwa_settings['auto_ingest_ignored_formats']) }}
+    {{ formats('ignore_ingest_', _('Auto-Ingest - Ignored Formats'), _('Files in these formats are left in the ingest folder.'), cwa_settings['auto_ingest_ignored_formats']) }}
   </section>
 
   <section class="card" id="conversion" aria-labelledby="conversion-h">
@@ -133,8 +133,8 @@
       </select>
       <span class="field-hint">{{ _('For Kobo, KEPUB gives the best experience (page numbers, reading stats); EPUB also works.') }}</span>
     </div>
-    {{ formats('ignore_convert_', _('CWA Auto-Convert - Ignored Formats'), _('Books in these formats are imported as they are, without conversion.'), cwa_settings['auto_convert_ignored_formats']) }}
-    {{ formats('convert_retained_', _('CWA Auto-Convert - Retained Formats'), _('After converting, keep the original file too when it is in one of these formats. The target format is always kept.'), cwa_settings['auto_convert_retained_formats']) }}
+    {{ formats('ignore_convert_', _('Auto-Convert - Ignored Formats'), _('Books in these formats are imported as they are, without conversion.'), cwa_settings['auto_convert_ignored_formats']) }}
+    {{ formats('convert_retained_', _('Auto-Convert - Retained Formats'), _('After converting, keep the original file too when it is in one of these formats. The target format is always kept.'), cwa_settings['auto_convert_retained_formats']) }}
   </section>
 
   <section class="card" id="metadata" aria-labelledby="metadata-h">
@@ -179,7 +179,7 @@
   </section>
 
   <section class="card" id="duplicates" aria-labelledby="duplicates-h">
-    <h2 class="card-title" id="duplicates-h">{{ _('CWA Duplicate Detection System') }}</h2>
+    <h2 class="card-title" id="duplicates-h">{{ _('Duplicate Detection System') }}</h2>
     <div>
       {{ toggle('duplicate_detection_enabled', _('Enable Duplicate Detection')) }}
       <div class="setting-body" data-show-if="duplicate_detection_enabled">
@@ -192,7 +192,7 @@
             <option value="sql" {% if scan_method == 'sql' %}selected{% endif %}>{{ _('Legacy SQL only (experimental)') }}</option>
           </select>
         </div>
-        <span class="label">{{ _('CWA Duplicate Detection Criteria') }}</span>
+        <span class="label">{{ _('Duplicate Detection Criteria') }}</span>
         <p class="hint">{{ _('Books count as duplicates when all selected fields match.') }}</p>
         <div class="format-checks">
           {%- for field, label in [('title', _('Title')), ('author', _('Author')), ('language', _('Language')), ('series', _('Series')), ('publisher', _('Publisher')), ('format', _('Format'))] %}
@@ -248,10 +248,10 @@
   <section class="card" id="backups" aria-labelledby="backups-h">
     <h2 class="card-title" id="backups-h">{{ _('Automatic Backup Settings') }}</h2>
     <div>
-      {{ toggle('auto_backup_imports', _('Enable CWA Import Auto-Backup'), _('Keeps a copy of every imported file in /config/processed_books/imported.')) }}
-      {{ toggle('auto_backup_conversions', _('Enable CWA Conversion Auto-Backup'), _('Keeps the original of every converted file.')) }}
-      {{ toggle('auto_backup_epub_fixes', _('Enable CWA EPUB Fixer Auto-Backup'), _('Keeps the original of every EPUB the fixer changed.')) }}
-      {{ toggle('auto_zip_backups', _('Enable CWA Auto-Zip Backups'), _('Compresses the backups once a day to save space.')) }}
+      {{ toggle('auto_backup_imports', _('Enable Import Auto-Backup'), _('Keeps a copy of every imported file in /config/processed_books/imported.')) }}
+      {{ toggle('auto_backup_conversions', _('Enable Conversion Auto-Backup'), _('Keeps the original of every converted file.')) }}
+      {{ toggle('auto_backup_epub_fixes', _('Enable EPUB Fixer Auto-Backup'), _('Keeps the original of every EPUB the fixer changed.')) }}
+      {{ toggle('auto_zip_backups', _('Enable Auto-Zip Backups'), _('Compresses the backups once a day to save space.')) }}
     </div>
   </section>
 
