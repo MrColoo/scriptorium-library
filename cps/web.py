@@ -1463,6 +1463,9 @@ def list_books():
     search_param = request.args.get("search")
     sort_param = request.args.get("sort", "id")
     order = request.args.get("order", "").lower()
+    # Only these two words may reach the ORDER BY clause built below.
+    if order not in ("asc", "desc"):
+        order = ""
     state = None
     join = tuple()
 

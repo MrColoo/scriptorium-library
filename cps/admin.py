@@ -656,6 +656,9 @@ def list_users():
         if sort not in ub.User.__table__.columns.keys():
             sort = "id"
     order = request.args.get("order", "").lower()
+    # Only these two words may reach the ORDER BY clause built below.
+    if order not in ("asc", "desc"):
+        order = ""
 
     if sort != "state" and order:
         order = text(sort + " " + order)
