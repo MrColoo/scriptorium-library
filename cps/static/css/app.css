@@ -962,3 +962,8 @@ a.format-tile:hover { border-color: var(--border-strong); background: var(--surf
 .rank-list li:first-child { border-top: 0; }
 ol.rank-list li::before { counter-increment: rank; content: counter(rank); width: 18px; color: var(--text-faint); font-variant-numeric: tabular-nums; font-size: 12px; }
 .select.select--auto, .input.input--auto { width: auto; }
+.toolbar form { display: contents; }
+.pick-list { list-style: none; margin: 8px 0 0; padding: 4px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.pick-list > li.muted { padding: 8px 12px; }
+.pick-item { display: block; width: 100%; text-align: left; padding: 8px 12px; border: 0; border-radius: var(--radius-sm); background: none; color: var(--text); font: inherit; cursor: pointer; }
+.pick-item:hover, .pick-item:focus-visible { background: var(--surface-hover); }

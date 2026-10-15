@@ -1,24 +1,23 @@
 {% extends "layout.html" %}
+{% block content_class %}content--wide{% endblock %}
 {% block body %}
-<div class="discover">
-  <h2>Calibre-Web Automated Stats</h2>
-    <div>
-      <h3>{{title}}</h3><br>
-      <table class="table table-striped">
-        <tr>
-          {% for header in table_headers %}
-          <th>{{ header }}</th>
-          {% endfor %}
-        </tr>
-        {% for row in data|reverse %}
-        <tr>
-          {% for cell in row %}
-          <td>
-            <div style="max-height: 20rem; overflow-y: auto;">{{ cell|nl2br }}</div>
-          </td>
-          {% endfor %}
-        </tr>
-        {% endfor %}
-      </table>
+<div class="page-header">
+  <div>
+    <span class="page-eyebrow"><a href="{{ url_for('cwa_stats.cwa_stats_show', tab='system') }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Statistics') }}</a></span>
+    <h1 class="page-title">{{ title }}</h1>
+    <span class="page-subtitle">{{ ngettext('%(num)s entry', '%(num)s entries', data|length, num=data|length) }}</span>
+  </div>
+</div>
+<div class="table-wrap">
+  <table class="table">
+    <thead><tr>{% for header in table_headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+    <tbody>
+      {%- for row in data|reverse %}
+      <tr>{% for cell in row %}<td class="cell-wrap"><div class="table-scroll-cell">{{ cell|nl2br }}</div></td>{% endfor %}</tr>
+      {%- else %}
+      <tr><td colspan="{{ table_headers|length }}" class="muted center">{{ _('Nothing yet.') }}</td></tr>
+      {%- endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}

@@ -1651,7 +1651,7 @@ def cwa_scheduled_upcoming_ops():
 def show_full_enforcement():
     cwa_db = CWA_DB()
     data = cwa_db.enforce_show(paths=False, verbose=True, web_ui=True)
-    return render_title_template("cwa_stats_full.html", title=_("Calibre-Web Automated - Full Enforcement History"), page="cwa-stats-full",
+    return render_title_template("cwa_stats_full.html", title=_("Full Enforcement History"), page="cwa-stats-full",
                                     table_headers=headers["enforcement"]["no_paths"], data=data)
 
 @cwa_stats.route("/cwa-stats-show/full-enforcement-with-paths", methods=["GET", "POST"])
@@ -1660,7 +1660,7 @@ def show_full_enforcement():
 def show_full_enforcement_path():
     cwa_db = CWA_DB()
     data = cwa_db.enforce_show(paths=True, verbose=True, web_ui=True)
-    return render_title_template("cwa_stats_full.html", title=_("Calibre-Web Automated - Full Enforcement History (w/ Paths)"), page="cwa-stats-full",
+    return render_title_template("cwa_stats_full.html", title=_("Full Enforcement History (w/ Paths)"), page="cwa-stats-full",
                                     table_headers=headers["enforcement"]["with_paths"], data=data)
 
 @cwa_stats.route("/cwa-stats-show/full-imports", methods=["GET", "POST"])
@@ -1669,7 +1669,7 @@ def show_full_enforcement_path():
 def show_full_imports():
     cwa_db = CWA_DB()
     data = cwa_db.get_import_history(verbose=True)
-    return render_title_template("cwa_stats_full.html", title=_("Calibre-Web Automated - Full Import History"), page="cwa-stats-full",
+    return render_title_template("cwa_stats_full.html", title=_("Full Import History"), page="cwa-stats-full",
                                     table_headers=headers["imports"], data=data)
 
 @cwa_stats.route("/cwa-stats-show/full-conversions", methods=["GET", "POST"])
@@ -1678,7 +1678,7 @@ def show_full_imports():
 def show_full_conversions():
     cwa_db = CWA_DB()
     data = cwa_db.get_conversion_history(verbose=True)
-    return render_title_template("cwa_stats_full.html", title=_("Calibre-Web Automated - Full Conversion History"), page="cwa-stats-full",
+    return render_title_template("cwa_stats_full.html", title=_("Full Conversion History"), page="cwa-stats-full",
                                     table_headers=headers["conversions"], data=data)
 
 @cwa_stats.route("/cwa-stats-show/full-epub-fixer", methods=["GET", "POST"])
@@ -1687,7 +1687,7 @@ def show_full_conversions():
 def show_full_epub_fixer():
     cwa_db = CWA_DB()
     data = cwa_db.get_epub_fixer_history(fixes=False, verbose=True)
-    return render_title_template("cwa_stats_full.html", title=_("Calibre-Web Automated - Full EPUB Fixer History (w/out Paths & Fixes)"), page="cwa-stats-full",
+    return render_title_template("cwa_stats_full.html", title=_("Full EPUB Fixer History (w/out Paths & Fixes)"), page="cwa-stats-full",
                                     table_headers=headers["epub_fixer"]["no_fixes"], data=data)
 
 @cwa_stats.route("/cwa-stats-show/full-epub-fixer-with-paths-fixes", methods=["GET", "POST"])
@@ -1696,7 +1696,7 @@ def show_full_epub_fixer():
 def show_full_epub_fixer_with_paths_fixes():
     cwa_db = CWA_DB()
     data = cwa_db.get_epub_fixer_history(fixes=True, verbose=True)
-    return render_title_template("cwa_stats_full.html", title=_("Calibre-Web Automated - Full EPUB Fixer History (w/ Paths & Fixes)"), page="cwa-stats-full",
+    return render_title_template("cwa_stats_full.html", title=_("Full EPUB Fixer History (w/ Paths & Fixes)"), page="cwa-stats-full",
                                     table_headers=headers["epub_fixer"]["with_fixes"], data=data)
 
 ##————————————————————————————————————————————————————————————————————————————##
@@ -1781,7 +1781,7 @@ def read_log(log_filename):
         with open(file_path, 'r') as f:
             log = f.read()
 
-        return render_title_template('cwa_read_log.html', title=_("Calibre-Web Automated - Log Archive - Read Log - %(name)s", name=log_filename), page="cwa-log-read",
+        return render_title_template('cwa_read_log.html', title=_("Log %(name)s", name=log_filename), page="cwa-log-read",
                                     log_filename=log_filename, log=log)
     
     except Exception as e:
@@ -1899,10 +1899,10 @@ def kill_convert_library(queue):
 @login_required_if_no_ano
 @admin_required
 def show_convert_library_page():
-    return render_title_template('cwa_convert_library.html', title=_("Calibre-Web Automated - Convert Library"), page="cwa-library-convert",
+    return render_title_template('cwa_convert_library.html', title=_("Convert Library"), page="cwa-library-convert",
                                 target_format=CWA_DB().cwa_settings['auto_convert_target_format'].upper())
 
-@convert_library.route('/cwa-convert-library/schedule/<int:delay>', methods=["GET"])
+@convert_library.route('/cwa-convert-library/schedule/<int:delay>', methods=["POST"])
 @login_required_if_no_ano
 @admin_required
 def schedule_convert_library(delay: int):
@@ -1923,7 +1923,7 @@ def schedule_convert_library(delay: int):
 def show_convert_library_logs():
     logs=get_logs_from_archive("convert-library")
     log_dates = get_log_dates(logs)
-    return render_title_template('cwa_list_logs.html', title=_("Calibre-Web Automated - Convert Library"), page="cwa-library-convert-logs",
+    return render_title_template('cwa_list_logs.html', title=_("Convert Library – Run Archive"), page="cwa-library-convert-logs",
                                 logs=logs, log_dates=log_dates)
 
 @convert_library.route('/cwa-convert-library/download-current-log/<log_filename>')
@@ -1979,14 +1979,14 @@ def request_convert_library_cancel():
     # Create kill trigger file
     open(tempfile.gettempdir() + "/.kill_convert_library_trigger", 'w').close()
 
-@convert_library.route('/cwa-convert-library-start', methods=["GET"])
+@convert_library.route('/cwa-convert-library-start', methods=["POST"])
 @login_required_if_no_ano
 @admin_required
 def start_conversion():
     start_convert_library_run()
     return redirect(url_for('convert_library.show_convert_library_page'))
 
-@convert_library.route('/convert-library-cancel', methods=["GET"])
+@convert_library.route('/convert-library-cancel', methods=["POST"])
 @login_required_if_no_ano
 @admin_required
 def cancel_convert_library():
@@ -2062,9 +2062,9 @@ def kill_epub_fixer(queue):
 @login_required_if_no_ano
 @admin_required
 def show_epub_fixer_page():
-    return render_title_template('cwa_epub_fixer.html', title=_("Calibre-Web Automated - EPUB Fixer Service"), page="cwa-epub-fixer")
+    return render_title_template('cwa_epub_fixer.html', title=_("EPUB Fixer Service"), page="cwa-epub-fixer")
 
-@epub_fixer.route('/cwa-epub-fixer/schedule/<int:delay>', methods=["GET"])
+@epub_fixer.route('/cwa-epub-fixer/schedule/<int:delay>', methods=["POST"])
 @login_required_if_no_ano
 @admin_required
 def schedule_epub_fixer(delay: int):
@@ -2084,7 +2084,7 @@ def schedule_epub_fixer(delay: int):
 def show_epub_fixer_logs():
     logs = get_logs_from_archive("epub-fixer")
     log_dates = get_log_dates(logs)
-    return render_title_template('cwa_list_logs.html', title=_("Calibre-Web Automated - EPUB Fixer Service"), page="cwa-epub-fixer-logs",
+    return render_title_template('cwa_list_logs.html', title=_("EPUB Fixer – Run Archive"), page="cwa-epub-fixer-logs",
                                 logs=logs, log_dates=log_dates)
 
 @epub_fixer.route('/cwa-epub-fixer/download-current-log/<log_filename>')
@@ -2148,7 +2148,7 @@ def request_epub_fixer_cancel():
     except Exception as e:
         log.error(f"Failed to terminate epub fixer process: {e}")
 
-@epub_fixer.route('/cwa-epub-fixer-start', methods=["GET"])
+@epub_fixer.route('/cwa-epub-fixer-start', methods=["POST"])
 @login_required_if_no_ano
 @admin_required
 def start_epub_fixer():
@@ -2206,7 +2206,7 @@ def run_epub_fixer_for_book():
         log.error(f"Failed to start EPUB Fixer for book {book_id}: {e}")
         return jsonify({"success": False, "error": _("Failed to start EPUB Fixer for selected book.")}), 500
 
-@epub_fixer.route('/epub-fixer-cancel', methods=["GET"])
+@epub_fixer.route('/epub-fixer-cancel', methods=["POST"])
 @login_required_if_no_ano
 @admin_required
 def cancel_epub_fixer():

@@ -1,0 +1,33 @@
+{#- Shared layout for the batch services (Convert Library, EPUB Fixer). -#}
+{% import "_macros.html" as ui with context %}
+{% macro service_controls(start_url, cancel_url, schedule_endpoint, logs_url, download_url) -%}
+<div class="toolbar">
+  <form method="post" action="{{ start_url }}">{{ ui.csrf_field() }}<button class="btn btn-primary" type="submit">{{ ui.icon('play') }}{{ _('Start') }}</button></form>
+  <form method="post" action="{{ cancel_url }}" data-confirm="{{ _('Stop the current run? Books already processed stay processed.') }}" data-confirm-action="{{ _('Cancel') }}">
+    {{ ui.csrf_field() }}<button class="btn btn-danger-ghost" type="submit">{{ ui.icon('x') }}{{ _('Cancel') }}</button></form>
+  <details class="menu">
+    <summary class="btn">{{ ui.icon('clock') }}{{ _('Schedule') }}{{ ui.icon('chevron-down', 'icon-sm') }}</summary>
+    <div class="menu-panel menu-panel--left" role="menu">
+      {%- for delay in [5, 15, 60] %}
+      <form method="post" action="{{ url_for(schedule_endpoint, delay=delay) }}">{{ ui.csrf_field() }}
+        <button class="menu-item" type="submit" role="menuitem">{{ _('In %(minutes)s minutes', minutes=delay) }}</button></form>
+      {%- endfor %}
+    </div>
+  </details>
+  <span class="grow"></span>
+  <a class="btn btn-ghost" href="{{ logs_url }}">{{ ui.icon('history') }}{{ _('Run Archive') }}</a>
+  <a class="btn btn-ghost" href="{{ download_url }}">{{ ui.icon('download') }}{{ _('Download Log') }}</a>
+</div>
+{%- endmacro %}
+
+{% macro service_status(status_url) -%}
+<section class="card" aria-labelledby="run-status-h" data-run-status="{{ status_url }}">
+  <div class="row-between">
+    <h2 class="card-title" id="run-status-h">{{ _('Current run') }}</h2>
+    <span class="badge" data-run-state>{{ _('Idle') }}</span>
+  </div>
+  <div class="progress progress--lg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-run-progress><span style="width: 0%"></span></div>
+  <pre class="log-view" data-run-log>{{ _('No current or previous run to display. Press the Start button above to initiate a run.') }}</pre>
+  <script type="application/json" data-run-i18n>{{ {'running': _('Running'), 'done': _('Finished'), 'cancelled': _('Cancelled'), 'idle': _('Idle')}|tojson }}</script>
+</section>
+{%- endmacro %}

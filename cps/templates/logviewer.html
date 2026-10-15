@@ -1,30 +1,23 @@
 {% extends "layout.html" %}
 {% block body %}
-   <div id="log_group" class="inputs">
-     {% if log_enable %}
-      <div><input type="radio" name="log_radio" id="log1" value="0" checked>
-      <label for="log1">{{_('Show Calibre-Web Log: ')}}</label>{{logfiles[0]}}</div>
-     {% else %}
-     <div><label for="log1">{{_('Calibre-Web Log: ')}}</label> {{_("Stream output, can't be displayed")}}</div>
-     {% endif %}
-     {% if accesslog_enable %}
-      <div><input type="radio" name="log_radio" id="log0" value="1" {% if not log_enable %}checked{% endif %}>
-      <label for="log0">{{_('Show Access Log: ')}}</label>{{logfiles[1]}}</div>
-     {% endif %}
-   </div>
-  <div class="row">
-    <div class="col-xs-6 col-sm-7">
-      {% if log_enable %}
-      <a class="btn btn-default" id="log_file_0" href="{{url_for('admin.download_log', logtype=0)}}">{{_('Download Calibre-Web Log')}}</a>
-      {% endif %}
-      {% if accesslog_enable %}
-      <a class="btn btn-default" id="log_file_1" href="{{url_for('admin.download_log', logtype=1)}}">{{_('Download Access Log')}}</a>
-      {% endif %}
-    </div>
+<div class="page-header">
+  <div>
+    <span class="page-eyebrow"><a href="{{ url_for('admin.admin') }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Settings') }}</a></span>
+    <h1 class="page-title">{{ _('Logfile viewer') }}</h1>
   </div>
-   <div id="renderer" class="log"></div>
-
+  <div class="page-actions">
+    {%- if log_enable %}<a class="btn btn-sm" href="{{ url_for('admin.download_log', logtype=0) }}" id="log_file_0">{{ ui.icon('download') }}{{ _('Download Calibre-Web Log') }}</a>{% endif %}
+    {%- if accesslog_enable %}<a class="btn btn-sm" href="{{ url_for('admin.download_log', logtype=1) }}" id="log_file_1">{{ ui.icon('download') }}{{ _('Download Access Log') }}</a>{% endif %}
+  </div>
+</div>
+{%- if log_enable or accesslog_enable %}
+<div class="segmented" role="group" aria-label="{{ _('Log') }}" id="log_group">
+  {%- if log_enable %}<label><input type="radio" name="log_radio" value="0" checked data-log-url="{{ url_for('admin.send_logfile', logtype=0) }}"><span>{{ _('Calibre-Web Log') }}</span></label>{% endif %}
+  {%- if accesslog_enable %}<label><input type="radio" name="log_radio" value="1" {% if not log_enable %}checked{% endif %} data-log-url="{{ url_for('admin.send_logfile', logtype=1) }}"><span>{{ _('Access Log') }}</span></label>{% endif %}
+</div>
+<pre class="log-view" id="renderer" aria-live="polite"></pre>
+{%- else %}
+{{ ui.empty_state('file', _('Logs go to the console'), _("Stream output, can't be displayed")) }}
+{%- endif %}
 {% endblock %}
-{% block js %}
-<script src="{{ url_for('static', filename='js/logviewer.js') }}"></script>
-{% endblock %}
+{% block js %}<script src="{{ url_for('static', filename='js/logviewer.js') }}"></script>{% endblock %}

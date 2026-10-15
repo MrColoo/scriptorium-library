@@ -1,36 +1,32 @@
 {% extends "layout.html" %}
-
-{% block header %}
-<style>
-</style>
-{% endblock %}
-
+{% block content_class %}content--narrow{% endblock %}
 {% block body %}
-<div class="discover">
-  <h2>{{title}}</h2>
-
+<div class="page-header">
   <div>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h3 style="margin: 0;">{{title}} - Logs</h3>
-    </div>
-    <br>
-    <table class="table table-striped">
-      <tr>
-        <th>Log Date</th>
-        <th>Log Filename</th>
-        <th>Open Log</th>
-        <th>Download Log</th>
-      </tr>
-      {% for log, log_path in logs.items() %}
-      <tr>
-        <td>{{ log_dates[log]["date"] }} {{ log_dates[log]["time"] }}</td>
-        <td>{{ log }}</td>
-        <td><a href="{{ url_for('cwa_logs.read_log', log_filename=log) }}">Open in Browser</a></td>
-        <td><a href="{{ url_for('cwa_logs.download_log', log_filename=log) }}">{{ log_path }}</a></td>
-      </tr>
-      {% endfor %}
-    </table>
+    <span class="page-eyebrow"><a href="{{ url_for('admin.admin') }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Settings') }}</a></span>
+    <h1 class="page-title">{{ title }}</h1>
+    <span class="page-subtitle">{{ _('Logs of previous runs, newest first.') }}</span>
   </div>
-
 </div>
+{%- if logs %}
+<div class="table-wrap">
+  <table class="table">
+    <thead><tr><th>{{ _('Date') }}</th><th>{{ _('File') }}</th><th><span class="sr-only">{{ _('Actions') }}</span></th></tr></thead>
+    <tbody>
+      {%- for log, log_path in logs.items() %}
+      <tr>
+        <td class="nowrap tabular">{{ log_dates[log]["date"] }} {{ log_dates[log]["time"] }}</td>
+        <td class="mono small break">{{ log }}</td>
+        <td class="nowrap">
+          <a class="btn btn-sm btn-ghost" href="{{ url_for('cwa_logs.read_log', log_filename=log) }}">{{ ui.icon('eye') }}{{ _('Open') }}</a>
+          <a class="btn btn-sm btn-ghost" href="{{ url_for('cwa_logs.download_log', log_filename=log) }}">{{ ui.icon('download') }}{{ _('Download') }}</a>
+        </td>
+      </tr>
+      {%- endfor %}
+    </tbody>
+  </table>
+</div>
+{%- else %}
+{{ ui.empty_state('file', _('No logs yet'), _('Logs appear here after the first run.')) }}
+{%- endif %}
 {% endblock %}
