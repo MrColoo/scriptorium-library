@@ -878,3 +878,11 @@ a.format-tile:hover { border-color: var(--border-strong); background: var(--surf
 .multiselect-options .menu-item { white-space: normal; }
 .multiselect-options input { accent-color: var(--accent); width: 15px; height: 15px; flex: none; }
 .row-nowrap { flex-wrap: nowrap; }
+.restriction-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; max-height: 280px; overflow-y: auto; }
+.restriction-item { display: flex; align-items: center; gap: 10px; padding: 6px 6px 6px 10px; border: 1px solid var(--border); border-radius: var(--radius); }
+.avatar { overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.sortable.is-disabled .sortable-item { cursor: default; opacity: .65; }
+.steps h3 { font-size: 15px; }
+.page-header > .identity { flex-direction: row; align-items: center; gap: 16px; }
+.identity-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }

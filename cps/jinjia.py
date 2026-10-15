@@ -262,3 +262,9 @@ def format_minutes(minutes):
     if hours:
         return "{} h {:02d} min".format(hours, mins)
     return "{} min".format(mins)
+
+
+@jinjia.app_template_global('kobo_overview')
+def kobo_overview_global(user):
+    from .reading_overview import kobo_overview
+    return kobo_overview(user)

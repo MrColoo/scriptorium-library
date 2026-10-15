@@ -1,0 +1,29 @@
+{#- Allowed/denied tag and custom-column value editor. Open with a button carrying
+    data-restrictions-open="<res_type>" data-restrictions-user="<user id or 0>" data-restrictions-title="…".
+    res_type: 0 default tags, 1 default column values, 2 user tags, 3 user column values. -#}
+{% macro restrictions_dialog() -%}
+<dialog class="modal" id="restrictions-dialog" aria-labelledby="restrictions-title"
+        data-list-url="{{ url_for('admin.list_restriction', res_type=0)[:-2] }}"
+        data-add-url="{{ url_for('admin.add_user_0_restriction', res_type=0)[:-2] }}"
+        data-delete-url="{{ url_for('admin.delete_user_0_restriction', res_type=0)[:-2] }}">
+  <div class="modal-header">
+    <h2 id="restrictions-title">{{ _('Allowed and denied values') }}</h2>
+    <button class="btn btn-ghost btn-icon" type="button" data-dialog-close aria-label="{{ _('Close') }}"><svg class="icon" aria-hidden="true"><use href="{{ url_for('static', filename='img/icons.svg') }}#x"></use></svg></button>
+  </div>
+  <div class="modal-body">
+    <p class="hint">{{ _('Allowed values limit the library to books that have them. Denied values hide every book that has them.') }}</p>
+    <ul class="restriction-list" data-restrictions-list></ul>
+    <p class="muted small" data-restrictions-empty hidden>{{ _('No restrictions yet.') }}</p>
+    <form class="stack-sm" data-restrictions-form>
+      <label class="label" for="restriction-value">{{ _('Add View Restriction') }}</label>
+      <div class="row row-nowrap">
+        <input class="input" type="text" id="restriction-value" name="add_element" required autocomplete="off">
+        <button class="btn" type="submit" name="submit_allow" value="1">{{ _('Allow') }}</button>
+        <button class="btn btn-danger-ghost" type="submit" name="submit_deny" value="1">{{ _('Deny') }}</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+<script type="application/json" id="restrictions-i18n">{{ {'allow': _('Allow'), 'deny': _('Deny'), 'remove': _('Remove')}|tojson }}</script>
+<script src="{{ url_for('static', filename='js/restrictions.js') }}" defer></script>
+{%- endmacro %}

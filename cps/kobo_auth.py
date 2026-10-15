@@ -51,8 +51,9 @@ from binascii import hexlify
 from datetime import datetime
 from os import urandom
 from functools import wraps
+import secrets
 
-from flask import g, Blueprint, abort, request
+from flask import g, Blueprint, abort, request, redirect, url_for, jsonify
 from .cw_login import login_user, current_user
 from flask_babel import gettext as _
 from flask_limiter import RateLimitExceeded
@@ -73,10 +74,32 @@ def _require_self_or_admin(user_id):
         abort(403)
 
 
-@kobo_auth.route("/generate_auth_token/<int:user_id>")
+def _settings_page_for(user_id):
+    if user_id == current_user.id:
+        return url_for("web.profile") + "#kobo"
+    return url_for("admin.edit_user", user_id=user_id) + "#kobo"
+
+
+@kobo_auth.route("/generate_auth_token/<int:user_id>", methods=["GET", "POST"])
 @user_login_required
 def generate_auth_token(user_id):
     _require_self_or_admin(user_id)
+    if request.method == "POST":
+        # Creating (or regenerating) a token changes state, so it only happens on a CSRF-checked POST.
+        existing = ub.session.query(ub.RemoteAuthToken).filter(
+            ub.RemoteAuthToken.user_id == user_id, ub.RemoteAuthToken.token_type == 1)
+        if request.form.get("regenerate"):
+            existing.delete()
+            ub.session_commit()
+        if not existing.first():
+            new_token = ub.RemoteAuthToken()
+            new_token.user_id = user_id
+            new_token.expiration = datetime.max
+            new_token.auth_token = secrets.token_hex(16)
+            new_token.token_type = 1
+            ub.session.add(new_token)
+            ub.session_commit()
+        return redirect(_settings_page_for(user_id))
     warning = False
     host_list = request.host.rsplit(':')
     if len(host_list) == 1:
@@ -116,8 +139,10 @@ def delete_auth_token(user_id):
     # Invalidate any previously generated Kobo Auth token for this user
     ub.session.query(ub.RemoteAuthToken).filter(ub.RemoteAuthToken.user_id == user_id)\
         .filter(ub.RemoteAuthToken.token_type==1).delete()
-
-    return ub.session_commit()
+    ub.session_commit()
+    if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+        return jsonify({"success": True})
+    return redirect(_settings_page_for(user_id))
 
 
 def disable_failed_auth_redirect_for_blueprint(bp):

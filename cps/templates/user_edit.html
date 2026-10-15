@@ -1,868 +1,401 @@
 {% extends "layout.html" %}
-{% block header %}
-<style>
-  /* Hide the original :before pseudo-elements for user_edit template */
-  body.me > div.container-fluid > div.row-fluid > div.col-sm-10:before {
-    display: none !important;
-  }
-  
-  body.me > div.container-fluid > div > div.col-sm-10 > div.discover[name="profile-page"]:before {
-    display: none !important;
-  }
-  
-  /* Main container positioning */
-  body.me > div.container-fluid > div > div.col-sm-10 > div.discover[name="profile-page"] {
-      margin: 4rem !important;
-      width: 80% !important;
-      padding: 0px !important;
-      border: none;
-      justify-self: center;
-  }
-  
-  /* Profile header flexbox container */
-  .profile-header-container {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: #1f2c3554;
-    border-radius: 8px;
-  }
-  
-  .profile-picture {
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYwIiBoZWlnaHQ9IjU2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyI+CiAgICAgICAgPHBhdGggZD0iTTE0NC4yOTEgNDkyLjMyNUMxNjYuNjI0IDQ3Ni4yNjUgMTkzLjE5NCA0NjYuMTU2IDIyNCA0NjJjMTIuNDQ0IDkuMzMzIDMxLjExMSAxNCA1NiAxNHM0My41NTYtNC42NjcgNTYtMTRjMzAuODA2IDQuMTU2IDU3LjM3NiAxNC4yNjQgNzkuNzA5IDMwLjMyNUMzNzYuNTI3IDUxNy40MzUgMzI5Ljk1MSA1MzIgMjgwIDUzMmMtNDkuOTUxIDAtOTYuNTI3LTE0LjU2NS0xMzUuNzA5LTM5LjY3NXoiIGZpbGwtb3BhY2l0eT0iLjYiLz4KICAgICAgICA8cGF0aCBkPSJNMjI0IDQ2MmwxMi44OC00MC4yNTFDMTk2LjQyOSAzOTcuNDYyIDE2OCAzNDAuMDM1IDE2OCAyNzMuMDU5YzAtMzUuMTkzIDcuODQ5LTY3Ljc1IDIxLjE2OC05NC4yNDggMTYuMTczIDQuOTc3IDM1LjMxNSA3Ljg1NiA1NS44MzIgNy44NTYgNTEuMTA0IDAgOTMuNjgtMTcuODYgMTAzLjA3Mi00MS41MTZDMzc0Ljc3OSAxNzQuNTg4IDM5MiAyMjAuOTMxIDM5MiAyNzMuMDU5YzAgNjYuOTc2LTI4LjQyOSAxMjQuNDAzLTY4Ljg4IDE0OC42OUwzMzYgNDYyYy0xMi40NDQgOS4zMzMtMzEuMTExIDE0LTU2IDE0LTI0LjY5NCAwLTQzLjI2My00LjU5NC01NS43MDctMTMuNzgyTDIyNCA0NjJ6IiBmaWxsLW9wYWNpdHk9Ii43NSIvPgogICAgICAgIDxwYXRoIGQ9Ik0xODAuMDY0IDM0NS44NDlDMTU1LjI4MiAzMTguMDY3IDE0MCAyNzkuOTk3IDE0MCAyMzhjMC04NS4wNTIgNjIuNjgtMTU0IDE0MC0xNTRzMTQwIDY4Ljk0OCAxNDAgMTU0YzAgNDEuOTk3LTE1LjI4MiA4MC4wNjctNDAuMDY0IDEwNy44NDkgNy43MTYtMjEuODYyIDEyLjA2NC00Ni41OTYgMTIuMDY0LTcyLjc5IDAtNTIuMTI4LTE3LjIyMS05OC40NzEtNDMuOTI4LTEyNy45MDgtOS4zOTIgMjMuNjU2LTUxLjk2OCA0MS41MTYtMTAzLjA3MiA0MS41MTYtMjAuNTE3IDAtMzkuNjU5LTIuODc5LTU1LjgzMi03Ljg1NkMxNzUuODQ5IDIwNS4zMDkgMTY4IDIzNy44NjYgMTY4IDI3My4wNTljMCAyNi4xOTQgNC4zNDggNTAuOTI4IDEyLjA2NCA3Mi43OXoiIGZpbGwtb3BhY2l0eT0iLjQ1Ii8+CiAgICAgICAgPHBhdGggZD0iTTI4MCA1MzJjMTM5LjE3NiAwIDI1Mi0xMTIuODI0IDI1Mi0yNTJTNDE5LjE3NiAyOCAyODAgMjggMjggMTQwLjgyNCAyOCAyODBzMTEyLjgyNCAyNTIgMjUyIDI1MnptMCAyOEMxMjUuMzYgNTYwIDAgNDM0LjY0IDAgMjgwUzEyNS4zNiAwIDI4MCAwczI4MCAxMjUuMzYgMjgwIDI4MC0xMjUuMzYgMjgwLTI4MCAyODB6IiBmaWxsLW9wYWNpdHk9Ii43NSIvPgogICAgPC9nPgo8L3N2Zz4K);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .profile-picture .fallback-icon {
-    display: none;
-    font-size: 4rem;
-    line-height: 1;
-  }
-  
-  .profile-picture.no-custom-picture {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYwIiBoZWlnaHQ9IjU2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9IiNGRkYiIGZpbGwtcnVsZT0ibm9uemVybyI+CiAgICAgICAgPHBhdGggZD0iTTE0NC4yOTEgNDkyLjMyNUMxNjYuNjI0IDQ3Ni4yNjUgMTkzLjE5NCA0NjYuMTU2IDIyNCA0NjJjMTIuNDQ0IDkuMzMzIDMxLjExMSAxNCA1NiAxNHM0My41NTYtNC42NjcgNTYtMTRjMzAuODA2IDQuMTU2IDU3LjM3NiAxNC4yNjQgNzkuNzA5IDMwLjMyNUMzNzYuNTI3IDUxNy40MzUgMzI5Ljk1MSA1MzIgMjgwIDUzMmMtNDkuOTUxIDAtOTYuNTI3LTE0LjU2NS0xMzUuNzA5LTM5LjY3NXoiIGZpbGwtb3BhY2l0eT0iLjYiLz4KICAgICAgICA8cGF0aCBkPSJNMjI0IDQ2MmwxMi44OC00MC4yNTFDMTk2LjQyOSAzOTcuNDYyIDE2OCAzNDAuMDM1IDE2OCAyNzMuMDU5YzAtMzUuMTkzIDcuODQ5LTY3Ljc1IDIxLjE2OC05NC4yNDggMTYuMTczIDQuOTc3IDM1LjMxNSA3Ljg1NiA1NS44MzIgNy44NTYgNTEuMTA0IDAgOTMuNjgtMTcuODYgMTAzLjA3Mi00MS41MTZDMzc0Ljc3OSAxNzQuNTg4IDM5MiAyMjAuOTMxIDM5MiAyNzMuMDU5YzAgNjYuOTc2LTI4LjQyOSAxMjQuNDAzLTY4Ljg4IDE0OC42OUwzMzYgNDYyYy0xMi40NDQgOS4zMzMtMzEuMTExIDE0LTU2IDE0LTI0LjY5NCAwLTQzLjI2My00LjU5NC01NS43MDctMTMuNzgyTDIyNCA0NjJ6IiBmaWxsLW9wYWNpdHk9Ii43NSIvPgogICAgICAgIDxwYXRoIGQ9Ik0xODAuMDY0IDM0NS44NDlDMTU1LjI4MiAzMTguMDY3IDE0MCAyNzkuOTk3IDE0MCAyMzhjMC04NS4wNTIgNjIuNjgtMTU0IDE0MC0xNTRzMTQwIDY4Ljk0OCAxNDAgMTU0YzAgNDEuOTk3LTE1LjI4MiA4MC4wNjctNDAuMDY0IDEwNy44NDkgNy43MTYtMjEuODYyIDEyLjA2NC00Ni41OTYgMTIuMDY0LTcyLjc5IDAtNTIuMTI4LTE3LjIyMS05OC40NzEtNDMuOTI4LTEyNy45MDgtOS4zOTIgMjMuNjU2LTUxLjk2OCA0MS41MTYtMTAzLjA3MiA0MS41MTYtMjAuNTE3IDAtMzkuNjU5LTIuODc5LTU1LjgzMi03Ljg1NkMxNzUuODQ5IDIwNS4zMDkgMTY4IDIzNy44NjYgMTY4IDI3My4wNTljMCAyNi4xOTQgNC4zNDggNTAuOTI4IDEyLjA2NCA3Mi43OXoiIGZpbGwtb3BhY2l0eT0iLjQ1Ii8+CiAgICAgICAgPHBhdGggZD0iTTI4MCA1MzJjMTM5LjE3NiAwIDI1Mi0xMTIuODI0IDI1Mi0yNTJTNDE5LjE3NiAyOCAyODAgMjggMjggMTQwLjgyNCAyOCAyODBzMTEyLjgyNCAyNTIgMjUyIDI1MnptMCAyOEMxMjUuMzYgNTYwIDAgNDM0LjY0IDAgMjgwUzEyNS4zNiAwIDI4MCAwczI4MCAxMjUuMzYgMjgwIDI4MC0xMjUuMzYgMjgwLTI4MCAyODB6IiBmaWxsLW9wYWNpdHk9Ii43NSIvPgogICAgPC9nPgo8L3N2Zz4K);
-  }
-  
-  .profile-title-section {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .profile-title-section h2 {
-    margin: 0;
-    color: #ffc200;
-  }
-  
-  .profile-subtitle {
-    font-size: 1.2rem;
-    color: #bbbbbb;
-    margin: 0;
-  }
-  
-  /* Mobile responsive styles for user_edit template - triggers below 768px */
-  @media (max-width: 768px) {
-    body.me > div.container-fluid > div > div.col-sm-10 > div.discover[name="profile-page"] {
-      margin-inline: 3rem !important;
-      width: 90% !important;
-      justify-self: center !important;
-      padding-top: 0px !important;
-    }
-    
-    .profile-header-container {
-      flex-direction: column;
-      text-align: center;
-      padding: 15px;
-      gap: 15px;
-    }
-    
-    .profile-picture {
-      width: 100px;
-      height: 100px;
-    }
-    
-    .profile-picture .fallback-icon {
-      font-size: 3rem;
-    }
-    
-    .profile-title-section {
-      align-items: center;
-    }
-    
-    .profile-title-section h2 {
-      font-size: 1.5rem;
-    }
-    
-    .profile-subtitle {
-      font-size: 1rem;
-    }
-  }
-
-  .opds-order-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-    background: #2a3441;
-    border: 1px solid #444;
-    border-radius: 6px;
-    cursor: move;
-    transition: all 0.2s;
-  }
-
-  .opds-order-item.dragging {
-    opacity: 0.6;
-    background: #344151;
-    border-color: #5a6b7d;
-  }
-
-  .opds-order-drag-handle {
-    color: #ffc200;
-    margin-right: 12px;
-    font-size: 18px;
-    user-select: none;
-  }
-
-  .opds-order-label {
-    color: white;
-    font-weight: 500;
-  }
-
-  .opds-order-toggle {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: #c5c5c5;
-    font-size: 13px;
-  }
-
-  .magic-shelf-icon {
-    margin-right: 8px;
-    font-size: 16px;
-  }
-
-  .order-list-disabled .opds-order-item {
-    opacity: 0.6;
-    cursor: default;
-  }
-</style>
-{% endblock %}
+{% from '_restrictions.html' import restrictions_dialog %}
 {% block body %}
-<div name="profile-page" class="discover" style="padding-top: 0px !important;">
-  <h2>{{title}}</h2>
-  <!-- Profile Header with Picture and Title -->
-  <div class="profile-header-container">
-    <div class="profile-picture" id="user-profile-picture">
-      <span class="fallback-icon">👤</span>
-    </div>
-    <div class="profile-title-section">
-      <h2>{{title}}</h2>
-      <p class="profile-subtitle">{% if profile %}{{_('Your Profile')}}{% else %}{{_('User Settings')}}{% endif %}</p>
+{%- set is_admin_view = current_user.role_admin() and not profile %}
+{%- set is_anon = content.role_anonymous() %}
+{%- set kobo = kobo_overview(content) if (kobo_support and not new_user and not is_anon) else none %}
+<div class="page-header">
+  <div class="identity">
+    <span class="avatar avatar--lg" id="user-profile-picture" data-username="{{ content.name }}">{{ (content.name or '?')[:1]|upper }}</span>
+    <div class="identity-text">
+      {%- if is_admin_view %}<span class="page-eyebrow"><a href="{{ url_for('admin.admin') }}">{{ _('Settings') }}</a> / {{ _('Users') }}</span>{% endif %}
+      <h1 class="page-title">{% if new_user %}{{ _('Add New User') }}{% else %}{{ content.name }}{% endif %}</h1>
+      {%- if not new_user %}<span class="page-subtitle">{{ content.email or '' }}</span>{% endif %}
     </div>
   </div>
-  <form role="form" method="POST" autocomplete="off" style="margin-top: 3rem;">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    
-    <!-- User Account Information Card -->
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('Account Information')}}</h4>
-      
-      {% if new_user or ( current_user and content.name != "Guest" and current_user.role_admin() ) %}
-      <div class="form-group required">
-        <label for="name">{{_('Username')}}</label>
-        <input type="text" class="form-control" name="name" id="name" value="{{ content.name if content.name != None }}" autocomplete="off">
-      </div>
-      {% endif %}
+</div>
 
-      <p class="cwa-settings-tip">{{_('If you need to change your email address or password, you can do so here.')}}</p>
-      
-      <div class="form-group">
-        <label for="email">{{_('Email')}}</label>
-        <input type="email" class="form-control" name="email" id="email" value="{{ content.email if content.email != None }}" autocomplete="off">
-      </div>
-      
-      {% if ( current_user and current_user.role_passwd() or current_user.role_admin() ) and not content.role_anonymous() %}
-        {% if current_user and current_user.role_admin() and not new_user and not profile and ( mail_configured and content.email if content.email != None ) %}
-        <div style="margin-bottom: 15px;">
-          <a class="btn btn-default postAction" id="resend_password" role="button" data-action="{{url_for('admin.reset_user_password', user_id = content.id) }}">{{_('Reset user Password')}}</a>
-        </div>
-        {% endif %}
-        <div class="form-group">
-          <label for="password">{{_('Password')}}</label>
-          <input type="password" class="form-control" name="password" id="password" data-lang="{{ current_user.locale }}" data-verify="{{ config.config_password_policy }}" {% if config.config_password_policy %} data-min={{ config.config_password_min_length }} data-word={{ config.config_password_character }} data-special={{ config.config_password_special }} data-upper={{ config.config_password_upper }} data-lower={{ config.config_password_lower }} data-number={{ config.config_password_number }}{% endif %} value="" autocomplete="off">
-        </div>
-      {% endif %}
-    </div>
-    
-    <!-- eReader Configuration Card -->
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('eReader Configuration')}}</h4>
-      
-      <div class="form-group">
-        <label for="kindle_mail">{{_('Send to eReader Email Address')}}</label>
-        <input type="email" class="form-control" name="kindle_mail" id="kindle_mail" value="{{ content.kindle_mail if content.kindle_mail != None }}" placeholder="{{_('Use comma to separate multiple addresses')}}">
-        <p class="cwa-settings-tip">{{_('Email address(es) for your eReader devices. Separate multiple addresses with commas.')}}</p>
-      </div>
-      
-      <div class="form-group">
-        <label for="kindle_mail_subject">{{_('Send to eReader Subject')}}</label>
-        <input type="text" class="form-control" name="kindle_mail_subject" id="kindle_mail_subject" value="{{ content.kindle_mail_subject if content.kindle_mail_subject != None }}">
-      </div>
+<nav class="tabs" aria-label="{{ _('Sections') }}">
+  <a class="tab" href="#account">{{ _('Account') }}</a>
+  {%- if kobo is not none %}<a class="tab" href="#kobo">{{ ui.icon('device', 'icon-sm') }}Kobo</a>{% endif %}
+  <a class="tab" href="#devices">{{ _('eReaders') }}</a>
+  <a class="tab" href="#preferences">{{ _('Preferences') }}</a>
+  {%- if not is_anon and not new_user %}<a class="tab" href="#shelves">{{ _('Shelves & OPDS') }}</a>{% endif %}
+  {%- if is_admin_view %}<a class="tab" href="#permissions">{{ _('Permissions') }}</a>{% endif %}
+</nav>
 
-      {% if not content.role_anonymous() %}
-      <div style="margin-top: 20px;">
-        <input type="checkbox" id="allow_additional_ereader_emails" name="allow_additional_ereader_emails" {% if content.allow_additional_ereader_emails %}checked{% endif %} style="accent-color: var(--color-secondary);">
-        <label for="allow_additional_ereader_emails">{{_('Enable Send-to-eReader Pop-up Modal')}}</label>
-        <p class="cwa-settings-tip">
-          {{_('Enables or disables the Send-to-eReader Pop-up Modal that allows users to enter extra email addresses and only send to a selection of saved addresses when sending to eReader.')}}
-          <br><br>
-          {{_('When disabled, emails will be sent to all configured eReader addresses without prompting.')}}
-        </p>
-      </div>
-      {% endif %}
-      
-      {% if not content.role_anonymous() %}
-      <div style="margin-top: 20px;">
-        <input type="checkbox" id="auto_send_enabled" name="auto_send_enabled" {% if content.auto_send_enabled %}checked{% endif %} style="accent-color: var(--color-secondary);">
-        <label for="auto_send_enabled">{{_('Automatically send new books to my eReader(s)')}}</label>
-        <p class="cwa-settings-tip">{{_('When enabled, newly ingested books will be automatically sent to all configured eReader email addresses above.')}}</p>
-      </div>
-      {% endif %}
+<form class="stack-lg" id="user-form" method="post" autocomplete="off">
+  {{ ui.csrf_field() }}
+
+  {#- Account -#}
+  <section class="card" id="account" aria-labelledby="account-h">
+    <div class="card-header"><div><h2 class="card-title" id="account-h">{{ _('Account') }}</h2></div></div>
+    <div class="form-grid">
+      {%- if new_user or (content.name != "Guest" and current_user.role_admin()) %}
+      {{ ui.field('name', _('Username'), content.name, required=True, autocomplete='off') }}
+      {%- endif %}
+      {{ ui.field('email', _('Email'), content.email, type='email', autocomplete='email') }}
     </div>
-    
-    <!-- Language & Theme Preferences Card -->
-    {% if not content.role_anonymous() %}
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('Language & Theme Preferences')}}</h4>
-      
-      <div class="form-group">
-        <label for="locale">{{_('Interface Language')}}</label>
-        <select name="locale" id="locale" class="form-control">
-          {%  for translation in translations %}
-            <option value="{{translation}}" {% if translation|string == content.locale %}selected{% endif %}>{{ translation.display_name|capitalize }}</option>
-          {% endfor %}
-        </select>
+    {%- if (current_user.role_passwd() or current_user.role_admin()) and not is_anon %}
+    <div class="form-grid">
+      {%- if profile %}
+      <div class="field">
+        <label for="current_password">{{ _('Current password') }}</label>
+        <div class="password-field">
+          <input class="input" type="password" id="current_password" name="current_password" autocomplete="current-password">
+          <button class="btn btn-ghost btn-icon" type="button" data-password-toggle aria-label="{{ _('Show password') }}">{{ ui.icon('eye') }}</button>
+        </div>
+        <span class="field-hint">{{ _('Only needed to set a new password.') }}</span>
       </div>
-      
-      <div class="form-group">
-        <label for="default_language">{{_('Language of Books')}}</label>
-        <select name="default_language" id="default_language" class="form-control">
-          <option value="all" {% if content.default_language == "all" %}selected{% endif %}>{{ _('Show All') }}</option>
-          {%  for language in languages %}
-          <option value="{{ language.lang_code }}" {% if content.default_language == language.lang_code %}selected{% endif %}>{{ language.name }}</option>
-          {% endfor %}
-        </select>
-        <p class="cwa-settings-tip">{{_('Filter the library to only show books in a specific language.')}}</p>
-      </div>
-      
-      <div class="form-group">
-        <label for="theme">{{ _('Theme') }}</label>
-        <select name="theme" id="theme" class="form-control">
-          <option value="1" selected>caliBlur (Dark)</option>
-        </select>
+      {%- endif %}
+      <div class="field">
+        <label for="password">{{ _('New password') if not new_user else _('Password') }}</label>
+        <div class="password-field">
+          <input class="input" type="password" id="password" name="password" autocomplete="new-password"
+                 {%- if config.config_password_policy %} minlength="{{ config.config_password_min_length }}"{% endif %}
+                 {%- if new_user %} required{% endif %} data-password-strength>
+          <button class="btn btn-ghost btn-icon" type="button" data-password-toggle aria-label="{{ _('Show password') }}">{{ ui.icon('eye') }}</button>
+        </div>
+        <div class="strength" aria-hidden="true" data-strength><span></span><span></span><span></span><span></span></div>
+        {%- if config.config_password_policy %}
+        <span class="field-hint">
+          {{ _('At least %(num)s characters', num=config.config_password_min_length) }}
+          {%- if config.config_password_number %} · {{ _('a number') }}{% endif %}
+          {%- if config.config_password_lower %} · {{ _('a lowercase letter') }}{% endif %}
+          {%- if config.config_password_upper %} · {{ _('an uppercase letter') }}{% endif %}
+          {%- if config.config_password_character %} · {{ _('a letter') }}{% endif %}
+          {%- if config.config_password_special %} · {{ _('a special character') }}{% endif %}
+        </span>
+        {%- endif %}
       </div>
     </div>
-    {% else %}
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('Book Language Filter')}}</h4>
-      
-      <div class="form-group">
-        <label for="default_language">{{_('Language of Books')}}</label>
-        <select name="default_language" id="default_language" class="form-control">
-          <option value="all" {% if content.default_language == "all" %}selected{% endif %}>{{ _('Show All') }}</option>
-          {%  for language in languages %}
-          <option value="{{ language.lang_code }}" {% if content.default_language == language.lang_code %}selected{% endif %}>{{ language.name }}</option>
-          {% endfor %}
-        </select>
-        <p class="settings-explanation">{{_('Filter the library to only show books in a specific language.')}}</p>
+    {%- if is_admin_view and not new_user and mail_configured and content.email %}
+    <div><button class="btn btn-sm" type="button" data-post="{{ url_for('admin.reset_user_password', user_id=content.id) }}"
+                 data-confirm="{{ _('Send %(name)s a new random password by email?', name=content.name) }}" data-confirm-danger="false"
+                 data-confirm-action="{{ _('Reset user Password') }}">{{ ui.icon('key') }}{{ _('Reset user Password') }}</button></div>
+    {%- endif %}
+    {%- endif %}
+
+    {%- if registered_oauth.keys()|length > 0 and not new_user and profile %}
+    <div class="stack-sm">
+      <span class="label">{{ _('Linked accounts') }}</span>
+      <div class="row">
+        {%- for id, name in registered_oauth.items() %}
+          {%- if id not in oauth_status %}
+        <a class="btn btn-sm" href="{{ url_for('oauth.' + name + '_login') }}">{{ ui.icon('link') }}{{ _('Link') }} {{ name|capitalize }}</a>
+          {%- else %}
+        <a class="btn btn-sm" href="{{ url_for('oauth.' + name + '_login_unlink') }}">{{ ui.icon('x') }}{{ _('Unlink') }} {{ name|capitalize }}</a>
+          {%- endif %}
+        {%- endfor %}
       </div>
     </div>
-    {% endif %}
-    
-    <!-- OAuth & API Integrations Card -->
-    {% if (registered_oauth.keys()| length > 0 and not new_user and profile) or (hardcover_support and not new_user) or (kobo_support and not new_user) %}
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('OAuth & API Integrations')}}</h4>
-      
-      {% if registered_oauth.keys()| length > 0 and not new_user and profile %}
-        {% for id, name in registered_oauth.items() %}
-        <div class="form-group" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 0.5rem;">
-          <label style="display: block; margin-bottom: 8px;">{{ name|capitalize }} {{_('OAuth Settings')}}</label>
-          {% if id not in oauth_status %}
-          <a href="{{ url_for('oauth.'+ name +'_login') }}" id="config_{{ id }}_oauth" class="btn btn-primary">{{_('Link')}} {{ name|capitalize }} {{_('Account')}}</a>
-          {% else %}
-          <a href="{{ url_for('oauth.'+ name +'_login_unlink') }}" id="config_{{ id }}_oauth" class="btn btn-primary">{{_('Unlink')}} {{ name|capitalize }} {{_('Account')}}</a>
-          {% endif %}
-        </div>
-        {% endfor %}
-      {% endif %}
-      
-      {% if hardcover_support and not new_user %}
-      <div class="form-group">
-        <label for="hardcover_token">{{_('Hardcover API Token')}}</label>
-        <input type="text" class="form-control" name="hardcover_token" id="hardcover_token" value="{{ content.hardcover_token if content.hardcover_token != None }}">
-        <p class="cwa-settings-tip">{{_('API token for Hardcover metadata provider integration.')}}</p>
-      </div>
-      {% endif %}
-      
-      {% if kobo_support and not new_user %}
-      <div style="margin-top: 25px;">
-        <label style="display: block; margin-bottom: 12px; font-weight: bold;">{{ _('Kobo Sync Token')}}</label>
-        <div style="margin-bottom: 10px;">
-          <a class="btn btn-default" id="config_create_kobo_token" data-toggle="modal" data-target="#modal_kobo_token" data-remote="false" href="{{ url_for('kobo_auth.generate_auth_token', user_id=content.id) }}">{{_('Create/View')}}</a>
-          <div class="btn btn-danger" id="config_delete_kobo_token" data-value="{{ content.id }}" data-remote="false" {% if not content.remote_auth_token.first() %} style="display: none;" {% endif %}>{{_('Delete')}}</div>
-        </div>
-        <div>
-          <div class="btn btn-default" id="kobo_full_sync" data-value="{% if current_user.role_admin() %}{{ content.id }}{% else %}0{% endif %}" {% if not content.remote_auth_token.first() %} style="display: none;" {% endif %}>{{_('Force full kobo sync')}}</div>
-        </div>
-        {% if kobo_support and not content.role_anonymous() and not simple %}
-        <div style="margin-top: 20px;
-                    background: #202c34a3;
-                    padding: 2rem;">
-          <input type="checkbox" name="kobo_only_shelves_sync" id="kobo_only_shelves_sync" {% if content.kobo_only_shelves_sync %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="kobo_only_shelves_sync">{{_('Sync only books in selected shelves with Kobo')}}</label>
-        </div>
-        {% endif %}
-      </div>
-      {% endif %}
+    {%- endif %}
+  </section>
+</form>
+
+{#- Kobo: its own forms, so it lives outside the main form; its toggle still belongs to it via form="user-form". -#}
+{%- if kobo is not none %}
+<section class="stack" id="kobo" aria-labelledby="kobo-h">
+  <div class="row-between">
+    <div class="stack-sm" style="gap: 4px;">
+      <h2 id="kobo-h" style="font-size: 20px;">{{ _('Sync with your Kobo') }}</h2>
+      <p class="muted">{{ _('Books, shelves and reading progress stay in step between this library and the Kobo. You set it up once.') }}</p>
     </div>
-    {% endif %}
-    
-    <!-- Sidebar Display Settings Card -->
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('Sidebar Display Settings')}}</h4>
-      <p class="settings-explanation">{{_('Choose which sections to display in your sidebar navigation.')}}</p>
-      
-      <div style="display: grid;
-                  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                  gap: 12px;
-                  margin-top: 20px;
-                  background: #202c34a3;
-                  padding: 2rem;">
-        {% for element in sidebar %}
-          {% if element['config_show'] %}
-          <div>
-            <input type="checkbox" name="show_{{element['visibility']}}" id="show_{{element['visibility']}}" {% if content.check_visibility(element['visibility']) %}checked{% endif %} style="accent-color: var(--color-secondary);">
-            <label for="show_{{element['visibility']}}">{{element['show_text']}}</label>
+  </div>
+  <div class="split">
+    <ol class="steps split-main">
+      <li class="step">
+        <span class="step-marker {{ 'step-marker--done' if kobo.token else 'step-marker--current' }}">{% if kobo.token %}{{ ui.icon('check') }}{% else %}1{% endif %}</span>
+        <div class="step-body">
+          <div class="stack-sm" style="gap: 4px;">
+            <h3>{{ _('Create your sync address') }}</h3>
+            <p class="muted">{{ _('It is personal: anyone who knows it can download your books. Regenerate it if it leaks.') }}</p>
           </div>
-          {% endif %}
-        {% endfor %}
-        <div>
-          <input type="checkbox" name="Show_detail_random" id="Show_detail_random" {% if content.show_detail_random() %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="Show_detail_random">{{_('Show Random Books in Detail View')}}</label>
+          {%- if kobo.local_host %}
+          <div class="alert alert--warning">{{ ui.icon('alert') }}<div class="alert-body">{{ _('You opened this page through localhost, so the address below only works on this computer. Open the library from the address your Kobo can reach (for example its LAN IP or domain) and copy it from there.') }}</div></div>
+          {%- endif %}
+          {%- if kobo.token %}
+          <div class="code-line">
+            <code id="kobo-endpoint">api_endpoint={{ kobo.endpoint }}</code>
+            <button class="btn btn-primary" type="button" data-copy-target="#kobo-endpoint">{{ ui.icon('copy') }}{{ _('Copy') }}</button>
+          </div>
+          <div class="row small">
+            <form method="post" action="{{ url_for('kobo_auth.generate_auth_token', user_id=content.id) }}"
+                  data-confirm="{{ _('Your Kobo will stop syncing until you paste the new address into it.') }}" data-confirm-action="{{ _('Regenerate') }}">
+              {{ ui.csrf_field() }}<input type="hidden" name="regenerate" value="1">
+              <button class="btn btn-link" type="submit">{{ _('Regenerate') }}</button>
+            </form>
+            <span class="faint">·</span>
+            <form method="post" action="{{ url_for('kobo_auth.delete_auth_token', user_id=content.id) }}"
+                  data-confirm="{{ _('Your Kobo will no longer be able to sync with this library.') }}" data-confirm-action="{{ _('Revoke access') }}">
+              {{ ui.csrf_field() }}
+              <button class="btn btn-link danger-text" type="submit">{{ _('Revoke access') }}</button>
+            </form>
+          </div>
+          {%- else %}
+          <form method="post" action="{{ url_for('kobo_auth.generate_auth_token', user_id=content.id) }}">
+            {{ ui.csrf_field() }}
+            <button class="btn btn-primary" type="submit">{{ ui.icon('key') }}{{ _('Create sync address') }}</button>
+          </form>
+          {%- endif %}
         </div>
-      </div>
-      
-      {% if ( current_user and current_user.role_admin() and not new_user ) and not simple %}
-      <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #5c6b74;">
-        <a href="#" id="get_user_tags" class="btn btn-default" data-id="{{content.id}}" data-toggle="modal" data-target="#restrictModal">{{_('Add Allowed/Denied Tags')}}</a>
-        <a href="#" id="get_user_column_values" data-id="{{content.id}}" class="btn btn-default" data-toggle="modal" data-target="#restrictModal" style="margin-left: 10px;">{{_('Add allowed/Denied Custom Column Values')}}</a>
-      </div>
-      {% endif %}
-    </div>
-    
-    <!-- User Permissions Card (Admin Only) -->
-    {% if not content.role_anonymous() and (profile or (current_user and current_user.role_admin() and not new_user)) %}
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('OPDS Catalog Order')}}</h4>
-      <p class="settings-explanation">{{_('Reorder the OPDS root catalog by listing entry IDs in the order you want. Unknown IDs are ignored and missing entries are appended automatically.')}}</p>
-      <input type="hidden" name="opds_root_order" id="opds_root_order" value="{{ opds_root_order_string }}">
-      <input type="hidden" name="opds_hidden_entries" id="opds_hidden_entries" value="{{ opds_hidden_entries_string }}">
-      <div id="opds_root_order_container" style="margin-top: 1rem;">
-        <ul id="opds_root_order_list" style="list-style: none; padding: 0; margin: 0;"></ul>
-      </div>
-      <div class="cwa-settings-tip" style="margin-top: 1.5rem;">
-        <small class="settings-explanation">
-          💡 <strong>{{_('Tip')}}:</strong> {{_('Drag to reorder OPDS root entries. Missing entries are appended automatically.') }}
-        </small>
-      </div>
-    </div>
-    {% endif %}
+      </li>
+      <li class="step">
+        <span class="step-marker {{ 'step-marker--current' if kobo.token and not kobo.last_sync else ('step-marker--done' if kobo.last_sync else '') }}">{% if kobo.last_sync %}{{ ui.icon('check') }}{% else %}2{% endif %}</span>
+        <div class="step-body">
+          <h3>{{ _('Paste it into the Kobo') }}</h3>
+          <ol>
+            <li>{{ _('Connect the Kobo to your computer with the USB cable.') }}</li>
+            <li>{{ _('Open %(file)s in a text editor.', file='.kobo/Kobo/Kobo eReader.conf') }}</li>
+            <li>{{ _('In the %(section)s section, replace the %(key)s line with the one you copied.', section='[OneStoreServices]', key='api_endpoint=') }}</li>
+            <li>{{ _('Eject the Kobo and tap Sync.') }}</li>
+          </ol>
+          {%- if not kobo.proxy %}
+          <p class="hint">{{ _('The Kobo store is not proxied, so store features on the device (recommendations, purchases) will not load.') }}</p>
+          {%- endif %}
+        </div>
+      </li>
+      {%- if not simple %}
+      <li class="step">
+        <span class="step-marker">3</span>
+        <fieldset class="step-body">
+          <legend><h3 style="margin-bottom: 12px;">{{ _('Choose what to sync') }}</h3></legend>
+          <label class="choice-card">
+            <input type="radio" name="kobo_only_shelves_sync" value="off" form="user-form" {% if not kobo.only_shelves %}checked{% endif %}>
+            <span class="check-text"><span class="check-title">{{ _('Whole library') }}</span><span class="hint">{{ _('Every compatible book goes to the Kobo.') }}</span></span>
+          </label>
+          <label class="choice-card">
+            <input type="radio" name="kobo_only_shelves_sync" value="on" form="user-form" {% if kobo.only_shelves %}checked{% endif %}>
+            <span class="check-text"><span class="check-title">{{ _('Only selected shelves') }}</span><span class="hint">{{ _('They become collections with the same name on the Kobo. Turn sync on for a shelf from its edit page.') }}</span></span>
+          </label>
+          {%- if kobo.only_shelves %}
+          <div class="chips">
+            {%- for shelf in kobo.shelves %}
+            <a class="chip {{ 'is-active' if shelf.kobo_sync }}" href="{{ url_for('shelf.edit_shelf', shelf_id=shelf.id) }}">{% if shelf.kobo_sync %}{{ ui.icon('check', 'icon-sm') }}{% endif %}{{ shelf.name }} <span class="chip-count">{{ shelf.books.count() }}</span></a>
+            {%- else %}
+            <a class="chip" href="{{ url_for('shelf.create_shelf') }}">{{ ui.icon('plus', 'icon-sm') }}{{ _('Create Shelf') }}</a>
+            {%- endfor %}
+          </div>
+          {%- endif %}
+          <p class="hint">{{ _('Saved together with the rest of the page.') }}</p>
+        </fieldset>
+      </li>
+      {%- endif %}
+    </ol>
+    <aside class="split-aside">
+      <section class="card" aria-labelledby="kobo-device-h">
+        <div class="row row-nowrap" style="gap: 12px;">
+          <span class="icon-tile">{{ ui.icon('device') }}</span>
+          <div class="stack-sm" style="gap: 2px;">
+            <h3 id="kobo-device-h">Kobo</h3>
+            {%- if kobo.last_sync %}
+            <span class="status-line"><span class="status-dot status-dot--ok"></span>{{ _('Last sync %(when)s', when=kobo.last_sync) }}</span>
+            {%- elif kobo.token %}
+            <span class="status-line"><span class="status-dot status-dot--warn"></span>{{ _('Waiting for the first sync') }}</span>
+            {%- else %}
+            <span class="status-line"><span class="status-dot"></span>{{ _('Not set up') }}</span>
+            {%- endif %}
+          </div>
+        </div>
+        <dl class="dl dl--compact">
+          <dt>{{ _('Books on the device') }}</dt><dd>{{ kobo.books_on_device }}</dd>
+          <dt>{{ _('Kobo store proxy') }}</dt><dd>{{ _('On') if kobo.proxy else _('Off') }}</dd>
+        </dl>
+        {%- if kobo.token %}
+        <button class="btn btn-block" type="button" data-post="{{ url_for('admin.ajax_fullsync', userid=content.id) if is_admin_view else url_for('admin.ajax_self_fullsync') }}"
+                data-confirm="{{ _('On the next sync the Kobo receives every book again. Useful after changing covers or metadata.') }}"
+                data-confirm-action="{{ _('Force full kobo sync') }}" data-confirm-danger="false">{{ ui.icon('refresh') }}{{ _('Force full kobo sync') }}</button>
+        {%- endif %}
+      </section>
+      <section class="card card--dashed">
+        <h3>{{ _('Using KOReader?') }}</h3>
+        <p class="small muted">{{ _('Reading progress can also sync from KOReader with the CWA plugin.') }}</p>
+        <a class="small strong" href="{{ url_for('kosync.kosync_plugin_page') }}">{{ _('Set up KOReader') }} →</a>
+      </section>
+    </aside>
+  </div>
+</section>
+{%- endif %}
 
-    <!-- User Permissions Card (Admin Only) -->
-    {% if current_user and current_user.role_admin() and not profile %}
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('User Permissions')}}</h4>
-      <p class="settings-explanation">{{_('Configure what actions this user is allowed to perform.')}}</p>
-      
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-top: 20px;">
-        {% if not content.role_anonymous() %}
-        <div>
-          <input type="checkbox" name="admin_role" id="admin_role" {% if content.role_admin() %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="admin_role">{{_('Admin User')}}</label>
-        </div>
-        {% endif %}
-        
-        <div>
-          <input type="checkbox" name="download_role" id="download_role" {% if content.role_download() %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="download_role">{{_('Allow Downloads')}}</label>
-        </div>
-        
-        <div>
-          <input type="checkbox" name="viewer_role" id="viewer_role" {% if content.role_viewer() %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="viewer_role">{{_('Allow eBook Viewer')}}</label>
-        </div>
-        
-        {% if config.config_uploading %}
-        <div>
-          <input type="checkbox" name="upload_role" id="upload_role" {% if content.role_upload() %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="upload_role">{{_('Allow Uploads')}}</label>
-        </div>
-        {% endif %}
-        
-        <div>
-          <input type="checkbox" name="edit_role" data-control="edit_settings" id="edit_role" {% if content.role_edit() %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="edit_role">{{_('Allow Edit')}}</label>
-        </div>
-        
-        <div data-related="edit_settings">
-          <input type="checkbox" name="delete_role" id="delete_role" {% if content.role_delete_books() %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="delete_role">{{_('Allow Delete Books')}}</label>
-        </div>
-        
-        {% if not content.role_anonymous() %}
-        <div>
-          <input type="checkbox" name="passwd_role" id="passwd_role" {% if content.role_passwd() %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="passwd_role">{{_('Allow Changing Password')}}</label>
-        </div>
-        
-        <div>
-          <input type="checkbox" name="edit_shelf_role" id="edit_shelf_role" {% if content.role_edit_shelfs() %}checked{% endif %} style="accent-color: var(--color-secondary);">
-          <label for="edit_shelf_role">{{_('Allow Editing Public Shelves')}}</label>
-        </div>
-        {% endif %}
+<div class="stack-lg">
+  {#- eReaders (email) -#}
+  <section class="card" id="devices" aria-labelledby="devices-h">
+    <div class="card-header"><div><h2 class="card-title" id="devices-h">{{ _('Send to eReader') }}</h2>
+      <p class="card-subtitle">{{ _('Books are emailed to these addresses, for example a Kindle or PocketBook address.') }}</p></div></div>
+    <div class="form-grid">
+      <div class="field">
+        <label for="kindle_mail">{{ _('eReader email addresses') }}</label>
+        <input class="input" type="text" name="kindle_mail" id="kindle_mail" form="user-form" value="{{ content.kindle_mail if content.kindle_mail != None }}" placeholder="name@kindle.com">
+        <span class="field-hint">{{ _('Separate several addresses with commas.') }}</span>
+      </div>
+      <div class="field">
+        <label for="kindle_mail_subject">{{ _('Email subject') }}</label>
+        <input class="input" type="text" name="kindle_mail_subject" id="kindle_mail_subject" form="user-form" value="{{ content.kindle_mail_subject if content.kindle_mail_subject != None }}">
       </div>
     </div>
-    {% endif %}
-    
-    <!-- Magic Shelves Visibility Card -->
-    {% if not content.role_anonymous() and not new_user %}
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('Magic Shelves Order')}}</h4>
-      <p class="settings-explanation">{{_('Choose how your magic shelves are ordered in the sidebar.')}}</p>
+    {%- if not is_anon %}
+    <div>
+      <label class="setting" for="allow_additional_ereader_emails">
+        <span class="setting-text"><span class="setting-title">{{ _('Ask before sending') }}</span><span class="hint">{{ _('Pick addresses and format every time. When off, books go to all addresses above.') }}</span></span>
+        <span class="setting-control"><input class="switch" type="checkbox" id="allow_additional_ereader_emails" name="allow_additional_ereader_emails" form="user-form" {% if content.allow_additional_ereader_emails %}checked{% endif %}></span>
+      </label>
+      <label class="setting" for="auto_send_enabled">
+        <span class="setting-text"><span class="setting-title">{{ _('Automatically send new books to my eReader(s)') }}</span><span class="hint">{{ _('Every newly imported book is emailed to the addresses above.') }}</span></span>
+        <span class="setting-control"><input class="switch" type="checkbox" id="auto_send_enabled" name="auto_send_enabled" form="user-form" {% if content.auto_send_enabled %}checked{% endif %}></span>
+      </label>
+    </div>
+    {%- endif %}
+  </section>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-top: 20px;">
-        <div>
-          <label for="magic_shelf_order_mode" class="settings-explanation" style="display: block; margin-bottom: 8px;">{{_('Order Mode')}}</label>
-          <select name="magic_shelf_order_mode" id="magic_shelf_order_mode" class="form-control">
-            <option value="manual">{{_('Manual (drag to reorder)')}}</option>
-            <option value="name_asc">{{_('Name (A-Z)')}}</option>
-            <option value="name_desc">{{_('Name (Z-A)')}}</option>
-            <option value="book_count_desc">{{_('Book count (high to low)')}}</option>
-            <option value="book_count_asc">{{_('Book count (low to high)')}}</option>
-            <option value="created_desc">{{_('Created (newest first)')}}</option>
-            <option value="created_asc">{{_('Created (oldest first)')}}</option>
-            <option value="modified_desc">{{_('Recently modified')}}</option>
-            <option value="modified_asc">{{_('Least recently modified')}}</option>
-          </select>
-        </div>
+  {#- Preferences -#}
+  <section class="card" id="preferences" aria-labelledby="prefs-h">
+    <div class="card-header"><div><h2 class="card-title" id="prefs-h">{{ _('Preferences') }}</h2></div></div>
+    <div class="form-grid">
+      {%- if not is_anon %}
+      <div class="field">
+        <label for="locale">{{ _('Interface Language') }}</label>
+        <select class="select" name="locale" id="locale" form="user-form">
+          {%- for translation in translations %}
+          <option value="{{ translation }}" {% if translation|string == content.locale %}selected{% endif %}>{{ translation.display_name|capitalize }}</option>
+          {%- endfor %}
+        </select>
       </div>
+      {%- endif %}
+      <div class="field">
+        <label for="default_language">{{ _('Language of Books') }}</label>
+        <select class="select" name="default_language" id="default_language" form="user-form">
+          <option value="all" {% if content.default_language == "all" %}selected{% endif %}>{{ _('Show All') }}</option>
+          {%- for language in languages %}
+          <option value="{{ language.lang_code }}" {% if content.default_language == language.lang_code %}selected{% endif %}>{{ language.name }}</option>
+          {%- endfor %}
+        </select>
+        <span class="field-hint">{{ _('Only show books in this language.') }}</span>
+      </div>
+      {%- if hardcover_support and not new_user %}
+      <div class="field">
+        <label for="hardcover_token">{{ _('Hardcover API Token') }}</label>
+        <input class="input input-mono" type="password" name="hardcover_token" id="hardcover_token" form="user-form" value="{{ content.hardcover_token if content.hardcover_token != None }}" autocomplete="off">
+        <span class="field-hint">{{ _('Used to fetch metadata from Hardcover and sync reading progress.') }}</span>
+      </div>
+      {%- endif %}
+      <input type="hidden" name="theme" value="1" form="user-form">
+    </div>
+    <div class="stack-sm">
+      <span class="label">{{ _('Sidebar') }}</span>
+      <div class="form-grid" style="gap: 10px 20px;">
+        {%- for element in sidebar %}
+          {%- if element['config_show'] %}
+        <label class="check"><input type="checkbox" name="show_{{ element['visibility'] }}" form="user-form" {% if content.check_visibility(element['visibility']) %}checked{% endif %}><span>{{ element['show_text'] }}</span></label>
+          {%- endif %}
+        {%- endfor %}
+        <label class="check"><input type="checkbox" name="Show_detail_random" form="user-form" {% if content.show_detail_random() %}checked{% endif %}><span>{{ _('Show Random Books in Detail View') }}</span></label>
+      </div>
+    </div>
+    {%- if is_admin_view and not new_user and not simple %}
+    <div class="row">
+      <button class="btn btn-sm" type="button" data-restrictions-open="2" data-restrictions-user="{{ content.id }}">{{ ui.icon('tag') }}{{ _('Add Allowed/Denied Tags') }}</button>
+      <button class="btn btn-sm" type="button" data-restrictions-open="3" data-restrictions-user="{{ content.id }}">{{ ui.icon('filter') }}{{ _('Add allowed/Denied Custom Column Values') }}</button>
+    </div>
+    {%- endif %}
+  </section>
 
-      <input type="hidden" name="magic_shelf_order" id="magic_shelf_order" value="{{ magic_shelf_order_string }}">
-      <div id="magic_shelf_order_container" style="margin-top: 1rem;">
-        <ul id="magic_shelf_order_list" style="list-style: none; padding: 0; margin: 0;"></ul>
-      </div>
-      <div class="cwa-settings-tip" style="margin-top: 1.5rem;">
-        <small class="settings-explanation">
-          💡 <strong>{{_('Tip')}}:</strong> {{_('Manual order is used only when the order mode is set to Manual.') }}
-        </small>
+  {#- Shelves & OPDS -#}
+  {%- if not is_anon and not new_user %}
+  <section class="card" id="shelves" aria-labelledby="shelves-h">
+    <div class="card-header"><div><h2 class="card-title" id="shelves-h">{{ _('Smart shelves') }}</h2>
+      <p class="card-subtitle">{{ _('Choose how smart shelves are ordered in the sidebar and which ones you see.') }}</p></div></div>
+    <div class="field" style="max-width: 320px;">
+      <label for="magic_shelf_order_mode">{{ _('Order Mode') }}</label>
+      <select class="select" name="magic_shelf_order_mode" id="magic_shelf_order_mode" form="user-form">
+        {%- for value, label in [('manual', _('Manual (drag to reorder)')), ('name_asc', _('Name (A-Z)')), ('name_desc', _('Name (Z-A)')),
+                                ('book_count_desc', _('Book count (high to low)')), ('book_count_asc', _('Book count (low to high)')),
+                                ('created_desc', _('Created (newest first)')), ('created_asc', _('Created (oldest first)')),
+                                ('modified_desc', _('Recently modified')), ('modified_asc', _('Least recently modified'))] %}
+        <option value="{{ value }}" {% if value == magic_shelf_order_mode %}selected{% endif %}>{{ label }}</option>
+        {%- endfor %}
+      </select>
+    </div>
+    {%- if magic_shelf_order_labels %}
+    <input type="hidden" name="magic_shelf_order" id="magic_shelf_order" form="user-form" value="{{ magic_shelf_order_string }}">
+    <ol class="sortable" data-order-list="magic_shelf_order" data-order-mode="magic_shelf_order_mode">
+      {%- set order_ids = magic_shelf_order_string.split(',') if magic_shelf_order_string else [] %}
+      {%- set labels = {} %}{% for item in magic_shelf_order_labels %}{% if labels.update({item.key: item}) %}{% endif %}{% endfor %}
+      {%- for key in order_ids if key in labels %}
+      <li class="sortable-item" draggable="true" tabindex="0" data-key="{{ key }}">{{ ui.icon('drag', 'faint') }}<span aria-hidden="true">{{ labels[key].icon }}</span><span class="grow">{{ labels[key].label }}</span></li>
+      {%- endfor %}
+      {%- for item in magic_shelf_order_labels if item.key not in order_ids %}
+      <li class="sortable-item" draggable="true" tabindex="0" data-key="{{ item.key }}">{{ ui.icon('drag', 'faint') }}<span aria-hidden="true">{{ item.icon }}</span><span class="grow">{{ item.label }}</span></li>
+      {%- endfor %}
+    </ol>
+    {%- endif %}
+    {%- set all_public_shelves = (visible_public_shelves or []) + (hidden_custom_shelves or []) %}
+    {%- if system_shelf_templates or all_public_shelves %}
+    <div class="stack-sm">
+      <span class="label">{{ _('Visible in the sidebar') }}</span>
+      <div class="form-grid" style="gap: 10px 20px;">
+        {%- for key, template in (system_shelf_templates or {}).items() %}
+        <label class="check"><input type="checkbox" name="show_magic_shelf_{{ key }}" form="user-form" {% if key not in hidden_shelf_templates %}checked{% endif %}><span>{{ template['icon'] }} {{ template['name'] }}</span></label>
+        {%- endfor %}
+        {%- for shelf in all_public_shelves %}
+        <label class="check"><input type="checkbox" name="show_custom_shelf_{{ shelf.id }}" form="user-form" {% if shelf.id not in hidden_custom_shelf_ids %}checked{% endif %}><span>{{ shelf.icon }} {{ shelf.name }} <span class="faint">· {{ shelf.user.name }}</span></span></label>
+        {%- endfor %}
       </div>
     </div>
+    {%- endif %}
+  </section>
 
-    <div class="settings-container" style="max-width: none; margin-inline: 0rem;">
-      <h4 class="settings-section-header">{{_('Magic Shelves Visibility')}}</h4>
-      <p class="settings-explanation">{{_('Uncheck shelves you want to hide from your sidebar. System shelves cannot be deleted, only hidden. Public shelves from other users can also be hidden.')}}</p>
-      
-      {% if system_shelf_templates|length > 0 %}
-      <div style="margin-top: 20px; margin-bottom: 20px;">
-        <strong style="color: #ffc200;">{{_('Default System Shelves:')}}</strong>
-      </div>
-      <div style="display: grid;
-                  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                  gap: 8px;
-                  margin-left: 10px;
-                  background: #202c34a3;
-                  padding: 2rem;">
-        {% for key, template in system_shelf_templates.items() %}
-        <div>
-          <input type="checkbox" 
-                name="show_magic_shelf_{{ key }}" 
-                id="show_magic_shelf_{{ key }}" 
-                {% if key not in hidden_shelf_templates %}checked{% endif %}
-                style="accent-color: var(--color-secondary);">
-          <label for="show_magic_shelf_{{ key }}">{{ template['icon'] }} {{ template['name'] }}</label>
-        </div>
-        {% endfor %}
-      </div>
-      {% endif %}
-      
-      {% set all_public_shelves = visible_public_shelves + hidden_custom_shelves %}
-      {% if all_public_shelves|length > 0 %}
-      <div style="margin-top: 30px; margin-bottom: 20px;">
-        <strong style="color: #ffc200;">{{_('Public Shelves:')}}</strong>
-      </div>
-      <div style="display: grid;
-                  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                  gap: 8px;
-                  margin-left: 10px;
-                  background: #202c34a3;
-                  padding: 2rem;
-                  margin-bottom: 2rem;">
-        {% for shelf in all_public_shelves %}
-        <div>
-          <input type="checkbox" 
-                 name="show_custom_shelf_{{ shelf.id }}" 
-                 id="show_custom_shelf_{{ shelf.id }}"
-                 {% if shelf.id not in hidden_custom_shelf_ids %}checked{% endif %}
-                 style="accent-color: var(--color-secondary);">
-          <label for="show_custom_shelf_{{ shelf.id }}">{{ shelf.icon }} {{ shelf.name }} <small style="color: #888;">(by {{ shelf.user.name }})</small></label>
-        </div>
-        {% endfor %}
-      </div>
-      {% endif %}
-      
-      {% if system_shelf_templates|length > 0 or all_public_shelves|length > 0 %}
-      <div class="settings-disclaimer" style="margin-top: 25px !important; padding-top: 20px; border-top: 1px solid #5c6b74;">
-        {% if system_shelf_templates|length > 0 %}
-        {{_('%(visible)s of %(total)s default shelves visible', visible=(system_shelf_templates|length - hidden_shelf_templates|length), total=system_shelf_templates|length)}}
-        {% endif %}
-        {% if all_public_shelves|length > 0 %}
-        {% set visible_count = all_public_shelves|length - hidden_custom_shelf_ids|length %}
-        {% if system_shelf_templates|length > 0 %} • {% endif %}{{_('%(visible)s of %(total)s public shelves visible', visible=visible_count, total=all_public_shelves|length)}}
-        {% endif %}
-      </div>
-      {% endif %}
-    </div>
-    {% endif %}
-    
-    <!-- Action Buttons -->
-    <div style="margin-bottom: 4rem; display: flex; flex-direction: column; gap: 0.5rem;">
-      <button id="user_submit" class="btn btn-default" type="button" style="width: -webkit-fill-available;">{{_('Save')}}</button>
-      {% if not profile %}
-      <button id="back" class="btn btn-default" type="button" data-back="{{ url_for('admin.admin') }}" style="width: -webkit-fill-available;">{{_('Cancel')}}</button>
-      {% endif %}
-      {% if current_user and current_user.role_admin() and not profile and not new_user and not content.role_anonymous() %}
-      <button id="btndeluser" class="btn btn-danger" type="button" data-value="{{ content.id }}" data-remote="false" style="width: -webkit-fill-available;">{{_('Delete User')}}</button>
-      {% endif %}
-    </div>
-  </form>
-</div>
+  <section class="card" aria-labelledby="opds-h">
+    <div class="card-header"><div><h2 class="card-title" id="opds-h">{{ _('OPDS Catalog Order') }}</h2>
+      <p class="card-subtitle">{{ _('Order and visibility of the entries e-reader apps see at the top of the OPDS catalog.') }}</p></div></div>
+    <input type="hidden" name="opds_root_order" id="opds_root_order" form="user-form" value="{{ opds_root_order_string }}">
+    <input type="hidden" name="opds_hidden_entries" id="opds_hidden_entries" form="user-form" value="{{ opds_hidden_entries_string }}">
+    <ol class="sortable" data-order-list="opds_root_order" data-hidden-input="opds_hidden_entries">
+      {%- set order_ids = opds_root_order_string.split(',') if opds_root_order_string else [] %}
+      {%- set hidden_ids = opds_hidden_entries_string.split(',') if opds_hidden_entries_string else [] %}
+      {%- set labels = {} %}{% for item in opds_root_labels %}{% if labels.update({item.key: item.label}) %}{% endif %}{% endfor %}
+      {%- for key in (order_ids|select('in', labels)|list) + (opds_root_labels|map(attribute='key')|reject('in', order_ids)|list) %}
+      <li class="sortable-item" draggable="true" tabindex="0" data-key="{{ key }}">{{ ui.icon('drag', 'faint') }}<span class="grow">{{ labels[key] }}</span>
+        <label class="row small muted" style="gap: 6px;"><input type="checkbox" class="switch" data-visible {% if key not in hidden_ids %}checked{% endif %} aria-label="{{ _('Show %(name)s', name=labels[key]) }}">{{ _('Visible') }}</label></li>
+      {%- endfor %}
+    </ol>
+  </section>
+  {%- endif %}
 
-<div class="modal fade" id="modal_kobo_token" tabindex="-1" role="dialog" aria-labelledby="kobo_tokenModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="kobo_tokenModalLabel">{{_('Generate Kobo Auth URL')}}</h4>
-      </div>
-      <div class="modal-body">...</div>
-      <div class="modal-footer">
-        <button type="button" id="kobo_close" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
-      </div>
+  {#- Permissions (admin) -#}
+  {%- if is_admin_view %}
+  <section class="card" id="permissions" aria-labelledby="perm-h">
+    <div class="card-header"><div><h2 class="card-title" id="perm-h">{{ _('Permissions') }}</h2></div></div>
+    <div>
+      {%- if not is_anon %}{{ ui.switch('admin_role', _('Admin User'), content.role_admin(), _('Full access to settings and users.')) }}{% endif %}
+      {{ ui.switch('download_role', _('Allow Downloads'), content.role_download()) }}
+      {{ ui.switch('viewer_role', _('Allow eBook Viewer'), content.role_viewer()) }}
+      {%- if config.config_uploading %}{{ ui.switch('upload_role', _('Allow Uploads'), content.role_upload()) }}{% endif %}
+      {{ ui.switch('edit_role', _('Allow Edit'), content.role_edit()) }}
+      {{ ui.switch('delete_role', _('Allow Delete Books'), content.role_delete_books()) }}
+      {%- if not is_anon %}
+      {{ ui.switch('passwd_role', _('Allow Changing Password'), content.role_passwd()) }}
+      {{ ui.switch('edit_shelf_role', _('Allow Editing Public Shelves'), content.role_edit_shelfs()) }}
+      {%- endif %}
     </div>
+  </section>
+  {%- endif %}
+
+  <div class="form-actions form-actions--sticky">
+    <button class="btn btn-primary" type="submit" form="user-form" id="user_submit">{{ _('Save') }}</button>
+    {%- if not profile %}<a class="btn" href="{{ url_for('admin.admin') }}">{{ _('Cancel') }}</a>{% endif %}
+    {%- if is_admin_view and not new_user and not is_anon %}
+    <span class="grow"></span>
+    <form method="post" data-confirm="{{ _('Delete %(name)s? Their shelves and reading progress are removed too.', name=content.name) }}" data-confirm-action="{{ _('Delete User') }}">
+      {{ ui.csrf_field() }}<input type="hidden" name="delete" value="True">
+      <button class="btn btn-danger-ghost" type="submit" id="btndeluser">{{ ui.icon('trash') }}{{ _('Delete User') }}</button>
+    </form>
+    {%- endif %}
   </div>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const opdsLabels = {{ opds_root_labels | tojson }};
-  const opdsOrderRaw = "{{ opds_root_order_string }}";
-  const opdsHiddenRaw = "{{ opds_hidden_entries_string }}";
-  const magicShelfLabels = {{ magic_shelf_order_labels | tojson }};
-  const magicShelfOrderRaw = "{{ magic_shelf_order_string }}";
-  const magicShelfOrderMode = "{{ magic_shelf_order_mode }}";
-
-  function parseOrder(raw) {
-    if (!raw) return [];
-    return raw.split(',').map(item => item.trim()).filter(Boolean);
-  }
-
-  function buildOrderList(labels, order) {
-    const labelMap = new Map(labels.map(item => [item.key, item.label]));
-    const seen = new Set();
-    const result = [];
-    order.forEach(key => {
-      if (labelMap.has(key) && !seen.has(key)) {
-        result.push(key);
-        seen.add(key);
-      }
-    });
-    labels.forEach(item => {
-      if (!seen.has(item.key)) {
-        result.push(item.key);
-        seen.add(item.key);
-      }
-    });
-    return result;
-  }
-
-  function renderOpdsOrderList() {
-    const container = document.getElementById('opds_root_order_list');
-    if (!container) return;
-
-    const order = buildOrderList(opdsLabels, parseOrder(opdsOrderRaw));
-    container.innerHTML = '';
-
-    const hiddenSet = new Set(parseOrder(opdsHiddenRaw));
-    order.forEach(key => {
-      const label = opdsLabels.find(item => item.key === key)?.label || key;
-      const isHidden = hiddenSet.has(key);
-      const li = document.createElement('li');
-      li.className = 'opds-order-item';
-      li.dataset.key = key;
-      li.innerHTML = `
-        <span class="opds-order-drag-handle">☰</span>
-        <span class="opds-order-label">${label}</span>
-        <label class="opds-order-toggle">
-          <input type="checkbox" class="opds-order-visible" data-key="${key}" ${isHidden ? '' : 'checked'}>
-          {{_('Visible')}}
-        </label>
-      `;
-      container.appendChild(li);
-    });
-
-    setupOpdsDragDrop();
-    updateOpdsHiddenInput();
-  }
-
-  function setupOpdsDragDrop() {
-    let dragged = null;
-    let isDragging = false;
-
-    const items = document.querySelectorAll('.opds-order-item');
-    items.forEach(item => {
-      item.addEventListener('mousedown', function(e) {
-        isDragging = true;
-        dragged = this;
-        this.classList.add('dragging');
-        document.body.style.userSelect = 'none';
-        e.preventDefault();
-      });
-    });
-
-    document.addEventListener('mousemove', function(e) {
-      if (!isDragging || !dragged) return;
-      const container = document.getElementById('opds_root_order_list');
-      const afterElement = getOpdsAfterElement(container, e.clientY);
-      if (afterElement == null) {
-        container.appendChild(dragged);
-      } else {
-        container.insertBefore(dragged, afterElement);
-      }
-    });
-
-    document.addEventListener('mouseup', function() {
-      if (!isDragging) return;
-      isDragging = false;
-      if (dragged) {
-        dragged.classList.remove('dragging');
-        dragged = null;
-      }
-      document.body.style.userSelect = '';
-      updateOpdsHiddenInput();
-    });
-  }
-
-  function getOpdsAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.opds-order-item:not(.dragging)')];
-    return draggableElements.reduce((closest, child) => {
-      const box = child.getBoundingClientRect();
-      const offset = y - box.top - box.height / 2;
-      if (offset < 0 && offset > closest.offset) {
-        return { offset: offset, element: child };
-      }
-      return closest;
-    }, { offset: Number.NEGATIVE_INFINITY }).element;
-  }
-
-  function updateOpdsHiddenInput() {
-    const container = document.getElementById('opds_root_order_list');
-    const hiddenInput = document.getElementById('opds_root_order');
-    const hiddenEntriesInput = document.getElementById('opds_hidden_entries');
-    if (!container || !hiddenInput) return;
-    const items = container.querySelectorAll('.opds-order-item');
-    const order = Array.from(items).map(item => item.dataset.key);
-    hiddenInput.value = order.join(',');
-
-    if (!hiddenEntriesInput) return;
-    const hidden = [];
-    container.querySelectorAll('.opds-order-visible').forEach(checkbox => {
-      if (!checkbox.checked) {
-        hidden.push(checkbox.dataset.key);
-      }
-    });
-    hiddenEntriesInput.value = hidden.join(',');
-  }
-
-  function renderMagicShelfOrderList() {
-    const container = document.getElementById('magic_shelf_order_list');
-    if (!container) return;
-
-    const order = buildOrderList(magicShelfLabels, parseOrder(magicShelfOrderRaw));
-    container.innerHTML = '';
-
-    order.forEach(key => {
-      const item = magicShelfLabels.find(entry => entry.key === key);
-      const label = item?.label || key;
-      const icon = item?.icon || '📚';
-      const li = document.createElement('li');
-      li.className = 'opds-order-item magic-shelf-order-item';
-      li.dataset.key = key;
-      li.innerHTML = `
-        <span class="opds-order-drag-handle">☰</span>
-        <span class="magic-shelf-icon">${icon}</span>
-        <span class="opds-order-label">${label}</span>
-      `;
-      container.appendChild(li);
-    });
-
-    setupMagicShelfDragDrop();
-    updateMagicShelfHiddenInput();
-    updateMagicShelfOrderModeState();
-  }
-
-  function setupMagicShelfDragDrop() {
-    let dragged = null;
-    let isDragging = false;
-
-    const items = document.querySelectorAll('.magic-shelf-order-item');
-    items.forEach(item => {
-      item.addEventListener('mousedown', function(e) {
-        const orderMode = document.getElementById('magic_shelf_order_mode')?.value;
-        if (orderMode && orderMode !== 'manual') return;
-        isDragging = true;
-        dragged = this;
-        this.classList.add('dragging');
-        document.body.style.userSelect = 'none';
-        e.preventDefault();
-      });
-    });
-
-    document.addEventListener('mousemove', function(e) {
-      if (!isDragging || !dragged) return;
-      const container = document.getElementById('magic_shelf_order_list');
-      const afterElement = getOpdsAfterElement(container, e.clientY);
-      if (afterElement == null) {
-        container.appendChild(dragged);
-      } else {
-        container.insertBefore(dragged, afterElement);
-      }
-    });
-
-    document.addEventListener('mouseup', function() {
-      if (!isDragging) return;
-      isDragging = false;
-      if (dragged) {
-        dragged.classList.remove('dragging');
-        dragged = null;
-      }
-      document.body.style.userSelect = '';
-      updateMagicShelfHiddenInput();
-    });
-  }
-
-  function updateMagicShelfHiddenInput() {
-    const container = document.getElementById('magic_shelf_order_list');
-    const hiddenInput = document.getElementById('magic_shelf_order');
-    if (!container || !hiddenInput) return;
-    const items = container.querySelectorAll('.magic-shelf-order-item');
-    const order = Array.from(items).map(item => item.dataset.key);
-    hiddenInput.value = order.join(',');
-  }
-
-  function updateMagicShelfOrderModeState() {
-    const container = document.getElementById('magic_shelf_order_container');
-    const modeSelect = document.getElementById('magic_shelf_order_mode');
-    if (!container || !modeSelect) return;
-    const isManual = modeSelect.value === 'manual';
-    container.classList.toggle('order-list-disabled', !isManual);
-  }
-
-  const magicShelfModeSelect = document.getElementById('magic_shelf_order_mode');
-  if (magicShelfModeSelect) {
-    magicShelfModeSelect.value = magicShelfOrderMode || 'name_asc';
-    magicShelfModeSelect.addEventListener('change', updateMagicShelfOrderModeState);
-  }
-
-  const form = document.querySelector('form[role="form"]');
-  if (form) {
-    form.addEventListener('submit', function() {
-      updateOpdsHiddenInput();
-      updateMagicShelfHiddenInput();
-    });
-  }
-
-  document.addEventListener('change', function(e) {
-    if (e.target && e.target.classList.contains('opds-order-visible')) {
-      updateOpdsHiddenInput();
-    }
-  });
-
-  renderOpdsOrderList();
-  renderMagicShelfOrderList();
-});
-</script>
-
 {% endblock %}
 {% block modal %}
-{{ restrict_modal() }}
-{{ delete_confirm_modal() }}
+{%- if current_user.role_admin() and not profile %}{{ restrictions_dialog() }}{% endif %}
 {% endblock %}
 {% block js %}
-<script>
-  // Load custom profile picture if available
-  (function() {
-    const username = "{{ content.name }}";
-    const profilePictureElement = document.getElementById('user-profile-picture');
-    
-    if (username && profilePictureElement) {
-      // Fetch user profiles from the JSON endpoint
-      fetch('{{ url_for("profile_pictures.user_profiles_json") }}')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to load profile pictures');
-          }
-          return response.json();
-        })
-        .then(userProfiles => {
-          console.log('User profiles loaded:', userProfiles);
-          console.log('Looking for username:', username);
-          if (userProfiles[username]) {
-            // User has a custom profile picture
-            console.log('Setting custom profile picture:', userProfiles[username]);
-            profilePictureElement.style.backgroundImage = `url(${userProfiles[username]})`;
-          } else {
-            // No custom profile picture - keep default SVG
-            console.log('No custom profile picture found, using default');
-            profilePictureElement.classList.add('no-custom-picture');
-          }
-        })
-        .catch(error => {
-          console.error('Could not load user profile picture:', error);
-          profilePictureElement.classList.add('no-custom-picture');
-        });
-    }
-  })();
-</script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table-editable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-editable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/pwstrength/i18next.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/pwstrength/i18nextHttpBackend.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/pwstrength/pwstrength-bootstrap.js') }}"></script>
-<script src="{{ url_for('static', filename='js/password.js') }}"></script>
-<script src="{{ url_for('static', filename='js/table.js') }}"></script>
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 {% endblock %}

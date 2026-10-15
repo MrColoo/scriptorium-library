@@ -1032,19 +1032,17 @@ def edit_restriction(res_type, user_id):
             config.config_allowed_column_value = ','.join(elementlist)
             config.save()
         if res_type == 2:  # Tags per user
-            if isinstance(user_id, int):
-                usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first()
-            else:
-                usr = current_user
+            usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first() if user_id else current_user
+            if usr is None:
+                abort(404)
             elementlist = usr.list_allowed_tags()
             elementlist[int(element['id'][1:])] = element['Element']
             usr.allowed_tags = ','.join(elementlist)
             ub.session_commit("Changed allowed tags of user {} to {}".format(usr.name, usr.allowed_tags))
         if res_type == 3:  # CColumn per user
-            if isinstance(user_id, int):
-                usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first()
-            else:
-                usr = current_user
+            usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first() if user_id else current_user
+            if usr is None:
+                abort(404)
             elementlist = usr.list_allowed_column_values()
             elementlist[int(element['id'][1:])] = element['Element']
             usr.allowed_column_value = ','.join(elementlist)
@@ -1061,19 +1059,17 @@ def edit_restriction(res_type, user_id):
             config.config_denied_column_value = ','.join(elementlist)
             config.save()
         if res_type == 2:  # Tags per user
-            if isinstance(user_id, int):
-                usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first()
-            else:
-                usr = current_user
+            usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first() if user_id else current_user
+            if usr is None:
+                abort(404)
             elementlist = usr.list_denied_tags()
             elementlist[int(element['id'][1:])] = element['Element']
             usr.denied_tags = ','.join(elementlist)
             ub.session_commit("Changed denied tags of user {} to {}".format(usr.name, usr.denied_tags))
         if res_type == 3:  # CColumn per user
-            if isinstance(user_id, int):
-                usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first()
-            else:
-                usr = current_user
+            usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first() if user_id else current_user
+            if usr is None:
+                abort(404)
             elementlist = usr.list_denied_column_values()
             elementlist[int(element['id'][1:])] = element['Element']
             usr.denied_column_value = ','.join(elementlist)
@@ -1108,10 +1104,10 @@ def add_restriction(res_type, user_id):
             config.config_denied_column_value = restriction_addition(element, config.list_denied_column_values)
             config.save()
     if res_type == 2:  # Tags per user
-        if isinstance(user_id, int):
-            usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first()
-        else:
-            usr = current_user
+        # user_id 0 means the current user; a missing user is a 404, not a crash.
+        usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first() if user_id else current_user
+        if usr is None:
+            abort(404)
         if 'submit_allow' in element:
             usr.allowed_tags = restriction_addition(element, usr.list_allowed_tags)
             ub.session_commit("Changed allowed tags of user {} to {}".format(usr.name, usr.list_allowed_tags()))
@@ -1119,10 +1115,10 @@ def add_restriction(res_type, user_id):
             usr.denied_tags = restriction_addition(element, usr.list_denied_tags)
             ub.session_commit("Changed denied tags of user {} to {}".format(usr.name, usr.list_denied_tags()))
     if res_type == 3:  # CustomC per user
-        if isinstance(user_id, int):
-            usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first()
-        else:
-            usr = current_user
+        # user_id 0 means the current user; a missing user is a 404, not a crash.
+        usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first() if user_id else current_user
+        if usr is None:
+            abort(404)
         if 'submit_allow' in element:
             usr.allowed_column_value = restriction_addition(element, usr.list_allowed_column_values)
             ub.session_commit("Changed allowed columns of user {} to {}".format(usr.name, usr.list_allowed_column_values()))
@@ -1159,10 +1155,10 @@ def delete_restriction(res_type, user_id):
             config.config_denied_column_value = restriction_deletion(element, config.list_denied_column_values)
             config.save()
     elif res_type == 2:  # Tags per user
-        if isinstance(user_id, int):
-            usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first()
-        else:
-            usr = current_user
+        # user_id 0 means the current user; a missing user is a 404, not a crash.
+        usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first() if user_id else current_user
+        if usr is None:
+            abort(404)
         if element['id'].startswith('a'):
             usr.allowed_tags = restriction_deletion(element, usr.list_allowed_tags)
             ub.session_commit("Deleted allowed tags of user {}: {}".format(usr.name, element['Element']))
@@ -1170,10 +1166,10 @@ def delete_restriction(res_type, user_id):
             usr.denied_tags = restriction_deletion(element, usr.list_denied_tags)
             ub.session_commit("Deleted denied tag of user {}: {}".format(usr.name, element['Element']))
     elif res_type == 3:  # Columns per user
-        if isinstance(user_id, int):
-            usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first()
-        else:
-            usr = current_user
+        # user_id 0 means the current user; a missing user is a 404, not a crash.
+        usr = ub.session.query(ub.User).filter(ub.User.id == int(user_id)).first() if user_id else current_user
+        if usr is None:
+            abort(404)
         if element['id'].startswith('a'):
             usr.allowed_column_value = restriction_deletion(element, usr.list_allowed_column_values)
             ub.session_commit("Deleted allowed columns of user {}: {}".format(usr.name, usr.list_allowed_column_values()))
@@ -1202,20 +1198,18 @@ def list_restriction(res_type, user_id):
                  for i, x in enumerate(config.list_allowed_column_values()) if x != '']
         json_dumps = restrict + allow
     elif res_type == 2:  # Tags per user
-        if isinstance(user_id, int):
-            usr = ub.session.query(ub.User).filter(ub.User.id == user_id).first()
-        else:
-            usr = current_user
+        usr = ub.session.query(ub.User).filter(ub.User.id == user_id).first() if user_id else current_user
+        if usr is None:
+            abort(404)
         restrict = [{'Element': x, 'type': _('Deny'), 'id': 'd' + str(i)}
                     for i, x in enumerate(usr.list_denied_tags()) if x != '']
         allow = [{'Element': x, 'type': _('Allow'), 'id': 'a' + str(i)}
                  for i, x in enumerate(usr.list_allowed_tags()) if x != '']
         json_dumps = restrict + allow
     elif res_type == 3:  # CustomC per user
-        if isinstance(user_id, int):
-            usr = ub.session.query(ub.User).filter(ub.User.id == user_id).first()
-        else:
-            usr = current_user
+        usr = ub.session.query(ub.User).filter(ub.User.id == user_id).first() if user_id else current_user
+        if usr is None:
+            abort(404)
         restrict = [{'Element': x, 'type': _('Deny'), 'id': 'd' + str(i)}
                     for i, x in enumerate(usr.list_denied_column_values()) if x != '']
         allow = [{'Element': x, 'type': _('Allow'), 'id': 'a' + str(i)}

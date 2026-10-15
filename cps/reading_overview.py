@@ -113,3 +113,41 @@ def get_kobo_book_status(user, book_id, book_shelf_ids):
         "kobo_shelves": kobo_shelves,
         "in_kobo_shelves": [shelf for shelf in kobo_shelves if shelf.id in shelf_ids],
     }
+
+
+def kobo_overview(user):
+    """Everything the Kobo section of a profile needs, or None when Kobo sync is disabled."""
+    from flask import request, url_for
+    from . import config
+    if not config.config_kobo_sync or user is None or user.is_anonymous:
+        return None
+    token = None
+    try:
+        token = (ub.session.query(ub.RemoteAuthToken)
+                 .filter(ub.RemoteAuthToken.user_id == int(user.id), ub.RemoteAuthToken.token_type == 1)
+                 .first())
+    except Exception as e:
+        log.debug("Could not load Kobo token: %s", e)
+    host = request.host.rsplit(":", 1)[0] if ":" in request.host and not request.host.endswith("]") else request.host
+    local_host = host.startswith("127.") or host.lower() == "localhost" or host in ("[::1]", "::1")
+    books_on_device = 0
+    try:
+        books_on_device = ub.session.query(ub.KoboSyncedBooks).filter(ub.KoboSyncedBooks.user_id == int(user.id)).count()
+    except Exception as e:
+        log.debug("Could not count Kobo synced books: %s", e)
+    kobo_shelves = []
+    try:
+        kobo_shelves = (ub.session.query(ub.Shelf)
+                        .filter(ub.Shelf.user_id == int(user.id)).order_by(ub.Shelf.name).all())
+    except Exception as e:
+        log.debug("Could not load shelves: %s", e)
+    return {
+        "token": token.auth_token if token else None,
+        "endpoint": url_for("kobo.TopLevelEndpoint", auth_token=token.auth_token, _external=True) if token else None,
+        "local_host": local_host,
+        "proxy": bool(config.config_kobo_proxy),
+        "last_sync": humanize_since(get_kobo_last_sync(user.id)),
+        "books_on_device": books_on_device,
+        "only_shelves": bool(user.kobo_only_shelves_sync),
+        "shelves": kobo_shelves,
+    }
