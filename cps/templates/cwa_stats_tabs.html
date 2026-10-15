@@ -1,153 +1,184 @@
 {% extends "layout.html" %}
+{% macro stat(label, value, note='') -%}
+<div class="stat"><span class="stat-label">{{ label }}</span><span class="stat-value">{{ value }}</span>{% if note %}<span class="stat-note">{{ note }}</span>{% endif %}</div>
+{%- endmacro %}
+{% macro chart(name, title, height='', span=false) -%}
+<section class="card{% if span %} span-all{% endif %}" aria-label="{{ title }}">
+  <h3 class="card-title">{{ title }}</h3>
+  <div class="chart-box{% if height %} chart-box--{{ height }}{% endif %}" data-chart="{{ name }}" role="img" aria-label="{{ title }}"></div>
+</section>
+{%- endmacro %}
+{% macro history(title, headers, rows, more_url) -%}
+<section class="stack-sm">
+  <div class="row-between"><h3 class="card-title">{{ title }}</h3><a class="btn btn-sm btn-ghost" href="{{ more_url }}">{{ _('Click to See More') }}{{ ui.icon('arrow-right', 'icon-sm') }}</a></div>
+  <div class="table-wrap">
+    <table class="table">
+      <thead><tr>{% for header in headers %}<th>{{ header }}</th>{% endfor %}</tr></thead>
+      <tbody>
+        {%- for row in rows|reverse %}
+        <tr>{% for cell in row %}<td class="cell-wrap"><div class="table-scroll-cell">{{ cell|nl2br }}</div></td>{% endfor %}</tr>
+        {%- else %}
+        <tr><td colspan="{{ headers|length }}" class="muted center">{{ _('Nothing yet.') }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{%- endmacro %}
+
 {% block body %}
-
-<script src="{{ url_for('static', filename='js/libs/echarts.min.js') }}"></script>
-
-<style>
-    .stats-tabs {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 30px;
-        border-bottom: 2px solid #3a4451;
-        padding-bottom: 0;
-    }
-    
-    .stats-tab {
-        background: none;
-        border: none;
-        padding: 15px 30px;
-        font-size: 1.1em;
-        font-weight: 600;
-        color: #aaa;
-        cursor: pointer;
-        border-bottom: 3px solid transparent;
-        transition: all 0.3s ease;
-        position: relative;
-        bottom: -2px;
-    }
-    
-    .stats-tab:hover {
-        color: #ff9800;
-        background: rgba(255, 152, 0, 0.05);
-    }
-    
-    .stats-tab.active {
-        color: #ff9800;
-        border-bottom-color: #ff9800;
-        background: rgba(255, 152, 0, 0.1);
-    }
-    
-    .tab-content {
-        display: none;
-    }
-    
-    .tab-content.active {
-        display: block;
-        animation: fadeIn 0.3s ease;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-</style>
-
-<div class="discover" style="margin-top: 1rem !important;">
-    <h2>{{title}}</h2>
-    
-    <!-- Tab Navigation -->
-    <div class="stats-tabs">
-        <button class="stats-tab {{ 'active' if active_tab == 'activity' else '' }}" 
-                onclick="switchTab('activity')">
-            📊 User Activity
-        </button>
-        <button class="stats-tab {{ 'active' if active_tab == 'library' else '' }}" 
-                onclick="switchTab('library')">
-            📚 Library Stats
-        </button>
-        <button class="stats-tab {{ 'active' if active_tab == 'api' else '' }}" 
-                onclick="switchTab('api')">
-            📱 API Usage
-        </button>
-        <button class="stats-tab {{ 'active' if active_tab == 'system' else '' }}" 
-                onclick="switchTab('system')">
-            ⚙️ System Stats
-        </button>
-    </div>
-
-    <div style="max-width: 1200px; margin: auto;">
-        <!-- User Activity Tab -->
-        <div id="activity-tab" class="tab-content {{ 'active' if active_tab == 'activity' else '' }}">
-            {% include 'cwa_user_activity.html' %}
-        </div>
-        
-        <!-- Library Stats Tab -->
-        <div id="library-tab" class="tab-content {{ 'active' if active_tab == 'library' else '' }}">
-            {% include 'cwa_library_stats.html' %}
-        </div>
-        
-        <!-- API Usage Tab -->
-        <div id="api-tab" class="tab-content {{ 'active' if active_tab == 'api' else '' }}">
-            {% include 'cwa_api_stats.html' %}
-        </div>
-        
-        <!-- System Logs Tab -->
-        <div id="system-tab" class="tab-content {{ 'active' if active_tab == 'system' else '' }}">
-            {% include 'cwa_stats_system.html' %}
-        </div>
-    </div>
-    
+<div class="page-header">
+  <div>
+    {%- if is_admin %}<span class="page-eyebrow"><a href="{{ url_for('admin.admin') }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Settings') }}</a></span>{% endif %}
+    <h1 class="page-title">{{ _('Statistics') }}</h1>
+    <span class="page-subtitle">{{ date_range_label }}</span>
+  </div>
 </div>
 
-<script>
-function switchTab(tabName) {
-    // Update tab buttons
-    document.querySelectorAll('.stats-tab').forEach(tab => {
-        tab.classList.remove('active');
-    });
-    event.target.classList.add('active');
-    
-    // Update tab content
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-    });
-    document.getElementById(tabName + '-tab').classList.add('active');
-    
-    // Update URL without page reload
-    const url = new URL(window.location);
-    url.searchParams.set('tab', tabName);
-    window.history.pushState({}, '', url);
-    
-    // Resize charts after tab switch to fix layout issues
-    setTimeout(() => {
-        if (tabName === 'activity') {
-            // Resize User Activity charts
-            if (typeof timelineChart !== 'undefined' && timelineChart) timelineChart.resize();
-            if (typeof eventsChart !== 'undefined' && eventsChart) eventsChart.resize();
-            if (typeof formatsChart !== 'undefined' && formatsChart) formatsChart.resize();
-            if (typeof heatmapChart !== 'undefined' && heatmapChart) heatmapChart.resize();
-            if (typeof velocityChart !== 'undefined' && velocityChart) velocityChart.resize();
-            if (typeof formatPreferencesChart !== 'undefined' && formatPreferencesChart) formatPreferencesChart.resize();
-            if (typeof discoveryChart !== 'undefined' && discoveryChart) discoveryChart.resize();
-            if (typeof deviceChart !== 'undefined' && deviceChart) deviceChart.resize();
-            if (typeof sessionDurationChart !== 'undefined' && sessionDurationChart) sessionDurationChart.resize();
-            if (typeof searchSuccessChart !== 'undefined' && searchSuccessChart) searchSuccessChart.resize();
-        } else if (tabName === 'library') {
-            // Resize Library Stats charts
-            if (typeof growthChart !== 'undefined' && growthChart) growthChart.resize();
-            if (typeof libraryFormatsChart !== 'undefined' && libraryFormatsChart) libraryFormatsChart.resize();
-            if (typeof seriesChart !== 'undefined' && seriesChart) seriesChart.resize();
-            if (typeof publicationYearChart !== 'undefined' && publicationYearChart) publicationYearChart.resize();
-            if (typeof ratingStatsChart !== 'undefined' && ratingStatsChart) ratingStatsChart.resize();
-            if (typeof topEnforcedChart !== 'undefined' && topEnforcedChart) topEnforcedChart.resize();
-            if (typeof importSankeyChart !== 'undefined' && importSankeyChart) importSankeyChart.resize();
-        } else if (tabName === 'api') {
-            // Resize API Usage charts
-            if (typeof apiUsageChart !== 'undefined' && apiUsageChart) apiUsageChart.resize();
-            if (typeof apiTimingChart !== 'undefined' && apiTimingChart) apiTimingChart.resize();
-        }
-    }, 50); // Small delay to ensure DOM has updated
-}
-</script>
+<form class="toolbar" method="get" id="stats-filters">
+  <input type="hidden" name="tab" value="{{ active_tab }}" data-tab-input>
+  {%- if is_admin %}
+  <label class="sr-only" for="user_id">{{ _('User') }}</label>
+  <select class="select select--auto" name="user_id" id="user_id" data-autosubmit>
+    <option value="" {% if not selected_user_id %}selected{% endif %}>{{ _('All Users') }}</option>
+    {%- for uid, uname in active_users %}<option value="{{ uid }}" {% if selected_user_id == uid %}selected{% endif %}>{{ uname }}</option>{% endfor %}
+  </select>
+  {%- endif %}
+  <label class="sr-only" for="days">{{ _('Time Period') }}</label>
+  <select class="select select--auto" name="days" id="days" data-period>
+    {%- for value, label in [(7, _('Last 7 Days')), (30, _('Last 30 Days')), (90, _('Last 90 Days')), (180, _('Last 6 Months')), (365, _('Last Year'))] %}
+    <option value="{{ value }}" {% if days == value and not start_date %}selected{% endif %}>{{ label }}</option>
+    {%- endfor %}
+    <option value="custom" {% if start_date and end_date %}selected{% endif %}>{{ _('Custom Range') }}</option>
+  </select>
+  <span class="row" data-custom-range {% if not (start_date and end_date) %}hidden{% endif %}>
+    <label class="sr-only" for="start_date">{{ _('From') }}</label>
+    <input class="input input--auto" type="date" id="start_date" name="start_date" value="{{ start_date or '' }}" max="{{ today }}" {% if not (start_date and end_date) %}disabled{% endif %}>
+    <span class="muted">–</span>
+    <label class="sr-only" for="end_date">{{ _('To') }}</label>
+    <input class="input input--auto" type="date" id="end_date" name="end_date" value="{{ end_date or '' }}" max="{{ today }}" {% if not (start_date and end_date) %}disabled{% endif %}>
+    <button class="btn btn-sm" type="submit">{{ _('Apply') }}</button>
+  </span>
+  <span class="grow"></span>
+  <a class="btn btn-sm" data-export href="{{ url_for('cwa_stats.export_stats_csv', tab_name=active_tab) }}">{{ ui.icon('download') }}{{ _('Export CSV') }}</a>
+</form>
+{%- if show_warning %}<div class="alert alert--warning">{{ ui.icon('clock') }}<div class="alert-body">{{ _('Large date ranges may take longer to load') }}</div></div>{% endif %}
 
+<nav class="tabs" role="tablist" aria-label="{{ _('Statistics') }}">
+  {%- for key, label in [('activity', _('User Activity')), ('library', _('Library')), ('api', _('API Usage')), ('system', _('System'))] %}
+  <button class="tab" type="button" role="tab" id="tab-{{ key }}" aria-controls="panel-{{ key }}" aria-selected="{{ 'true' if active_tab == key else 'false' }}" data-tab="{{ key }}">{{ label }}</button>
+  {%- endfor %}
+</nav>
+
+{#- User activity -#}
+<div class="stack-lg" role="tabpanel" id="panel-activity" aria-labelledby="tab-activity" {% if active_tab != 'activity' %}hidden{% endif %}>
+  {%- set totals = dashboard_stats.totals or {} %}
+  <div class="stat-grid">
+    {{ stat(_('Logins'), totals.total_logins or 0) }}
+    {%- if totals.active_users is defined %}{{ stat(_('Active Users'), totals.active_users or 0) }}{% endif %}
+    {{ stat(_('Total Downloads'), totals.total_downloads or 0) }}
+    {{ stat(_('Books Read'), totals.total_reads or 0) }}
+    {{ stat(_('Searches'), totals.total_searches or 0) }}
+    {{ stat(_('Avg Session Length'), (session_duration.average_minutes or 0)|round(1) ~ ' min') }}
+    {{ stat(_('Search Success Rate'), (search_success.success_rate or 0) ~ '%', _('%(done)s of %(total)s searches', done=search_success.successful_searches or 0, total=search_success.total_searches or 0)) }}
+  </div>
+  <div class="form-grid stats-grid">
+    {{ chart('timeline', _('Activity Timeline'), span=true) }}
+    {{ chart('heatmap', _('Peak Usage Hours'), 'sm', span=true) }}
+    {{ chart('events', _('Event Types'), 'sm') }}
+    {{ chart('formats', _('Download Formats Distribution'), 'sm') }}
+    {{ chart('formatPreferences', _('Format Preferences by User'), 'sm') }}
+    {{ chart('discovery', _('Discovery Sources'), 'sm') }}
+    {{ chart('devices', _('Device Breakdown'), 'sm') }}
+    {{ chart('velocity', _('Reading Velocity (Books per Week)'), 'sm') }}
+    {{ chart('sessionDuration', _('Average Session Duration'), 'sm') }}
+    <section class="card"><h3 class="card-title">{{ _('Top Users') if not selected_user_id else _('Most Active Days') }}</h3><ol class="rank-list" data-list="topUsers"></ol></section>
+    <section class="card"><h3 class="card-title">{{ _('Popular Books') }}</h3><ol class="rank-list" data-list="topBooks"></ol></section>
+    <section class="card"><h3 class="card-title">{{ _('Recent Searches') }}</h3><ul class="rank-list" data-list="recentSearches"></ul></section>
+    <section class="card"><h3 class="card-title">{{ _('Shelf Activity') }}</h3><ul class="rank-list" data-list="shelfActivity"></ul></section>
+    <section class="card"><h3 class="card-title">{{ _('Failed Login Attempts') }}</h3><ul class="rank-list" data-list="failedLogins"></ul></section>
+  </div>
+</div>
+
+{#- Library -#}
+<div class="stack-lg" role="tabpanel" id="panel-library" aria-labelledby="tab-library" {% if active_tab != 'library' %}hidden{% endif %}>
+  <div class="stat-grid">
+    {{ stat(_('Total Books'), cwa_stats.total_books) }}
+    {{ stat(_('Added Books'), books_added_stats.total if books_added_stats else 0) }}
+    {{ stat(_('Conversions'), conversion_stats.total if conversion_stats else 0, (_('%(rate)s%% successful', rate=conversion_stats.success_rate) if conversion_stats and conversion_stats.total else '')) }}
+    {{ stat(_('Formats'), library_formats|length) }}
+    {{ stat(_('Average rating'), (rating_statistics.average_rating or 0)|round(1) ~ ' ★' if rating_statistics else '—', _('%(rated)s of %(total)s rated', rated=rating_statistics.rated_books or 0, total=rating_statistics.total_books or 0) if rating_statistics else '') }}
+  </div>
+  <div class="form-grid stats-grid">
+    {{ chart('growth', _('Library Growth'), span=true) }}
+    {{ chart('libraryFormats', _('Formats in the library'), 'sm') }}
+    {{ chart('ratings', _('Rating Distribution'), 'sm') }}
+    {{ chart('publicationYears', _('Publication Years'), 'sm', span=true) }}
+    {{ chart('series', _('Largest Series'), 'sm') }}
+    {{ chart('importFlows', _('Import Conversions'), 'sm') }}
+    <section class="card"><h3 class="card-title">{{ _('Most Enforced Books') }}</h3><ol class="rank-list" data-list="topEnforced"></ol></section>
+    <section class="card"><h3 class="card-title">{{ _('Most Fixed EPUBs') }}</h3><ol class="rank-list" data-list="mostFixed"></ol></section>
+  </div>
+</div>
+
+{#- API -#}
+<div class="stack-lg" role="tabpanel" id="panel-api" aria-labelledby="tab-api" {% if active_tab != 'api' %}hidden{% endif %}>
+  <div class="form-grid stats-grid">
+    {{ chart('apiUsage', _('Usage by Source'), 'sm') }}
+    {{ chart('apiTiming', _('API Activity by Hour'), 'sm') }}
+    <section class="card span-all"><h3 class="card-title">{{ _('Most Used Endpoints') }}</h3>
+      <div class="table-wrap"><table class="table"><thead><tr><th>{{ _('Endpoint') }}</th><th>{{ _('Category') }}</th><th class="num">{{ _('Requests') }}</th><th>{{ _('Last Access') }}</th></tr></thead>
+        <tbody>{% for endpoint, category, count, last in endpoint_frequency or [] %}<tr><td class="mono small">{{ endpoint }}</td><td>{{ category }}</td><td class="num">{{ count }}</td><td class="nowrap">{{ last }}</td></tr>{% else %}<tr><td colspan="4" class="muted center">{{ _('Nothing yet.') }}</td></tr>{% endfor %}</tbody></table></div>
+    </section>
+  </div>
+</div>
+
+{#- System -#}
+<div class="stack-lg" role="tabpanel" id="panel-system" aria-labelledby="tab-system" {% if active_tab != 'system' %}hidden{% endif %}>
+  <div class="stat-grid">
+    {{ stat(_('Total Books'), cwa_stats['total_books']) }}
+    {{ stat(_('Books Enforced'), cwa_stats['cwa_enforcement']) }}
+    {{ stat(_('Books Converted'), cwa_stats['cwa_conversions']) }}
+    {{ stat(_('Books Fixed'), cwa_stats['epub_fixes']) }}
+  </div>
+  {%- if hardcover_stats %}
+  <section class="card">
+    <div class="row-between"><h3 class="card-title">{{ _('Hardcover Auto-Fetch Statistics') }}</h3>
+      {%- if hardcover_stats.pending_review %}<a class="btn btn-sm btn-primary" href="{{ url_for('admin.hardcover_review_matches') }}">{{ _('Review %(count)s Pending Match(es)', count=hardcover_stats.pending_review) }}</a>{% endif %}</div>
+    <dl class="dl dl--compact">
+      <dt>{{ _('Total Processed') }}</dt><dd>{{ hardcover_stats.total_processed }}</dd>
+      <dt>{{ _('Auto-Matched') }}</dt><dd>{{ hardcover_stats.total_auto_matched }}</dd>
+      <dt>{{ _('Pending Review') }}</dt><dd>{{ hardcover_stats.pending_review }}</dd>
+      <dt>{{ _('Manually Reviewed') }}</dt><dd>{{ hardcover_stats.manually_reviewed }}</dd>
+    </dl>
+  </section>
+  {%- endif %}
+  {{ history(_('Calibre-Web Automated Conversion History'), headers_conversion, data_conversions, url_for('cwa_stats.show_full_conversions')) }}
+  {{ history(_('Calibre-Web Automated Import History'), headers_import, data_imports, url_for('cwa_stats.show_full_imports')) }}
+  {{ history(_('Calibre-Web Automated EPUB Fixer History'), headers_epub_fixer, data_epub_fixer, url_for('cwa_stats.show_full_epub_fixer')) }}
+  {{ history(_('Calibre-Web Automated Cover & Metadata Enforcement History'), headers_enforcement, data_enforcement, url_for('cwa_stats.show_full_enforcement')) }}
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="application/json" id="stats-data">{{ {
+  'timeline': dashboard_stats.timeline or [], 'topUsers': dashboard_stats.top_users or [], 'topBooks': dashboard_stats.top_books or [],
+  'recentSearches': dashboard_stats.recent_searches or [], 'formats': dashboard_stats.format_distribution or [],
+  'events': dashboard_stats.event_breakdown or [], 'heatmap': hourly_heatmap or [], 'velocity': reading_velocity or [],
+  'formatPreferences': format_preferences or [], 'discovery': discovery_sources or [], 'devices': device_breakdown or [],
+  'failedLogins': failed_logins or [], 'sessionDuration': session_duration or {}, 'shelfActivity': shelf_activity or [],
+  'singleUser': selected_user_id is not none,
+  'growth': library_growth or [], 'libraryFormats': library_formats or [], 'series': series_completion or [],
+  'publicationYears': publication_years or [], 'mostFixed': most_fixed_books or [], 'ratings': (rating_statistics.rating_distribution if rating_statistics else []) or [],
+  'topEnforced': top_enforced_books or [], 'importFlows': import_source_flows or [],
+  'apiUsage': api_usage_breakdown or [], 'apiTiming': api_timing or [],
+  'bookUrl': url_for('web.show_book', book_id=999999999),
+  'strings': {
+    'empty': _('No data for this period yet.'), 'books': _('Books'), 'count': _('Count'), 'added': _('Added'), 'removed': _('Removed'),
+    'views': _('Views'), 'attempts': _('Attempts'), 'days': [_('Sun'), _('Mon'), _('Tue'), _('Wed'), _('Thu'), _('Fri'), _('Sat')],
+    'minutes': _('minutes'), 'highest_index': _('Highest number'), 'by': _('by')
+  }
+}|tojson }}</script>
+<script src="{{ url_for('static', filename='js/libs/echarts.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/stats.js') }}"></script>
 {% endblock %}

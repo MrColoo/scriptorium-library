@@ -2291,7 +2291,12 @@ class CWA_DB:
             
             # 4. Recent search terms
             self.cur.execute(f"""
-                SELECT extra_data as search_term, timestamp, user_name
+                SELECT
+                    -- log_activity stores a plain-text term as JSON under "format"
+                    CASE WHEN json_valid(extra_data)
+                         THEN COALESCE(json_extract(extra_data, '$.format'), json_extract(extra_data, '$.term'), extra_data)
+                         ELSE extra_data END as search_term,
+                    timestamp, user_name
                 FROM cwa_user_activity 
                 WHERE event_type = 'SEARCH' 
                   AND extra_data IS NOT NULL
