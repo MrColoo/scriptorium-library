@@ -862,3 +862,19 @@ a.format-tile:hover { border-color: var(--border-strong); background: var(--surf
 .star-input .icon { width: 16px; height: 16px; }
 .star-input:hover .icon { fill: none; color: var(--border-strong); }
 .star-input button:hover .icon, .star-input button:has(~ button:hover) .icon { fill: currentColor; color: var(--star); }
+.search-box--sm { flex: 0 1 320px; height: 36px; }
+.author-bio { display: flex; align-items: flex-start; gap: 20px; }
+.author-photo { width: 96px; height: 96px; border-radius: var(--radius); object-fit: cover; flex: none; }
+.prose--sm { font-size: 16px; }
+@media (max-width: 480px) { .author-bio { flex-direction: column; } }
+
+/* Multi-select (enhanced <select multiple>) */
+.multiselect { display: flex; width: 100%; }
+.multiselect-summary { display: flex; align-items: center; cursor: pointer; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: var(--text); }
+.multiselect-summary.is-placeholder { color: var(--text-faint); }
+.multiselect-panel { width: 100%; min-width: 240px; gap: 6px; }
+.multiselect-panel > .input { min-height: 34px; }
+.multiselect-options { display: flex; flex-direction: column; gap: 1px; max-height: 260px; overflow-y: auto; }
+.multiselect-options .menu-item { white-space: normal; }
+.multiselect-options input { accent-color: var(--accent); width: 15px; height: 15px; flex: none; }
+.row-nowrap { flex-wrap: nowrap; }

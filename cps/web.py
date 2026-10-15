@@ -649,7 +649,7 @@ def render_author_books(page, author_id, order):
         book_entries = [entry.Books for entry in entries]
         other_books = services.goodreads_support.get_other_books(author_info, book_entries)
     return render_title_template('author.html', entries=entries, pagination=pagination, id=author_id,
-                                 title=_("Author: %(name)s", name=author_name), author=author_info,
+                                 title=_("Author: %(name)s", name=author_name), author=author_info, author_name=author_name,
                                  other_books=other_books, page="author", order=order[1])
 
 

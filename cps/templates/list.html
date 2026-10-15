@@ -1,84 +1,67 @@
-<!-- Calibre-Web Automated – fork of Calibre-Web
-Copyright (C) 2018-2025 Calibre-Web contributors
-Copyright (C) 2024-2025 Calibre-Web Automated contributors
-SPDX-License-Identifier: GPL-3.0-or-later
-See CONTRIBUTORS for full list of authors. -->
-
 {% extends "layout.html" %}
 {% block body %}
-<h1 class="{{page}}">{{_(title)}}</h1>
-
-    <div class="filterheader hidden-xs">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      {% if entries.__len__() and data == 'author' %}
-        <div id="sort_name" class="btn btn-primary"><b>B,A <-> A B</b></div>
-      {% endif %}
-      <div id="asc" data-order="{{ order }}" data-id="{{ data }}" class="btn btn-primary {% if order == 1 %} active{% endif%}"><span class="glyphicon glyphicon-sort-by-alphabet"></span></div>
-      <div id="desc" data-id="{{ data }}" class="btn btn-primary{% if order == 0 %} active{% endif%}"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></div>
-      {% if charlist|length %}
-      <div id="all" class="active btn btn-primary">{{_('All')}}</div>
-      {% endif %}
-      {% if charlist|length %}
-        {% if charlist|length > 9 %}
-          <!-- Use a dropdown when there are many characters -->
-          <div class="character-dropdown" style="display:inline-block; margin-left: .5rem;">
-            <label for="char-dropdown" class="sr-only">{{ _('Filter by initial') }}</label>
-            <select id="char-dropdown" class="form-control" style="display:inline-block; width:auto;">
-              <option value="" selected disabled>{{ _('Filter by initial') }}</option>
-              {% for char in charlist %}
-                <option value="{{char[0]}}">{{char[0]}}</option>
-              {% endfor %}
-            </select>
-          </div>
-        {% else %}
-          <div class="btn-group character" role="group">
-            {% for char in charlist%}
-            <div class="btn btn-primary char">{{char[0]}}</div>
-            {% endfor %}
-          </div>
-        {% endif %}
-      {% endif %}
-
-      {% if data == "series" %}
-      <button class="update-view btn btn-primary" data-target="series_view" id="grid-button" data-view="grid">{{_('Grid')}}</button>
-      {% endif %}
-    </div>
-  <div class="container" id="{{_(title)}}">
-    {% if title == "Downloads" %}
-      <h1 style="padding-top: 1rem; padding-bottom: 2rem;">Users Downloaded Books:</h1>
-    {% endif %}
-    <div id="{{_(title)}}_list" class="col-xs-12 col-sm-6 list-container">
-    {% for entry in entries %}
-      {% if loop.index0 == (loop.length/2+loop.length%2)|int and loop.length > 20 %}
-        </div>
-        <div id="second" class="col-xs-12 col-sm-6">
-      {% endif %}
-      <div class="row" id="{{_(title)}}_row" {% if entry[0].sort %}data-name="{{entry[0].name}}"{% endif %} data-id="{% if entry[0].sort %}{{entry[0].sort}}{% else %}{% if entry[0].format %}{{entry[0].format}}{% else %}{% if entry[0].rating %}{{entry[0].rating}}{% else %}{{entry[0].name}}{% endif %}{% endif %}{% endif %}">
-        <div class="col-xs-2 col-sm-2 col-md-1" align="left"><span class="badge">{{entry[1]}}</span></div>
-        <div class="col-xs-10 col-sm-10 col-md-11">
-          <a style="width: -webkit-fill-available; display: block;" id="list_{{loop.index0}}" href="{% if entry.format %}{{url_for('web.books_list', data=data, sort_param='stored', book_id=entry.format )}}{% else %}{{url_for('web.books_list', data=data, sort_param='stored', book_id=entry[0].id )}}{% endif %}">
-          {% if entry.name %}
-          <div class="rating">
-          {% for number in range(entry.name|int) %}
-            <span class="glyphicon glyphicon-star good"></span>
-            {% if loop.last and loop.index < 5 %}
-              {% for numer in range(5 - loop.index) %}
-                <span class="glyphicon glyphicon-star-empty"></span>
-              {% endfor %}
-            {% endif %}
-          {% endfor %}
-          </div>
-          {% else %}
-          {% if entry.format %}
-            {{entry.format}}
-          {% else %}
-            {% if page == "authorlist" %}{{ entry[0].name.replace('|', ', ') }}{% else %}{{entry[0].name}}{% endif %}
-          {% endif %}{% endif %}</a></div>
-      </div>
-    {% endfor %}
-    </div>
+{%- set heading = _(title) %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ heading }}</h1>
+    <span class="page-subtitle">{{ ngettext('%(num)s entry', '%(num)s entries', entries|length, num=entries|length) }}</span>
   </div>
+  <div class="page-actions">
+    {%- if data == 'series' %}
+    <div class="segmented" role="group" aria-label="{{ _('View') }}">
+      <button type="button" data-series-view="grid" aria-pressed="false" aria-label="{{ _('Grid') }}">{{ ui.icon('grid') }}</button>
+      <button type="button" data-series-view="list" aria-pressed="true" aria-label="{{ _('List') }}">{{ ui.icon('list') }}</button>
+    </div>
+    {%- endif %}
+    {%- if data == 'author' and entries|length %}
+    <button class="btn btn-sm" type="button" data-author-name-toggle aria-pressed="false" title="{{ _('Switch between “First Last” and “Last, First”') }}">{{ ui.icon('user') }}{{ _('Last, First') }}</button>
+    {%- endif %}
+    <button class="btn btn-sm" type="button" data-sort-dir="{{ 'asc' if order == 1 else 'desc' }}" data-sort-key="{{ data }}">{{ ui.icon('sort') }}<span>{{ _('A–Z') if order == 1 else _('Z–A') }}</span></button>
+  </div>
+</div>
+
+{%- if entries|length > 12 %}
+<div class="toolbar">
+  <label class="search-box search-box--sm">
+    {{ ui.icon('filter') }}
+    <span class="sr-only">{{ _('Filter') }}</span>
+    <input type="search" data-list-filter placeholder="{{ _('Filter %(what)s', what=heading|lower) }}" autocomplete="off">
+  </label>
+  {%- if charlist|length > 1 %}
+  <nav class="letter-nav" aria-label="{{ _('Filter by initial') }}">
+    <button type="button" class="is-active" data-letter="">{{ _('All') }}</button>
+    {%- for char in charlist %}
+    <button type="button" data-letter="{{ char[0] }}">{{ char[0] }}</button>
+    {%- endfor %}
+  </nav>
+  {%- endif %}
+</div>
+{%- endif %}
+
+{%- if entries %}
+<div class="index-list" data-list>
+  {%- for entry in entries %}
+    {%- if entry.format %}
+      {%- set label = entry.format %}{% set href = url_for('web.books_list', data=data, sort_param='stored', book_id=entry.format) %}{% set sortkey = entry.format %}
+    {%- else %}
+      {%- set label = entry[0].name.replace('|', ', ') if data == 'author' else entry[0].name %}
+      {%- set href = url_for('web.books_list', data=data, sort_param='stored', book_id=entry[0].id) %}
+      {%- set sortkey = entry[0].sort if entry[0].sort else (entry[0].name|string) %}
+    {%- endif %}
+  <a class="index-item" href="{{ href }}" data-item data-key="{{ sortkey }}"{% if data == 'author' and entry[0].sort %} data-name="{{ label }}" data-sortname="{{ entry[0].sort }}"{% endif %}>
+    <span class="grow">
+      {%- if entry.name is defined and entry.name is number %}{{ ui.stars(entry.name * 2) }}
+      {%- else %}{{ label }}{% endif -%}
+    </span>
+    <span class="nav-count">{{ entry[1] }}</span>
+  </a>
+  {%- endfor %}
+</div>
+<p class="muted" data-list-empty hidden>{{ _('Nothing matches this filter.') }}</p>
+{%- else %}
+{{ ui.empty_state('list', _('Nothing here yet'), _('Entries appear once books in the library use them.')) }}
+{%- endif %}
 {% endblock %}
 {% block js %}
-<script src="{{ url_for('static', filename='js/filter_list.js') }}"></script>
+<script src="{{ url_for('static', filename='js/browse.js') }}"></script>
 {% endblock %}

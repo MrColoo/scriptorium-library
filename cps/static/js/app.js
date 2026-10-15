@@ -525,6 +525,71 @@
     });
   }
 
+  // ---------- Multi-select: <select multiple data-multiselect> ----------
+  // Keeps the native <select> as the form field and mirrors it with a searchable checkbox list.
+  function enhanceMultiselect(select) {
+    if (select.dataset.enhanced) return;
+    select.dataset.enhanced = "1";
+    var wrap = doc.createElement("details");
+    wrap.className = "menu multiselect";
+    var summary = doc.createElement("summary");
+    summary.className = "select multiselect-summary";
+    var label = select.id ? doc.querySelector('label[for="' + select.id + '"]') : null;
+    if (label) summary.setAttribute("aria-label", label.textContent.trim());
+    var panel = doc.createElement("div");
+    panel.className = "menu-panel menu-panel--left multiselect-panel";
+    var filter = doc.createElement("input");
+    filter.type = "search";
+    filter.className = "input";
+    filter.placeholder = select.getAttribute("data-filter-placeholder") || t("filter", "Filter");
+    filter.setAttribute("aria-label", filter.placeholder);
+    var optionsBox = doc.createElement("div");
+    optionsBox.className = "multiselect-options";
+    if (select.options.length > 8) panel.appendChild(filter);
+    panel.appendChild(optionsBox);
+    Array.prototype.forEach.call(select.options, function (opt) {
+      var row = doc.createElement("label");
+      row.className = "menu-item";
+      var box = doc.createElement("input");
+      box.type = "checkbox";
+      box.checked = opt.selected;
+      box.addEventListener("change", function () { opt.selected = box.checked; render(); select.dispatchEvent(new Event("change", { bubbles: true })); });
+      var text = doc.createElement("span");
+      text.className = "grow";
+      text.textContent = opt.textContent;
+      row.appendChild(box);
+      row.appendChild(text);
+      row.setAttribute("data-keep-open", "");
+      optionsBox.appendChild(row);
+    });
+    filter.addEventListener("input", function () {
+      var q = filter.value.toLowerCase();
+      Array.prototype.forEach.call(optionsBox.children, function (row) {
+        row.hidden = q && row.textContent.toLowerCase().indexOf(q) === -1;
+      });
+    });
+    function render() {
+      var chosen = Array.prototype.filter.call(select.options, function (o) { return o.selected; }).map(function (o) { return o.textContent; });
+      summary.textContent = chosen.length ? (chosen.length > 2 ? chosen.slice(0, 2).join(", ") + " +" + (chosen.length - 2) : chosen.join(", "))
+        : (select.getAttribute("data-placeholder") || t("any", "Any"));
+      summary.classList.toggle("is-placeholder", !chosen.length);
+    }
+    render();
+    if (select.form) {
+      select.form.addEventListener("reset", function () {
+        setTimeout(function () {
+          Array.prototype.forEach.call(optionsBox.querySelectorAll("input"), function (box, i) { box.checked = select.options[i].selected; });
+          render();
+        }, 0);
+      });
+    }
+    wrap.appendChild(summary);
+    wrap.appendChild(panel);
+    select.hidden = true;
+    select.parentNode.insertBefore(wrap, select.nextSibling);
+  }
+  Array.prototype.forEach.call(doc.querySelectorAll("select[multiple][data-multiselect]"), enhanceMultiselect);
+
   window.CWA = {
     t: t,
     toast: toast,
@@ -534,6 +599,7 @@
     openDialog: openDialog,
     closeDialog: closeDialog,
     icon: icon,
-    upload: uploadFiles
+    upload: uploadFiles,
+    enhanceMultiselect: enhanceMultiselect
   };
 })();

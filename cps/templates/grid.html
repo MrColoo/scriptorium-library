@@ -1,50 +1,58 @@
-{% import 'image.html' as image %}
 {% extends "layout.html" %}
 {% block body %}
-<h1 class="{{page}}">{{_(title)}}</h1>
-
-    <div class="filterheader hidden-xs">
-      {% if entries.__len__() and data == 'author' %}
-        <div id="sort_name" class="btn btn-primary"><b>B,A <-> A B</b></div>
-      {% endif %}
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <div id="asc" data-id="series" data-order="{{ order }}" class="btn btn-primary{% if order == 1 %} active{% endif%}"><span class="glyphicon glyphicon-sort-by-alphabet"></span></div>
-      <div id="desc" data-id="series" class="btn btn-primary{% if order == 0 %} active{% endif%}"><span class="glyphicon glyphicon-sort-by-alphabet-alt"></span></div>
-      {% if charlist|length %}
-      <div id="all" class="active btn btn-primary {% if charlist|length > 9 %}hidden-sm{% endif %}">{{_('All')}}</div>
-      {% endif %}
-      <div class="btn-group character {% if charlist|length > 9 %}hidden-sm{% endif %}" role="group">
-        {% for char in charlist%}
-        <div class="btn btn-primary char">{{char.char}}</div>
-        {% endfor %}
-      </div>
-        <div class="update-view btn btn-primary" data-target="series_view" id="list-button" data-view="list">{{_('List')}}</div>
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _(title) }}</h1>
+    <span class="page-subtitle">{{ ngettext('%(num)s series', '%(num)s series', entries|length, num=entries|length) }}</span>
+  </div>
+  <div class="page-actions">
+    <div class="segmented" role="group" aria-label="{{ _('View') }}">
+      <button type="button" data-series-view="grid" aria-pressed="true" aria-label="{{ _('Grid') }}">{{ ui.icon('grid') }}</button>
+      <button type="button" data-series-view="list" aria-pressed="false" aria-label="{{ _('List') }}">{{ ui.icon('list') }}</button>
     </div>
+    <button class="btn btn-sm" type="button" data-sort-dir="{{ 'asc' if order == 1 else 'desc' }}" data-sort-key="series">{{ ui.icon('sort') }}<span>{{ _('A–Z') if order == 1 else _('Z–A') }}</span></button>
+  </div>
+</div>
 
-    {% if entries[0] %}
-        <div id="list" class="row display-flex">
-          {% for entry in entries %}
-              <div class="col-sm-3 col-lg-2 col-xs-6 book sortable" {% if entry[0].sort %}data-name="{{entry[0].series[0].name}}"{% endif %} data-id="{% if entry[0].series[0].name %}{{entry[0].series[0].name}}{% endif %}">
-                  <div class="cover">
-                      <a href="{{url_for('web.books_list', data=data, sort_param='stored', book_id=entry[0].series[0].id )}}">
-                          <span class="img" title="{{entry[0].series[0].name}}">
-                              {{ image.book_cover(entry[0])}}
-                              <span class="badge">{{entry.count}}</span>
-                            </span>
-                      </a>
-                  </div>
-                  <div class="meta">
-                      <a href="{{url_for('web.books_list', data=data, sort_param='stored', book_id=entry[0].series[0].id )}}">
-                          <p title="{{entry[0].series[0].name|shortentitle}}" class="title">{{entry[0].series[0].name|shortentitle}}</p>
-                      </a>
-                  </div>
-              </div>
-        {% endfor %}
-        </div>
-    {% endif %}
+{%- if entries|length > 12 %}
+<div class="toolbar">
+  <label class="search-box search-box--sm">
+    {{ ui.icon('filter') }}
+    <span class="sr-only">{{ _('Filter') }}</span>
+    <input type="search" data-list-filter placeholder="{{ _('Filter series') }}" autocomplete="off">
+  </label>
+  {%- if charlist|length > 1 %}
+  <nav class="letter-nav" aria-label="{{ _('Filter by initial') }}">
+    <button type="button" class="is-active" data-letter="">{{ _('All') }}</button>
+    {%- for char in charlist %}
+    <button type="button" data-letter="{{ char.char }}">{{ char.char }}</button>
+    {%- endfor %}
+  </nav>
+  {%- endif %}
+</div>
+{%- endif %}
 
-
+{%- if entries %}
+<div class="tile-grid" data-list>
+  {%- for entry in entries %}
+    {%- set series = entry[0].series[0] %}
+  <article class="book-card" data-item data-key="{{ series.sort or series.name }}">
+    <a class="cover" href="{{ url_for('web.books_list', data=data, sort_param='stored', book_id=series.id) }}" tabindex="-1" aria-hidden="true">
+      {{ ui.cover_img(entry[0], alt='') }}
+      <span class="cover-badges"><span></span><span class="cover-badge">{{ entry.count }}</span></span>
+    </a>
+    <div class="book-meta">
+      <a class="book-title" href="{{ url_for('web.books_list', data=data, sort_param='stored', book_id=series.id) }}">{{ series.name }}</a>
+      <span class="book-author">{{ ngettext('%(num)s book', '%(num)s books', entry.count, num=entry.count) }}</span>
+    </div>
+  </article>
+  {%- endfor %}
+</div>
+<p class="muted" data-list-empty hidden>{{ _('Nothing matches this filter.') }}</p>
+{%- else %}
+{{ ui.empty_state('series', _('No series yet'), _('Series appear here once books in the library belong to one.')) }}
+{%- endif %}
 {% endblock %}
 {% block js %}
-<script src="{{ url_for('static', filename='js/filter_grid.js') }}"></script>
+<script src="{{ url_for('static', filename='js/browse.js') }}"></script>
 {% endblock %}

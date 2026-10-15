@@ -1,272 +1,125 @@
 {% extends "layout.html" %}
-{% block body %}
-<h1 class="{{page}}">{{title}}</h1>
-<div class="col-md-10 col-lg-6">
-  <form role="form" id="search" action="{{ url_for('search.advanced_search_form') }}" method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <div class="form-group">
-      <label for="title">{{_('Book Title')}}</label>
-      <input type="text" class="form-control" name="title" id="title" value="">
-    </div>
-    <div class="form-group">
-      <label for="authors">{{_('Author')}}</label>
-      <input type="text" class="form-control typeahead" name="authors" id="authors" value="" autocomplete="off">
-    </div>
-    <div class="form-group">
-      <label for="Publisher">{{_('Publisher')}}</label>
-      <input type="text" class="form-control" name="publisher" id="publisher" value="">
-    </div>
-    <div class="row">
-      <div class="form-group col-sm-6">
-        <label for="publishstart">{{_('Published Date From')}}</label>
-        <div class="input-group">
-          <input type="text" class="datepicker form-control" name="publishstart" id="publishstart" value="">
-          <input type="text" class="form-control fake-input hidden" id="fake_publishstart" value="">
-          <span class="input-group-btn">
-            <button type="button" id="publishstart_delete" class="datepicker_delete btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
-          </span>
-        </div>
-      </div>
-      <div class="form-group col-sm-6">
-        <label for="publishend">{{_('Published Date To')}}</label>
-        <div class="input-group ">
-          <input type="text" class="datepicker form-control" name="publishend" id="publishend" value="">
-          <input type="text" class="form-control fake-input hidden" id="fake_publishend" value="">
-          <span class="input-group-btn">
-            <button type="button" id="publishend_delete" class="datepicker_delete btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="read_status">{{_('Read Status')}}</label>
-      <select name="read_status" id="read_status" class="form-control">
-        <option value="Any" selected>{{_('Any')}}</option>
-        <option value="">{{_('Empty')}}</option>
-        <option value="True" >{{_('Yes')}}</option>
-        <option value="False" >{{_('No')}}</option>
-      </select>
-    </div>
-    <div class="row">
-      <div class="form-group col-sm-6" id="tag">
-        <div><label for="include_tag">{{_('Tags')}}</label></div>
-        <select class="selectpicker" name="include_tag" id="include_tag" data-live-search="true" data-style="btn-primary" data-dropup-auto="false" multiple>
-          {% for tag in tags %}
-          <option class="tags_click" value="{{tag.id}}">{{tag.name}}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="form-group col-sm-6">
-        <div><label for="exclude_tag">{{_('Exclude Tags')}}</label></div>
-        <select class="selectpicker" name="exclude_tag" id="exclude_tag" data-live-search="true" data-style="btn-danger" data-dropup-auto="false" multiple>
-          {% for tag in tags %}
-          <option  class="tags_click" value="{{tag.id}}">{{tag.name}}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group col-sm-6">
-        <div><label for="include_serie">{{_('Series')}}</label></div>
-        <select class="selectpicker" name="include_serie" id="include_serie" data-live-search="true" data-style="btn-primary" data-dropup-auto="false" data-actions-box="true" multiple>
-          {% for serie in series %}
-          <option value="{{serie.id}}">{{serie.name}}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="form-group col-sm-6">
-        <div><label for="exclude_serie">{{_('Exclude Series')}}</label></div>
-        <select class="selectpicker" name="exclude_serie" id="exclude_serie" data-live-search="true" data-style="btn-danger" data-dropup-auto="false" data-actions-box="true" multiple>
-          {% for serie in series %}
-          <option value="{{serie.id}}">{{serie.name}}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-     <div class="row">
-      <div class="form-group col-sm-6">
-        <div><label for="include_shelf">{{_('Shelves')}}</label></div>
-        <select class="selectpicker" name="include_shelf" id="include_shelf" data-live-search="true" data-style="btn-primary" data-dropup-auto="false" data-actions-box="true" multiple>
-          {% for shelf in shelves %}
-          <option value="{{shelf.id}}">{{shelf.name}}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="form-group col-sm-6">
-        <div><label for="exclude_shelf">{{_('Exclude Shelves')}}</label></div>
-        <select class="selectpicker" name="exclude_shelf" id="exclude_shelf" data-live-search="true" data-style="btn-danger" data-dropup-auto="false" data-actions-box="true" multiple>
-          {% for shelf in shelves %}
-          <option value="{{shelf.id}}">{{shelf.name}}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-
-    {% if languages %}
-    <div class="row">
-      <div class="form-group col-sm-6">
-        <div><label for="include_language">{{_('Languages')}}</label></div>
-        <select class="selectpicker" name="include_language" id="include_language" data-live-search="true" data-style="btn-primary" data-dropup-auto="false" data-actions-box="true" multiple>
-          {% for language in languages %}
-          <option value="{{language.id}}">{{language.name}}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="form-group col-sm-6">
-        <div><label for="exclude_language">{{_('Exclude Languages')}}</label></div>
-        <select class="selectpicker" name="exclude_language" id="exclude_language" data-live-search="true" data-style="btn-danger" data-dropup-auto="false" data-actions-box="true" multiple>
-          {% for language in languages %}
-          <option value="{{language.id}}">{{language.name}}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-    {% endif%}
-    <div class="row">
-      <div class="form-group col-sm-6">
-        <div><label for="include_extension">{{_('Extensions')}}</label></div>
-        <select class="selectpicker" name="include_extension" id="include_extension" data-live-search="true" data-style="btn-primary" data-dropup-auto="false" data-actions-box="true" multiple>
-          {% for extension in extensions %}
-          <option value="{{extension.format}}">{{extension.format}}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="form-group col-sm-6">
-        <div><label for="exclude_extension">{{_('Exclude Extensions')}}</label></div>
-        <select class="selectpicker" name="exclude_extension" id="exclude_extension" data-live-search="true" data-style="btn-danger" data-dropup-auto="false" data-actions-box="true" multiple>
-          {% for extension in extensions %}
-          <option value="{{extension.format}}">{{extension.format}}</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="form-group col-sm-6">
-        <label for="ratinghigh">{{_('Rating Above')}}</label>
-        <input type="number"  name="ratinghigh" id="ratinghigh" class="rating input-lg" data-clearable="" >
-      </div>
-        <div class="form-group col-sm-6">
-          <label for="ratinglow">{{_('Rating Below')}}</label>
-          <input type="number"  name="ratinglow" id="ratinglow" class="rating input-lg" data-clearable="" >
-        </div>
-    </div>
-    <div class="form-group">
-      <label for="comments">{{_('Description')}}</label>
-      <input type="text" class="form-control" name="comments" id="comments" value="">
-    </div>
-
-    {% if cc|length > 0 %}
-    {% for c in cc %}
-    <div class="form-group">
-      <!--input type="number" step="1" class="form-control" name="{{ 'custom_column_' ~ c.id }}" id="{{ 'custom_column_' ~ c.id }}" value=""-->
-      <label for="{{ 'custom_column_' ~ c.id }}">{{ c.name }}</label>
-      {% if c.datatype == 'bool' %}
-      <select name="{{ 'custom_column_' ~ c.id }}" id="{{ 'custom_column_' ~ c.id }}" class="form-control">
-        <option value="Any" selected>{{_('Any')}}</option>
-        <option value="">{{_('Empty')}}</option>
-        <option value="True" >{{_('Yes')}}</option>
-        <option value="False" >{{_('No')}}</option>
-      </select>
-      {% endif %}
-
-      {% if c.datatype == 'int' %}
-        <div class="row">
-          <div class="form-group col-sm-6">
-            <label for="{{ 'custom_column_' ~ c.id }}_low">{{_('From:')}}</label>
-              <input type="number" step="1" class="form-control" name="{{ 'custom_column_' ~ c.id }}_low" id="{{ 'custom_column_' ~ c.id }}_low" value="">
-            </div>
-          <div class="form-group col-sm-6">
-            <label for="{{ 'custom_column_' ~ c.id }}_high">{{_('To:')}}</label>
-              <input type="number" step="1" class="form-control" name="{{ 'custom_column_' ~ c.id }}_high" id="{{ 'custom_column_' ~ c.id }}_high" value="">
-          </div>
-        </div>
-      {% endif %}
-      {% if c.datatype == 'float' %}
-        <div class="row">
-          <div class="form-group col-sm-6">
-            <label for="{{ 'custom_column_' ~ c.id }}_low">{{_('From:')}}</label>
-              <input type="number" step="0.01" class="form-control" name="{{ 'custom_column_' ~ c.id }}_low" id="{{ 'custom_column_' ~ c.id }}_low" value="">
-            </div>
-          <div class="form-group col-sm-6">
-            <label for="{{ 'custom_column_' ~ c.id }}_high">{{_('To:')}}</label>
-              <input type="number" step="0.01" class="form-control" name="{{ 'custom_column_' ~ c.id }}_high" id="{{ 'custom_column_' ~ c.id }}_high" value="">
-          </div>
-        </div>
-      <!--input type="number" step="0.01" class="form-control" name="{{ 'custom_column_' ~ c.id }}" id="{{ 'custom_column_' ~ c.id }}" value=""-->
-      {% endif %}
-
-      {% if c.datatype == 'datetime' %}
-      <div class="row">
-        <div class="form-group col-sm-6">
-          <label for="{{ 'custom_column_' ~ c.id }}">{{_('From:')}}</label>
-          <div class="input-group">
-            <input type="text" class="datepicker form-control" name="{{ 'custom_column_' ~ c.id }}_start" id="{{ 'custom_column_' ~ c.id }}_start" value="">
-            <input type="text" class="form-control fake-input hidden" id="fake_{{ 'custom_column_' ~ c.id }}_start" value="">
-            <span class="input-group-btn">
-              <button type="button" id="{{ 'custom_column_' ~ c.id }}_start_delete" class="datepicker_delete btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
-            </span>
-          </div>
-        </div>
-        <div class="form-group col-sm-6">
-          <label for="{{ 'custom_column_' ~ c.id }}">{{_('To:')}}</label>
-          <div class="input-group ">
-            <input type="text" class="datepicker form-control" name="{{ 'custom_column_' ~ c.id }}_end" id="{{ 'custom_column_' ~ c.id }}_end" value="">
-            <input type="text" class="form-control fake-input hidden" id="fake_{{ 'custom_column_' ~ c.id }}_end" value="">
-            <span class="input-group-btn">
-              <button type="button" id="{{ 'custom_column_' ~ c.id }}_end_delete" class="datepicker_delete btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span></button>
-            </span>
-          </div>
-        </div>
-      </div>
-      {% endif %}
-
-      {% if c.datatype in ['text', 'series', 'comments'] and not c.is_multiple %}
-      <input type="text" class="form-control" name="{{ 'custom_column_' ~ c.id }}" id="{{ 'custom_column_' ~ c.id }}" value="">
-      {% endif %}
-
-      {% if c.datatype in ['text', 'series'] and c.is_multiple %}
-      <input type="text" class="form-control" name="{{ 'custom_column_' ~ c.id }}" id="{{ 'custom_column_' ~ c.id }}" value="">
-      {% endif %}
-
-      {% if c.datatype == 'enumeration' %}
-      <select class="form-control" name="{{ 'custom_column_' ~ c.id }}" id="{{ 'custom_column_' ~ c.id }}">
-        <option></option>
-        {% for opt in c.get_display_dict().enum_values %}
-        <option>{{ opt }}</option>
-        {% endfor %}
-      </select>
-      {% endif %}
-
-      {% if c.datatype == 'rating' %}
-      <input type="number" min="1" max="5" step="0.5" class="form-control" name="{{ 'custom_column_' ~ c.id }}" id="{{ 'custom_column_' ~ c.id }}">
-      {% endif %}
-    </div>
-    {% endfor %}
-    {% endif %}
-
-    <button type="submit" id="adv_submit" class="btn btn-default">{{_('Search')}}</button>
-  </form>
+{% block content_class %}content--narrow{% endblock %}
+{% macro include_exclude(name, label, items, value_attr='id', text_attr='name') -%}
+<div class="form-grid">
+  <div class="field">
+    <label for="include_{{ name }}">{{ label }}</label>
+    <select class="select" name="include_{{ name }}" id="include_{{ name }}" multiple data-multiselect data-placeholder="{{ _('Any') }}">
+      {%- for item in items %}<option value="{{ item[value_attr] }}">{{ item[text_attr] }}</option>{% endfor %}
+    </select>
+  </div>
+  <div class="field">
+    <label for="exclude_{{ name }}">{{ _('Exclude') }}</label>
+    <select class="select" name="exclude_{{ name }}" id="exclude_{{ name }}" multiple data-multiselect data-placeholder="{{ _('None') }}">
+      {%- for item in items %}<option value="{{ item[value_attr] }}">{{ item[text_attr] }}</option>{% endfor %}
+    </select>
+  </div>
 </div>
-{% endblock %}
+{%- endmacro %}
+{% block body %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _('Advanced Search') }}</h1>
+    <span class="page-subtitle">{{ _('Fill in only what you need; empty fields are ignored.') }}</span>
+  </div>
+</div>
 
-{% block js %}
-<script>
-  var language = '{{ current_user.locale }}';
-</script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
-{% if not current_user.locale == 'en' %}
-<script src="{{ url_for('static', filename='js/libs/bootstrap-datepicker/locales/bootstrap-datepicker.' + current_user.locale + '.min.js') }}" charset="UTF-8"></script>
-{% endif %}
-<script src="{{ url_for('static', filename='js/libs/bootstrap-rating-input.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/typeahead.bundle.js') }}"></script>
-<script src="{{ url_for('static', filename='js/edit_books.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-select.min.js')}}"></script>
-{% if not current_user.locale == 'en' %}
-<script src="{{ url_for('static', filename='js/libs/bootstrap-select/defaults-' + current_user.locale + '.min.js') }}" charset="UTF-8"></script>
-{% endif %}
-{% endblock %}
-{% block header %}
-<link href="{{ url_for('static', filename='css/libs/typeahead.css') }}" rel="stylesheet" media="screen">
-<link href="{{ url_for('static', filename='css/libs/bootstrap-datepicker3.min.css') }}" rel="stylesheet" media="screen">
-<link href="{{ url_for('static', filename='css/libs/bootstrap-select.min.css') }}" rel="stylesheet" >
+<form class="form" id="search" action="{{ url_for('search.advanced_search_form') }}" method="post">
+  {{ ui.csrf_field() }}
+  <section class="card">
+    <h2 class="card-title">{{ _('Book') }}</h2>
+    <div class="form-grid">
+      {{ ui.field('title', _('Book Title')) }}
+      {{ ui.field('authors', _('Author'), autocomplete='off') }}
+      {{ ui.field('publisher', _('Publisher')) }}
+      {{ ui.field('comments', _('Description contains')) }}
+      {{ ui.field('publishstart', _('Published from'), type='date') }}
+      {{ ui.field('publishend', _('Published until'), type='date') }}
+      <div class="field">
+        <label for="read_status">{{ _('Read Status') }}</label>
+        <select class="select" name="read_status" id="read_status">
+          <option value="Any" selected>{{ _('Any') }}</option>
+          <option value="True">{{ _('Read') }}</option>
+          <option value="False">{{ _('Unread') }}</option>
+          <option value="">{{ _('Not set') }}</option>
+        </select>
+      </div>
+      <div class="field">
+        <span class="label" id="rating-label">{{ _('Rating') }}</span>
+        <div class="row row-nowrap" role="group" aria-labelledby="rating-label">
+          <select class="select" name="ratinghigh" aria-label="{{ _('Rating Above') }}">
+            <option value="">{{ _('Any') }}</option>
+            {%- for i in range(1, 6) %}<option value="{{ i }}">≥ {{ i }} ★</option>{% endfor %}
+          </select>
+          <select class="select" name="ratinglow" aria-label="{{ _('Rating Below') }}">
+            <option value="">{{ _('Any') }}</option>
+            {%- for i in range(1, 6) %}<option value="{{ i }}">≤ {{ i }} ★</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="card-title">{{ _('Filters') }}</h2>
+    {{ include_exclude('tag', _('Tags'), tags) }}
+    {{ include_exclude('serie', _('Series'), series) }}
+    {%- if shelves %}{{ include_exclude('shelf', _('Shelves'), shelves) }}{% endif %}
+    {%- if languages %}{{ include_exclude('language', _('Languages'), languages) }}{% endif %}
+    {{ include_exclude('extension', _('File formats'), extensions, 'format', 'format') }}
+  </section>
+
+  {%- if cc|length > 0 %}
+  <section class="card">
+    <h2 class="card-title">{{ _('Custom columns') }}</h2>
+    <div class="form-grid">
+    {%- for c in cc %}
+      {%- set cid = 'custom_column_' ~ c.id %}
+      {%- if c.datatype == 'bool' %}
+      <div class="field">
+        <label for="{{ cid }}">{{ c.name }}</label>
+        <select class="select" name="{{ cid }}" id="{{ cid }}">
+          <option value="Any" selected>{{ _('Any') }}</option><option value="True">{{ _('Yes') }}</option>
+          <option value="False">{{ _('No') }}</option><option value="">{{ _('Empty') }}</option>
+        </select>
+      </div>
+      {%- elif c.datatype in ['int', 'float'] %}
+      <div class="field">
+        <span class="label">{{ c.name }}</span>
+        <div class="row row-nowrap">
+          <input class="input" type="number" step="{{ '1' if c.datatype == 'int' else '0.01' }}" name="{{ cid }}_low" aria-label="{{ c.name }} {{ _('From:') }}" placeholder="{{ _('From') }}">
+          <input class="input" type="number" step="{{ '1' if c.datatype == 'int' else '0.01' }}" name="{{ cid }}_high" aria-label="{{ c.name }} {{ _('To:') }}" placeholder="{{ _('To') }}">
+        </div>
+      </div>
+      {%- elif c.datatype == 'datetime' %}
+      <div class="field">
+        <span class="label">{{ c.name }}</span>
+        <div class="row row-nowrap">
+          <input class="input" type="date" name="{{ cid }}_start" aria-label="{{ c.name }} {{ _('From:') }}">
+          <input class="input" type="date" name="{{ cid }}_end" aria-label="{{ c.name }} {{ _('To:') }}">
+        </div>
+      </div>
+      {%- elif c.datatype == 'enumeration' %}
+      <div class="field">
+        <label for="{{ cid }}">{{ c.name }}</label>
+        <select class="select" name="{{ cid }}" id="{{ cid }}"><option></option>{% for opt in c.get_display_dict().enum_values %}<option>{{ opt }}</option>{% endfor %}</select>
+      </div>
+      {%- elif c.datatype == 'rating' %}
+      <div class="field">
+        <label for="{{ cid }}">{{ c.name }}</label>
+        <input class="input" type="number" min="1" max="5" step="0.5" name="{{ cid }}" id="{{ cid }}">
+      </div>
+      {%- elif c.datatype in ['text', 'series', 'comments'] %}
+      {{ ui.field(cid, c.name) }}
+      {%- endif %}
+    {%- endfor %}
+    </div>
+  </section>
+  {%- endif %}
+
+  <div class="form-actions form-actions--sticky">
+    <button class="btn btn-primary" type="submit" id="adv_submit">{{ ui.icon('search') }}{{ _('Search') }}</button>
+    <button class="btn btn-ghost" type="reset">{{ _('Clear') }}</button>
+  </div>
+</form>
 {% endblock %}

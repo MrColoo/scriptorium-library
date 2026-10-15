@@ -94,7 +94,7 @@
 {%- endmacro %}
 
 {#- Sort menu for book lists. `url_for_sort(key)` must be supplied by the caller via `endpoint` args. -#}
-{% macro sort_menu(current, data, book_id, extra=None) -%}
+{% macro sort_menu(current, data, book_id, query=None) -%}
 {%- set options = [
   ('new', _('Recently added')), ('old', _('Oldest added')),
   ('abc', _('Title A–Z')), ('zyx', _('Title Z–A')),
@@ -109,7 +109,7 @@
   <div class="menu-panel" role="menu">
     {%- for key, label in options %}
     <a class="menu-item" role="menuitemradio" aria-checked="{{ 'true' if key == current else 'false' }}"
-       href="{{ url_for('web.books_list', data=data, book_id=book_id, sort_param=key) }}">
+       href="{{ url_for('web.books_list', data=data, book_id=book_id, sort_param=key, query=query) }}">
       <span class="grow">{{ label }}</span>{{ icon('check', 'menu-check') }}</a>
     {%- endfor %}
   </div>

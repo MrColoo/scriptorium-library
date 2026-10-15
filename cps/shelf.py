@@ -300,13 +300,17 @@ def order_shelf(shelf_id):
     shelf = ub.session.query(ub.Shelf).filter(ub.Shelf.id == shelf_id).first()
     if shelf and check_shelf_view_permissions(shelf):
         if request.method == "POST":
+            # Viewing a public shelf is not enough to rearrange it.
+            if not check_shelf_edit_permissions(shelf):
+                abort(403)
             to_save = request.form.to_dict()
             books_in_shelf = ub.session.query(ub.BookShelf).filter(ub.BookShelf.shelf == shelf_id).order_by(
                 ub.BookShelf.order.asc()).all()
-            counter = 0
             for book in books_in_shelf:
-                setattr(book, 'order', to_save[str(book.book_id)])
-                counter += 1
+                try:
+                    book.order = int(to_save[str(book.book_id)])
+                except (KeyError, ValueError):
+                    continue
                 # if order different from before -> shelf.last_modified = datetime.now(timezone.utc)
             try:
                 ub.session.commit()

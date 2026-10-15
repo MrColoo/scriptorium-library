@@ -1,31 +1,35 @@
+{% if shelf.id %}{% set shelf_current = shelf.id %}{% endif %}
 {% extends "layout.html" %}
+{% block content_class %}content--narrow{% endblock %}
 {% block body %}
-<div class="discover">
-  <h1>{{title}}</h1>
-  <form role="form" method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <div class="form-group">
-      <label for="title">{{_('Title')}}</label>
-      <input type="text" class="form-control" name="title" id="title" value="{{ shelf.name if shelf.name != None }}">
-    </div>
-    {% if current_user.role_edit_shelfs() %}
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" name="is_public" {% if shelf.is_public == 1 %}checked{% endif %}> {{_('Share with Everyone')}}
-        </label>
-      </div>
-    {% endif %}
-    {% if kobo_sync_enabled and sync_only_selected_shelves %}
-      <div class="checkbox">
-          <label> <input type="checkbox" name="kobo_sync" {% if shelf.kobo_sync == 1 %}checked{% endif %}>
-              {{ _('Sync this shelf with Kobo device') }}
-          </label>
-      </div>
-    {% endif %}
-    <button type="submit" class="btn btn-default" id="submit">{{_('Save')}}</button>
-    {% if shelf.id != None %}
-      <a href="{{ url_for('shelf.show_shelf', shelf_id=shelf.id) }}" class="btn btn-default">{{_('Cancel')}}</a>
-    {% endif %}
-  </form>
+<div class="page-header">
+  <div>
+    {%- if shelf.id %}
+    <span class="page-eyebrow"><a href="{{ url_for('shelf.show_shelf', shelf_id=shelf.id) }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ shelf.name }}</a></span>
+    {%- endif %}
+    <h1 class="page-title">{{ title }}</h1>
+  </div>
 </div>
+
+<form class="card form" method="post">
+  {{ ui.csrf_field() }}
+  <div class="field">
+    <label for="title">{{ _('Name') }}</label>
+    <input class="input" type="text" name="title" id="title" value="{{ shelf.name if shelf.name != None }}" required maxlength="200" autofocus>
+  </div>
+  <div>
+    {%- if current_user.role_edit_shelfs() %}
+    {{ ui.switch('is_public', _('Share with Everyone'), shelf.is_public == 1, _('Every user can see this shelf. Only users allowed to edit public shelves can change it.')) }}
+    {%- endif %}
+    {%- if kobo_sync_enabled %}
+    {{ ui.switch('kobo_sync', _('Sync this shelf with Kobo device'), shelf.kobo_sync == 1,
+                 _('The shelf appears as a collection on your Kobo and its books are sent to the device.') if sync_only_selected_shelves
+                 else _('Your Kobo currently receives the whole library. Turn on “Sync only selected shelves” in your Kobo settings to send only shelves like this one.')) }}
+    {%- endif %}
+  </div>
+  <div class="form-actions">
+    <button class="btn btn-primary" type="submit" id="submit">{{ _('Save') }}</button>
+    <a class="btn" href="{{ url_for('shelf.show_shelf', shelf_id=shelf.id) if shelf.id else url_for('web.index') }}">{{ _('Cancel') }}</a>
+  </div>
+</form>
 {% endblock %}
