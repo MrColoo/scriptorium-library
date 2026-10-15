@@ -3,7 +3,7 @@
 {% block body %}
 <div class="auth-card">
   <div class="auth-head">
-    <span class="brand-mark brand-mark--lg">{{ ui.icon('book', 'icon-lg') }}</span>
+    <img class="brand-logo brand-logo--lg" src="{{ url_for('static', filename='icon.svg') }}" alt="" width="64" height="64">
     <div class="stack-sm">
       <h1>{{ _('Create an account') }}</h1>
       <p>{{ _('Your password will be emailed to you.') if config.config_register_email or mail else _('Join %(name)s.', name=instance) }}</p>

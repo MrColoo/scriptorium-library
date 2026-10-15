@@ -24,7 +24,8 @@
   {%- endif %}
   <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='icon.svg') }}">
-  <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+  <meta name="theme-color" content="#0E1016">
   <link rel="preload" href="{{ url_for('static', filename='fonts/geist-latin-wght-normal.woff2').split('?')[0] }}" as="font" type="font/woff2" crossorigin>
   <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
@@ -49,7 +50,7 @@
 <div class="app">
   <aside class="sidebar" id="sidebar" aria-label="{{ _('Library navigation') }}">
     <a class="brand" href="{{ url_for('web.index') }}">
-      <span class="brand-mark">{{ ui.icon('book') }}</span>
+      <img class="brand-logo" src="{{ url_for('static', filename='icon.svg') }}" alt="" width="32" height="32">
       <span class="brand-name">{{ instance }}</span>
     </a>
 

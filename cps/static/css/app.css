@@ -1026,3 +1026,6 @@ ol.rank-list li::before { counter-increment: rank; content: counter(rank); width
 .player-extra { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .player-speed .select { height: 34px; width: auto; font-size: 13px; }
 .player-error { color: var(--danger); margin: 0; }
+/* Scriptorium logo */
+.brand-logo { width: 32px; height: 32px; flex: none; display: block; border-radius: 22%; box-shadow: 0 0 0 1px var(--border); }
+.brand-logo--lg { width: 64px; height: 64px; filter: drop-shadow(0 6px 14px rgb(14 16 22 / .28)); }

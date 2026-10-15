@@ -3,7 +3,7 @@
 {% block body %}
 <div class="auth-card">
   <div class="auth-head">
-    <span class="brand-mark brand-mark--lg">{{ ui.icon('book', 'icon-lg') }}</span>
+    <img class="brand-logo brand-logo--lg" src="{{ url_for('static', filename='icon.svg') }}" alt="" width="64" height="64">
     <div class="stack-sm">
       <h1>{{ _('Sign in to %(name)s', name=instance) }}</h1>
       <p>{{ _('Your library, your shelves and your Kobo, in one place.') }}</p>
