@@ -1,6 +1,5 @@
 {% import '_macros.html' as ui with context %}
 {% import 'image.html' as image %}
-{% from 'modal_dialogs.html' import restrict_modal, delete_book, filechooser_modal, delete_confirm_modal, change_confirm_modal %}
 {%- set signed_in = current_user.is_authenticated or g.allow_anonymous -%}
 {%- set nav_icons = {
   'new': 'book', 'hot': 'flame', 'download': 'download', 'rated': 'star', 'read': 'check-circle', 'unread': 'eye-off',

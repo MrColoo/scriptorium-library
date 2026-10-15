@@ -38,19 +38,13 @@ See https://github.com/adobe-type-tools/cmap-resources
 	  <link rel="resource" type="application/l10n" href="{{ url_for('static', filename='locale/locale.json') }}">
 	  <script src="{{ url_for('static', filename='js/libs/pdf.mjs') }}" type="module"></script>
 
-    <script type="text/javascript">
-    window.addEventListener('webviewerloaded', function() {
-        PDFViewerApplicationOptions.set('disableAutoFetch', true);
-        PDFViewerApplicationOptions.set('disableRange', false);
-        PDFViewerApplicationOptions.set('disableStream', true);
-        PDFViewerApplicationOptions.set('disablePreferences', true);
-        PDFViewerApplicationOptions.set('cMapUrl', "{{ url_for('static', filename='cmaps/') }}");
-        PDFViewerApplicationOptions.set('sidebarViewOnLoad', 0);
-        PDFViewerApplicationOptions.set('imageResourcesPath', "{{ url_for('static', filename='css/images/') }}");
-        PDFViewerApplicationOptions.set('workerSrc', "{{ url_for('static', filename='js/libs/pdf.worker.mjs') }}");
-        PDFViewerApplicationOptions.set('defaultUrl',"{{ url_for('web.serve_book', book_id=pdffile, book_format='pdf') }}")
-    });
-    </script>
+    <script type="application/json" id="pdf-config">{{ {
+      'cMapUrl': url_for('static', filename='cmaps/'),
+      'imageResourcesPath': url_for('static', filename='css/images/'),
+      'workerSrc': url_for('static', filename='js/libs/pdf.worker.mjs'),
+      'defaultUrl': url_for('web.serve_book', book_id=pdffile, book_format='pdf')
+    }|tojson }}</script>
+    <script src="{{ url_for('static', filename='js/reading/pdf-init.js') }}"></script>
 
     <script src="{{ url_for('static', filename='js/libs/viewer.mjs') }}" type="module"></script>
 

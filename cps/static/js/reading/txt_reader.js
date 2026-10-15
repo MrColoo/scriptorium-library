@@ -1,86 +1,68 @@
-/* This file is part of the Calibre-Web (https://github.com/janeczku/calibre-web)
- *    Copyright (C) 2021 Ozzieisaacs
- *
- *  This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
+// Calibre-Web Automated – SPDX-License-Identifier: GPL-3.0-or-later
+// Plain-text reader: themed, resizable, remembers where you stopped.
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var content = document.getElementById("content");
+  var loader = document.getElementById("txt-loader");
+  var progress = document.getElementById("progress");
+  var THEMES = ["lightTheme", "sepiaTheme", "darkTheme", "blackTheme"];
+  var key = "calibre.reader.txt." + content.getAttribute("data-key");
 
-$(document).ready(function() {
-    //to int
-    $("#area").width($("#area").width());
-    $("#content").width($("#content").width());
-    //bind text
-    $("#content").load($("#readmain").data('load'), function(textStr) {
-        $(this).height($(this).parent().height()*0.95);
-        $(this).text(textStr);
-    });
-    //keybind
-    $(document).keydown(function(event){
-        if(event.keyCode == 37){
-            prevPage();
-        }
-        if(event.keyCode == 39){
-            nextPage();
-        }
-    });
-    //click
-    $( "#left" ).click(function() {
-        prevPage();
-    });
-    $( "#right" ).click(function() {
-        nextPage();
-    });
-    $("#readmain").swipe( {
-        swipeRight:function() {
-            prevPage();
-        },
-        swipeLeft:function() {
-            nextPage();
-        },
-    });
+  function get(k, fallback) { try { return localStorage.getItem(k) || fallback; } catch (e) { return fallback; } }
+  function set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* storage blocked */ } }
 
-    //bind mouse
-    $(window).bind('DOMMouseScroll mousewheel', function(event) {
-        var delta = 0;
-        if (event.originalEvent.wheelDelta) {
-            delta = event.originalEvent.wheelDelta;
-        } else if (event.originalEvent.detail) {
-            delta = event.originalEvent.detail*-1;
-        }
-        if (delta >= 0) {
-            prevPage();
-        } else {
-            nextPage();
-        }
-    });
+  var theme = get("calibre.reader.theme", "lightTheme");
+  root.setAttribute("data-reader-theme", THEMES.indexOf(theme) === -1 ? "lightTheme" : theme);
+  var size = parseInt(get("calibre.reader.txtSize", "18"), 10) || 18;
+  function applySize() { content.style.fontSize = size + "px"; }
+  applySize();
 
-    //page animate
-    var origwidth = $("#content")[0].getBoundingClientRect().width;
-    var gap = 20;
-    function prevPage() {
-        if($("#content").offset().left > 0) {
-            return;
-        }
-        leftoff = $("#content").offset().left;
-        leftoff = leftoff+origwidth+gap;
-        $("#content").offset({left:leftoff});
-    }
-    function nextPage() {
-        leftoff = $("#content").offset().left;
-        leftoff = leftoff-origwidth-gap;
-        if (leftoff + $("#content")[0].scrollWidth < 0) {
-            return;
-        }
-        $("#content").offset({left:leftoff});
-    }
-});
+  document.querySelector("[data-txt-theme]").addEventListener("click", function () {
+    var next = THEMES[(THEMES.indexOf(root.getAttribute("data-reader-theme")) + 1) % THEMES.length];
+    root.setAttribute("data-reader-theme", next);
+    set("calibre.reader.theme", next);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-txt-size]"), function (btn) {
+    btn.addEventListener("click", function () {
+      var ratio = window.scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
+      size = Math.min(32, Math.max(12, size + parseInt(btn.getAttribute("data-txt-size"), 10) * 2));
+      set("calibre.reader.txtSize", String(size));
+      applySize();
+      window.scrollTo(0, ratio * (document.documentElement.scrollHeight - innerHeight));
+    });
+  });
+
+  function ratio() {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    return max > 0 ? Math.min(1, window.scrollY / max) : 1;
+  }
+  var ticking = false;
+  window.addEventListener("scroll", function () {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      ticking = false;
+      var r = ratio();
+      progress.textContent = Math.round(r * 100) + "%";
+      set(key, r.toFixed(4));
+    });
+  }, { passive: true });
+
+  fetch(content.getAttribute("data-load"), { credentials: "same-origin" })
+    .then(function (r) { if (!r.ok) throw new Error(r.statusText); return r.text(); })
+    .then(function (text) {
+      content.textContent = text;
+      content.hidden = false;
+      loader.remove();
+      var saved = parseFloat(get(key, "0"));
+      if (saved > 0) window.scrollTo(0, saved * (document.documentElement.scrollHeight - innerHeight));
+      progress.textContent = Math.round(ratio() * 100) + "%";
+    })
+    .catch(function () {
+      loader.remove();
+      content.hidden = false;
+      content.className = "reader-error";
+      content.textContent = content.getAttribute("data-error");
+    });
+})();

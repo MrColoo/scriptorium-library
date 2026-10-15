@@ -1,34 +1,33 @@
+{%- import "_macros.html" as ui with context -%}
 <!DOCTYPE html>
-<html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{_('txt Reader')}} | {{title}}</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, user-scalable=no">
-        <meta name="mobile-web-app-capable" content="yes">
-        {% if g.google_site_verification|length > 0 %}
-          <meta name="google-site-verification" content="{{g.google_site_verification}}">
-        {% endif %}  
-
-        <link rel="apple-touch-icon" sizes="140x140" href="{{ url_for('static', filename='favicon.ico') }}">
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" type="text/css"/>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/text.css') }}" type="text/css"/>
-
-        <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/libs/plugins.js') }}"></script>
-        <script>
-            "use strict";
-        </script>
-        <script src="{{ url_for('static', filename='js/reading/txt_reader.js') }}"></script>
-    </head>
-    <body>
-      <div id="readmain" data-load="{{ url_for('web.serve_book', book_id=txtfile, book_format='txt') }}">
-        <div id="left" class="arrow" >‹</div>
-        <div id="area"><pre id="content" class="content"></pre></div>
-        <div id="right" class="arrow">›</div>
-      </div>
-    </body>
+<html lang="{{ current_user.locale or 'en' }}" data-reader-theme="lightTheme">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>{{ title }} · {{ _('Reader') }}</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/epub-reader.css') }}">
+</head>
+<body class="reader reader--scroll">
+  <header id="titlebar" class="reader-bar">
+    <div id="opener">
+      <a class="reader-btn" href="{{ url_for('web.show_book', book_id=txtfile) }}" title="{{ _('Back to book') }}" aria-label="{{ _('Back to book') }}">{{ ui.icon('arrow-left') }}</a>
+    </div>
+    <div id="metainfo"><span id="book-title">{{ title }}</span></div>
+    <div id="title-controls">
+      <button class="reader-btn" type="button" data-txt-size="-1" title="{{ _('Smaller text') }}" aria-label="{{ _('Smaller text') }}">{{ ui.icon('minus') }}</button>
+      <button class="reader-btn" type="button" data-txt-size="1" title="{{ _('Larger text') }}" aria-label="{{ _('Larger text') }}">{{ ui.icon('plus') }}</button>
+      <button class="reader-btn" type="button" data-txt-theme title="{{ _('Theme') }}" aria-label="{{ _('Theme') }}">{{ ui.icon('sun') }}</button>
+    </div>
+  </header>
+  <main class="txt-page">
+    <div class="spinner" id="txt-loader" role="status" aria-label="{{ _('Loading…') }}"></div>
+    <article id="content" class="txt-content" data-load="{{ url_for('web.serve_book', book_id=txtfile, book_format='txt') }}" data-key="{{ txtfile }}" data-error="{{ _('This file could not be loaded.') }}" hidden></article>
+  </main>
+  <div id="progress" aria-hidden="true">0%</div>
+  <script src="{{ url_for('static', filename='js/reading/txt_reader.js') }}"></script>
+</body>
 </html>

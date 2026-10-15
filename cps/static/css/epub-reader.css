@@ -116,3 +116,13 @@ body.reader { margin: 0; height: 100vh; height: 100dvh; overflow: hidden; backgr
 @media (prefers-reduced-motion: reduce) {
   #main, .md-content, .overlay { transition: none; }
 }
+
+/* ---------- Scrolling readers (plain text) ---------- */
+body.reader--scroll { height: auto; min-height: 100vh; overflow: auto; background: var(--r-bg); }
+.reader--scroll #titlebar { position: sticky; top: 0; background: color-mix(in srgb, var(--r-bg) 88%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); opacity: 1; border-bottom: 1px solid var(--r-border); }
+.reader--scroll #progress { position: fixed; }
+button.reader-btn { border: 0; background: none; padding: 0; }
+.txt-page { padding: 32px 20px 96px; display: flex; justify-content: center; }
+.txt-page .spinner { margin-top: 30vh; }
+.txt-content { width: 100%; max-width: 68ch; white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--font-serif); line-height: 1.7; color: var(--r-fg); }
+.reader--scroll #progress { padding: 2px 8px; border-radius: 999px; background: var(--r-bg); border: 1px solid var(--r-border); }

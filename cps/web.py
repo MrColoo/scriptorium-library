@@ -198,6 +198,8 @@ def get_email_status_json():
 @user_login_required
 def set_bookmark(book_id, book_format):
     bookmark_key = request.form["bookmark"]
+    if len(bookmark_key) > 2048:  # a CFI, page number or playback position, never more
+        abort(400)
     ub.session.query(ub.Bookmark).filter(and_(ub.Bookmark.user_id == int(current_user.id),
                                               ub.Bookmark.book_id == book_id,
                                               ub.Bookmark.format == book_format)).delete()
