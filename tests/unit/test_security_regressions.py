@@ -110,3 +110,25 @@ def test_page_title_is_escaped():
     layout = (TEMPLATES / "layout.html").read_text(encoding="utf-8")
     assert re.search(r"<title>.*\{\{\s*title\s*\}\}", layout)
     assert "title|safe" not in layout.replace(" ", "")
+
+
+def test_templates_have_no_inline_scripts_or_handlers():
+    """The CSP allows scripts only from this origin; inline code would be blocked."""
+    inline_script = re.compile(r"<script(?![^>]*\bsrc=)(?![^>]*type=\"application/json\")[^>]*>", re.I)
+    handler = re.compile(r"\son[a-z]+\s*=\s*[\"']", re.I)
+    offenders = []
+    for path in sorted(TEMPLATES.glob("*.html")):
+        text = path.read_text(encoding="utf-8")
+        if inline_script.search(text) or handler.search(text):
+            offenders.append(path.name)
+    assert offenders == []
+
+
+def test_csp_script_src_is_strict_outside_readers():
+    source = (REPO / "cps" / "web.py").read_text(encoding="utf-8")
+    func = source[source.index("def _content_security_policy"):source.index("def add_security_headers")]
+    assert "script = [\"'self'\"] + trusted" in func
+    # eval is only granted inside the reader branch
+    reader_branch = func[func.index("if reader:"):func.index("img = [")]
+    assert "'unsafe-eval'" in reader_branch
+    assert func.count("'unsafe-eval'") == 1

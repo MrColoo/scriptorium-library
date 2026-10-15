@@ -127,32 +127,63 @@ def enforce_password_change():
     return redirect(url_for('web.profile'))
 
 
+_GOODREADS_IMAGE_HOSTS = ["images.gr-assets.com", "i.gr-assets.com", "s.gr-assets.com"]
+
+
+def _content_security_policy():
+    """Build the CSP for the current request.
+
+    Pages carry no inline scripts, so scripts are limited to this origin. The in-browser
+    readers are the exception: epub.js, kthoom, pdf.js and the DjVu viewer need blob:
+    documents and eval, and the GWT-built DjVu viewer also injects inline scripts.
+    """
+    trusted = [host.strip() for host in config.config_trustedhosts.split(',') if host.strip()]
+    reader = request.endpoint == "web.read_book"
+    book_format = str((request.view_args or {}).get("book_format", "")).lower() if reader else ""
+
+    script = ["'self'"] + trusted
+    if reader:
+        script += ["'unsafe-eval'", "'wasm-unsafe-eval'", "blob:"]
+        if book_format in ("djvu", "djv"):
+            script.append("'unsafe-inline'")
+    img = ["'self'", "data:"] + trusted
+    if reader:
+        img.append("blob:")
+    if request.path.startswith("/author/") and config.config_use_goodreads:
+        img += _GOODREADS_IMAGE_HOSTS
+    if request.endpoint == "admin.hardcover_review_matches":
+        img.append("https:")
+    if request.endpoint == "edit-book.show_edit_book" or config.config_use_google_drive:
+        img.append("*")  # cover previews from metadata providers, Drive thumbnails
+    extra_reader = ["blob:"] if reader else []
+
+    directives = [
+        ("default-src", ["'self'"] + trusted),
+        ("script-src", script),
+        ("style-src", ["'self'", "'unsafe-inline'"] + extra_reader),
+        ("img-src", img),
+        ("font-src", ["'self'", "data:"] + extra_reader),
+        ("media-src", ["'self'", "blob:"]),
+        ("connect-src", ["'self'"] + trusted + extra_reader),
+        ("worker-src", ["'self'", "blob:"]),
+        ("frame-src", ["'self'"] + extra_reader),
+        ("object-src", ["'none'"]),
+        ("base-uri", ["'self'"]),
+        ("frame-ancestors", ["'self'"]),
+    ]
+    return "; ".join(name + " " + " ".join(values) for name, values in directives)
+
+
 @app.after_request
 def add_security_headers(resp):
-    default_src = ([host.strip() for host in config.config_trustedhosts.split(',') if host] +
-                   ["'self'", "'unsafe-inline'", "'unsafe-eval'"])
-    csp = "default-src " + ' '.join(default_src)
-    if request.endpoint == "web.read_book" and config.config_use_google_drive:
-        csp +=" blob: "
-    csp += "; font-src 'self' data:"
-    if request.endpoint == "web.read_book":
-        csp += " blob: "
-    csp += "; img-src 'self'"
-    if request.path.startswith("/author/") and config.config_use_goodreads:
-        csp += " images.gr-assets.com i.gr-assets.com s.gr-assets.com"
-    if request.endpoint == "admin.hardcover_review_matches":
-        csp += " https:"
-    csp += " data:"
-    if request.endpoint == "edit-book.show_edit_book" or config.config_use_google_drive:
-        csp += " *"
-    if request.endpoint == "web.read_book":
-        csp += " blob: ; style-src-elem 'self' blob: 'unsafe-inline'"
-    csp += "; object-src 'none';"
-    resp.headers['Content-Security-Policy'] = csp
+    resp.headers['Content-Security-Policy'] = _content_security_policy()
     resp.headers['X-Content-Type-Options'] = 'nosniff'
     resp.headers['X-Frame-Options'] = 'SAMEORIGIN'
-    resp.headers['X-XSS-Protection'] = '1; mode=block'
-    resp.headers['Strict-Transport-Security'] = 'max-age=31536000';
+    # The legacy XSS auditor is gone from browsers and could be abused; CSP replaces it.
+    resp.headers['X-XSS-Protection'] = '0'
+    resp.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    resp.headers['Permissions-Policy'] = 'camera=(), microphone=(), geolocation=(), payment=()'
+    resp.headers['Strict-Transport-Security'] = 'max-age=31536000'
     return resp
 
 
