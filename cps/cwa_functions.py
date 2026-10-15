@@ -1710,8 +1710,12 @@ def show_full_epub_fixer_with_paths_fixes():
 @login_required_if_no_ano
 @admin_required
 def cwa_flash_status():
-    result = subprocess.run(['/app/calibre-web-automated/scripts/check-cwa-services.sh'])
-    services_status = result.returncode
+    try:
+        result = subprocess.run(['/app/calibre-web-automated/scripts/check-cwa-services.sh'], timeout=30)
+        services_status = result.returncode
+    except (OSError, subprocess.TimeoutExpired) as e:
+        log.error("Could not run the service check: %s", e)
+        services_status = None
 
     match services_status:
         case 0:
@@ -1737,57 +1741,27 @@ def cwa_flash_status():
 @login_required_if_no_ano
 @admin_required
 def download_log(log_filename):
-    try:
-        # Secure the filename to prevent directory traversal (e.g., '..')
-        safe_filename = secure_filename(log_filename)
-        
-        # Join the logs directory with the filename and get the absolute path
-        file_path = os.path.abspath(os.path.join(LOG_ARCHIVE, safe_filename))
-        
-        # Check if the file path is within the allowed directory
-        if not file_path.startswith(os.path.abspath(LOG_ARCHIVE)):
-            abort(403)  # Forbidden if it's not within the logs directory
+    safe_filename = _archived_log_or_404(log_filename)
+    return send_from_directory(LOG_ARCHIVE, safe_filename, as_attachment=True)
 
-        # Check if the file exists
-        if not os.path.exists(file_path):
-            abort(404)  # Return a 404 if the file does not exist
 
-        # Send the file as an attachment (to trigger a download)
-        return send_from_directory(LOG_ARCHIVE, safe_filename, as_attachment=True)
-    
-    except Exception as e:
-        # Handle any other errors
-        abort(400)  # Bad request for malformed or unsafe file paths
+def _archived_log_or_404(log_filename):
+    """Return the sanitised name of an existing file in the log archive, or abort with 404."""
+    safe_filename = secure_filename(log_filename)
+    if not safe_filename or not os.path.isfile(os.path.join(LOG_ARCHIVE, safe_filename)):
+        abort(404)
+    return safe_filename
+
 
 @cwa_logs.route('/cwa-logs/read/<log_filename>')
 @login_required_if_no_ano
 @admin_required
 def read_log(log_filename):
-    try:
-        # Secure the filename to prevent directory traversal (e.g., '..')
-        safe_filename = secure_filename(log_filename)
-        
-        # Join the logs directory with the filename and get the absolute path
-        file_path = os.path.abspath(os.path.join(LOG_ARCHIVE, safe_filename))
-        
-        # Check if the file path is within the allowed directory
-        if not file_path.startswith(os.path.abspath(LOG_ARCHIVE)):
-            abort(403)  # Forbidden if it's not within the logs directory
-
-        # Check if the file exists
-        if not os.path.exists(file_path):
-            abort(404)  # Return a 404 if the file does not exist
-
-        # Send the file as an attachment (to trigger a download)
-        with open(file_path, 'r') as f:
-            log = f.read()
-
-        return render_title_template('cwa_read_log.html', title=_("Log %(name)s", name=log_filename), page="cwa-log-read",
-                                    log_filename=log_filename, log=log)
-    
-    except Exception as e:
-        # Handle any other errors
-        abort(400)  # Bad request for malformed or unsafe file paths
+    safe_filename = _archived_log_or_404(log_filename)
+    with open(os.path.join(LOG_ARCHIVE, safe_filename), 'r', encoding='utf-8', errors='replace') as f:
+        log = f.read()
+    return render_title_template('cwa_read_log.html', title=_("Log %(name)s", name=safe_filename), page="cwa-log-read",
+                                 log_filename=safe_filename, log=log)
 
 ##————————————————————————————————————————————————————————————————————————————##
 ##                                                                            ##
@@ -1927,33 +1901,20 @@ def show_convert_library_logs():
     return render_title_template('cwa_list_logs.html', title=_("Convert Library – Run Archive"), page="cwa-library-convert-logs",
                                 logs=logs, log_dates=log_dates)
 
+def _send_current_log(filename, back_endpoint):
+    """Download the live log of a batch service, or explain that there is none yet."""
+    if not os.path.isfile(os.path.join("/config", filename)):
+        flash(_("There is no log yet. Start a run first."), category="info")
+        return redirect(url_for(back_endpoint))
+    return send_from_directory("/config", filename, as_attachment=True)
+
+
 @convert_library.route('/cwa-convert-library/download-current-log/<log_filename>')
 @login_required_if_no_ano
 @admin_required
 def download_current_log(log_filename):
-    log_filename = "convert-library.log"
-    LOG_DIR = "/config"
-    try:
-        # Secure the filename to prevent directory traversal (e.g., '..')
-        safe_filename = secure_filename(log_filename)
-        
-        # Join the logs directory with the filename and get the absolute path
-        file_path = os.path.abspath(os.path.join(LOG_DIR, safe_filename))
-        
-        # Check if the file path is within the allowed directory
-        if not file_path.startswith(os.path.abspath(LOG_DIR)):
-            abort(403)  # Forbidden if it's not within the logs directory
-
-        # Check if the file exists
-        if not os.path.exists(file_path):
-            abort(404)  # Return a 404 if the file does not exist
-
-        # Send the file as an attachment (to trigger a download)
-        return send_from_directory(LOG_DIR, safe_filename, as_attachment=True)
-    
-    except Exception as e:
-        # Handle any other errors
-        abort(400)  # Bad request for malformed or unsafe file paths
+    # The URL keeps its filename segment for compatibility; only this service's log is served.
+    return _send_current_log("convert-library.log", "convert_library.show_convert_library_page")
 
 def start_convert_library_run():
     """Start a full Convert Library run in background threads.
@@ -2092,29 +2053,8 @@ def show_epub_fixer_logs():
 @login_required_if_no_ano
 @admin_required
 def download_current_log(log_filename):
-    log_filename = "epub-fixer.log"
-    LOG_DIR = "/config"
-    try:
-        # Secure the filename to prevent directory traversal (e.g., '..')
-        safe_filename = secure_filename(log_filename)
-        
-        # Join the logs directory with the filename and get the absolute path
-        file_path = os.path.abspath(os.path.join(LOG_DIR, safe_filename))
-        
-        # Check if the file path is within the allowed directory
-        if not file_path.startswith(os.path.abspath(LOG_DIR)):
-            abort(403)  # Forbidden if it's not within the logs directory
-
-        # Check if the file exists
-        if not os.path.exists(file_path):
-            abort(404)  # Return a 404 if the file does not exist
-
-        # Send the file as an attachment (to trigger a download)
-        return send_from_directory(LOG_DIR, safe_filename, as_attachment=True)
-    
-    except Exception as e:
-        # Handle any other errors
-        abort(400)  # Bad request for malformed or unsafe file paths
+    # The URL keeps its filename segment for compatibility; only this service's log is served.
+    return _send_current_log("epub-fixer.log", "epub_fixer.show_epub_fixer_page")
 
 def start_epub_fixer_run():
     """Start a full-library EPUB Fixer run in background threads.
