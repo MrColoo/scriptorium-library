@@ -886,3 +886,27 @@ a.format-tile:hover { border-color: var(--border-strong); background: var(--surf
 .steps h3 { font-size: 15px; }
 .page-header > .identity { flex-direction: row; align-items: center; gap: 16px; }
 .identity-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+/* Suggestions dropdown */
+.suggest { position: relative; }
+.suggest-list { position: absolute; z-index: 45; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none; max-height: 260px; overflow-y: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-lg); }
+.suggest-list li { padding: 7px 10px; border-radius: 7px; cursor: pointer; font-size: 13.5px; }
+.suggest-list li:hover, .suggest-list li[aria-selected="true"] { background: var(--surface-hover); }
+
+/* Book edit */
+.description-preview { width: 100%; min-height: 220px; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; }
+.identifier-row .input:first-child { flex: 0 1 180px; }
+.meta-results { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.meta-result { display: flex; gap: 16px; padding: 14px; border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.meta-result-cover { width: 96px; flex: none; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+.meta-result-cover img { width: 96px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 4px; background: var(--surface-active); }
+.meta-result-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.meta-fields { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 12px; font-size: 13px; margin: 0; }
+.meta-fields dt { display: flex; align-items: center; gap: 6px; color: var(--text-muted); }
+.meta-fields dd { margin: 0; overflow-wrap: anywhere; }
+.meta-fields dd.clamp { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.meta-fields input { accent-color: var(--accent); }
+.provider-chip input { position: absolute; opacity: 0; pointer-events: none; }
+.provider-chip:has(input:checked) { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
+.provider-chip:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (max-width: 560px) { .meta-result { flex-direction: column; } }

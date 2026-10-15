@@ -590,6 +590,103 @@
   }
   Array.prototype.forEach.call(doc.querySelectorAll("select[multiple][data-multiselect]"), enhanceMultiselect);
 
+  // ---------- Suggestions: <input data-suggest="url" [data-separator=","]> ----------
+  // Completes the last token of the field from a JSON list of {name}.
+  var suggestCounter = 0;
+  function enhanceSuggest(input) {
+    if (input.dataset.suggestReady) return;
+    input.dataset.suggestReady = "1";
+    var sep = input.getAttribute("data-separator");
+    var listId = "suggest-" + (++suggestCounter);
+    var box = doc.createElement("ul");
+    box.className = "suggest-list";
+    box.id = listId;
+    box.setAttribute("role", "listbox");
+    box.hidden = true;
+    var wrap = doc.createElement("div");
+    wrap.className = "suggest";
+    input.parentNode.insertBefore(wrap, input);
+    wrap.appendChild(input);
+    wrap.appendChild(box);
+    input.setAttribute("role", "combobox");
+    input.setAttribute("aria-autocomplete", "list");
+    input.setAttribute("aria-controls", listId);
+    input.setAttribute("aria-expanded", "false");
+    var timer = null;
+    var active = -1;
+    var lastQuery = null;
+
+    function tokens() {
+      if (!sep) return { head: "", current: input.value };
+      var parts = input.value.split(sep);
+      var current = parts.pop();
+      return { head: parts.length ? parts.join(sep) + sep + " " : "", current: current };
+    }
+    function close() {
+      box.hidden = true;
+      box.textContent = "";
+      active = -1;
+      input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-activedescendant");
+    }
+    function choose(value) {
+      // No trailing separator: an empty last entry would become an empty author or tag.
+      input.value = sep ? tokens().head + value : value;
+      close();
+      input.focus();
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    function highlight(index) {
+      var items = box.querySelectorAll("[role=option]");
+      if (!items.length) return;
+      active = (index + items.length) % items.length;
+      Array.prototype.forEach.call(items, function (el, i) { el.setAttribute("aria-selected", i === active ? "true" : "false"); });
+      input.setAttribute("aria-activedescendant", items[active].id);
+      items[active].scrollIntoView({ block: "nearest" });
+    }
+    function show(names) {
+      box.textContent = "";
+      names.slice(0, 12).forEach(function (name, i) {
+        var li = doc.createElement("li");
+        li.id = listId + "-" + i;
+        li.setAttribute("role", "option");
+        li.setAttribute("aria-selected", "false");
+        li.textContent = name;
+        li.addEventListener("mousedown", function (e) { e.preventDefault(); choose(name); });
+        box.appendChild(li);
+      });
+      box.hidden = !names.length;
+      input.setAttribute("aria-expanded", names.length ? "true" : "false");
+      active = -1;
+    }
+    input.addEventListener("input", function () {
+      var q = tokens().current.trim();
+      clearTimeout(timer);
+      if (q.length < 1) { close(); return; }
+      timer = setTimeout(function () {
+        if (q === lastQuery) return;
+        lastQuery = q;
+        var url = input.getAttribute("data-suggest");
+        request(url + (url.indexOf("?") === -1 ? "?" : "&") + "q=" + encodeURIComponent(q)).then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (tokens().current.trim() !== q) return;
+            var existing = sep ? input.value.split(sep).map(function (x) { return x.trim().toLowerCase(); }) : [];
+            show((data || []).map(function (d) { return typeof d === "string" ? d : d.name; })
+              .filter(function (n) { return n && (sep ? existing.indexOf(n.toLowerCase()) === -1 || n.toLowerCase() === q.toLowerCase() : true); }));
+          }).catch(close);
+      }, 150);
+    });
+    input.addEventListener("keydown", function (e) {
+      if (box.hidden) return;
+      if (e.key === "ArrowDown") { e.preventDefault(); highlight(active + 1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); highlight(active - 1); }
+      else if (e.key === "Enter" && active >= 0) { e.preventDefault(); choose(box.querySelectorAll("[role=option]")[active].textContent); }
+      else if (e.key === "Escape") { e.stopPropagation(); close(); }
+    });
+    input.addEventListener("blur", function () { setTimeout(close, 100); });
+  }
+  Array.prototype.forEach.call(doc.querySelectorAll("input[data-suggest]"), enhanceSuggest);
+
   window.CWA = {
     t: t,
     toast: toast,
@@ -600,6 +697,7 @@
     closeDialog: closeDialog,
     icon: icon,
     upload: uploadFiles,
-    enhanceMultiselect: enhanceMultiselect
+    enhanceMultiselect: enhanceMultiselect,
+    enhanceSuggest: enhanceSuggest
   };
 })();

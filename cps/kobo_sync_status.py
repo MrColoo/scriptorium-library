@@ -56,17 +56,10 @@ def change_archived_books(book_id, state=None, message=None):
 # select all books which are synced by the current user and do not belong to a synced shelf and set them to archive
 # select all shelves from current user which are synced and do not belong to the "only sync" shelves
 def update_on_sync_shelfs(user_id):
-    books_to_archive = (ub.session.query(ub.KoboSyncedBooks)
-                        .join(ub.BookShelf, ub.KoboSyncedBooks.book_id == ub.BookShelf.book_id, isouter=True)
-                        .join(ub.Shelf, ub.Shelf.user_id == user_id, isouter=True)
-                        .filter(or_(ub.Shelf.kobo_sync == 0, ub.Shelf.kobo_sync==None))
-                        .filter(ub.KoboSyncedBooks.user_id == user_id).all())
-    for b in books_to_archive:
-        change_archived_books(b.book_id, True)
-        ub.session.query(ub.KoboSyncedBooks) \
-            .filter(ub.KoboSyncedBooks.book_id == b.book_id) \
-            .filter(ub.KoboSyncedBooks.user_id == user_id).delete()
-        ub.session_commit()
+    # Books that are no longer on a synced shelf are removed from the device by the next
+    # library sync (see HandleSyncRequest), which needs their KoboSyncedBooks rows to know
+    # what is on the device. They used to be archived here instead, which also hid the
+    # user's whole library in the web UI and kept the books on the Kobo.
 
     # Search all shelf which are currently not synced
     shelves_to_archive = ub.session.query(ub.Shelf).filter(ub.Shelf.user_id == user_id).filter(
