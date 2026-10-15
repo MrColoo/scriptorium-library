@@ -6,7 +6,7 @@
 {%- set kobo = kobo_overview(content) if (kobo_support and not new_user and not is_anon) else none %}
 <div class="page-header">
   <div class="identity">
-    <span class="avatar avatar--lg" id="user-profile-picture" data-username="{{ content.name }}">{{ (content.name or '?')[:1]|upper }}</span>
+    {{ ui.avatar(content, 'avatar--lg') }}
     <div class="identity-text">
       {%- if is_admin_view %}<span class="page-eyebrow"><a href="{{ url_for('admin.admin') }}">{{ _('Settings') }}</a> / {{ _('Users') }}</span>{% endif %}
       <h1 class="page-title">{% if new_user %}{{ _('Add New User') }}{% else %}{{ content.name }}{% endif %}</h1>

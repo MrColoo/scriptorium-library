@@ -78,19 +78,4 @@
       meter.setAttribute("data-score", v ? String(Math.max(1, score)) : "0");
     });
   }
-
-  // ---------- Custom profile picture (CWA user_profiles.json) ----------
-  var avatar = document.getElementById("user-profile-picture");
-  var picturesUrl = document.body.getAttribute("data-profile-pictures-url");
-  if (avatar && picturesUrl) {
-    fetch(picturesUrl, { credentials: "same-origin" }).then(function (r) { return r.ok ? r.json() : {}; }).then(function (profiles) {
-      var src = profiles && profiles[avatar.getAttribute("data-username")];
-      if (typeof src !== "string" || !/^data:image\/(png|jpe?g|gif|webp);base64,/.test(src)) return;
-      var img = document.createElement("img");
-      img.src = src;
-      img.alt = "";
-      avatar.textContent = "";
-      avatar.appendChild(img);
-    }).catch(function () {});
-  }
 })();

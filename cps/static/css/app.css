@@ -967,3 +967,9 @@ ol.rank-list li::before { counter-increment: rank; content: counter(rank); width
 .pick-list > li.muted { padding: 8px 12px; }
 .pick-item { display: block; width: 100%; text-align: left; padding: 8px 12px; border: 0; border-radius: var(--radius-sm); background: none; color: var(--text); font: inherit; cursor: pointer; }
 .pick-item:hover, .pick-item:focus-visible { background: var(--surface-hover); }
+.avatar--xl { width: 72px; height: 72px; font-size: 28px; }
+.avatar-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.avatar-card { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.avatar-card-name { display: flex; flex-direction: column; min-width: 0; max-width: 100%; }
+.avatar-card-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.avatar-card-actions form { display: contents; }

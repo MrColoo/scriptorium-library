@@ -125,6 +125,11 @@
 </div>
 {%- endmacro %}
 
+{% macro avatar(user, cls='') -%}
+{%- set src = avatar_url(user) -%}
+<span class="avatar{{ ' ' ~ cls if cls }}">{% if src %}<img src="{{ src }}" alt="" loading="lazy" decoding="async">{% else %}{{ (user.name or '?')[:1]|upper }}{% endif %}</span>
+{%- endmacro %}
+
 {% macro csrf_field() -%}
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 {%- endmacro %}

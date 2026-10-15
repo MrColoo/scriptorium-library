@@ -33,7 +33,7 @@
 </head>
 <body class="page-{{ page or 'none' }}{% if bodyClass %} {{ bodyClass }}{% endif %}"
       data-icon-sprite="{{ url_for('static', filename='img/icons.svg') }}"
-      {%- if current_user.is_authenticated %} data-view-url="{{ url_for('web.update_view') }}" data-profile-pictures-url="{{ url_for('profile_pictures.user_profiles_json') }}"{% endif %}
+      {%- if current_user.is_authenticated %} data-view-url="{{ url_for('web.update_view') }}"{% endif %}
       {%- if current_user.is_authenticated and not current_user.is_anonymous %}
       data-refresh-url="{{ url_for('library_refresh.cwa_library_refresh') }}"
       data-refresh-messages-url="{{ url_for('library_refresh.get_library_refresh_messages') }}"
@@ -149,7 +149,7 @@
         {%- endif %}
         <details class="menu">
           <summary class="btn btn-icon btn-ghost" aria-label="{{ _('Account') }}" title="{{ current_user.name }}">
-            {%- if current_user.is_anonymous %}{{ ui.icon('user') }}{% else %}<span class="avatar">{{ current_user.name[:1]|upper }}</span>{% endif -%}
+            {%- if current_user.is_anonymous %}{{ ui.icon('user') }}{% else %}{{ ui.avatar(current_user) }}{% endif -%}
           </summary>
           <div class="menu-panel" role="menu">
             {%- if not current_user.is_anonymous %}

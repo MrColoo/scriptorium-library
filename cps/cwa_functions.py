@@ -10,6 +10,7 @@ from flask_babel import gettext as _, lazy_gettext as _l
 from . import logger, config, constants, csrf, helper, ub, calibre_db
 from .usermanagement import login_required_if_no_ano, user_login_required
 from .admin import admin_required
+from . import profile_pictures as profile_picture_store
 from .render_template import render_title_template
 from .cw_login import login_user, logout_user, current_user
 
@@ -2233,108 +2234,57 @@ def get_status():
 @profile_pictures.route("/user_profiles.json")
 @user_login_required
 def user_profiles_json():
-    try:
-        json_path = "/config/user_profiles.json"
-        with open(json_path, "r") as file:
-            data = json.load(file)
-        return jsonify(data)
-    except Exception as e:
-        log.error(f"Error reading user_profiles.json: {str(e)}")
-        return jsonify({}), 500
+    # Kept for API compatibility with older themes and scripts.
+    return jsonify(profile_picture_store.load_all())
+
+
+@profile_pictures.route("/avatar/<int:user_id>")
+@user_login_required
+def avatar(user_id):
+    user = ub.session.query(ub.User).filter(ub.User.id == user_id).first()
+    picture = profile_picture_store.get(user.name) if user else None
+    if not picture:
+        abort(404)
+    mimetype, raw = picture
+    response = current_app.response_class(raw, mimetype=mimetype)
+    response.headers["Cache-Control"] = "private, max-age=86400"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    return response
+
 
 @profile_pictures.route("/me/profile-picture", methods=["GET", "POST"])
 @user_login_required
+@admin_required
 def set_profile_picture():
-    log.debug("Accessed /me/profile-picture route.")
-
-    # Check if the user is an admin
-    if not current_user.role_admin():
-        flash(_("You must be an admin to access this page."), category="error")
-        log.warning(f"Unauthorized access attempt by user: {current_user.name}")
-        return redirect(url_for('web.profile'))
-
     if request.method == "POST":
-        log.debug("POST request received on profile_pictures page.")
-
-        # Get the form data (username and image data)
-        username = request.form.get("username")
-        image_data = request.form.get("image_data")
-
-        log.debug(f"Form data received - Username: {username}, Image Data Length: {len(image_data) if image_data else 'None'}")
-
-        # Validate form fields
-        if not username or not image_data:
-            flash(_("Both username and image data are required."), category="error")
-            log.warning("Form submission missing username or image_data.")
+        user = ub.session.query(ub.User).filter(ub.User.id == request.form.get("user_id", type=int)).first()
+        if not user or user.role_anonymous():
+            flash(_("User not found."), category="error")
             return redirect(url_for('profile_pictures.set_profile_picture'))
-
-        # Validate Base64 image data format
-        try:
-            # Check if image_data starts with a valid data URI scheme
-            if not image_data.startswith('data:image/'):
-                flash(_("Invalid image data format. Must be a valid image."), category="error")
-                log.warning(f"Invalid image data format from user: {username}")
-                return redirect(url_for('profile_pictures.set_profile_picture'))
-            
-            # Verify it's a supported image type (PNG or JPEG)
-            if not (image_data.startswith('data:image/png;base64,') or 
-                    image_data.startswith('data:image/jpeg;base64,') or
-                    image_data.startswith('data:image/jpg;base64,')):
-                flash(_("Unsupported image type. Only PNG and JPEG are allowed."), category="error")
-                log.warning(f"Unsupported image type from user: {username}")
-                return redirect(url_for('profile_pictures.set_profile_picture'))
-            
-            # Extract and validate the Base64 portion
-            if ';base64,' in image_data:
-                base64_part = image_data.split(';base64,')[1]
-                # Try to decode to verify it's valid Base64
-                try:
-                    decoded = base64.b64decode(base64_part, validate=True)
-                    # Check size (limit to 500KB decoded)
-                    if len(decoded) > 512000:
-                        flash(_("Image is too large. Please use an image smaller than 500KB."), category="error")
-                        log.warning(f"Image too large from user: {username}, size: {len(decoded)} bytes")
-                        return redirect(url_for('profile_pictures.set_profile_picture'))
-                except Exception as decode_error:
-                    flash(_("Invalid Base64 image data."), category="error")
-                    log.warning(f"Invalid Base64 data from user: {username}, error: {str(decode_error)}")
-                    return redirect(url_for('profile_pictures.set_profile_picture'))
-            else:
-                flash(_("Invalid image data format."), category="error")
-                log.warning(f"Invalid image data format (no base64 marker) from user: {username}")
-                return redirect(url_for('profile_pictures.set_profile_picture'))
-                
-        except Exception as validation_error:
-            flash(_("Error validating image data."), category="error")
-            log.error(f"Image validation error: {str(validation_error)}")
+        if request.form.get("action") == "remove":
+            if profile_picture_store.remove_picture(user.name):
+                flash(_("Profile picture removed for %(name)s.", name=user.name), category="success")
             return redirect(url_for('profile_pictures.set_profile_picture'))
-
         try:
-            # Path to the JSON file
-            json_path = "/config/user_profiles.json"
-            log.debug(f"Opening JSON file at: {json_path}")
-
-            # Read the existing data from the JSON file and update it
-            with open(json_path, "r+") as file:
-                user_data = json.load(file)
-                user_data[username] = image_data  # Add new or update existing entry
-                file.seek(0)  # Move to the start of the file for writing
-                json.dump(user_data, file, indent=4)  # Write back the updated data
-                file.truncate()  # Ensure there is no leftover content
-
-            # Success feedback and logging
-            flash(_("Profile picture updated successfully."), category="success")
-            log.info(f"Profile picture updated for user: {username}")
-
-        except Exception as e:
-            # Error handling in case of an issue
-            flash(f"Error: {str(e)}", category="error")
-            log.error(f"Exception while updating profile picture JSON: {str(e)}")
-
+            profile_picture_store.set_picture(user.name, request.form.get("image_data", ""))
+        except profile_picture_store.ProfilePictureError as err:
+            messages = {
+                "too_large": _("Image is too large. Please use an image smaller than 500KB."),
+                "unsupported": _("Unsupported image type. Only PNG, JPEG and WebP are allowed."),
+            }
+            flash(messages.get(str(err), _("Invalid image data.")), category="error")
+            return redirect(url_for('profile_pictures.set_profile_picture'))
+        except OSError as err:
+            log.error("Could not save profile picture: %s", err)
+            flash(_("Could not save the profile picture. Check that the config folder is writable."), category="error")
+            return redirect(url_for('profile_pictures.set_profile_picture'))
+        log.info("Profile picture updated for user: %s", user.name)
+        flash(_("Profile picture updated for %(name)s.", name=user.name), category="success")
         return redirect(url_for('profile_pictures.set_profile_picture'))
 
-    # Handle the GET request and render the page
-    log.debug("Rendering GET view for profile_pictures page.")
-    return render_title_template("profile_pictures.html", 
-                                title=_("CWA Profile Picture Management (WIP)"), 
-                                page="profile-picture")
+    users = (ub.session.query(ub.User)
+             .filter(ub.User.role.op('&')(constants.ROLE_ANONYMOUS) != constants.ROLE_ANONYMOUS)
+             .order_by(ub.User.name).all())
+    pictures = profile_picture_store.load_all()
+    return render_title_template("profile_pictures.html", users=users, pictures=pictures,
+                                 title=_("Profile pictures"), page="profile-picture")

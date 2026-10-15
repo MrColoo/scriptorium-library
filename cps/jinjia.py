@@ -268,3 +268,15 @@ def format_minutes(minutes):
 def kobo_overview_global(user):
     from .reading_overview import kobo_overview
     return kobo_overview(user)
+
+
+@jinjia.app_template_global('avatar_url')
+def avatar_url_global(user):
+    """URL of the user's profile picture, or None when they have none."""
+    from . import profile_pictures
+    if not user or not getattr(user, 'name', None):
+        return None
+    token = profile_pictures.version(user.name)
+    if not token:
+        return None
+    return url_for('profile_pictures.avatar', user_id=user.id, v=token)
