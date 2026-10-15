@@ -910,3 +910,18 @@ a.format-tile:hover { border-color: var(--border-strong); background: var(--surf
 .provider-chip:has(input:checked) { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
 .provider-chip:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
 @media (max-width: 560px) { .meta-result { flex-direction: column; } }
+
+/* Smart shelf rule builder */
+.rule-group { display: flex; flex-direction: column; gap: 10px; }
+.rule-group--nested { padding: 12px; border: 1px dashed var(--border-strong); border-radius: var(--radius); background: var(--surface-2); }
+.rule-group-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.rule-list { display: flex; flex-direction: column; gap: 8px; }
+.rule-row { display: grid; grid-template-columns: minmax(130px, 1fr) minmax(130px, 1fr) minmax(160px, 1.4fr) auto; gap: 8px; align-items: center; }
+.rule-value { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.rule-value .input[aria-invalid="true"] { border-color: var(--danger); }
+.input.icon-input { width: 72px; font-size: 22px; text-align: center; flex: none; }
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 4px; max-height: 196px; overflow-y: auto; padding: 6px; border: 1px solid var(--border); border-radius: var(--radius); margin-top: 6px; }
+.icon-grid button { height: 40px; border: 1px solid transparent; border-radius: 8px; background: none; font-size: 20px; cursor: pointer; }
+.icon-grid button:hover { background: var(--surface-hover); }
+.icon-grid button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+@media (max-width: 640px) { .rule-row { grid-template-columns: 1fr 1fr; } .rule-row .rule-value { grid-column: 1 / 2; } }
