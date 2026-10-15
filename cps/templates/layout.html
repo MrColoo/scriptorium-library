@@ -270,7 +270,8 @@
     'show_more': _('Show more'), 'show_less': _('Show less'), 'error': _('Something went wrong, please try again'),
     'processing': _('Upload done, processing, please wait...'), 'upload_failed': _('Upload failed'),
     'files_count': _('%(count)s files', count='%d'),
-    'filter': _('Filter'), 'any': _('Any'), 'no_email': _('Choose at least one address')
+    'filter': _('Filter'), 'any': _('Any'), 'no_email': _('Choose at least one address'),
+    'restarting': _('Restarting, the page reloads when the server is back.'), 'enter_url': _('Enter a URL first')
   }|tojson }}</script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   {%- if current_user.is_authenticated and (current_user.role_admin() or current_user.role_edit()) and duplicate_notification is defined and duplicate_notification.enabled %}

@@ -1,128 +1,102 @@
 {% extends "layout.html" %}
-{% block header %}
-<link href="{{ url_for('static', filename='css/libs/bootstrap-table.min.css') }}" rel="stylesheet">
-<link href="{{ url_for('static', filename='css/libs/bootstrap-editable.css') }}" rel="stylesheet">
-{% endblock %}
+{% block content_class %}content--narrow{% endblock %}
 {% block body %}
-<div class="discover">
-  <h1>{{title}}</h1>
-  <form role="form" class="col-md-10 col-lg-6" method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    {% if feature_support['gmail'] %}
-    <div class="form-group">
-      <label for="config_email_type">{{_('Email Account Type')}}</label>
-      <select name="mail_server_type" id="config_email_type" class="form-control" data-control="email-settings">
-       <option value="0" {% if content.mail_server_type == 0 %}selected{% endif %}>{{_('Standard Email Account')}}</option>
-       <option value="1" {% if content.mail_server_type == 1 %}selected{% endif %}>{{_('Gmail Account')}}</option>
+<div class="page-header">
+  <div>
+    <span class="page-eyebrow"><a href="{{ url_for('admin.admin') }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Settings') }}</a></span>
+    <h1 class="page-title">{{ _('Email server') }}</h1>
+    <span class="page-subtitle">{{ _('Used for Send to eReader, automatic sending of new books and password resets.') }}</span>
+  </div>
+</div>
+
+<form class="form" method="post" autocomplete="off">
+  {{ ui.csrf_field() }}
+  <section class="card">
+    {%- if feature_support['gmail'] %}
+    <div class="field">
+      <label for="config_email_type">{{ _('Email Account Type') }}</label>
+      <select class="select" name="mail_server_type" id="config_email_type">
+        <option value="0" {% if content.mail_server_type == 0 %}selected{% endif %}>{{ _('Standard Email Account') }}</option>
+        <option value="1" {% if content.mail_server_type == 1 %}selected{% endif %}>{{ _('Gmail Account') }}</option>
       </select>
     </div>
-    <div data-related="email-settings-1">
-      <div class="form-group">
-        {% if content.mail_gmail_token == {} %}
-        <button type="submit" id="gmail_server" name="gmail" value="submit" class="btn btn-default">{{_('Setup Gmail Account')}}</button>
-        {% else %}
-        <button type="submit" id="invalidate_server" name="invalidate" value="submit" class="btn btn-danger">{{_('Revoke Gmail Access')}}</button>
-        {% endif %}
-      </div>
+    <div data-show-if="config_email_type:1">
+      {%- if content.mail_gmail_token == {} %}
+      <button class="btn btn-primary" type="submit" id="gmail_server" name="gmail" value="submit">{{ _('Setup Gmail Account') }}</button>
+      {%- else %}
+      <button class="btn btn-danger-ghost" type="submit" id="invalidate_server" name="invalidate" value="submit">{{ _('Revoke Gmail Access') }}</button>
+      {%- endif %}
     </div>
-    <div data-related="email-settings-0">
-   {% endif %}
-      <div class="form-group">
-        <label for="mail_server">{{_('SMTP Hostname')}}</label>
-        <input type="text" class="form-control" name="mail_server" id="mail_server" value="{{content.mail_server}}" required>
-      </div>
-      <div class="form-group">
-        <label for="mail_port">{{_('SMTP Port')}}</label>
-        <input type="number" min="1" max="65535" step="1" class="form-control" name="mail_port" id="mail_port" value="{% if content.mail_port != None %}{{ content.mail_port }}{% endif %}" autocomplete="off" required>
-      </div>
-      <div class="form-group">
-        <label for="mail_use_ssl">{{_('Encryption')}}</label>
-          <select name="mail_use_ssl" id="mail_use_ssl" class="form-control">
-              <option value="0" {% if content.mail_use_ssl == 0 %}selected{% endif %}>{{ _('None') }}</option>
-              <option value="1" {% if content.mail_use_ssl == 1 %}selected{% endif %}>{{ _('STARTTLS') }}</option>
-              <option value="2" {% if content.mail_use_ssl == 2 %}selected{% endif %}>{{ _('SSL/TLS') }}</option>
+    {%- endif %}
+    <div class="stack" {% if feature_support['gmail'] %}data-show-if="config_email_type:0"{% endif %}>
+      <div class="form-grid">
+        <div class="field">
+          <label for="mail_server">{{ _('SMTP Hostname') }}</label>
+          <input class="input" type="text" name="mail_server" id="mail_server" value="{{ content.mail_server or '' }}" required placeholder="smtp.example.com">
+        </div>
+        <div class="field">
+          <label for="mail_port">{{ _('SMTP Port') }}</label>
+          <input class="input" type="number" min="1" max="65535" step="1" name="mail_port" id="mail_port" value="{{ content.mail_port if content.mail_port != None }}" required>
+        </div>
+        <div class="field">
+          <label for="mail_use_ssl">{{ _('Encryption') }}</label>
+          <select class="select" name="mail_use_ssl" id="mail_use_ssl">
+            <option value="0" {% if content.mail_use_ssl == 0 %}selected{% endif %}>{{ _('None') }}</option>
+            <option value="1" {% if content.mail_use_ssl == 1 %}selected{% endif %}>{{ _('STARTTLS') }}</option>
+            <option value="2" {% if content.mail_use_ssl == 2 %}selected{% endif %}>{{ _('SSL/TLS') }}</option>
           </select>
+        </div>
+        <div class="field">
+          <label for="mail_size">{{ _('Attachment Size Limit') }} (MiB)</label>
+          <input class="input" type="number" min="1" max="600" step="1" name="mail_size" id="mail_size" value="{{ (content.mail_size / 1024 / 1024)|int if content.mail_size != None }}" required>
+        </div>
+        <div class="field">
+          <label for="mail_login">{{ _('SMTP Login') }}</label>
+          <input class="input" type="text" name="mail_login" id="mail_login" value="{{ content.mail_login or '' }}" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="mail_password_e">{{ _('SMTP Password') }}</label>
+          <div class="password-field">
+            <input class="input" type="password" name="mail_password_e" id="mail_password_e" value="" autocomplete="new-password">
+            <button class="btn btn-ghost btn-icon" type="button" data-password-toggle aria-label="{{ _('Show password') }}">{{ ui.icon('eye') }}</button>
+          </div>
+          <span class="field-hint">{{ _('Leave empty to keep the current password.') }}</span>
+        </div>
+        <div class="field span-all">
+          <label for="mail_from">{{ _('From Email') }}</label>
+          <input class="input" type="text" name="mail_from" id="mail_from" value="{{ content.mail_from or '' }}" required placeholder="Books &lt;books@example.com&gt;">
+        </div>
       </div>
-      <div class="form-group">
-        <label for="mail_login">{{_('SMTP Login')}}</label>
-        <input type="text" class="form-control" name="mail_login" id="mail_login" value="{{content.mail_login}}">
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit" name="submit" value="submit">{{ _('Save') }}</button>
+        <button class="btn" type="submit" name="test" value="test">{{ ui.icon('send') }}{{ _('Save and Send Test Email') }}</button>
+        <a class="btn btn-ghost" href="{{ url_for('admin.admin') }}" id="email_back">{{ _('Back') }}</a>
       </div>
-      <div class="form-group">
-        <label for="mail_password_e">{{_('SMTP Password')}}</label>
-        <input type="password" class="form-control" name="mail_password_e" id="mail_password_e" value="">
-      </div>
-      <div class="form-group">
-        <label for="mail_from">{{_('From Email')}}</label>
-        <input type="text" class="form-control" name="mail_from" id="mail_from" value="{{content.mail_from}}" required>
-      </div>
-      <label for="mail_size">{{_('Attachment Size Limit')}}</label>
-       <div class="form-group input-group">
-        <input type="number" min="1" max="600" step="1" class="form-control" name="mail_size" id="mail_size" value="{% if content.mail_size != None %}{{ (content.mail_size / 1024 / 1024)|int }}{% endif %}" required>
-        <span class="input-group-btn">
-          <button type="button" id="attachement_size" class="btn btn-default" disabled>MiB</button>
-        </span>
-      </div>
-      <button type="submit" name="submit" value="submit" class="btn btn-default">{{_('Save')}}</button>
-      <button type="submit" name="test" value="test" class="btn btn-default">{{_('Save and Send Test Email')}}</button>
-   {% if feature_support['gmail'] %}
     </div>
-   {% endif %}
-      <a href="{{ url_for('admin.admin') }}" id="email_back" class="btn btn-default">{{_('Back')}}</a>
-  </form>
-    {% if g.allow_registration and not simple%}
-  <div class="col-md-10 col-lg-6">
-    <h2>{{_('Allowed Domains (Whitelist)')}}</h2>
-    <form id="domain_add_allow" action="{{ url_for('admin.add_domain',allow=1)}}" method="POST">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <div class="form-group required">
-      <label for="domainname_allow">{{_('Add Domain')}}</label>
-      <input type="text" class="form-control" name="domainname" id="domainname_allow" >
-    </div>
-    <button id="domain_allow_submit" class="btn btn-default">{{_('Add')}}</button>
-    </form>
-  <table class="table table-no-bordered" id="domain-allow-table" data-url="{{url_for('admin.list_domain', allow=1)}}" data-id-field="id" data-show-header="false" data-editable-mode="inline" data-locale="{{ current_user.locale }}">
-    <thead>
-    <tr>
-      <th data-field="domain" id="domain-allow" data-escape="true" data-editable-type="text" data-editable-url="{{ url_for('admin.edit_domain', allow = 1)}}" data-editable="true" data-editable-title="{{_('Enter domainname')}}"></th>
-      <th data-field="id" id="id-allow" data-visible="false"></th>
-      <th data-align="right" data-formatter="TableActions"></th>
-    </tr>
-    </thead>
-  </table>
-  <h2>{{_('Denied Domains (Blacklist)')}}</h2>
-    <table class="table table-no-bordered" id="domain-deny-table" data-url="{{url_for('admin.list_domain', allow=0)}}" data-id-field="id" data-show-header="false" data-editable-mode="inline" data-locale="{{ current_user.locale }}">
-      <thead>
-        <tr>
-            <th data-field="domain" id="domain-deny" data-escape="true" data-editable-type="text" data-editable-url="{{ url_for('admin.edit_domain', allow = 0)}}" data-editable="true" data-editable-title="{{_('Enter domainname')}}"></th>
-            <th data-field="id" id="id-deny" data-visible="false"></th>
-            <th data-align="right" data-formatter="TableActions"></th>
-        </tr>
-      </thead>
-    </table>
-    <form id="domain_add_deny" action="{{ url_for('admin.add_domain',allow=0)}}" method="POST">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <div class="form-group required">
-        <label for="domainname_deny">{{_('Add Domain')}}</label>
-        <input type="text" class="form-control" name="domainname" id="domainname_deny" >
-      </div>
-      <button id="domain_deny_submit" class="btn btn-default">{{_('Add')}}</button>
-    </form>
-    </div>
+  </section>
+</form>
 
-    {% endif %}
-</div>
-{% endblock %}
-{% block modal %}
-{% if g.allow_registration %}
-{{ delete_confirm_modal() }}
-{% endif %}
+{%- if g.allow_registration and not simple %}
+<section class="card" aria-labelledby="domains-h">
+  <div class="card-header"><div><h2 class="card-title" id="domains-h">{{ _('Registration domains') }}</h2>
+    <p class="card-subtitle">{{ _('Who may register. Use * and ? as wildcards, for example *.example.com.') }}</p></div></div>
+  <div class="form-grid">
+    {%- for allow, label in [(1, _('Allowed Domains (Whitelist)')), (0, _('Denied Domains (Blacklist)'))] %}
+    <div class="stack-sm" data-domains data-allow="{{ allow }}" data-list-url="{{ url_for('admin.list_domain', allow=allow) }}" data-add-url="{{ url_for('admin.add_domain', allow=allow) }}" data-delete-url="{{ url_for('admin.delete_domain') }}">
+      <span class="label">{{ label }}</span>
+      <ul class="restriction-list" data-domain-list></ul>
+      <form class="row row-nowrap" data-domain-add>
+        <label class="sr-only" for="domainname_{{ allow }}">{{ _('Add Domain') }}</label>
+        <input class="input" type="text" name="domainname" id="domainname_{{ allow }}" placeholder="*.example.com" required>
+        <button class="btn" type="submit">{{ _('Add') }}</button>
+      </form>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+<script type="application/json" id="domains-i18n">{{ {'remove': _('Remove'), 'confirm': _('Do you really want to delete the domain rule?')}|tojson }}</script>
+{%- endif %}
 {% endblock %}
 {% block js %}
-{% if g.allow_registration %}
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table-locale-all.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table-editable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-editable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/table.js') }}"></script>
-{% endif %}
+<script src="{{ url_for('static', filename='js/domains.js') }}"></script>
 {% endblock %}

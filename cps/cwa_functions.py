@@ -1716,13 +1716,13 @@ def cwa_flash_status():
         case 0:
             flash(_("✅ All Monitoring Services are running as intended! 👍"), category="cwa_refresh")
         case 1:
-            flash(_("🔴 The Ingest Service is running but the Metadata Change Detector is not"), category="cwa_refresh")
+            flash(_("🔴 The Ingest Service is running but the Metadata Change Detector is not"), category="error")
         case 2:
-            flash(_("🔴 The Metadata Change Detector is running but the Ingest Service is not"), category="cwa_refresh")
+            flash(_("🔴 The Metadata Change Detector is running but the Ingest Service is not"), category="error")
         case 3:
-            flash(_("⛔ Neither the Ingest Service or the Metadata Change Detector are running"), category="cwa_refresh")
+            flash(_("⛔ Neither the Ingest Service or the Metadata Change Detector are running"), category="error")
         case _:
-            flash(_("An Error has occurred"), category="cwa_refresh")
+            flash(_("An Error has occurred"), category="error")
 
     return redirect(url_for('admin.admin'))
 

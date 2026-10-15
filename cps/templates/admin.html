@@ -1,336 +1,177 @@
 {% extends "layout.html" %}
-{% macro display_bool_setting(setting_value) -%}
-  {% if setting_value %}<span class="glyphicon glyphicon-ok"></span>{% else %}<span class="glyphicon glyphicon-remove"></span>{% endif %}
+{% macro yesno_badge(value) -%}
+<span class="badge {{ 'badge--success' if value else '' }}">{{ _('On') if value else _('Off') }}</span>
 {%- endmacro %}
 {% block body %}
-<div class="container-fluid">
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _('Settings') }}</h1>
+    <span class="page-subtitle">{{ _('Users, library, automation and server.') }}</span>
+  </div>
+  <div class="page-actions">
+    <a class="btn btn-sm" href="{{ url_for('cwa_check_status.cwa_flash_status') }}" id="check_mon_srvs">{{ ui.icon('activity') }}{{ _('Check CWA Status') }}</a>
+    <a class="btn btn-sm" href="{{ url_for('cwa_stats.cwa_stats_show') }}" id="cwa_stats">{{ ui.icon('chart') }}{{ _('Statistics') }}</a>
+  </div>
+</div>
+
+{#- Users -#}
+<section class="section" aria-labelledby="users-h">
+  <div class="section-header">
+    <h2 id="users-h">{{ _('Users') }}</h2>
+    <span class="section-meta">{{ allUser|length }}</span>
+    <span class="grow"></span>
+    {%- if config.config_login_type == 1 %}
+    <button class="btn btn-sm" type="button" data-post="{{ url_for('admin.import_ldap_users') }}" data-json="{}" id="import_ldap_users">{{ ui.icon('users') }}{{ _('Import LDAP Users') }}</button>
+    {%- endif %}
+    <a class="btn btn-sm" href="{{ url_for('profile_pictures.set_profile_picture') }}" id="admin_profile_pictures">{{ ui.icon('image') }}{{ _('Profile pictures') }}</a>
+    {%- if not simple %}<a class="btn btn-sm" href="{{ url_for('admin.edit_user_table') }}" id="admin_user_table">{{ ui.icon('table') }}{{ _('Edit Users') }}</a>{% endif %}
+    <a class="btn btn-sm btn-primary" href="{{ url_for('admin.new_user') }}" id="admin_new_user">{{ ui.icon('plus') }}{{ _('Add New User') }}</a>
+  </div>
+  <div class="table-wrap">
+    <table class="table" id="table_user">
+      <thead><tr>
+        <th>{{ _('Username') }}</th><th>{{ _('Email') }}</th><th>{{ _('Send to eReader') }}</th>
+        <th class="num">{{ _('Downloads') }}</th><th>{{ _('Roles') }}</th>
+      </tr></thead>
+      <tbody>
+        {%- for user in allUser if not user.role_anonymous() or config.config_anonbrowse %}
+        <tr>
+          <td class="cell-strong"><a href="{{ url_for('admin.edit_user', user_id=user.id) }}">{{ user.name }}</a></td>
+          <td>{{ user.email or '' }}</td>
+          <td class="truncate" style="max-width: 220px;">{{ user.kindle_mail or '' }}</td>
+          <td class="num">{{ user.downloads.count() }}</td>
+          <td><div class="chips" style="gap: 4px;">
+            {%- if user.role_admin() %}<span class="badge badge--accent">{{ _('Admin') }}</span>{% endif %}
+            {%- if user.role_upload() and config.config_uploading %}<span class="badge">{{ _('Upload') }}</span>{% endif %}
+            {%- if user.role_download() %}<span class="badge">{{ _('Download') }}</span>{% endif %}
+            {%- if user.role_edit() %}<span class="badge">{{ _('Edit') }}</span>{% endif %}
+            {%- if user.role_delete_books() %}<span class="badge">{{ _('Delete') }}</span>{% endif %}
+            {%- if user.role_edit_shelfs() %}<span class="badge">{{ _('Public Shelf') }}</span>{% endif %}
+            {%- if user.role_anonymous() %}<span class="badge">{{ _('Guest') }}</span>{% endif %}
+          </div></td>
+        </tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{#- Configuration hub -#}
+<section class="section" aria-labelledby="config-h">
+  <h2 id="config-h">{{ _('Configuration') }}</h2>
+  <div class="card-grid">
+    <a class="card card-link" href="{{ url_for('cwa_settings.set_cwa_settings') }}" id="cwa-settings">
+      <span class="icon-tile">{{ ui.icon('zap') }}</span>
+      <span class="card-title">{{ _('Automation') }}</span>
+      <span class="card-subtitle">{{ _('Ingest, conversion, cover and metadata enforcement, Kindle EPUB fixing, KOReader sync.') }}</span>
+    </a>
+    <a class="card card-link" href="{{ url_for('admin.configuration') }}" id="basic_config">
+      <span class="icon-tile icon-tile--neutral">{{ ui.icon('server') }}</span>
+      <span class="card-title">{{ _('Server & features') }}</span>
+      <span class="card-subtitle">{{ _('Port, uploads, Kobo sync, login methods, metadata providers.') }}</span>
+    </a>
+    <a class="card card-link" href="{{ url_for('admin.view_configuration') }}" id="view_config">
+      <span class="icon-tile icon-tile--neutral">{{ ui.icon('sliders') }}</span>
+      <span class="card-title">{{ _('Interface') }}</span>
+      <span class="card-subtitle">{{ _('Title, books per page, default sidebar and permissions for new users.') }}</span>
+    </a>
+    <a class="card card-link" href="{{ url_for('admin.db_configuration') }}" id="db_config">
+      <span class="icon-tile icon-tile--neutral">{{ ui.icon('database') }}</span>
+      <span class="card-title">{{ _('Calibre library') }}</span>
+      <span class="card-subtitle mono small break">{{ config.config_calibre_dir or _('Not configured') }}</span>
+    </a>
+    <a class="card card-link" href="{{ url_for('admin.edit_mailsettings') }}" id="admin_edit_email">
+      <span class="icon-tile icon-tile--neutral">{{ ui.icon('mail') }}</span>
+      <span class="card-title">{{ _('Email server') }}</span>
+      <span class="card-subtitle">
+        {%- if config.get_mail_server_configured() %}
+          {%- if config.mail_server_type == 0 %}{{ config.mail_server }}:{{ config.mail_port }} · {{ config.mail_from }}{% else %}{{ _('Gmail via Oauth2') }}{% endif %}
+        {%- else %}{{ _('Not configured. Needed for Send to eReader and password resets.') }}{% endif %}
+      </span>
+    </a>
+    {%- if feature_support['scheduler'] %}
+    <a class="card card-link" href="{{ url_for('admin.edit_scheduledtasks') }}" id="admin_edit_scheduled_tasks">
+      <span class="icon-tile icon-tile--neutral">{{ ui.icon('clock') }}</span>
+      <span class="card-title">{{ _('Scheduled tasks') }}</span>
+      <span class="card-subtitle">{{ _('Starts at %(time)s, runs up to %(duration)s.', time=schedule_time, duration=schedule_duration) }}</span>
+    </a>
+    {%- endif %}
+  </div>
+  <dl class="dl dl--divided">
+    <dt>{{ _('External Port') }}</dt>
+    <dd>{% if config.config_external_port %}{{ config.config_external_port }}{% elif is_proxied %}<em>{{ _('Not set — reverse proxy detected') }}</em>{% else %}8083{% endif %}</dd>
+    <dt>{{ _('Log Level') }}</dt><dd>{{ config.get_log_level() }}</dd>
+    <dt>{{ _('Books per Page') }}</dt><dd>{{ config.config_books_per_page }}</dd>
+    <dt>{{ _('Uploads') }}</dt><dd>{{ yesno_badge(config.config_uploading) }}</dd>
+    <dt>{{ _('Kobo sync') }}</dt><dd>{{ yesno_badge(config.config_kobo_sync) }}</dd>
+    <dt>{{ _('Anonymous Browsing') }}</dt><dd>{{ yesno_badge(config.config_anonbrowse) }}</dd>
+    <dt>{{ _('Public Registration') }}</dt><dd>{{ yesno_badge(config.config_public_reg) }}</dd>
+    <dt>{{ _('Magic Link Remote Login') }}</dt><dd>{{ yesno_badge(config.config_remote_login) }}</dd>
+    <dt>{{ _('Reverse Proxy Login') }}</dt><dd>{{ yesno_badge(config.config_allow_reverse_proxy_header_login) }}{% if config.config_allow_reverse_proxy_header_login %} <span class="mono small">{{ config.config_reverse_proxy_login_header_name }}</span>{% endif %}</dd>
+  </dl>
+</section>
+
+{#- Tools -#}
+<section class="section" aria-labelledby="tools-h">
+  <h2 id="tools-h">{{ _('Library tools') }}</h2>
+  <div class="card-grid">
+    <a class="card card-link" href="{{ url_for('convert_library.show_convert_library_page') }}" id="library_convert">
+      <span class="card-title">{{ _('Convert library') }}</span>
+      <span class="card-subtitle">{{ _('Convert every book to your preferred format in one run.') }}</span></a>
+    <a class="card card-link" href="{{ url_for('epub_fixer.show_epub_fixer_page') }}" id="epub_fixer">
+      <span class="card-title">{{ _('EPUB fixer') }}</span>
+      <span class="card-subtitle">{{ _('Repair EPUB files so Kindle accepts them by email.') }}</span></a>
+    <a class="card card-link" href="{{ url_for('duplicates.show_duplicates') }}">
+      <span class="card-title">{{ _('Duplicates') }}</span>
+      <span class="card-subtitle">{{ _('Find and merge books that were added twice.') }}</span></a>
+    <a class="card card-link" href="{{ url_for('admin.hardcover_review_matches') }}">
+      <span class="card-title">{{ _('Hardcover matches') }}</span>
+      <span class="card-subtitle">{{ _('Review automatic matches before metadata is applied.') }}</span></a>
+    <a class="card card-link" href="{{ url_for('cwa_stats.cwa_stats_show') }}">
+      <span class="card-title">{{ _('Logs & history') }}</span>
+      <span class="card-subtitle">{{ _('Imports, conversions and enforcement history.') }}</span></a>
+    <a class="card card-link" href="{{ url_for('kosync.kosync_plugin_page') }}" id="kosync">
+      <span class="card-title">{{ _('KOReader sync') }}</span>
+      <span class="card-subtitle">{{ _('Plugin download and setup steps.') }}</span></a>
+  </div>
   <div class="row">
-    <div class="col">
-      <h2>{{_('Users&nbsp;&nbsp;👤')}}</h2>
-    {% if allUser.__len__() < 10 %}
-      <div style="overflow-x: auto; margin-bottom: 1rem;">
-        <table style="margin-bottom: 0;" class="table table-striped" id="table_user">
-          <tr>
-              <th>{{_('Username')}}</th>
-              <th>{{_('Email')}}</th>
-              <th>{{_('Send to eReader Email')}}</th>
-              <th>{{_('Send to eReader Subject')}}</th>
-              <th>{{_('Downloads')}}</th>
-              <th class="hidden-xs ">{{_('Admin')}}</th>
-              <th class="hidden-xs hidden-sm">{{_('Password')}}</th>
-            {% if config.config_uploading %}
-              <th class="hidden-xs hidden-sm">{{_('Upload')}}</th>
-            {%  endif %}
-              <th class="hidden-xs hidden-sm">{{_('Download')}}</th>
-              <th class="hidden-xs hidden-sm hidden-md">{{_('View Books')}}</th>
-              <th class="hidden-xs hidden-sm hidden-md">{{_('Edit')}}</th>
-              <th class="hidden-xs hidden-sm hidden-md">{{_('Delete')}}</th>
-              <th class="hidden-xs hidden-sm hidden-md">{{_('Public Shelf')}}</th>
-          </tr>
-          {% for user in allUser %}
-            {% if not user.role_anonymous() or config.config_anonbrowse %}
-            <tr>
-              <td><a class="session" href="{{url_for('admin.edit_user', user_id=user.id)}}">{{user.name}}</a></td>
-              <td>{{user.email}}</td>
-              <td>{{user.kindle_mail}}</td>
-              <td>{{user.kindle_mail_subject}}</td>
-              <td>{{user.downloads.count()}}</td>
-              <td class="hidden-xs">{{ display_bool_setting(user.role_admin()) }}</td>
-              <td class="hidden-xs hidden-sm">{{ display_bool_setting(user.role_passwd()) }}</td>
-              {% if config.config_uploading %}
-              <td class="hidden-xs hidden-sm">{{ display_bool_setting(user.role_upload()) }}</td>
-              {%  endif %}
-              <td class="hidden-xs hidden-sm">{{ display_bool_setting(user.role_download()) }}</td>
-              <td class="hidden-xs hidden-sm hidden-md">{{ display_bool_setting(user.role_viewer()) }}</td>
-              <td class="hidden-xs hidden-sm hidden-md">{{ display_bool_setting(user.role_edit()) }}</td>
-              <td class="hidden-xs hidden-sm hidden-md">{{ display_bool_setting(user.role_delete_books()) }}</td>
-              <td class="hidden-xs hidden-sm hidden-md">{{ display_bool_setting(user.role_edit_shelfs()) }}</td>
-            </tr>
-            {% endif %}
-          {% endfor %}
+    <button class="btn btn-sm" type="button" data-post="{{ url_for('admin.update_thumbnails') }}" id="admin_refresh_cover_cache">{{ ui.icon('image') }}{{ _('Refresh Thumbnail Cache') }}</button>
+    <button class="btn btn-sm" type="button" data-post="{{ url_for('admin.trigger_hardcover_auto_fetch') }}" id="hardcover_auto_fetch">{{ ui.icon('download') }}{{ _('Run Hardcover auto-fetch') }}</button>
+    {%- if config.schedule_metadata_backup %}
+    <button class="btn btn-sm" type="button" data-post="{{ url_for('admin.queue_metadata_backup') }}" id="metadata_backup">{{ ui.icon('archive') }}{{ _('Queue all books for metadata backup') }}</button>
+    {%- endif %}
+  </div>
+</section>
+
+{#- System -#}
+<section class="section" aria-labelledby="system-h">
+  <h2 id="system-h">{{ _('System') }}</h2>
+  <div class="split">
+    <div class="split-main">
+      <div class="table-wrap">
+        <table class="table" id="update_table">
+          <thead><tr><th>{{ _('Component') }}</th><th>{{ _('Version') }}</th></tr></thead>
+          <tbody>
+            <tr><td class="cell-strong">Calibre-Web Automated</td><td class="mono">{{ cwa_version }}</td></tr>
+            <tr><td class="cell-strong">Calibre</td><td class="mono">{{ calibre_version }}</td></tr>
+            <tr><td class="cell-strong">Kepubify</td><td class="mono">{{ kepubify_version }}</td></tr>
+          </tbody>
         </table>
       </div>
-    {% endif %}
-        {% if not simple %}
-          <a class="btn btn-default" id="admin_user_table" href="{{url_for('admin.edit_user_table')}}">{{_('Edit Users')}}</a>
-        {% endif %}
-        <a class="btn btn-default" id="admin_new_user" href="{{url_for('admin.new_user')}}">{{_('Add New User')}}</a>
-        <a class="btn btn-default" id="admin_profile_pictures" href="{{ url_for('profile_pictures.set_profile_picture') }}">{{ _('Manage Profile Pictures') }}</a>
-      {% if (config.config_login_type == 1) %}
-        <div class="btn btn-default" id="import_ldap_users" data-toggle="modal" data-target="#StatusDialog">{{_('Import LDAP Users')}}</div>
-      {% endif %}
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <h2>{{_('Email Server Settings&nbsp;&nbsp;📬')}}</h2>
-      {% if config.get_mail_server_configured() %}
-        {% if config.mail_server_type == 0 %}
-        <div class="col-xs-12 col-sm-12">
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('SMTP Hostname')}}</div>
-            <div class="col-xs-6 col-sm-3">{{config.mail_server}}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('SMTP Port')}}</div>
-            <div class="col-xs-6 col-sm-3">{{config.mail_port}}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('Encryption')}}</div>
-            <div class="col-xs-6 col-sm-3">{{ display_bool_setting(config.mail_use_ssl) }}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('SMTP Login')}}</div>
-            <div class="col-xs-6 col-sm-3">{{config.mail_login}}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('From Email')}}</div>
-            <div class="col-xs-6 col-sm-3">{{config.mail_from}}</div>
-          </div>
-        </div>
-      {% else %}
-        <div class="col-xs-12 col-sm-12">
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('Email Service')}}</div>
-            <div class="col-xs-6 col-sm-3">{{_('Gmail via Oauth2')}}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('From Email')}}</div>
-            <div class="col-xs-6 col-sm-3">{{config.mail_gmail_token['email']}}</div>
-          </div>
-        </div>
-      {% endif %}
-    {% endif %}
-      <a class="btn btn-default emailconfig" id="admin_edit_email" href="{{url_for('admin.edit_mailsettings')}}">{{_('Edit Email Server Settings')}}</a>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col">
-      <h2>{{_('Configuration&nbsp;&nbsp;⚙️')}}</h2>
-      <div class="col-xs-12 col-sm-6">
-        <div class="row">
-            <div class="col-xs-6 col-sm-6">{{_('Calibre Database Directory')}}</div>
-            <div class="col-xs-6 col-sm-6">{{config.config_calibre_dir}}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-6">{{_('Log Level')}}</div>
-            <div class="col-xs-6 col-sm-6">{{config.get_log_level()}}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-6">{{_('External Port')}}</div>
-            <div class="col-xs-6 col-sm-6">{% if config.config_external_port %}{{ config.config_external_port }}{% elif is_proxied %}<em>{{ _('Not set — reverse proxy detected') }}</em>{% else %}8083{% endif %}</div>
-        </div>
-        {% if kobo_support and config.config_external_port != config.config_external_port %}
-        <div class="row">
-          <div class="col-xs-6 col-sm-6">{{_('External Port')}}</div>
-          <div class="col-xs-6 col-sm-6">{{config.config_external_port}}</div>
-        </div>
-        {% endif %}
-      </div>
-      <div class="col-xs-12 col-sm-6">
-        <div class="row">
-            <div class="col-xs-6 col-sm-7">{{_('Books per Page')}}</div>
-            <div class="col-xs-6 col-sm-5">{{config.config_books_per_page}}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-7">{{_('Uploads')}}</div>
-            <div class="col-xs-6 col-sm-5">{{ display_bool_setting(config.config_uploading) }}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-7">{{_('Anonymous Browsing')}}</div>
-            <div class="col-xs-6 col-sm-5">{{ display_bool_setting(config.config_anonbrowse) }}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-7">{{_('Public Registration')}}</div>
-            <div class="col-xs-6 col-sm-5">{{ display_bool_setting(config.config_public_reg) }}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-7">{{_('Magic Link Remote Login')}}</div>
-            <div class="col-xs-6 col-sm-5">{{ display_bool_setting(config.config_remote_login) }}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 col-sm-7">{{_('Reverse Proxy Login')}}</div>
-            <div class="col-xs-6 col-sm-5">{{ display_bool_setting(config.config_allow_reverse_proxy_header_login) }}</div>
-        </div>
-        {% if config.config_allow_reverse_proxy_header_login %}
-        <div class="row">
-            <div class="col-xs-6 col-sm-7">{{_('Reverse Proxy Header Name')}}</div>
-            <div class="col-xs-6 col-sm-5">{{ config.config_reverse_proxy_login_header_name }}</div>
-        </div>
-        {% endif %}
-      </div>
-      <a class="btn btn-default" id="cwa-settings" href="{{url_for('cwa_settings.set_cwa_settings')}}">{{_('CWA Settings')}}</a>
-      <a class="btn btn-default" id="basic_config" href="{{url_for('admin.configuration')}}">{{_('Edit Basic Configuration')}}</a>
-      <a class="btn btn-default" id="view_config" href="{{url_for('admin.view_configuration')}}">{{_('Edit UI Configuration')}}</a>
-      <a class="btn btn-default" id="db_config" href="{{url_for('admin.db_configuration')}}">{{_('Edit Calibre Database Configuration')}}</a>
-    </div>
-  </div>
-{%  if feature_support['scheduler'] %}
-  <div class="row">
-    <div class="col">
-      <h2>{{_('Scheduled Tasks&nbsp;&nbsp;⌛')}}</h2>
-        <div class="col-xs-12 col-sm-12 scheduled_tasks_details">
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('Start Time')}}</div>
-            <div class="col-xs-6 col-sm-3">{{schedule_time}}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('Maximum Duration')}}</div>
-            <div class="col-xs-6 col-sm-3">{{schedule_duration}}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('Scheduled Thumbnail Refresh')}}</div>
-            <div class="col-xs-6 col-sm-3">{{ display_bool_setting(config.schedule_generate_book_covers) }}</div>
-          </div>
-          <!--div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('Generate series cover thumbnails')}}</div>
-            <div class="col-xs-6 col-sm-3">{{ display_bool_setting(config.schedule_generate_series_covers) }}</div>
-          </div-->
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('Reconnect Calibre Database')}}</div>
-            <div class="col-xs-6 col-sm-3">{{ display_bool_setting(config.schedule_reconnect) }}</div>
-          </div>
-          <div class="row">
-            <div class="col-xs-6 col-sm-3">{{_('Generate Metadata Backup Files')}}</div>
-            <div class="col-xs-6 col-sm-3">{{ display_bool_setting(config.schedule_metadata_backup) }}</div>
-          </div>
-
-        </div>
-      <a class="btn btn-default scheduledtasks" id="admin_edit_scheduled_tasks" href="{{url_for('admin.edit_scheduledtasks')}}">{{_('Edit Scheduled Tasks Settings')}}</a>
-      <a class="btn btn-default" id="admin_refresh_cover_cache">{{_('Refresh Thumbnail Cache')}}</a>
-    </div>
-  </div>
-{%  endif %}
-
-  <div class="row form-group">
-    <h2>{{_('CWA Admin Functions&nbsp;&nbsp;⚡')}}</h2>
-    <a class="btn btn-default" id="cwa_stats" href="{{url_for('cwa_stats.cwa_stats_show')}}">{{_('Show CWA Stats')}}</a>
-    <a class="btn btn-default" id="check_mon_srvs" href="{{url_for('cwa_check_status.cwa_flash_status')}}">{{_('Check CWA Status')}}</a>
-    <a class="btn btn-default" id="kosync" href="{{url_for('kosync.kosync_plugin_page')}}">{{_('Setup KOReader Sync')}}</a>
-  </div>
-  <div class="row form-group">
-    <a class="btn btn-default" id="library_convert" href="{{url_for('convert_library.show_convert_library_page')}}">{{_('CWA Library Conversion Service')}}</a>
-    <a class="btn btn-default" id="epub_fixer" href="{{url_for('epub_fixer.show_epub_fixer_page')}}">{{_('CWA EPUB Fixer Service')}}</a>
-  </div>
-  <div class="row form-group">
-    <a class="btn btn-default github" id="cwa_github_link" href="https://github.com/crocodilestick/Calibre-Web-Automated/">{{_('CWA GitHub')}}</a>
-    <a class="btn btn-default discord" id="cwa_discord_link" href="https://discord.gg/EjgSeek94R">{{_('CWA Discord Server')}}</a>
-  </div>
-  <div class="row form-group">
-    <div class="btn btn-primary" id="hardcover_auto_fetch" data-toggle="modal" data-target="#StatusDialog" style="background-color: var(--color-primary); border-color: var(--color-primary); margin-left: 8px;">🔖 {{_('Run Hardcover Auto-Fetch')}}</div>
-    <a href="{{url_for('admin.hardcover_review_matches')}}" class="btn btn-info" style="margin-left: 10px; background-color: #17a2b8; border-color: #17a2b8;">📋 {{_('Review Hardcover Matches')}}</a>
-  </div>
-
-  <div class="row form-group">
-    <h2>{{_('Administration&nbsp;&nbsp;🚀')}}</h2>
-    <a class="btn btn-default" id="debug" href="{{url_for('admin.download_debug')}}">{{_('Download Debug Package')}}</a>
-    <!-- <a class="btn btn-default" id="logfile" href="{{url_for('admin.view_logfile')}}">{{_('View Logs')}}</a> -->
-  </div>
-  <div class="row form-group">
-    <div class="btn btn-default" id="restart_database" data-toggle="modal" data-target="#StatusDialog">{{_('Reconnect Calibre Database')}}</div>
-  </div>
-  <div class="row form-group">
-    <div class="btn btn-default" id="admin_restart" data-toggle="modal" data-target="#RestartDialog">{{_('Restart')}}</div>
-    <div class="btn btn-default" id="admin_stop" data-toggle="modal" data-target="#ShutdownDialog">{{_('Shutdown')}}</div>
-  </div>
-{% if config.schedule_metadata_backup %}
-  <div class="row form-group">
-    <div class="btn btn-default" id="metadata_backup" data-toggle="modal" data-target="#StatusDialog">{{_('Queue all books for metadata backup')}}</div>
-  </div>
-{%  endif %}
-  <div class="row">
-    <div class="col">
-      <h2>{{_('Version Information&nbsp;&nbsp;📜')}}</h2>
-      <table class="table table-striped" id="update_table">
-        <thead>
-          <tr>
-              <th class="col-xl-3">Distribution</th>
-              <th class="col-xs-3">{{_('Version')}}</th>
-              <th class="col-xl-8">{{_('Details')}}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="current_version">
-            <td>Calibre-Web Automated</td>
-            <td>{{cwa_version}} </td>
-            <td><i>{{_('Current Version')}}</i></td>
-          </tr>
-          <tr id="current_version">
-            <td>Calibre</td>
-            <td>{{calibre_version}} </td>
-            <td><i>{{_('-')}}</i></td>
-          </tr>
-          <tr id="current_version">
-            <td>Kepubify</td>
-            <td>{{kepubify_version}} </td>
-            <td><i>{{_('-')}}</i></td>
-          </tr>
-        </tbody>
-      </table>
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      {%  if feature_support['updater'] %}
-      <div class="hidden" id="update_error"> <span>{{update_error}}</span></div>
-      <div class="btn btn-primary" id="check_for_update">{{_('Check for Update')}}</div>
-      <div class="btn btn-primary hidden" id="perform_update" data-toggle="modal" data-target="#StatusDialog">{{_('Perform Update')}}</div>
-      {%  endif %}
-    </div>
-  </div>
-</div>
-
-<!-- Modal -->
-<div id="RestartDialog" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header bg-info"></div>
-      <div class="modal-body text-center">
-        <p>{{_('Are you sure you want to restart?')}}</p>
-          <div id="spinner" class="spinner"  style="display:none;">
-                <img id="img-spinner" src="{{ url_for('static', filename='css/libs/images/loading-icon.gif') }}"/>
-          </div>
-          <p></p>
-        <button type="button" class="btn btn-default" id="restart" >{{_('OK')}}</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
+    <div class="split-aside">
+      <div class="card">
+        <a class="btn btn-block" href="{{ url_for('admin.download_debug') }}" id="debug">{{ ui.icon('download') }}{{ _('Download Debug Package') }}</a>
+        <button class="btn btn-block" type="button" data-post="{{ url_for('admin.shutdown') }}" data-json='{"parameter": 2}' id="restart_database">{{ ui.icon('database') }}{{ _('Reconnect Calibre Database') }}</button>
+        <button class="btn btn-block" type="button" data-admin-restart data-url="{{ url_for('admin.shutdown') }}" id="admin_restart">{{ ui.icon('refresh') }}{{ _('Restart') }}</button>
+        <button class="btn btn-block btn-danger-ghost" type="button" data-post="{{ url_for('admin.shutdown') }}" data-json='{"parameter": 1}'
+                data-confirm="{{ _('Are you sure you want to shutdown?') }}" data-confirm-action="{{ _('Shutdown') }}" id="admin_stop">{{ ui.icon('power') }}{{ _('Shutdown') }}</button>
       </div>
     </div>
   </div>
-</div>
-<div id="ShutdownDialog" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header bg-info">
-      </div>
-      <div class="modal-body text-center">
-        <p>{{_('Are you sure you want to shutdown?')}}</p>
-        <button type="button" class="btn btn-default" id="shutdown" data-dismiss="modal">{{_('OK')}}</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="StatusDialog" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header bg-info text-center">
-      <span id="DialogHeader">{{_('Updating, please do not reload this page')}}</span>
-      </div>
-      <div class="modal-body text-center">
-          <div id="spinner2" class="spinner2"  style="display:none;">
-                <img id="img-spinner2" src="{{ url_for('static', filename='css/libs/images/loading-icon.gif') }}"/>
-          </div>
-          <p></p>
-        <div id="DialogContent"></div>
-          <p></p>
-        <button type="button" class="btn btn-default hidden" id="DialogFinished" data-dismiss="modal">{{_('OK')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
+</section>
 {% endblock %}
-{% block modal %}
-{{ change_confirm_modal() }}
+{% block js %}
+<script type="application/json" id="admin-i18n">{{ {'restart_confirm': _('Are you sure you want to restart?'), 'restart': _('Restart'), 'restarting': _('Restarting, the page reloads when the server is back.')}|tojson }}</script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 {% endblock %}

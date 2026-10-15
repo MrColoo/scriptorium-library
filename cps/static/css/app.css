@@ -927,3 +927,6 @@ a.format-tile:hover { border-color: var(--border-strong); background: var(--surf
 @media (max-width: 640px) { .rule-row { grid-template-columns: 1fr 1fr; } .rule-row .rule-value { grid-column: 1 / 2; } }
 .qr-code { margin: 0 auto; border-radius: var(--radius); background: #fff; padding: 8px; }
 .bullets { margin: 0; padding-left: 18px; color: var(--text-2); display: flex; flex-direction: column; gap: 6px; line-height: 1.5; }
+.card-link { color: var(--text); gap: 8px; transition: border-color .12s, box-shadow .12s, transform .12s; }
+.card-link:hover { color: var(--text); border-color: var(--border-strong); box-shadow: var(--shadow-md); }
+.card-link .icon-tile { margin-bottom: 4px; }

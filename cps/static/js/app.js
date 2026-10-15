@@ -347,10 +347,14 @@
     var run = function () {
       el.classList.add("is-loading");
       var bodyData = null;
-      if (el.hasAttribute("data-body")) {
+      var headers = {};
+      if (el.hasAttribute("data-json")) {
+        bodyData = el.getAttribute("data-json");
+        headers["Content-Type"] = "application/json";
+      } else if (el.hasAttribute("data-body")) {
         bodyData = new URLSearchParams(JSON.parse(el.getAttribute("data-body")));
       }
-      request(el.getAttribute("data-post"), { method: "POST", body: bodyData }).then(function (res) {
+      request(el.getAttribute("data-post"), { method: "POST", body: bodyData, headers: headers }).then(function (res) {
         el.classList.remove("is-loading");
         var type = res.headers.get("content-type") || "";
         var parse = type.indexOf("json") !== -1 ? res.json() : res.text().then(function (txt) { return { text: txt }; });
@@ -358,12 +362,12 @@
           // Some endpoints answer with a one-item list of {type, message}.
           if (Array.isArray(data)) data = data[0] || {};
           if (!res.ok || (data && (data.success === false || data.type === "danger"))) {
-            throw new Error((data && (data.message || data.msg || data.error)) || res.statusText);
+            throw new Error((data && (data.message || data.msg || data.error || data.text)) || res.statusText);
           }
           return data;
         });
       }).then(function (data) {
-        var msg = el.getAttribute("data-success") || (data && (data.message || data.msg)) || "";
+        var msg = el.getAttribute("data-success") || (data && (data.message || data.msg || data.text)) || "";
         if (el.hasAttribute("data-redirect")) { window.location.href = el.getAttribute("data-redirect"); return; }
         if (data && data.location) { window.location.href = data.location; return; }
         if (el.hasAttribute("data-reload")) { window.location.reload(); return; }
@@ -686,6 +690,76 @@
     input.addEventListener("blur", function () { setTimeout(close, 100); });
   }
   Array.prototype.forEach.call(doc.querySelectorAll("input[data-suggest]"), enhanceSuggest);
+
+  // ---------- Conditional fields: data-show-if="checkboxId" or "selectId:value1,value2" ----------
+  function updateShowIf() {
+    Array.prototype.forEach.call(doc.querySelectorAll("[data-show-if]"), function (el) {
+      var spec = el.getAttribute("data-show-if");
+      var negate = spec.charAt(0) === "!";
+      if (negate) spec = spec.slice(1);
+      var parts = spec.split(":");
+      var control = doc.getElementById(parts[0]);
+      if (!control) return;
+      var show;
+      if (parts.length > 1) show = parts[1].split(",").indexOf(control.value) !== -1;
+      else show = control.type === "checkbox" ? control.checked : !!control.value;
+      if (negate) show = !show;
+      el.hidden = !show;
+    });
+  }
+  doc.addEventListener("change", function (e) {
+    if (e.target.id && doc.querySelector('[data-show-if*="' + e.target.id + '"]')) updateShowIf();
+  });
+  updateShowIf();
+
+  // ---------- AJAX settings forms: form[data-ajax-form] ----------
+  // Handles the {result: [{type, message}], reboot} answers of the admin configuration endpoints.
+  doc.addEventListener("submit", function (e) {
+    var form = e.target;
+    if (!form.hasAttribute || !form.hasAttribute("data-ajax-form") || e.defaultPrevented) return;
+    e.preventDefault();
+    var submit = form.querySelector('[type="submit"]');
+    if (submit) submit.classList.add("is-loading");
+    request(form.getAttribute("action") || window.location.href, { method: "POST", body: new URLSearchParams(new FormData(form)) })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (submit) submit.classList.remove("is-loading");
+        (data.result || []).forEach(function (item) {
+          toast(item.message, item.type === "danger" ? "error" : (item.type === "success" ? "success" : "info"));
+        });
+        if (data.config_upload !== undefined) {
+          var formats = doc.getElementById("config_upload_formats");
+          if (formats) formats.value = data.config_upload;
+        }
+        if (data.reboot && form.getAttribute("data-alive-url")) {
+          toast(t("restarting", "Restarting…"), "info", 0);
+          var alive = setInterval(function () {
+            fetch(form.getAttribute("data-alive-url"), { credentials: "same-origin", cache: "no-store" }).then(function (r) {
+              if (r.status < 400) { clearInterval(alive); window.location.reload(); }
+            }).catch(function () {});
+          }, 1500);
+        }
+      })
+      .catch(function () {
+        if (submit) submit.classList.remove("is-loading");
+        toast(t("error", "Something went wrong"), "error");
+      });
+  });
+
+  // ---------- Test buttons: data-test-url + data-test-source="#input" ----------
+  doc.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-test-url]");
+    if (!btn) return;
+    e.preventDefault();
+    var source = doc.querySelector(btn.getAttribute("data-test-source"));
+    var value = source ? source.value.trim() : "";
+    if (!value) { toast(t("enter_url", "Enter a URL first"), "error"); return; }
+    btn.classList.add("is-loading");
+    request(btn.getAttribute("data-test-url"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url: value }) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { btn.classList.remove("is-loading"); toast(d.message || "", d.success ? "success" : "error", 8000); })
+      .catch(function () { btn.classList.remove("is-loading"); toast(t("error", "Something went wrong"), "error"); });
+  });
 
   window.CWA = {
     t: t,
