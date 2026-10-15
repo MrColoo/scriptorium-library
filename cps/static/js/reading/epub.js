@@ -1,3 +1,4 @@
+/* Calibre-Web Automated – modified for Scriptorium · Copyright (C) 2026 Mrcoloo (changes) · SPDX-License-Identifier: GPL-3.0-or-later */
 /* global $, calibre, EPUBJS, ePubReader */
 
 var reader;

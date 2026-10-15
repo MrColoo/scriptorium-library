@@ -1,3 +1,8 @@
+# Calibre-Web Automated – modified for Scriptorium
+# Copyright (C) 2026 Mrcoloo (Scriptorium changes)
+# SPDX-License-Identifier: GPL-3.0-or-later
+# See NOTICE and CONTRIBUTORS for the upstream projects and their authors.
+
 from pathlib import Path
 
 

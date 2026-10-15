@@ -1,4 +1,4 @@
-// Calibre-Web Automated – SPDX-License-Identifier: GPL-3.0-or-later
+// Scriptorium – based on Calibre-Web Automated · Copyright (C) 2026 Mrcoloo · SPDX-License-Identifier: GPL-3.0-or-later
 // Book metadata editor: identifiers, cover preview, description preview, metadata search.
 // All provider data is inserted with textContent / attributes, never as HTML.
 (function () {

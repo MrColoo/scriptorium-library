@@ -1,4 +1,4 @@
-// Calibre-Web Automated – SPDX-License-Identifier: GPL-3.0-or-later
+// Scriptorium – based on Calibre-Web Automated · Copyright (C) 2026 Mrcoloo · SPDX-License-Identifier: GPL-3.0-or-later
 // Statistics dashboard: tabs, period filter and ECharts charts styled from the CSS tokens.
 // All server data is rendered as text or passed to ECharts as values.
 (function () {

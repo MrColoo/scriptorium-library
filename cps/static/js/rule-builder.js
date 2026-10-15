@@ -1,4 +1,4 @@
-// Calibre-Web Automated – SPDX-License-Identifier: GPL-3.0-or-later
+// Scriptorium – based on Calibre-Web Automated · Copyright (C) 2026 Mrcoloo · SPDX-License-Identifier: GPL-3.0-or-later
 // Smart (magic) shelf editor: nested AND/OR rule groups, preview, save, delete, duplicate.
 // Produces the same JSON as jQuery QueryBuilder did: {condition, rules: [{id, operator, value} | group]}.
 (function () {

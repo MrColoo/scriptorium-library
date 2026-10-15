@@ -1,4 +1,4 @@
-// Calibre-Web Automated – SPDX-License-Identifier: GPL-3.0-or-later
+// Scriptorium – based on Calibre-Web Automated · Copyright (C) 2026 Mrcoloo · SPDX-License-Identifier: GPL-3.0-or-later
 //
 // Behaviour shared by every page. No framework and no inline handlers: elements opt in with
 // data-* attributes, so the Content-Security-Policy can forbid inline scripts.

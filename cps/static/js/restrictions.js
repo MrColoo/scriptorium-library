@@ -1,4 +1,4 @@
-// Calibre-Web Automated – SPDX-License-Identifier: GPL-3.0-or-later
+// Scriptorium – based on Calibre-Web Automated · Copyright (C) 2026 Mrcoloo · SPDX-License-Identifier: GPL-3.0-or-later
 // Allowed/denied tags and custom column values (admin). Talks to /ajax/{list,add,delete}restriction.
 (function () {
   "use strict";

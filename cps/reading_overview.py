@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Calibre-Web Automated – fork of Calibre-Web
-# Copyright (C) 2024-2026 Calibre-Web Automated contributors
+# Scriptorium – based on Calibre-Web Automated, a fork of Calibre-Web
+# Copyright (C) 2026 Mrcoloo
 # SPDX-License-Identifier: GPL-3.0-or-later
-# See CONTRIBUTORS for full list of authors.
+# See NOTICE and CONTRIBUTORS for the upstream projects and their authors.
 
 """Reading-state summaries for the library home page and the Kobo settings page."""
 

@@ -1,0 +1,43 @@
+Scriptorium
+Copyright (C) 2026 Mrcoloo
+https://github.com/Mrcoloo/scriptorium-library
+
+Scriptorium is free software, released under the GNU General Public License,
+version 3 or (at your option) any later version. See the LICENSE file.
+
+Scriptorium is a fork of Calibre-Web-Automated. It replaces the web interface
+(templates, styles and scripts) and keeps the backend, the automation services
+and the data formats of the upstream projects. Files changed or written for
+Scriptorium carry an additional "Copyright (C) 2026 Mrcoloo" line; every
+original copyright notice is kept.
+
+This product includes work from the following projects:
+
+  Calibre-Web-Automated
+    Copyright (C) 2024-2026 Calibre-Web Automated contributors (crocodilestick et al.)
+    https://github.com/crocodilestick/Calibre-Web-Automated
+    License: GPL-3.0-or-later
+
+  Calibre-Web
+    Copyright (C) 2018-2026 Calibre-Web contributors (janeczku et al.)
+    https://github.com/janeczku/calibre-web
+    License: GPL-3.0-or-later
+
+  Calibre
+    Copyright (C) Kovid Goyal and contributors
+    https://calibre-ebook.com
+    License: GPL-3.0. Calibre is not part of this repository; the Docker image
+    downloads and runs the official Calibre release for conversion and metadata.
+
+  CWA Sync plugin for KOReader (koreader/plugins/cwasync.koplugin)
+    Derived by the Calibre-Web-Automated project from the KOReader kosync plugin,
+    https://github.com/koreader/koreader. It keeps KOReader's license terms.
+
+The full list of upstream authors is in the CONTRIBUTORS file.
+
+Third-party components bundled with the web interface keep their own licenses,
+stated in their files or in the original projects, among them:
+  pdf.js (Mozilla, Apache-2.0), ECharts (Apache-2.0), JSZip (MIT),
+  screenfull (MIT), epub.js and the epubjs reader, jQuery, kthoom,
+  the djvu.js/djvu-html5 viewer, and the Geist and Newsreader fonts
+  (SIL Open Font License 1.1, see cps/static/fonts/LICENSE-*).

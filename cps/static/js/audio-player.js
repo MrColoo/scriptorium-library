@@ -1,4 +1,4 @@
-// Calibre-Web Automated – SPDX-License-Identifier: GPL-3.0-or-later
+// Scriptorium – based on Calibre-Web Automated · Copyright (C) 2026 Mrcoloo · SPDX-License-Identifier: GPL-3.0-or-later
 // Audiobook player: native <audio>, resume position, skip, speed, sleep timer, lock-screen controls.
 (function () {
   "use strict";

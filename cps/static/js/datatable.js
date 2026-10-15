@@ -1,4 +1,4 @@
-// Calibre-Web Automated – SPDX-License-Identifier: GPL-3.0-or-later
+// Scriptorium – based on Calibre-Web Automated · Copyright (C) 2026 Mrcoloo · SPDX-License-Identifier: GPL-3.0-or-later
 //
 // Server-side table with search, sort, paging, column picker, inline editing and selection.
 // Replaces bootstrap-table + x-editable for the books and users tables.

@@ -1,7 +1,7 @@
-# Calibre-Web Automated – fork of Calibre-Web
-# Copyright (C) 2024-2026 Calibre-Web Automated contributors
+# Scriptorium – based on Calibre-Web Automated, a fork of Calibre-Web
+# Copyright (C) 2026 Mrcoloo
 # SPDX-License-Identifier: GPL-3.0-or-later
-# See CONTRIBUTORS for full list of authors.
+# See NOTICE and CONTRIBUTORS for the upstream projects and their authors.
 
 """Personal styles: stored values are always validated, presets are complete, CSS covers every option."""
 
