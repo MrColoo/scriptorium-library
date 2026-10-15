@@ -265,9 +265,8 @@ def refresh_library(app):
         # Print result to docker log (force English by casting within temporary locale guard if desired)
         print(str(message).replace('Library Refresh 🔄', '[library-refresh]'), flush=True)
 
-@csrf.exempt
-@library_refresh.route("/cwa-library-refresh", methods=["GET", "POST"])
-@login_required_if_no_ano
+@library_refresh.route("/cwa-library-refresh", methods=["POST"])
+@user_login_required
 def cwa_library_refresh():
     print("[library-refresh] Library refresh manually triggered by user...", flush=True)
     app = current_app._get_current_object()  # Get actual app instance
@@ -280,9 +279,8 @@ def cwa_library_refresh():
 
     return jsonify({"message": _("Library Refresh 🔄 Checking for any books that may have been missed, please wait...")}), 200
 
-@csrf.exempt
 @library_refresh.route("/cwa-library-refresh/messages", methods=["GET"])
-@login_required_if_no_ano
+@user_login_required
 def get_library_refresh_messages():
     messages = current_app.config.get("library_refresh_messages", [])
 
@@ -607,7 +605,6 @@ def cwa_internal_reconnect_db():
         log.exception("Internal reconnect-db failed")
         return jsonify({"error": str(e)}), 500
 
-@csrf.exempt
 @cwa_stats.route('/cwa-scheduled/cancel', methods=["POST"])
 @login_required_if_no_ano
 @admin_required
@@ -652,7 +649,6 @@ def cwa_scheduled_cancel():
 ##                                                                            ##
 ##————————————————————————————————————————————————————————————————————————————##
 
-@csrf.exempt
 @cwa_settings.route("/cwa-settings", methods=["GET", "POST"])
 @login_required_if_no_ano
 @admin_required
@@ -1785,7 +1781,7 @@ def read_log(log_filename):
         with open(file_path, 'r') as f:
             log = f.read()
 
-        return render_title_template('cwa_read_log.html', title=_(f"Calibre-Web Automated - Log Archive - Read Log - {log_filename}"), page="cwa-log-read",
+        return render_title_template('cwa_read_log.html', title=_("Calibre-Web Automated - Log Archive - Read Log - %(name)s", name=log_filename), page="cwa-log-read",
                                     log_filename=log_filename, log=log)
     
     except Exception as e:
@@ -1916,9 +1912,9 @@ def schedule_convert_library(delay: int):
         # Called directly: an HTTP request from the web process to itself blocks the gevent server.
         username = getattr(current_user, 'name', 'System') or 'System'
         _schedule_library_op('convert_library', 'Convert Library', TaskConvertLibraryRun, delay, username)
-        flash(_(f"Convert Library scheduled in {delay} minute(s)."), category="success")
+        flash(_("Convert Library scheduled in %(delay)s minute(s).", delay=delay), category="success")
     except Exception as e:
-        flash(_(f"Failed to schedule Convert Library: {e}"), category="error")
+        flash(_("Failed to schedule Convert Library: %(error)s", error=e), category="error")
     return redirect(url_for('convert_library.show_convert_library_page'))
 
 @convert_library.route('/cwa-convert-library/log-archive', methods=["GET"])
@@ -2077,9 +2073,9 @@ def schedule_epub_fixer(delay: int):
         # Called directly: an HTTP request from the web process to itself blocks the gevent server.
         username = getattr(current_user, 'name', 'System') or 'System'
         _schedule_library_op('epub_fixer', 'EPUB Fixer', TaskEpubFixerRun, delay, username)
-        flash(_(f"EPUB Fixer scheduled in {delay} minute(s)."), category="success")
+        flash(_("EPUB Fixer scheduled in %(delay)s minute(s).", delay=delay), category="success")
     except Exception as e:
-        flash(_(f"Failed to schedule EPUB Fixer: {e}"), category="error")
+        flash(_("Failed to schedule EPUB Fixer: %(error)s", error=e), category="error")
     return redirect(url_for('epub_fixer.show_epub_fixer_page'))
 
 @epub_fixer.route('/cwa-epub-fixer/log-archive', methods=["GET"])
@@ -2161,7 +2157,6 @@ def start_epub_fixer():
 
 
 @epub_fixer.route('/cwa-epub-fixer/run-book', methods=["POST"])
-@csrf.exempt
 @login_required_if_no_ano
 def run_epub_fixer_for_book():
     # Rewrites the book's files, so require edit rights (anonymous browsing passes the login check).

@@ -14,7 +14,7 @@
         <tr>
           {% for cell in row %}
           <td>
-            <div style="max-height: 20rem; overflow-y: auto;">{{ cell | replace("\n", "<br>") | safe }}</div>
+            <div style="max-height: 20rem; overflow-y: auto;">{{ cell|nl2br }}</div>
           </td>
           {% endfor %}
         </tr>

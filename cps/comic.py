@@ -6,6 +6,7 @@
 # See CONTRIBUTORS for full list of authors.
 
 import os
+import tempfile
 
 from . import logger, isoLanguages, cover
 from .constants import BookMeta
@@ -91,7 +92,13 @@ def _extract_cover_from_archive(original_file_extension, tmp_file_name, rar_exec
                 extension = ext[1].lower()
                 if extension in cover.COVER_EXTENSIONS:
                     try:
-                        cover_data = cf.read([name])[name].read()
+                        # extract() works on every py7zr release; read() was removed in 1.0
+                        with tempfile.TemporaryDirectory() as tmp_dir:
+                            cf.extract(path=tmp_dir, targets=[name])
+                            extracted = os.path.realpath(os.path.join(tmp_dir, name))
+                            if extracted.startswith(os.path.realpath(tmp_dir) + os.sep):
+                                with open(extracted, 'rb') as f:
+                                    cover_data = f.read()
                     except (py7zr.Bad7zFile, OSError) as ex:
                         log.error('7Zip file failed with error: {}'.format(ex))
                     break

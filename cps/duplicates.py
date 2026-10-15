@@ -1299,7 +1299,6 @@ def invalidate_cache():
 
 
 @duplicates.route("/duplicates/trigger-scan", methods=['POST'])
-@csrf.exempt
 @login_required_if_no_ano
 @admin_or_edit_required
 def trigger_scan():

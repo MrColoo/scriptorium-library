@@ -226,3 +226,26 @@ def contains_music(book_formats):
         if format.format.lower() in g.constants.EXTENSIONS_AUDIO:
             result = True
     return result
+
+
+@jinjia.app_template_filter('sanitize_html')
+def sanitize_html(value):
+    """Render library-supplied HTML (book comments, custom columns) safely.
+
+    Books added by the ingest service never pass through the web editor's sanitiser,
+    so their descriptions are cleaned here, at render time, before being marked safe.
+    """
+    from markupsafe import Markup
+    from .clean_html import clean_string
+    if not value:
+        return ""
+    return Markup(clean_string(str(value)))
+
+
+@jinjia.app_template_filter('nl2br')
+def nl2br(value):
+    """Escape text, then turn newlines into <br> tags."""
+    from markupsafe import Markup
+    if value is None:
+        return ""
+    return Markup("<br>").join(escape(str(value)).split("\n"))

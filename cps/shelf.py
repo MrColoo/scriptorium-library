@@ -6,6 +6,7 @@
 # See CONTRIBUTORS for full list of authors.
 
 import sys
+from urllib.parse import urlparse
 from datetime import datetime, timezone
 
 from flask import Blueprint, flash, redirect, request, url_for, abort, jsonify
@@ -16,11 +17,23 @@ from sqlalchemy.sql.expression import func, true
 
 from . import calibre_db, config, db, logger, ub
 from .render_template import render_title_template
+from .redirect import get_redirect_location
 from .usermanagement import login_required_if_no_ano, user_login_required
 from .services import hardcover
 log = logger.create()
 
 shelf = Blueprint('shelf', __name__)
+
+
+def _referrer_path():
+    """Path (plus query) of the referring page, or None when it is on another host."""
+    ref = request.referrer
+    if not ref:
+        return None
+    parsed = urlparse(ref)
+    if parsed.netloc and parsed.netloc != request.host:
+        return None
+    return parsed.path + ("?" + parsed.query if parsed.query else "")
 
 
 @shelf.route("/shelf/add/<int:shelf_id>/<int:book_id>", methods=["POST"])
@@ -91,17 +104,11 @@ def add_to_shelf(shelf_id, book_id):
         ub.session.rollback()
         log.error_or_exception("Settings Database error: {}".format(e))
         flash(_("Oops! Database Error: %(error)s.", error=e.orig), category="error")
-        if "HTTP_REFERER" in request.environ:
-            return redirect(request.environ["HTTP_REFERER"])
-        else:
-            return redirect(url_for('web.index'))
+        return redirect(get_redirect_location(_referrer_path(), "web.index"))
     if not xhr:
         log.debug("Book has been added to shelf: {}".format(shelf.name))
         flash(_("Book has been added to shelf: %(sname)s", sname=shelf.name), category="success")
-        if "HTTP_REFERER" in request.environ:
-            return redirect(request.environ["HTTP_REFERER"])
-        else:
-            return redirect(url_for('web.index'))
+        return redirect(get_redirect_location(_referrer_path(), "web.index"))
     if shelf.kobo_sync and config.config_hardcover_sync and bool(hardcover):
         try:
             hardcoverClient = hardcover.HardcoverClient(current_user.hardcover_token)
@@ -226,16 +233,10 @@ def remove_from_shelf(shelf_id, book_id):
             ub.session.rollback()
             log.error_or_exception("Settings Database error: {}".format(e))
             flash(_("Oops! Database Error: %(error)s.", error=e.orig), category="error")
-            if "HTTP_REFERER" in request.environ:
-                return redirect(request.environ["HTTP_REFERER"])
-            else:
-                return redirect(url_for('web.index'))
+            return redirect(get_redirect_location(_referrer_path(), "web.index"))
         if not xhr:
             flash(_("Book has been removed from shelf: %(sname)s", sname=shelf.name), category="success")
-            if "HTTP_REFERER" in request.environ:
-                return redirect(request.environ["HTTP_REFERER"])
-            else:
-                return redirect(url_for('web.index'))
+            return redirect(get_redirect_location(_referrer_path(), "web.index"))
         return "", 204
     else:
         if not xhr:

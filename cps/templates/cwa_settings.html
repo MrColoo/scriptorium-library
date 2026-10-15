@@ -132,6 +132,7 @@
 <div class="discover">
   <h2>{{title}}</h2>
   <form action="{{ url_for('cwa_settings.set_cwa_settings')}}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="settings-container" style="margin-top: 3rem;">
       <h4 class="settings-section-header">{{_('Enable/Disable Calibre-Web Automated Services')}}</h4>
       

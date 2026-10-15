@@ -819,7 +819,7 @@
                                                             {% elif c.datatype == 'datetime' %}
                                                                 {{ column.value|formatdate }}
                                                             {% elif c.datatype == 'comments' %}
-                                                                {{ column.value|safe }}
+                                                                {{ column.value|sanitize_html }}
                                                             {% elif c.datatype == 'series' %}
                                                                 {{ '%s [%s]' % (column.value, column.extra|formatfloat(2)) }}
                                                             {% elif c.datatype == 'text' %}
@@ -861,7 +861,7 @@
                 {% if entry.comments|length > 0 and entry.comments[0].text|length > 0 %}
                     <div class="book-detail-description">
                         <h3 id="decription">{{ _('Description:') }}</h3>
-                        {{ entry.comments[0].text|safe }}
+                        {{ entry.comments[0].text|sanitize_html }}
                     </div>
                 {% endif %}
                 <div id="shelf-action-errors" class="pull-left" role="alert"></div>

@@ -51,6 +51,9 @@ def remove_prefix(text, prefix):
 
 def get_redirect_location(next, endpoint, **values):
     target = next or url_for(endpoint, **values)
+    # Only same-site paths: rejects absolute URLs and protocol-relative "//host" or "/\\host".
+    if not target.startswith("/") or target.startswith(("//", "/\\")) or not is_safe_url(target):
+        return url_for(endpoint, **values)
     adapter = current_app.url_map.bind(urlparse(request.host_url).netloc)
     if not len(adapter.allowed_methods(remove_prefix(target, request.environ.get('HTTP_X_SCRIPT_NAME',"")))):
         target = url_for(endpoint, **values)

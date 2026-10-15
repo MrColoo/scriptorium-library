@@ -164,7 +164,7 @@
     try {
       const res = await fetch("{{ url_for('epub_fixer.run_epub_fixer_for_book') }}", {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token() }}' },
         body: JSON.stringify({ book_id: bookId })
       });
       const data = await res.json();

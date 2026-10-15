@@ -9,6 +9,7 @@ import atexit
 import json
 import os
 import re
+import shutil
 import sqlite3
 import subprocess
 import sys
@@ -629,7 +630,8 @@ class Enforcer:
 
     def replace_old_metadata(self, old_metadata: str, new_metadata: str) -> None:
         """Switches the metadata in metadata_temp with the metadata in the Calibre-Library"""
-        os.system(f'cp "{new_metadata}" "{old_metadata}"')
+        # Book paths come from library metadata, so never hand them to a shell.
+        shutil.copyfile(new_metadata, old_metadata)
 
 
     def print_library_list(self) -> None:
@@ -699,7 +701,16 @@ class Enforcer:
 
     def empty_metadata_temp(self):
         """Empties the metadata_temp folder"""
-        os.system(f"rm -r {metadata_temp_dir}/*")
+        if not os.path.isdir(metadata_temp_dir):
+            return
+        for entry in os.scandir(metadata_temp_dir):
+            if entry.is_dir(follow_symlinks=False):
+                shutil.rmtree(entry.path, ignore_errors=True)
+            else:
+                try:
+                    os.unlink(entry.path)
+                except FileNotFoundError:
+                    pass
 
 
     def check_for_other_logs(self, processed_book_ids: set | None = None):

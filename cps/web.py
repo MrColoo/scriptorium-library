@@ -109,6 +109,23 @@ sqlalchemy_version2 = ([int(x) for x in sql_version.split('.')] >= [2, 0, 0])
 
 _start_time = time.time()
 
+_PASSWORD_CHANGE_ALLOWED_ENDPOINTS = {"web.profile", "web.logout", "static", "web.login", "web.login_post"}
+
+
+@app.before_request
+def enforce_password_change():
+    """Keep a user who logged in with the default password on the profile page until they change it."""
+    if not flask_session.get('must_change_password'):
+        return None
+    if not current_user.is_authenticated or current_user.is_anonymous:
+        flask_session.pop('must_change_password', None)
+        return None
+    if request.endpoint in _PASSWORD_CHANGE_ALLOWED_ENDPOINTS or request.blueprint in ("kobo", "opds"):
+        return None
+    flash(_("You are using the default password. Choose a new one to continue."), category="warning")
+    return redirect(url_for('web.profile'))
+
+
 @app.after_request
 def add_security_headers(resp):
     default_src = ([host.strip() for host in config.config_trustedhosts.split(',') if host] +
@@ -479,9 +496,9 @@ def render_books_list(data, sort_param, book_id, page):
                                                                 db.Series)
 
         try:
-            title = _(f'Books ({pagination.total_count})')
+            title = _('Books (%(count)s)', count=pagination.total_count)
         except:
-            title = _(f'Books ({cwa_get_num_books_in_library()})')
+            title = _('Books (%(count)s)', count=cwa_get_num_books_in_library())
 
         return render_title_template('index.html', random=random, entries=entries, pagination=pagination,
                                      title=title, page=website, order=order[1])
@@ -962,7 +979,7 @@ def render_magic_shelf(shelf_id, sort_param, page):
     return render_title_template('index.html', 
                                  entries=entries, 
                                  pagination=pagination,
-                                 title=_("Magic Shelf&nbsp&nbsp&nbsp—&nbsp&nbsp&nbsp%(icon)s %(name)s", icon=shelf.icon, name=shelf.name), 
+                                 title=_("Magic Shelf: %(icon)s %(name)s", icon=shelf.icon, name=shelf.name), 
                                  page="magicshelf",
                                  shelf=shelf,
                                  is_hidden_shelf=is_hidden,
@@ -2346,6 +2363,9 @@ def login_post():
             if user and check_password_hash(str(user.password), form['password']) and user.name != "Guest":
                 config.config_is_initial = False
                 log.debug(u"You are now logged in as: '{}'".format(user.name))
+                if form['password'] == constants.DEFAULT_PASSWORD:
+                    # Shipped default credentials: nothing else is reachable until they are changed.
+                    flask_session['must_change_password'] = True
                 return handle_login_user(user,
                                          remember_me,
                                          _(u"You are now logged in as: '%(nickname)s'", nickname=user.name),
@@ -2403,7 +2423,12 @@ def change_profile(kobo_support, hardcover_support, local_oauth_check, oauth_sta
     try:
         if current_user.role_passwd() or current_user.role_admin():
             if to_save.get("password", "") != "":
+                if not check_password_hash(str(current_user.password), to_save.get("current_password", "")):
+                    raise Exception(_("Current password is incorrect"))
+                if to_save.get("password") == constants.DEFAULT_PASSWORD:
+                    raise Exception(_("Please choose a password other than the default one"))
                 current_user.password = generate_password_hash(valid_password(to_save.get("password")))
+                flask_session.pop('must_change_password', None)
         if to_save.get("kindle_mail", current_user.kindle_mail) != current_user.kindle_mail:
             current_user.kindle_mail = valid_email(to_save.get("kindle_mail"))
         if to_save.get("kindle_mail_subject", current_user.kindle_mail_subject) != current_user.kindle_mail_subject:
@@ -2643,7 +2668,7 @@ def change_profile(kobo_support, hardcover_support, local_oauth_check, oauth_sta
                                      magic_shelf_order_string=magic_shelf_order_string,
                                      magic_shelf_order_labels=magic_shelf_order_labels,
                                      magic_shelf_order_mode=magic_shelf_order_mode,
-                                     title=_(f"{current_user.name.capitalize()}'s Profile", name=current_user.name),
+                                     title=_("%(name)s's Profile", name=current_user.name),
                                      page="me",
                                      kobo_support=kobo_support,
                                      hardcover_support=hardcover_support,
@@ -2771,7 +2796,7 @@ def profile():
                                  magic_shelf_order_string=magic_shelf_order_string,
                                  magic_shelf_order_labels=magic_shelf_order_labels,
                                  magic_shelf_order_mode=magic_shelf_order_mode,
-                                 title=_(f"{current_user.name.capitalize()}'s Profile", name=current_user.name),
+                                 title=_("%(name)s's Profile", name=current_user.name),
                                  page="me",
                                  registered_oauth=local_oauth_check,
                                  oauth_status=oauth_status)

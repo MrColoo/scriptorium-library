@@ -177,7 +177,7 @@
     if (!id) return;
     fetch('{{ url_for("cwa_stats.cwa_scheduled_cancel") }}', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token() }}' },
       body: JSON.stringify({ id: id })
     })
     .then(r => {
