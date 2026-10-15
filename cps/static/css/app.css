@@ -990,3 +990,9 @@ ol.rank-list li::before { counter-increment: rank; content: counter(rank); width
 .resolution-group { border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
 .resolution-line { display: flex; gap: 8px; align-items: baseline; font-size: 14px; }
 .resolution-line .badge { flex: none; }
+/* Hardcover review */
+.hc-candidates { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.hc-candidate { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.hc-cover img { width: 72px; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 4px; background: var(--surface-active); box-shadow: var(--shadow-sm); }
+.hc-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; align-items: flex-start; }
+.hc-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
