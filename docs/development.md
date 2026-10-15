@@ -20,7 +20,7 @@ Create a throwaway library with sample books, covers and EPUB files:
 Start the server against it:
 
 ```bash
-cd /path/to/calibre-web-automated
+cd /path/to/scriptorium-library
 CWA_DB_PATH=/tmp/cwa-dev/config CALIBRE_DBPATH=/tmp/cwa-dev/config DEVELOP_ON=true \
 PYTHONPATH=scripts:. CWA_PORT_OVERRIDE=8089 \
 .venv/bin/python cps.py -p /tmp/cwa-dev/config/app.db
@@ -99,6 +99,6 @@ Placeholders that JavaScript fills in are passed through gettext as values, e.g.
 
 ## Pull requests
 
-Keep the backend close to upstream Calibre-Web where possible, so fixes can flow both ways. Run
+Keep the backend close to upstream Calibre-Web-Automated where possible, so fixes can flow both ways. Run
 the unit tests, check pages in light and dark mode and at phone width, and describe what you
 tested.

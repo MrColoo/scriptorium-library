@@ -1,6 +1,6 @@
 # Security
 
-CWA holds your library, your users' passwords and tokens that can download every book. This page
+Scriptorium holds your library, your users' passwords and tokens that can download every book. This page
 explains how the application protects them and what you should do when you deploy it.
 
 ## Deploying safely
@@ -11,7 +11,7 @@ explains how the application protects them and what you should do when you deplo
   Then enable *Settings → Server & features → Security → Use via HTTPS* so session cookies are
   marked `Secure`.
 - **Do not expose the container port directly** when you use reverse-proxy authentication: anyone
-  who reaches CWA without the proxy could send the `Remote-User` header and log in as anyone.
+  who reaches Scriptorium without the proxy could send the `Remote-User` header and log in as anyone.
 - **Keep the Kobo sync address private.** It works like a password for your books. Regenerate it
   from your profile if it leaks, and revoke it when a device is lost.
 - **Back up `/config`.** It contains `app.db` (users, settings, reading progress) and `cwa.db`.
@@ -52,5 +52,4 @@ The repository contains regression tests for these fixes in
 
 ## Reporting a vulnerability
 
-Please do not open a public issue. Contact the maintainers privately on
-[Discord](https://discord.gg/EjgSeek94R) with a description and, if possible, steps to reproduce.
+See [SECURITY.md](../SECURITY.md). Please report privately, not in a public issue.

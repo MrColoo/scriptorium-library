@@ -1,6 +1,6 @@
 # Kobo
 
-CWA can stand in for the Kobo Store as your device's sync server. After a one-time setup, tapping
+Scriptorium can stand in for the Kobo Store as your device's sync server. After a one-time setup, tapping
 **Sync** on the Kobo downloads new books, removes the ones you take off, creates collections from
 your shelves and sends your reading progress back to the library.
 
@@ -10,7 +10,7 @@ your shelves and sends your reading progress back to the library.
 
 - **Proxy unknown requests to Kobo Store** keeps the store working on the device (recommendations,
   purchases, your Kobo account). Leave it on unless you want the device fully offline from Kobo.
-- **Kobo port**: only needed when the Kobo reaches CWA on a different port than the browser does
+- **Kobo port**: only needed when the Kobo reaches Scriptorium on a different port than the browser does
   (for example through a port forward).
 
 For the best experience on a Kobo, set *Settings → Automation → Conversion → target format* to
@@ -22,7 +22,7 @@ For the best experience on a Kobo, set *Settings → Automation → Conversion �
 *Profile → Kobo → Create sync address.*
 
 Open the profile page from an address the Kobo can reach — your server's LAN IP or domain, not
-`localhost` — because the address is built from the one in your browser. CWA warns you if it
+`localhost` — because the address is built from the one in your browser. Scriptorium warns you if it
 looks wrong.
 
 The address is personal: anyone who has it can download your books. If it leaks, press
@@ -55,7 +55,7 @@ library.
 
 ## Reading progress
 
-Your position, the read/unread status and the time spent reading flow from the Kobo to CWA at
+Your position, the read/unread status and the time spent reading flow from the Kobo to Scriptorium at
 every sync. The book page shows them under *On your Kobo*, and the home page lists what you are
 reading under *Continue reading*.
 

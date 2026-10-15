@@ -1,12 +1,12 @@
 # KOReader
 
-[KOReader](https://koreader.rocks/) runs on Kobo, Kindle, PocketBook, Android and more. The CWA
+[KOReader](https://koreader.rocks/) runs on Kobo, Kindle, PocketBook, Android and more. The Scriptorium
 Sync plugin keeps your reading position in step between KOReader and the library, so you can stop
 on one device and continue on another (or in the browser).
 
 ## Enable it (administrator)
 
-*Settings → Automation → Services → Enable KOReader Sync (CWA Plugin).*
+*Settings → Automation → Services → Enable KOReader Sync (Scriptorium Plugin).*
 
 The first start after enabling it computes a checksum for every book file so KOReader's documents
 can be matched to library books. On large libraries this takes a while and can briefly lock the
@@ -24,7 +24,7 @@ The full, personalised instructions are on the **KOReader sync** page (*Profile 
 
 ## Sign in
 
-Open a book, tap the top of the screen, open the **Tools** menu and choose **CWA Progress Sync**.
+Open a book, tap the top of the screen, open the **Tools** menu and choose **Scriptorium Sync**.
 Enter:
 
 - **Server URL**: the address shown on the KOReader sync page (your library address followed by

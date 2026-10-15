@@ -1,6 +1,6 @@
 # Automation
 
-Everything CWA does on its own is configured in *Settings → Automation*. The page is split into
+Everything Scriptorium does on its own is configured in *Settings → Automation*. The page is split into
 Services, Import, Conversion, Metadata, Duplicates and Backups; each option has a short
 explanation next to it. This guide explains how the pieces fit together.
 
@@ -8,7 +8,7 @@ explanation next to it. This guide explains how the pieces fit together.
 
 1. A file lands in `/cwa-book-ingest` (copied there, uploaded through the web interface, or
    dropped in by another tool such as Shelfmark).
-2. CWA waits until the file stops changing, then picks it up. Formats listed under
+2. Scriptorium waits until the file stops changing, then picks it up. Formats listed under
    *Import → Ignored formats* are left alone.
 3. If it is not already in the **target format**, it is converted (unless its format is listed
    under *Conversion → Ignored formats*). Originals in a *Retained format* are kept next to the
@@ -63,7 +63,7 @@ language, series, publisher and format are optional). Different languages are ne
 Amazon's Send to Kindle rejects many EPUBs for small technical reasons (encoding declarations,
 broken links, odd language tags). The fixer repairs them:
 
-- automatically for every new EPUB, when *Enable CWA Kindle EPUB Fixer* is on;
+- automatically for every new EPUB, when *Enable Kindle EPUB Fixer* is on;
 - for the whole library or a single book from *Settings → Library tools → EPUB fixer*.
 
 *Aggressive mode* also rewrites valid markup that often breaks on Kindle; it can change how some
