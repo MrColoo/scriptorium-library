@@ -1,49 +1,33 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h3>{{_('About')}} {{instance}}</h3>
-<p>{{instance}} powered by
-<a href="https://github.com/crocodilestick/calibre-web-automated" title="Calibre-Web Automated">Calibre-Web Automated</a>.
-</p>
-  <h3>{{_('Library Statistics')}}</h3>
-<table id="stats" class="table">
-  <tbody>
-    <tr>
-      <th>{{bookcounter}}</th>
-      <td>{{_('Books in this Library')}}</td>
-    </tr>
-    <tr>
-      <th>{{authorcounter}}</th>
-      <td>{{_('Authors in this Library')}}</td>
-    </tr>
-    <tr>
-      <th>{{categorycounter}}</th>
-      <td>{{_('Categories in this Library')}}</td>
-    </tr>
-    <tr>
-      <th>{{seriecounter}}</th>
-      <td>{{_('Series in this Library')}}</td>
-    </tr>
-  </tbody>
-</table>
-{% if current_user.role_admin() %}
-  <h3>{{_('System Statistics')}}</h3>
-<table id="libs" class="table">
-  <thead>
-    <tr>
-      <th>{{_('Program')}}</th>
-      <th>{{_('Installed Version')}}</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for library,version in versions.items() %}
-  {% if version %}
-    <tr>
-      <th>{{library}}</th>
-      <td>{{version}}</td>
-    </tr>
-  {% endif %}
-  {% endfor %}
-  </tbody>
-</table>
-{% endif %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _('About') }} {{ instance }}</h1>
+    <span class="page-subtitle">{{ _('Powered by') }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated" rel="noopener" target="_blank">Calibre-Web Automated</a></span>
+  </div>
+</div>
+<section class="section" aria-labelledby="lib-stats-h">
+  <h2 id="lib-stats-h">{{ _('Library Statistics') }}</h2>
+  <div class="stat-grid">
+    <div class="stat"><span class="stat-label">{{ _('Books') }}</span><span class="stat-value">{{ bookcounter }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Authors') }}</span><span class="stat-value">{{ authorcounter }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Categories') }}</span><span class="stat-value">{{ categorycounter }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Series') }}</span><span class="stat-value">{{ seriecounter }}</span></div>
+  </div>
+</section>
+{%- if current_user.role_admin() %}
+<section class="section" aria-labelledby="sys-stats-h">
+  <h2 id="sys-stats-h">{{ _('System Statistics') }}</h2>
+  <div class="table-wrap">
+    <table class="table" id="libs">
+      <thead><tr><th>{{ _('Program') }}</th><th>{{ _('Installed Version') }}</th></tr></thead>
+      <tbody>
+        {%- for library, version in versions.items() if version %}
+        <tr><td class="cell-strong">{{ library }}</td><td class="mono">{{ version }}</td></tr>
+        {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{%- endif %}
 {% endblock %}

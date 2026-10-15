@@ -33,13 +33,22 @@ def error_http(error):
 
 
 def internal_error(error):
+    stack = traceback.format_exc()
+    log.error("Unhandled error: %s", stack)
+    # Tracebacks reveal paths and code; only administrators get to see them.
+    show_stack = False
+    try:
+        from .cw_login import current_user
+        show_stack = bool(current_user and current_user.is_authenticated and current_user.role_admin())
+    except Exception:
+        show_stack = False
     return render_template('http_error.html',
                            error_code="500 Internal Server Error",
                            error_name='The server encountered an internal error and was unable to complete your '
                                       'request. There is an error in the application.',
                            issue=True,
                            unconfigured=False,
-                           error_stack=traceback.format_exc().split("\n"),
+                           error_stack=stack.split("\n") if show_stack else [],
                            instance=config.config_calibre_web_title
                            ), 500
 

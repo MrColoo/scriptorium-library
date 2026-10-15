@@ -1,276 +1,65 @@
 {% extends "layout.html" %}
-
-{% block header %}
-<style>
-  .kosync-container {
-      max-width: 100rem;
-      margin-top: 3rem;
-      padding-left: 20px;
-      background: #1f2c3554;
-      padding-right: 10px;
-      padding-bottom: 4rem;
-      margin-bottom: 3rem;
-      align-content: center;
-      justify-self: anchor-center;
-      width: -webkit-fill-available;
-  }
-
-  .kosync-heading {
-      margin-bottom: 3rem;
-      margin-left: -10px;
-      font-weight: bold;
-  }
-
-  .kosync-section {
-      padding-left: 20px;
-      background-color: var(--color-bg-light);
-      border-radius: 8px;
-      border: 1px solid var(--color-border);
-      padding-right: 20px;
-      padding-top: 2rem;
-  }
-
-  .kosync-download-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: var(--color-secondary);
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    margin-bottom: 10px;
-    transition: background-color 0.3s;
-    margin-top: 3rem;
-  }
-
-  .kosync-download-btn:hover {
-    background-color: var(--color-secondary-hover);
-    color: white;
-    text-decoration: none;
-  }
-
-  .kosync-step {
-    margin-bottom: 15px;
-    background-color: var(--color-bg);
-    border-left: 4px solid var(--color-secondary);
-    border-radius: 4px;
-  }
-
-  .kosync-step-number {
-      font-weight: bold;
-      color: var(--color-secondary);
-      margin-right: 10px;
-      margin-left: 20px;
-      vertical-align: baseline;
-      padding-left: 16px;
-  }
-
-
-  .kosync-warning {
-      background-color: #fff3cd;
-      color: #856404;
-      padding: 2rem;
-      border-radius: 4px;
-      border: 1px solid #ffeaa7;
-      margin-top: 2rem;
-  }
-
-  .kosync-info {
-      background-color: #d1ecf1;
-      color: #0c5460;
-      padding: 2rem;
-      border-radius: 4px;
-      border: 1px solid #b8daff;
-      margin-top: 3rem;
-  }
-
-  .kosync-table {
-    width: 100%;
-    border-left: 4px solid var(--color-secondary);
-    border-radius: 4px;
-  }
-
-  .kosync-issue {
-      color: var(--color-secondary);
-      margin-right: 10px;
-      margin-left: 20px;
-      vertical-align: baseline;
-      padding-left: 16px;
-  }
-
-</style>
-{% endblock %}
-
+{% block content_class %}content--narrow{% endblock %}
 {% block body %}
-<div class="discover">
-  <h2>{{title}}</h2>
-
-  {% if not kosync_enabled %}
-  <div class="kosync-warning" style="margin-top: 2rem; max-width: 100rem; margin-inline: auto;">
-    <strong>{{_('KOReader Sync is disabled.')}}</strong>
-    {{_('Enable it in CWA Settings to activate the /kosync endpoints and checksum generation.')}}
-    <div style="margin-top: 1rem;">
-      <a class="btn btn-default" href="{{ url_for('cwa_settings.set_cwa_settings') }}">{{_('Open CWA Settings')}}</a>
-    </div>
-  </div>
-  {% endif %}
-
-  <div class="kosync-container">
-    <div class="kosync-section">
-      <h3 class="kosync-heading">📱&nbsp;&nbsp;&nbsp;Get the CWA KOReader Sync Plugin</h3>
-      <p>
-        This plugin allows you to synchronize your reading progress across multiple devices using KOReader.
-        Your progress will be automatically saved and synced with this Calibre-Web-Automated server.
-      </p>
-
-      <div class="kosync-info">
-        <strong>Compatible with:</strong> KOReader on Android, Kindle, Kobo, and other supported devices
-      </div>
-
-      <div class="text-center">
-        {% if kosync_enabled %}
-        <a href="{{ url_for('static', filename='koplugin.zip') }}" class="kosync-download-btn">
-          📥 Download CWA Sync Plugin
-        </a>
-        {% else %}
-        <div class="kosync-warning" style="margin-top: 1rem;">
-          {{_('Download is available after enabling KOReader Sync in CWA Settings.')}}
-        </div>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-
-  <div class="kosync-container">
-    <div class="kosync-section">
-      <h3 class="kosync-heading">🔧&nbsp;&nbsp;&nbsp;Installation Instructions</h3>
-
-      <table class="kosync-table">
-        <tbody>
-          <tr>
-            <td class="kosync-step-number" style="width: 16%;">Step 1</td>
-            <td>Download the plugin file <code>koplugin.zip</code> using the button above.</td>
-          </tr>
-          <tr>
-              <td class="kosync-step-number">Step 2</td>
-              <td>Extract <code>koplugin.zip</code> to a temporary location. This will create a
-              <code>cwasync.koplugin</code> folder containing all the plugin files.</td>
-          </tr>
-          <tr>
-            <td class="kosync-step-number">Step 3</td>
-            <td>Move the <code>cwasync.koplugin</code> folder into your device's
-            <code>/koreader/plugins/</code> directory.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div style="margin-top: 4rem;" class="kosync-warning">
-        <strong>Important:</strong> Extract the zip file directly to the <code>/koreader/plugins/</code> directory.
-        The extraction will automatically create the <code>cwasync.koplugin</code> folder with the correct structure.
-      </div>
-    </div>
-  </div>
-
-  <div class="kosync-container">
-    <div class="kosync-section">
-      <h3 class="kosync-heading">🔌&nbsp;&nbsp;&nbsp;Accessing the Plugin</h3>
-
-      <div class="kosync-info" style="margin-top: 3rem; margin-bottom: 3rem;">
-        <strong>Where to find it:</strong> After installation and restarting KOReader, tap the
-        <strong>Navigation menu icon (<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" width="48" height="48" viewBox="0 0 48 48" enable-background="new 0 0 24.00 24.00" xml:space="preserve" id="svg4" sodipodi:docname="appbar.page.corner.bookmark.svg" inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)" inkscape:export-xdpi="96" inkscape:export-ydpi="96"><sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-width="1914" inkscape:window-height="968" id="namedview7" showgrid="true" inkscape:zoom="1" inkscape:cx="24" inkscape:cy="24" inkscape:window-x="0" inkscape:window-y="90" inkscape:window-maximized="0" inkscape:current-layer="svg4" inkscape:document-rotation="0"><inkscape:grid type="xygrid" id="grid893" originx="0" originy="0"/></sodipodi:namedview><metadata id="metadata10"><rdf:RDF><cc:Work rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/><dc:title/></cc:Work></rdf:RDF></metadata><defs id="defs8"/>
-
-<rect style="fill:none;stroke:#000000;stroke-width:2;stroke-linejoin:round" id="rect1443" width="26" height="36" x="11" y="6" ry="3.0857143"/><path id="path895" style="fill:none;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 23,6 V 18.333333 L 28,15 33,18.333333 V 6" sodipodi:nodetypes="ccccc"/></svg>)</strong> at the top of the screen to open the
-        <strong>Navigation</strong> menu. Look for <strong>"CWA Progress Sync"</strong> in the menu list.
-        If you have many plugins installed, you may need to scroll down or check the second page of menu items.
-      </div>      <div class="kosync-warning">
-        <strong>Note:</strong> If the plugin doesn't appear after restarting, follow these steps to manually enable it:
-      </div>
-
-      <table class="kosync-table">
-        <tbody>
-          <tr>
-            <td class="kosync-step-number" style="width: 16%;">Step 1</td>
-            <td>Open KOReader on your device.</td>
-          </tr>
-          <tr>
-              <td class="kosync-step-number">Step 2</td>
-              <td>Tap the top menu area to bring up the navigation bar.</td>
-          </tr>
-          <tr>
-            <td class="kosync-step-number">Step 3</td>
-            <td>Navigate to: <strong>Settings</strong> → <strong>Tools</strong> → <strong>Plugin management</strong></td>
-          </tr>
-          <tr>
-            <td class="kosync-step-number">Step 4</td>
-            <td>Find "CWA Progress Sync" in the plugin list and enable it if it's not already enabled.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="kosync-container">
-    <div class="kosync-section">
-      <h3 class="kosync-heading">⚙️&nbsp;&nbsp;&nbsp;Plugin Configuration</h3>
-
-      <div class="kosync-step">
-      <ul style="margin-top: 10px;">
-        <li><strong>Server URL:</strong>&nbsp;&nbsp;&nbsp;<code>{{ request.url_root }}</code></li>
-        <li><strong>Username:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Calibre-Web-Automated username</li>
-        <li><strong>Password:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Calibre-Web-Automated password</li>
-      </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="kosync-container">
-    <div class="kosync-section">
-      <h3 class="kosync-heading">🔄&nbsp;&nbsp;&nbsp;Using the Sync Feature</h3>
-
-      <div class="kosync-info">
-        Once configured, the plugin will automatically sync your reading progress in the background.
-        <br><br>
-        <span style="font-weight: bold;">Your progress will be saved when you:</span>
-        <ul style="margin-top: 10px;">
-          <li>Turn pages</li>
-          <li>Close a book</li>
-          <li>Switch between books</li>
-          <li>Exit KOReader</li>
-        </ul>
-        <div class="kosync-warning">
-          <strong>Note:</strong> Make sure you have an internet connection for the sync to work.
-          The plugin will automatically retry failed sync attempts when connectivity is restored.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="kosync-container">
-    <div class="kosync-section">
-      <h3 class="kosync-heading">❓&nbsp;&nbsp;&nbsp;Troubleshooting</h3>
-
-      <table class="kosync-table">
-        <tr>
-          <th style="width: 30%; padding-left: 16px;">Issue</th>
-          <th style="color: var(--color-secondary);">Solution</th>
-        </tr>
-        <tr>
-          <td class="kosync-issue">Plugin not appearing in KOReader</td>
-          <td>Ensure the folder structure is correct and restart KOReader completely.</td>
-        </tr>
-        <tr>
-          <td class="kosync-issue">Authentication failed</td>
-          <td>Double-check your username and password. Make sure you're using your correct credentials.</td>
-        </tr>
-        <tr>
-          <td class="kosync-issue">Sync not working</td>
-          <td>Check your internet connection and verify the server URL is correct.</td>
-        </tr>
-      </table>
-
-    </div>
+<div class="page-header">
+  <div>
+    <span class="page-eyebrow"><a href="{{ url_for('web.profile') }}#kobo">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Profile') }}</a></span>
+    <h1 class="page-title">{{ _('Sync with KOReader') }}</h1>
+    <span class="page-subtitle">{{ _('The CWA plugin keeps your reading position in step between KOReader and this library.') }}</span>
   </div>
 </div>
+
+{%- if not kosync_enabled %}
+<div class="alert alert--warning">{{ ui.icon('alert') }}<div class="alert-body"><strong>{{ _('KOReader Sync is disabled.') }}</strong>
+  {%- if current_user.role_admin() %}<a href="{{ url_for('cwa_settings.set_cwa_settings') }}">{{ _('Open CWA Settings') }}</a>{% else %}{{ _('Ask an administrator to turn it on.') }}{% endif %}</div></div>
+{%- endif %}
+
+<ol class="steps">
+  <li class="step">
+    <span class="step-marker step-marker--current">1</span>
+    <div class="step-body">
+      <h3>{{ _('Download the plugin') }}</h3>
+      <p class="muted">{{ _('Works with KOReader on Kobo, Kindle, PocketBook, Android and other supported devices.') }}</p>
+      {%- if kosync_enabled %}
+      <div><a class="btn btn-primary" href="{{ url_for('static', filename='koplugin.zip') }}" download>{{ ui.icon('download') }}{{ _('Download CWA Sync Plugin') }}</a></div>
+      {%- else %}
+      <p class="hint">{{ _('Download is available after enabling KOReader Sync in CWA Settings.') }}</p>
+      {%- endif %}
+    </div>
+  </li>
+  <li class="step">
+    <span class="step-marker">2</span>
+    <div class="step-body">
+      <h3>{{ _('Install it') }}</h3>
+      <ol>
+        <li>{{ _('Connect the device to your computer.') }}</li>
+        <li>{{ _('Extract %(file)s straight into the %(dir)s folder on the device. This creates the %(plugin)s folder.', file='koplugin.zip', dir='koreader/plugins/', plugin='cwasync.koplugin') }}</li>
+        <li>{{ _('Eject the device and restart KOReader.') }}</li>
+      </ol>
+    </div>
+  </li>
+  <li class="step">
+    <span class="step-marker">3</span>
+    <div class="step-body">
+      <h3>{{ _('Sign in from KOReader') }}</h3>
+      <p class="muted">{{ _('Open a book, tap the top of the screen, open the Tools menu and choose “CWA Progress Sync”. Enter:') }}</p>
+      <dl class="dl">
+        <dt>{{ _('Server URL') }}</dt>
+        <dd><div class="code-line"><code id="kosync-url">{{ request.url_root }}</code><button class="btn btn-sm" type="button" data-copy-target="#kosync-url">{{ ui.icon('copy') }}{{ _('Copy') }}</button></div></dd>
+        <dt>{{ _('Username') }}</dt><dd>{{ current_user.name }}</dd>
+        <dt>{{ _('Password') }}</dt><dd>{{ _('Your password for this library') }}</dd>
+      </dl>
+    </div>
+  </li>
+</ol>
+
+<section class="card">
+  <h2 class="card-title">{{ _('Good to know') }}</h2>
+  <ul class="bullets">
+    <li>{{ _('Progress is saved when you turn pages, close a book, switch books or leave KOReader, and synced in the background.') }}</li>
+    <li>{{ _('Without a connection the plugin retries once the device is back online.') }}</li>
+    <li>{{ _('If the plugin does not show up, check that the folder is koreader/plugins/cwasync.koplugin, then enable it under Settings → Tools → Plugin management.') }}</li>
+    <li>{{ _('If sign-in fails, check the server URL and that you can log in to this site with the same username and password.') }}</li>
+  </ul>
+</section>
 {% endblock %}

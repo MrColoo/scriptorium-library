@@ -925,3 +925,5 @@ a.format-tile:hover { border-color: var(--border-strong); background: var(--surf
 .icon-grid button:hover { background: var(--surface-hover); }
 .icon-grid button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
 @media (max-width: 640px) { .rule-row { grid-template-columns: 1fr 1fr; } .rule-row .rule-value { grid-column: 1 / 2; } }
+.qr-code { margin: 0 auto; border-radius: var(--radius); background: #fff; padding: 8px; }
+.bullets { margin: 0; padding-left: 18px; color: var(--text-2); display: flex; flex-direction: column; gap: 6px; line-height: 1.5; }

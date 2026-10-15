@@ -1,5 +1,6 @@
 {% import 'image.html' as image %}
-<div class="container-fluid">
+{% import '_macros.html' as ui with context %}
+<div class="fragment">
   {% block body %}{% endblock %}
 </div>
 {% block js %}{% endblock %}
