@@ -930,3 +930,21 @@ a.format-tile:hover { border-color: var(--border-strong); background: var(--surf
 .card-link { color: var(--text); gap: 8px; transition: border-color .12s, box-shadow .12s, transform .12s; }
 .card-link:hover { color: var(--text); border-color: var(--border-strong); box-shadow: var(--shadow-md); }
 .card-link .icon-tile { margin-bottom: 4px; }
+
+/* Data tables */
+.datatable-toolbar .datatable-size { width: auto; min-height: 32px; padding-top: 4px; padding-bottom: 4px; font-size: 13px; }
+.datatable th { position: sticky; top: 0; z-index: 1; }
+.datatable td { max-width: 320px; }
+.datatable tr.is-selected td { background: var(--accent-soft); }
+.datatable-check { width: 36px; }
+.datatable-check input { accent-color: var(--accent); width: 15px; height: 15px; }
+.datatable-sort { display: inline-flex; align-items: center; gap: 4px; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; white-space: nowrap; }
+.datatable-sort:hover { color: var(--text); }
+.datatable-edit { display: block; width: 100%; min-height: 24px; padding: 2px 6px; margin: -2px -6px; border: 1px dashed transparent; border-radius: 6px; background: none; color: inherit; font: inherit; text-align: inherit; cursor: text; overflow: hidden; text-overflow: ellipsis; }
+.datatable-edit:hover { border-color: var(--border-strong); background: var(--surface); }
+.datatable td .input, .datatable td .select, .datatable td .textarea { min-height: 32px; padding: 4px 8px; font-size: 13px; min-width: 140px; }
+.datatable-clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.datatable-footer { padding-top: 10px; }
+.bulk-bar { position: sticky; top: calc(var(--topbar-h) + 8px); z-index: 15; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 12px; border-radius: var(--radius-lg); background: var(--primary); color: var(--on-primary); box-shadow: var(--shadow-lg); }
+.bulk-bar .btn { --btn-bg: transparent; --btn-fg: var(--on-primary); --btn-border: color-mix(in srgb, var(--on-primary) 30%, transparent); --btn-hover: color-mix(in srgb, var(--on-primary) 14%, transparent); }
+[aria-busy="true"] .table-wrap { opacity: .6; }

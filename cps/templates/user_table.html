@@ -1,193 +1,73 @@
 {% extends "layout.html" %}
-{% macro user_table_row(parameter, edit_text, show_text, validate, elements=False) -%}
-<th data-field="{{ parameter }}" id="{{ parameter }}"
-    data-name="{{ parameter }}"
-    data-escape="true"
-    data-visible="{{visiblility.get(parameter)}}"
-    data-editable-type="text"
-    data-editable-url="{{ url_for('admin.edit_list_user', param=parameter)}}"
-    data-editable-title="{{ edit_text }}"
-    data-edit="true"
-    {% if not button %}
-    data-sortable="true"
-    {% endif %}
-    {% if validate %}data-edit-validate="{{ _('This Field is Required') }}"{% endif %}>
-    {% if elements %}
-        <div class="multi_select">
-            <select class="multi_selector" id="{{ parameter }}" data-live-search="true" data-style="btn-default" data-dropup-auto="false" aria-disabled="true" multiple disabled>
-              {% for tag in elements %}
-              <option class="tags_click" value="{{tag.id}}">{% if tag.name %}{{tag.name}}{% else %}{{tag.value}}{% endif %}</option>
-              {% endfor %}
-            </select>
-            <div class="btn-group btn-group-justified" role="group">
-              <div class="btn-group" role="group">
-                  <div class="multi_head btn btn-default hidden" data-set="remove" data-name="{{parameter}}" aria-disabled="true">{{_('Remove')}}</div>
-              </div>
-              <div class="btn-group" role="group">
-                  <div class="multi_head btn btn-default hidden" data-set="add" data-name="{{parameter}}" aria-disabled="true">{{_('Add')}}</div>
-              </div>
-            </div>
-        </div>
-    {% endif %}
-    {{ show_text }}
-</th>
-{%- endmacro %}
-
-{% macro user_single_checkbox_row(parameter, show_text) -%}
-<th data-name="{{parameter}}" data-field="{{parameter}}"
-    data-formatter="singlecheckboxFormatter">
-    <div class="form-check">
-    <div>
-        <input type="radio" class="check_head" data-set="false" data-val="0" name="{{parameter}}" id="false_{{parameter}}" data-name="{{parameter}}" disabled>{{_('Deny')}}
-    </div>
-    <div>
-        <input type="radio" class="check_head" data-set="true" data-val="1" name="{{parameter}}" data-name="{{parameter}}" disabled>{{_('Allow')}}
-    </div>
-    </div>
-    {{show_text}}
-</th>
-{%- endmacro %}
-
-{% macro user_checkbox_row(parameter, array_field, show_text, element, value) -%}
-<th data-name="{{array_field}}" data-field="{{parameter}}"
-    data-visible="{{element.get(array_field)}}"
-    data-column="{{value.get(array_field)}}"
-    data-formatter="checkboxFormatter">
-    <div  class="form-check">
-    <div>
-        <input type="radio" class="check_head" data-set="false" data-val="{{value.get(array_field)}}" name="options_{{array_field}}" id="false_{{array_field}}" data-name="{{parameter}}" disabled>{{_('Deny')}}
-    </div>
-    <div>
-        <input type="radio" class="check_head" data-set="true" data-val="{{value.get(array_field)}}" name="options_{{array_field}}" data-name="{{parameter}}" disabled>{{_('Allow')}}
-    </div>
-    </div>
-    {{show_text}}
-</th>
-{%- endmacro %}
-
-{% macro user_select_languages(parameter, url, show_text, validate) -%}
-<th data-field="{{ parameter }}" id="{{ parameter }}"
-    data-name="{{ parameter }}"
-    data-visible="{{visiblility.get(parameter)}}"
-    data-edit="true"
-    data-sortable="true"
-    data-editable-type="select"
-    data-editable-url="{{ url_for('admin.edit_list_user', param=parameter)}}"
-    data-editable-source="{{url}}"
-    {% if validate %}data-edit-validate="{{ _('This Field is Required') }}"{% endif %}>
-    <div>
-      <select id="select_{{ parameter }}" class="header_select" disabled="">
-      <option value="none">{{ _('Select...') }}</option>
-      <option value="all">{{ _('Show All') }}</option>
-      {% for language in languages %}
-        <option value="{{language.lang_code}}">{{language.name}}</option>
-      {% endfor %}
-      </select>
-    </div>
-    {{ show_text }}
-</th>
-{%- endmacro %}
-
-{% macro user_select_translations(parameter, url, show_text, validate) -%}
-<th data-field="{{ parameter }}" id="{{ parameter }}"
-    data-name="{{ parameter }}"
-    data-visible="{{visiblility.get(parameter)}}"
-    data-editable-type="select"
-    data-edit="true"
-    data-sortable="true"
-    data-editable-url="{{ url_for('admin.edit_list_user', param=parameter)}}"
-    data-editable-source="{{url}}"
-    {% if validate %}data-edit-validate="{{ _('This Field is Required') }}"{% endif %}>
-    <div>
-      <select id="select_{{ parameter }}" class="header_select" disabled="">
-      <option value="None">{{_('Select...')}}</option>
-      {% for translation in translations %}
-        <option value="{{translation}}">{{translation.display_name|capitalize}}</option>
-      {% endfor %}
-    </select>
-    </div>
-    {{ show_text }}
-</th>
-{%- endmacro %}
-
-
-{% block header %}
-<link href="{{ url_for('static', filename='css/libs/bootstrap-table.min.css') }}" rel="stylesheet">
-<link href="{{ url_for('static', filename='css/libs/bootstrap-editable.css') }}" rel="stylesheet">
-<link href="{{ url_for('static', filename='css/libs/bootstrap-select.min.css') }}" rel="stylesheet" >
-{% endblock %}
+{% block content_class %}content--wide{% endblock %}
 {% block body %}
-<h2 class="{{page}}">{{_(title)}}</h2>
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <div class="col-xs-12 col-sm-12">
-        <div class="row">
-          <div class="btn btn-default disabled" id="user_delete_selection" aria-disabled="true">{{_('Remove Selections')}}</div>
-        </div>
-    </div>
-    <table id="user-table" class="table table-no-bordered table-striped"
-           data-url="{{url_for('admin.list_users')}}"  data-locale="{{ current_user.locale }}" data-classes="table table-no-bordered table-hover">
-      <thead>
-        <tr>
-            <th data-name="edit" data-buttontext="{{_('Edit User')}}" data-visible="{{visiblility.get('edit')}}" data-formatter="singleUserFormatter">{{_('Edit')}}</th>
-            <th data-name="state" data-field="state" data-checkbox="true" data-visible="{{visiblility.get('state')}}" data-sortable="true"></th>
-            <th data-name="id" data-field="id" id="id" data-visible="false" data-switchable="false"></th>
-            {{ user_table_row('name', _('Enter Username'), _('Username'), true) }}
-            {{ user_table_row('email', _('Enter Email'), _('Email'), true) }}
-            {{ user_table_row('kindle_mail', _('Enter eReader Email'), _('eReader Email'), false) }}
-            {{ user_table_row('kindle_mail_subject', _('Enter eReader Email Subject'), _('eReader Email Subject'), false) }}
-            {{ user_select_translations('locale', url_for('admin.table_get_locale'), _('Locale'), true) }}
-            {{ user_select_languages('default_language', url_for('admin.table_get_default_lang'), _('Visible Book Languages'), true) }}
-            {{ user_table_row('allowed_tags', _("Edit Allowed Tags"), _("Allowed Tags"), false, tags) }}
-            {{ user_table_row('denied_tags', _("Edit Denied Tags"), _("Denied Tags"), false, tags) }}
-            {{ user_table_row('allowed_column_value', _("Edit Allowed Column Values"), _("Allowed Column Values"), false, custom_values) }}
-            {{ user_table_row('denied_column_value', _("Edit Denied Column Values"), _("Denied Column Values"), false, custom_values) }}
-            {{ user_checkbox_row("role", "admin_role", _('Admin'), visiblility, all_roles)}}
-            {{ user_checkbox_row("role", "passwd_role", _('Change Password'), visiblility, all_roles)}}
-            {{ user_checkbox_row("role", "upload_role",_('Upload'), visiblility, all_roles)}}
-            {{ user_checkbox_row("role", "download_role", _('Download'), visiblility, all_roles)}}
-            {{ user_checkbox_row("role", "viewer_role", _('View'), visiblility, all_roles)}}
-            {{ user_checkbox_row("role", "edit_role", _('Edit'), visiblility, all_roles)}}
-            {{ user_checkbox_row("role", "delete_role", _('Delete'), visiblility, all_roles)}}
-            {{ user_checkbox_row("role", "edit_shelf_role", _('Edit Public Shelves'), visiblility, all_roles)}}
-            {%  if kobo_support %}
-            {{ user_single_checkbox_row("kobo_only_shelves_sync", _('Sync selected Shelves with Kobo'))}}
-            {%  endif %}
-            {{ user_checkbox_row("sidebar_view", "detail_random", _('Show Random Books in Detail View'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_language", _('Show Language Section'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_read_and_unread", _('Show Read/Unread Section'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_series", _('Show Series Section'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_category", _('Show Category Section'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_random", _('Show Random Books'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_author", _('Show Author Section'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_best_rated", _('Show Top Rated Books'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_read_and_unread", _('Show Random Books'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_publisher", _('Show Publisher Section'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_rating", _('Show Ratings Section'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_format", _('Show File Formats Section'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_archived", _('Show Archived Books'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_download", _('Show Downloaded Books'), visiblility, sidebar_settings)}}
-            {{ user_checkbox_row("sidebar_view", "sidebar_list", _('Show Books List'), visiblility, sidebar_settings)}}
-            <th data-align="right" data-formatter="UserActions" data-switchable="false"><div><div class="btn btn-default button_head disabled" aria-disabled="true">{{_('Delete User')}}</div></div><br>{{_('Delete User')}}</th>
-        </tr>
-      </thead>
-    </table>
-    <div class="errorlink">
-      <div class="btn btn-default" data-back="{{ url_for('admin.admin') }}" id="back">{{_('Back')}}</div>
-    </div>
-{% endblock %}
-{% block modal %}
-{{ delete_confirm_modal() }}
-{{ change_confirm_modal() }}
-{{ restrict_modal() }}
+<div class="page-header">
+  <div>
+    <span class="page-eyebrow"><a href="{{ url_for('admin.admin') }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Settings') }}</a></span>
+    <h1 class="page-title">{{ _('Edit Users') }}</h1>
+    <span class="page-subtitle">{{ _('Click a value to change it. Permission switches save immediately.') }}</span>
+  </div>
+  <div class="page-actions">
+    <a class="btn btn-sm btn-primary" href="{{ url_for('admin.new_user') }}">{{ ui.icon('plus') }}{{ _('Add New User') }}</a>
+  </div>
+</div>
+
+<div class="bulk-bar" id="user-bulk" hidden>
+  <span class="small strong" data-bulk-count></span>
+  <span class="grow"></span>
+  <button class="btn btn-sm" type="button" id="user_delete_selection">{{ ui.icon('trash') }}{{ _('Remove Selections') }}</button>
+</div>
+
+<div id="users" data-datatable="user-table-config"></div>
 {% endblock %}
 {% block js %}
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table-locale-all.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table-editable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-editable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-select.min.js')}}"></script>
-{% if not current_user.locale == 'en' %}
-<script src="{{ url_for('static', filename='js/libs/bootstrap-select/defaults-' + current_user.locale + '.min.js') }}" charset="UTF-8"></script>
-{% endif %}
-<script src="{{ url_for('static', filename='js/table.js') }}"></script>
+{%- set role_labels = [('admin_role', _('Admin')), ('passwd_role', _('Change Password')), ('upload_role', _('Upload')), ('download_role', _('Download')),
+                       ('viewer_role', _('View')), ('edit_role', _('Edit')), ('delete_role', _('Delete')), ('edit_shelf_role', _('Edit Public Shelves'))] %}
+{%- set sidebar_labels = [('detail_random', _('Show Random Books in Detail View')), ('sidebar_language', _('Show Language Section')),
+                          ('sidebar_read_and_unread', _('Show Read/Unread Section')), ('sidebar_series', _('Show Series Section')),
+                          ('sidebar_category', _('Show Category Section')), ('sidebar_random', _('Show Random Books')),
+                          ('sidebar_author', _('Show Author Section')), ('sidebar_best_rated', _('Show Top Rated Books')),
+                          ('sidebar_publisher', _('Show Publisher Section')), ('sidebar_rating', _('Show Ratings Section')),
+                          ('sidebar_format', _('Show File Formats Section')), ('sidebar_archived', _('Show Archived Books')),
+                          ('sidebar_download', _('Show Downloaded Books')), ('sidebar_list', _('Show Books List'))] %}
+{%- set locale_options = [] %}{% for t in translations %}{% if locale_options.append([t|string, t.display_name|capitalize]) %}{% endif %}{% endfor %}
+{%- set language_options = [['all', _('Show All')]] %}{% for l in languages %}{% if language_options.append([l.lang_code, l.name]) %}{% endif %}{% endfor %}
+{%- set columns = [
+  {'field': 'name', 'label': _('Username'), 'type': 'text', 'sortable': true, 'hideable': false, 'edit': {'url': url_for('admin.edit_list_user', param='name')}},
+  {'field': 'email', 'label': _('Email'), 'type': 'text', 'sortable': true, 'edit': {'url': url_for('admin.edit_list_user', param='email')}},
+  {'field': 'kindle_mail', 'label': _('eReader Email'), 'type': 'text', 'sortable': true, 'edit': {'url': url_for('admin.edit_list_user', param='kindle_mail')}},
+  {'field': 'kindle_mail_subject', 'label': _('eReader Email Subject'), 'type': 'text', 'hidden': true, 'edit': {'url': url_for('admin.edit_list_user', param='kindle_mail_subject')}},
+  {'field': 'locale', 'label': _('Locale'), 'type': 'select', 'sortable': true, 'options': locale_options, 'edit': {'url': url_for('admin.edit_list_user', param='locale')}},
+  {'field': 'default_language', 'label': _('Visible Book Languages'), 'type': 'select', 'displayField': 'default',
+   'options': language_options, 'edit': {'url': url_for('admin.edit_list_user', param='default_language')}},
+  {'field': 'allowed_tags', 'label': _('Allowed Tags'), 'type': 'text', 'hidden': true, 'edit': {'url': url_for('admin.edit_list_user', param='allowed_tags')}},
+  {'field': 'denied_tags', 'label': _('Denied Tags'), 'type': 'text', 'hidden': true, 'edit': {'url': url_for('admin.edit_list_user', param='denied_tags')}},
+  {'field': 'allowed_column_value', 'label': _('Allowed Column Values'), 'type': 'text', 'hidden': true, 'edit': {'url': url_for('admin.edit_list_user', param='allowed_column_value')}},
+  {'field': 'denied_column_value', 'label': _('Denied Column Values'), 'type': 'text', 'hidden': true, 'edit': {'url': url_for('admin.edit_list_user', param='denied_column_value')}}
+] %}
+{%- for key, label in role_labels %}
+  {%- if columns.append({'field': 'role', 'key': key, 'label': label, 'type': 'bit', 'bit': all_roles[key], 'hidden': visiblility.get(key) == 'false', 'edit': {'url': url_for('admin.edit_list_user', param='role')}}) %}{% endif %}
+{%- endfor %}
+{%- if kobo_support %}
+  {%- if columns.append({'field': 'kobo_only_shelves_sync', 'label': _('Sync selected Shelves with Kobo'), 'type': 'bool', 'hidden': true, 'edit': {'url': url_for('admin.edit_list_user', param='kobo_only_shelves_sync')}}) %}{% endif %}
+{%- endif %}
+{%- for key, label in sidebar_labels if key in sidebar_settings %}
+  {%- if columns.append({'field': 'sidebar_view', 'key': key, 'label': label, 'type': 'bit', 'bit': sidebar_settings[key], 'hidden': true, 'edit': {'url': url_for('admin.edit_list_user', param='sidebar_view')}}) %}{% endif %}
+{%- endfor %}
+{%- if columns.append({'field': 'id', 'label': '', 'type': 'actions', 'hideable': false, 'actions': [
+      {'href': url_for('admin.edit_user', user_id=999999999)|replace('999999999', '__id__'), 'icon': 'edit', 'label': _('Edit User'), 'iconOnly': true},
+      {'post': url_for('admin.delete_user'), 'idParam': 'userid', 'icon': 'trash', 'label': _('Delete User'), 'iconOnly': true,
+       'confirm': _('Delete %(name)s? Their shelves and reading progress are removed too.', name='%s')}]}) %}{% endif %}
+<script type="application/json" id="user-table-config">{{ {
+  'url': url_for('admin.list_users'), 'selectable': true, 'labelField': 'name', 'pageSize': 25,
+  'settingsUrl': url_for('admin.update_table_settings'), 'visibility': visiblility, 'columns': columns,
+  'strings': {
+    'search': _('Search users'), 'columns': _('Columns'), 'per_page': _('Rows per page'), 'empty': _('No users found'),
+    'range': _('%(first)s–%(last)s of %(total)s', first='%from', last='%to', total='%total'), 'previous': _('Previous'), 'next': _('Next'),
+    'selected': _('%(count)s selected', count='%n'), 'select': _('Select'), 'select_page': _('Select all on this page'), 'edit': _('Click to edit')
+  },
+  'bulk': {'delete_url': url_for('admin.delete_user'), 'confirm': _('Delete the selected users? Their shelves and reading progress are removed too.'), 'delete': _('Remove Selections')}
+}|tojson }}</script>
+<script src="{{ url_for('static', filename='js/datatable.js') }}"></script>
+<script src="{{ url_for('static', filename='js/user-table.js') }}"></script>
 {% endblock %}

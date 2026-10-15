@@ -1,385 +1,148 @@
 {% extends "layout.html" %}
-{% macro text_table_row(parameter, edit_text, show_text, validate, sort) -%}
-<th data-field="{{ parameter }}" id="{{ parameter }}"
-  {% if sort %}data-sortable="true" {% endif %}
-  data-visible = "{{visiblility.get(parameter)}}"
-  data-escape="true"
-  {% if current_user.role_edit() %}
-    data-editable-type="text"
-    data-editable-url="{{ url_for('edit-book.edit_list_book', param=parameter)}}"
-    data-editable-title="{{ edit_text }}"
-    data-edit="true"
-    {% if validate %}data-edit-validate="{{ _('This Field is Required') }}" {% endif %}
-  {% endif %}
->{{ show_text }}</th>
-{%- endmacro %}
-
-{% macro book_checkbox_row(parameter, show_text, sort) -%}
-<th data-name="{{parameter}}" data-field="{{parameter}}" data-switchable="false"
-  {% if sort %}data-sortable="true" {% endif %}
-  data-visible="{{visiblility.get(parameter)}}"
-  data-formatter="bookCheckboxFormatter">
-  {{show_text}}
-</th>
-{%- endmacro %}
-
-
-{% block header %}
-<link href="{{ url_for('static', filename='css/libs/bootstrap-table.min.css') }}" rel="stylesheet">
-<link href="{{ url_for('static', filename='css/libs/bootstrap-editable.css') }}" rel="stylesheet">
-<link href="{{ url_for('static', filename='css/libs/bootstrap-wysihtml5-0.0.3.css') }}" rel="stylesheet">
-<style>
-  .pagination {
-      position: static !important;
-      margin-top: 0.8rem !important;
-  }
-</style>
-{% endblock %}
+{% block content_class %}content--wide{% endblock %}
 {% block body %}
-<div class="discover">
-  <h2 class="{{page}}">{{_(title)}}</h2>
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <div class="row form-group" style="display: inline-block;">
-      <div class="btn btn-default disabled" id="merge_books" aria-disabled="true">
-        {{_('Merge')}}
-      </div>
-      <div class="btn btn-default disabled" id="edit_selected_books" aria-disabled="true">
-        {{_('Edit')}}
-      </div>
-      <div class="btn btn-default disabled" id="archive_selected_books" aria-disabled="true">
-        {{_('Archive')}}
-      </div>
-      <div class="btn btn-default disabled" id="unarchive_selected_books" aria-disabled="true">
-        {{_('Unarchive')}}
-      </div>
-      <div class="btn btn-default disabled" id="read_selected_books" aria-disabled="true">
-        {{_('Mark as read')}}
-      </div>
-      <div class="btn btn-default disabled" id="unread_selected_books" aria-disabled="true">
-        {{_('Mark as unread')}}
-      </div>
-      <div class="btn btn-default disabled" id="delete_selected_books" aria-disabled="true">
-        {{_('Delete')}}
-      </div>
-      <div class="btn btn-default disabled" id="add_to_shelf_btn" aria-disabled="true">
-        {{_('Add to Shelf')}}
-      </div>
-        <div class="btn btn-default disabled" id="table_xchange" ><span class="glyphicon glyphicon-arrow-up"></span><span class="glyphicon glyphicon-arrow-down"></span>{{_(' Exchange author & title')}}
-      </div>
-      <!-- New Select all button -->
-      {% if current_user.role_edit() %}
-      <div class="btn btn-default" id="select_all">
-        {{ _('Select all') }}
-      </div>
-      <div class="btn btn-default" id="unselect_all">
-        {{ _('Clear all') }}
-      </div>
-      {% endif %}
-    </div>
-    <div>
-      <br>
-      <div class="filterhead" style="display: inline-block;">
-        <div style="display: inline-block; padding-inline-start: 10px;">
-          <input type="checkbox" id="autoupdate_titlesort" name="autoupdate_titlesort" checked>
-          <label for="autoupdate_titlesort" style="padding-left: 0.4em">{{_('Update Title Sort automatically  ')}}</label>
-        </div>
-        <div style="display: inline-block; padding-inline-start: 10px;">
-          <input type="checkbox" id="autoupdate_authorsort" name="autoupdate_authorsort" checked>
-          <label for="autoupdate_authorsort" style="padding-left: 0.4em">{{_('Update Author Sort automatically')}}</label>
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <table id="books-table" class="table table-no-bordered table-striped"
-        data-url="{{url_for('web.list_books')}}" data-locale="{{ current_user.locale }}" data-classes="table table-no-bordered table-hover">
-        <thead>
-          <tr>
-            {% if current_user.role_edit() %}
-              <th data-field="state" data-checkbox="true" data-sortable="true"></th>
-            {% endif %}
-              <th data-field="id" id="id" data-visible="false" data-switchable="false"></th>
-              {{ text_table_row('title', _('Enter Title'),_('Title'), true, true) }}
-              {{ text_table_row('sort', _('Enter Title Sort'),_('Title Sort'), false, true) }}
-              {{ text_table_row('author_sort', _('Enter Author Sort'),_('Author Sort'), false, true) }}
-              {{ text_table_row('authors', _('Enter Authors'),_('Authors'), true, true) }}
-              {{ text_table_row('tags', _('Enter Categories'),_('Categories'), false, true) }}
-              {{ text_table_row('series', _('Enter Series'),_('Series'), false, true) }}
-              <th data-field="series_index" id="series_index" data-visible="{{visiblility.get('series_index')}}" data-edit-validate="{{ _('This Field is Required') }}" data-sortable="true" {% if current_user.role_edit() %} data-editable-type="number" data-editable-placeholder="1" data-editable-step="0.01" data-editable-min="0" data-editable-url="{{ url_for('edit-book.edit_list_book', param='series_index')}}" data-edit="true" data-editable-title="{{_('Enter Title')}}"{% endif %}>{{_('Series ID')}}</th>
-              {{ text_table_row('languages', _('Enter Languages'),_('Languages'), false, true) }}
-              <!--th data-field="pubdate" data-type="date" data-visible="{{visiblility.get('pubdate')}}" data-viewformat="dd.mm.yyyy" id="pubdate" data-sortable="true">{{_('Publishing Date')}}</th-->
-              {{ text_table_row('publishers', _('Enter Publishers'),_('Publishers'), false, true) }}
-              <th data-field="comments" id="comments" data-escape="true" data-editable-mode="popup"  data-visible="{{visiblility.get('comments')}}" data-sortable="false" {% if current_user.role_edit() %} data-editable-type="wysihtml5" data-editable-url="{{ url_for('edit-book.edit_list_book', param='comments')}}" data-edit="true" data-editable-title="{{_('Enter comments')}}"{% endif %}>{{_('Comments')}}</th>
-              {% if current_user.check_visibility(32768) %}
-                {{ book_checkbox_row('is_archived', _('Archived?'), false)}}
-              {%  endif %}
-              {{ book_checkbox_row('read_status', _('Read?'), false)}}
-              {% for c in cc %}
-                {% if c.datatype == "int" %}
-                  <th data-field="custom_column_{{ c.id|string }}" id="custom_column_{{ c.id|string }}" data-visible="{{visiblility.get('custom_column_'+ c.id|string)}}" data-sortable="false" {% if current_user.role_edit() %} data-editable-type="number" data-editable-placeholder="1" data-editable-step="1" data-editable-url="{{ url_for('edit-book.edit_list_book', param='custom_column_'+ c.id|string)}}" data-edit="true" data-editable-title="{{_('Enter ') + c.name}}"{% endif %}>{{c.name}}</th>
-                {% elif c.datatype == "rating" %}
-                  <th data-field="custom_column_{{ c.id|string }}" id="custom_column_{{ c.id|string }}" data-formatter="ratingFormatter" data-visible="{{visiblility.get('custom_column_'+ c.id|string)}}" data-sortable="false" {% if current_user.role_edit() %} data-editable-type="number" data-editable-placeholder="1" data-editable-step="0.5" data-editable-step="1" data-editable-min="1" data-editable-max="5" data-editable-url="{{ url_for('edit-book.edit_list_book', param='custom_column_'+ c.id|string)}}" data-edit="true" data-editable-title="{{_('Enter ') + c.name}}"{% endif %}>{{c.name}}</th>
-                {% elif c.datatype == "float" %}
-                  <th data-field="custom_column_{{ c.id|string }}" id="custom_column_{{ c.id|string }}" data-visible="{{visiblility.get('custom_column_'+ c.id|string)}}" data-sortable="false" {% if current_user.role_edit() %} data-editable-type="number" data-editable-placeholder="1" data-editable-step="0.01" data-editable-url="{{ url_for('edit-book.edit_list_book', param='custom_column_'+ c.id|string)}}" data-edit="true" data-editable-title="{{_('Enter ') + c.name}}"{% endif %}>{{c.name}}</th>
-                {% elif c.datatype == "enumeration" %}
-                  <th data-field="custom_column_{{ c.id|string }}" id="custom_column_{{ c.id|string }}" data-visible="{{visiblility.get('custom_column_'+ c.id|string)}}" data-sortable="false" {% if current_user.role_edit() %} data-editable-type="select" data-editable-source={{ url_for('edit-book.table_get_custom_enum', c_id=c.id)  }} data-editable-url="{{ url_for('edit-book.edit_list_book', param='custom_column_'+ c.id|string)}}" data-edit="true" data-editable-title="{{_('Enter ') + c.name}}"{% endif %}>{{c.name}}</th>
-                {% elif c.datatype in ["datetime"] %}
-                    <!-- missing -->
-                {% elif c.datatype == "text" %}
-                  {{ text_table_row('custom_column_' + c.id|string, _('Enter ') + c.name, c.name, false, false) }}
-                {% elif c.datatype == "comments" %}
-                    <th data-field="custom_column_{{ c.id|string }}" id="custom_column_{{ c.id|string }}" data-escape="true" data-editable-mode="popup"  data-visible="{{visiblility.get('custom_column_'+ c.id|string)}}" data-sortable="false" {% if current_user.role_edit() %} data-editable-type="wysihtml5" data-editable-url="{{ url_for('edit-book.edit_list_book', param='custom_column_'+ c.id|string)}}" data-edit="true" data-editable-title="{{_('Enter ') + c.name}}"{% endif %}>{{c.name}}</th>
-                {% elif c.datatype == "bool" %}
-                    {{ book_checkbox_row('custom_column_' + c.id|string, c.name, false)}}
-                {% else %}
-                  <!--{{ text_table_row('custom_column_' + c.id|string, _('Enter ') + c.name, c.name, false, false) }} -->
-                {% endif %}
-              {% endfor %}
-            {% if current_user.role_delete_books() and current_user.role_edit()%}
-              <th data-align="right" data-formatter="EbookActions" data-switchable="false">
-                <br>
-                {{_('Delete')}}
-              </th>
-            {% endif %}
-          </tr>
-        </thead>
-      </table>
-    </div>
+{%- set can_edit = current_user.role_edit() %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _('Books List') }}</h1>
+    <span class="page-subtitle">{{ _('Every book as a row. Click a value to edit it, select rows for bulk changes.') if can_edit else _('Every book as a row.') }}</span>
+  </div>
+  {%- if can_edit %}
+  <div class="page-actions">
+    <label class="check small"><input type="checkbox" id="autoupdate_titlesort" checked><span>{{ _('Update Title Sort automatically') }}</span></label>
+    <label class="check small"><input type="checkbox" id="autoupdate_authorsort" checked><span>{{ _('Update Author Sort automatically') }}</span></label>
+  </div>
+  {%- endif %}
 </div>
 
+{%- if can_edit %}
+<div class="bulk-bar" id="book-bulk" hidden>
+  <span class="small strong" data-bulk-count></span>
+  <span class="grow"></span>
+  <button class="btn btn-sm" type="button" data-bulk="edit">{{ ui.icon('edit') }}{{ _('Edit') }}</button>
+  <button class="btn btn-sm" type="button" data-bulk="merge" data-min="2">{{ ui.icon('merge') }}{{ _('Merge') }}</button>
+  <button class="btn btn-sm" type="button" data-bulk="shelf">{{ ui.icon('bookmark') }}{{ _('Add to shelf') }}</button>
+  <details class="menu">
+    <summary class="btn btn-sm">{{ ui.icon('more') }}{{ _('More') }}</summary>
+    <div class="menu-panel" role="menu">
+      <button class="menu-item" type="button" data-bulk="read">{{ ui.icon('check-circle') }}<span class="grow">{{ _('Mark As Read') }}</span></button>
+      <button class="menu-item" type="button" data-bulk="unread">{{ ui.icon('eye-off') }}<span class="grow">{{ _('Mark As Unread') }}</span></button>
+      <button class="menu-item" type="button" data-bulk="archive">{{ ui.icon('archive') }}<span class="grow">{{ _('Archive') }}</span></button>
+      <button class="menu-item" type="button" data-bulk="unarchive">{{ ui.icon('archive') }}<span class="grow">{{ _('Restore from archive') }}</span></button>
+      <button class="menu-item" type="button" data-bulk="xchange">{{ ui.icon('refresh') }}<span class="grow">{{ _('Exchange author & title') }}</span></button>
+      {%- if current_user.role_delete_books() %}
+      <div class="menu-sep"></div>
+      <button class="menu-item menu-item--danger" type="button" data-bulk="delete">{{ ui.icon('trash') }}<span class="grow">{{ _('Delete') }}</span></button>
+      {%- endif %}
+    </div>
+  </details>
+  <button class="btn btn-sm btn-icon" type="button" data-bulk="clear" aria-label="{{ _('Clear selection') }}">{{ ui.icon('x') }}</button>
+</div>
+{%- endif %}
+
+<div id="books" data-datatable="book-table-config"></div>
 {% endblock %}
+
 {% block modal %}
-{{ delete_book(current_user.role_delete_books()) }}
-{% if current_user.role_edit() %}
-<div class="modal fade" id="mergeModal" role="dialog" aria-labelledby="metaMergeLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-center">
-        <span>{{_('Are you really sure?')}}</span>
-      </div>
-        <div class="modal-body">
-          <p></p>
-            <div class="text-left">{{_('Books with Title will be merged from:')}}</div>
-          <p></p>
-            <div class="text-left" id="merge_from"></div>
-          <p></p>
-            <div class="text-left">{{_('Into Book with Title:')}}</div>
-          <p></p>
-            <div class="text-left" id="merge_to"></div>
-        </div>
-      <div class="modal-footer">
-        <input id="merge_confirm" type="button" class="btn btn-danger" value="{{_('Merge')}}" name="merge_confirm" data-dismiss="modal">
-        <button id="merge_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
+{%- if current_user.role_edit() %}
+<dialog class="modal" id="bulk-edit-dialog" aria-labelledby="bulk-edit-title">
+  <form class="stack" method="dialog" id="bulk-edit-form">
+    <div class="modal-header"><h2 id="bulk-edit-title">{{ _('Edit selected books') }}</h2>
+      <button class="btn btn-ghost btn-icon" type="button" data-dialog-close aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
+    <div class="modal-body">
+      <p class="hint">{{ _('Only the fields you fill in are changed, on every selected book.') }}</p>
+      <div class="form-grid">
+        {{ ui.field('title', _('Title'), id='bulk_title') }}
+        {{ ui.field('title_sort', _('Title Sort'), id='bulk_title_sort') }}
+        {{ ui.field('authors', _('Authors'), id='bulk_authors') }}
+        {{ ui.field('author_sort', _('Author Sort'), id='bulk_author_sort') }}
+        {{ ui.field('categories', _('Categories'), id='bulk_categories') }}
+        {{ ui.field('series', _('Series'), id='bulk_series') }}
+        {{ ui.field('languages', _('Languages'), id='bulk_languages') }}
+        {{ ui.field('publishers', _('Publishers'), id='bulk_publishers') }}
+        <div class="field span-all"><label for="bulk_comments">{{ _('Description') }}</label><textarea class="textarea" id="bulk_comments" name="comments" rows="3"></textarea></div>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="modal fade" id="delete_selected_modal" role="dialog" aria-labelledby="metaDeleteSelectedLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-center">
-        <span>{{_('Are you really sure?')}}</span>
-      </div>
-      <div class="modal-body">
-        <p></p>
-          <div class="text-left">{{_('The following books will be deleted:')}}</div>
-        <p></p>
-          <div class="text-left" id="display-delete-selected-books"></div>
-      <div class="modal-footer">
-        <input id="delete_selected_confirm" type="button" class="btn btn-danger" value="{{_('Delete')}}" name="delete_selected_confirm" data-dismiss="modal">
-        <button id="delete_selected_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-      </div>
+    <div class="modal-footer">
+      <button class="btn" type="button" data-dialog-close>{{ _('Cancel') }}</button>
+      <button class="btn btn-primary" type="submit" value="save">{{ _('Apply') }}</button>
     </div>
-  </div>
-</div>
-
-<div class="modal fade" id="archive_selected_modal" role="dialog" aria-labelledby="metaArchiveSelectedLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-center">
-        <span>{{_('Are you really sure?')}}</span>
-      </div>
-      <div class="modal-body">
-        <p></p>
-          <div class="text-left">{{_('The following books will be archived:')}}</div>
-        <p></p>
-          <div class="text-left" id="display-archive-selected-books"></div>
-      <div class="modal-footer">
-        <input id="archive_selected_confirm" type="button" class="btn btn-danger" value="{{_('Archive')}}" name="archive_selected_confirm" data-dismiss="modal">
-        <button id="archive_selected_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-      </div>
+  </form>
+</dialog>
+<dialog class="modal modal--sm" id="bulk-shelf-dialog" aria-labelledby="bulk-shelf-title">
+  <form class="stack" method="dialog" id="bulk-shelf-form">
+    <div class="modal-header"><h2 id="bulk-shelf-title">{{ _('Add to shelf') }}</h2></div>
+    <div class="modal-body">
+      <label class="sr-only" for="bulk_shelf">{{ _('Shelf') }}</label>
+      <select class="select" id="bulk_shelf" required>
+        {%- for shelf in g.shelves_access if not shelf.is_public or current_user.role_edit_shelfs() %}
+        <option value="{{ shelf.id }}">{{ shelf.name }}{% if shelf.kobo_sync %} · Kobo{% endif %}</option>
+        {%- endfor %}
+      </select>
     </div>
-  </div>
-</div>
-
-<div class="modal fade" id="unarchive_selected_modal" role="dialog" aria-labelledby="metaUnArchiveSelectedLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-center">
-        <span>{{_('Are you really sure?')}}</span>
-      </div>
-      <div class="modal-body">
-        <p></p>
-          <div class="text-left">{{_('The following books will be unarchived:')}}</div>
-        <p></p>
-          <div class="text-left" id="display-unarchive-selected-books"></div>
-      <div class="modal-footer">
-        <input id="unarchive_selected_confirm" type="button" class="btn btn-danger" value="{{_('Unarchive')}}" name="unarchive_selected_confirm" data-dismiss="modal">
-        <button id="unarchive_selected_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-      </div>
+    <div class="modal-footer">
+      <button class="btn" type="button" data-dialog-close>{{ _('Cancel') }}</button>
+      <button class="btn btn-primary" type="submit" value="save">{{ _('Add') }}</button>
     </div>
-  </div>
-</div>
-
-<div class="modal fade" id="read_selected_modal" role="dialog" aria-labelledby="metaReadSelectedLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-center">
-        <span>{{_('Are you really sure?')}}</span>
-      </div>
-      <div class="modal-body">
-        <p></p>
-          <div class="text-left">{{_('The following books will be marked read:')}}</div>
-        <p></p>
-          <div class="text-left" id="display-read-selected-books"></div>
-      <div class="modal-footer">
-        <input id="read_selected_confirm" type="button" class="btn btn-danger" value="{{_('Mark as read')}}" name="read_selected_confirm" data-dismiss="modal">
-        <button id="read_selected_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="unread_selected_modal" role="dialog" aria-labelledby="metaReadSelectedLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-center">
-        <span>{{_('Are you really sure?')}}</span>
-      </div>
-      <div class="modal-body">
-        <p></p>
-          <div class="text-left">{{_('The following books will be marked unread:')}}</div>
-        <p></p>
-          <div class="text-left" id="display-unread-selected-books"></div>
-      <div class="modal-footer">
-        <input id="unread_selected_confirm" type="button" class="btn btn-danger" value="{{_('Mark as unread')}}" name="unread_selected_confirm" data-dismiss="modal">
-        <button id="read_selected_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="edit_selected_modal" role="dialog" aria-labelledby="metaEditSelectedLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <span>{{_('Edit Metadata')}}</span>
-      </div>
-      <div class="modal-body">
-        <div class="text-left">{{_('Edit the fields you want changed. Blank fields will be ignored:')}}</div>
-        <div class="text-left text-muted" style="margin-top: 6px;">
-          {{_('Multiple values are supported for Authors, Tags/Categories, Languages, and Publishers. Use comma-separated values (e.g., "Name1, Name2").')}}
-        </div>
-          <br>
-          Title:
-          <input class="form-control" id="title_input">
-          <p></p>
-
-          Title Sort:
-          <input class="form-control" id="title_sort_input">
-          <p></p>
-
-          Author Sort:
-          <input class="form-control" id="author_sort_input">
-          <p></p>
-
-          Authors:
-          <input class="form-control" id="authors_input">
-          <p></p>
-
-          Tags / Categories:
-          <input class="form-control" id="categories_input">
-          <p></p>
-
-          Series:
-          <input class="form-control" id="series_input">
-          <p></p>
-
-          Languages:
-          <input class="form-control" id="languages_input">
-          <p></p>
-
-          Publishers:
-          <input class="form-control" id="publishers_input">
-          <p></p>
-
-          Comments:
-          <input class="form-control" id="comments_input">
-          <p></p>
-        </div>
-
-      <div class="modal-footer">
-        <input id="edit_selected_confirm" type="button" class="btn btn-danger" value="{{_('Edit')}}" name="edit_selected_confirm" id="edit_selected_confirm" data-dismiss="modal">
-        <button id="edit_selected_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endif %}
-
-<!-- Add to Shelf Modal -->
-<div class="modal fade" id="addToShelfModal" role="dialog" aria-labelledby="addToShelfModalLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="{{_('Close')}}"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="addToShelfModalLabel">{{_('Select a Shelf')}}</h4>
-      </div>
-      <div class="modal-body">
-        <p>{{_('Please select a shelf to add the selected books to:')}}</p>
-        <select class="form-control" id="shelf_selection_dropdown">
-            <option value="">{{_('-- Select a Shelf --')}}</option>
-            {% if g.shelves_access %}
-                {% for shelf in g.shelves_access %}
-                    {% if current_user.is_anonymous == False %}
-                        {% if shelf.user_id == current_user.id or (shelf.is_public and current_user.role_edit_shelfs()) %}
-                            <option value="{{ shelf.id }}">{{ shelf.name }}</option>
-                        {% endif %}
-                    {% elif shelf.is_public and config.config_anon_browse %}
-                        {# Anonymous users can only see public shelves if anon browse is enabled #}
-                        {# Permissions to edit public shelves for anonymous would be odd, so we assume they can't add to public shelves #}
-                        {# This part might need adjustment based on how `check_shelf_edit_permissions` handles anonymous users for public shelves #}
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        </select>
-      </div>
-      <div class="modal-footer">
-        <button id="cancel_add_to_shelf_btn" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-        <input id="confirm_add_to_shelf_btn" type="button" class="btn btn-primary" value="{{_('Add')}}">
-      </div>
-    </div>
-  </div>
-</div>
+  </form>
+</dialog>
+{%- endif %}
 {% endblock %}
 
 {% block js %}
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table-locale-all.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-table-editable.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/bootstrap-editable.min.js') }}"></script>
-{% if not current_user.locale == 'en' %}
-<script src="{{ url_for('static', filename='js/libs/bootstrap-table/locale/bootstrap-table-' + current_user.locale + '.min.js') }}" charset="UTF-8"></script>
-{% endif %}
-<script src="{{ url_for('static', filename='js/libs/wysihtml5-0.3.0.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/bootstrap-wysihtml5-0.0.3.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/libs/wysihtml5-0.0.3.js') }}"></script>
-<script src="{{ url_for('static', filename='js/table.js') }}"></script>
+{%- set can_edit = current_user.role_edit() %}
+{%- macro col(field, label, type='text', sortable=true, hidden=false, suggest=none, separator=none, extra_from=none, options=none, true_value=none, false_value=none, sort_field=none) -%}
+{{ {'field': field, 'label': label, 'type': type, 'sortable': sortable, 'sortField': sort_field,
+    'hidden': (visiblility.get(field) == 'false') if visiblility.get(field) is not none else hidden,
+    'suggest': suggest, 'separator': separator, 'options': options, 'trueValue': true_value, 'falseValue': false_value,
+    'edit': ({'url': url_for('edit-book.edit_list_book', param=field), 'extraFrom': extra_from or {}} if can_edit else none)}|tojson }}
+{%- endmacro %}
+{%- set columns = [
+  col('title', _('Title'), extra_from={'checkT': '#autoupdate_titlesort'}),
+  col('sort', _('Title Sort'), hidden=true),
+  col('authors', _('Authors'), suggest=url_for('web.get_authors_json'), separator='&', extra_from={'checkA': '#autoupdate_authorsort'}),
+  col('author_sort', _('Author Sort'), hidden=true),
+  col('tags', _('Categories'), suggest=url_for('web.get_tags_json'), separator=','),
+  col('series', _('Series'), suggest=url_for('web.get_series_json')),
+  col('series_index', _('Series Index'), type='number'),
+  col('languages', _('Languages'), suggest=url_for('web.get_languages_json'), separator=','),
+  col('publishers', _('Publishers'), suggest=url_for('web.get_publishers_json')),
+  col('comments', _('Comments'), type='html', sortable=false, hidden=true),
+  col('read_status', _('Read?'), type='bool', sortable=false, true_value='True', false_value='False')
+] %}
+{%- if current_user.check_visibility(32768) %}{% if columns.append(col('is_archived', _('Archived?'), type='bool', sortable=false, true_value='True', false_value='False')) %}{% endif %}{% endif %}
+{%- for c in cc %}
+  {%- set cid = 'custom_column_' ~ c.id|string %}
+  {%- if c.datatype in ['int', 'float', 'rating'] %}{% if columns.append(col(cid, c.name, type='number', sortable=false, hidden=true)) %}{% endif %}
+  {%- elif c.datatype == 'enumeration' %}
+    {%- set opts = [['', '']] %}{% for o in c.get_display_dict().enum_values %}{% if opts.append([o, o]) %}{% endif %}{% endfor %}
+    {%- if columns.append(col(cid, c.name, type='select', sortable=false, hidden=true, options=opts)) %}{% endif %}
+  {%- elif c.datatype == 'text' %}{% if columns.append(col(cid, c.name, sortable=false, hidden=true)) %}{% endif %}
+  {%- elif c.datatype == 'comments' %}{% if columns.append(col(cid, c.name, type='html', sortable=false, hidden=true)) %}{% endif %}
+  {%- elif c.datatype == 'bool' %}{% if columns.append(col(cid, c.name, type='bool', sortable=false, hidden=true, true_value='True', false_value='False')) %}{% endif %}
+  {%- endif %}
+{%- endfor %}
+<script type="application/json" id="book-table-config">{"url": {{ url_for('web.list_books')|tojson }}, "selectable": {{ 'true' if can_edit else 'false' }}, "labelField": "title", "pageSize": 25,
+  "settingsUrl": {{ url_for('web.update_table_settings')|tojson }}, "visibility": {{ visiblility|tojson }},
+  "columns": [{{ columns|join(',') }}, {"field": "id", "label": "", "type": "actions", "hideable": false, "actions": [
+     {"href": {{ (url_for('web.show_book', book_id=999999999)|replace('999999999', '__id__'))|tojson }}, "icon": "book-open", "label": {{ _('View Book')|tojson }}, "iconOnly": true}
+     {%- if can_edit %}, {"href": {{ (url_for('edit-book.show_edit_book', book_id=999999999)|replace('999999999', '__id__'))|tojson }}, "icon": "edit", "label": {{ _('Edit Metadata')|tojson }}, "iconOnly": true}{% endif %}]}],
+  "strings": {{ {
+    'search': _('Search books'), 'columns': _('Columns'), 'per_page': _('Rows per page'), 'empty': _('No books found'),
+    'range': _('%(first)s–%(last)s of %(total)s', first='%from', last='%to', total='%total'), 'previous': _('Previous'), 'next': _('Next'),
+    'selected': _('%(count)s selected', count='%n'), 'select': _('Select'), 'select_page': _('Select all on this page'), 'edit': _('Click to edit')
+  }|tojson }},
+  "bulk": {{ {
+    'edit_url': url_for('edit-book.edit_selected_books'), 'merge_url': url_for('edit-book.merge_list_book'), 'simulate_merge_url': url_for('edit-book.simulate_merge_list_book'),
+    'archive_url': url_for('edit-book.archive_selected_books'), 'read_url': url_for('edit-book.read_selected_books'),
+    'delete_url': url_for('edit-book.delete_selected_books'), 'xchange_url': url_for('edit-book.table_xchange_author_title'),
+    'shelf_url': url_for('shelf.add_selected_to_shelf'),
+    'merge_confirm': _('Merge %(sources)s into “%(target)s”? Their files and metadata are moved into it and the other books are deleted.', sources='%from', target='%to'),
+    'merge': _('Merge'), 'delete_confirm': _('Delete %(count)s books and all their files? This cannot be undone.', count='%n'), 'delete': _('Delete'),
+    'xchange_confirm': _('Swap author and title of %(count)s books?', count='%n'), 'xchange': _('Exchange author & title'),
+    'done': _('Done'), 'selected': _('%(count)s selected', count='%n')
+  }|tojson }}
+}</script>
+<script src="{{ url_for('static', filename='js/datatable.js') }}"></script>
+{%- if can_edit %}<script src="{{ url_for('static', filename='js/book-table.js') }}"></script>{% endif %}
 {% endblock %}
