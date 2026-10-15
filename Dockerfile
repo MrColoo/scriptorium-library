@@ -2,7 +2,7 @@
 
 # Simple Example Build Command:
 # docker build \
-# --tag crocodilestick/calibre-web-automated:dev \
+# --tag ghcr.io/mrcoloo/scriptorium-library:dev \
 # --build-arg="BUILD_DATE=27-09-2024 12:06" \
 # --build-arg="VERSION=2.1.0-test-5" .
 
@@ -12,10 +12,10 @@
 # Multi-Platform Example Build & Push Command:
 # docker buildx build \
 # --push \
-# --platform linux/amd64,linux/arm64, \
+# --platform linux/amd64,linux/arm64 \
 # --build-arg="BUILD_DATE=02-08-2024 20:52" \
 # --build-arg="VERSION=2.1.0" \
-# --tag crocodilestick/calibre-web-automated:latest .
+# --tag ghcr.io/mrcoloo/scriptorium-library:latest .
 
 # ==========================================================================
 # STAGE 1: Dependencies - Install system packages and Python dependencies
@@ -175,7 +175,14 @@ ARG KEPUBIFY_RELEASE
 
 LABEL build_version="Version:- ${VERSION}"
 LABEL build_date="${BUILD_DATE}"
-LABEL maintainer="CrocodileStick"
+LABEL maintainer="Mrcoloo"
+LABEL org.opencontainers.image.title="Scriptorium" \
+      org.opencontainers.image.description="A self-hosted library that tends itself. Based on Calibre-Web-Automated." \
+      org.opencontainers.image.source="https://github.com/Mrcoloo/scriptorium-library" \
+      org.opencontainers.image.url="https://github.com/Mrcoloo/scriptorium-library" \
+      org.opencontainers.image.licenses="GPL-3.0-or-later" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.created="${BUILD_DATE}"
 
 # Set the default shell for the following RUN instructions to bash instead of sh
 SHELL ["/bin/bash", "-c"]
@@ -290,7 +297,7 @@ ENV CALIBRE_CONFIG_DIR=/config/.config/calibre
 
 # Ports and volumes
 WORKDIR /config
-# The default port CWA listens on. Can be overridden with the CWA_PORT_OVERRIDE environment variable.
+# The default port Scriptorium listens on. Can be overridden with the CWA_PORT_OVERRIDE environment variable.
 EXPOSE 8083
 VOLUME /config
 VOLUME /cwa-book-ingest

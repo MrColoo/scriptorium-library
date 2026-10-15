@@ -1,14 +1,14 @@
 # =====================================================================
-# This script builds a custom Docker image of Calibre-Web-Automated.
+# This script builds a custom Docker image of Scriptorium (a fork of Calibre-Web-Automated).
 # It clones the upstream repository into a specified local directory,
 # then builds either a development or production image tagged under
 # your Docker Hub username, with versioning and build date metadata.
 #
 # Optional Environment Variables:
 #
-#   REPO_DIR – Local directory where the Calibre-Web-Automated repo
+#   REPO_DIR – Local directory where the Scriptorium repo
 #              will be cloned for building.
-#              Example: export REPO_DIR="$HOME/cwa-repo-download"
+#              Example: export REPO_DIR="$HOME/scriptorium-repo-download"
 #
 #   DH_USER  – Docker Hub username used to tag the built image.
 #              Example: export DH_USER="mydockerusername"
@@ -81,7 +81,7 @@ done
 : "${DH_USER:=}"
 : "${DH_USER_FROM_ARG:=0}"
 : "${REPO_DIR:=}"
-: "${REPO_URL:=https://github.com/crocodilestick/calibre-web-automated.git}"
+: "${REPO_URL:=https://github.com/Mrcoloo/scriptorium-library.git}"
 : "${build_type:=}"
 : "${version:=}"
 : "${testnum:=}"
@@ -108,7 +108,7 @@ if [ ${LOCAL_BUILD} -eq 1 ]; then
   printf 'Doing local build from repo directory: %s\n' "${REPO_DIR}"
 else
   if [ -n "${REPO_DIR}" ]; then
-    echo "The CWA repo will be cloned into: ${REPO_DIR} (configured via \$REPO_DIR)"
+    echo "The Scriptorium repo will be cloned into: ${REPO_DIR} (configured via \$REPO_DIR)"
     read -r -p "Confirm location? [y/N]: " confirm
     case "$confirm" in
     [Yy]*) ;;
@@ -120,7 +120,7 @@ else
   else
     DEFAULT_HOME="${HOME:-}"
     [ -z "${DEFAULT_HOME}" ] && die "Cannot find your home directory, set \$REPO_DIR manually."
-    DEFAULT_REPO_DIR="${DEFAULT_HOME}/cwa-repo-download"
+    DEFAULT_REPO_DIR="${DEFAULT_HOME}/scriptorium-repo-download"
 
     read -r -p "Enter directory for repo files [ENTER for default: ${DEFAULT_REPO_DIR}]: " input_dir
     REPO_DIR="${input_dir:-${DEFAULT_REPO_DIR}}"
@@ -196,10 +196,10 @@ fi
 NOW="$(date +"%Y-%m-%d %H:%M:%S")"
 
 if [ "${build_type}" = "dev" ]; then
-  image_preview="${DH_USER}/calibre-web-automated:dev-$testnum"
+  image_preview="${DH_USER}/scriptorium-library:dev-$testnum"
   version_str="${version}-TEST-${testnum}"
 else
-  image_preview="${DH_USER}/calibre-web-automated:$version"
+  image_preview="${DH_USER}/scriptorium-library:$version"
   version_str="${version}"
 fi
 

@@ -538,7 +538,7 @@ def cwa_container(docker_compose_file: str, test_volumes: dict) -> Generator:
 
     # Runtime configuration
     test_port = os.getenv('CWA_TEST_PORT', '8085')
-    test_image = os.getenv('CWA_TEST_IMAGE', 'crocodilestick/calibre-web-automated:dev')
+    test_image = os.getenv('CWA_TEST_IMAGE', 'ghcr.io/mrcoloo/scriptorium-library:dev')
     test_uid, test_gid = _get_test_uid_gid()
 
     # Create a temporary docker-compose override for testing

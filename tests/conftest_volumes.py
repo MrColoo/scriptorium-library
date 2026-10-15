@@ -329,7 +329,7 @@ def cwa_container_dind(test_volumes_dind):
         "-e", f"PGID={test_gid}",
         "-v", f"{library_volume}:/calibre-library",
         "-v", f"{ingest_volume}:/cwa-book-ingest",
-        "crocodilestick/calibre-web-automated:latest"
+        "ghcr.io/mrcoloo/scriptorium-library:latest"
     ], check=True, capture_output=True)
     
     print("   Waiting for container readiness...", end="", flush=True)

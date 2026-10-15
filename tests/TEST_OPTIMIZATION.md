@@ -139,7 +139,7 @@ def test_something_that_might_hang():
 ### 2. Cache Docker Images
 ```yaml
 - name: Pull Docker image
-  run: docker pull crocodilestick/calibre-web-automated:latest
+  run: docker pull ghcr.io/mrcoloo/scriptorium-library:latest
   
 - name: Cache Docker layers
   uses: actions/cache@v3

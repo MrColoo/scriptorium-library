@@ -153,7 +153,7 @@ jobs:
           context: .
           push: false
           load: true
-          tags: crocodilestick/calibre-web-automated:latest
+          tags: ghcr.io/mrcoloo/scriptorium-library:test
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -172,7 +172,7 @@ jobs:
             --junitxml=integration-results.xml
         env:
           CWA_TEST_PORT: "8083"  # CI uses production default port
-          CWA_TEST_IMAGE: "crocodilestick/calibre-web-automated:latest"
+          CWA_TEST_IMAGE: "ghcr.io/mrcoloo/scriptorium-library:test"
         timeout-minutes: 30  # Kill if stuck
       
       - name: Upload test results

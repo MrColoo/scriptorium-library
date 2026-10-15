@@ -54,7 +54,7 @@ def download_file(url: str, dest: Path, max_retries: int = 3) -> bool:
             req = urllib.request.Request(
                 url,
                 headers={
-                    'User-Agent': 'CWA-Test-Suite/1.0 (https://github.com/crocodilestick/Calibre-Web-Automated)'
+                    'User-Agent': 'Scriptorium-Test-Suite/1.0 (https://github.com/Mrcoloo/scriptorium-library)'
                 }
             )
             

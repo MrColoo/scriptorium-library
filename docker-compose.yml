@@ -1,44 +1,28 @@
----
+# Scriptorium — https://github.com/Mrcoloo/scriptorium-library
+# Start with:  docker compose up -d   then open http://<your-server>:8083 (admin / admin123)
 services:
-  calibre-web-automated:
-    image: crocodilestick/calibre-web-automated:latest
-    container_name: calibre-web-automated
+  scriptorium:
+    image: ghcr.io/mrcoloo/scriptorium-library:latest
+    container_name: scriptorium
     environment:
-      # Only change these if you know what you're doing
-      - PUID=1000
-      - PGID=1000
-      # Edit to match your current timezone e.g. Europe/London, America/New_York - https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-      - TZ=Europe/London
-      # Sets the listening port for the application. Defaults to 8083.
-      # - CWA_PORT_OVERRIDE=8083
-      # Hardcover API Key required for Hardcover as a Metadata Provider, get one here: https://docs.hardcover.app/api/getting-started/
-      - HARDCOVER_TOKEN=your_hardcover_api_key_here
-      # If your library is on a network share (e.g., NFS/SMB), disables WAL and chown to reduce locking/permission issues,
-      # and switches file watching to polling (more reliable on network mounts) instead of inotify.
-      # Accepts: true/false (default: false)
-      - NETWORK_SHARE_MODE=false
-      # If you want to force polling mode regardless of share type, set CWA_WATCH_MODE=poll
-      # - CWA_WATCH_MODE=poll
-      # If running behind multiple proxies (e.g., Cloudflare Tunnel + reverse proxy), set the total number of proxies
-      # This ensures proper IP detection for session protection and rate limiting (default: 1)
-      # - TRUSTED_PROXY_COUNT=2
-      # Skip the automatic library detection/mount at startup. When enabled, the auto-library service will not run.
-      # Accepts: true/yes/1 to disable auto-mount (default: false)
-      # - DISABLE_LIBRARY_AUTOMOUNT=false
+      - PUID=1000            # owner of the files on your volumes: run `id -u`
+      - PGID=1000            # run `id -g`
+      - TZ=Europe/London     # your time zone, e.g. Europe/Rome, America/New_York
+      # Optional — see README "Environment variables":
+      # - HARDCOVER_TOKEN=your_hardcover_api_key   # Hardcover as a metadata provider
+      # - NETWORK_SHARE_MODE=true                  # library or config on NFS/SMB
+      # - TRUSTED_PROXY_COUNT=2                    # more than one reverse proxy in front
+      # - CWA_PORT_OVERRIDE=8083                   # port inside the container
     volumes:
-      # CW users migrating should stop their existing CW instance, make a copy of the config folder, and bind that here to carry over all of their user settings etc.
-      - /path/to/config/folder:/config
-      # This is an ingest dir, NOT a library one. Anything added here will be automatically added to your library according to the settings you have configured in CWA Settings page. All files placed here are REMOVED AFTER PROCESSING
-      - /path/to/the/folder/you/want/to/use/for/book/ingest:/cwa-book-ingest
-      # If you don't have an existing library, CWA will automatically create one at the bind provided here
-      - /path/to/your/calibre/library:/calibre-library
-      # If you use calibre plugins, you can bind your plugins folder here to have CWA attempt to add them to it's workflow (WIP)
-      # If you are starting with a fresh install, you also need to copy customize.py.json to the Calibre config volume above, in /path/to/config/folder/.config/calibre/customize.py.json, see the README for more info
-      - /path/to/your/calibre/plugins/folder:/config/.config/calibre/plugins
+      # Settings, users, logs and backups. Back this folder up.
+      - ./config:/config
+      # Drop zone: books placed here are imported, then REMOVED from this folder.
+      - ./ingest:/cwa-book-ingest
+      # Your Calibre library. Empty folder = a new library is created for you.
+      - ./library:/calibre-library
+      # Optional: Calibre plugins for conversion (also copy customize.py.json, see docs/installation.md)
+      # - ./calibre-plugins:/config/.config/calibre/plugins
     ports:
-      # Change the first number to change the port you want to access the Web UI, not the second
-      - 8083:8083
-    # If you set CWA_PORT_OVERRIDE to a port below 1024, you may need to uncomment the following line:
-    # cap_add:
-    #   - NET_BIND_SERVICE
+      - 8083:8083            # change the left number to use another port on your host
     restart: unless-stopped
+    # The image ships a healthcheck; `docker ps` shows the container as healthy once it is up.
