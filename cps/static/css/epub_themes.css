@@ -1,19 +1,7 @@
-.lightTheme {
-	background: #fff;
-	color: #000;
-}
-
-.darkTheme {
-	background: #202124;
-	color: #fff
-}
-
-.sepiaTheme {
-	background: #ece1ca;
-	color: #000;
-}
-
-.blackTheme {
-	background: #000;
-	color: #fff;
-}
+/* Injected into the book's iframe by epub.js; colours match the reader chrome. */
+.lightTheme { background: #ffffff; color: #26262b; }
+.sepiaTheme { background: #f4ecd8; color: #433422; }
+.darkTheme { background: #1c1c1f; color: #e6e6e9; }
+.blackTheme { background: #000000; color: #d8d8dc; }
+.darkTheme a, .blackTheme a { color: #9ab8ff; }
+.sepiaTheme a { color: #7a4f1d; }

@@ -193,8 +193,8 @@ def create_app():
                          res['found']))
     app.wsgi_app = ReverseProxied(app.wsgi_app)
 
-    if os.environ.get('FLASK_DEBUG'):
-        cache_buster.init_cache_busting(app)
+    # Versioned static URLs: browsers must not keep stale CSS/JS after an upgrade.
+    cache_buster.init_cache_busting(app)
     log.info('Starting Calibre Web...')
     Principal(app)
     lm.init_app(app)

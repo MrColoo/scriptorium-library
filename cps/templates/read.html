@@ -1,242 +1,116 @@
+{%- import "_macros.html" as ui with context -%}
 <!DOCTYPE html>
-<html class="no-js">
-
+<html lang="{{ current_user.locale or 'en' }}" data-reader-theme="lightTheme">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>{{_('epub Reader')}} | {{title}}</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    {% if g.google_site_verification|length > 0 %}
-    <meta name="google-site-verification" content="{{g.google_site_verification}}">
-    {% endif %}
-    <link rel="apple-touch-icon" sizes="140x140" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/libs/normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/popup.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/reader.css') }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{{ title }} · {{ _('Reader') }}</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/popup.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/epub-reader.css') }}">
 </head>
+<body class="reader">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <aside id="sidebar" aria-label="{{ _('Contents') }}">
+    <div id="panels" role="tablist">
+      <a id="show-Toc" class="show_view active" data-view="Toc" role="tab" tabindex="0">{{ ui.icon('list') }}<span>{{ _('Contents') }}</span></a>
+      <a id="show-Bookmarks" class="show_view" data-view="Bookmarks" role="tab" tabindex="0">{{ ui.icon('bookmark') }}<span>{{ _('Bookmarks') }}</span></a>
+    </div>
+    <div id="tocView" class="view"></div>
+    <div id="bookmarksView" class="view"><ul id="bookmarks"></ul></div>
+  </aside>
 
-<body>
-    <div id="sidebar">
-        <div id="panels">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <!--input id="searchBox" placeholder="search" type="search"-->
+  <div id="main">
+    <header id="titlebar">
+      <div id="opener">
+        <a id="slider" class="icon-menu reader-btn" role="button" tabindex="0" title="{{ _('Contents') }}" aria-label="{{ _('Contents') }}">{{ ui.icon('menu', 'when-closed') }}{{ ui.icon('x', 'when-open') }}</a>
+        <a class="reader-btn" href="{{ url_for('web.show_book', book_id=bookid) }}" title="{{ _('Back to book') }}" aria-label="{{ _('Back to book') }}">{{ ui.icon('arrow-left') }}</a>
+      </div>
+      <div id="metainfo">
+        <span id="book-title"></span>
+        <span id="title-seperator" aria-hidden="true">·</span>
+        <span id="chapter-title"></span>
+      </div>
+      <div id="title-controls">
+        <a id="bookmark" class="icon-bookmark-empty reader-btn" role="button" tabindex="0" title="{{ _('Bookmark') }}" aria-label="{{ _('Bookmark') }}">{{ ui.icon('bookmark', 'when-empty') }}{{ ui.icon('bookmark-filled', 'when-set') }}</a>
+        <a id="setting" class="reader-btn" role="button" tabindex="0" title="{{ _('Settings') }}" aria-label="{{ _('Settings') }}">{{ ui.icon('type') }}</a>
+        <a id="fullscreen" class="icon-resize-full reader-btn" role="button" tabindex="0" title="{{ _('Fullscreen') }}" aria-label="{{ _('Fullscreen') }}">{{ ui.icon('maximize', 'when-small') }}{{ ui.icon('minimize', 'when-full') }}</a>
+      </div>
+    </header>
 
-            <!--a id="show-Search" class="show_view icon-search" data-view="Search">Search</a-->
-            <a id="show-Toc" class="show_view icon-list-1 active" data-view="Toc">TOC</a>
-            <a id="show-Bookmarks" class="show_view icon-bookmark" data-view="Bookmarks">Bookmarks</a>
-            <a id="back-button" data-view="Back to Books" href="{{ url_for('web.index') }}">Books</a>
-            <!--a id="show-Notes" class="show_view icon-edit" data-view="Notes">Notes</a-->
+    <div id="divider"></div>
+    <div id="prev" class="arrow" role="button" aria-label="{{ _('Previous page') }}">{{ ui.icon('chevron-left') }}</div>
+    <div id="viewer"></div>
+    <div id="next" class="arrow" role="button" aria-label="{{ _('Next page') }}">{{ ui.icon('chevron-right') }}</div>
+    <div id="progress" aria-live="polite">0%</div>
+    <div id="loader" role="status" aria-label="{{ _('Loading…') }}"><span class="spinner"></span></div>
+  </div>
 
+  <div class="modal md-effect-1" id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-h">
+    <div class="md-content">
+      <div class="reader-settings">
+        <div class="row-between">
+          <h2 id="settings-h">{{ _('Reading settings') }}</h2>
+          <button class="closer btn btn-ghost btn-icon" type="button" aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button>
         </div>
-        <div id="tocView" class="view">
-        </div>
-        <!--div id="searchView" class="view">
-          <ul id="searchResults"></ul>
-        </div-->
-        <div id="bookmarksView" class="view">
-            <ul id="bookmarks"></ul>
-        </div>
-        <!--div id="notesView" class="view">
-          <div id="new-note">
-            <textarea id="note-text"></textarea>
-            <button id="note-anchor">Anchor</button>
+        <fieldset class="reader-field">
+          <legend>{{ _('Theme') }}</legend>
+          <div class="theme-swatches" id="themes">
+            <button type="button" id="lightTheme" class="swatch lightTheme" data-reader-theme-set="lightTheme"><span aria-hidden="true">Aa</span>{{ _('Light') }}</button>
+            <button type="button" id="sepiaTheme" class="swatch sepiaTheme" data-reader-theme-set="sepiaTheme"><span aria-hidden="true">Aa</span>{{ _('Sepia') }}</button>
+            <button type="button" id="darkTheme" class="swatch darkTheme" data-reader-theme-set="darkTheme"><span aria-hidden="true">Aa</span>{{ _('Dark') }}</button>
+            <button type="button" id="blackTheme" class="swatch blackTheme" data-reader-theme-set="blackTheme"><span aria-hidden="true">Aa</span>{{ _('Black') }}</button>
           </div>
-          <ol id="notes"></ol>
-        </div-->
-    </div>
-    <div id="main">
-
-        <div id="titlebar">
-            <div id="opener">
-                <a id="slider" class="icon-menu">Menu</a>
-            </div>
-            <div id="metainfo">
-	            <span id="book-title"></span>
-	            <span id="title-seperator">&nbsp;&nbsp;–&nbsp;&nbsp;</span>
-	            <span id="chapter-title"></span>
-	        </div>
-	        <div id="title-controls">
-	            <a id="bookmark" class="icon-bookmark-empty">Bookmark</a>
-	            <a id="setting" class="icon-cog">Settings</a>
-	            <a id="fullscreen" class="icon-resize-full">Fullscreen</a>            
-	        </div>
-	    </div>
-
-	    <div id="divider"></div>
-	    <div id="prev" class="arrow">‹</div>
-	    <div id="viewer"></div>
-	    <div id="next" class="arrow">›</div>
-	    <div id="progress">0%</div>
-	    <div id="loader"><img src="{{ url_for('static', filename='img/loader.gif') }}"></div>
-	</div>
-    <div class="modal md-effect-1" id="settings-modal">
-        <div class="md-content">
-            <h3>{{_('Settings')}}</h3>
-            <div class="form-group themes" id="themes">
-                Choose a theme below: <br />
-
-                <!-- Hardcoded a tick in the light theme button because it is the "default" theme. Need to find a way to do this dynamically on startup-->
-                <button type="button" id="lightTheme" class="lightTheme" onclick="selectTheme(this.id)"><span
-                        id="lightSelected">✓</span>{{_('Light')}}</button>
-                <button type="button" id="darkTheme" class="darkTheme" onclick="selectTheme(this.id)"><span
-                        id="darkSelected"> </span>{{_('Dark')}}</button>
-                <button type="button" id="sepiaTheme" class="sepiaTheme" onclick="selectTheme(this.id)"><span
-                        id="sepiaSelected"> </span>{{_('Sepia')}}</button>
-                <button type="button" id="blackTheme" class="blackTheme" onclick="selectTheme(this.id)"><span
-                        id="blackSelected"> </span>{{_('Black')}}</button>
-            </div>
-            <div class="form-group">
-                <p>
-                    <input type="checkbox" id="sidebarReflow"
-                        name="sidebarReflow">{{_('Reflow text when sidebars are open.')}}
-                </p>
-            </div>
-            <div class="form-group fontSizeWrapper">
-                <div class="slider">
-                    <label for="fader">{{ _('Font Sizes') }}</label>
-                    <input type="range" min="75" max="200" value="100" id="fontSizeFader" step="25">
-                </div>            
-            </div>
-              <div class="font" id="font">
-                <label class="item">{{_('Font')}}:</label>
-                <button type="button" id="default" onclick="selectFont(this.id)"><span>✓</span>{{_('Default')}}</button> 
-                <button type="button" id="Yahei" onclick="selectFont(this.id)"><span></span>{{_('Yahei')}}</button>
-                <button type="button" id="SimSun" onclick="selectFont(this.id)"><span></span>{{_('SimSun')}}</button>
-                <button type="button" id="KaiTi" onclick="selectFont(this.id)"><span></span>{{_('KaiTi')}}</button>
-                <button type="button" id="Arial" onclick="selectFont(this.id)"><span></span>{{_('Arial')}}</button>
-              </div>
-              <div class="layou" id="layout">
-                <label class="item">{{ _('Spread') }}:</label>
-                <button type="button" id="spread" onclick="spread(this.id)"><span>✓</span>{{_('Two columns')}}</button>
-                <button type="button" id="nonespread" onclick="spread(this.id)"><span></span>{{_('One column')}}</button>
-              </div>            
-            <div class="closer icon-cancel-circled"></div>
+        </fieldset>
+        <div class="reader-field">
+          <label for="fontSizeFader">{{ _('Text size') }} <output id="fontSizeValue">100%</output></label>
+          <input type="range" min="75" max="200" value="100" id="fontSizeFader" step="25">
         </div>
+        <fieldset class="reader-field">
+          <legend>{{ _('Font') }}</legend>
+          <div class="segmented" id="font">
+            <button type="button" id="default" data-reader-font="default">{{ _('Book default') }}</button>
+            <button type="button" id="Arial" data-reader-font="Arial">Sans</button>
+            <button type="button" id="Yahei" data-reader-font="Yahei">{{ _('Yahei') }}</button>
+            <button type="button" id="SimSun" data-reader-font="SimSun">{{ _('SimSun') }}</button>
+            <button type="button" id="KaiTi" data-reader-font="KaiTi">{{ _('KaiTi') }}</button>
+          </div>
+        </fieldset>
+        <fieldset class="reader-field">
+          <legend>{{ _('Layout') }}</legend>
+          <div class="segmented" id="layout">
+            <button type="button" id="spread" data-reader-spread="spread">{{ _('Two columns') }}</button>
+            <button type="button" id="nonespread" data-reader-spread="nonespread">{{ _('One column') }}</button>
+          </div>
+        </fieldset>
+        <label class="switch-row"><input type="checkbox" class="switch" id="sidebarReflow" name="sidebarReflow"><span>{{ _('Reflow text when sidebars are open.') }}</span></label>
+      </div>
     </div>
-    <div class="overlay"></div>
-    <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/compress/jszip_epub.min.js') }}">
-    </script>
-    <script src="{{ url_for('static', filename='js/libs/epub.min.js') }}"></script>
-    <script type="text/javascript">
-        window.calibre = {
-            filePath: "{{ url_for('static', filename='js/libs/') }}",
-            cssPath: "{{ url_for('static', filename='css/') }}",
-            bookmarkUrl: "{{ url_for('web.set_bookmark', book_id=bookid, book_format=book_format|upper) }}",
-            bookUrl: "{{ url_for('web.serve_book', book_id=bookid, book_format=book_format, anyname='file.epub') }}",
-            bookmark: "{{ bookmark.bookmark_key if bookmark != None }}",
-            useBookmarks: "{{ current_user.is_authenticated | tojson }}",
-            kosyncPercent: {{ kosync_progress | tojson if kosync_progress is not none else 'null' }}
-        };
+  </div>
+  <div class="overlay"></div>
 
-        window.themes = {
-            "darkTheme": {
-                "bgColor": "#202124",
-                "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
-                "title-color": "#fff"
-            },
-            "lightTheme": {
-                "bgColor": "white",
-                "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
-                "title-color": "#4f4f4f"
-            },
-            "sepiaTheme": {
-                "bgColor": "#ece1ca",
-                "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
-                "title-color": "#4f4f4f"
-            },
-            "blackTheme": {
-                "bgColor": "black",
-                "css_path": "{{ url_for('static', filename='css/epub_themes.css') }}",
-                "title-color": "#fff"
-            },
-        };
-
-        function selectTheme (id) {
-            let tickSpans = document.getElementById("themes").querySelectorAll("span");
-            // Remove tick mark from all theme buttons
-            tickSpans.forEach(function (tickSpan) {
-              document.getElementById(tickSpan.id).textContent = "";
-            });
-            // Add tick mark to the button corresponding to the currently selected theme
-            document.getElementById(id).querySelector("span").textContent = "✓";
-            // Saving theme to local storage
-            localStorage.setItem("calibre.reader.theme", id);
-            // Apply theme to epubjs iframe
-            reader.rendition.themes.select(id);
-            // Apply theme to rest of the page. 
-            document.getElementById("main").style.backgroundColor = themes[id]["bgColor"];
-            document.getElementById("titlebar").style.color = themes[id]["title-color"] || "#fff";
-          }
-
-        // Font size and font logic (wait for reader to be ready)
-        let defaultFont;
-        window.selectFont = function(id) {
-          if (!defaultFont) {
-            try {
-              defaultFont = reader.rendition.getContents()[0]?.css('font-family');
-            } catch (e) { defaultFont = null; }
-          }
-          let spans = document.getElementById("font").querySelectorAll("span");
-          for(var i = 0; i < spans.length; i++) {
-            spans[i].textContent = "";
-          }
-          document.getElementById(id).querySelector("span").textContent = "✓";
-          localStorage.setItem("calibre.reader.font", id);
-          if (id == 'default' && defaultFont) {
-            reader.rendition.themes.font(defaultFont);
-            return;
-          }
-          reader.rendition.themes.font(id);
-        }
-
-        window.spread = function(id) {
-          let spans = document.getElementById("layout").querySelectorAll("span");
-          for(var i = 0; i < spans.length; i++) {
-            spans[i].textContent = "";
-          }
-          document.getElementById(id).querySelector("span").textContent = "✓";
-          localStorage.setItem("calibre.reader.spread", id);
-          reader.rendition.spread(id==='spread'?true:'none');
-        }
-
-        // Font size slider logic
-        document.addEventListener("DOMContentLoaded", function() {
-          let fontSizeFader = document.getElementById('fontSizeFader');
-          if (fontSizeFader) {
-            let savedFontSize = localStorage.getItem("calibre.reader.fontSize");
-            if (savedFontSize) {
-              fontSizeFader.value = savedFontSize;
-            }
-            fontSizeFader.addEventListener("change", function () {
-              reader.rendition.themes.fontSize(`${this.value}%`);
-              localStorage.setItem("calibre.reader.fontSize", this.value);
-            });
-          }
-        });
-
-        // Reflow logic
-        document.addEventListener("DOMContentLoaded", function() {
-          let reflowBox = document.getElementById('sidebarReflow');
-          if (reflowBox) {
-            let savedReflow = localStorage.getItem("calibre.reader.reflow");
-            if (savedReflow !== null) {
-              reflowBox.checked = savedReflow === 'true';
-            }
-            reflowBox.addEventListener("change", function() {
-              localStorage.setItem("calibre.reader.reflow", this.checked);
-            });
-          }
-        });
-      </script>
-      <script src="{{ url_for('static', filename='js/libs/screenfull.min.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/libs/reader.min.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/reading/epub.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/reading/epub-progress.js') }}"></script>      
-    </body>
+  <script type="application/json" id="reader-config">{{ {
+    'filePath': url_for('static', filename='js/libs/'),
+    'cssPath': url_for('static', filename='css/'),
+    'bookmarkUrl': url_for('web.set_bookmark', book_id=bookid, book_format=book_format|upper),
+    'bookUrl': url_for('web.serve_book', book_id=bookid, book_format=book_format, anyname='file.epub'),
+    'bookmark': bookmark.bookmark_key if bookmark else '',
+    'useBookmarks': current_user.is_authenticated and not current_user.is_anonymous,
+    'kosyncPercent': kosync_progress if kosync_progress is defined else none,
+    'themeCss': url_for('static', filename='css/epub_themes.css'),
+    'i18n': {'open_failed': _('This EPUB could not be opened. It may be damaged or DRM-protected.'), 'load_failed': _('Something went wrong while loading this book.')}
+  }|tojson }}</script>
+  <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/compress/jszip_epub.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/libs/epub.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/reading/epub-config.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/libs/screenfull.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/libs/reader.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/reading/epub.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/reading/epub-progress.js') }}"></script>
+</body>
 </html>

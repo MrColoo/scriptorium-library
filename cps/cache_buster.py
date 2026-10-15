@@ -28,28 +28,37 @@ def init_cache_busting(app):
 
     static_folder = os.path.join(app.static_folder, '')  # path to the static file folder, with trailing slash
 
-    hash_table = {}  # map of file hashes
+    hash_table = {}  # web path -> (mtime, short hash)
+
+    def file_version(rooted_filename):
+        with open(rooted_filename, 'rb') as f:
+            return hashlib.md5(f.read(), usedforsecurity=False).hexdigest()[:7]
 
     log.debug('Computing cache-busting values...')
-    # compute file hashes
     for dirpath, __, filenames in os.walk(static_folder):
         for filename in filenames:
-            # compute version component
             rooted_filename = os.path.join(dirpath, filename)
+            file_path = rooted_filename.replace(static_folder, "").replace("\\", "/")
             try:
-                with open(rooted_filename, 'rb') as f:
-                    file_hash = hashlib.md5(f.read()).hexdigest()[:7]  # nosec
-                # save version to tables
-                file_path = rooted_filename.replace(static_folder, "")
-                file_path = file_path.replace("\\", "/")  # Convert Windows path to web path
-                hash_table[file_path] = file_hash
+                hash_table[file_path] = (os.path.getmtime(rooted_filename), file_version(rooted_filename))
             except PermissionError:
                 log.error("No permission to access {} file.".format(rooted_filename))
-
     log.debug('Finished computing cache-busting values')
 
     def bust_filename(file_name):
-        return hash_table.get(file_name, "")
+        entry = hash_table.get(file_name)
+        if not entry:
+            return ""
+        # Re-hash files changed since startup (development, hot fixes) so their URL changes too.
+        rooted_filename = os.path.join(static_folder, file_name)
+        try:
+            mtime = os.path.getmtime(rooted_filename)
+            if mtime != entry[0]:
+                entry = (mtime, file_version(rooted_filename))
+                hash_table[file_name] = entry
+        except OSError:
+            pass
+        return entry[1]
 
     def unbust_filename(file_name):
         return file_name.split("?", 1)[0]

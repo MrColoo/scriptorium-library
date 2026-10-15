@@ -23,25 +23,30 @@ var reader;
         }
         var viewer = document.getElementById("viewer");
         if (viewer) {
-            viewer.innerHTML = "<div class=\"reader-error\">" + message + "</div>";
+            var box = document.createElement("div");
+            box.className = "reader-error";
+            box.textContent = message;
+            viewer.textContent = "";
+            viewer.appendChild(box);
         }
     }
+    var i18n = calibre.i18n || {};
 
     if (reader && reader.book && typeof reader.book.on === 'function') {
         reader.book.on("openFailed", function(error) {
-            showReaderError("Failed to open this EPUB. It may be corrupted or DRM-protected.", error);
+            showReaderError(i18n.open_failed || "Failed to open this EPUB.", error);
         });
         reader.book.on("error", function(error) {
-            showReaderError("An error occurred while loading this EPUB.", error);
+            showReaderError(i18n.load_failed || "An error occurred while loading this EPUB.", error);
         });
     }
 
     if (reader && reader.rendition && typeof reader.rendition.on === 'function') {
         reader.rendition.on("displayerror", function(error) {
-            showReaderError("Unable to display this EPUB content.", error);
+            showReaderError(i18n.load_failed || "Unable to display this EPUB content.", error);
         });
         reader.rendition.on("loaderror", function(error) {
-            showReaderError("Unable to load this EPUB resource.", error);
+            showReaderError(i18n.load_failed || "Unable to load this EPUB resource.", error);
         });
     }
 
@@ -100,18 +105,20 @@ var reader;
             }.bind(this));
         }
         
-        var csrftoken = $("input[name='csrf_token']").val();
-
-        // Save to database
-        $.ajax(calibre.bookmarkUrl, {
-            method: "post",
-            data: { bookmark: location || "" },
-            headers: { "X-CSRFToken": csrftoken }
-        }).fail(function (xhr, status, error) {
-            alert(error);
+        var body = new URLSearchParams();
+        body.set("bookmark", location || "");
+        fetch(calibre.bookmarkUrl, {
+            method: "POST",
+            credentials: "same-origin",
+            headers: { "X-CSRFToken": document.querySelector("meta[name='csrf-token']").content },
+            body: body
+        }).then(function (r) {
+            if (!r.ok) throw new Error(r.statusText);
+        }).catch(function (err) {
+            console.error("Could not save the bookmark", err);
         });
     }
-    
+
     // Restore all settings after DOM and reader are ready
     document.addEventListener("DOMContentLoaded", function() {
         // Declare reflowBox once and reuse

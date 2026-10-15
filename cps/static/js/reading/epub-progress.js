@@ -58,7 +58,8 @@ window.addEventListener('locationchange',()=>{
     }
 });
 
-var epub=ePub(calibre.bookUrl)
+// Reuse the book the reader already opened instead of downloading it a second time.
+var epub = window.reader && window.reader.book;
 
 let progressDiv=document.getElementById("progress");
 
