@@ -1,819 +1,150 @@
 {% extends "layout.html" %}
+{% block body %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _('Duplicates') }}</h1>
+    <span class="page-subtitle">{{ _('Books with the same title, author and language. Editions in different languages are never treated as duplicates.') }}</span>
+  </div>
+  <div class="page-actions">
+    <button class="btn" type="button" id="trigger-scan">{{ ui.icon('refresh') }}<span>{{ _('Run Full Duplicate Scan') if duplicate_index_needs_full_scan else _('Scan now') }}</span></button>
+  </div>
+</div>
+{%- if next_scan_run %}
+<p class="hint">{{ _('Next scheduled scan:') }} <time>{{ next_scan_run }}</time></p>
+{%- endif %}
 
-{% block header %}
-<style>
-  .duplicate-group {
-      margin-bottom: 35px;
-      border: none;
-      border-radius: 12px;
-      padding: 25px;
-      background: #1c28328a;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-  }
-  .duplicate-group:hover {
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-      transform: translateY(-2px);
-  }
-  .duplicate-header {
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 3px solid #e74c3c;
-      background: linear-gradient(90deg, rgba(231, 76, 60, 0.2) 0%, rgba(231, 76, 60, 0.04) 100%);
-      border-radius: 8px;
-      padding: 3rem;
-      margin: -10px -10px 25px -10px;
-  }
-  .duplicate-title {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: white;
-      text-shadow: 0 1px 3px rgba(44, 62, 80, 0.1);
-  }
-  .duplicate-author {
-      font-size: 16px;
-      color: var(--color-primary);
-      margin-bottom: 8px;
-      font-weight: 500;
-  }
-  .duplicate-count {
-      color: white;
-      font-weight: 700;
-      background: linear-gradient(135deg, rgb(231 76 60 / 51%) 0%, rgb(231 76 60 / 42%) 100%);
-      padding: 6px 12px;
-      border-radius: 6px;
-      display: inline-block;
-      border: 1px solid rgba(231, 76, 60, 0.2);
-      text-transform: capitalize;
-  }
-  .books-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      align-items: flex-start;
-  }
-  .book-item {
-      display: flex;
-      max-width: 450px;
-      padding: 20px;
-      border: none;
-      border-radius: 10px;
-      background: #34455185;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-  }
-  .book-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #3498db, #2ecc71, #f39c12, #e74c3c);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-  }
-  .book-item:hover {
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15), 0 3px 6px rgba(0,0,0,0.1);
-      transform: translateY(-3px);
-      border-color: #3498db;
-  }
-  .book-item:hover::before {
-      opacity: 1;
-  }
-  .book-item.selected {
-      border-color: #e74c3c;
-      background: #64859d78;
-      box-shadow: 0 4px 8px rgba(231, 76, 60, 0.15), 0 2px 4px rgba(231, 76, 60, 0.1);
-  }
-  .book-item.selected::before {
-      background: #e74c3c;
-      opacity: 1;
-  }
-  .book-cover {
-      flex-shrink: 0;
-      margin-right: 18px;
-      margin-left: 18px;
-      position: relative;
-  }
-  .book-cover img {
-      width: 85px;
-      height: 125px;
-      object-fit: cover;
-      border-radius: 6px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      border: 1px solid rgba(0,0,0,0.1);
-  }
-  .book-item:hover .book-cover img {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25), 0 2px 6px rgba(0,0,0,0.15);
-  }
-  .book-details {
-      flex: 1;
-      min-width: 0;
-  }
-  .book-checkbox {
-      margin-right: 20px;
-      margin-top: 8px;
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-      accent-color: #e74c3c;
-      transform: scale(1.2);
-  }
-    .book-title {
-        font-weight: 600;
-        margin-bottom: 12px;
-        line-height: 1.3;
-        color: white;
-        font-size: 15px;
-        text-shadow: 0 1px 2px rgba(44, 62, 80, 0.1);
-    }
-  .book-title-link {
-      color: white;
-      text-decoration: none;
-      transition: color 0.2s ease;
-  }
-  .book-title-link:hover {
-      color: #3498db;
-      text-decoration: none;
-  }
-  .book-cover a {
-      display: block;
-      text-decoration: none;
-  }
-  .book-actions {
-      margin-top: 12px;
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-  }
-  .book-action-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 12px;
-      background: rgba(52, 152, 219, 0.2);
-      border: 1px solid rgba(52, 152, 219, 0.4);
-      border-radius: 4px;
-      color: #3498db;
-      font-size: 12px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
-  }
-  .book-action-btn:hover {
-      background: rgba(52, 152, 219, 0.3);
-      border-color: #3498db;
-      color: #5dade2;
-      text-decoration: none;
-      transform: translateY(-1px);
-  }
-  .book-action-btn .glyphicon {
-      font-size: 11px;
-  }
-  .book-meta {
-      color: white;
-      font-size: 13px;
-      line-height: 1.5;
-      font-weight: 400;
-  }
-  .book-meta div {
-      margin-bottom: 6px;
-      color: white !important;
-  }
-.book-meta strong {
-    color: var(--color-primary);
-    font-weight: 600;
-}
-.no-duplicates {
-    text-align: center;
-    padding: 60px 20px;
-    color: #f9be03;
-    background: linear-gradient(135deg, #3e474c 0%, #00101a 100%);
-    border-radius: 10px;
-    border: 0px solid #dee2e6;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-  .no-duplicates h3 {
-      color: whitesmoke;
-      margin-bottom: 15px;
-  }
-  h2 {
-      color: #2c3e50;
-      font-weight: 600;
-      margin-bottom: 20px;
-      text-shadow: 0 1px 3px rgba(44, 62, 80, 0.1);
-  }
-  .text-muted {
-      color: whitesmoke !important;
-  }
-  #success_modal .modal-content {
-      background: #252525;
-      border: 1px solid rgba(46, 204, 113, 0.45);
-      border-radius: 6px;
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45);
-      color: #f4f4f4;
-      overflow: hidden;
-  }
-  #success_modal .modal-header {
-      background: linear-gradient(135deg, #1f8f46 0%, #28a745 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      color: #fff;
-      padding: 18px 24px;
-  }
-  #success_modal .modal-header span {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-  }
-  #success_modal .modal-body {
-      color: #f4f4f4;
-      padding: 26px 30px 22px;
-  }
-  #success_modal .success-icon {
-      animation: success-bounce 0.6s ease-out;
-      color: #2ecc71;
-      font-size: 52px;
-      margin-bottom: 20px;
-      text-shadow: 0 0 22px rgba(46, 204, 113, 0.28);
-  }
-  #success_modal .modal-footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 18px 30px;
-  }
-  #success_modal .modal-footer .btn {
-      margin: 0;
-      min-height: 46px;
-      min-width: 76px;
-      line-height: 1.2;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-  }
-  #success_modal .resolution-success-summary {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 8px;
-  }
-  #success_modal .resolution-success-stat {
-      background: rgba(46, 204, 113, 0.09);
-      border: 1px solid rgba(46, 204, 113, 0.22);
-      border-radius: 5px;
-      padding: 14px 10px;
-      text-align: center;
-  }
-  #success_modal .resolution-success-value {
-      color: #8af0ad;
-      display: block;
-      font-size: 24px;
-      font-weight: 800;
-      line-height: 1.1;
-  }
-  #success_modal .resolution-success-label {
-      color: #d7d7d7;
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      margin-top: 7px;
-      text-transform: uppercase;
-  }
-  @keyframes success-bounce {
-      0% { transform: scale(0.3); opacity: 0; }
-      50% { transform: scale(1.1); opacity: 0.8; }
-      100% { transform: scale(1); opacity: 1; }
-  }
-  /* Error Modal Styling */
-  #error_modal .modal-header {
-      background-color: #dc3545;
-      color: white;
-      border-radius: 6px 6px 0 0;
-  }
-  #error_modal .modal-content {
-      border-radius: 6px;
-      border: none;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.2), 0 3px 6px rgba(0,0,0,0.1);
-  }
-  #error_modal .modal-body {
-      padding: 30px;
-  }
-  #error_modal .error-icon {
-      animation: error-shake 0.6s ease-out;
-  }
-  @keyframes error-shake {
-      0%, 100% { transform: translateX(0); }
-      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-      20%, 40%, 60%, 80% { transform: translateX(5px); }
-  }
-  #execute_resolution_modal .modal-content {
-      background: #252525;
-      border: 1px solid rgba(229, 144, 41, 0.55);
-      border-radius: 6px;
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45);
-      color: #f4f4f4;
-      overflow: hidden;
-  }
-  #execute_resolution_modal .modal-header {
-      background: linear-gradient(135deg, #8f2f24 0%, #c9512c 100%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      color: #fff;
-      padding: 18px 24px;
-  }
-  #execute_resolution_modal .modal-header span {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-  }
-  #execute_resolution_modal .modal-body {
-      color: #f4f4f4;
-      font-size: 15px;
-      line-height: 1.55;
-      padding: 24px;
-  }
-  #execute_resolution_modal .strategy-summary {
-      background: rgba(229, 144, 41, 0.12);
-      border-left: 4px solid #e59029;
-      border-radius: 4px;
-      margin: 18px 0;
-      padding: 12px 14px;
-  }
-  #execute_resolution_modal .danger-note {
-      color: #ffcfbf;
-      font-weight: 700;
-      margin-bottom: 0;
-  }
-  #execute_resolution_modal .modal-footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 12px;
-      padding: 18px 30px;
-  }
-  #execute_resolution_modal .modal-footer .btn,
-  #execute_resolution_modal .modal-footer input.btn {
-      margin: 0;
-      min-height: 46px;
-      line-height: 1.2;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-  }
-  .bulk-actions {
-      margin-bottom: 30px;
-      padding: 20px;
-      background: #1c2832;
-      border-radius: 10px;
-      border: none;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  }
-  .btn {
-      display: inline-block;
-      padding: 6px 16px;
-      font-family: Open Sans Bold, Helvetica Neue, Helvetica, Arial, sans-serif;
-      border: 0;
-      margin-bottom: 0;
-      line-height: 1.71428571;
-      text-align: center;
-      border-radius: 3px;
-      white-space: nowrap;
-      user-select: none;
-      transition: background-color .1s;
-  }
-  .btn-default {
-      border-color: #CC7B19;
-      color: #fff;
-      background-color: #CC7B19;
-  }
-  .btn-default:hover {
-      border-color: #E59029;
-      color: #fff;
-      background-color: #E59029;
-  }
-  .btn-danger {
-      color: #fff;
-      background-color: #ac3323;
-      border-color: #ac3323;
-      margin-left: 10px;
-  }
-  .btn-danger:hover:not(.disabled) {
-      background-color: #ce3d2a;
-      border-color: #641e14;
-  }
-  .btn-danger.disabled {
-      background-color: #6c757d;
-      opacity: 0.65;
-      cursor: not-allowed;
-  }
-    .btn-primary {
-      color: #fff;
-      background-color: #3498db;
-      border-color: #3498db;
-    }
-    .btn-primary:hover:not(.disabled) {
-      background-color: #2980b9;
-      border-color: #2471a3;
-    }
-    .btn-primary.disabled {
-      background-color: #6c757d;
-      opacity: 0.65;
-      cursor: not-allowed;
-    }
-  .selection-info {
-      font-weight: 600;
-      color: white;
-      text-shadow: 0 1px 2px rgba(40, 167, 69, 0.1);
-      background: #cc7b1969;
-      padding: 1rem;
-      max-height: 37px;
-      border-radius: 4px;
-      text-transform: capitalize;
-      line-height: normal;
-      padding-inline: 1.5rem;
-  }
-  div.bulk-actions > div.form-inline {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 1rem;
-  }
-  .glyphicon.glyphicon-refresh {
-      font-size: smaller !important;
-      margin-right: 6px;
-  }
-  .container-fluid img {
-      display: block;
-      width: max(10vw,120px) !important;
-      height: auto;
-      max-width: 26rem;
-      margin: auto;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
-  }
-  @media (max-width: 768px) {
-    .books-grid {
-      flex-direction: column;
-    }
-    .book-item {
-      max-width: 100%;
-    }
-  }
-  #duplicate_scan_results_status {
-      display: none;
-  }
-  #duplicate_scan_task_notice {
-      max-width: 720px;
-      margin: 0 auto;
-      color: #ddd;
-  }
-  #duplicate_scan_task_notice .duplicate-scan-progress-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 10px;
-      color: #8bd8ef;
-      font-weight: 600;
-  }
-  #duplicate_scan_task_notice .duplicate-scan-progress {
-      display: block;
-      width: 100%;
-      height: 20px;
-      margin: 6px 0 6px 0;
-      overflow: hidden;
-  }
-</style>
+{%- if duplicate_index_needs_full_scan %}
+<div class="alert alert--warning" id="dup-setup-notice">{{ ui.icon('info') }}
+  <div class="alert-body">
+    <strong>{{ _('Duplicate scanning needs a one-time full scan.') }}</strong>
+    {{ _('It builds the index that keeps duplicate checks fast during imports and metadata edits. On large libraries it can take a few minutes; you can keep using CWA meanwhile.') }}
+  </div>
+</div>
+{%- endif %}
+
+<section class="card" id="dup-scan-status" aria-live="polite" hidden>
+  <div class="row-between">
+    <h2 class="card-title" data-scan-title>{{ _('Duplicate scan is running.') }}</h2>
+    <a class="btn btn-sm btn-ghost" href="{{ url_for('tasks.get_tasks_status') }}">{{ _('Tasks') }}</a>
+  </div>
+  <p class="muted" data-scan-message>{{ _('You can keep using CWA while it runs.') }}</p>
+  <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-scan-progress><span style="width: 0%"></span></div>
+</section>
+
+{%- if duplicate_groups %}
+<div id="dup-results" class="stack">
+  <section class="card" aria-labelledby="resolve-h">
+    <h2 class="card-title" id="resolve-h">{{ _('Resolve automatically') }}</h2>
+    <p class="muted">{{ _('Keep one book per group and delete the others. Preview first to see exactly what changes.') }}</p>
+    <div class="row">
+      <label class="sr-only" for="resolution-strategy">{{ _('Strategy') }}</label>
+      <select class="select grow" id="resolution-strategy">
+        <option value="newest">{{ _('Keep newest') }} — {{ _('delete older copies') }}</option>
+        <option value="oldest">{{ _('Keep oldest') }} — {{ _('delete newer copies') }}</option>
+        <option value="merge">{{ _('Merge formats') }} — {{ _('into the newest copy, then delete the rest') }}</option>
+        <option value="highest_quality_format">{{ _('Best format') }} — {{ _('following your format priority ranking') }}</option>
+        <option value="most_metadata">{{ _('Most metadata') }} — {{ _('keep the most complete record') }}</option>
+        <option value="largest_file_size">{{ _('Largest files') }} — {{ _('keep the biggest total size') }}</option>
+      </select>
+      <button class="btn" type="button" id="preview-resolution">{{ ui.icon('eye') }}{{ _('Preview') }}</button>
+    </div>
+    <p class="hint">{{ _('Deleted books are backed up to %(path)s first.', path='/config/processed_books/duplicate_resolutions/') }}</p>
+  </section>
+
+  <div class="bulk-bar" id="dup-selection" hidden>
+    <span class="small strong" data-selection-count></span>
+    <span class="grow"></span>
+    <button class="btn btn-sm btn-ghost" type="button" data-select="none">{{ _('Clear') }}</button>
+    <button class="btn btn-sm btn-danger" type="button" id="delete-selected">{{ ui.icon('trash') }}{{ _('Delete selected') }}</button>
+  </div>
+  <div class="row">
+    <button class="btn btn-sm btn-ghost" type="button" data-select="duplicates">{{ ui.icon('check') }}{{ _('Select all but the first of each group') }}</button>
+  </div>
+
+  {%- for group in duplicate_groups %}
+  <section class="card dup-group" data-group="{{ group.group_hash }}" aria-labelledby="g{{ loop.index }}">
+    <header class="dup-group-head">
+      <div class="dup-group-title">
+        <h2 class="card-title" id="g{{ loop.index }}">{{ group.title }}</h2>
+        <span class="muted">{{ group.author }} · {{ ngettext('%(num)s copy', '%(num)s copies', group.count, num=group.count) }}</span>
+      </div>
+      <div class="row">
+        <button class="btn btn-sm" type="button" data-merge disabled title="{{ _('Select at least two books in this group') }}">{{ ui.icon('merge') }}{{ _('Merge selected') }}</button>
+        <button class="btn btn-sm btn-ghost" type="button" data-dismiss-group="{{ url_for('duplicates.dismiss_duplicate_group', group_hash=group.group_hash) }}">{{ ui.icon('eye-off') }}{{ _('Not a duplicate') }}</button>
+      </div>
+    </header>
+    <ul class="dup-books" role="list">
+      {%- for book in group.books %}
+      <li class="dup-book">
+        <label class="dup-book-select">
+          <input type="checkbox" value="{{ book.id }}" data-book>
+          <span class="dup-book-cover">{{ ui.cover_img(book, '96px', '') }}</span>
+          <span class="dup-book-meta">
+            <strong class="dup-book-title">{{ book.title }}</strong>
+            <span class="muted small">{{ book.author_names }}</span>
+            <span class="small">{{ _('Added') }} {{ book.timestamp|formatdate }}</span>
+            {%- if book.series %}<span class="small">{{ book.series[0].name }}{% if book.series_index %} #{{ book.series_index|formatfloat(2) }}{% endif %}</span>{% endif %}
+            <span class="chips">{% for data in book.data %}<span class="chip chip--soft">{{ data.format }}</span>{% endfor %}<span class="faint small mono">#{{ book.id }}</span></span>
+          </span>
+        </label>
+        <span class="dup-book-links">
+          <a class="btn btn-sm btn-ghost" href="{{ url_for('web.show_book', book_id=book.id) }}">{{ _('Open') }}</a>
+          <a class="btn btn-sm btn-ghost" href="{{ url_for('edit-book.show_edit_book', book_id=book.id) }}">{{ _('Edit') }}</a>
+        </span>
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+  {%- endfor %}
+</div>
+{%- elif not duplicate_index_needs_full_scan %}
+<div id="dup-results">
+{{ ui.empty_state('copy', _('No duplicates'), _('No two books in your library share the same title, author and language.')) }}
+</div>
+{%- endif %}
 {% endblock %}
 
-{% block body %}
-<div class="discover">
-  <h2>{{title}}</h2>
-  <div class="settings-container" style="margin-top: 3rem; max-width: none; justify-self: auto;">
-    <h2>{{_('CWA Duplicates Manager')}}</h2>
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <p style="color: whitesmoke; margin-bottom: 2rem;" class="text-muted">{{_('Books with matching titles, authors, and languages. Books in different languages are not considered duplicates.')}}</p>
-      
-      <!-- Action bar - always show for manual scan trigger -->
-      <div class="bulk-actions" style="margin-bottom: 20px;">
-        <div class="form-inline">
-          <button type="button" class="btn btn-sm btn-default" id="trigger_scan">
-            <span class="glyphicon glyphicon-refresh"></span>
-            {% if duplicate_index_needs_full_scan %}
-              {{_('Run Full Duplicate Scan')}}
-            {% else %}
-              {{_('Scan for Duplicates Now')}}
-            {% endif %}
-          </button>
-          {% if duplicate_groups %}
-            <button type="button" class="btn btn-sm btn-default" id="select_all">{{_('Select Duplicates')}}</button>
-            <button type="button" class="btn btn-sm btn-default" id="select_none">{{_('Select None')}}</button>
-            <button type="button" class="btn btn-sm btn-danger disabled" id="delete_selected" aria-disabled="true">{{_('Delete Selected')}}</button>
-            <span id="selection_count" class="selection-info"></span>
-          {% endif %}
-        </div>
-
-        {% if next_scan_run %}
-          <div style="margin-top: 10px; color: #bbb; font-size: 12px;">
-            {{_('Next scheduled scan:')}} <span id="next_scan_run">{{ next_scan_run }}</span>
-          </div>
-        {% endif %}
-      </div>
-
-      {% if duplicate_index_needs_full_scan %}
-        <div id="duplicate_index_setup_notice" class="cwa-settings-tip" style="margin: 0 0 24px 0; background: rgba(243, 156, 18, 0.16); border-left: 4px solid #f39c12; padding: 16px; border-radius: 6px;">
-          <strong style="color: #f39c12;">{{_('Duplicate scanning needs a one-time full scan.')}}</strong>
-          <p style="color: #ddd; margin: 8px 0 0 0;">
-            {{_('CWA now uses a duplicate index to keep duplicate checks fast during imports and metadata changes. Before incremental scans can run, the index needs an initial baseline.')}}
-          </p>
-          <p style="color: #bbb; margin: 8px 0 0 0;">
-            {{_('Click "Run Full Duplicate Scan" to build it. This may take several minutes on large libraries, and you can keep using CWA while it runs.')}}
-          </p>
-        </div>
-      {% endif %}
-
-      <div id="duplicate_scan_results_status" class="no-duplicates">
-        <div id="duplicate_scan_task_notice">
-          <h3 id="duplicate_scan_task_title" style="color: #8bd8ef;">{{_('Duplicate scan is running.')}}</h3>
-          <p id="duplicate_scan_task_message">{{_('You can keep using CWA while it runs.')}}</p>
-          <div id="duplicate_scan_task_progress_container">
-            <div class="duplicate-scan-progress-header">
-              <span>{{_('Progress')}}</span>
-              <span id="duplicate_scan_task_progress_label">0%</span>
-            </div>
-            <div class="progress duplicate-scan-progress">
-              <div id="duplicate_scan_task_progress" class="progress-bar progress-bar-info progress-bar-striped active"
-                   role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                   style="width: 0%;"></div>
-            </div>
-          </div>
-          <a id="duplicate_scan_task_link" href="{{ url_for('tasks.get_tasks_status') }}">{{_('View Background Tasks')}}</a>
-        </div>
-      </div>
-      
-      {% if duplicate_groups %}
-
-        <div id="duplicate_results_content">
-        <!-- Auto-Resolution Section -->
-        <div class="settings-container" style="margin-bottom: 30px; padding: 25px; background: #1c28328a; border-radius: 10px; margin-inline: 0rem; max-width: none;">
-          <h4 style="color: white; margin-bottom: 15px; display: flex; align-items: center;">
-            <span class="glyphicon glyphicon-cog" style="margin-right: 10px;"></span>
-            {{_('Auto-Resolve Duplicates')}}
-          </h4>
-          
-          <p style="color: #bbb; margin-bottom: 20px;">
-            {{_('Automatically resolve all duplicate groups by keeping one book and deleting others based on a strategy.')}}
-          </p>
-          
-          <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-            <label for="resolution_strategy" style="color: white; font-weight: 600;">{{_('Strategy:')}}</label>
-            <select id="resolution_strategy" class="form-control" style="background: #1c2832; color: white; border: 1px solid #444;">
-              <option value="newest">{{_('Keep Newest - Delete older copies, keep the most recently added')}}</option>
-              <option value="oldest">{{_('Keep Oldest - Delete newer copies, keep the earliest added')}}</option>
-              <option value="merge">{{_('Merge Formats - Merge formats into the newest book, delete the rest')}}</option>
-              <option value="highest_quality_format">{{_('Keep Highest Quality Format - Prefer formats based on your Duplicate Format Priority Ranking')}}</option>
-              <option value="most_metadata">{{_('Keep Most Metadata - Keep book with most complete information')}}</option>
-              <option value="largest_file_size">{{_('Keep Largest File Size - Keep book with largest total file size')}}</option>
-            </select>
-            
-            <button type="button" class="btn btn-default" id="preview_resolution">
-              <span class="glyphicon glyphicon-eye-open"></span> {{_('Preview')}}
-            </button>
-            
-            <button type="button" class="btn btn-danger disabled" id="execute_resolution" aria-disabled="true">
-              <span class="glyphicon glyphicon-flash"></span> {{_('Execute Resolution')}}
-            </button>
-          </div>
-          
-          <div class="cwa-settings-tip" style="margin-top: 15px; background: rgba(231, 76, 60, 0.15); border-left: 3px solid #e74c3c; padding: 12px; border-radius: 4px;">
-            <strong style="color: #e74c3c;">⚠️ {{_('Warning:')}}</strong>
-            <span style="color: #ddd;">{{_('This will permanently delete books. Original files will be backed up to')}} <code style="background: #2a3441; padding: 2px 6px; border-radius: 3px; color: #f39c12; line-break: anywhere;">/config/processed_books/duplicate_resolutions/</code></span>
-          </div>
-        </div>
-
-        <div class="duplicates-container">
-          {% for group in duplicate_groups %}
-          <div class="duplicate-group" data-group-hash="{{ group.group_hash }}">
-            <div class="duplicate-header" style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="flex: 1;">
-                <div class="duplicate-title">{{ group.title }}</div>
-                <div class="duplicate-author">by {{ group.author }}</div>
-                <div class="duplicate-count">{{ group.count }} duplicate{{ 's' if group.count > 1 else '' }} found</div>
-              </div>
-              <div style="display: flex; gap: 10px; align-items: center;">
-                <button type="button"
-                        class="merge-selected-btn disabled"
-                        aria-disabled="true"
-                        style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s ease; white-space: nowrap; margin-left: 10px;">
-                  <span class="glyphicon glyphicon-link"></span> {{_('Merge Selected')}}</button>
-                <button class="dismiss-duplicate-btn" 
-                        data-group-hash="{{ group.group_hash }}" 
-                        data-dismissed="false"
-                        title="{{_('Dismiss this duplicate group')}}"
-                        style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s ease; white-space: nowrap; margin-left: 10px;">
-                  <span class="glyphicon glyphicon-eye-close"></span> {{_('Dismiss')}}
-                </button>
-              </div>
-            </div>
-            
-            <div class="books-grid">
-              {% for book in group.books %}
-              <div class="book-item" data-book-id="{{ book.id }}">
-                <input type="checkbox" class="book-checkbox" value="{{ book.id }}" data-title="{{ book.title }}" data-authors="{{ book.author_names }}">
-                
-                <div class="book-cover">
-                  <a href="{{ url_for('web.show_book', book_id=book.id) }}" title="{{_('View book details')}}">
-                    <img src="{{ book.cover_url }}" alt="Cover for {{ book.title }}" onerror="this.src='/static/generic_cover.svg'">
-                  </a>
-                </div>
-                
-                <div class="book-details">
-                  <div class="book-title">
-                    <a href="{{ url_for('web.show_book', book_id=book.id) }}" class="book-title-link">{{ book.title }}</a>
-                  </div>
-                  <div class="book-meta">
-                    <div><strong>Authors:</strong> {{ book.author_names }}</div>
-                    <div><strong>Added:</strong> {{ book.timestamp.strftime('%Y-%m-%d %H:%M') }}</div>
-                    <div><strong>Book ID:</strong> {{ book.id }}</div>
-                    {% if book.series %}
-                      <div><strong>Series:</strong> 
-                        {% for series in book.series %}
-                          {{ series.name }}{% if book.series_index %} ({{ book.series_index }}){% endif %}{% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                      </div>
-                    {% endif %}
-                    {% if book.data %}
-                      <div><strong>Formats:</strong> 
-                        {% for data in book.data %}{{ data.format }}{% if not loop.last %}, {% endif %}{% endfor %}
-                      </div>
-                    {% endif %}
-                  </div>
-                  <div class="book-actions">
-                    <a href="{{ url_for('edit-book.show_edit_book', book_id=book.id) }}" class="book-action-btn" title="{{_('Edit book metadata')}}">
-                      <span class="glyphicon glyphicon-edit"></span> {{_('Edit')}}
-                    </a>
-                    <a href="{{ url_for('web.show_book', book_id=book.id) }}" class="book-action-btn" title="{{_('Archive/delete book')}}">
-                      <span class="glyphicon glyphicon-trash"></span> {{_('Archive')}}
-                    </a>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-        </div>
-      {% elif not duplicate_index_needs_full_scan %}
-        <div id="no_duplicate_books_message" class="no-duplicates">
-            <h3>{{_('No Duplicate Books Found')}}</h3>
-            <p>{{_('Your library has no books with duplicate title and author combinations.')}}</p>
-            <p class="text-muted">{{_('This search looks for books with identical titles AND authors to avoid false positives.')}}</p>
-        </div>
-      {% endif %}
-</div>
-
-<!-- Execute Resolution Confirmation Modal -->
-<div class="modal fade" id="execute_resolution_modal" role="dialog" aria-labelledby="executeResolutionLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <span>{{_('Execute Auto-Resolution')}}</span>
-      </div>
-      <div class="modal-body">
-        <div class="text-left">{{_('CWA will resolve duplicate groups using the selected strategy and permanently delete duplicate books.')}}</div>
-        <div class="text-left strategy-summary">
-          {{_('Selected strategy:')}} <strong id="execute_resolution_strategy_name"></strong>
-        </div>
-        <div class="text-left danger-note">{{_('This action cannot be undone!')}}</div>
-      </div>
-      <div class="modal-footer">
-        <input id="execute_resolution_confirm" type="button" class="btn btn-danger" value="{{_('Execute Resolution')}}" name="execute_resolution_confirm" data-dismiss="modal">
-        <button id="execute_resolution_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-    </div>
+{% block modal %}
+<dialog class="modal modal--lg" id="resolution-dialog" aria-labelledby="resolution-dialog-h">
+  <div class="modal-header"><h2 id="resolution-dialog-h">{{ _('Resolution preview') }}</h2>
+    <button class="btn btn-ghost btn-icon" type="button" data-dialog-close aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
+  <div class="modal-body" data-preview-body></div>
+  <div class="modal-footer">
+    <button class="btn" type="button" data-dialog-close>{{ _('Cancel') }}</button>
+    <button class="btn btn-danger" type="button" id="execute-resolution">{{ _('Delete duplicates') }}</button>
   </div>
-</div>
-
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="delete_selected_modal" role="dialog" aria-labelledby="deleteSelectedLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-center">
-        <span>{{_('Are you really sure?')}}</span>
-      </div>
-      <div class="modal-body">
-        <p></p>
-        <div class="text-left">{{_('The following books will be permanently deleted:')}}</div>
-        <p></p>
-        <div class="text-left" id="display-delete-selected-books"></div>
-        <p></p>
-        <div class="text-left"><strong>{{_('This action cannot be undone!')}}</strong></div>
-      </div>
-      <div class="modal-footer">
-        <input id="delete_selected_confirm" type="button" class="btn btn-danger" value="{{_('Delete')}}" name="delete_selected_confirm" data-dismiss="modal">
-        <button id="delete_selected_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Merge Confirmation Modal -->
-<div class="modal fade" id="merge_selected_modal" role="dialog" aria-labelledby="mergeSelectedLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-center">
-        <span>{{_('Merge Books')}}</span>
-      </div>
-      <div class="modal-body">
-        <p></p>
-        <div class="text-left">{{_('The following book will be kept:')}}</div>
-        <p></p>
-        <div class="text-left" id="display-merge-target-book" style="font-weight: bold; color: #28a745;"></div>
-        <p></p>
-        <div class="text-left">{{_('The following books will be merged into it (and then deleted):')}}</div>
-        <p></p>
-        <div class="text-left" id="display-merge-source-books"></div>
-        <p></p>
-        <div class="text-left"><strong>{{_('Note: File formats from source books will be added to the target book.')}}</strong></div>
-      </div>
-      <div class="modal-footer">
-        <input id="merge_selected_confirm" type="button" class="btn btn-primary" value="{{_('Merge')}}" name="merge_selected_confirm" data-dismiss="modal">
-        <button id="merge_selected_abort" type="button" class="btn btn-default" data-dismiss="modal">{{_('Cancel')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Resolution Preview Modal -->
-<div class="modal fade" id="resolution_preview_modal" role="dialog">
-  <div class="modal-dialog modal-lg" style="width: 50%; max-width: 1200px;">
-    <div class="modal-content">
-      <div class="modal-header" style="background: #e59029; color: white;">
-        <button type="button" class="close" data-dismiss="modal" style="color: white;">&times;</button>
-        <h4 class="modal-title">
-          <span class="glyphicon glyphicon-eye-open"></span> {{_('Resolution Preview')}}
-        </h4>
-      </div>
-      <div class="modal-body" id="resolution_preview_body" style="max-height: 600px; overflow-y: auto; padding: 3rem;">
-        <!-- Preview content will be injected here -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Success Modal -->
-<div class="modal fade" id="success_modal" role="dialog" aria-labelledby="successModalLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <span id="success_modal_title">{{_('Success')}}</span>
-      </div>
-      <div class="modal-body">
-        <div class="text-center">
-          <div class="success-icon">
-            <i class="glyphicon glyphicon-ok-circle"></i>
-          </div>
-          <div id="success_modal_message">{{_('Selected duplicate books have been deleted successfully!')}}</div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button id="success_modal_ok" type="button" class="btn btn-default" data-dismiss="modal">{{_('OK')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Error Modal -->
-<div class="modal fade" id="error_modal" role="dialog" aria-labelledby="errorModalLabel">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-danger text-center">
-        <span id="error_modal_title">{{_('Error')}}</span>
-      </div>
-      <div class="modal-body">
-        <div class="text-center">
-          <div class="error-icon" style="font-size: 48px; color: #dc3545; margin-bottom: 20px;">
-            <i class="glyphicon glyphicon-remove-circle"></i>
-          </div>
-          <p id="error_modal_message">{{_('An error occurred while processing your request.')}}</p>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button id="error_modal_ok" type="button" class="btn btn-default" data-dismiss="modal">{{_('OK')}}</button>
-      </div>
-    </div>
-  </div>
-</div>
+</dialog>
 {% endblock %}
 
 {% block js %}
+<script type="application/json" id="duplicates-config">{{ {
+  'scan_url': url_for('duplicates.trigger_scan'),
+  'tasks_url': url_for('web.get_email_status_json'),
+  'preview_url': url_for('duplicates.preview_resolution'),
+  'execute_url': url_for('duplicates.execute_resolution'),
+  'delete_url': url_for('edit-book.delete_selected_books'),
+  'merge_url': url_for('edit-book.merge_list_book'),
+  'simulate_merge_url': url_for('edit-book.simulate_merge_list_book'),
+  'i18n': {
+    'selected': _('%(count)s selected', count='%n'),
+    'scanning': _('Duplicate scan is running.'),
+    'queued': _('Duplicate scan is queued.'),
+    'finished': _('Scan finished. Updating results…'),
+    'blocked': _('Import is in progress. Run a full duplicate scan after ingest finishes.'),
+    'scan_failed': _('Could not start the duplicate scan.'),
+    'delete_confirm': _('Delete %(count)s books and all their files? This cannot be undone.', count='%n'),
+    'delete': _('Delete'),
+    'merge_confirm': _('Merge %(sources)s into “%(target)s”? Their files and metadata are moved into it and the other books are deleted.', sources='%from', target='%to'),
+    'merge': _('Merge'),
+    'dismissed': _('Group hidden. It will not be reported again.'),
+    'summary': _('%(groups)s groups: keep %(kept)s books, delete %(deleted)s.', groups='%groups', kept='%keep', deleted='%delete'),
+    'keep': _('Keep'),
+    'remove': _('Delete'),
+    'added': _('added'),
+    'nothing': _('Nothing to resolve.'),
+    'execute_confirm': _('Delete the duplicates listed in the preview? This cannot be undone.'),
+    'done': _('Resolved %(groups)s groups, deleted %(deleted)s books.', groups='%groups', deleted='%delete')
+  }
+}|tojson }}</script>
 <script src="{{ url_for('static', filename='js/duplicates.js') }}"></script>
-{% endblock %} 
+{% endblock %}
