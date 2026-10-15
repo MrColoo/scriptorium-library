@@ -1490,8 +1490,12 @@ def list_books():
     elif sort_param == "languages":
         order = [db.Languages.lang_code.asc()] if order == "asc" else [db.Languages.lang_code.desc()]
         join = db.books_languages_link, db.Books.id == db.books_languages_link.c.book, db.Languages
-    elif order and sort_param in ["sort", "title", "authors_sort", "series_index"]:
-        order = [text(sort_param + " " + order)]
+    elif order and sort_param in ["sort", "title", "author_sort", "authors_sort", "series_index"]:
+        # Real columns, not raw SQL: the query is wrapped in a subquery for eager loading,
+        # where a bare "title" no longer resolves.
+        column = {"sort": db.Books.sort, "title": db.Books.title, "author_sort": db.Books.author_sort,
+                  "authors_sort": db.Books.author_sort, "series_index": db.Books.series_index}[sort_param]
+        order = [column.asc() if order == "asc" else column.desc()]
     elif not state:
         order = [db.Books.timestamp.desc()]
 

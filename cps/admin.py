@@ -661,7 +661,8 @@ def list_users():
         order = ""
 
     if sort != "state" and order:
-        order = text(sort + " " + order)
+        column = getattr(ub.User, sort)
+        order = column.asc() if order == "asc" else column.desc()
     elif not state:
         order = ub.User.id.asc()
 
