@@ -948,3 +948,8 @@ a.format-tile:hover { border-color: var(--border-strong); background: var(--surf
 .bulk-bar { position: sticky; top: calc(var(--topbar-h) + 8px); z-index: 15; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 12px; border-radius: var(--radius-lg); background: var(--primary); color: var(--on-primary); box-shadow: var(--shadow-lg); }
 .bulk-bar .btn { --btn-bg: transparent; --btn-fg: var(--on-primary); --btn-border: color-mix(in srgb, var(--on-primary) 30%, transparent); --btn-hover: color-mix(in srgb, var(--on-primary) 14%, transparent); }
 [aria-busy="true"] .table-wrap { opacity: .6; }
+.input.input-narrow { width: 120px; max-width: 40vw; }
+.format-checks { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px 12px; }
+.format-checks input:disabled + span { opacity: .5; }
+.sortable--compact .sortable-item { padding: 6px 10px; }
+.sortable-item .switch { margin-left: auto; }
