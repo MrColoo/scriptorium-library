@@ -249,7 +249,11 @@
 
   {#- Preferences -#}
   <section class="card" id="preferences" aria-labelledby="prefs-h">
-    <div class="card-header"><div><h2 class="card-title" id="prefs-h">{{ _('Preferences') }}</h2></div></div>
+    <div class="card-header"><div><h2 class="card-title" id="prefs-h">{{ _('Preferences') }}</h2></div>
+      {%- if not is_admin_view and not is_anon %}
+      <a class="btn btn-sm" href="{{ url_for('appearance.customize') }}">{{ ui.icon('sparkles') }}{{ _('Colours and style') }}</a>
+      {%- endif %}
+    </div>
     <div class="form-grid">
       {%- if not is_anon %}
       <div class="field">

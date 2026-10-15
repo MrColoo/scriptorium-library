@@ -69,6 +69,12 @@ build step and no framework.
 - **No inline JavaScript.** The Content-Security-Policy only allows scripts from the server, so
   `<script>` blocks with code and `onclick=` attributes will not run (and a unit test fails).
   Pass data as JSON, put code in a static file.
+- **Personal styles** (*Customize*) live in `static/css/themes.css` and `cps/appearance_styles.py`.
+  A style is a set of `data-ap-*` attributes plus the `--ap-h`/`--ap-h2` hues on a scope element
+  (`<html>`, or a preview card). Option rules only set custom properties on that element; the
+  component rules at the bottom of `themes.css` read them with the stock value as fallback, so an
+  element without a style looks exactly like the default design. To add an option value, add it to
+  `OPTIONS` in `appearance_styles.py` and a rule in `themes.css` (a unit test checks they match).
 - **`window.CWA`** exposes helpers for page scripts: `request()` (fetch with CSRF header),
   `toast()`, `confirm()`, `openDialog()`, `t()` for translated strings.
 

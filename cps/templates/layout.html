@@ -8,7 +8,7 @@
 {%- set library_ids = ['new', 'read', 'unread', 'hot', 'rated', 'rand', 'download', 'archived', 'list', 'duplicates'] -%}
 {%- set flash = namespace(toasts=[]) -%}
 <!doctype html>
-<html lang="{{ current_user.locale or 'en' }}" data-theme="light">
+<html lang="{{ current_user.locale or 'en' }}" data-theme="light"{{ appearance_attrs(current_user)|xmlattr }}>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -28,6 +28,7 @@
   <link rel="preload" href="{{ url_for('static', filename='fonts/geist-latin-wght-normal.woff2').split('?')[0] }}" as="font" type="font/woff2" crossorigin>
   <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/themes.css') }}">
   {% block header %}{% endblock %}
 </head>
 <body class="page-{{ page or 'none' }}{% if bodyClass %} {{ bodyClass }}{% endif %}"
@@ -155,6 +156,7 @@
             <div class="menu-label">{{ current_user.name }}</div>
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}">{{ ui.icon('user') }}<span class="grow">{{ _('Profile') }}</span></a>
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}#kobo">{{ ui.icon('device') }}<span class="grow">{{ _('Kobo sync') }}</span></a>
+            <a class="menu-item" role="menuitem" href="{{ url_for('appearance.customize') }}">{{ ui.icon('sparkles') }}<span class="grow">{{ _('Customize') }}</span></a>
             {%- endif %}
             <div class="menu-sep"></div>
             <div class="menu-label">{{ _('Appearance') }}</div>

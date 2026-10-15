@@ -1,0 +1,184 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as ui with context %}
+{%- macro mock(attrs, big=False) -%}
+<div class="ap-mock{{ ' ap-mock--big' if big }}{{ ' ap-reset' if not attrs }}" {{ attrs|xmlattr }}{% if big %} id="ap-stage" aria-hidden="true"{% endif %}>
+  <div class="ap-mock-side">
+    <span class="ap-mock-mark">{{ ui.icon('book') }}</span>
+    <span class="ap-mock-link is-active">{% if big %}{{ ui.icon('book') }}<span>{{ _('Books') }}</span>{% endif %}</span>
+    <span class="ap-mock-link">{% if big %}{{ ui.icon('user') }}<span>{{ _('Authors') }}</span>{% endif %}</span>
+    <span class="ap-mock-link">{% if big %}{{ ui.icon('series') }}<span>{{ _('Series') }}</span>{% endif %}</span>
+    {%- if big %}<span class="ap-mock-link">{{ ui.icon('bookmark') }}<span>{{ _('Shelves') }}</span></span>{% endif %}
+  </div>
+  <div class="ap-mock-main">
+    <div class="ap-mock-top">
+      <span class="ap-mock-search">{% if big %}{{ ui.icon('search') }}<span>{{ _('Search titles, authors, series…') }}</span>{% endif %}</span>
+      {%- if big %}<span class="btn btn-icon btn-sm ap-mock-btn">{{ ui.icon('refresh') }}</span>{% endif %}
+      <span class="btn btn-sm btn-primary ap-mock-cta">{% if big %}{{ ui.icon('upload') }}{{ _('Upload') }}{% endif %}</span>
+    </div>
+    <div class="ap-mock-body">
+      {%- if big %}
+      <h2 class="ap-mock-title">{{ _('Continue reading') }}</h2>
+      <div class="ap-mock-covers">
+        {%- for book in sample_books[:4] %}
+        <span class="ap-mock-cover">{{ ui.cover_img(book, '120px', '') }}</span>
+        {%- else %}
+        {%- for i in range(4) %}<span class="ap-mock-cover ap-mock-cover--blank"></span>{% endfor %}
+        {%- endfor %}
+      </div>
+      <div class="ap-mock-row">
+        <span class="btn btn-sm btn-primary">{{ _('Read') }}</span>
+        <span class="btn btn-sm">{{ _('Download') }}</span>
+        <span class="chip is-active">{{ _('In progress') }}</span>
+        <span class="chip">{{ _('Unread') }}</span>
+      </div>
+      <p class="ap-mock-text">{{ _('A link looks like this,') }} <a>{{ _('and this is one') }}</a>.</p>
+      <div class="progress"><span style="width: 62%"></span></div>
+      {%- else %}
+      <span class="ap-mini-row"><span></span><span></span><span></span></span>
+      <span class="ap-mini-bar"></span>
+      {%- endif %}
+    </div>
+  </div>
+</div>
+{%- endmacro %}
+
+{%- macro choice(name, value, label, attrs=None) -%}
+<label class="ap-choice">
+  <input type="radio" name="{{ name }}" value="{{ value }}"{% if current[name] == value %} checked{% endif %}>
+  {%- if attrs is not none %}<span class="ap-swatch" data-swatch="{{ name }}" {{ attrs|xmlattr }}><span class="ap-mock-top"></span><span class="ap-mock-side"></span><span class="ap-swatch-body"></span></span>{% endif %}
+  <span class="ap-choice-label">{{ label }}</span>
+</label>
+{%- endmacro %}
+
+{%- set header_labels = {'plain': _('Classic'), 'tint': _('Tinted'), 'gradient': _('Gradient'), 'mesh': _('Mesh'), 'aurora': _('Aurora (animated)'),
+  'dots': _('Dots'), 'grid': _('Grid'), 'waves': _('Waves'), 'stripes': _('Stripes'), 'topo': _('Contours'), 'glass': _('Glass')} %}
+{%- set sidebar_labels = {'plain': _('Classic'), 'tinted': _('Tinted'), 'art': _('Coloured')} %}
+{%- set backdrop_labels = {'none': _('None'), 'glow': _('Glow'), 'dots': _('Dots')} %}
+{%- set surface_labels = {'neutral': _('Neutral'), 'tinted': _('Tinted'), 'paper': _('Paper')} %}
+{%- set buttons_labels = {'mono': _('Black & white'), 'accent': _('Colour'), 'gradient': _('Gradient')} %}
+{%- set radius_labels = {'default': _('Soft'), 'sharp': _('Sharp'), 'round': _('Round')} %}
+{%- set headings_labels = {'sans': _('Sans-serif'), 'serif': _('Serif')} %}
+{%- set vibrancy_labels = {'soft': _('Soft'), 'vivid': _('Vivid')} %}
+
+{% block body %}
+<div class="page-header">
+  <div>
+    <span class="page-eyebrow"><a href="{{ url_for('web.profile') }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Profile') }}</a></span>
+    <h1 class="page-title">{{ _('Customize') }}</h1>
+    <span class="page-subtitle">{{ _('Give the library your own colours. Changes show up right away; save to keep them. Only you see your style.') }}</span>
+  </div>
+</div>
+
+<form method="post" action="{{ url_for('appearance.customize') }}" id="ap-form" class="ap-layout"
+      data-stock="{{ 'true' if is_stock else 'false' }}">
+  {{ ui.csrf_field() }}
+  <input type="hidden" name="preset" value="" id="ap-preset">
+
+  <div class="ap-controls">
+    <section class="card stack-sm" aria-labelledby="ap-styles-h">
+      <div class="row-between">
+        <h2 class="card-title" id="ap-styles-h">{{ _('Styles') }}</h2>
+        <button class="btn btn-sm" type="button" data-ap-random>{{ ui.icon('shuffle') }}{{ _('Surprise me') }}</button>
+      </div>
+      <div class="ap-presets">
+        {%- for preset in presets %}
+        <button class="ap-preset" type="submit" name="preset" value="{{ preset.key }}" data-ap-preset="{{ preset.key }}"
+                aria-pressed="{{ 'true' if (preset.key == 'stock' and is_stock) else 'false' }}">
+          {{ mock(preset.attrs) }}
+          <span class="ap-preset-name">{{ preset.label }}</span>
+        </button>
+        {%- endfor %}
+      </div>
+    </section>
+
+    <section class="card stack-sm" aria-labelledby="ap-colours-h">
+      <h2 class="card-title" id="ap-colours-h">{{ _('Colours') }}</h2>
+      <div class="ap-hue">
+        <label for="ap-hue">{{ _('Main colour') }}</label>
+        <span class="ap-hue-dot" data-hue-dot="hue"></span>
+        <input type="range" id="ap-hue" name="hue" min="0" max="359" step="1" value="{{ current.hue }}" class="ap-hue-range">
+      </div>
+      <div class="ap-hue">
+        <label for="ap-hue2">{{ _('Second colour') }}</label>
+        <span class="ap-hue-dot" data-hue-dot="hue2"></span>
+        <input type="range" id="ap-hue2" name="hue2" min="0" max="359" step="1" value="{{ current.hue2 }}" class="ap-hue-range">
+      </div>
+      <fieldset class="ap-group">
+        <legend>{{ _('Intensity') }}</legend>
+        <div class="ap-choices ap-choices--text">{% for v in options.vibrancy %}{{ choice('vibrancy', v, vibrancy_labels[v]) }}{% endfor %}</div>
+      </fieldset>
+    </section>
+
+    <section class="card stack-sm" aria-labelledby="ap-header-h">
+      <h2 class="card-title" id="ap-header-h">{{ _('Top bar') }}</h2>
+      <div class="ap-choices">
+        {%- for v in options.header %}{{ choice('header', v, header_labels[v], {'data-ap': '', 'data-ap-header': v, 'data-ap-vibrancy': current.vibrancy, 'style': '--ap-h:%d;--ap-h2:%d'|format(current.hue, current.hue2)}) }}{% endfor %}
+      </div>
+    </section>
+
+    <section class="card stack-sm" aria-labelledby="ap-page-h">
+      <h2 class="card-title" id="ap-page-h">{{ _('Sidebar and page') }}</h2>
+      <fieldset class="ap-group">
+        <legend>{{ _('Sidebar') }}</legend>
+        <div class="ap-choices">{% for v in options.sidebar %}{{ choice('sidebar', v, sidebar_labels[v], {'data-ap': '', 'data-ap-sidebar': v, 'data-ap-vibrancy': current.vibrancy, 'style': '--ap-h:%d;--ap-h2:%d'|format(current.hue, current.hue2)}) }}{% endfor %}</div>
+      </fieldset>
+      <fieldset class="ap-group">
+        <legend>{{ _('Background') }}</legend>
+        <div class="ap-choices ap-choices--text">{% for v in options.surface %}{{ choice('surface', v, surface_labels[v]) }}{% endfor %}</div>
+      </fieldset>
+      <fieldset class="ap-group">
+        <legend>{{ _('Page decoration') }}</legend>
+        <div class="ap-choices ap-choices--text">{% for v in options.backdrop %}{{ choice('backdrop', v, backdrop_labels[v]) }}{% endfor %}</div>
+      </fieldset>
+    </section>
+
+    <section class="card stack-sm" aria-labelledby="ap-details-h">
+      <h2 class="card-title" id="ap-details-h">{{ _('Details') }}</h2>
+      <fieldset class="ap-group">
+        <legend>{{ _('Main buttons') }}</legend>
+        <div class="ap-choices ap-choices--text">{% for v in options.buttons %}{{ choice('buttons', v, buttons_labels[v]) }}{% endfor %}</div>
+      </fieldset>
+      <fieldset class="ap-group">
+        <legend>{{ _('Corners') }}</legend>
+        <div class="ap-choices ap-choices--text">{% for v in options.radius %}{{ choice('radius', v, radius_labels[v]) }}{% endfor %}</div>
+      </fieldset>
+      <fieldset class="ap-group">
+        <legend>{{ _('Headings') }}</legend>
+        <div class="ap-choices ap-choices--text">{% for v in options.headings %}{{ choice('headings', v, headings_labels[v]) }}{% endfor %}</div>
+      </fieldset>
+    </section>
+  </div>
+
+  <aside class="ap-preview" aria-labelledby="ap-preview-h">
+    <div class="ap-preview-inner">
+      <div class="row-between">
+        <h2 class="card-title" id="ap-preview-h">{{ _('Preview') }}</h2>
+        <div class="segmented" role="group" aria-label="{{ _('Appearance') }}">
+          <button type="button" data-theme-set="light" title="{{ _('Light') }}" aria-label="{{ _('Light') }}">{{ ui.icon('sun') }}</button>
+          <button type="button" data-theme-set="dark" title="{{ _('Dark') }}" aria-label="{{ _('Dark') }}">{{ ui.icon('moon') }}</button>
+        </div>
+      </div>
+      {{ mock(appearance_attrs(current_user) or {}, True) }}
+      <p class="hint" data-ap-status>{{ _('Saved style') }}</p>
+    </div>
+  </aside>
+
+  <div class="ap-savebar" data-ap-savebar hidden>
+    <span class="small strong">{{ _('You have unsaved changes.') }}</span>
+    <span class="grow"></span>
+    <button class="btn btn-sm btn-ghost" type="button" data-ap-revert>{{ _('Undo') }}</button>
+    <button class="btn btn-sm btn-primary" type="submit" name="action" value="save">{{ _('Save style') }}</button>
+  </div>
+</form>
+{% endblock %}
+{% block js %}
+<script type="application/json" id="ap-config">{{ {
+  'presets': presets|map(attribute='values')|list,
+  'presetKeys': presets|map(attribute='key')|list,
+  'options': options,
+  'current': current,
+  'stock': is_stock,
+  'i18n': {'saved': _('Saved style'), 'unsaved': _('Not saved yet'), 'random': _('Random mix: save it if you like it, or try again.')}
+}|tojson }}</script>
+<script src="{{ url_for('static', filename='js/appearance.js') }}"></script>
+{% endblock %}

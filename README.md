@@ -38,6 +38,10 @@ packaged as a single Docker container.
 - **Bulk editing** in a spreadsheet-style table, plus metadata search from several providers on
   every book.
 - **Statistics** on reading, downloads, imports, conversions and API usage.
+- **Make it yours.** Each reader can give the interface their own colours from *Customize* in the
+  account menu: ready-made styles (Aurora, Sunset, Ocean, Neon…), a random mix, or their own pick
+  of colours, top-bar art (gradients, mesh, waves, patterns, glass), sidebar, backgrounds, corners and
+  heading fonts — with a live preview, in light and dark mode. The classic look stays the default.
 - **Users and access**: roles, per-user tag and language restrictions, OAuth/OIDC, LDAP and
   reverse-proxy login, magic-link sign-in from another device.
 

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-10-15 20:23+0200\n"
+"POT-Creation-Date: 2026-10-15 22:38+0200\n"
 "PO-Revision-Date: 2026-02-10 18:28+0800\n"
 "Last-Translator: xlivevil <xlivevil@aliyun.com>\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
@@ -148,7 +148,7 @@ msgid "{} users deleted successfully"
 msgstr "成功删除 {} 个用户"
 
 #: cps/admin.py:752 cps/templates/config_view_edit.html:75
-#: cps/templates/user_edit.html:267 cps/templates/user_table.html:34
+#: cps/templates/user_edit.html:271 cps/templates/user_table.html:34
 msgid "Show All"
 msgstr "显示全部"
 
@@ -749,6 +749,66 @@ msgid ""
 msgstr ""
 "恢复完成。备份及恢复日志已保存至“%(dir)s”中。所有与书籍相关的数据均已重置。"
 
+#: cps/appearance.py:29 cps/templates/appearance.html:53
+#: cps/templates/appearance.html:55
+msgid "Classic"
+msgstr ""
+
+#: cps/appearance.py:30
+msgid "Aurora"
+msgstr ""
+
+#: cps/appearance.py:31
+msgid "Sunset"
+msgstr ""
+
+#: cps/appearance.py:32
+msgid "Ocean"
+msgstr ""
+
+#: cps/appearance.py:33
+msgid "Forest"
+msgstr ""
+
+#: cps/appearance.py:34 cps/templates/appearance.html:57
+msgid "Paper"
+msgstr ""
+
+#: cps/appearance.py:35
+msgid "Neon"
+msgstr ""
+
+#: cps/appearance.py:36
+msgid "Lavender"
+msgstr ""
+
+#: cps/appearance.py:37
+msgid "Coral"
+msgstr ""
+
+#: cps/appearance.py:38
+#, fuzzy
+msgid "Midnight"
+msgstr "浅色"
+
+#: cps/appearance.py:39
+msgid "Citrus"
+msgstr ""
+
+#: cps/appearance.py:70
+msgid "Back to the classic look."
+msgstr ""
+
+#: cps/appearance.py:73 cps/appearance.py:76
+msgid "Your style is saved."
+msgstr ""
+
+#: cps/appearance.py:91 cps/templates/appearance.html:67
+#: cps/templates/layout.html:159
+#, fuzzy
+msgid "Customize"
+msgstr "自定义过滤器"
+
 #: cps/constants.py:207
 msgid "Czech"
 msgstr "捷克语"
@@ -978,143 +1038,147 @@ msgstr "Calibre-Web Automated - 完整的 EPUB 修复历史（无路径和修复
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr "Calibre-Web Automated - 完整的 EPUB 修复历史（带路径和修复）"
 
-#: cps/cwa_functions.py:1718
+#: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
 msgstr "✅ 所有监控服务均按预期运行！ 👍"
 
-#: cps/cwa_functions.py:1720
+#: cps/cwa_functions.py:1724
 msgid ""
 "🔴 The Ingest Service is running but the Metadata Change Detector is not"
 msgstr "🔴 导入服务正在运行，但元数据更改检测器未运行"
 
-#: cps/cwa_functions.py:1722
+#: cps/cwa_functions.py:1726
 msgid ""
 "🔴 The Metadata Change Detector is running but the Ingest Service is not"
 msgstr "🔴 元数据更改检测器正在运行，但导入服务未运行"
 
-#: cps/cwa_functions.py:1724
+#: cps/cwa_functions.py:1728
 msgid ""
 "⛔ Neither the Ingest Service or the Metadata Change Detector are running"
 msgstr "⛔ 导入服务和元数据更改检测器均未运行"
 
-#: cps/cwa_functions.py:1726
+#: cps/cwa_functions.py:1730
 msgid "An Error has occurred"
 msgstr "发生错误"
 
-#: cps/cwa_functions.py:1785
+#: cps/cwa_functions.py:1763
 #, fuzzy, python-format
 msgid "Log %(name)s"
 msgstr "语言：%(name)s"
 
-#: cps/cwa_functions.py:1903 cps/tasks/ops.py:81
+#: cps/cwa_functions.py:1877 cps/tasks/ops.py:81
 msgid "Convert Library"
 msgstr "转换库"
 
-#: cps/cwa_functions.py:1916
+#: cps/cwa_functions.py:1890
 #, fuzzy, python-format
 msgid "Convert Library scheduled in %(delay)s minute(s)."
 msgstr "转换库操作已成功完成"
 
-#: cps/cwa_functions.py:1918
+#: cps/cwa_functions.py:1892
 #, fuzzy, python-format
 msgid "Failed to schedule Convert Library: %(error)s"
 msgstr "移动封面文件失败 %(file)s：%(error)s"
 
-#: cps/cwa_functions.py:1927
+#: cps/cwa_functions.py:1901
 #, fuzzy
 msgid "Convert Library – Run Archive"
 msgstr "转换库 - 完整运行"
 
-#: cps/cwa_functions.py:2066
+#: cps/cwa_functions.py:1907
+msgid "There is no log yet. Start a run first."
+msgstr ""
+
+#: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
 msgstr "CWA EPUB 修复工具"
 
-#: cps/cwa_functions.py:2077
+#: cps/cwa_functions.py:2038
 #, fuzzy, python-format
 msgid "EPUB Fixer scheduled in %(delay)s minute(s)."
 msgstr "EPUB 修复程序已成功启动"
 
-#: cps/cwa_functions.py:2079
+#: cps/cwa_functions.py:2040
 #, fuzzy, python-format
 msgid "Failed to schedule EPUB Fixer: %(error)s"
 msgstr "移动封面文件失败 %(file)s：%(error)s"
 
-#: cps/cwa_functions.py:2088
+#: cps/cwa_functions.py:2049
 #, fuzzy
 msgid "EPUB Fixer – Run Archive"
 msgstr "EPUB 修复工具 - 完整运行"
 
-#: cps/cwa_functions.py:2167
+#: cps/cwa_functions.py:2107
 msgid "Single-book EPUB Fixer is not supported with Google Drive libraries."
 msgstr "单本 EPUB 修复工具不支持 Google 驱动器库。"
 
-#: cps/cwa_functions.py:2174
+#: cps/cwa_functions.py:2114
 msgid "Invalid book selection."
 msgstr "无效的书籍选择。"
 
-#: cps/cwa_functions.py:2180
+#: cps/cwa_functions.py:2120
 msgid "Book not found."
 msgstr "未找到该书。"
 
-#: cps/cwa_functions.py:2186
+#: cps/cwa_functions.py:2126
 msgid "Selected book has no EPUB format."
 msgstr "所选书籍不支持 EPUB 格式。"
 
-#: cps/cwa_functions.py:2190
+#: cps/cwa_functions.py:2130
 msgid "EPUB file not found on disk."
 msgstr "磁盘上未找到 EPUB 文件。"
 
-#: cps/cwa_functions.py:2205
+#: cps/cwa_functions.py:2145
 msgid "EPUB Fixer started for selected book."
 msgstr "EPUB 修复程序已针对选定的书籍启动。"
 
-#: cps/cwa_functions.py:2208
+#: cps/cwa_functions.py:2148
 msgid "Failed to start EPUB Fixer for selected book."
 msgstr "未能启动针对所选书籍的 EPUB 修复程序。"
 
-#: cps/cwa_functions.py:2262
+#: cps/cwa_functions.py:2202
 #, fuzzy
 msgid "User not found."
 msgstr "找不到用户"
 
-#: cps/cwa_functions.py:2266
+#: cps/cwa_functions.py:2206
 #, python-format
 msgid "Profile picture removed for %(name)s."
 msgstr ""
 
-#: cps/cwa_functions.py:2272
+#: cps/cwa_functions.py:2212
 msgid "Image is too large. Please use an image smaller than 500KB."
 msgstr "图片太大了。请使用大小小于 500KB 的图片。"
 
-#: cps/cwa_functions.py:2273
+#: cps/cwa_functions.py:2213
 #, fuzzy
 msgid "Unsupported image type. Only PNG, JPEG and WebP are allowed."
 msgstr "不支持的图像类型。只允许使用 PNG 和 JPEG 格式。"
 
-#: cps/cwa_functions.py:2275
+#: cps/cwa_functions.py:2215
 #, fuzzy
 msgid "Invalid image data."
 msgstr "无效的图像数据格式。"
 
-#: cps/cwa_functions.py:2279
+#: cps/cwa_functions.py:2219
 msgid ""
 "Could not save the profile picture. Check that the config folder is writable."
 msgstr ""
 
-#: cps/cwa_functions.py:2282
+#: cps/cwa_functions.py:2222
 #, fuzzy, python-format
 msgid "Profile picture updated for %(name)s."
 msgstr "头像更新成功。"
 
-#: cps/cwa_functions.py:2290 cps/templates/admin.html:26
+#: cps/cwa_functions.py:2230 cps/templates/admin.html:26
 #: cps/templates/profile_pictures.html:6
 #, fuzzy
 msgid "Profile pictures"
 msgstr "管理用户头像"
 
-#: cps/db.py:1273 cps/templates/config_edit.html:110
-#: cps/templates/config_view_edit.html:39
+#: cps/db.py:1273 cps/templates/appearance.html:56
+#: cps/templates/config_edit.html:110 cps/templates/config_view_edit.html:39
 #: cps/templates/config_view_edit.html:47 cps/templates/email_edit.html:44
 #: cps/templates/search_form.html:13 cps/web.py:702 cps/web.py:736
 #: cps/web.py:781 cps/web.py:821 cps/web.py:850 cps/web.py:1663 cps/web.py:1700
@@ -1177,7 +1241,7 @@ msgstr "格式上传缺少或无效的书籍 ID"
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr "无法上传格式：图书馆中已不存在该书籍"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:270
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:272
 msgid "Upload done, processing, please wait..."
 msgstr "上传完成，正在处理，请稍候..."
 
@@ -1716,8 +1780,8 @@ msgid "{} Stars"
 msgstr "{} 星"
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:166
-#: cps/templates/layout.html:221 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:168
+#: cps/templates/layout.html:223 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2251
 msgid "Login"
 msgstr "登录"
@@ -1741,8 +1805,8 @@ msgid ""
 msgstr ""
 "在导入和元数据更改后执行快速重复项检查之前，重复项扫描需要进行一次全面扫描。"
 
-#: cps/render_template.py:74 cps/templates/cwa_stats_tabs.html:177
-#: cps/templates/stats.html:12
+#: cps/render_template.py:74 cps/templates/appearance.html:7
+#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:12
 msgid "Books"
 msgstr "书籍"
 
@@ -1809,12 +1873,12 @@ msgstr "分类"
 msgid "Show Category Section"
 msgstr "显示分类栏目"
 
-#: cps/render_template.py:107 cps/templates/book_edit.html:93
-#: cps/templates/book_edit.html:270 cps/templates/book_table.html:60
-#: cps/templates/book_table.html:106 cps/templates/cwa_settings.html:149
-#: cps/templates/cwa_settings.html:198 cps/templates/magic_shelf_edit.html:92
-#: cps/templates/search_form.html:66 cps/templates/stats.html:15
-#: cps/web.py:1706 cps/web.py:1718
+#: cps/render_template.py:107 cps/templates/appearance.html:9
+#: cps/templates/book_edit.html:93 cps/templates/book_edit.html:270
+#: cps/templates/book_table.html:60 cps/templates/book_table.html:106
+#: cps/templates/cwa_settings.html:149 cps/templates/cwa_settings.html:198
+#: cps/templates/magic_shelf_edit.html:92 cps/templates/search_form.html:66
+#: cps/templates/stats.html:15 cps/web.py:1706 cps/web.py:1718
 msgid "Series"
 msgstr "丛书"
 
@@ -1822,9 +1886,10 @@ msgstr "丛书"
 msgid "Show Series Section"
 msgstr "显示丛书栏目"
 
-#: cps/render_template.py:110 cps/templates/author.html:5
-#: cps/templates/book_table.html:57 cps/templates/book_table.html:103
-#: cps/templates/cwa_settings.html:148 cps/templates/stats.html:13
+#: cps/render_template.py:110 cps/templates/appearance.html:8
+#: cps/templates/author.html:5 cps/templates/book_table.html:57
+#: cps/templates/book_table.html:103 cps/templates/cwa_settings.html:148
+#: cps/templates/stats.html:13
 msgid "Authors"
 msgstr "作者"
 
@@ -1905,7 +1970,7 @@ msgstr ""
 
 #: cps/search.py:53 cps/search.py:440 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:217 cps/templates/search.html:5
+#: cps/templates/layout.html:219 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "搜索"
@@ -1937,7 +2002,7 @@ msgstr "阅读状态 = '%(status)s'"
 msgid "Error on search for custom columns, please restart Calibre-Web"
 msgstr "搜索自定义栏目时出错，请重启 Calibre-Web"
 
-#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:136
+#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:137
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2057,7 +2122,7 @@ msgid "Error opening shelf. Shelf does not exist or is not accessible"
 msgstr "打开书架出错。书架不存在或不可访问"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:120 cps/templates/tasks.html:5
+#: cps/templates/layout.html:121 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "任务列表"
 
@@ -2220,7 +2285,7 @@ msgstr "书架名称过长（最长 100 个字符）"
 msgid "Error creating shelf"
 msgstr "创建书架时出错"
 
-#: cps/templates/layout.html:105 cps/web.py:1210
+#: cps/templates/layout.html:106 cps/web.py:1210
 msgid "Create Magic Shelf"
 msgstr "创建魔法书架"
 
@@ -2329,7 +2394,7 @@ msgstr "成功！书籍已排队准备发送至所选的收件人地址！"
 msgid "Please wait one minute to register next user"
 msgstr "请等待一分钟注册下一个用户"
 
-#: cps/templates/layout.html:168 cps/templates/login.html:77
+#: cps/templates/layout.html:170 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2130 cps/web.py:2134
 #: cps/web.py:2139 cps/web.py:2143 cps/web.py:2149 cps/web.py:2174
 #: cps/web.py:2178 cps/web.py:2191 cps/web.py:2194
@@ -2639,8 +2704,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "正在清理封面缩略图缓存"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/layout.html:143 cps/templates/layout.html:144
-#: cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:144
+#: cps/templates/layout.html:145 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "上传书籍"
 
@@ -2649,8 +2714,9 @@ msgstr "上传书籍"
 msgid "Rating: %(rating)s of 5"
 msgstr "评分：%(rating)s 星"
 
-#: cps/templates/_macros.html:43 cps/templates/detail.html:155
-#: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:42
+#: cps/templates/_macros.html:43 cps/templates/appearance.html:29
+#: cps/templates/detail.html:155 cps/templates/magic_shelf_edit.html:90
+#: cps/templates/search_form.html:42
 msgid "Read"
 msgstr "已读"
 
@@ -2743,11 +2809,11 @@ msgstr "显示栏目值"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:186
-#: cps/templates/layout.html:189 cps/templates/layout.html:192
-#: cps/templates/layout.html:195 cps/templates/layout.html:198
-#: cps/templates/layout.html:201 cps/templates/layout.html:238
-#: cps/templates/layout.html:266 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:188
+#: cps/templates/layout.html:191 cps/templates/layout.html:194
+#: cps/templates/layout.html:197 cps/templates/layout.html:200
+#: cps/templates/layout.html:203 cps/templates/layout.html:240
+#: cps/templates/layout.html:268 cps/templates/read.html:58
 msgid "Close"
 msgstr "关闭"
 
@@ -2785,11 +2851,11 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:247
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:249
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
-#: cps/templates/tasks.html:56 cps/templates/user_edit.html:385
+#: cps/templates/tasks.html:56 cps/templates/user_edit.html:389
 msgid "Cancel"
 msgstr "取消"
 
@@ -2843,7 +2909,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:123
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:124
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -2887,10 +2953,10 @@ msgstr ""
 msgid "Admin"
 msgstr "管理权限"
 
-#: cps/templates/admin.html:46 cps/templates/cwa_list_logs.html:22
-#: cps/templates/detail.html:27 cps/templates/detail.html:86
-#: cps/templates/listenmp3.html:62 cps/templates/shelf.html:35
-#: cps/templates/user_table.html:24
+#: cps/templates/admin.html:46 cps/templates/appearance.html:30
+#: cps/templates/cwa_list_logs.html:22 cps/templates/detail.html:27
+#: cps/templates/detail.html:86 cps/templates/listenmp3.html:62
+#: cps/templates/shelf.html:35 cps/templates/user_table.html:24
 msgid "Download"
 msgstr "下载书籍"
 
@@ -3001,7 +3067,7 @@ msgstr "每页书籍数"
 msgid "Uploads"
 msgstr "上传"
 
-#: cps/templates/admin.html:106 cps/templates/layout.html:157
+#: cps/templates/admin.html:106 cps/templates/layout.html:158
 #, fuzzy
 msgid "Kobo sync"
 msgstr "启用 Kobo 同步"
@@ -3085,7 +3151,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "运行“Hardcover自动获取”功能"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:118 cps/templates/layout.html:161
+#: cps/templates/layout.html:119 cps/templates/layout.html:163
 msgid "System"
 msgstr ""
 
@@ -3121,8 +3187,252 @@ msgstr "停止"
 msgid "Are you sure you want to restart?"
 msgstr "您确定要重启吗？"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:273
+#: cps/templates/admin.html:175 cps/templates/layout.html:275
 msgid "Restarting, the page reloads when the server is back."
+msgstr ""
+
+#: cps/templates/appearance.html:10 cps/templates/detail.html:102
+#: cps/templates/detail.html:246 cps/templates/layout.html:85
+#: cps/templates/search_form.html:67
+msgid "Shelves"
+msgstr "书架列表"
+
+#: cps/templates/appearance.html:14 cps/templates/layout.html:136
+#, fuzzy
+msgid "Search titles, authors, series…"
+msgstr "按标题/作者搜索"
+
+#: cps/templates/appearance.html:20 cps/templates/index.html:9
+#, fuzzy
+msgid "Continue reading"
+msgstr "在这里贡献！"
+
+#: cps/templates/appearance.html:31 cps/templates/index.html:27
+#, fuzzy
+msgid "In progress"
+msgstr "任务进度"
+
+#: cps/templates/appearance.html:32 cps/templates/magic_shelf_edit.html:90
+#: cps/templates/search_form.html:43
+#, fuzzy
+msgid "Unread"
+msgstr "未读书籍"
+
+#: cps/templates/appearance.html:34
+msgid "A link looks like this,"
+msgstr ""
+
+#: cps/templates/appearance.html:34
+msgid "and this is one"
+msgstr ""
+
+#: cps/templates/appearance.html:53 cps/templates/appearance.html:55
+#: cps/templates/appearance.html:57
+msgid "Tinted"
+msgstr ""
+
+#: cps/templates/appearance.html:53 cps/templates/appearance.html:58
+msgid "Gradient"
+msgstr ""
+
+#: cps/templates/appearance.html:53
+msgid "Mesh"
+msgstr ""
+
+#: cps/templates/appearance.html:53
+msgid "Aurora (animated)"
+msgstr ""
+
+#: cps/templates/appearance.html:54 cps/templates/appearance.html:56
+msgid "Dots"
+msgstr ""
+
+#: cps/templates/appearance.html:54 cps/templates/grid.html:10
+#: cps/templates/list.html:12
+msgid "Grid"
+msgstr "网格"
+
+#: cps/templates/appearance.html:54
+msgid "Waves"
+msgstr ""
+
+#: cps/templates/appearance.html:54
+msgid "Stripes"
+msgstr ""
+
+#: cps/templates/appearance.html:54
+#, fuzzy
+msgid "Contours"
+msgstr "评论"
+
+#: cps/templates/appearance.html:54
+msgid "Glass"
+msgstr ""
+
+#: cps/templates/appearance.html:55
+msgid "Coloured"
+msgstr ""
+
+#: cps/templates/appearance.html:56
+msgid "Glow"
+msgstr ""
+
+#: cps/templates/appearance.html:57
+msgid "Neutral"
+msgstr ""
+
+#: cps/templates/appearance.html:58
+msgid "Black & white"
+msgstr ""
+
+#: cps/templates/appearance.html:58
+msgid "Colour"
+msgstr ""
+
+#: cps/templates/appearance.html:59 cps/templates/appearance.html:61
+msgid "Soft"
+msgstr ""
+
+#: cps/templates/appearance.html:59
+msgid "Sharp"
+msgstr ""
+
+#: cps/templates/appearance.html:59
+msgid "Round"
+msgstr ""
+
+#: cps/templates/appearance.html:60
+msgid "Sans-serif"
+msgstr ""
+
+#: cps/templates/appearance.html:60
+#, fuzzy
+msgid "Serif"
+msgstr "丛书"
+
+#: cps/templates/appearance.html:61
+msgid "Vivid"
+msgstr ""
+
+#: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
+#: cps/templates/layout.html:157
+#, fuzzy
+msgid "Profile"
+msgstr "您的个人资料"
+
+#: cps/templates/appearance.html:68
+msgid ""
+"Give the library your own colours. Changes show up right away; save to keep "
+"them. Only you see your style."
+msgstr ""
+
+#: cps/templates/appearance.html:80
+msgid "Styles"
+msgstr ""
+
+#: cps/templates/appearance.html:81
+msgid "Surprise me"
+msgstr ""
+
+#: cps/templates/appearance.html:95
+msgid "Colours"
+msgstr ""
+
+#: cps/templates/appearance.html:97
+msgid "Main colour"
+msgstr ""
+
+#: cps/templates/appearance.html:102
+msgid "Second colour"
+msgstr ""
+
+#: cps/templates/appearance.html:107
+msgid "Intensity"
+msgstr ""
+
+#: cps/templates/appearance.html:113
+#, fuzzy
+msgid "Top bar"
+msgstr "用户列表"
+
+#: cps/templates/appearance.html:120
+msgid "Sidebar and page"
+msgstr ""
+
+#: cps/templates/appearance.html:122 cps/templates/user_edit.html:288
+msgid "Sidebar"
+msgstr ""
+
+#: cps/templates/appearance.html:126
+#, fuzzy
+msgid "Background"
+msgstr "查看后台任务"
+
+#: cps/templates/appearance.html:130
+#, fuzzy
+msgid "Page decoration"
+msgstr "会话保护"
+
+#: cps/templates/appearance.html:136
+msgid "Details"
+msgstr "详情"
+
+#: cps/templates/appearance.html:138
+msgid "Main buttons"
+msgstr ""
+
+#: cps/templates/appearance.html:142
+msgid "Corners"
+msgstr ""
+
+#: cps/templates/appearance.html:146
+#, fuzzy
+msgid "Headings"
+msgstr "评分"
+
+#: cps/templates/appearance.html:155 cps/templates/book_edit.html:132
+#: cps/templates/book_edit.html:136 cps/templates/duplicates.html:49
+#: cps/templates/magic_shelf_edit.html:60
+msgid "Preview"
+msgstr "预览"
+
+#: cps/templates/appearance.html:156 cps/templates/layout.html:162
+msgid "Appearance"
+msgstr ""
+
+#: cps/templates/appearance.html:157 cps/templates/layout.html:164
+#: cps/templates/read.html:63 cps/templates/readcbr.html:107
+msgid "Light"
+msgstr "浅色"
+
+#: cps/templates/appearance.html:158 cps/templates/layout.html:165
+#: cps/templates/read.html:65 cps/templates/readcbr.html:108
+msgid "Dark"
+msgstr "深色"
+
+#: cps/templates/appearance.html:162 cps/templates/appearance.html:181
+msgid "Saved style"
+msgstr ""
+
+#: cps/templates/appearance.html:167
+msgid "You have unsaved changes."
+msgstr ""
+
+#: cps/templates/appearance.html:169
+msgid "Undo"
+msgstr ""
+
+#: cps/templates/appearance.html:170
+msgid "Save style"
+msgstr ""
+
+#: cps/templates/appearance.html:181
+#, fuzzy
+msgid "Not saved yet"
+msgstr "显示丛书栏目"
+
+#: cps/templates/appearance.html:181
+msgid "Random mix: save it if you like it, or try again."
 msgstr ""
 
 #: cps/templates/author.html:7
@@ -3294,11 +3604,6 @@ msgstr "简介"
 msgid "HTML"
 msgstr ""
 
-#: cps/templates/book_edit.html:132 cps/templates/book_edit.html:136
-#: cps/templates/duplicates.html:49 cps/templates/magic_shelf_edit.html:60
-msgid "Preview"
-msgstr "预览"
-
 #: cps/templates/book_edit.html:137
 msgid ""
 "Basic HTML is kept (paragraphs, bold, italic, lists, links). Scripts and "
@@ -3370,7 +3675,7 @@ msgstr "从同步到Hardcover过程中黑名单阅读进度"
 #: cps/templates/cwa_settings.html:259 cps/templates/email_edit.html:71
 #: cps/templates/magic_shelf_edit.html:59
 #: cps/templates/profile_pictures.html:28 cps/templates/schedule_edit.html:33
-#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:384
+#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:388
 msgid "Save"
 msgstr "保存"
 
@@ -3463,7 +3768,7 @@ msgid "Add to shelf"
 msgstr "添加到书架"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:42
-#: cps/templates/layout.html:223
+#: cps/templates/layout.html:225
 #, fuzzy
 msgid "More"
 msgstr "更多"
@@ -3727,7 +4032,7 @@ msgid "Ok"
 msgstr "完成"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:268 cps/templates/login.html:35
+#: cps/templates/layout.html:270 cps/templates/login.html:35
 #: cps/templates/user_edit.html:46 cps/templates/user_edit.html:57
 #, fuzzy
 msgid "Show password"
@@ -4389,35 +4694,35 @@ msgstr "默认语言"
 msgid "Default Visible Language of Books"
 msgstr "书籍的默认显示语言"
 
-#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:369
+#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:373
 msgid "Admin User"
 msgstr "管理员用户"
 
-#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:370
+#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:374
 msgid "Allow Downloads"
 msgstr "允许下载书籍"
 
-#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:371
+#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:375
 msgid "Allow eBook Viewer"
 msgstr "允许在线阅读"
 
-#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:372
+#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:376
 msgid "Allow Uploads"
 msgstr "允许上传书籍"
 
-#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:373
+#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:377
 msgid "Allow Edit"
 msgstr "允许编辑书籍"
 
-#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:374
+#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:378
 msgid "Allow Delete Books"
 msgstr "允许删除书籍"
 
-#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:376
+#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:380
 msgid "Allow Changing Password"
 msgstr "允许修改密码"
 
-#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:377
+#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:381
 msgid "Allow Editing Public Shelves"
 msgstr "允许编辑公共书架"
 
@@ -4425,12 +4730,12 @@ msgstr "允许编辑公共书架"
 msgid "Default Visibilities for New Users"
 msgstr "新用户默认显示权限"
 
-#: cps/templates/config_view_edit.html:96 cps/templates/user_edit.html:291
+#: cps/templates/config_view_edit.html:96 cps/templates/user_edit.html:295
 #: cps/templates/user_table.html:26
 msgid "Show Random Books in Detail View"
 msgstr "在主页显示随机书籍"
 
-#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:296
+#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:300
 msgid "Add Allowed/Denied Tags"
 msgstr "添加显示或隐藏书籍的标签值"
 
@@ -5140,7 +5445,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:59
-#: cps/templates/layout.html:55 cps/templates/layout.html:216
+#: cps/templates/layout.html:56 cps/templates/layout.html:218
 #, fuzzy
 msgid "Library"
 msgstr "在书库"
@@ -5516,12 +5821,7 @@ msgstr "在线阅读"
 msgid "Listen"
 msgstr "列表"
 
-#: cps/templates/detail.html:102 cps/templates/detail.html:246
-#: cps/templates/layout.html:84 cps/templates/search_form.html:67
-msgid "Shelves"
-msgstr "书架列表"
-
-#: cps/templates/detail.html:117 cps/templates/layout.html:86
+#: cps/templates/detail.html:117 cps/templates/layout.html:87
 #: cps/templates/user_edit.html:176
 msgid "Create Shelf"
 msgstr "创建书架"
@@ -5587,7 +5887,7 @@ msgstr "创建书架"
 msgid "Reading progress"
 msgstr "KOReader 进度"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:269
+#: cps/templates/detail.html:207 cps/templates/layout.html:271
 #, fuzzy
 msgid "Show more"
 msgstr "显示未读"
@@ -5957,7 +6257,7 @@ msgid "(Magic)"
 msgstr "（魔法）"
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:93
+#: cps/templates/layout.html:94
 msgid "(Public)"
 msgstr "(公共)"
 
@@ -5982,10 +6282,6 @@ msgstr[0] ""
 msgid "View"
 msgstr "查看书籍"
 
-#: cps/templates/grid.html:10 cps/templates/list.html:12
-msgid "Grid"
-msgstr "网格"
-
 #: cps/templates/grid.html:11 cps/templates/list.html:13
 msgid "List"
 msgstr "列表"
@@ -5998,7 +6294,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:272
+#: cps/templates/grid.html:21 cps/templates/layout.html:274
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6133,11 +6429,6 @@ msgstr "登出账号"
 msgid "Create Issue"
 msgstr "创建问题"
 
-#: cps/templates/index.html:9
-#, fuzzy
-msgid "Continue reading"
-msgstr "在这里贡献！"
-
 #: cps/templates/index.html:12
 #, fuzzy, python-format
 msgid "Kobo synced %(when)s"
@@ -6147,11 +6438,6 @@ msgstr "Kobo 同步 Token"
 #, python-format
 msgid "%(time)s left"
 msgstr ""
-
-#: cps/templates/index.html:27
-#, fuzzy
-msgid "In progress"
-msgstr "任务进度"
 
 #: cps/templates/index.html:56 cps/templates/magic_shelf_edit.html:6
 #, fuzzy
@@ -6196,11 +6482,6 @@ msgstr ""
 #, fuzzy
 msgid "Nothing matches this view yet."
 msgstr "没有待拒绝的匹配"
-
-#: cps/templates/kosync_plugin.html:6 cps/templates/layout.html:156
-#, fuzzy
-msgid "Profile"
-msgstr "您的个人资料"
 
 #: cps/templates/kosync_plugin.html:7
 #, fuzzy
@@ -6323,170 +6604,151 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:45
+#: cps/templates/layout.html:46
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:49
+#: cps/templates/layout.html:50
 #, fuzzy
 msgid "Library navigation"
 msgstr "书库统计"
 
-#: cps/templates/layout.html:74
+#: cps/templates/layout.html:75
 msgid "Browse"
 msgstr "按条件浏览"
 
-#: cps/templates/layout.html:97
+#: cps/templates/layout.html:98
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:103 cps/templates/user_edit.html:305
+#: cps/templates/layout.html:104 cps/templates/user_edit.html:309
 #, fuzzy
 msgid "Smart shelves"
 msgstr "书架列表"
 
-#: cps/templates/layout.html:131
+#: cps/templates/layout.html:132
 msgid "Toggle Navigation"
 msgstr "切换导航"
 
-#: cps/templates/layout.html:134
+#: cps/templates/layout.html:135
 msgid "Search Library"
 msgstr "搜索书库"
 
-#: cps/templates/layout.html:135
-#, fuzzy
-msgid "Search titles, authors, series…"
-msgstr "按标题/作者搜索"
-
-#: cps/templates/layout.html:136
+#: cps/templates/layout.html:137
 #, fuzzy
 msgid "Advanced"
 msgstr "高级搜索"
 
-#: cps/templates/layout.html:140
+#: cps/templates/layout.html:141
 msgid "Refresh Library"
 msgstr "刷新书库"
 
-#: cps/templates/layout.html:150 cps/templates/user_edit.html:19
+#: cps/templates/layout.html:151 cps/templates/user_edit.html:19
 #: cps/templates/user_edit.html:32
 msgid "Account"
 msgstr "账号"
 
-#: cps/templates/layout.html:160
-msgid "Appearance"
-msgstr ""
-
-#: cps/templates/layout.html:162 cps/templates/read.html:63
-#: cps/templates/readcbr.html:107
-msgid "Light"
-msgstr "浅色"
-
-#: cps/templates/layout.html:163 cps/templates/read.html:65
-#: cps/templates/readcbr.html:108
-msgid "Dark"
-msgstr "深色"
-
-#: cps/templates/layout.html:171
+#: cps/templates/layout.html:173
 msgid "Logout"
 msgstr "注销"
 
-#: cps/templates/layout.html:191
+#: cps/templates/layout.html:193
 msgid "See Changelog"
 msgstr "查看更新日志"
 
-#: cps/templates/layout.html:194
+#: cps/templates/layout.html:196
 msgid "Open Duplicates"
 msgstr "打开重复项"
 
-#: cps/templates/layout.html:197
+#: cps/templates/layout.html:199
 msgid "Contribute here!"
 msgstr "在这里贡献！"
 
-#: cps/templates/layout.html:215
+#: cps/templates/layout.html:217
 #, fuzzy
 msgid "Quick navigation"
 msgstr "基本配置"
 
-#: cps/templates/layout.html:219
+#: cps/templates/layout.html:221
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:244
+#: cps/templates/layout.html:246
 #, fuzzy
 msgid "Are you sure?"
 msgstr "您真的确认？"
 
-#: cps/templates/layout.html:248 cps/templates/layout.html:266
+#: cps/templates/layout.html:250 cps/templates/layout.html:268
 #, fuzzy
 msgid "Confirm"
 msgstr "配置"
 
-#: cps/templates/layout.html:254
+#: cps/templates/layout.html:256
 msgid "Uploading..."
 msgstr "正在上传..."
 
-#: cps/templates/layout.html:257
+#: cps/templates/layout.html:259
 msgid "Please do not refresh the page"
 msgstr "请不要刷新页面"
 
-#: cps/templates/layout.html:260
+#: cps/templates/layout.html:262
 msgid "Drop books to add them to the library"
-msgstr ""
-
-#: cps/templates/layout.html:266
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "UUID 已复制至剪贴板"
-
-#: cps/templates/layout.html:267
-msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
 #: cps/templates/layout.html:268
 #, fuzzy
-msgid "Hide password"
-msgstr "密码"
+msgid "Copied to clipboard"
+msgstr "UUID 已复制至剪贴板"
 
 #: cps/templates/layout.html:269
-#, fuzzy
-msgid "Show less"
-msgstr "显示全部"
-
-#: cps/templates/layout.html:269 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
+msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
 #: cps/templates/layout.html:270
 #, fuzzy
+msgid "Hide password"
+msgstr "密码"
+
+#: cps/templates/layout.html:271
+#, fuzzy
+msgid "Show less"
+msgstr "显示全部"
+
+#: cps/templates/layout.html:271 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:272
+#, fuzzy
 msgid "Upload failed"
 msgstr "更新失败："
 
-#: cps/templates/layout.html:271
+#: cps/templates/layout.html:273
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "前 %(count)s 个"
 
-#: cps/templates/layout.html:272 cps/templates/search_form.html:7
+#: cps/templates/layout.html:274 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "任何"
 
-#: cps/templates/layout.html:272
+#: cps/templates/layout.html:274
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "请至少选择一个电子邮件地址"
 
-#: cps/templates/layout.html:273
+#: cps/templates/layout.html:275
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:276
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "重复扫描已完成：%(count)s 个组"
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:276
 #, fuzzy
 msgid "Review"
 msgstr "预览"
@@ -6812,11 +7074,6 @@ msgstr ""
 #: cps/templates/magic_shelf_edit.html:89
 msgid "Delete this smart shelf? The books themselves are not affected."
 msgstr ""
-
-#: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:43
-#, fuzzy
-msgid "Unread"
-msgstr "未读书籍"
 
 #: cps/templates/magic_shelf_edit.html:90
 #, fuzzy
@@ -7625,7 +7882,7 @@ msgstr ""
 msgid "Shelves & OPDS"
 msgstr "书架列表"
 
-#: cps/templates/user_edit.html:24 cps/templates/user_edit.html:367
+#: cps/templates/user_edit.html:24 cps/templates/user_edit.html:371
 msgid "Permissions"
 msgstr "权限"
 
@@ -7875,114 +8132,114 @@ msgstr "自动将新购书籍发送至我的电子阅读器（设备）上"
 msgid "Every newly imported book is emailed to the addresses above."
 msgstr ""
 
-#: cps/templates/user_edit.html:256
+#: cps/templates/user_edit.html:254
+msgid "Colours and style"
+msgstr ""
+
+#: cps/templates/user_edit.html:260
 msgid "Interface Language"
 msgstr "界面语言"
 
-#: cps/templates/user_edit.html:265
+#: cps/templates/user_edit.html:269
 msgid "Language of Books"
 msgstr "按语言显示书籍"
 
-#: cps/templates/user_edit.html:272
+#: cps/templates/user_edit.html:276
 #, fuzzy
 msgid "Only show books in this language."
 msgstr "对图书馆进行筛选，仅显示使用特定语言编写的书籍。"
 
-#: cps/templates/user_edit.html:276
+#: cps/templates/user_edit.html:280
 msgid "Hardcover API Token"
 msgstr "Hardcover API 令牌"
 
-#: cps/templates/user_edit.html:278
+#: cps/templates/user_edit.html:282
 msgid "Used to fetch metadata from Hardcover and sync reading progress."
 msgstr ""
 
-#: cps/templates/user_edit.html:284
-msgid "Sidebar"
-msgstr ""
-
-#: cps/templates/user_edit.html:297
+#: cps/templates/user_edit.html:301
 msgid "Add allowed/Denied Custom Column Values"
 msgstr "添加允许/拒绝的自定义栏目值"
 
-#: cps/templates/user_edit.html:306
+#: cps/templates/user_edit.html:310
 #, fuzzy
 msgid ""
 "Choose how smart shelves are ordered in the sidebar and which ones you see."
 msgstr "选择魔法书架在侧边栏中的排序方式。"
 
-#: cps/templates/user_edit.html:308
+#: cps/templates/user_edit.html:312
 msgid "Order Mode"
 msgstr "排序模式"
 
-#: cps/templates/user_edit.html:310
+#: cps/templates/user_edit.html:314
 msgid "Manual (drag to reorder)"
 msgstr "手动（拖动以重新排序）"
 
-#: cps/templates/user_edit.html:310
+#: cps/templates/user_edit.html:314
 msgid "Name (A-Z)"
 msgstr "名称（A-Z）"
 
-#: cps/templates/user_edit.html:310
+#: cps/templates/user_edit.html:314
 msgid "Name (Z-A)"
 msgstr "名称（Z-A）"
 
-#: cps/templates/user_edit.html:311
+#: cps/templates/user_edit.html:315
 msgid "Book count (high to low)"
 msgstr "书籍数量（高到低）"
 
-#: cps/templates/user_edit.html:311
+#: cps/templates/user_edit.html:315
 msgid "Book count (low to high)"
 msgstr "书籍数量（低到高）"
 
-#: cps/templates/user_edit.html:312
+#: cps/templates/user_edit.html:316
 msgid "Created (newest first)"
 msgstr "创建时间（最新的优先）"
 
-#: cps/templates/user_edit.html:312
+#: cps/templates/user_edit.html:316
 msgid "Created (oldest first)"
 msgstr "创建时间（最早的优先）"
 
-#: cps/templates/user_edit.html:313
+#: cps/templates/user_edit.html:317
 msgid "Recently modified"
 msgstr "最近修改的"
 
-#: cps/templates/user_edit.html:313
+#: cps/templates/user_edit.html:317
 msgid "Least recently modified"
 msgstr "最近最少修改的"
 
-#: cps/templates/user_edit.html:334
+#: cps/templates/user_edit.html:338
 msgid "Visible in the sidebar"
 msgstr ""
 
-#: cps/templates/user_edit.html:348
+#: cps/templates/user_edit.html:352
 msgid "OPDS Catalog Order"
 msgstr "OPDS 目录顺序"
 
-#: cps/templates/user_edit.html:349
+#: cps/templates/user_edit.html:353
 msgid ""
 "Order and visibility of the entries e-reader apps see at the top of the OPDS "
 "catalog."
 msgstr ""
 
-#: cps/templates/user_edit.html:358
+#: cps/templates/user_edit.html:362
 #, fuzzy, python-format
 msgid "Show %(name)s"
 msgstr "作者：%(name)s"
 
-#: cps/templates/user_edit.html:358
+#: cps/templates/user_edit.html:362
 msgid "Visible"
 msgstr "可见"
 
-#: cps/templates/user_edit.html:369
+#: cps/templates/user_edit.html:373
 msgid "Full access to settings and users."
 msgstr ""
 
-#: cps/templates/user_edit.html:388 cps/templates/user_table.html:60
+#: cps/templates/user_edit.html:392 cps/templates/user_table.html:60
 #, python-format
 msgid "Delete %(name)s? Their shelves and reading progress are removed too."
 msgstr ""
 
-#: cps/templates/user_edit.html:388 cps/templates/user_edit.html:390
+#: cps/templates/user_edit.html:392 cps/templates/user_edit.html:394
 #: cps/templates/user_table.html:59
 msgid "Delete User"
 msgstr "删除此用户"
@@ -8154,9 +8411,6 @@ msgstr ""
 
 #~ msgid "Version Information&nbsp;&nbsp;📜"
 #~ msgstr "版本信息&nbsp;&nbsp;📜"
-
-#~ msgid "Details"
-#~ msgstr "详情"
 
 #~ msgid "-"
 #~ msgstr "-"
@@ -9088,9 +9342,6 @@ msgstr ""
 #~ msgstr ""
 #~ "点击“运行完整重复项扫描”以建立它。在大型书库上可能需要几分钟时间，在它运行"
 #~ "时您可以继续使用 CWA。"
-
-#~ msgid "View Background Tasks"
-#~ msgstr "查看后台任务"
 
 #~ msgid "Auto-Resolve Duplicates"
 #~ msgstr "自动解决重复项"

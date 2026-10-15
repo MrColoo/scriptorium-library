@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version:  Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: https://github.com/crocodilestick/Calibre-Web-"
 "Automated\n"
-"POT-Creation-Date: 2026-10-15 20:23+0200\n"
+"POT-Creation-Date: 2026-10-15 22:38+0200\n"
 "PO-Revision-Date: 2023-01-21 10:00+0700\n"
 "Last-Translator: Arief Hidayat<arihid95@gmail.com>\n"
 "Language-Team: Arief Hidayat <arihid95@gmail.com>\n"
@@ -151,7 +151,7 @@ msgid "{} users deleted successfully"
 msgstr "{} pengguna berhasil dihapus"
 
 #: cps/admin.py:752 cps/templates/config_view_edit.html:75
-#: cps/templates/user_edit.html:267 cps/templates/user_table.html:34
+#: cps/templates/user_edit.html:271 cps/templates/user_table.html:34
 msgid "Show All"
 msgstr "Tampilkan semua"
 
@@ -772,6 +772,66 @@ msgid ""
 "data was reset."
 msgstr ""
 
+#: cps/appearance.py:29 cps/templates/appearance.html:53
+#: cps/templates/appearance.html:55
+msgid "Classic"
+msgstr ""
+
+#: cps/appearance.py:30
+msgid "Aurora"
+msgstr ""
+
+#: cps/appearance.py:31
+msgid "Sunset"
+msgstr ""
+
+#: cps/appearance.py:32
+msgid "Ocean"
+msgstr ""
+
+#: cps/appearance.py:33
+msgid "Forest"
+msgstr ""
+
+#: cps/appearance.py:34 cps/templates/appearance.html:57
+msgid "Paper"
+msgstr ""
+
+#: cps/appearance.py:35
+msgid "Neon"
+msgstr ""
+
+#: cps/appearance.py:36
+msgid "Lavender"
+msgstr ""
+
+#: cps/appearance.py:37
+msgid "Coral"
+msgstr ""
+
+#: cps/appearance.py:38
+#, fuzzy
+msgid "Midnight"
+msgstr "Terang"
+
+#: cps/appearance.py:39
+msgid "Citrus"
+msgstr ""
+
+#: cps/appearance.py:70
+msgid "Back to the classic look."
+msgstr ""
+
+#: cps/appearance.py:73 cps/appearance.py:76
+msgid "Your style is saved."
+msgstr ""
+
+#: cps/appearance.py:91 cps/templates/appearance.html:67
+#: cps/templates/layout.html:159
+#, fuzzy
+msgid "Customize"
+msgstr "Filter Kustom"
+
 #: cps/constants.py:207
 msgid "Czech"
 msgstr ""
@@ -1005,147 +1065,151 @@ msgstr ""
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr ""
 
-#: cps/cwa_functions.py:1718
-msgid "✅ All Monitoring Services are running as intended! 👍"
-msgstr ""
-
-#: cps/cwa_functions.py:1720
-msgid ""
-"🔴 The Ingest Service is running but the Metadata Change Detector is not"
-msgstr ""
-
 #: cps/cwa_functions.py:1722
-msgid ""
-"🔴 The Metadata Change Detector is running but the Ingest Service is not"
+msgid "✅ All Monitoring Services are running as intended! 👍"
 msgstr ""
 
 #: cps/cwa_functions.py:1724
 msgid ""
-"⛔ Neither the Ingest Service or the Metadata Change Detector are running"
+"🔴 The Ingest Service is running but the Metadata Change Detector is not"
 msgstr ""
 
 #: cps/cwa_functions.py:1726
+msgid ""
+"🔴 The Metadata Change Detector is running but the Ingest Service is not"
+msgstr ""
+
+#: cps/cwa_functions.py:1728
+msgid ""
+"⛔ Neither the Ingest Service or the Metadata Change Detector are running"
+msgstr ""
+
+#: cps/cwa_functions.py:1730
 msgid "An Error has occurred"
 msgstr ""
 
-#: cps/cwa_functions.py:1785
+#: cps/cwa_functions.py:1763
 #, fuzzy, python-format
 msgid "Log %(name)s"
 msgstr "Bahasa: %(name)s"
 
-#: cps/cwa_functions.py:1903 cps/tasks/ops.py:81
+#: cps/cwa_functions.py:1877 cps/tasks/ops.py:81
 #, fuzzy
 msgid "Convert Library"
 msgstr "Dalam Pustaka"
 
-#: cps/cwa_functions.py:1916
+#: cps/cwa_functions.py:1890
 #, python-format
 msgid "Convert Library scheduled in %(delay)s minute(s)."
 msgstr ""
 
-#: cps/cwa_functions.py:1918
+#: cps/cwa_functions.py:1892
 #, fuzzy, python-format
 msgid "Failed to schedule Convert Library: %(error)s"
 msgstr "Gagal Memindahkan Berkas Sampul %(file)s: %(error)s"
 
-#: cps/cwa_functions.py:1927
+#: cps/cwa_functions.py:1901
 #, fuzzy
 msgid "Convert Library – Run Archive"
 msgstr "Dalam Pustaka"
 
-#: cps/cwa_functions.py:2066
+#: cps/cwa_functions.py:1907
+msgid "There is no log yet. Start a run first."
+msgstr ""
+
+#: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
 msgstr "Temukan"
 
-#: cps/cwa_functions.py:2077
+#: cps/cwa_functions.py:2038
 #, fuzzy, python-format
 msgid "EPUB Fixer scheduled in %(delay)s minute(s)."
 msgstr "{} pengguna berhasil dihapus"
 
-#: cps/cwa_functions.py:2079
+#: cps/cwa_functions.py:2040
 #, fuzzy, python-format
 msgid "Failed to schedule EPUB Fixer: %(error)s"
 msgstr "Gagal Memindahkan Berkas Sampul %(file)s: %(error)s"
 
-#: cps/cwa_functions.py:2088
+#: cps/cwa_functions.py:2049
 msgid "EPUB Fixer – Run Archive"
 msgstr ""
 
-#: cps/cwa_functions.py:2167
+#: cps/cwa_functions.py:2107
 msgid "Single-book EPUB Fixer is not supported with Google Drive libraries."
 msgstr ""
 
-#: cps/cwa_functions.py:2174
+#: cps/cwa_functions.py:2114
 #, fuzzy
 msgid "Invalid book selection."
 msgstr "Peran tidak valid"
 
-#: cps/cwa_functions.py:2180
+#: cps/cwa_functions.py:2120
 #, fuzzy
 msgid "Book not found."
 msgstr "Token tidak ditemukan"
 
-#: cps/cwa_functions.py:2186
+#: cps/cwa_functions.py:2126
 #, fuzzy
 msgid "Selected book has no EPUB format."
 msgstr "Gabungkan buku terpiih"
 
-#: cps/cwa_functions.py:2190
+#: cps/cwa_functions.py:2130
 #, fuzzy
 msgid "EPUB file not found on disk."
 msgstr "%(format)s format tidak ditemukan dalam disk"
 
-#: cps/cwa_functions.py:2205
+#: cps/cwa_functions.py:2145
 #, fuzzy
 msgid "EPUB Fixer started for selected book."
 msgstr "Gabungkan buku terpiih"
 
-#: cps/cwa_functions.py:2208
+#: cps/cwa_functions.py:2148
 msgid "Failed to start EPUB Fixer for selected book."
 msgstr ""
 
-#: cps/cwa_functions.py:2262
+#: cps/cwa_functions.py:2202
 #, fuzzy
 msgid "User not found."
 msgstr "Pengguna tidak ditemukan"
 
-#: cps/cwa_functions.py:2266
+#: cps/cwa_functions.py:2206
 #, python-format
 msgid "Profile picture removed for %(name)s."
 msgstr ""
 
-#: cps/cwa_functions.py:2272
+#: cps/cwa_functions.py:2212
 msgid "Image is too large. Please use an image smaller than 500KB."
 msgstr ""
 
-#: cps/cwa_functions.py:2273
+#: cps/cwa_functions.py:2213
 msgid "Unsupported image type. Only PNG, JPEG and WebP are allowed."
 msgstr ""
 
-#: cps/cwa_functions.py:2275
+#: cps/cwa_functions.py:2215
 #, fuzzy
 msgid "Invalid image data."
 msgstr "Format alamat email tidak valid"
 
-#: cps/cwa_functions.py:2279
+#: cps/cwa_functions.py:2219
 msgid ""
 "Could not save the profile picture. Check that the config folder is writable."
 msgstr ""
 
-#: cps/cwa_functions.py:2282
+#: cps/cwa_functions.py:2222
 #, fuzzy, python-format
 msgid "Profile picture updated for %(name)s."
 msgstr "{} pengguna berhasil dihapus"
 
-#: cps/cwa_functions.py:2290 cps/templates/admin.html:26
+#: cps/cwa_functions.py:2230 cps/templates/admin.html:26
 #: cps/templates/profile_pictures.html:6
 #, fuzzy
 msgid "Profile pictures"
 msgstr "{} pengguna berhasil dihapus"
 
-#: cps/db.py:1273 cps/templates/config_edit.html:110
-#: cps/templates/config_view_edit.html:39
+#: cps/db.py:1273 cps/templates/appearance.html:56
+#: cps/templates/config_edit.html:110 cps/templates/config_view_edit.html:39
 #: cps/templates/config_view_edit.html:47 cps/templates/email_edit.html:44
 #: cps/templates/search_form.html:13 cps/web.py:702 cps/web.py:736
 #: cps/web.py:781 cps/web.py:821 cps/web.py:850 cps/web.py:1663 cps/web.py:1700
@@ -1213,7 +1277,7 @@ msgstr ""
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr ""
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:270
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:272
 msgid "Upload done, processing, please wait..."
 msgstr "Unggahan selesai, harap tunggu, data sedang diproses..."
 
@@ -1779,8 +1843,8 @@ msgid "{} Stars"
 msgstr "{}★"
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:166
-#: cps/templates/layout.html:221 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:168
+#: cps/templates/layout.html:223 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2251
 msgid "Login"
 msgstr "Masuk"
@@ -1803,8 +1867,8 @@ msgid ""
 "can run after imports and metadata changes. "
 msgstr ""
 
-#: cps/render_template.py:74 cps/templates/cwa_stats_tabs.html:177
-#: cps/templates/stats.html:12
+#: cps/render_template.py:74 cps/templates/appearance.html:7
+#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:12
 msgid "Books"
 msgstr "Buku"
 
@@ -1873,12 +1937,12 @@ msgstr "Kategori"
 msgid "Show Category Section"
 msgstr "Tampilkan pilihan kategori"
 
-#: cps/render_template.py:107 cps/templates/book_edit.html:93
-#: cps/templates/book_edit.html:270 cps/templates/book_table.html:60
-#: cps/templates/book_table.html:106 cps/templates/cwa_settings.html:149
-#: cps/templates/cwa_settings.html:198 cps/templates/magic_shelf_edit.html:92
-#: cps/templates/search_form.html:66 cps/templates/stats.html:15
-#: cps/web.py:1706 cps/web.py:1718
+#: cps/render_template.py:107 cps/templates/appearance.html:9
+#: cps/templates/book_edit.html:93 cps/templates/book_edit.html:270
+#: cps/templates/book_table.html:60 cps/templates/book_table.html:106
+#: cps/templates/cwa_settings.html:149 cps/templates/cwa_settings.html:198
+#: cps/templates/magic_shelf_edit.html:92 cps/templates/search_form.html:66
+#: cps/templates/stats.html:15 cps/web.py:1706 cps/web.py:1718
 msgid "Series"
 msgstr "Seri"
 
@@ -1887,9 +1951,10 @@ msgstr "Seri"
 msgid "Show Series Section"
 msgstr "Tampilkan pilihan seri"
 
-#: cps/render_template.py:110 cps/templates/author.html:5
-#: cps/templates/book_table.html:57 cps/templates/book_table.html:103
-#: cps/templates/cwa_settings.html:148 cps/templates/stats.html:13
+#: cps/render_template.py:110 cps/templates/appearance.html:8
+#: cps/templates/author.html:5 cps/templates/book_table.html:57
+#: cps/templates/book_table.html:103 cps/templates/cwa_settings.html:148
+#: cps/templates/stats.html:13
 msgid "Authors"
 msgstr "Penulis"
 
@@ -1977,7 +2042,7 @@ msgstr ""
 
 #: cps/search.py:53 cps/search.py:440 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:217 cps/templates/search.html:5
+#: cps/templates/layout.html:219 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "Telusuri"
@@ -2010,7 +2075,7 @@ msgid "Error on search for custom columns, please restart Calibre-Web"
 msgstr ""
 "Terjadi kesalahan saat mencari kolom khusus, harap mulai ulang Calibre-Web"
 
-#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:136
+#: cps/search.py:384 cps/search.py:416 cps/templates/layout.html:137
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2131,7 +2196,7 @@ msgstr ""
 "Terjadi kesalahan saat membuka rak. Rak tidak ada atau tidak dapat diakses"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:120 cps/templates/tasks.html:5
+#: cps/templates/layout.html:121 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Tugas"
 
@@ -2301,7 +2366,7 @@ msgstr ""
 msgid "Error creating shelf"
 msgstr "Kesalahan menghapus Rak"
 
-#: cps/templates/layout.html:105 cps/web.py:1210
+#: cps/templates/layout.html:106 cps/web.py:1210
 #, fuzzy
 msgid "Create Magic Shelf"
 msgstr "Buat Rak"
@@ -2424,7 +2489,7 @@ msgstr "Buku telah diantrikan untuk dikirim ke %(eReadermail)s"
 msgid "Please wait one minute to register next user"
 msgstr ""
 
-#: cps/templates/layout.html:168 cps/templates/login.html:77
+#: cps/templates/layout.html:170 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2130 cps/web.py:2134
 #: cps/web.py:2139 cps/web.py:2143 cps/web.py:2149 cps/web.py:2174
 #: cps/web.py:2178 cps/web.py:2191 cps/web.py:2194
@@ -2757,8 +2822,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "Menghapus cache thumbnail sampul"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/layout.html:143 cps/templates/layout.html:144
-#: cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:144
+#: cps/templates/layout.html:145 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Unggah"
 
@@ -2767,8 +2832,9 @@ msgstr "Unggah"
 msgid "Rating: %(rating)s of 5"
 msgstr "Peringkat: %(rating)s★"
 
-#: cps/templates/_macros.html:43 cps/templates/detail.html:155
-#: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:42
+#: cps/templates/_macros.html:43 cps/templates/appearance.html:29
+#: cps/templates/detail.html:155 cps/templates/magic_shelf_edit.html:90
+#: cps/templates/search_form.html:42
 msgid "Read"
 msgstr "Baca"
 
@@ -2859,11 +2925,11 @@ msgstr "Nilai Kolom yang Diizinkan"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:186
-#: cps/templates/layout.html:189 cps/templates/layout.html:192
-#: cps/templates/layout.html:195 cps/templates/layout.html:198
-#: cps/templates/layout.html:201 cps/templates/layout.html:238
-#: cps/templates/layout.html:266 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:188
+#: cps/templates/layout.html:191 cps/templates/layout.html:194
+#: cps/templates/layout.html:197 cps/templates/layout.html:200
+#: cps/templates/layout.html:203 cps/templates/layout.html:240
+#: cps/templates/layout.html:268 cps/templates/read.html:58
 msgid "Close"
 msgstr "Tutup"
 
@@ -2901,11 +2967,11 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:247
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:249
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
-#: cps/templates/tasks.html:56 cps/templates/user_edit.html:385
+#: cps/templates/tasks.html:56 cps/templates/user_edit.html:389
 msgid "Cancel"
 msgstr "Batal"
 
@@ -2960,7 +3026,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:123
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:124
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -3006,10 +3072,10 @@ msgstr ""
 msgid "Admin"
 msgstr "Admin"
 
-#: cps/templates/admin.html:46 cps/templates/cwa_list_logs.html:22
-#: cps/templates/detail.html:27 cps/templates/detail.html:86
-#: cps/templates/listenmp3.html:62 cps/templates/shelf.html:35
-#: cps/templates/user_table.html:24
+#: cps/templates/admin.html:46 cps/templates/appearance.html:30
+#: cps/templates/cwa_list_logs.html:22 cps/templates/detail.html:27
+#: cps/templates/detail.html:86 cps/templates/listenmp3.html:62
+#: cps/templates/shelf.html:35 cps/templates/user_table.html:24
 msgid "Download"
 msgstr "Unduh"
 
@@ -3119,7 +3185,7 @@ msgstr "Buku per halaman"
 msgid "Uploads"
 msgstr "Unggah"
 
-#: cps/templates/admin.html:106 cps/templates/layout.html:157
+#: cps/templates/admin.html:106 cps/templates/layout.html:158
 #, fuzzy
 msgid "Kobo sync"
 msgstr "Aktifkan sinkronisasi Kobo"
@@ -3202,7 +3268,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Aktifkan sinkronisasi Kobo"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:118 cps/templates/layout.html:161
+#: cps/templates/layout.html:119 cps/templates/layout.html:163
 msgid "System"
 msgstr ""
 
@@ -3238,8 +3304,250 @@ msgstr "Matikan"
 msgid "Are you sure you want to restart?"
 msgstr "Apa Anda yakin untuk memulai ulang?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:273
+#: cps/templates/admin.html:175 cps/templates/layout.html:275
 msgid "Restarting, the page reloads when the server is back."
+msgstr ""
+
+#: cps/templates/appearance.html:10 cps/templates/detail.html:102
+#: cps/templates/detail.html:246 cps/templates/layout.html:85
+#: cps/templates/search_form.html:67
+msgid "Shelves"
+msgstr "Rak"
+
+#: cps/templates/appearance.html:14 cps/templates/layout.html:136
+msgid "Search titles, authors, series…"
+msgstr ""
+
+#: cps/templates/appearance.html:20 cps/templates/index.html:9
+msgid "Continue reading"
+msgstr ""
+
+#: cps/templates/appearance.html:31 cps/templates/index.html:27
+#, fuzzy
+msgid "In progress"
+msgstr "Kemajuan"
+
+#: cps/templates/appearance.html:32 cps/templates/magic_shelf_edit.html:90
+#: cps/templates/search_form.html:43
+#, fuzzy
+msgid "Unread"
+msgstr "Buku yang Belum Dibaca"
+
+#: cps/templates/appearance.html:34
+msgid "A link looks like this,"
+msgstr ""
+
+#: cps/templates/appearance.html:34
+msgid "and this is one"
+msgstr ""
+
+#: cps/templates/appearance.html:53 cps/templates/appearance.html:55
+#: cps/templates/appearance.html:57
+msgid "Tinted"
+msgstr ""
+
+#: cps/templates/appearance.html:53 cps/templates/appearance.html:58
+msgid "Gradient"
+msgstr ""
+
+#: cps/templates/appearance.html:53
+msgid "Mesh"
+msgstr ""
+
+#: cps/templates/appearance.html:53
+msgid "Aurora (animated)"
+msgstr ""
+
+#: cps/templates/appearance.html:54 cps/templates/appearance.html:56
+msgid "Dots"
+msgstr ""
+
+#: cps/templates/appearance.html:54 cps/templates/grid.html:10
+#: cps/templates/list.html:12
+msgid "Grid"
+msgstr "Terjadi Kesalahan"
+
+#: cps/templates/appearance.html:54
+msgid "Waves"
+msgstr ""
+
+#: cps/templates/appearance.html:54
+msgid "Stripes"
+msgstr ""
+
+#: cps/templates/appearance.html:54
+#, fuzzy
+msgid "Contours"
+msgstr "Komentar"
+
+#: cps/templates/appearance.html:54
+msgid "Glass"
+msgstr ""
+
+#: cps/templates/appearance.html:55
+msgid "Coloured"
+msgstr ""
+
+#: cps/templates/appearance.html:56
+msgid "Glow"
+msgstr ""
+
+#: cps/templates/appearance.html:57
+msgid "Neutral"
+msgstr ""
+
+#: cps/templates/appearance.html:58
+msgid "Black & white"
+msgstr ""
+
+#: cps/templates/appearance.html:58
+msgid "Colour"
+msgstr ""
+
+#: cps/templates/appearance.html:59 cps/templates/appearance.html:61
+msgid "Soft"
+msgstr ""
+
+#: cps/templates/appearance.html:59
+msgid "Sharp"
+msgstr ""
+
+#: cps/templates/appearance.html:59
+msgid "Round"
+msgstr ""
+
+#: cps/templates/appearance.html:60
+msgid "Sans-serif"
+msgstr ""
+
+#: cps/templates/appearance.html:60
+#, fuzzy
+msgid "Serif"
+msgstr "Seri"
+
+#: cps/templates/appearance.html:61
+msgid "Vivid"
+msgstr ""
+
+#: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
+#: cps/templates/layout.html:157
+#, fuzzy
+msgid "Profile"
+msgstr "Alamat email Anda"
+
+#: cps/templates/appearance.html:68
+msgid ""
+"Give the library your own colours. Changes show up right away; save to keep "
+"them. Only you see your style."
+msgstr ""
+
+#: cps/templates/appearance.html:80
+msgid "Styles"
+msgstr ""
+
+#: cps/templates/appearance.html:81
+msgid "Surprise me"
+msgstr ""
+
+#: cps/templates/appearance.html:95
+msgid "Colours"
+msgstr ""
+
+#: cps/templates/appearance.html:97
+msgid "Main colour"
+msgstr ""
+
+#: cps/templates/appearance.html:102
+msgid "Second colour"
+msgstr ""
+
+#: cps/templates/appearance.html:107
+msgid "Intensity"
+msgstr ""
+
+#: cps/templates/appearance.html:113
+#, fuzzy
+msgid "Top bar"
+msgstr "Pengguna"
+
+#: cps/templates/appearance.html:120
+msgid "Sidebar and page"
+msgstr ""
+
+#: cps/templates/appearance.html:122 cps/templates/user_edit.html:288
+msgid "Sidebar"
+msgstr ""
+
+#: cps/templates/appearance.html:126
+msgid "Background"
+msgstr ""
+
+#: cps/templates/appearance.html:130
+#, fuzzy
+msgid "Page decoration"
+msgstr "pilih opsi"
+
+#: cps/templates/appearance.html:136
+msgid "Details"
+msgstr "Detail"
+
+#: cps/templates/appearance.html:138
+msgid "Main buttons"
+msgstr ""
+
+#: cps/templates/appearance.html:142
+msgid "Corners"
+msgstr ""
+
+#: cps/templates/appearance.html:146
+#, fuzzy
+msgid "Headings"
+msgstr "Peringkat"
+
+#: cps/templates/appearance.html:155 cps/templates/book_edit.html:132
+#: cps/templates/book_edit.html:136 cps/templates/duplicates.html:49
+#: cps/templates/magic_shelf_edit.html:60
+#, fuzzy
+msgid "Preview"
+msgstr "Sebelumnya"
+
+#: cps/templates/appearance.html:156 cps/templates/layout.html:162
+msgid "Appearance"
+msgstr ""
+
+#: cps/templates/appearance.html:157 cps/templates/layout.html:164
+#: cps/templates/read.html:63 cps/templates/readcbr.html:107
+msgid "Light"
+msgstr "Terang"
+
+#: cps/templates/appearance.html:158 cps/templates/layout.html:165
+#: cps/templates/read.html:65 cps/templates/readcbr.html:108
+msgid "Dark"
+msgstr "Gelap"
+
+#: cps/templates/appearance.html:162 cps/templates/appearance.html:181
+msgid "Saved style"
+msgstr ""
+
+#: cps/templates/appearance.html:167
+msgid "You have unsaved changes."
+msgstr ""
+
+#: cps/templates/appearance.html:169
+msgid "Undo"
+msgstr ""
+
+#: cps/templates/appearance.html:170
+msgid "Save style"
+msgstr ""
+
+#: cps/templates/appearance.html:181
+#, fuzzy
+msgid "Not saved yet"
+msgstr "Tampilkan pilihan seri"
+
+#: cps/templates/appearance.html:181
+msgid "Random mix: save it if you like it, or try again."
 msgstr ""
 
 #: cps/templates/author.html:7
@@ -3410,12 +3718,6 @@ msgstr "Deskripsi"
 msgid "HTML"
 msgstr ""
 
-#: cps/templates/book_edit.html:132 cps/templates/book_edit.html:136
-#: cps/templates/duplicates.html:49 cps/templates/magic_shelf_edit.html:60
-#, fuzzy
-msgid "Preview"
-msgstr "Sebelumnya"
-
 #: cps/templates/book_edit.html:137
 msgid ""
 "Basic HTML is kept (paragraphs, bold, italic, lists, links). Scripts and "
@@ -3488,7 +3790,7 @@ msgstr ""
 #: cps/templates/cwa_settings.html:259 cps/templates/email_edit.html:71
 #: cps/templates/magic_shelf_edit.html:59
 #: cps/templates/profile_pictures.html:28 cps/templates/schedule_edit.html:33
-#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:384
+#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:388
 msgid "Save"
 msgstr "Simpan"
 
@@ -3581,7 +3883,7 @@ msgid "Add to shelf"
 msgstr "Tambah ke rak"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:42
-#: cps/templates/layout.html:223
+#: cps/templates/layout.html:225
 #, fuzzy
 msgid "More"
 msgstr "Lainnya oleh"
@@ -3852,7 +4154,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:268 cps/templates/login.html:35
+#: cps/templates/layout.html:270 cps/templates/login.html:35
 #: cps/templates/user_edit.html:46 cps/templates/user_edit.html:57
 #, fuzzy
 msgid "Show password"
@@ -4520,35 +4822,35 @@ msgstr "Bahasa Bawaan"
 msgid "Default Visible Language of Books"
 msgstr "Bahasa Buku Bawaan yang Terlihat"
 
-#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:369
+#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:373
 msgid "Admin User"
 msgstr "Pengguna Admin"
 
-#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:370
+#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:374
 msgid "Allow Downloads"
 msgstr "Izinkan Unduhan"
 
-#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:371
+#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:375
 msgid "Allow eBook Viewer"
 msgstr "Izinkan Penampil eBook"
 
-#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:372
+#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:376
 msgid "Allow Uploads"
 msgstr "Izinkan Unggahan"
 
-#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:373
+#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:377
 msgid "Allow Edit"
 msgstr "Izinkan Edit"
 
-#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:374
+#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:378
 msgid "Allow Delete Books"
 msgstr "Izinkan Menghapus Buku"
 
-#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:376
+#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:380
 msgid "Allow Changing Password"
 msgstr "Izinkan Mengganti Kata Sandi"
 
-#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:377
+#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:381
 msgid "Allow Editing Public Shelves"
 msgstr "Izinkan Mengedit Rak Publik"
 
@@ -4556,12 +4858,12 @@ msgstr "Izinkan Mengedit Rak Publik"
 msgid "Default Visibilities for New Users"
 msgstr "Visibilitas Default untuk Pengguna Baru"
 
-#: cps/templates/config_view_edit.html:96 cps/templates/user_edit.html:291
+#: cps/templates/config_view_edit.html:96 cps/templates/user_edit.html:295
 #: cps/templates/user_table.html:26
 msgid "Show Random Books in Detail View"
 msgstr "Tampilkan Buku Acak dalam Tampilan Detail"
 
-#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:296
+#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:300
 msgid "Add Allowed/Denied Tags"
 msgstr "Tambahkan Tag yang Diizinkan/Ditolak"
 
@@ -5284,7 +5586,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:59
-#: cps/templates/layout.html:55 cps/templates/layout.html:216
+#: cps/templates/layout.html:56 cps/templates/layout.html:218
 #, fuzzy
 msgid "Library"
 msgstr "Dalam Pustaka"
@@ -5653,12 +5955,7 @@ msgstr "Baca di Peramban"
 msgid "Listen"
 msgstr "Daftar"
 
-#: cps/templates/detail.html:102 cps/templates/detail.html:246
-#: cps/templates/layout.html:84 cps/templates/search_form.html:67
-msgid "Shelves"
-msgstr "Rak"
-
-#: cps/templates/detail.html:117 cps/templates/layout.html:86
+#: cps/templates/detail.html:117 cps/templates/layout.html:87
 #: cps/templates/user_edit.html:176
 #, fuzzy
 msgid "Create Shelf"
@@ -5725,7 +6022,7 @@ msgstr "Buat Rak"
 msgid "Reading progress"
 msgstr "Kemajuan"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:269
+#: cps/templates/detail.html:207 cps/templates/layout.html:271
 #, fuzzy
 msgid "Show more"
 msgstr "Tampilkan belum dibaca"
@@ -6085,7 +6382,7 @@ msgid "(Magic)"
 msgstr ""
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:93
+#: cps/templates/layout.html:94
 msgid "(Public)"
 msgstr "(Publik)"
 
@@ -6112,10 +6409,6 @@ msgstr[0] ""
 msgid "View"
 msgstr "Tampilan"
 
-#: cps/templates/grid.html:10 cps/templates/list.html:12
-msgid "Grid"
-msgstr "Terjadi Kesalahan"
-
 #: cps/templates/grid.html:11 cps/templates/list.html:13
 msgid "List"
 msgstr "Daftar"
@@ -6128,7 +6421,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:272
+#: cps/templates/grid.html:21 cps/templates/layout.html:274
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6259,10 +6552,6 @@ msgstr "Keluar Pengguna"
 msgid "Create Issue"
 msgstr "Buat Isu"
 
-#: cps/templates/index.html:9
-msgid "Continue reading"
-msgstr ""
-
 #: cps/templates/index.html:12
 #, fuzzy, python-format
 msgid "Kobo synced %(when)s"
@@ -6272,11 +6561,6 @@ msgstr "Token Kobo Sync"
 #, python-format
 msgid "%(time)s left"
 msgstr ""
-
-#: cps/templates/index.html:27
-#, fuzzy
-msgid "In progress"
-msgstr "Kemajuan"
 
 #: cps/templates/index.html:56 cps/templates/magic_shelf_edit.html:6
 #, fuzzy
@@ -6323,11 +6607,6 @@ msgstr ""
 #: cps/templates/index.html:89
 msgid "Nothing matches this view yet."
 msgstr ""
-
-#: cps/templates/kosync_plugin.html:6 cps/templates/layout.html:156
-#, fuzzy
-msgid "Profile"
-msgstr "Alamat email Anda"
 
 #: cps/templates/kosync_plugin.html:7
 #, fuzzy
@@ -6450,171 +6729,153 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:45
+#: cps/templates/layout.html:46
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:49
+#: cps/templates/layout.html:50
 #, fuzzy
 msgid "Library navigation"
 msgstr "Statistik Pustaka"
 
-#: cps/templates/layout.html:74
+#: cps/templates/layout.html:75
 msgid "Browse"
 msgstr "Jelajahi"
 
-#: cps/templates/layout.html:97
+#: cps/templates/layout.html:98
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:103 cps/templates/user_edit.html:305
+#: cps/templates/layout.html:104 cps/templates/user_edit.html:309
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Rak"
 
-#: cps/templates/layout.html:131
+#: cps/templates/layout.html:132
 msgid "Toggle Navigation"
 msgstr "Alihkan Navigasi"
 
-#: cps/templates/layout.html:134
+#: cps/templates/layout.html:135
 msgid "Search Library"
 msgstr "Cari di Pustaka"
 
-#: cps/templates/layout.html:135
-msgid "Search titles, authors, series…"
-msgstr ""
-
-#: cps/templates/layout.html:136
+#: cps/templates/layout.html:137
 #, fuzzy
 msgid "Advanced"
 msgstr "Penelusuran Lanjutan"
 
-#: cps/templates/layout.html:140
+#: cps/templates/layout.html:141
 #, fuzzy
 msgid "Refresh Library"
 msgstr "Cari di Pustaka"
 
-#: cps/templates/layout.html:150 cps/templates/user_edit.html:19
+#: cps/templates/layout.html:151 cps/templates/user_edit.html:19
 #: cps/templates/user_edit.html:32
 msgid "Account"
 msgstr "Akun"
 
-#: cps/templates/layout.html:160
-msgid "Appearance"
-msgstr ""
-
-#: cps/templates/layout.html:162 cps/templates/read.html:63
-#: cps/templates/readcbr.html:107
-msgid "Light"
-msgstr "Terang"
-
-#: cps/templates/layout.html:163 cps/templates/read.html:65
-#: cps/templates/readcbr.html:108
-msgid "Dark"
-msgstr "Gelap"
-
-#: cps/templates/layout.html:171
+#: cps/templates/layout.html:173
 msgid "Logout"
 msgstr "Keluar"
 
-#: cps/templates/layout.html:191
+#: cps/templates/layout.html:193
 msgid "See Changelog"
 msgstr ""
 
-#: cps/templates/layout.html:194
+#: cps/templates/layout.html:196
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Hapus"
 
-#: cps/templates/layout.html:197
+#: cps/templates/layout.html:199
 msgid "Contribute here!"
 msgstr ""
 
-#: cps/templates/layout.html:215
+#: cps/templates/layout.html:217
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Pengaturan Dasar"
 
-#: cps/templates/layout.html:219
+#: cps/templates/layout.html:221
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:244
+#: cps/templates/layout.html:246
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Apakah Anda yakin?"
 
-#: cps/templates/layout.html:248 cps/templates/layout.html:266
+#: cps/templates/layout.html:250 cps/templates/layout.html:268
 #, fuzzy
 msgid "Confirm"
 msgstr "Pengaturan"
 
-#: cps/templates/layout.html:254
+#: cps/templates/layout.html:256
 msgid "Uploading..."
 msgstr "Mengunggah..."
 
-#: cps/templates/layout.html:257
+#: cps/templates/layout.html:259
 msgid "Please do not refresh the page"
 msgstr "Harap jangan segarkan halaman"
 
-#: cps/templates/layout.html:260
+#: cps/templates/layout.html:262
 msgid "Drop books to add them to the library"
-msgstr ""
-
-#: cps/templates/layout.html:266
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "Cari di Pustaka"
-
-#: cps/templates/layout.html:267
-msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
 #: cps/templates/layout.html:268
 #, fuzzy
-msgid "Hide password"
-msgstr "Kata Sandi"
+msgid "Copied to clipboard"
+msgstr "Cari di Pustaka"
 
 #: cps/templates/layout.html:269
-#, fuzzy
-msgid "Show less"
-msgstr "Tampilkan semua"
-
-#: cps/templates/layout.html:269 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
+msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
 #: cps/templates/layout.html:270
 #, fuzzy
+msgid "Hide password"
+msgstr "Kata Sandi"
+
+#: cps/templates/layout.html:271
+#, fuzzy
+msgid "Show less"
+msgstr "Tampilkan semua"
+
+#: cps/templates/layout.html:271 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:272
+#, fuzzy
 msgid "Upload failed"
 msgstr "Pembaruan gagal:"
 
-#: cps/templates/layout.html:271
+#: cps/templates/layout.html:273
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "Profil %(name)s"
 
-#: cps/templates/layout.html:272 cps/templates/search_form.html:7
+#: cps/templates/layout.html:274 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr ""
 
-#: cps/templates/layout.html:272
+#: cps/templates/layout.html:274
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Kata Sandi baru telah dikirimkan ke alamat email Anda"
 
-#: cps/templates/layout.html:273
+#: cps/templates/layout.html:275
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:276
 #, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr ""
 
-#: cps/templates/layout.html:274
+#: cps/templates/layout.html:276
 #, fuzzy
 msgid "Review"
 msgstr "Sebelumnya"
@@ -6938,11 +7199,6 @@ msgstr ""
 #: cps/templates/magic_shelf_edit.html:89
 msgid "Delete this smart shelf? The books themselves are not affected."
 msgstr ""
-
-#: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:43
-#, fuzzy
-msgid "Unread"
-msgstr "Buku yang Belum Dibaca"
 
 #: cps/templates/magic_shelf_edit.html:90
 #, fuzzy
@@ -7752,7 +8008,7 @@ msgstr ""
 msgid "Shelves & OPDS"
 msgstr "Rak"
 
-#: cps/templates/user_edit.html:24 cps/templates/user_edit.html:367
+#: cps/templates/user_edit.html:24 cps/templates/user_edit.html:371
 #, fuzzy
 msgid "Permissions"
 msgstr "Versi"
@@ -7999,114 +8255,114 @@ msgstr ""
 msgid "Every newly imported book is emailed to the addresses above."
 msgstr ""
 
-#: cps/templates/user_edit.html:256
+#: cps/templates/user_edit.html:254
+msgid "Colours and style"
+msgstr ""
+
+#: cps/templates/user_edit.html:260
 #, fuzzy
 msgid "Interface Language"
 msgstr "Masukkan Bahasa"
 
-#: cps/templates/user_edit.html:265
+#: cps/templates/user_edit.html:269
 msgid "Language of Books"
 msgstr "Bahasa Buku"
 
-#: cps/templates/user_edit.html:272
+#: cps/templates/user_edit.html:276
 msgid "Only show books in this language."
 msgstr ""
 
-#: cps/templates/user_edit.html:276
+#: cps/templates/user_edit.html:280
 msgid "Hardcover API Token"
 msgstr ""
 
-#: cps/templates/user_edit.html:278
+#: cps/templates/user_edit.html:282
 msgid "Used to fetch metadata from Hardcover and sync reading progress."
 msgstr ""
 
-#: cps/templates/user_edit.html:284
-msgid "Sidebar"
-msgstr ""
-
-#: cps/templates/user_edit.html:297
+#: cps/templates/user_edit.html:301
 msgid "Add allowed/Denied Custom Column Values"
 msgstr "Tambahkan Nilai Kolom Kustom yang Diizinkan/Ditolak"
 
-#: cps/templates/user_edit.html:306
+#: cps/templates/user_edit.html:310
 msgid ""
 "Choose how smart shelves are ordered in the sidebar and which ones you see."
 msgstr ""
 
-#: cps/templates/user_edit.html:308
+#: cps/templates/user_edit.html:312
 msgid "Order Mode"
 msgstr ""
 
-#: cps/templates/user_edit.html:310
+#: cps/templates/user_edit.html:314
 msgid "Manual (drag to reorder)"
 msgstr ""
 
-#: cps/templates/user_edit.html:310
+#: cps/templates/user_edit.html:314
 msgid "Name (A-Z)"
 msgstr ""
 
-#: cps/templates/user_edit.html:310
+#: cps/templates/user_edit.html:314
 msgid "Name (Z-A)"
 msgstr ""
 
-#: cps/templates/user_edit.html:311
+#: cps/templates/user_edit.html:315
 msgid "Book count (high to low)"
 msgstr ""
 
-#: cps/templates/user_edit.html:311
+#: cps/templates/user_edit.html:315
 msgid "Book count (low to high)"
 msgstr ""
 
-#: cps/templates/user_edit.html:312
+#: cps/templates/user_edit.html:316
 msgid "Created (newest first)"
 msgstr ""
 
-#: cps/templates/user_edit.html:312
+#: cps/templates/user_edit.html:316
 msgid "Created (oldest first)"
 msgstr ""
 
-#: cps/templates/user_edit.html:313
+#: cps/templates/user_edit.html:317
 #, fuzzy
 msgid "Recently modified"
 msgstr "Buku yang baru ditambahkan"
 
-#: cps/templates/user_edit.html:313
+#: cps/templates/user_edit.html:317
 msgid "Least recently modified"
 msgstr ""
 
-#: cps/templates/user_edit.html:334
+#: cps/templates/user_edit.html:338
 msgid "Visible in the sidebar"
 msgstr ""
 
-#: cps/templates/user_edit.html:348
+#: cps/templates/user_edit.html:352
 msgid "OPDS Catalog Order"
 msgstr ""
 
-#: cps/templates/user_edit.html:349
+#: cps/templates/user_edit.html:353
 msgid ""
 "Order and visibility of the entries e-reader apps see at the top of the OPDS "
 "catalog."
 msgstr ""
 
-#: cps/templates/user_edit.html:358
+#: cps/templates/user_edit.html:362
 #, fuzzy, python-format
 msgid "Show %(name)s"
 msgstr "Penulis: %(name)s"
 
-#: cps/templates/user_edit.html:358
+#: cps/templates/user_edit.html:362
 msgid "Visible"
 msgstr ""
 
-#: cps/templates/user_edit.html:369
+#: cps/templates/user_edit.html:373
 msgid "Full access to settings and users."
 msgstr ""
 
-#: cps/templates/user_edit.html:388 cps/templates/user_table.html:60
+#: cps/templates/user_edit.html:392 cps/templates/user_table.html:60
 #, python-format
 msgid "Delete %(name)s? Their shelves and reading progress are removed too."
 msgstr ""
 
-#: cps/templates/user_edit.html:388 cps/templates/user_edit.html:390
+#: cps/templates/user_edit.html:392 cps/templates/user_edit.html:394
 #: cps/templates/user_table.html:59
 msgid "Delete User"
 msgstr "Hapus Pengguna"
@@ -8242,9 +8498,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Version Information&nbsp;&nbsp;📜"
 #~ msgstr "Informasi Versi"
-
-#~ msgid "Details"
-#~ msgstr "Detail"
 
 #~ msgid "Check for Update"
 #~ msgstr "Periksa Pembaruan"

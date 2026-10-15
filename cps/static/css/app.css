@@ -28,8 +28,9 @@
 @font-face { font-family: "Newsreader"; font-style: italic; font-weight: 200 800; font-display: swap;
   src: url("../fonts/newsreader-latin-wght-italic.woff2") format("woff2"); }
 
-/* ---------- Tokens ---------- */
-:root {
+/* ---------- Tokens ----------
+ * Also declared on [data-ap] and .ap-reset so a nested preview (themes.css) starts from the stock values. */
+:root, .ap-reset, [data-ap] {
   color-scheme: light;
   --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-serif: "Newsreader", "Iowan Old Style", Georgia, serif;
@@ -81,7 +82,7 @@
   --ease: cubic-bezier(.2, .7, .2, 1);
 }
 
-:root[data-theme="dark"] {
+:root[data-theme="dark"], [data-theme="dark"] .ap-reset, [data-theme="dark"] [data-ap] {
   color-scheme: dark;
   --bg: #121214;
   --bg-sunken: #0D0D0F;

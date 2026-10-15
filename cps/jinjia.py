@@ -280,3 +280,10 @@ def avatar_url_global(user):
     if not token:
         return None
     return url_for('profile_pictures.avatar', user_id=user.id, v=token)
+
+
+@jinjia.app_template_global('appearance_attrs')
+def appearance_attrs_global(user):
+    """HTML attributes that apply the user's chosen style to <html>."""
+    from . import appearance
+    return appearance.html_attrs(appearance.for_user(user))
