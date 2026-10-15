@@ -249,3 +249,16 @@ def nl2br(value):
     if value is None:
         return ""
     return Markup("<br>").join(escape(str(value)).split("\n"))
+
+
+@jinjia.app_template_filter('format_minutes')
+def format_minutes(minutes):
+    """Reading time left as '3 h 40 min' / '48 min'."""
+    try:
+        minutes = int(minutes)
+    except (TypeError, ValueError):
+        return ""
+    hours, mins = divmod(max(minutes, 0), 60)
+    if hours:
+        return "{} h {:02d} min".format(hours, mins)
+    return "{} min".format(mins)

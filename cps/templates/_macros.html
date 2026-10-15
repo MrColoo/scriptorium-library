@@ -1,0 +1,147 @@
+{#- Shared building blocks for the redesigned templates. Import with:
+    {% import '_macros.html' as ui with context %} -#}
+
+{% macro icon(name, cls='') -%}
+<svg class="icon{% if cls %} {{ cls }}{% endif %}" aria-hidden="true"><use href="{{ url_for('static', filename='img/icons.svg') }}#{{ name }}"></use></svg>
+{%- endmacro %}
+
+{% macro cover_img(book, sizes='(max-width: 860px) 34vw, 180px', alt=None) -%}
+{%- set srcset = book|get_cover_srcset -%}
+<img srcset="{{ srcset }}" sizes="{{ sizes }}"
+     src="{{ url_for('web.get_cover', book_id=book.id, resolution='og', c=book|last_modified) }}"
+     alt="{{ alt if alt is not none else book.title }}" loading="lazy" decoding="async">
+{%- endmacro %}
+
+{% macro stars(rating) -%}
+{#- rating is Calibre's 0–10 scale -#}
+{%- set full = ((rating or 0) / 2)|round(0, 'floor')|int -%}
+<span class="stars" role="img" aria-label="{{ _('Rating: %(rating)s of 5', rating=full) }}">
+  {%- for i in range(5) -%}
+  <svg class="icon {{ 'is-on' if i < full else 'is-off' }}" aria-hidden="true"><use href="{{ url_for('static', filename='img/icons.svg') }}#star"></use></svg>
+  {%- endfor -%}
+</span>
+{%- endmacro %}
+
+{% macro author_links(authors, limit=0) -%}
+{%- for author in authors -%}
+  {%- if limit == 0 or loop.index <= limit -%}
+    {%- if not loop.first %}, {% endif -%}
+    <a href="{{ url_for('web.books_list', data='author', sort_param='stored', book_id=author.id) }}">{{ author.name.replace('|', ',') }}</a>
+  {%- elif loop.index == limit + 1 -%}
+    <span class="faint"> +{{ loop.length - limit }}</span>
+  {%- endif -%}
+{%- endfor -%}
+{%- endmacro %}
+
+{#- One book in a grid. `book` is a db.Books row; `read` marks it finished. -#}
+{% macro book_card(book, read=False, show_series=True, series_link=True, progress=None, extra_badge=None) -%}
+<article class="book-card">
+  <a class="cover" href="{{ url_for('web.show_book', book_id=book.id) }}" aria-label="{{ book.title }}" tabindex="-1">
+    {{ cover_img(book, alt='') }}
+    {%- if read or extra_badge %}
+    <span class="cover-badges">
+      {%- if read %}<span class="cover-badge cover-badge--read" role="img" aria-label="{{ _('Read') }}">{{ icon('check') }}</span>{% else %}<span></span>{% endif -%}
+      {%- if extra_badge %}<span class="cover-badge">{{ extra_badge }}</span>{% endif -%}
+    </span>
+    {%- endif %}
+    {%- if progress %}<span class="cover-progress" aria-hidden="true"><span style="width: {{ progress }}%"></span></span>{% endif %}
+  </a>
+  <div class="book-meta">
+    <a class="book-title" href="{{ url_for('web.show_book', book_id=book.id) }}" title="{{ book.title }}">{{ book.title }}</a>
+    <span class="book-author">{{ author_links(book.authors, g.config_authors_max or 2) }}{% if book.data|music %} · {{ icon('headphones', 'icon-sm') }}{% endif %}</span>
+    {%- if show_series and book.series|length > 0 %}
+    <span class="book-series">
+      {%- if series_link %}<a href="{{ url_for('web.books_list', data='series', sort_param='stored', book_id=book.series[0].id) }}">{{ book.series[0].name }}</a>{% else %}{{ book.series[0].name }}{% endif %}
+      · {{ book.series_index|formatfloat(2) }}</span>
+    {%- endif %}
+  </div>
+</article>
+{%- endmacro %}
+
+{#- Grid of rows from fill_indexpage(): entry.Books plus entry[2] read flag. -#}
+{% macro entries_grid(entries, page='', series_link=True) -%}
+<div class="book-grid">
+  {%- for entry in entries %}
+  {{ book_card(entry.Books, read=(entry[2] == True), series_link=series_link and page != 'series') }}
+  {%- endfor %}
+</div>
+{%- endmacro %}
+
+{% macro pagination_nav(pagination) -%}
+{%- if pagination and (pagination.has_next or pagination.has_prev) %}
+<nav aria-label="{{ _('Pages') }}">
+  <ul class="pagination">
+    {%- if pagination.has_prev %}
+    <li><a href="{{ (pagination.page - 1)|url_for_other_page }}" rel="prev">{{ icon('chevron-left') }}<span class="sr-only">{{ _('Previous') }}</span></a></li>
+    {%- endif %}
+    {%- for p in pagination.iter_pages() %}
+      {%- if p %}
+        {%- if p == pagination.page %}
+    <li><span aria-current="page">{{ p }}</span></li>
+        {%- else %}
+    <li><a href="{{ p|url_for_other_page }}" aria-label="{{ _('Page %(page)s', page=p) }}">{{ p }}</a></li>
+        {%- endif %}
+      {%- else %}
+    <li><span class="gap" aria-hidden="true">…</span></li>
+      {%- endif %}
+    {%- endfor %}
+    {%- if pagination.has_next %}
+    <li><a href="{{ (pagination.page + 1)|url_for_other_page }}" rel="next"><span class="sr-only">{{ _('Next') }}</span>{{ icon('chevron-right') }}</a></li>
+    {%- endif %}
+  </ul>
+</nav>
+{%- endif %}
+{%- endmacro %}
+
+{#- Sort menu for book lists. `url_for_sort(key)` must be supplied by the caller via `endpoint` args. -#}
+{% macro sort_menu(current, data, book_id, extra=None) -%}
+{%- set options = [
+  ('new', _('Recently added')), ('old', _('Oldest added')),
+  ('abc', _('Title A–Z')), ('zyx', _('Title Z–A')),
+  ('authaz', _('Author A–Z')), ('authza', _('Author Z–A')),
+  ('pubnew', _('Newest published')), ('pubold', _('Oldest published'))] -%}
+{%- if data == 'series' %}{% set options = [('seriesasc', _('Series order')), ('seriesdesc', _('Series order, reversed'))] + options %}{% endif -%}
+{%- if data == 'hot' %}{% set options = [('hotdesc', _('Most downloaded')), ('hotasc', _('Least downloaded'))] %}{% endif -%}
+{%- set ns = namespace(label=_('Sort')) -%}
+{%- for key, label in options %}{% if key == current %}{% set ns.label = label %}{% endif %}{% endfor -%}
+<details class="menu">
+  <summary class="btn btn-sm">{{ icon('sort') }}<span>{{ ns.label }}</span>{{ icon('chevron-down', 'icon-sm') }}</summary>
+  <div class="menu-panel" role="menu">
+    {%- for key, label in options %}
+    <a class="menu-item" role="menuitemradio" aria-checked="{{ 'true' if key == current else 'false' }}"
+       href="{{ url_for('web.books_list', data=data, book_id=book_id, sort_param=key) }}">
+      <span class="grow">{{ label }}</span>{{ icon('check', 'menu-check') }}</a>
+    {%- endfor %}
+  </div>
+</details>
+{%- endmacro %}
+
+{% macro empty_state(icon_name, heading, text='', action_href=None, action_label=None) -%}
+<div class="empty">
+  <span class="icon-tile icon-tile--neutral">{{ icon(icon_name) }}</span>
+  <h2>{{ heading }}</h2>
+  {%- if text %}<p>{{ text }}</p>{% endif %}
+  {%- if action_href %}<a class="btn btn-primary" href="{{ action_href }}">{{ action_label }}</a>{% endif %}
+</div>
+{%- endmacro %}
+
+{% macro csrf_field() -%}
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+{%- endmacro %}
+
+{% macro switch(name, label, checked=False, hint='', id=None, value='on', disabled=False) -%}
+{%- set fid = id or name -%}
+<label class="setting" for="{{ fid }}">
+  <span class="setting-text"><span class="setting-title">{{ label }}</span>{% if hint %}<span class="hint">{{ hint }}</span>{% endif %}</span>
+  <span class="setting-control"><input type="checkbox" class="switch" id="{{ fid }}" name="{{ name }}" value="{{ value }}"{% if checked %} checked{% endif %}{% if disabled %} disabled{% endif %}></span>
+</label>
+{%- endmacro %}
+
+{% macro field(name, label, value='', type='text', hint='', id=None, required=False, placeholder='', autocomplete=None) -%}
+{%- set fid = id or name -%}
+<div class="field">
+  <label for="{{ fid }}">{{ label }}</label>
+  <input class="input" type="{{ type }}" id="{{ fid }}" name="{{ name }}" value="{{ value if value is not none else '' }}"{% if required %} required{% endif %}{% if placeholder %} placeholder="{{ placeholder }}"{% endif %}{% if autocomplete %} autocomplete="{{ autocomplete }}"{% endif %}>
+  {%- if hint %}<span class="field-hint">{{ hint }}</span>{% endif %}
+</div>
+{%- endmacro %}

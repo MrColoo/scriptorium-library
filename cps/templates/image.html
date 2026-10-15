@@ -1,22 +1,14 @@
-{% macro book_cover(book, alt=None) -%}
+{% macro book_cover(book, alt=None, sizes='(max-width: 860px) 34vw, 180px') -%}
     {%- set image_title = book.title if book.title else book.name -%}
-    {%- set image_alt = alt if alt else image_title -%}
-    {% set srcset = book|get_cover_srcset %}
-    <img
-        srcset="{{ srcset }}"
-        src="{{ url_for('web.get_cover', book_id=book.id, resolution='og', c=book|last_modified) }}"
-        alt="{{ image_alt }}"
-        loading="lazy"
-    />
+    {%- set image_alt = alt if alt is not none else image_title -%}
+    <img srcset="{{ book|get_cover_srcset }}" sizes="{{ sizes }}"
+         src="{{ url_for('web.get_cover', book_id=book.id, resolution='og', c=book|last_modified) }}"
+         alt="{{ image_alt }}" loading="lazy" decoding="async">
 {%- endmacro %}
 
-{% macro series(series, alt=None) -%}
-    {%- set image_alt = alt if alt else image_title -%}
-    {% set srcset = series|get_series_srcset %}
-    <img
-        srcset="{{ srcset }}"
-        src="{{ url_for('web.get_series_cover', series_id=series.id, resolution='og', c='day'|cache_timestamp) }}"
-        alt="{{ title }}"
-        loading="lazy"
-    />
+{% macro series(series, alt=None, sizes='(max-width: 860px) 34vw, 180px') -%}
+    {%- set image_alt = alt if alt is not none else series.name -%}
+    <img srcset="{{ series|get_series_srcset }}" sizes="{{ sizes }}"
+         src="{{ url_for('web.get_series_cover', series_id=series.id, resolution='og', c='day'|cache_timestamp) }}"
+         alt="{{ image_alt }}" loading="lazy" decoding="async">
 {%- endmacro %}

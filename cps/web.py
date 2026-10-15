@@ -44,6 +44,7 @@ from .cw_babel import get_available_locale
 from .usermanagement import login_required_if_no_ano
 from .kobo_sync_status import remove_synced_book
 from . import magic_shelf
+from . import reading_overview
 from .render_template import render_title_template
 from .kobo_sync_status import change_archived_books
 from . import limiter
@@ -500,8 +501,14 @@ def render_books_list(data, sort_param, book_id, page):
         except:
             title = _('Books (%(count)s)', count=cwa_get_num_books_in_library())
 
+        continue_reading = []
+        kobo_last_sync = None
+        if website == "newest" and page == 1 and not current_user.is_anonymous:
+            continue_reading = reading_overview.get_continue_reading(current_user.id)
+            kobo_last_sync = reading_overview.humanize_since(reading_overview.get_kobo_last_sync(current_user.id))
         return render_title_template('index.html', random=random, entries=entries, pagination=pagination,
-                                     title=title, page=website, order=order[1])
+                                     title=title, page=website, order=order[1],
+                                     continue_reading=continue_reading, kobo_last_sync=kobo_last_sync)
 
 
 def render_rated_books(page, book_id, order):
@@ -2976,6 +2983,7 @@ def show_book(book_id):
 
         cwa_db = CWA_DB()
         cwa_settings = cwa_db.cwa_settings
+        kobo_status = reading_overview.get_kobo_book_status(current_user, book_id, book_in_shelves)
 
         return render_title_template('detail.html',
                                      entry=entry,
@@ -2986,6 +2994,7 @@ def show_book(book_id):
                                      cwa_settings=cwa_settings,
                                      kosync_progress=kosync_progress,
                                      kosync_progress_timestamp=kosync_progress_timestamp,
+                                     kobo_status=kobo_status,
                                      page="book")
     else:
         log.debug("Selected book is unavailable. File does not exist or is not accessible")

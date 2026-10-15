@@ -1,474 +1,280 @@
-{% from 'modal_dialogs.html' import restrict_modal, delete_book, filechooser_modal, delete_confirm_modal, change_confirm_modal %}
+{% import '_macros.html' as ui with context %}
 {% import 'image.html' as image %}
+{% from 'modal_dialogs.html' import restrict_modal, delete_book, filechooser_modal, delete_confirm_modal, change_confirm_modal %}
+{%- set signed_in = current_user.is_authenticated or g.allow_anonymous -%}
+{%- set nav_icons = {
+  'new': 'book', 'hot': 'flame', 'download': 'download', 'rated': 'star', 'read': 'check-circle', 'unread': 'eye-off',
+  'rand': 'shuffle', 'cat': 'tag', 'serie': 'series', 'author': 'user', 'publisher': 'building', 'lang': 'language',
+  'rate': 'star', 'format': 'file', 'archived': 'archive', 'list': 'table', 'duplicates': 'copy'} -%}
+{%- set library_ids = ['new', 'read', 'unread', 'hot', 'rated', 'rand', 'download', 'archived', 'list', 'duplicates'] -%}
+{%- set flash = namespace(toasts=[]) -%}
+<!doctype html>
+<html lang="{{ current_user.locale or 'en' }}" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% if title %}{{ title }} · {% endif %}{{ instance }}</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#F6F6F4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121214" media="(prefers-color-scheme: dark)">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="{{ instance }}">
+  {%- if g.google_site_verification|length > 0 %}
+  <meta name="google-site-verification" content="{{ g.google_site_verification }}">
+  {%- endif %}
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='icon.svg') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon.png') }}">
+  <link rel="preload" href="{{ url_for('static', filename='fonts/geist-latin-wght-normal.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  {% block header %}{% endblock %}
+</head>
+<body class="page-{{ page or 'none' }}{% if bodyClass %} {{ bodyClass }}{% endif %}"
+      data-icon-sprite="{{ url_for('static', filename='img/icons.svg') }}"
+      {%- if current_user.is_authenticated and not current_user.is_anonymous %}
+      data-refresh-url="{{ url_for('library_refresh.cwa_library_refresh') }}"
+      data-refresh-messages-url="{{ url_for('library_refresh.get_library_refresh_messages') }}"
+      {%- endif %}
+      {%- if signed_in and current_user.role_upload() and g.allow_upload %}
+      data-upload-url="{{ url_for('edit-book.upload') }}"
+      {%- endif %}>
+  {#- Legacy scripts read the token from this input; new code uses the meta tag. #}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <a class="skip-link" href="#main">{{ _('Skip to content') }}</a>
 
-<!DOCTYPE html>
-<html lang="{{ current_user.locale }}">
-  <head>
-    <title>{{instance}} | {{title}}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="mobile-web-app-capable" content="yes">
-    {% if g.google_site_verification|length > 0 %}
-      <meta name="google-site-verification" content="{{g.google_site_verification}}">
-    {% endif %}
-    <!-- Bootstrap -->
-    <link rel="apple-touch-icon" sizes="140x140" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link href="{{ url_for('static', filename='css/libs/bootstrap.min.css') }}" rel="stylesheet" media="screen">
-    {% block header %}{% endblock %}
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" media="screen">
-    <link href="{{ url_for('static', filename='css/upload.css') }}" rel="stylesheet" media="screen">
-    {% if g.current_theme == 1 %}
-      <link href="{{ url_for('static', filename='css/caliBlur.css') }}" rel="stylesheet" media="screen">
-      <link href="{{ url_for('static', filename='css/caliBlur_override.css') }}" rel="stylesheet" media="screen">
-      <link href="{{ url_for('static', filename='css/layout-refresh.css') }}" rel="stylesheet" media="screen">
-    {% endif %}
-    <link href="{{ url_for('static', filename='css/cwa.css') }}" rel="stylesheet" media="screen">
-    {% if current_user.is_authenticated and (current_user.role_admin() or current_user.role_edit()) %}
-    <link href="{{ url_for('static', filename='css/duplicates-notifications.css') }}" rel="stylesheet" media="screen">
-    {% endif %}
-    <script>
-      let checkMessagesInterval = null; // Store interval ID
+{% if signed_in and not bare_layout %}
+<div class="app">
+  <aside class="sidebar" id="sidebar" aria-label="{{ _('Library navigation') }}">
+    <a class="brand" href="{{ url_for('web.index') }}">
+      <span class="brand-mark">{{ ui.icon('book') }}</span>
+      <span class="brand-name">{{ instance }}</span>
+    </a>
 
-      function refreshLibrary() {
-          fetch("/cwa-library-refresh", {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json"
-              }
-          })
-          .then(response => response.json())
-          .then(data => {
-            updateLibraryRefreshMessage(data.message);  // Show immediate confirmation
-            startCheckingMessages(); // Start checking for messages
-          })
-          .catch(error => console.error("Error:", error));
-      }
+    <nav class="nav-group" aria-label="{{ _('Library') }}">
+      {%- for element in sidebar %}
+        {%- if element['id'] in library_ids and current_user.check_visibility(element['visibility']) and element['public'] %}
+          {%- set active = page == element['page'] or (element['id'] == 'new' and page == 'newest') %}
+      <a class="nav-link" href="{{ url_for(element['link'], data=element['page'], sort_param='stored') }}"{% if active %} aria-current="page"{% endif %}>
+        {{ ui.icon(nav_icons.get(element['id'], 'book')) }}<span class="nav-label">{{ _(element['text']) }}</span>
+        {%- if element['id'] == 'duplicates' %}
+          {%- set dup_count = duplicate_notification.count if duplicate_notification is defined else 0 %}
+        <span id="duplicate-count-badge" class="badge badge--solid-danger"{% if not dup_count %} hidden{% endif %}>{{ '99+' if dup_count > 99 else dup_count }}</span>
+        {%- endif %}
+      </a>
+        {%- endif %}
+      {%- endfor %}
+    </nav>
 
-      function checkLibraryMessages() {
-          fetch("/cwa-library-refresh/messages")
-              .then(response => response.json())
-              .then(data => {
-                  if (data.messages.length > 0) {
-                    updateLibraryRefreshMessage(data.messages.join("<br>")); // Show messages
-                      stopCheckingMessages(); // Stop checking once we get a message
-                  }
-              })
-              .catch(error => console.error("Error fetching messages:", error));
-      }
+    {%- set browse = [] %}
+    {%- for element in sidebar %}{% if element['id'] not in library_ids and current_user.check_visibility(element['visibility']) and element['public'] %}{% if browse.append(element) %}{% endif %}{% endif %}{% endfor %}
+    {%- if browse %}
+    <nav class="nav-group" aria-labelledby="nav-browse">
+      <span class="nav-heading" id="nav-browse">{{ _('Browse') }}</span>
+      {%- for element in browse %}
+      <a class="nav-link" href="{{ url_for(element['link'], data=element['page'], sort_param='stored') }}"{% if page == element['page'] %} aria-current="page"{% endif %}>
+        {{ ui.icon(nav_icons.get(element['id'], 'book')) }}<span class="nav-label">{{ _(element['text']) }}</span>
+      </a>
+      {%- endfor %}
+    </nav>
+    {%- endif %}
 
-      function startCheckingMessages() {
-          if (!checkMessagesInterval) { // Prevent multiple intervals
-              checkMessagesInterval = setInterval(checkLibraryMessages, 500);
-          }
-      }
+    <nav class="nav-group" aria-labelledby="nav-shelves">
+      <span class="nav-heading" id="nav-shelves">{{ _('Shelves') }}
+        {%- if not current_user.is_anonymous %}
+        <a class="btn btn-ghost btn-icon" href="{{ url_for('shelf.create_shelf') }}" aria-label="{{ _('Create Shelf') }}" title="{{ _('Create Shelf') }}">{{ ui.icon('plus', 'icon-sm') }}</a>
+        {%- endif %}
+      </span>
+      {%- for shelf in g.shelves_access %}
+      <a class="nav-link" href="{{ url_for('shelf.show_shelf', shelf_id=shelf.id) }}"{% if page == 'shelf' and shelf_current is defined and shelf_current == shelf.id %} aria-current="page"{% endif %} title="{{ shelf.name }}">
+        {%- if shelf.kobo_sync %}{{ ui.icon('device') }}{% else %}{{ ui.icon('bookmark') }}{% endif %}
+        <span class="nav-label">{{ shelf.name }}</span>
+        {%- if shelf.is_public == 1 %}<span class="sr-only">{{ _('(Public)') }}</span>{{ ui.icon('globe', 'icon-sm faint') }}{% endif %}
+        <span class="nav-count">{{ shelf.books.count() }}</span>
+      </a>
+      {%- else %}
+      <span class="nav-link nav-more">{{ _('No shelves yet') }}</span>
+      {%- endfor %}
+    </nav>
 
-      function stopCheckingMessages() {
-          if (checkMessagesInterval) {
-              clearInterval(checkMessagesInterval);
-              checkMessagesInterval = null;
-          }
-      }
+    {%- if current_user.is_authenticated and magic_shelf_routes.render %}
+    <nav class="nav-group" aria-labelledby="nav-magic">
+      <span class="nav-heading" id="nav-magic">{{ _('Smart shelves') }}
+        {%- if magic_shelf_routes.create %}
+        <a class="btn btn-ghost btn-icon" href="{{ url_for('web.create_magic_shelf') }}" aria-label="{{ _('Create Magic Shelf') }}" title="{{ _('Create Magic Shelf') }}">{{ ui.icon('plus', 'icon-sm') }}</a>
+        {%- endif %}
+      </span>
+      {%- for shelf in g.magic_shelves_access %}
+      <a class="nav-link" href="{{ url_for('web.render_magic_shelf', shelf_id=shelf.id) }}"{% if page == 'magicshelf' and id == shelf.id %} aria-current="page"{% endif %} title="{{ shelf.name }}">
+        <span class="nav-emoji" aria-hidden="true">{{ shelf.icon }}</span>
+        <span class="nav-label">{{ shelf.name }}</span>
+        <span class="nav-count">{{ shelf.book_count }}</span>
+      </a>
+      {%- endfor %}
+    </nav>
+    {%- endif %}
 
-      function updateLibraryRefreshMessage(message) {
-        const messageDiv = document.getElementById("message_library_refresh");
-        const messagePara = document.getElementById("library_refresh_message")
-        if (messageDiv) {
-            messagePara.innerHTML = message; // Set the message inside the div
-            messageDiv.style.display = "inline-flex"; // Make sure it's visible
-        }
-      }
+    <nav class="nav-group sidebar-footer" aria-label="{{ _('System') }}">
+      {%- if not current_user.is_anonymous and not simple %}
+      <a class="nav-link" href="{{ url_for('tasks.get_tasks_status') }}"{% if page == 'tasks' %} aria-current="page"{% endif %}>{{ ui.icon('activity') }}<span class="nav-label">{{ _('Tasks') }}</span></a>
+      {%- endif %}
+      {%- if current_user.role_admin() %}
+      <a class="nav-link" href="{{ url_for('admin.admin') }}"{% if page in ['admin', 'config', 'newuser', 'user', 'mailset', 'cwa-settings', 'cwa-stats', 'logfile'] %} aria-current="page"{% endif %}>{{ ui.icon('settings') }}<span class="nav-label">{{ _('Settings') }}</span></a>
+      {%- endif %}
+    </nav>
+  </aside>
+  <div class="nav-scrim" aria-hidden="true"></div>
 
-    function dismissLibraryRefreshMessage() {
-        const messageDiv = document.getElementById("message_library_refresh");
-        const messagePara = document.getElementById("library_refresh_message")
-        if (messageDiv) {
-            messagePara.innerHTML = ""; // Set the message inside the div
-            messageDiv.style.display = "none"; // Make sure it's visible
-        }
-      }
+  <div class="main">
+    <header class="topbar">
+      <button class="btn btn-ghost btn-icon menu-toggle" type="button" data-nav-toggle aria-controls="sidebar" aria-expanded="false" aria-label="{{ _('Toggle Navigation') }}">{{ ui.icon('menu') }}</button>
+      <form class="search-box" role="search" action="{{ url_for('search.simple_search') }}" method="get">
+        {{ ui.icon('search') }}
+        <label for="query" class="sr-only">{{ _('Search Library') }}</label>
+        <input type="search" id="query" name="query" placeholder="{{ _('Search titles, authors, series…') }}" value="{{ searchterm or '' }}" autocomplete="off" enterkeyhint="search">
+        <a href="{{ url_for('search.advanced_search') }}" title="{{ _('Advanced Search') }}">{{ _('Advanced') }}</a>
+      </form>
+      <div class="topbar-actions">
+        {%- if current_user.is_authenticated and not current_user.is_anonymous %}
+        <button class="btn btn-icon" type="button" data-action="library-refresh" aria-label="{{ _('Refresh Library') }}" title="{{ _('Refresh Library') }}">{{ ui.icon('refresh') }}</button>
+        {%- endif %}
+        {%- if current_user.role_upload() and g.allow_upload %}
+        <label class="btn btn-primary" title="{{ _('Upload') }}">
+          {{ ui.icon('upload') }}<span class="btn-label">{{ _('Upload') }}</span>
+          <input class="sr-only" type="file" name="btn-upload" data-upload-input multiple
+                 accept="{% for format in accept %}{% if format %}.{{ format }}{% if not loop.last %},{% endif %}{% endif %}{% endfor %}">
+        </label>
+        {%- endif %}
+        <details class="menu">
+          <summary class="btn btn-icon btn-ghost" aria-label="{{ _('Account') }}" title="{{ current_user.name }}">
+            {%- if current_user.is_anonymous %}{{ ui.icon('user') }}{% else %}<span class="avatar">{{ current_user.name[:1]|upper }}</span>{% endif -%}
+          </summary>
+          <div class="menu-panel" role="menu">
+            {%- if not current_user.is_anonymous %}
+            <div class="menu-label">{{ current_user.name }}</div>
+            <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}">{{ ui.icon('user') }}<span class="grow">{{ _('Profile') }}</span></a>
+            <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}#kobo">{{ ui.icon('device') }}<span class="grow">{{ _('Kobo sync') }}</span></a>
+            {%- endif %}
+            <div class="menu-sep"></div>
+            <div class="menu-label">{{ _('Appearance') }}</div>
+            <button class="menu-item" type="button" role="menuitemradio" data-theme-set="system" data-keep-open>{{ ui.icon('monitor') }}<span class="grow">{{ _('System') }}</span>{{ ui.icon('check', 'menu-check') }}</button>
+            <button class="menu-item" type="button" role="menuitemradio" data-theme-set="light" data-keep-open>{{ ui.icon('sun') }}<span class="grow">{{ _('Light') }}</span>{{ ui.icon('check', 'menu-check') }}</button>
+            <button class="menu-item" type="button" role="menuitemradio" data-theme-set="dark" data-keep-open>{{ ui.icon('moon') }}<span class="grow">{{ _('Dark') }}</span>{{ ui.icon('check', 'menu-check') }}</button>
+            <div class="menu-sep"></div>
+            {%- if current_user.is_anonymous %}
+            <a class="menu-item" role="menuitem" href="{{ url_for('web.login', next=request.full_path.rstrip('?')) }}">{{ ui.icon('log-in') }}<span class="grow">{{ _('Login') }}</span></a>
+              {%- if g.allow_registration %}
+            <a class="menu-item" role="menuitem" href="{{ url_for('web.register') }}">{{ ui.icon('user') }}<span class="grow">{{ _('Register') }}</span></a>
+              {%- endif %}
+            {%- else %}
+            <a class="menu-item" role="menuitem" href="{{ url_for('web.logout') }}">{{ ui.icon('log-out') }}<span class="grow">{{ _('Logout') }}</span></a>
+            {%- endif %}
+          </div>
+        </details>
+      </div>
+    </header>
 
-    </script>
-  </head>
-  <body class="{{ page }} {{ bodyClass }}{% if g.current_theme == 1 %} blur{% endif %}{% if cwa_settings and cwa_settings.get('enable_mobile_blur') %} allow-mobile-blur{% endif %}" data-text="{{_('Home')}}" data-textback="{{_('Back')}}">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <!-- Static navbar -->
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">{{_('Toggle Navigation')}}</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{{url_for('web.index')}}">{{instance}}</a>
-        </div>
-        {% if g.current_theme == 1 %}
-            <div class="home-btn"><a class="home-btn-tooltip" href="{{url_for("web.index",page=1)}}" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="Home"></a></div>
-            <div class="plexBack"><a href="{{url_for('web.index')}}"></a></div>
-        {% endif %}
-        {% if current_user.is_authenticated or g.allow_anonymous %}
-          <form class="navbar-form navbar-left" role="search" action="{{url_for('search.simple_search')}}" method="GET">
-            <div class="form-group input-group input-group-sm">
-              <label for="query" class="sr-only">{{_('Search')}}</label>
-              <input type="text" class="form-control" id="query" name="query" placeholder="{{_('Search Library')}}" value="{{searchterm}}">
-              <span class="input-group-btn">
-                <button type="submit" id="query_submit" class="btn btn-default">{{_('Search')}}</button>
-              </span>
-            </div>
-          </form>
-        {% endif %}
-        <div class="navbar-collapse collapse">
-          {% if current_user.is_authenticated or g.allow_anonymous %}
-          <ul class="nav navbar-nav ">
-            <li><a href="{{url_for('search.advanced_search')}}" id="advanced_search"><span class="glyphicon glyphicon-search" style="padding-left: 10px; padding-right: 6px;"></span><span class="hidden-sm"> {{_('Advanced Search')}}</span></a></li>
-          </ul>
-          {% endif %}
-          <ul class="nav navbar-nav navbar-right" id="main-nav">
-            {% if current_user.is_authenticated or g.allow_anonymous %}
-              {% if g.current_theme == 1 %}
-              <li class="dropdown"><a href="#" class="dropdown-toggle profileDrop" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span></a>
-                <ul class="dropdown-menu profileDropli">
-                    <li><a id="top_user" data-text="{{_('Account')}}" href="{{url_for('web.profile')}}"><span class="glyphicon glyphicon-user"></span> <span class="hidden-sm">{{current_user.name}}</span></a></li>
-                    {% if g.allow_registration and not current_user.is_authenticated %}
-                    <li><a id="login" href="{{url_for('web.login')}}"><span class="glyphicon glyphicon-log-in"></span> {{_('Login')}}</a></li>
-                    <li><a id="register" href="{{url_for('web.register')}}"><span class="glyphicon glyphicon-user"></span> {{_('Register')}}</a></li>
-                    {% endif %}
-                    {% if not current_user.is_anonymous %}
-                    <li><a id="logout" href="{{url_for('web.logout', next=(request.path + "?" + request.query_string.decode("utf-8")).rstrip("?"))}}"><span class="glyphicon glyphicon-log-out"></span> <span class="hidden-sm">{{_('Logout')}}</span></a></li>
-                    {% endif %}
-                </ul>
-              </li>
-              {% endif %}
-              <li class="cwa-switch-theme">
-                <a id="cwa-switch-theme" href="#" class="disabled" style="opacity: 0.5; cursor: not-allowed;" title="Temporarily disabled until v5.0.0" data-toggle="tooltip" data-placement="bottom" onclick="return false;">
-                  <span class="glyphicon glyphicon-sunglasses"></span>
-                  <span class="hidden-sm">{{_('Switch Theme')}}</span>
-                </a>
-              </li>
-              {% if current_user.role_upload() and g.allow_upload %}
-                  <li>
-                    <form id="form-upload" class="navbar-form" action="{{ url_for('edit-book.upload') }}" data-title="{{_('Uploading...')}}" data-footer="{{_('Close')}}" data-failed="{{_('Error')}}" data-message="{{_('Upload done, processing, please wait...')}}" method="post" enctype="multipart/form-data">
-                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                      <div class="form-group">
-                        <span class="btn btn-default btn-file">{{_('Upload')}}<input id="btn-upload" name="btn-upload"
-                        type="file" accept="{% for format in accept %}.{% if format != ''%}{{format}}{% else %}*{% endif %}{{ ',' if not loop.last }}{% endfor %}" multiple></span>
-                        <input class="hide" id="btn-upload2" name="btn-upload2" type="file" accept="{% for format in accept %}.{% if format != ''%}{{format}}{% else %}*{% endif %}{{ ',' if not loop.last }}{% endfor %}">
-                      </div>
-                    </form>
-                  </li>
-              {% endif %}
-              {% if not current_user.is_anonymous and not simple%}
-                <li class="top_tasks"><a id="top_tasks" href="{{url_for('tasks.get_tasks_status')}}"><span class="glyphicon glyphicon-tasks"></span> <span class="hidden-sm">{{_('Tasks')}}</span></a></li>
-              {% endif %}
-              {% if current_user.role_admin() %}
-                <li><a id="top_admin" data-text="{{_('Settings')}}" href="{{url_for('admin.admin')}}"><span class="glyphicon glyphicon-dashboard"></span> <span class="hidden-sm">{{_('Admin')}}</span></a></li>
-              {% endif %}
-              <li><a id="refresh-library" style="cursor: pointer;" data-text="{{_('Refresh Library')}}" onclick="refreshLibrary()"><span class="glyphicon glyphicon-refresh"></span> <span class="hidden-sm">{{_('Refresh Library')}}</span></a></li>
-              {% if g.current_theme == 0 %}
-              <li><a id="top_user" data-text="{{_('Account')}}" href="{% if not current_user.is_anonymous %}{{url_for('web.profile')}}{% else %}{{url_for('web.login', next=(request.path + "?" + request.query_string.decode("utf-8")).rstrip("?"))}}{% endif %}"><span class="glyphicon glyphicon-user"></span> <span class="hidden-sm">{{current_user.name}}</span></a></li>
-                {% if not current_user.is_anonymous %}
-                <li><a id="logout" href="{{url_for('web.logout', next=(request.path + "?" + request.query_string.decode("utf-8")).rstrip("?"))}}"><span class="glyphicon glyphicon-log-out"></span> <span class="hidden-sm">{{_('Logout')}}</span></a></li>
-                {% endif %}
-              {% endif %}
-            {% endif %}
-            {% if g.allow_registration and not current_user.is_authenticated and g.current_theme == 0 %}
-            <li><a id="login" href="{{url_for('web.login')}}"><span class="glyphicon glyphicon-log-in"></span> {{_('Login')}}</a></li>
-            <li><a id="register" href="{{url_for('web.register')}}"><span class="glyphicon glyphicon-user"></span> {{_('Register')}}</a></li>
-            {% endif %}
-          </ul>
-        </div><!--/.nav-collapse -->
+    <main id="main" class="content {% block content_class %}{% endblock %}" tabindex="-1">
+      {%- with messages = get_flashed_messages(with_categories=True) %}
+      {%- set inline = messages|rejectattr(0, 'in', ['success', 'info', 'cwa_refresh', 'theme_migration'])|list %}
+      {%- if inline %}
+      <div class="flash-stack">
+        {%- for category, message in inline %}
+          {%- if category in ['error', 'cwa_arch_warning'] %}
+        <div class="alert alert--danger" role="alert">{{ ui.icon('alert') }}<div class="alert-body">{{ message }}</div>
+          <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
+          {%- elif category == 'warning' %}
+        <div class="alert alert--warning" role="alert">{{ ui.icon('alert') }}<div class="alert-body">{{ message }}</div>
+          <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
+          {%- elif category == 'cwa_update' %}
+        <div class="alert alert--info">{{ ui.icon('bell') }}<div class="alert-body">{{ message }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated/releases" rel="noopener" target="_blank">{{ _('See Changelog') }}</a></div>
+          <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
+          {%- elif category == 'duplicate_scan_setup' %}
+        <div class="alert alert--info">{{ ui.icon('copy') }}<div class="alert-body">{{ message }} <a href="{{ url_for('duplicates.show_duplicates') }}">{{ _('Open Duplicates') }}</a></div>
+          <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss data-dismiss-url="{{ url_for('duplicates.dismiss_duplicate_scan_setup_notice') }}" aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
+          {%- elif category == 'translation_missing' %}
+        <div class="alert alert--info">{{ ui.icon('language') }}<div class="alert-body">{{ message }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated/wiki/Contributing-Translations" rel="noopener" target="_blank">{{ _('Contribute here!') }}</a></div>
+          <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
+          {%- else %}
+        <div class="alert alert--info">{{ ui.icon('info') }}<div class="alert-body">{{ message }}</div>
+          <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
+          {%- endif %}
+        {%- endfor %}
       </div>
-    </div>
-    
-    <div class="row-fluid text-center">
-      <div id="message_library_refresh" style="display: none;" class="alert alert-info refresh-cwa">
-        <p id="library_refresh_message"></p>
-        <button id="refresh_message_dismiss_btn" type="button" class="close" onclick="dismissLibraryRefreshMessage()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </div>
-
-    {% for message in get_flashed_messages(with_categories=True) %}
-      {%if message[0] == "error" %}
-      <div class="row-fluid text-center" >
-        <div id="flash_danger" class="alert alert-danger">{{ message[1] }}</div>
-      </div>
-      {%endif%}
-      {%if message[0] == "info" %}
-      <div class="row-fluid text-center">
-        <div id="flash_info" class="alert alert-info">{{ message[1] }}</div>
-      </div>
-      {%endif%}
-      <div id="messageContainer"></div>
-      {%if message[0] == "cwa_update" %}
-      <div class="row-fluid text-center">
-        <div id="flash_info" class="alert alert-info alert-cwa">
-          {{ message[1] }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated/releases">{{ _('See Changelog') }}</a>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-      {%endif%}
-      {%if message[0] == "duplicate_scan_setup" %}
-      <div class="row-fluid text-center">
-        <div id="flash_info" class="alert alert-info alert-cwa">
-          {{ message[1] }} <a href="{{ url_for('duplicates.show_duplicates') }}">{{ _('Open Duplicates') }}</a>
-          <button type="button" class="close duplicate-scan-setup-dismiss"
-                  data-dismiss-url="{{ url_for('duplicates.dismiss_duplicate_scan_setup_notice') }}"
-                  data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-      {%endif%}
-      {%if message[0] == "cwa_arch_warning" %}
-      <div class="row-fluid text-center">
-        <div id="flash_danger" class="alert alert-danger alert-cwa">
-          {{ message[1] }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-      {%endif%}
-      {%if message[0] == "translation_missing" %}
-      <div class="row-fluid text-center">
-        <div id="flash_info" class="alert alert-info alert-cwa">
-          {{ message[1] }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated/wiki/Contributing-Translations">{{ _('Contribute here!') }}</a>
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-      {%endif%}
-      {%if message[0] == "theme_migration" %}
-      <div class="row-fluid text-center">
-        <div id="flash_info" class="alert alert-info alert-cwa">
-          {{ message[1] }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-      {%endif%}
-      {%if message[0] == "cwa_refresh" %}
-      <div class="row-fluid text-center">
-        <div id="flash_success" class="alert alert-info refresh-cwa">
-          {{ message[1] }}
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-      {%endif%}
-      {%if message[0] == "warning" %}
-      <div class="row-fluid text-center">
-        <div id="flash_warning" class="alert alert-warning">{{ message[1] }}</div>
-      </div>
-      {%endif%}
-      {%if message[0] == "success" %}
-      <div class="row-fluid text-center">
-        <div id="flash_success" class="alert alert-success">{{ message[1] }}</div>
-      </div>
-      {%endif%}
-    {% endfor %}
-    {% block flash %}{% endblock %}
-    {% if g.current_theme == 1 %}
-      <div id="loader" hidden="true">
-        <center>
-          <h3>{{_('Uploading...')}}</h3>
-          <span>{{_("Please do not refresh the page")}}</span>.
-        </center>
-      </div>
-    {%endif%}
-    <div class="container-fluid">
-      <div class="row-fluid">
-        {% if current_user.is_authenticated or g.allow_anonymous %}
-        <div class="col-sm-2">
-          <nav class="navigation">
-            <ul class="list-unstyled" id="scnd-nav" intent in-standard-append="nav.navigation" in-mobile-after="#main-nav" in-mobile-class="nav navbar-nav">
-              <li class="nav-head hidden-xs">{{_('Browse')}}</li>
-              {% for element in sidebar %}
-                {% if current_user.check_visibility(element['visibility']) and element['public'] %}
-                    <li id="nav_{{element['id']}}" {% if page == element['page'] %}class="active"{% endif %} style="{% if element['id'] == 'duplicates' %}position: relative;{% endif %}">
-                      <a href="{{url_for(element['link'], data=element['page'], sort_param='stored')}}">
-                        <span class="glyphicon {{element['glyph']}}"></span> {{_(element['text'])}}
-                        {% if element['id'] == 'duplicates' %}
-                          {% set dup_count = duplicate_notification.count if duplicate_notification is defined else 0 %}
-                          <span id="duplicate-count-badge" class="duplicate-badge" style="{% if dup_count > 0 %}display: inline-block;{% else %}display: none;{% endif %}">
-                            {% if dup_count > 99 %}99+{% else %}{{ dup_count }}{% endif %}
-                          </span>
-                        {% endif %}
-                      </a>
-                    </li>
-                {% endif %}
-              {% endfor %}
-              {% if current_user.is_authenticated or g.allow_anonymous %}
-                <li class="nav-head hidden-xs public-shelves">{{_('Shelves')}}</li>
-                {% for shelf in g.shelves_access %}
-                  {% set book_count = shelf.books.count() %}
-                  <li><a href="{{url_for('shelf.show_shelf', shelf_id=shelf.id)}}" title="{{shelf.name}} ({{book_count}})"><span class="glyphicon glyphicon-list shelf"></span> {{shelf.name|shortentitle(40)}}{% if shelf.is_public == 1 %} {{_('(Public)')}}{% endif %} <span style="font-size: 80%; color: #888;">({{book_count}})</span></a></li>
-                {% endfor %}
-              {% if not current_user.is_anonymous %}
-                <li id="nav_createshelf" class="create-shelf"><a href="{{url_for('shelf.create_shelf')}}">{{_('Create Shelf')}}</a></li>
-              {% endif %}
-              {% endif %}
-              {% if current_user.is_authenticated and magic_shelf_routes.render %}
-                <li class="nav-head hidden-xs" style="margin-top: 1rem;">{{_('Magic Shelves ✨')}}</li>
-                  {% for shelf in g.magic_shelves_access %}
-                    <li><a href="{{url_for('web.render_magic_shelf', shelf_id=shelf.id)}}" title="{{shelf.name}} ({{shelf.book_count}})"><span style="font-size: 14px;">{{shelf.icon}}</span> {{shelf.name|shortentitle(40)}}{% if shelf.is_public == 1 %} {{_('(Public)')}}{% endif %} <span style="font-size: 80%; color: #888;">({{shelf.book_count}})</span></a></li>
-                  {% endfor %}
-                {% if magic_shelf_routes.create %}
-                  <li id="nav_createmagicshelf" class="create-shelf"><a href="{{url_for('web.create_magic_shelf')}}" style="display: flex; align-items: center;">{{_('Create Magic Shelf')}}</a></li>
-                {% endif %}
-              {% endif %}
-              <!-- {% if not current_user.is_anonymous %}
-                <li id="nav_about" {% if page == 'stat' %}class="active"{% endif %}><a href="{{url_for('about.package_versions')}}"><span class="glyphicon glyphicon-info-sign"></span> {{_('About')}}</a></li>
-              {% endif %} -->
-            </ul>
-          </nav>
-        </div>
-        {% endif %}
-        <div class="col-sm-10">
-          {% block body %}{% endblock %}
-          {% if pagination and (pagination.has_next or pagination.has_prev) %}
-            <div class="pagination">
-              {% if pagination.has_prev %}
-              <li class="page-item page-previous"><a class="page-link" aria-label="next page" href="{{ (pagination.page - 1)|url_for_other_page
-                }}">&laquo; {{_('Previous')}}</a></li>
-              {% endif %}
-            {% for page in pagination.iter_pages() %}
-              {% if page %}
-                {% if page != pagination.page %}
-                  <li class="page-item"><a class="page-link" aria-label="to page {{ page }}" href="{{ (page)|url_for_other_page }}">{{ page }}</a></li>
-                {% else %}
-                  <li class="page-item active"><a class="page-link" aria-label="to page {{ page }}" href="{{ (page)|url_for_other_page }}">{{ page }}</a></li>
-                {% endif %}
-              {% else %}
-                <li class="page-item page-last-separator page-jump dropdown">
-                  <a class="page-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" aria-label="{{_('Go to page')}}">…</a>
-                  <ul class="dropdown-menu page-jump-menu" role="menu">
-                    {% for i in range(1, pagination.pages + 1) %}
-                      <li role="presentation"{% if i == pagination.page %} class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{{ i|url_for_other_page }}">{{ i }}</a></li>
-                    {% endfor %}
-                  </ul>
-                </li>
-              {% endif %}
-            {% endfor %}
-            {% if pagination.has_next %}
-              <li class="page-item page-next"><a class="page-link next" aria-label="next page" href="{{ (pagination.page + 1)|url_for_other_page
-                }}">{{_('Next')}} &raquo;</a></li>
-            {% endif %}
-            </div>
-          {% endif %}
-      </div>
-    </div>
+      {%- endif %}
+      {%- set toasts = messages|selectattr(0, 'in', ['success', 'info', 'cwa_refresh'])|list %}
+      {%- set flash.toasts = toasts %}
+      {%- endwith %}
+      {% block flash %}{% endblock %}
+      {% block body %}{% endblock %}
+      {%- if pagination is defined and pagination %}{{ ui.pagination_nav(pagination) }}{% endif %}
+    </main>
   </div>
-    <div class="modal fade" id="bookDetailsModal" tabindex="-1" role="dialog" aria-labelledby="bookDetailsModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="bookDetailsModalLabel">{{_('Book Details')}}</h4>
-          </div>
-          <div class="modal-body">...</div>
-          <div class="modal-footer">
-            <button type="button" id="details_close" class="btn btn-default" data-dismiss="modal">{{_('Close')}}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% block modal %}{% endblock %}
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/libs/bootstrap.min.js') }}"></script>
 
-  <!-- Patch: Define global bootstrap object for plugins expecting Bootstrap 5+ -->
-  <script>window.bootstrap = window.bootstrap || {};</script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{ url_for('static', filename='js/libs/underscore-umd-min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/libs/intention.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/libs/context.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/libs/plugins.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/libs/jquery.form.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/uploadprogress.js') }}"> </script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    {% if g.current_theme == 1 %}
-      <script src="{{ url_for('static', filename='js/libs/jquery.visible.min.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/libs/compromise.min.js') }}"></script>
-      <script src="{{ url_for('static', filename='js/libs/readmore.min.js') }}"></script>
-      <script>
-        // Make script root available for JS
-        window.scriptRoot = "{{ request.script_root }}";
-        // Make user email data available for quick actions
-        window.cwaUserData = {};
-        {% if current_user.kindle_mail and current_user.kindle_mail.strip() %}
-        window.cwaUserData.primaryEmail = "{{ current_user.kindle_mail.split(',')[0].strip() }}";
-        {% else %}
-        window.cwaUserData.primaryEmail = null;
-        {% endif %}
-        // Add user permissions
-        window.cwaUserData.canEditBooks = {{ 'true' if current_user.role_edit() else 'false' }};
-      </script>
-      <script src="{{ url_for('static', filename='js/caliBlur.js') }}"></script>
-    {% endif %}
-    {% block js %}{% endblock %}
-    {% if current_user.is_authenticated %}
-    <script src="{{ url_for('static', filename='user-profile-data/CWA-profile-updater.js') }}"></script>
-    {% endif %}
-    <!-- Makes sure filter buttons are only on the title bar of the page when there is no pagination -->
-    <script>
-      function updateFilterHeaderFixed() {
-        document.querySelectorAll('.row-fluid').forEach(function(row) {
-          var filterheader = row.querySelector('.filterheader');
-          if (!filterheader) return;
-          var hasPagination = !!row.querySelector('.pagination');
-          if (window.innerWidth >= 915 && !hasPagination) {
-            filterheader.classList.add('filterheader-fixed');
-          } else {
-            filterheader.classList.remove('filterheader-fixed');
-          }
-        });
-      }
-      window.addEventListener('DOMContentLoaded', updateFilterHeaderFixed);
-      window.addEventListener('resize', updateFilterHeaderFixed);
-      </script>
-    {% if current_user.is_authenticated and (current_user.role_admin() or current_user.role_edit()) %}
-    <!-- Duplicate Notification Modal -->
-    <div id="duplicate-notification-backdrop" class="duplicate-notification-backdrop"></div>
-    <div id="duplicate-notification-modal" class="duplicate-notification-modal" tabindex="-1" role="dialog" aria-labelledby="duplicate-notification-title">
-      <div class="duplicate-notification-header">
-        <button id="duplicate-notification-close" class="duplicate-notification-close" aria-label="{{_('Close')}}">&times;</button>
-        <h2 id="duplicate-notification-title">{{_('Duplicate Books Detected')}}</h2>
-        <p>{{_('You have unresolved duplicate books in your library')}}</p>
-      </div>
-      <div class="duplicate-notification-body">
-        <div class="duplicate-count-section">
-          <div class="duplicate-count-badge" id="duplicate-notification-count">0</div>
-          <h3>{{_('Duplicate Groups Found')}}</h3>
-        </div>
-        <ul id="duplicate-notification-preview" class="duplicate-preview-list">
-          <!-- Preview items will be inserted here by JavaScript -->
-        </ul>
-      </div>
-      <div class="duplicate-notification-footer">
-        <button id="duplicate-notification-remind" class="duplicate-notification-btn duplicate-notification-btn-secondary">
-          {{_('Remind Me Later')}}
-        </button>
-        <a href="{{ url_for('duplicates.show_duplicates') }}" class="duplicate-notification-btn duplicate-notification-btn-primary">
-          {{_('View & Resolve Duplicates')}}
-        </a>
-      </div>
+  <nav class="bottom-nav" aria-label="{{ _('Quick navigation') }}">
+    <a href="{{ url_for('web.index') }}"{% if page == 'newest' %} aria-current="page"{% endif %}>{{ ui.icon('grid') }}{{ _('Library') }}</a>
+    <a href="{{ url_for('search.advanced_search') }}"{% if page == 'advsearch' %} aria-current="page"{% endif %}>{{ ui.icon('search') }}{{ _('Search') }}</a>
+    {%- if not current_user.is_anonymous %}
+    <a href="{{ url_for('web.profile') }}#kobo"{% if page == 'me' %} aria-current="page"{% endif %}>{{ ui.icon('device') }}{{ _('Kobo') }}</a>
+    {%- else %}
+    <a href="{{ url_for('web.login') }}">{{ ui.icon('log-in') }}{{ _('Login') }}</a>
+    {%- endif %}
+    <button type="button" data-nav-toggle aria-controls="sidebar" aria-expanded="false">{{ ui.icon('menu') }}{{ _('More') }}</button>
+  </nav>
+</div>
+{% else %}
+<main id="main" class="auth" tabindex="-1">
+  {{ self.body() }}
+</main>
+{% endif %}
+
+  <div class="toaster" aria-live="polite">
+    {%- for category, message in flash.toasts %}
+    {%- set kind = 'error' if category in ['error', 'cwa_arch_warning'] else ('success' if category in ['success', 'cwa_refresh'] else 'info') %}
+    <div class="toast toast--{{ kind }}" role="{{ 'alert' if kind == 'error' else 'status' }}">
+      {{ ui.icon('alert' if kind == 'error' else ('check-circle' if kind == 'success' else 'info')) }}
+      <div class="toast-body">{{ message }}</div>
+      <button type="button" class="btn btn-ghost btn-icon btn-sm" aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button>
     </div>
-    <script>
-      window.cwaDuplicateBootstrap = {{ duplicate_notification|tojson if duplicate_notification is defined else '{}' }};
-    </script>
-    <script src="{{ url_for('static', filename='js/duplicate-notifier.js') }}"></script>
-    {% endif %}
-  </body>
+    {%- endfor %}
+  </div>
+
+  <dialog class="modal modal--sm" id="confirm-dialog" aria-labelledby="confirm-dialog-title">
+    <div class="modal-header"><h2 id="confirm-dialog-title">{{ _('Are you sure?') }}</h2></div>
+    <div class="modal-body"><p data-confirm-message></p></div>
+    <div class="modal-footer">
+      <button type="button" class="btn" data-dialog-close>{{ _('Cancel') }}</button>
+      <button type="button" class="btn btn-danger" data-confirm-ok>{{ _('Confirm') }}</button>
+    </div>
+  </dialog>
+
+  {%- if signed_in and current_user.role_upload() and g.allow_upload %}
+  <dialog class="modal modal--sm" id="upload-dialog" aria-labelledby="upload-dialog-title" data-static>
+    <div class="modal-header"><h2 id="upload-dialog-title">{{ _('Uploading...') }}</h2></div>
+    <div class="modal-body">
+      <div class="upload-list"></div>
+      <p class="hint">{{ _('Please do not refresh the page') }}</p>
+    </div>
+  </dialog>
+  <div class="dropzone-overlay" aria-hidden="true"><div>{{ ui.icon('upload', 'icon-lg') }}{{ _('Drop books to add them to the library') }}</div></div>
+  {%- endif %}
+
+  {% block modal %}{% endblock %}
+
+  <script type="application/json" id="app-i18n">{{ {
+    'close': _('Close'), 'confirm': _('Confirm'), 'copied': _('Copied to clipboard'),
+    'copy_failed': _('Could not copy, select the text and copy it manually'),
+    'show_password': _('Show password'), 'hide_password': _('Hide password'),
+    'show_more': _('Show more'), 'show_less': _('Show less'), 'error': _('Something went wrong, please try again'),
+    'processing': _('Upload done, processing, please wait...'), 'upload_failed': _('Upload failed'),
+    'files_count': _('%(count)s files', count='%d')
+  }|tojson }}</script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  {%- if current_user.is_authenticated and (current_user.role_admin() or current_user.role_edit()) and duplicate_notification is defined and duplicate_notification.enabled %}
+  <script type="application/json" id="duplicate-notification-data">{{ duplicate_notification|tojson }}</script>
+  <script src="{{ url_for('static', filename='js/duplicate-notifier.js') }}" defer></script>
+  {%- endif %}
+  {% block js %}{% endblock %}
+</body>
 </html>
