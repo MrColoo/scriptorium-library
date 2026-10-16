@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/Mrcoloo/scriptorium-library/security/advisories/new
+    about: Please report security problems privately.
+  - name: Backend problem also present in Calibre-Web-Automated
+    url: https://github.com/crocodilestick/Calibre-Web-Automated/issues
+    about: Issues in the shared backend can be reported upstream too.

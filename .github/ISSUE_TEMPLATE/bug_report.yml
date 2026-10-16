@@ -1,0 +1,57 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting! For security problems use SECURITY.md instead of an issue.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to …
+        2. Click …
+        3. See error
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Scriptorium version
+      description: Shown in the admin settings, or the image tag you run.
+      placeholder: v1.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Host architecture
+      options: [amd64 / x86_64, arm64 / aarch64, other]
+  - type: input
+    id: client
+    attributes:
+      label: Browser or device
+      placeholder: Firefox 131 on Windows, Kobo Libra 2, KOReader 2024.11…
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant lines from `docker logs scriptorium` or Settings → Logs. Remove personal data.
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues.
+          required: true
+        - label: I removed passwords, tokens and Kobo sync addresses from what I pasted.
+          required: true
