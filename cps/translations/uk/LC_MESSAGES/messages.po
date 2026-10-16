@@ -310,7 +310,7 @@ msgstr "Помилкова Дія"
 
 #: cps/admin.py:1438
 msgid "client_secrets.json Is Not Configured For Web Application"
-msgstr "client_secrets.json не сконфігурований для CWA"
+msgstr "client_secrets.json не сконфігурований для Scriptorium"
 
 #: cps/admin.py:1577
 msgid "Logfile Location is not Valid, Please Enter Correct Path"
@@ -1046,32 +1046,34 @@ msgstr "Scriptorium статистики та події"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "CWA - повна історія застосувань"
+msgstr "Scriptorium - повна історія застосувань"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "CWA - повна історія застосувань (разом з Шляхами)"
+msgstr "Scriptorium - повна історія застосувань (разом з Шляхами)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "CWA - повна історія імпорту"
+msgstr "Scriptorium - повна історія імпорту"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "CWA - повна історія конвертацій"
+msgstr "Scriptorium - повна історія конвертацій"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
-msgstr "CWA - повна історія виправлення EPUB (без Шляхів і Виправ)"
+msgstr "Scriptorium - повна історія виправлення EPUB (без Шляхів і Виправ)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
-msgstr "CWA - повна історія виправлення EPUB (разом з Шляхами і Виправленнямі)"
+msgstr ""
+"Scriptorium - повна історія виправлення EPUB (разом з Шляхами і "
+"Виправленнямі)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"

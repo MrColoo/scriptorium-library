@@ -1117,37 +1117,36 @@ msgstr "Statistiques et activité automatisées Scriptorium"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - Historique complet d'exécution"
+msgstr "Scriptorium - Historique complet d'exécution"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr ""
-"Calibre-Web Automated - Historique complet d'exécution (avec les chemins)"
+msgstr "Scriptorium - Historique complet d'exécution (avec les chemins)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Historique complet des imports"
+msgstr "Scriptorium - Historique complet des imports"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - Historique complet des conversions"
+msgstr "Scriptorium - Historique complet des conversions"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Historique complet du correcteur EPUB (sans chemins "
-"ni corrections)"
+"Scriptorium - Historique complet du correcteur EPUB (sans chemins ni "
+"corrections)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Historique complet du correcteur EPUB (avec chemins "
-"et corrections)"
+"Scriptorium - Historique complet du correcteur EPUB (avec chemins et "
+"corrections)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1209,7 +1208,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "Service de correction EPUB de CWA"
+msgstr "Service de correction EPUB de Scriptorium"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -3407,19 +3406,19 @@ msgstr "Reconnecter la base de données Calibre"
 
 #: cps/templates/admin.html:166 cps/templates/admin.html:175
 msgid "Restart"
-msgstr "Redémarrer Calibre-Web"
+msgstr "Redémarrer Scriptorium"
 
 #: cps/templates/admin.html:168
 msgid "Are you sure you want to shutdown?"
-msgstr "Voulez-vous vraiment arrêter Calibre-Web?"
+msgstr "Voulez-vous vraiment arrêter Scriptorium?"
 
 #: cps/templates/admin.html:168
 msgid "Shutdown"
-msgstr "Arrêter Calibre-Web"
+msgstr "Arrêter Scriptorium"
 
 #: cps/templates/admin.html:175
 msgid "Are you sure you want to restart?"
-msgstr "Voulez-vous vraiment redémarrer Calibre-Web?"
+msgstr "Voulez-vous vraiment redémarrer Scriptorium?"
 
 #: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."

@@ -1008,32 +1008,32 @@ msgstr "Scriptorium Server 统计与活动"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - 完整的执行历史"
+msgstr "Scriptorium - 完整的执行历史"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated - 完整的执行历史（带路径）"
+msgstr "Scriptorium - 完整的执行历史（带路径）"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - 完整的导入历史"
+msgstr "Scriptorium - 完整的导入历史"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - 完整的转换历史"
+msgstr "Scriptorium - 完整的转换历史"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
-msgstr "Calibre-Web Automated - 完整的 EPUB 修复历史（无路径和修复）"
+msgstr "Scriptorium - 完整的 EPUB 修复历史（无路径和修复）"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
-msgstr "Calibre-Web Automated - 完整的 EPUB 修复历史（带路径和修复）"
+msgstr "Scriptorium - 完整的 EPUB 修复历史（带路径和修复）"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1089,7 +1089,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "CWA EPUB 修复工具"
+msgstr "Scriptorium EPUB 修复工具"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format

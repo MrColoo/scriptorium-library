@@ -1052,34 +1052,32 @@ msgstr "Scriptorium İstatistikler & Aktivite"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - Tam Uygulama Geçmişi"
+msgstr "Scriptorium - Tam Uygulama Geçmişi"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Otomatik - Tam Uygulama Geçmişi (w/ Paths)"
+msgstr "Scriptorium Otomatik - Tam Uygulama Geçmişi (w/ Paths)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Tam Aktarım Geçmişi"
+msgstr "Scriptorium - Tam Aktarım Geçmişi"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - Tam Dönüştürme Geçmişi"
+msgstr "Scriptorium - Tam Dönüştürme Geçmişi"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
-msgstr ""
-"Calibre-Web Automated - Tam EPUB Onarım Geçmişi (w/out Dizinler & Onarımlar)"
+msgstr "Scriptorium - Tam EPUB Onarım Geçmişi (w/out Dizinler & Onarımlar)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
-msgstr ""
-"Calibre-Web Automated - Tam EPUB Onarım Geçmişi (w/ Dizinler & Onarımlar)"
+msgstr "Scriptorium - Tam EPUB Onarım Geçmişi (w/ Dizinler & Onarımlar)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1137,7 +1135,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "CWA EPUB Düzenleme Servisi"
+msgstr "Scriptorium EPUB Düzenleme Servisi"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -4142,7 +4140,7 @@ msgstr "Emin misiniz? Bu geri alınamaz."
 
 #: cps/templates/config_db.html:79 cps/templates/config_db.html:81
 msgid "Restore Calibre Database (Last Resort)"
-msgstr "Calibre-Web veri tabanını geri yükle (Son Çare)"
+msgstr "Scriptorium veri tabanını geri yükle (Son Çare)"
 
 #: cps/templates/config_db.html:86
 msgid "New db location is invalid, please enter valid path"

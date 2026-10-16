@@ -1661,7 +1661,7 @@ msgstr ""
 msgid ""
 "Login failed: The OAuth provider returned invalid user profile data. Please "
 "contact your administrator."
-msgstr "Thiết lập Calibre-Web đã cập nhật"
+msgstr "Thiết lập Scriptorium đã cập nhật"
 
 #: cps/oauth_bb.py:290
 #, python-format
@@ -2461,14 +2461,14 @@ msgstr ""
 msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
-msgstr "Thiết lập Calibre-Web đã cập nhật"
+msgstr "Thiết lập Scriptorium đã cập nhật"
 
 #: cps/web.py:2272
 #, fuzzy
 msgid ""
 "OAuth authentication is not properly configured. Please contact "
 "administrator."
-msgstr "Thiết lập Calibre-Web đã cập nhật"
+msgstr "Thiết lập Scriptorium đã cập nhật"
 
 #: cps/web.py:2277 cps/web.py:2304
 msgid "Cannot activate LDAP authentication"
@@ -2503,7 +2503,7 @@ msgstr ""
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
-msgstr "Thiết lập Calibre-Web đã cập nhật"
+msgstr "Thiết lập Scriptorium đã cập nhật"
 
 #: cps/web.py:2355
 msgid ""

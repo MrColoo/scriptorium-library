@@ -1084,36 +1084,36 @@ msgstr "Estadísticas del Servidor y Archivo de Scriptorium"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - Historial de ejecución completo"
+msgstr "Scriptorium - Historial de ejecución completo"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated - Historial  de ejecución completo (con rutas)"
+msgstr "Scriptorium - Historial  de ejecución completo (con rutas)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Historial  de importaciones completo"
+msgstr "Scriptorium - Historial  de importaciones completo"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - Historial  de conversiones  completo"
+msgstr "Scriptorium - Historial  de conversiones  completo"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Historial completo del reparador de EPUB (sin rutas "
-"ni correcciones)"
+"Scriptorium - Historial completo del reparador de EPUB (sin rutas ni "
+"correcciones)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Historial completo del reparador de EPUB (con rutas "
-"y correcciones)"
+"Scriptorium - Historial completo del reparador de EPUB (con rutas y "
+"correcciones)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1176,7 +1176,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "Servicio de reparación de EPUB de CWA"
+msgstr "Servicio de reparación de EPUB de Scriptorium"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -5318,7 +5318,8 @@ msgstr ""
 #, fuzzy
 msgid "Enable Automatic Metadata Fetching for New Books"
 msgstr ""
-"Habilitar el servicio de aplicación automática de portadas y metadatos de CWA"
+"Habilitar el servicio de aplicación automática de portadas y metadatos de "
+"Scriptorium"
 
 #: cps/templates/cwa_settings.html:143
 msgid ""

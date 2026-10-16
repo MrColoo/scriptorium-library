@@ -267,7 +267,7 @@ msgstr "Oletko varma, että haluat poistaa hyllyn?"
 #: cps/admin.py:953 cps/templates/config_db.html:86
 #, fuzzy
 msgid "Are you sure you want to change Calibre library location?"
-msgstr "Haluatko varmasti pysäyttää Calibre-Webin?"
+msgstr "Haluatko varmasti pysäyttää Scriptoriumin?"
 
 #: cps/admin.py:955
 msgid ""
@@ -1667,7 +1667,7 @@ msgstr ""
 msgid ""
 "Login failed: The OAuth provider returned invalid user profile data. Please "
 "contact your administrator."
-msgstr "Calibre-Web asetukset päivitetty"
+msgstr "Scriptorium asetukset päivitetty"
 
 #: cps/oauth_bb.py:290
 #, python-format
@@ -2471,14 +2471,14 @@ msgstr "Vahvistusviesti on lähetetty sähköpostiosoitteeseesi."
 msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
-msgstr "Calibre-Web asetukset päivitetty"
+msgstr "Scriptorium asetukset päivitetty"
 
 #: cps/web.py:2272
 #, fuzzy
 msgid ""
 "OAuth authentication is not properly configured. Please contact "
 "administrator."
-msgstr "Calibre-Web asetukset päivitetty"
+msgstr "Scriptorium asetukset päivitetty"
 
 #: cps/web.py:2277 cps/web.py:2304
 #, fuzzy
@@ -2514,7 +2514,7 @@ msgstr "olet nyt kirjautunut tunnuksella: \"%(nickname)s\""
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
-msgstr "Calibre-Web asetukset päivitetty"
+msgstr "Scriptorium asetukset päivitetty"
 
 #: cps/web.py:2355
 msgid ""
@@ -3241,19 +3241,19 @@ msgstr "Calibre -tietokannan paikka"
 
 #: cps/templates/admin.html:166 cps/templates/admin.html:175
 msgid "Restart"
-msgstr "Uudellenkäynnistä Calibre-Web"
+msgstr "Uudellenkäynnistä Scriptorium"
 
 #: cps/templates/admin.html:168
 msgid "Are you sure you want to shutdown?"
-msgstr "Haluatko varmasti pysäyttää Calibre-Webin?"
+msgstr "Haluatko varmasti pysäyttää Scriptoriumin?"
 
 #: cps/templates/admin.html:168
 msgid "Shutdown"
-msgstr "Sammuta Calibre-Web"
+msgstr "Sammuta Scriptorium"
 
 #: cps/templates/admin.html:175
 msgid "Are you sure you want to restart?"
-msgstr "Haluatko varmasti uudelleenkäynnistää Calibre-Webin?"
+msgstr "Haluatko varmasti uudelleenkäynnistää Scriptoriumin?"
 
 #: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
@@ -3974,7 +3974,7 @@ msgstr ""
 #: cps/templates/book_table.html:141 cps/templates/duplicates.html:135
 #, fuzzy, python-format
 msgid "Delete %(count)s books and all their files? This cannot be undone."
-msgstr "Haluatko varmasti pysäyttää Calibre-Webin?"
+msgstr "Haluatko varmasti pysäyttää Scriptoriumin?"
 
 #: cps/templates/book_table.html:142
 #, python-format
@@ -4085,7 +4085,7 @@ msgstr ""
 #: cps/templates/config_db.html:79
 #, fuzzy
 msgid "Are you sure? This cannot be undone."
-msgstr "Haluatko varmasti pysäyttää Calibre-Webin?"
+msgstr "Haluatko varmasti pysäyttää Scriptoriumin?"
 
 #: cps/templates/config_db.html:79 cps/templates/config_db.html:81
 #, fuzzy
@@ -6217,7 +6217,7 @@ msgstr ""
 #: cps/templates/duplicates.html:145
 #, fuzzy
 msgid "Delete the duplicates listed in the preview? This cannot be undone."
-msgstr "Haluatko varmasti pysäyttää Calibre-Webin?"
+msgstr "Haluatko varmasti pysäyttää Scriptoriumin?"
 
 #: cps/templates/duplicates.html:146
 #, python-format

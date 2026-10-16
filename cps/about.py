@@ -41,7 +41,7 @@ def collect_stats():
     except Exception:
         cwa_version = "Unknown"
 
-    _VERSIONS = {'Calibre-Web Automated': cwa_version}
+    _VERSIONS = {'Scriptorium': cwa_version}
     _VERSIONS.update(OrderedDict(
         Python=sys.version,
         Platform='{0[0]} {0[2]} {0[3]} {0[4]} {0[5]}'.format(platform.uname()),

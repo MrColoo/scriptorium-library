@@ -1056,36 +1056,34 @@ msgstr "Scriptorium - Status do Servidor e Arquivo"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - Histórico Completo de Aplicação"
+msgstr "Scriptorium - Histórico Completo de Aplicação"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated - Histórico Completo de Aplicação (com caminhos)"
+msgstr "Scriptorium - Histórico Completo de Aplicação (com caminhos)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Histórico Completo de Importação"
+msgstr "Scriptorium - Histórico Completo de Importação"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - Histórico Completo de Conversão"
+msgstr "Scriptorium - Histórico Completo de Conversão"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Histórico Completo de Ajustes EPUB (sem caminho e "
-"ajustes)"
+"Scriptorium - Histórico Completo de Ajustes EPUB (sem caminho e ajustes)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Histórico Completo de Ajustes EPUB (com caminho e "
-"ajustes)"
+"Scriptorium - Histórico Completo de Ajustes EPUB (com caminho e ajustes)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -2563,7 +2561,7 @@ msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
 msgstr ""
-"Instancia do Calibre-Web não configurado, por favor contacte o seu "
+"Instancia do Scriptorium não configurado, por favor contacte o seu "
 "administrador"
 
 #: cps/web.py:2272
@@ -2610,7 +2608,7 @@ msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
 msgstr ""
-"Instancia do Calibre-Web não configurado, por favor contacte o seu "
+"Instancia do Scriptorium não configurado, por favor contacte o seu "
 "administrador"
 
 #: cps/web.py:2355
@@ -5285,7 +5283,8 @@ msgstr ""
 #: cps/templates/cwa_settings.html:143
 #, fuzzy
 msgid "Enable Automatic Metadata Fetching for New Books"
-msgstr "Habilitar Serviço de Forçagem de Capas e Metadados Automático do CWA"
+msgstr ""
+"Habilitar Serviço de Forçagem de Capas e Metadados Automático do Scriptorium"
 
 #: cps/templates/cwa_settings.html:143
 msgid ""
@@ -5476,7 +5475,7 @@ msgstr "Próximo"
 #: cps/templates/cwa_settings.html:221
 #, fuzzy
 msgid "Enable Duplicate Notifications"
-msgstr "Habilitar Notificações de Atualização do CWA"
+msgstr "Habilitar Notificações de Atualização do Scriptorium"
 
 #: cps/templates/cwa_settings.html:221
 msgid "Editors and admins see a notice when unresolved duplicates are found."

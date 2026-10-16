@@ -1014,32 +1014,32 @@ msgstr "Scriptorium テストメール"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - 完全な適用履歴"
+msgstr "Scriptorium - 完全な適用履歴"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated - 完全な適用履歴（パス付き）"
+msgstr "Scriptorium - 完全な適用履歴（パス付き）"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - 完全なインポート履歴"
+msgstr "Scriptorium - 完全なインポート履歴"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - 完全な変換履歴"
+msgstr "Scriptorium - 完全な変換履歴"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
-msgstr "Calibre-Web Automated - 完全なEPUB修正履歴（パスと修正なし）"
+msgstr "Scriptorium - 完全なEPUB修正履歴（パスと修正なし）"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
-msgstr "Calibre-Web Automated - 完全なEPUB修正履歴（パスと修正付き）"
+msgstr "Scriptorium - 完全なEPUB修正履歴（パスと修正付き）"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1096,7 +1096,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "CWA Kindle送信用EPUB修正サービス"
+msgstr "Scriptorium Kindle送信用EPUB修正サービス"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -2994,7 +2994,7 @@ msgstr ""
 
 #: cps/templates/admin.html:12
 msgid "Check Service Status"
-msgstr "CWAステータスを確認"
+msgstr "Scriptoriumステータスを確認"
 
 #: cps/templates/admin.html:20 cps/templates/user_edit.html:11
 msgid "Users"
@@ -4973,7 +4973,7 @@ msgstr "Scriptoriumサービスを有効/無効にする"
 
 #: cps/templates/cwa_settings.html:90
 msgid "Enable Auto-Convert"
-msgstr "CWA自動変換を有効にする"
+msgstr "Scriptorium自動変換を有効にする"
 
 #: cps/templates/cwa_settings.html:90
 msgid "New books are converted to the target format below."
@@ -4981,7 +4981,7 @@ msgstr ""
 
 #: cps/templates/cwa_settings.html:91
 msgid "Enable Automatic Cover & Metadata Enforcement Service"
-msgstr "CWA自動カバー＆メタデータ適用サービスを有効にする"
+msgstr "Scriptorium自動カバー＆メタデータ適用サービスを有効にする"
 
 #: cps/templates/cwa_settings.html:91
 msgid ""
@@ -5039,7 +5039,7 @@ msgstr ""
 
 #: cps/templates/cwa_settings.html:102
 msgid "Enable Update Notifications"
-msgstr "CWA更新通知を有効にする"
+msgstr "Scriptorium更新通知を有効にする"
 
 #: cps/templates/cwa_settings.html:103
 msgid "Enable Contribute Translations Notifications"
@@ -5102,7 +5102,7 @@ msgstr ""
 
 #: cps/templates/cwa_settings.html:124
 msgid "Auto-Ingest - Ignored Formats"
-msgstr "CWA自動取り込み - 無視する形式"
+msgstr "Scriptorium自動取り込み - 無視する形式"
 
 #: cps/templates/cwa_settings.html:124
 msgid "Files in these formats are left in the ingest folder."
@@ -5120,7 +5120,7 @@ msgstr ""
 
 #: cps/templates/cwa_settings.html:136
 msgid "Auto-Convert - Ignored Formats"
-msgstr "CWA自動変換 - 無視する形式"
+msgstr "Scriptorium自動変換 - 無視する形式"
 
 #: cps/templates/cwa_settings.html:136
 msgid "Books in these formats are imported as they are, without conversion."
@@ -5396,7 +5396,7 @@ msgstr "自動バックアップ設定"
 
 #: cps/templates/cwa_settings.html:251
 msgid "Enable Import Auto-Backup"
-msgstr "CWAインポート自動バックアップを有効にする"
+msgstr "Scriptoriumインポート自動バックアップを有効にする"
 
 #: cps/templates/cwa_settings.html:251
 #, fuzzy
@@ -5408,7 +5408,7 @@ msgstr ""
 
 #: cps/templates/cwa_settings.html:252
 msgid "Enable Conversion Auto-Backup"
-msgstr "CWA変換自動バックアップを有効にする"
+msgstr "Scriptorium変換自動バックアップを有効にする"
 
 #: cps/templates/cwa_settings.html:252
 msgid "Keeps the original of every converted file."
@@ -5424,7 +5424,7 @@ msgstr ""
 
 #: cps/templates/cwa_settings.html:254
 msgid "Enable Auto-Zip Backups"
-msgstr "CWA自動Zipバックアップを有効にする"
+msgstr "Scriptorium自動Zipバックアップを有効にする"
 
 #: cps/templates/cwa_settings.html:254
 msgid "Compresses the backups once a day to save space."

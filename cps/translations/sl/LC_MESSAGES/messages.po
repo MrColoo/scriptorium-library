@@ -1075,36 +1075,34 @@ msgstr "Avtomatizirana statistika in arhiv strežnikov Scriptorium"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - Celotna zgodovina uveljavljanja"
+msgstr "Scriptorium - Celotna zgodovina uveljavljanja"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated - Celotna zgodovina uveljavljanja (s potmi)"
+msgstr "Scriptorium - Celotna zgodovina uveljavljanja (s potmi)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Celotna zgodovina uvoza"
+msgstr "Scriptorium - Celotna zgodovina uvoza"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - Celotna zgodovina pretvorb"
+msgstr "Scriptorium - Celotna zgodovina pretvorb"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Celotna zgodovina popravljanja EPUB (brez poti in "
-"popravkov)"
+"Scriptorium - Celotna zgodovina popravljanja EPUB (brez poti in popravkov)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Celotna zgodovina popravljanja EPUB (s potmi in "
-"popravki)"
+"Scriptorium - Celotna zgodovina popravljanja EPUB (s potmi in popravki)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1162,7 +1160,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "CWA Storitev popravljanja datotek EPUB za pošiljanje v Kindle"
+msgstr "Scriptorium Storitev popravljanja datotek EPUB za pošiljanje v Kindle"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -2576,7 +2574,7 @@ msgstr "Uspeh! Potrditveno e-poštno sporočilo je bilo poslano."
 msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
-msgstr "Instanca Calibre-Web ni nastavljena, obrni se na skrbnika"
+msgstr "Instanca Scriptorium ni nastavljena, obrni se na skrbnika"
 
 #: cps/web.py:2272
 #, fuzzy
@@ -2618,7 +2616,7 @@ msgstr "Uspeh! Prijavljeni ste kot: %(nickname)s"
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
-msgstr "Instanca Calibre-Web ni nastavljena, obrni se na skrbnika"
+msgstr "Instanca Scriptorium ni nastavljena, obrni se na skrbnika"
 
 #: cps/web.py:2355
 msgid ""

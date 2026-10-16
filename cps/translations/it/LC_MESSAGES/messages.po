@@ -3291,19 +3291,19 @@ msgstr "Riconnetti il database di Calibre"
 
 #: cps/templates/admin.html:166 cps/templates/admin.html:175
 msgid "Restart"
-msgstr "Riavvia Calibre-Web"
+msgstr "Riavvia Scriptorium"
 
 #: cps/templates/admin.html:168
 msgid "Are you sure you want to shutdown?"
-msgstr "Sei sicuro di voler fermare Calibre-Web?"
+msgstr "Sei sicuro di voler fermare Scriptorium?"
 
 #: cps/templates/admin.html:168
 msgid "Shutdown"
-msgstr "Arresta Calibre-Web"
+msgstr "Arresta Scriptorium"
 
 #: cps/templates/admin.html:175
 msgid "Are you sure you want to restart?"
-msgstr "Sei sicuro di voler riavviare Calibre-Web?"
+msgstr "Sei sicuro di voler riavviare Scriptorium?"
 
 #: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."

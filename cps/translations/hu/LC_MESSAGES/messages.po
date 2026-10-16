@@ -1070,36 +1070,34 @@ msgstr "Scriptorium Statisztika és Aktivitás"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - Kényszerítési történet"
+msgstr "Scriptorium - Kényszerítési történet"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated - Kényszerítési történet (útvonalakkal)"
+msgstr "Scriptorium - Kényszerítési történet (útvonalakkal)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Teljes import történet"
+msgstr "Scriptorium - Teljes import történet"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - Teljes konvertálási történet"
+msgstr "Scriptorium - Teljes konvertálási történet"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Teljes EPUB javító történet (útvonalak és javítások "
-"nélkül)"
+"Scriptorium - Teljes EPUB javító történet (útvonalak és javítások nélkül)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Teljes EPUB javító történet (útvonalakkal és "
-"javításokkal)"
+"Scriptorium - Teljes EPUB javító történet (útvonalakkal és javításokkal)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1156,7 +1154,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "CWA EPUB javító szolgáltatás"
+msgstr "Scriptorium EPUB javító szolgáltatás"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -2820,7 +2818,7 @@ msgstr "EPUB javító - teljes futás"
 
 #: cps/tasks/ops.py:136
 msgid "EPUB Fixer"
-msgstr "CWA EPUB javító"
+msgstr "Scriptorium EPUB javító"
 
 #: cps/tasks/thumbnail.py:96
 #, python-format
@@ -3243,7 +3241,7 @@ msgstr ""
 #: cps/templates/admin.html:122 cps/templates/cwa_epub_fixer.html:7
 #, fuzzy
 msgid "EPUB fixer"
-msgstr "CWA EPUB javító"
+msgstr "Scriptorium EPUB javító"
 
 #: cps/templates/admin.html:123
 msgid "Repair EPUB files so Kindle accepts them by email."
@@ -3315,7 +3313,7 @@ msgstr "Újraindítás"
 
 #: cps/templates/admin.html:168
 msgid "Are you sure you want to shutdown?"
-msgstr "Valóban le akarja állítani a Calibre-Web Automatedet?"
+msgstr "Valóban le akarja állítani a Scriptoriumet?"
 
 #: cps/templates/admin.html:168
 msgid "Shutdown"
@@ -3323,7 +3321,7 @@ msgstr "Leállítás"
 
 #: cps/templates/admin.html:175
 msgid "Are you sure you want to restart?"
-msgstr "Valóban újra akarja indítani a Calibre-Web Automatedet?"
+msgstr "Valóban újra akarja indítani a Scriptoriumet?"
 
 #: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."

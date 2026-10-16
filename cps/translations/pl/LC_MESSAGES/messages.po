@@ -1049,35 +1049,32 @@ msgstr "Statystyki serwera i archiwum Scriptorium"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - Pełna historia wymuszania"
+msgstr "Scriptorium - Pełna historia wymuszania"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated - Pełna historia wymuszania (ze ścieżkami)"
+msgstr "Scriptorium - Pełna historia wymuszania (ze ścieżkami)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Pełna historia importu"
+msgstr "Scriptorium - Pełna historia importu"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - Pełna historia konwersji"
+msgstr "Scriptorium - Pełna historia konwersji"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
-msgstr ""
-"Calibre-Web Automated - Pełna historia naprawy EPUB (bez ścieżek i poprawek)"
+msgstr "Scriptorium - Pełna historia naprawy EPUB (bez ścieżek i poprawek)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
-msgstr ""
-"Calibre-Web Automated - Pełna historia naprawy EPUB (ze ścieżkami i "
-"poprawkami)"
+msgstr "Scriptorium - Pełna historia naprawy EPUB (ze ścieżkami i poprawkami)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1134,7 +1131,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "Usługa naprawy EPUB CWA dla wysyłki do Kindle"
+msgstr "Usługa naprawy EPUB Scriptorium dla wysyłki do Kindle"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -2525,8 +2522,8 @@ msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
 msgstr ""
-"Instancja Calibre-Web Automated jest nieskonfigurowana, proszę skontaktować "
-"się z administratorem"
+"Instancja Scriptorium jest nieskonfigurowana, proszę skontaktować się z "
+"administratorem"
 
 #: cps/web.py:2272
 #, fuzzy
@@ -2570,8 +2567,8 @@ msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
 msgstr ""
-"Instancja Calibre-Web Automated jest nieskonfigurowana, proszę skontaktować "
-"się z administratorem"
+"Instancja Scriptorium jest nieskonfigurowana, proszę skontaktować się z "
+"administratorem"
 
 #: cps/web.py:2355
 msgid ""
@@ -3294,19 +3291,19 @@ msgstr "Ponownie połącz z bazą danych Calibre"
 
 #: cps/templates/admin.html:166 cps/templates/admin.html:175
 msgid "Restart"
-msgstr "Uruchom ponownie Calibre Web"
+msgstr "Uruchom ponownie Scriptorium"
 
 #: cps/templates/admin.html:168
 msgid "Are you sure you want to shutdown?"
-msgstr "Na pewno chcesz zatrzymać Calibre Web?"
+msgstr "Na pewno chcesz zatrzymać Scriptorium?"
 
 #: cps/templates/admin.html:168
 msgid "Shutdown"
-msgstr "Zatrzymaj Calibre Web"
+msgstr "Zatrzymaj Scriptorium"
 
 #: cps/templates/admin.html:175
 msgid "Are you sure you want to restart?"
-msgstr "Na pewno chcesz uruchomić ponownie Calibre Web?"
+msgstr "Na pewno chcesz uruchomić ponownie Scriptorium?"
 
 #: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
@@ -4033,7 +4030,7 @@ msgstr ""
 #: cps/templates/book_table.html:141 cps/templates/duplicates.html:135
 #, fuzzy, python-format
 msgid "Delete %(count)s books and all their files? This cannot be undone."
-msgstr "Na pewno chcesz zatrzymać Calibre Web?"
+msgstr "Na pewno chcesz zatrzymać Scriptorium?"
 
 #: cps/templates/book_table.html:142
 #, python-format
@@ -4144,7 +4141,7 @@ msgstr ""
 #: cps/templates/config_db.html:79
 #, fuzzy
 msgid "Are you sure? This cannot be undone."
-msgstr "Na pewno chcesz zatrzymać Calibre Web?"
+msgstr "Na pewno chcesz zatrzymać Scriptorium?"
 
 #: cps/templates/config_db.html:79 cps/templates/config_db.html:81
 #, fuzzy
@@ -5217,7 +5214,8 @@ msgstr ""
 #: cps/templates/cwa_settings.html:143
 #, fuzzy
 msgid "Enable Automatic Metadata Fetching for New Books"
-msgstr "Włącz usługę automatycznego wymuszania okładek i metadanych CWA"
+msgstr ""
+"Włącz usługę automatycznego wymuszania okładek i metadanych Scriptorium"
 
 #: cps/templates/cwa_settings.html:143
 msgid ""
@@ -5408,7 +5406,7 @@ msgstr "Następne"
 #: cps/templates/cwa_settings.html:221
 #, fuzzy
 msgid "Enable Duplicate Notifications"
-msgstr "Włącz powiadomienia o aktualizacjach CWA"
+msgstr "Włącz powiadomienia o aktualizacjach Scriptorium"
 
 #: cps/templates/cwa_settings.html:221
 msgid "Editors and admins see a notice when unresolved duplicates are found."
@@ -6299,7 +6297,7 @@ msgstr ""
 #: cps/templates/duplicates.html:145
 #, fuzzy
 msgid "Delete the duplicates listed in the preview? This cannot be undone."
-msgstr "Na pewno chcesz zatrzymać Calibre Web?"
+msgstr "Na pewno chcesz zatrzymać Scriptorium?"
 
 #: cps/templates/duplicates.html:146
 #, python-format

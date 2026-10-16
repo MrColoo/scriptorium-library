@@ -1059,37 +1059,34 @@ msgstr "Scriptorium Statistiken & Aktivitäten"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - Vollständige Durchsetzungsgeschichte"
+msgstr "Scriptorium - Vollständige Durchsetzungsgeschichte"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr ""
-"Calibre-Web Automated - Vollständige Durchsetzungsgeschichte (mit Pfaden)"
+msgstr "Scriptorium - Vollständige Durchsetzungsgeschichte (mit Pfaden)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Vollständiger Importverlauf"
+msgstr "Scriptorium - Vollständiger Importverlauf"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - Vollständige Konvertierungsgeschichte"
+msgstr "Scriptorium - Vollständige Konvertierungsgeschichte"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Vollständige EPUB-Fixer-Historie (ohne Pfade und "
-"Korrekturen)"
+"Scriptorium - Vollständige EPUB-Fixer-Historie (ohne Pfade und Korrekturen)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Vollständige EPUB-Fixer-Historie (mit Pfaden und "
-"Korrekturen)"
+"Scriptorium - Vollständige EPUB-Fixer-Historie (mit Pfaden und Korrekturen)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1149,7 +1146,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "CWA EPUB-Fixer-Dienst"
+msgstr "Scriptorium EPUB-Fixer-Dienst"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -3332,7 +3329,7 @@ msgstr "Neustart"
 
 #: cps/templates/admin.html:168
 msgid "Are you sure you want to shutdown?"
-msgstr "Calibre-Web wirklich anhalten?"
+msgstr "Scriptorium wirklich anhalten?"
 
 #: cps/templates/admin.html:168
 msgid "Shutdown"
@@ -3340,7 +3337,7 @@ msgstr "Ausschalten"
 
 #: cps/templates/admin.html:175
 msgid "Are you sure you want to restart?"
-msgstr "Calibre-Web wirklich neustarten?"
+msgstr "Scriptorium wirklich neustarten?"
 
 #: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."

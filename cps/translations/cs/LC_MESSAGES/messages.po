@@ -1046,34 +1046,32 @@ msgstr "Statistika a aktivity Scriptorium"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated – Úplná historie vymáhání"
+msgstr "Scriptorium – Úplná historie vymáhání"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated – Úplná historie vynucování (s cestami)"
+msgstr "Scriptorium – Úplná historie vynucování (s cestami)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Úplná historie importu"
+msgstr "Scriptorium - Úplná historie importu"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated – Kompletní historie konverzí"
+msgstr "Scriptorium – Kompletní historie konverzí"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
-msgstr ""
-"Calibre-Web Automated - Kompletní historie oprav EPUB (bez cest a oprav)"
+msgstr "Scriptorium - Kompletní historie oprav EPUB (bez cest a oprav)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
-msgstr ""
-"Calibre-Web Automated - Kompletní historie oprav EPUB (s cestami a opravami)"
+msgstr "Scriptorium - Kompletní historie oprav EPUB (s cestami a opravami)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1129,7 +1127,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "Služba opravy EPUB CWA"
+msgstr "Služba opravy EPUB Scriptorium"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format

@@ -1033,32 +1033,32 @@ msgstr "Scriptorium 통계 및 활동"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - 전체 적용 내역"
+msgstr "Scriptorium - 전체 적용 내역"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated - 전체 적용 내역 (경로 포함)"
+msgstr "Scriptorium - 전체 적용 내역 (경로 포함)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - 전체 가져오기 내역"
+msgstr "Scriptorium - 전체 가져오기 내역"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - 전체 변환 내역"
+msgstr "Scriptorium - 전체 변환 내역"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
-msgstr "Calibre-Web Automated - 전체 EPUB Fixer 내역 (경로 & 수정 제외)"
+msgstr "Scriptorium - 전체 EPUB Fixer 내역 (경로 & 수정 제외)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
-msgstr "Calibre-Web Automated - 전체 EPUB Fixer 내역 (경로 & 수정 포함)"
+msgstr "Scriptorium - 전체 EPUB Fixer 내역 (경로 & 수정 포함)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1116,7 +1116,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "CWA EPUB 수정 서비스"
+msgstr "Scriptorium EPUB 수정 서비스"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -1605,8 +1605,8 @@ msgid ""
 "Unsupported architecture detected: %(arch)s. Scriptorium is optimized for "
 "x86_64 and aarch64."
 msgstr ""
-"지원하지 않는 아키텍처가 감지되었습니다: %(arch)s. CWA는 x86_64와 aarch64에 "
-"최적화되어 있습니다."
+"지원하지 않는 아키텍처가 감지되었습니다: %(arch)s. Scriptorium는 x86_64와 "
+"aarch64에 최적화되어 있습니다."
 
 #: cps/helper.py:1370
 msgid "Could not find the specified directory"
@@ -6035,9 +6035,9 @@ msgid ""
 "metadata edits. On large libraries it can take a few minutes; you can keep "
 "using Scriptorium meanwhile."
 msgstr ""
-"CWA는 가져오기와 메타데이터 변경 중에도 중복 검사를 빠르게 유지하기 위해 중"
-"복 인덱스를 사용합니다. 증분 검사를 실행하려면 먼저 인덱스의 기준선이 필요합"
-"니다."
+"Scriptorium는 가져오기와 메타데이터 변경 중에도 중복 검사를 빠르게 유지하기 "
+"위해 중복 인덱스를 사용합니다. 증분 검사를 실행하려면 먼저 인덱스의 기준선이 "
+"필요합니다."
 
 #: cps/templates/duplicates.html:27 cps/templates/duplicates.html:130
 msgid "Duplicate scan is running."
@@ -6045,7 +6045,7 @@ msgstr "중복 검사가 실행 중입니다."
 
 #: cps/templates/duplicates.html:30
 msgid "You can keep using Scriptorium while it runs."
-msgstr "실행 중에도 CWA를 계속 사용할 수 있습니다."
+msgstr "실행 중에도 Scriptorium를 계속 사용할 수 있습니다."
 
 #: cps/templates/duplicates.html:37
 #, fuzzy

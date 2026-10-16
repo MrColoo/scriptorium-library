@@ -274,7 +274,7 @@ msgstr ""
 #: cps/admin.py:953 cps/templates/config_db.html:86
 #, fuzzy
 msgid "Are you sure you want to change Calibre library location?"
-msgstr "Är du säker på att du vill stoppa Calibre-Web?"
+msgstr "Är du säker på att du vill stoppa Scriptorium?"
 
 #: cps/admin.py:955
 msgid ""
@@ -3282,19 +3282,19 @@ msgstr "Plats för Calibre-databasen"
 
 #: cps/templates/admin.html:166 cps/templates/admin.html:175
 msgid "Restart"
-msgstr "Starta om Calibre-Web"
+msgstr "Starta om Scriptorium"
 
 #: cps/templates/admin.html:168
 msgid "Are you sure you want to shutdown?"
-msgstr "Är du säker på att du vill stoppa Calibre-Web?"
+msgstr "Är du säker på att du vill stoppa Scriptorium?"
 
 #: cps/templates/admin.html:168
 msgid "Shutdown"
-msgstr "Stoppa Calibre-Web"
+msgstr "Stoppa Scriptorium"
 
 #: cps/templates/admin.html:175
 msgid "Are you sure you want to restart?"
-msgstr "Är du säker på att du vill starta om Calibre-Web?"
+msgstr "Är du säker på att du vill starta om Scriptorium?"
 
 #: cps/templates/admin.html:175 cps/templates/layout.html:279
 msgid "Restarting, the page reloads when the server is back."
@@ -4018,7 +4018,7 @@ msgstr ""
 #: cps/templates/book_table.html:141 cps/templates/duplicates.html:135
 #, fuzzy, python-format
 msgid "Delete %(count)s books and all their files? This cannot be undone."
-msgstr "Är du säker på att du vill stoppa Calibre-Web?"
+msgstr "Är du säker på att du vill stoppa Scriptorium?"
 
 #: cps/templates/book_table.html:142
 #, python-format
@@ -4129,7 +4129,7 @@ msgstr ""
 #: cps/templates/config_db.html:79
 #, fuzzy
 msgid "Are you sure? This cannot be undone."
-msgstr "Är du säker på att du vill stoppa Calibre-Web?"
+msgstr "Är du säker på att du vill stoppa Scriptorium?"
 
 #: cps/templates/config_db.html:79 cps/templates/config_db.html:81
 #, fuzzy
@@ -6262,7 +6262,7 @@ msgstr ""
 #: cps/templates/duplicates.html:145
 #, fuzzy
 msgid "Delete the duplicates listed in the preview? This cannot be undone."
-msgstr "Är du säker på att du vill stoppa Calibre-Web?"
+msgstr "Är du säker på att du vill stoppa Scriptorium?"
 
 #: cps/templates/duplicates.html:146
 #, python-format

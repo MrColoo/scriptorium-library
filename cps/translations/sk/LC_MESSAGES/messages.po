@@ -2504,7 +2504,7 @@ msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
 msgstr ""
-"Inštancia Calibre-Web nie je nastavené, kontaktujte prosím vašeho správcu"
+"Inštancia Scriptorium nie je nastavené, kontaktujte prosím vašeho správcu"
 
 #: cps/web.py:2272
 #, fuzzy
@@ -2547,7 +2547,7 @@ msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
 msgstr ""
-"Inštancia Calibre-Web nie je nastavené, kontaktujte prosím vašeho správcu"
+"Inštancia Scriptorium nie je nastavené, kontaktujte prosím vašeho správcu"
 
 #: cps/web.py:2355
 msgid ""

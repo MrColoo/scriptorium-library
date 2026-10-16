@@ -2475,7 +2475,7 @@ msgstr "نجاح! تم إرسال بريد إلكتروني للتأكيد."
 msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
-msgstr "مثيل Calibre-Web غير مهيأ، يرجى الاتصال بمسؤول النظام"
+msgstr "مثيل Scriptorium غير مهيأ، يرجى الاتصال بمسؤول النظام"
 
 #: cps/web.py:2272
 #, fuzzy
@@ -2517,7 +2517,7 @@ msgstr "تم بنجاح! أنت الآن مسجل الدخول باسم: %(nickn
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
-msgstr "مثيل Calibre-Web غير مهيأ، يرجى الاتصال بمسؤول النظام"
+msgstr "مثيل Scriptorium غير مهيأ، يرجى الاتصال بمسؤول النظام"
 
 #: cps/web.py:2355
 msgid ""

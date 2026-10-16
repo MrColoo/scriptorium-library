@@ -1058,36 +1058,34 @@ msgstr "Scriptorium - Статистика и активность"
 #: cps/cwa_functions.py:1655
 #, fuzzy
 msgid "Full Enforcement History"
-msgstr "Calibre-Web Automated - Полная история применения"
+msgstr "Scriptorium - Полная история применения"
 
 #: cps/cwa_functions.py:1664
 #, fuzzy
 msgid "Full Enforcement History (w/ Paths)"
-msgstr "Calibre-Web Automated - Полная история применения (с путями)"
+msgstr "Scriptorium - Полная история применения (с путями)"
 
 #: cps/cwa_functions.py:1673
 #, fuzzy
 msgid "Full Import History"
-msgstr "Calibre-Web Automated - Полная история импорта"
+msgstr "Scriptorium - Полная история импорта"
 
 #: cps/cwa_functions.py:1682
 #, fuzzy
 msgid "Full Conversion History"
-msgstr "Calibre-Web Automated - Полная история конвертации"
+msgstr "Scriptorium - Полная история конвертации"
 
 #: cps/cwa_functions.py:1691
 #, fuzzy
 msgid "Full EPUB Fixer History (w/out Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Полная история исправления EPUB (без путей и "
-"исправлений)"
+"Scriptorium - Полная история исправления EPUB (без путей и исправлений)"
 
 #: cps/cwa_functions.py:1700
 #, fuzzy
 msgid "Full EPUB Fixer History (w/ Paths & Fixes)"
 msgstr ""
-"Calibre-Web Automated - Полная история исправления EPUB (с путями и "
-"исправлениями)"
+"Scriptorium - Полная история исправления EPUB (с путями и исправлениями)"
 
 #: cps/cwa_functions.py:1722
 msgid "✅ All Monitoring Services are running as intended! 👍"
@@ -1143,7 +1141,7 @@ msgstr ""
 #: cps/cwa_functions.py:2027
 #, fuzzy
 msgid "EPUB Fixer Service"
-msgstr "Сервис исправления EPUB для Send-to-Kindle CWA"
+msgstr "Сервис исправления EPUB для Send-to-Kindle Scriptorium"
 
 #: cps/cwa_functions.py:2038
 #, fuzzy, python-format
@@ -5404,7 +5402,7 @@ msgstr "Следующая"
 #: cps/templates/cwa_settings.html:221
 #, fuzzy
 msgid "Enable Duplicate Notifications"
-msgstr "Включить уведомления о обновлениях CWA"
+msgstr "Включить уведомления о обновлениях Scriptorium"
 
 #: cps/templates/cwa_settings.html:221
 msgid "Editors and admins see a notice when unresolved duplicates are found."

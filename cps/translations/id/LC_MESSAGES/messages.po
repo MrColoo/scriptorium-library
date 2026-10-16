@@ -2518,7 +2518,7 @@ msgstr "E-mail konfirmasi telah dikirimkan ke alamat email Anda."
 msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
-msgstr "Instans Calibre-Web belum diatur, harap hubungi administrator Anda"
+msgstr "Instans Scriptorium belum diatur, harap hubungi administrator Anda"
 
 #: cps/web.py:2272
 #, fuzzy
@@ -2561,7 +2561,7 @@ msgstr "Anda sekarang login sebagai: %(nickname)s"
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
-msgstr "Instans Calibre-Web belum diatur, harap hubungi administrator Anda"
+msgstr "Instans Scriptorium belum diatur, harap hubungi administrator Anda"
 
 #: cps/web.py:2355
 msgid ""

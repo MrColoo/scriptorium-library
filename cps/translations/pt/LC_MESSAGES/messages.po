@@ -2557,7 +2557,7 @@ msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
 msgstr ""
-"Instancia do Calibre-Web não configurada. Por favor, contacte o seu "
+"Instancia do Scriptorium não configurada. Por favor, contacte o seu "
 "administrador"
 
 #: cps/web.py:2272
@@ -2604,7 +2604,7 @@ msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
 msgstr ""
-"Instancia do Calibre-Web não configurada. Por favor, contacte o seu "
+"Instancia do Scriptorium não configurada. Por favor, contacte o seu "
 "administrador"
 
 #: cps/web.py:2355
