@@ -204,3 +204,8 @@ CLAUDE.md
 pr-analysis-*
 # Local issue/PR triage export (see .github/triage/)
 .triage/
+
+# Local environment files (may contain secrets)
+.env
+.env.*
+!.env.example
