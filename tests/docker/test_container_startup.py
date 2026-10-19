@@ -1,6 +1,7 @@
 # Calibre-Web Automated – fork of Calibre-Web
 # Copyright (C) 2018-2026 Calibre-Web contributors
 # Copyright (C) 2024-2026 Calibre-Web Automated contributors
+# Copyright (C) 2026 Mrcoloo (Scriptorium changes)
 # SPDX-License-Identifier: GPL-3.0-or-later
 # See CONTRIBUTORS for full list of authors.
 
@@ -31,7 +32,7 @@ class TestDockerContainerStartup:
         """Verify the web interface is accessible."""
         response = cwa_api_client["session"].get(cwa_api_client["base_url"])
         assert response.status_code == 200
-        assert "Calibre-Web" in response.text
+        assert "Scriptorium" in response.text
     
     def test_authenticated_access(self, cwa_api_client):
         """Verify authentication works with default credentials."""

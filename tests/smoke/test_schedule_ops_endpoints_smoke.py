@@ -3,6 +3,7 @@
 
 # Calibre-Web Automated – fork of Calibre-Web
 # Copyright (C) 2024-2025 Calibre-Web Automated contributors
+# Copyright (C) 2026 Mrcoloo (Scriptorium changes)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 """
@@ -33,6 +34,15 @@ def _function_source(source_path, function_name):
             return ast.get_source_segment(source, node)
     raise AssertionError(f"Function {function_name} not found in {source_path}")
 
+
+
+def assert_schedule_buttons_macro():
+    """The shared Schedule menu posts to the given endpoint with 5- and 15-minute delays."""
+    with open(project_root / 'cps' / 'templates' / '_service_run.html', 'r', encoding='utf-8') as f:
+        macro = f.read()
+    assert 'url_for(schedule_endpoint, delay=delay)' in macro
+    delays = macro.split('for delay in [', 1)[1].split(']', 1)[0]
+    assert {'5', '15'} <= {d.strip() for d in delays.split(',')}
 
 class TestConvertLibraryScheduling:
     """Test Convert Library scheduling integration"""
@@ -86,9 +96,9 @@ class TestConvertLibraryScheduling:
         with open(template_file, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        # Buttons link to the admin-only schedule route
-        assert "url_for('convert_library.schedule_convert_library', delay=5)" in content
-        assert "url_for('convert_library.schedule_convert_library', delay=15)" in content
+        # The shared service_controls macro builds the buttons from the admin-only schedule route
+        assert "'convert_library.schedule_convert_library'" in content
+        assert_schedule_buttons_macro()
     
     def test_convert_library_task_wrapper_exists(self):
         """Verify TaskConvertLibraryRun task wrapper exists"""
@@ -154,9 +164,9 @@ class TestEpubFixerScheduling:
         with open(template_file, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        # Buttons link to the admin-only schedule route
-        assert "url_for('epub_fixer.schedule_epub_fixer', delay=5)" in content
-        assert "url_for('epub_fixer.schedule_epub_fixer', delay=15)" in content
+        # The shared service_controls macro builds the buttons from the admin-only schedule route
+        assert "'epub_fixer.schedule_epub_fixer'" in content
+        assert_schedule_buttons_macro()
     
     def test_epub_fixer_task_wrapper_exists(self):
         """Verify TaskEpubFixerRun task wrapper exists"""

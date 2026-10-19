@@ -3,6 +3,7 @@
 
 # Calibre-Web Automated – fork of Calibre-Web
 # Copyright (C) 2024-2025 Calibre-Web Automated contributors
+# Copyright (C) 2026 Mrcoloo (Scriptorium changes)
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 """
@@ -44,11 +45,14 @@ class TestAutoSendDelayValidation:
         with open(template_file, 'r', encoding='utf-8') as f:
             content = f.read()
         
-        # Verify input has type=number with min/max
-        assert 'name="auto_send_delay_minutes"' in content
-        assert 'type="number"' in content
-        assert 'min="1"' in content
-        assert 'max="60"' in content
+        # The field is rendered by the page's number() macro with min 1 and max 60
+        assert "number('auto_send_delay_minutes'" in content
+        call = content.split("number('auto_send_delay_minutes'", 1)[1].split('}}', 1)[0]
+        assert '1, 60' in call
+        macro = content.split('{% macro number(', 1)[1].split('{%- endmacro %}', 1)[0]
+        assert 'type="number"' in macro
+        assert 'min="{{ min }}"' in macro
+        assert 'max="{{ max }}"' in macro
     
     def test_cwa_functions_validates_range(self):
         """Verify cwa_functions.py validates 1-60 range"""
