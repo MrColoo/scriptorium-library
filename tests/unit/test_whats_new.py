@@ -152,3 +152,14 @@ class TestUpdateNotice:
         monkeypatch.setattr(whats_new.requests, "get", offline)
         whats_new._fetch_latest()
         assert whats_new.latest_version(check=False) == "v1.1.0"
+
+
+def test_notes_between_covers_every_skipped_release():
+    notes = releases.from_data({"releases": [
+        {"version": v, "title": v, "highlights": [{"title": v}],
+         "quote": {"text": "q" + v, "author": "A"} if v == "v1.2.0" else None}
+        for v in ("v1.0.0", "v1.1.0", "v1.2.0", "v1.3.0")]})
+    between = releases.notes_between("v1.0.0", "v1.2.0", notes)
+    assert [r["version"] for r in between] == ["v1.2.0", "v1.1.0"]
+    assert releases.localized(between[0], "en")["quote"] == {"text": "qv1.2.0", "author": "A", "book": ""}
+    assert releases.notes_between("v1.0.0", "nonsense", notes) == []

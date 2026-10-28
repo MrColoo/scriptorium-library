@@ -582,14 +582,7 @@ dialog.update-dialog { width: min(600px, calc(100vw - 32px)); }
 .update-quote blockquote { margin: 0; font-family: var(--font-serif); font-style: italic; font-size: 18px; line-height: 1.45; }
 .update-quote figcaption { margin-top: 8px; font-size: 12.5px; font-weight: 600; letter-spacing: .03em; color: #7A6450; }
 .update-quote cite { font-style: italic; font-weight: 500; }
-.update-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-.update-steps li { display: flex; align-items: center; gap: 10px; color: var(--text-faint); }
-.update-steps li::before { content: ""; width: 10px; height: 10px; border-radius: 50%; border: 2px solid currentColor; flex: none; }
-.update-steps li.is-current { color: var(--text); font-weight: 600; }
-.update-steps li.is-current::before { border-color: var(--accent); border-top-color: transparent; animation: spin .8s linear infinite; }
-.update-steps li.is-done { color: var(--success); }
-.update-steps li.is-done::before { background: currentColor; }
-.update-error { margin: 10px 0 0; color: var(--danger); font-weight: 500; }
+.update-manual { display: flex; flex-direction: column; gap: 8px; }
 .update-auto { display: flex; align-items: center; gap: 12px; font-weight: 500; color: var(--text); cursor: pointer; }
 
 /* What's new */

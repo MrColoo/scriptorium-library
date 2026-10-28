@@ -288,9 +288,7 @@
   {%- if update_notice %}
   {%- set u = update_notice %}
   <dialog class="modal update-dialog" id="update-dialog" aria-labelledby="update-dialog-title"
-          data-start-url="{{ url_for('self_update.start') }}" data-status-url="{{ url_for('self_update.status') }}"
-          data-auto-url="{{ url_for('self_update.auto_check') }}" data-installed="{{ u.installed }}"
-          data-timeout="{{ _('The update is taking longer than expected. Check your server, then reload this page.') }}">
+          data-auto-url="{{ url_for('whats_new.auto_check') }}">
     <div class="modal-header">
       <h2 id="update-dialog-title">{{ _('Scriptorium update') }}</h2>
       <span class="chip update-chip">{{ ui.icon('server', 'icon-sm') }}{{ u.installed }}</span>
@@ -318,27 +316,14 @@
       </figure>
       {%- endif %}
 
-      <div class="alert alert--info">{{ ui.icon('info') }}<div class="alert-body">{{ _('Check the release notes for breaking changes before updating. Your databases are backed up first.') }}
-        <a href="{{ u.url }}" target="_blank" rel="noopener">{{ _('Release notes') }} →</a></div></div>
-
-      <div class="update-progress" data-update-progress hidden>
-        <ol class="update-steps">
-          <li data-step="backing-up">{{ _('Backing up your databases') }}</li>
-          <li data-step="updating">{{ _('Downloading the new version') }}</li>
-          <li data-step="restarting">{{ _('Restarting Scriptorium') }}</li>
-          <li data-step="done">{{ _('Done, reloading…') }}</li>
-        </ol>
-        <p class="update-error" data-update-error hidden></p>
-      </div>
-
-      {%- if not u.can_update %}
-      <div class="update-manual" data-update-manual hidden>
-        <p class="small muted">{{ _('Run this next to your docker-compose.yml:') }}</p>
+      <div class="update-manual">
+        <p class="small muted">{{ _('To update, back up your config folder, then run this next to your docker-compose.yml:') }}</p>
         <div class="code-line"><code id="update-command">docker compose pull &amp;&amp; docker compose up -d</code>
           <button class="btn btn-sm" type="button" data-copy-target="#update-command">{{ ui.icon('copy') }}{{ _('Copy') }}</button></div>
-        <p class="hint">{{ _('For one-click updates, connect an update service such as Watchtower: see the installation guide.') }}</p>
       </div>
-      {%- endif %}
+
+      <div class="alert alert--info">{{ ui.icon('info') }}<div class="alert-body">{{ _('Check the release notes for breaking changes before updating.') }}
+        <a href="{{ u.url }}" target="_blank" rel="noopener">{{ _('Release notes') }} →</a></div></div>
 
       <label class="update-auto">
         <input type="checkbox" class="switch" data-update-auto checked>
@@ -346,12 +331,7 @@
       </label>
     </div>
     <div class="modal-footer">
-      <button class="btn" type="button" data-dialog-close>{{ _('Later') }}</button>
-      {%- if u.can_update %}
-      <button class="btn btn-primary" type="button" data-update-start>{{ ui.icon('download') }}{{ _('Update now') }}</button>
-      {%- else %}
-      <button class="btn btn-primary" type="button" data-update-manual-show>{{ ui.icon('download') }}{{ _('How to update') }}</button>
-      {%- endif %}
+      <button class="btn btn-primary" type="button" data-dialog-close>{{ _('Close') }}</button>
     </div>
   </dialog>
   <script src="{{ url_for('static', filename='js/update.js') }}" defer></script>

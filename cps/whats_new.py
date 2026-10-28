@@ -8,7 +8,8 @@
 
 - Every user sees the release notes of the installed version once, in a dialog.
 - Administrators get an update button in the top bar while a newer release exists. It opens a dialog
-  with that release's highlights and quote, read from the release_notes.json of the new version's tag.
+  with that release's highlights and quote, read from the release_notes.json of the new version's tag,
+  and the command that updates the container.
 - The newest release is looked up on GitHub in the background, at most every 12 hours and only while
   update notifications are on; until then the version found at container start is used.
 
@@ -20,7 +21,7 @@ import threading
 import time
 
 import requests
-from flask import Blueprint, abort, jsonify
+from flask import Blueprint, abort, jsonify, request
 from flask_babel import get_locale, gettext as _
 from sqlalchemy.orm.attributes import flag_modified
 
@@ -135,7 +136,6 @@ def update_notice(user, check=True):
               for release in releases.notes_between(constants.INSTALLED_VERSION, latest, notes)]
     highlights = [item for release in coming for item in release["highlights"]][:6]
     quote = next((release["quote"] for release in coming if release.get("quote")), None)
-    from . import self_update
     return {
         "version": latest,
         "installed": constants.INSTALLED_VERSION,
@@ -145,7 +145,6 @@ def update_notice(user, check=True):
         "date": coming[0]["date"] if coming else "",
         "highlights": highlights,
         "quote": quote,
-        "can_update": self_update.configured(),
     }
 
 
@@ -189,3 +188,15 @@ def dismiss_update():
     if latest:
         _remember(current_user, "update_dismissed", latest)
     return jsonify({"success": True})
+
+
+@whats_new.route("/update/auto-check", methods=["POST"])
+@user_login_required
+def auto_check():
+    """Turn the background release check (and the update button) on or off."""
+    if not current_user.role_admin():
+        abort(403)
+    enabled = bool((request.get_json(silent=True) or {}).get("enabled"))
+    from cwa_db import CWA_DB
+    CWA_DB().update_cwa_settings({"cwa_update_notifications": 1 if enabled else 0})
+    return jsonify({"ok": True, "enabled": enabled})

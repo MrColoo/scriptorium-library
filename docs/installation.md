@@ -123,51 +123,15 @@ is out of reach. On Android, *Share → Scriptorium* from any app sends an ebook
 library (the account needs upload permission). Browsers only allow installation over HTTPS, or on
 `localhost`.
 
-## One-click updates
+## Updates
 
 When a new release is out, administrators see a download button in the top bar. It opens the
-release highlights and, if your server is set up for it, an **Update now** button.
+highlights of the new version and the command that updates the container:
 
-A container cannot replace its own image, and Scriptorium is deliberately never given access to the
-Docker socket (that would mean root on your server). Instead, it asks a service you already trust to
-do the update, through a webhook. With [Watchtower](https://containrrr.dev/watchtower/http-api-mode/)
-in HTTP API mode, limited to the Scriptorium container:
-
-```yaml
-services:
-  scriptorium:
-    image: ghcr.io/mrcoloo/scriptorium-library:latest
-    environment:
-      - SCRIPTORIUM_UPDATE_WEBHOOK=http://watchtower:8080/v1/update
-      - SCRIPTORIUM_UPDATE_TOKEN=change-me-to-a-long-random-string
-    labels:
-      - com.centurylinklabs.watchtower.enable=true
-    # … your usual volumes and ports
-
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - WATCHTOWER_HTTP_API_UPDATE=true
-      - WATCHTOWER_HTTP_API_TOKEN=change-me-to-a-long-random-string
-      - WATCHTOWER_LABEL_ENABLE=true
-    restart: unless-stopped
+```bash
+docker compose pull && docker compose up -d
 ```
 
-Do not publish Watchtower's port; Scriptorium reaches it on the Compose network. Any other service
-that pulls and recreates the container on an authenticated POST works the same way.
-
-When you press **Update now**, Scriptorium:
-
-1. copies `app.db`, `cwa.db` and the library's `metadata.db` with SQLite's online backup into
-   `config/backups/pre-update-<version>-<time>/` and checks each copy (the five most recent are
-   kept); if the backup fails, nothing else happens;
-2. calls the webhook, then follows the restart and reloads the page once the new version answers.
-
-To go back, set the image to the previous tag (for example `:v1.0.0`) and, if needed, copy the
-databases from the backup folder over the ones in `config/` while the container is stopped.
-
-Without a webhook, the dialog shows the command to run instead:
-`docker compose pull && docker compose up -d`. *Automatically check for new updates* in the same
-dialog turns the release check off.
+Run it next to your `docker-compose.yml`, after a backup of your `config` folder. To go back, set
+the image to the previous tag (for example `:v1.0.0`) and run the same command. *Automatically
+check for new updates* in the same dialog turns the release check off.
