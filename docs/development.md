@@ -99,6 +99,7 @@ Placeholders that JavaScript fills in are passed through gettext as values, e.g.
 
 ## Release notes
 
+Releases are cut with `scripts/release.py` and published by a workflow: see [Releasing](releasing.md).
 Every release adds an entry to `cps/release_notes.json`: a version, a date, a title, three to
 five highlights (each with an `icon` from the sprite) and a `quote`: a short line from a book that
 fits the release, ideally from a public-domain work. Texts are in English (`en`) and in any other

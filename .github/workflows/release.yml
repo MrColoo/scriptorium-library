@@ -1,0 +1,242 @@
+name: Release
+
+# Publishes a Scriptorium release. Normally started by pushing a tag made with
+#   python3 scripts/release.py prepare vX.Y.Z
+# It checks the release notes, runs the fast tests, builds the multi-arch image
+# (amd64 + arm64) with provenance, and writes the GitHub release from
+# cps/release_notes.json plus the list of merged changes.
+#
+# It can also be started by hand for an existing tag ("Run workflow"), for
+# example to write a missing GitHub release without rebuilding the image.
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to release, e.g. v1.1.0"
+        required: true
+      build_image:
+        description: "Test, build and push the Docker image for this tag"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+env:
+  TAG: ${{ inputs.tag || github.ref_name }}
+
+jobs:
+  # Validate the tag and the release notes, and render the release text.
+  prepare:
+    name: Check tag and release notes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+      prerelease: ${{ steps.meta.outputs.prerelease }}
+      image: ${{ steps.meta.outputs.image }}
+      revision: ${{ steps.revision.outputs.sha }}
+    steps:
+      - name: Check the tag format
+        id: meta
+        run: |
+          if ! printf '%s' "$TAG" | grep -Eq '^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$'; then
+            echo "::error::'$TAG' is not a release tag (vMAJOR.MINOR.PATCH)"; exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          case "$TAG" in *-*) echo "prerelease=true" >> "$GITHUB_OUTPUT" ;; *) echo "prerelease=false" >> "$GITHUB_OUTPUT" ;; esac
+          owner="$(printf '%s' "$GITHUB_REPOSITORY_OWNER" | tr '[:upper:]' '[:lower:]')"
+          echo "image=ghcr.io/${owner}/scriptorium-library" >> "$GITHUB_OUTPUT"
+
+      # The tooling and the notes come from the default branch, which holds every
+      # release's notes; the tag's own copy wins when it has the entry.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Check that the tag exists
+        id: revision
+        run: |
+          sha="$(git rev-parse --verify --quiet "refs/tags/${TAG}^{commit}")" || { echo "::error::Tag $TAG does not exist"; exit 1; }
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+
+      - name: Check and render the release notes
+        run: |
+          notes=cps/release_notes.json
+          if git show "${TAG}:cps/release_notes.json" > /tmp/tag-notes.json 2>/dev/null \
+             && python3 scripts/release.py check "$TAG" --notes-file /tmp/tag-notes.json > /dev/null 2>&1; then
+            notes=/tmp/tag-notes.json
+          fi
+          python3 scripts/release.py check "$TAG" --notes-file "$notes"
+          python3 scripts/release.py notes "$TAG" --notes-file "$notes" > release-notes.md
+          cat release-notes.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: release-notes.md
+          retention-days: 7
+
+  test:
+    name: Fast tests (smoke + unit)
+    needs: prepare
+    if: ${{ github.event_name == 'push' || inputs.build_image }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.prepare.outputs.tag }}
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libldap2-dev libsasl2-dev libssl-dev
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Create the test environment
+        run: |
+          sudo mkdir -p /config /books/import /books/ingest /config/processed_books
+          sudo chmod -R 777 /config /books
+          touch /config/epub-fixer.log /config/converter.log /config/cwa.db
+
+      - name: Run smoke and unit tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/scripts
+        run: pytest -m "smoke or unit" -n auto --maxfail=3 -q --tb=short
+
+  image:
+    name: Build and push the image
+    needs: [prepare, test]
+    if: ${{ github.event_name == 'push' || inputs.build_image }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.prepare.outputs.tag }}
+          persist-credentials: false
+
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # vX.Y.Z always; vX.Y, vX and latest only for final (non pre-release) versions.
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ needs.prepare.outputs.image }}
+          flavor: latest=false
+          tags: |
+            type=raw,value=${{ needs.prepare.outputs.tag }}
+            type=semver,pattern=v{{major}}.{{minor}},value=${{ needs.prepare.outputs.tag }},enable=${{ needs.prepare.outputs.prerelease == 'false' }}
+            type=semver,pattern=v{{major}},value=${{ needs.prepare.outputs.tag }},enable=${{ needs.prepare.outputs.prerelease == 'false' && !startsWith(needs.prepare.outputs.tag, 'v0.') }}
+            type=raw,value=latest,enable=${{ needs.prepare.outputs.prerelease == 'false' }}
+          labels: |
+            org.opencontainers.image.title=Scriptorium
+            org.opencontainers.image.description=A self-hosted library that tends itself. Based on Calibre-Web-Automated.
+            org.opencontainers.image.vendor=Scriptorium
+            org.opencontainers.image.authors=Mrcoloo
+            org.opencontainers.image.licenses=GPL-3.0-or-later
+            org.opencontainers.image.version=${{ needs.prepare.outputs.tag }}
+            org.opencontainers.image.revision=${{ needs.prepare.outputs.revision }}
+
+      - name: Build and push (amd64 + arm64)
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
+          build-args: |
+            VERSION=${{ needs.prepare.outputs.tag }}
+            BUILD_DATE=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.created'] }}
+          provenance: mode=max
+          sbom: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ${{ needs.prepare.outputs.image }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          push-to-registry: true
+
+  release:
+    name: Publish the GitHub release
+    needs: [prepare, test, image]
+    # Runs after a successful build, or straight away when only the release is wanted.
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && (needs.image.result == 'success' || needs.image.result == 'skipped') && (needs.test.result == 'success' || needs.test.result == 'skipped') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-notes
+
+      - name: Add the list of changes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+        run: |
+          changes="$(gh api "repos/${GITHUB_REPOSITORY}/releases/generate-notes" -f tag_name="$RELEASE_TAG" --jq .body || true)"
+          if [ -n "$changes" ]; then
+            printf '\n---\n\n%s\n' "$changes" >> release-notes.md
+          fi
+
+      - name: Create or update the release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+          PRERELEASE: ${{ needs.prepare.outputs.prerelease }}
+        run: |
+          flags=()
+          if [ "$PRERELEASE" = "true" ]; then flags+=(--prerelease); else flags+=(--latest); fi
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            gh release edit "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --title "Scriptorium $RELEASE_TAG" \
+              --notes-file release-notes.md --draft=false "${flags[@]}"
+          else
+            gh release create "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --title "Scriptorium $RELEASE_TAG" \
+              --notes-file release-notes.md --verify-tag "${flags[@]}"
+          fi
+          echo "Released: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/releases/tag/${RELEASE_TAG}" >> "$GITHUB_STEP_SUMMARY"

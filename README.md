@@ -311,6 +311,7 @@ Coming from plain Calibre-Web? See [the installation guide](docs/installation.md
 | [Automation](docs/automation.md) | Ingest, conversion, metadata, duplicates, EPUB fixer, backups |
 | [Security](docs/security.md) | Deploying safely and how the app is hardened |
 | [Development](docs/development.md) | Running from source, tests, front-end conventions, translations |
+| [Releasing](docs/releasing.md) | How versions are tagged, built and published |
 
 ## Contributing
 

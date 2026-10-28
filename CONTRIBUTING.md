@@ -19,6 +19,10 @@ Thanks for helping. Bug reports, ideas, translations and code are all welcome.
 5. Check the pages you touched in light and dark mode and at phone width.
 6. Open a pull request and fill in the checklist.
 
+If your change is something users will notice, add it to the next version's entry in
+`cps/release_notes.json` (`python3 scripts/release.py new vX.Y.Z` creates one). Maintainers release
+as described in [docs/releasing.md](docs/releasing.md).
+
 ### Front-end rules
 
 - No inline JavaScript or `on*=` attributes: the Content-Security-Policy blocks them. Put code in
