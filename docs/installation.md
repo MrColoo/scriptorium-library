@@ -113,3 +113,12 @@ docker compose pull && docker compose up -d
 
 Scriptorium tells administrators in the interface when a newer image is available. Back up `/config`
 before major version jumps.
+
+## Install it as an app
+
+On a phone or desktop browser, open Scriptorium over **HTTPS** and choose *Install app* from the
+account menu (or *Add to Home Screen* on iPhone). The installed app opens full screen, has
+shortcuts to Continue reading, Highlights and Search, and shows a friendly page when your server
+is out of reach. On Android, *Share → Scriptorium* from any app sends an ebook straight to the
+library (the account needs upload permission). Browsers only allow installation over HTTPS, or on
+`localhost`.

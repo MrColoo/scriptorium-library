@@ -142,6 +142,8 @@ time. Nothing is locked in.
   exportable to Markdown for Obsidian, Notion or Readwise.
 - **More like this** on every book page, ranked from your own library.
 - **Your year in books**: a full-screen story of your reading year, with a poster to save and share.
+- **Installable app**: add Scriptorium to your phone's home screen, and send a book to the library with
+  *Share → Scriptorium* from any app (needs HTTPS).
 - **Import from Goodreads or The StoryGraph**: finished books with their dates, what you are reading
   and your want-to-read list, after a preview.
 - **Shelves and smart shelves** that fill themselves from rules (for example "unread sci-fi" or "added since June").
