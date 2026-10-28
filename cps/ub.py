@@ -2,6 +2,7 @@
 # Calibre-Web Automated – fork of Calibre-Web
 # Copyright (C) 2018-2025 Calibre-Web contributors
 # Copyright (C) 2024-2025 Calibre-Web Automated contributors
+# Copyright (C) 2026 Mrcoloo (Scriptorium changes)
 # SPDX-License-Identifier: GPL-3.0-or-later
 # See CONTRIBUTORS for full list of authors.
 
@@ -696,6 +697,30 @@ class KoboAnnotationSync(Base):
         return f'<KoboAnnotationSync annotation_id={self.annotation_id} book_id={self.book_id}>'
 
 
+class ReaderAnnotation(Base):
+    """Highlights and notes made on a reading device (Kobo, KOReader), shown on the Highlights page."""
+    __tablename__ = 'reader_annotation'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    book_id = Column(Integer, nullable=False)
+    source = Column(String, nullable=False)        # 'kobo' or 'koreader'
+    source_id = Column(String, nullable=False)     # the device's own id for the annotation
+    text = Column(String)
+    note = Column(String)
+    color = Column(String)
+    chapter = Column(String)
+    position = Column(String)                      # device-specific location (CFI, xpointer, page)
+    created = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated = Column(DateTime, default=lambda: datetime.now(timezone.utc),
+                     onupdate=lambda: datetime.now(timezone.utc))
+
+    __table_args__ = (
+        UniqueConstraint('user_id', 'source', 'source_id', name='uq_reader_annotation_source'),
+        Index('ix_reader_annotation_user_book', 'user_id', 'book_id'),
+    )
+
+
 class HardcoverBookBlacklist(Base):
     """Track book-level blacklisting for hardcover sync features."""
     __tablename__ = 'hardcover_book_blacklist'
@@ -857,6 +882,8 @@ def add_missing_tables(engine, _session):
         OpdsMagicShelfExposure.__table__.create(bind=engine, checkfirst=True)
     if not engine.dialect.has_table(engine.connect(), "hidden_magic_shelf_templates"):
         HiddenMagicShelfTemplate.__table__.create(bind=engine, checkfirst=True)
+    if not engine.dialect.has_table(engine.connect(), "reader_annotation"):
+        ReaderAnnotation.__table__.create(bind=engine, checkfirst=True)
 
 
 # migrate all settings missing in registration table

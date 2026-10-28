@@ -1385,6 +1385,11 @@ def _kobo_reading_services_stub():
     if p == "/api/v3/content/checkforchanges":
         return make_response(jsonify([]))
     if p.startswith("/api/v3/content/") and p.endswith("/annotations"):
+        if request.method == "PATCH":
+            # Keep the highlights for the Highlights page before answering.
+            from . import annotations
+            entitlement_id = p[len("/api/v3/content/"):-len("/annotations")]
+            annotations.store_kobo_request(current_user, entitlement_id, request.get_json(silent=True))
         return make_response(jsonify({"data": [], "totalResults": 0}))
     if p.startswith("/api/UserStorage/"):
         return make_response(jsonify({}))

@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content_class %}content--narrow{% endblock %}
+{% block body %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _('Highlights') }}</h1>
+    <span class="page-subtitle">{{ _('Passages and notes from your Kobo and KOReader, gathered by book.') }}</span>
+  </div>
+  {%- if total %}
+  <a class="btn" href="{{ url_for('annotations.export_markdown', book=book_id) if book_id else url_for('annotations.export_markdown') }}" download>{{ ui.icon('download') }}{{ _('Export as Markdown') }}</a>
+  {%- endif %}
+</div>
+
+{%- if total or query or book_id %}
+<form class="toolbar highlights-search" method="get" role="search">
+  {%- if book_id %}<input type="hidden" name="book" value="{{ book_id }}">{% endif %}
+  <label class="sr-only" for="highlights-q">{{ _('Search highlights') }}</label>
+  <input class="input grow" type="search" id="highlights-q" name="q" value="{{ query }}" placeholder="{{ _('Search highlights') }}">
+  <button class="btn" type="submit">{{ ui.icon('search') }}{{ _('Search') }}</button>
+  {%- if query or book_id %}<a class="btn btn-ghost" href="{{ url_for('annotations.highlights_page') }}">{{ _('Show all') }}</a>{% endif %}
+</form>
+{%- endif %}
+
+{%- for group in groups %}
+<section class="card highlight-book" aria-labelledby="hl-book-{{ group.book.id }}">
+  <header class="highlight-book-header">
+    <a class="cover" href="{{ url_for('web.show_book', book_id=group.book.id) }}" tabindex="-1" aria-hidden="true">{{ ui.cover_img(group.book, sizes='48px', alt='') }}</a>
+    <div class="grow">
+      <h2 id="hl-book-{{ group.book.id }}"><a href="{{ url_for('web.show_book', book_id=group.book.id) }}">{{ group.book.title }}</a></h2>
+      <span class="muted small">{{ group.book.authors|map(attribute='name')|join(', ') }} · {{ ngettext('%(num)s highlight', '%(num)s highlights', group.highlights|length, num=group.highlights|length) }}</span>
+    </div>
+    <a class="btn btn-ghost btn-sm" href="{{ url_for('annotations.export_markdown', book=group.book.id) }}" download title="{{ _('Export as Markdown') }}">{{ ui.icon('download') }}<span class="sr-only">{{ _('Export as Markdown') }}</span></a>
+  </header>
+  <ol class="highlight-list">
+    {%- set ns = namespace(chapter=none) %}
+    {%- for item in group.highlights %}
+      {%- if item.chapter and item.chapter != ns.chapter %}{% set ns.chapter = item.chapter %}
+    <li class="highlight-chapter">{{ item.chapter }}</li>
+      {%- endif %}
+    <li class="highlight" data-color="{{ (item.color or 'yellow')|lower }}">
+      {%- if item.text %}<blockquote>{{ item.text }}</blockquote>{% endif %}
+      {%- if item.note %}<p class="highlight-note">{{ ui.icon('edit', 'icon-sm') }}<span>{{ item.note }}</span></p>{% endif %}
+      <span class="highlight-meta">{{ 'KOReader' if item.source == 'koreader' else 'Kobo' }}{% if item.created %} · {{ item.created|formatdate }}{% endif %}</span>
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
+{%- else %}
+  {%- if query %}
+{{ ui.empty_state('search', _('No highlights match “%(query)s”', query=query)) }}
+  {%- else %}
+<div class="empty">
+  <span class="icon-tile">{{ ui.icon('highlight') }}</span>
+  <h2>{{ _('No highlights yet') }}</h2>
+  <p class="muted">{{ _('Highlight a passage on your Kobo or in KOReader and it appears here after the next sync.') }}</p>
+  <p class="hint">{{ _('KOReader needs version 1.1 or later of the Scriptorium plugin: download it again from Profile → Devices.') }}</p>
+</div>
+  {%- endif %}
+{%- endfor %}
+{% endblock %}

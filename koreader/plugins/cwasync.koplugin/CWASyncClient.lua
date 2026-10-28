@@ -165,6 +165,43 @@ function CWASyncClient:update_progress(
     socketutil:reset_timeout()
 end
 
+-- Scriptorium extension: send every highlight of the open book (see main.lua getAnnotationsForSync).
+function CWASyncClient:update_annotations(
+        username,
+        password,
+        document,
+        annotations,
+        device,
+        callback)
+    self.client:reset_middlewares()
+    self.client:enable("Format.JSON")
+    self.client:enable("GinClient")
+    self.client:enable("CWASyncAuth", {
+        username = username,
+        password = password,
+    })
+    socketutil:set_timeout(PROGRESS_TIMEOUTS[1], PROGRESS_TIMEOUTS[2])
+    local co = coroutine.create(function()
+        local ok, res = pcall(function()
+            return self.client:update_annotations({
+                document = document,
+                annotations = annotations,
+                device = device,
+            })
+        end)
+        if ok then
+            callback(res.status == 200 or res.status == 202, res.body)
+        else
+            logger.dbg("CWASyncClient:update_annotations failure:", res)
+            callback(false, res and res.body)
+        end
+    end)
+    self.client:enable("AsyncHTTP", {thread = co})
+    coroutine.resume(co)
+    if UIManager.looper then UIManager:setInputTimeout() end
+    socketutil:reset_timeout()
+end
+
 function CWASyncClient:get_progress(
         username,
         password,

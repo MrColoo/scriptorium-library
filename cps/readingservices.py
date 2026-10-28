@@ -3,6 +3,7 @@
 # Calibre-Web Automated – fork of Calibre-Web
 # Copyright (C) 2018-2025 Calibre-Web contributors
 # Copyright (C) 2024-2025 Calibre-Web Automated contributors
+# Copyright (C) 2026 Mrcoloo (Scriptorium changes)
 # SPDX-License-Identifier: GPL-3.0-or-later
 # See CONTRIBUTORS for full list of authors.
 
@@ -501,6 +502,8 @@ def handle_annotations(entitlement_id):
         try:
             data = request.get_json()
             log_annotation_data(entitlement_id, "PATCH", data)
+            from . import annotations
+            annotations.store_kobo_request(current_user, entitlement_id, data)
 
             # Get book from database
             book = get_book_by_entitlement_id(entitlement_id)

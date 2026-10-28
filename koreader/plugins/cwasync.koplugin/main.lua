@@ -25,7 +25,7 @@ end
 local CWASync = WidgetContainer:extend{
     name = "cwasync",
     title = _("Login to Scriptorium Server"),
-    version = "1.0.2",  -- Plugin version
+    version = "1.1.0",  -- Plugin version
 
     push_timestamp = nil,
     pull_timestamp = nil,
@@ -36,6 +36,7 @@ local CWASync = WidgetContainer:extend{
     periodic_push_scheduled = nil,
 
     settings = nil,
+    annotations_sent = nil,  -- document digest -> signature of the highlights last sent
 }
 
 local SYNC_STRATEGY = {
@@ -68,6 +69,7 @@ function CWASync:init()
     self.last_page = -1
     self.last_page_turn_timestamp = 0
     self.periodic_push_scheduled = false
+    self.annotations_sent = {}
 
     -- Like AutoSuspend, we need an instance-specific task for scheduling/resource management reasons.
     self.periodic_push_task = function()
@@ -692,6 +694,10 @@ function CWASync:updateProgress(ensure_networking, interactive, on_suspend)
         if interactive then showSyncError() end
         if err then logger.dbg("err:", err) end
     else
+        -- Scriptorium extension: highlights travel with the progress. Guarded so a problem here
+        -- can never stop progress sync.
+        local ann_ok, ann_err = pcall(self.pushAnnotations, self, doc_digest)
+        if not ann_ok then logger.warn("CWASync: could not send highlights:", ann_err) end
         -- This is solely for onSuspend's sake, to clear the ghosting left by the "Connected" InfoMessage
         if on_suspend then
             -- Our top-level widget should be the "Connected to network" InfoMessage from NetworkMgr's reconnectOrShowNetworkMenu
@@ -716,6 +722,86 @@ function CWASync:updateProgress(ensure_networking, interactive, on_suspend)
     end
 
     self.push_timestamp = now
+end
+
+-- Scriptorium extension: highlights and notes of the open book, as plain tables.
+-- Works with the annotations module (KOReader 2024.07 and later) and with older bookmark lists.
+local function positionString(value)
+    local kind = type(value)
+    if kind == "string" or kind == "number" then
+        return tostring(value)
+    end
+    return nil
+end
+
+function CWASync:getAnnotationsForSync()
+    local list = {}
+    local signature = {}
+    local current = self.ui and self.ui.annotation and self.ui.annotation.annotations
+    if type(current) == "table" then
+        for _, item in ipairs(current) do
+            local text = item.text
+            local note = item.note
+            -- Page bookmarks have no drawer; keep them only when they carry a note.
+            if (item.drawer and text and text ~= "") or (note and note ~= "") then
+                local pos = positionString(item.page) or positionString(item.pageno)
+                table.insert(list, {
+                    id = tostring(item.datetime or "") .. "|" .. tostring(pos or ""),
+                    text = item.drawer and text or nil,
+                    note = note,
+                    chapter = item.chapter,
+                    color = item.color,
+                    datetime = item.datetime,
+                    pos = pos,
+                })
+                table.insert(signature, tostring(item.datetime_updated or item.datetime or "") .. tostring(note or ""))
+            end
+        end
+    else
+        local legacy = self.ui and self.ui.bookmark and self.ui.bookmark.bookmarks
+        if type(legacy) == "table" then
+            for _, item in ipairs(legacy) do
+                if item.highlighted and item.notes and item.notes ~= "" then
+                    local pos = positionString(item.page)
+                    local note = (item.text and item.text ~= item.notes) and item.text or nil
+                    table.insert(list, {
+                        id = tostring(item.datetime or "") .. "|" .. tostring(pos or ""),
+                        text = item.notes,
+                        note = note,
+                        chapter = item.chapter,
+                        datetime = item.datetime,
+                        pos = pos,
+                    })
+                    table.insert(signature, tostring(item.datetime or "") .. tostring(note or ""))
+                end
+            end
+        end
+    end
+    return list, #list .. ":" .. table.concat(signature, ";")
+end
+
+function CWASync:pushAnnotations(doc_digest)
+    local annotations, signature = self:getAnnotationsForSync()
+    if self.annotations_sent[doc_digest] == signature then
+        return
+    end
+    local CWASyncClient = require("CWASyncClient")
+    local client = CWASyncClient:new{
+        service_url = self.settings.server .. "/kosync",
+        service_spec = self.path .. "/api.json"
+    }
+    client:update_annotations(
+        self.settings.username,
+        self.settings.password,
+        doc_digest,
+        annotations,
+        Device.model,
+        function(ok, body)
+            logger.dbg("CWASync: [Push] highlights:", #annotations, "ok:", ok, "body:", body)
+            if ok then
+                self.annotations_sent[doc_digest] = signature
+            end
+        end)
 end
 
 function CWASync:getProgress(ensure_networking, interactive)

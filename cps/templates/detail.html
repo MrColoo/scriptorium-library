@@ -199,6 +199,9 @@
       {%- endif %}
     </section>
     {%- endif %}
+    {%- if highlight_count %}
+    <a class="highlights-link" href="{{ url_for('annotations.highlights_page', book=entry.id) }}">{{ ui.icon('highlight') }}{{ ngettext('%(num)s highlight', '%(num)s highlights', highlight_count, num=highlight_count) }} →</a>
+    {%- endif %}
 
     {%- if entry.comments|length > 0 and entry.comments[0].text|length > 0 %}
     <section class="stack" aria-labelledby="description-heading">

@@ -501,6 +501,29 @@ dialog.modal--sm { width: min(420px, calc(100vw - 32px)); }
 .modal-footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding: 16px 20px 18px; }
 .modal-body:last-child { padding-bottom: 20px; }
 
+/* Highlights */
+.highlights-search { margin-bottom: 4px; }
+.highlight-book { gap: 14px; }
+.highlight-book-header { display: flex; align-items: center; gap: 14px; }
+.highlight-book-header h2 { font-family: var(--font-serif); font-size: 19px; line-height: 1.2; }
+.highlight-book-header h2 a { color: var(--text); }
+.highlight-book-header .cover { width: 44px; flex: none; }
+.highlight-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.highlight-chapter { margin-top: 6px; font-size: 11.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--text-faint); }
+.highlight { --hl: oklch(86% .15 95); position: relative; padding: 4px 0 4px 16px; display: flex; flex-direction: column; gap: 6px; }
+.highlight::before { content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 4px; border-radius: 4px; background: var(--hl); }
+.highlight[data-color="red"], .highlight[data-color="pink"] { --hl: oklch(74% .15 15); }
+.highlight[data-color="orange"] { --hl: oklch(80% .14 60); }
+.highlight[data-color="green"] { --hl: oklch(80% .14 150); }
+.highlight[data-color="blue"], .highlight[data-color="cyan"] { --hl: oklch(76% .11 235); }
+.highlight[data-color="purple"] { --hl: oklch(72% .13 300); }
+.highlight[data-color="gray"], .highlight[data-color="grey"] { --hl: var(--border-strong); }
+.highlight blockquote { margin: 0; font-family: var(--font-serif); font-size: 17px; line-height: 1.55; color: var(--text); white-space: pre-line; }
+.highlight-note { margin: 0; display: flex; gap: 8px; align-items: flex-start; padding: 8px 10px; border-radius: var(--radius); background: var(--surface-active); color: var(--text-2); font-size: 14px; }
+.highlight-note .icon { flex: none; margin-top: 3px; color: var(--text-muted); }
+.highlight-meta { font-size: 12px; color: var(--text-faint); }
+.highlights-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+
 /* What's new */
 dialog.whats-new { width: min(520px, calc(100vw - 32px)); }
 .whats-new-hero { padding: 26px 24px 18px; display: flex; flex-direction: column; gap: 8px;
