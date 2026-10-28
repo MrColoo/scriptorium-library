@@ -163,7 +163,8 @@ def render(data, version, repository="MrColoo/scriptorium-library"):
 def git(*args, capture=True):
     result = subprocess.run(["git", *args], cwd=ROOT, text=True, capture_output=capture)
     if result.returncode != 0:
-        raise ReleaseError("git {} failed: {}".format(" ".join(args), (result.stderr or "").strip()))
+        detail = (result.stderr or "").strip() or (result.stdout or "").strip()
+        raise ReleaseError("git {} failed: {}".format(" ".join(args), detail))
     return (result.stdout or "").strip()
 
 
@@ -201,10 +202,14 @@ def prepare(version, dry_run=False, today=None):
         print("Dry run: nothing written, committed or tagged.")
         return
     save_notes(data)
-    git("add", NOTES_PATH)
-    git("commit", "-m", "Release {}".format(version))
+    if git("status", "--porcelain", "--", NOTES_PATH):
+        git("add", NOTES_PATH)
+        git("commit", "-m", "Release {}".format(version))
+        done = "Committed \"Release {}\" and tagged {}".format(version, version)
+    else:  # the notes already carry today's date: tag the current commit
+        done = "The notes were already dated; tagged the current commit as {}".format(version)
     git("tag", "-a", version, "-m", "Scriptorium {}".format(version))
-    print("Committed \"Release {}\" and tagged {}. To publish:\n".format(version, version))
+    print("{}. To publish:\n".format(done))
     print("  git push origin main")
     print("  git push origin {}\n".format(version))
     print("Pushing the tag starts the Release workflow: tests, image, GitHub release.")

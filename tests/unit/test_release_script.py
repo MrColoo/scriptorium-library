@@ -154,3 +154,16 @@ def test_prepare_refuses_other_branches(repo):
     run("checkout", "-q", "-b", "feature")
     with pytest.raises(release.ReleaseError, match="main branch"):
         release.prepare("v2.0.0")
+
+
+def test_prepare_tags_without_an_empty_commit_when_already_dated(repo):
+    path, run = repo
+    notes = path / "cps" / "release_notes.json"
+    data = json.loads(notes.read_text(encoding="utf-8"))
+    data["releases"][0]["date"] = "2026-11-02"
+    notes.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    run("commit", "-q", "-am", "notes ready")
+    head = _git(path, "rev-parse", "HEAD")
+    release.prepare("v2.0.0", today=date(2026, 11, 2))
+    assert _git(path, "rev-parse", "v2.0.0^{commit}") == head
+    assert _git(path, "log", "-1", "--format=%s") == "notes ready"
