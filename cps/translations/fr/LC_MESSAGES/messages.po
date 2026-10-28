@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 21:29+0100\n"
+"POT-Creation-Date: 2026-10-28 21:49+0100\n"
 "PO-Revision-Date: 2026-02-11 09:17+0000\n"
 "Last-Translator: Tex <tex@grosist.fr>\n"
 "Language-Team: French\n"
@@ -905,7 +905,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:164
+#: cps/templates/layout.html:168
 #, fuzzy
 msgid "Customize"
 msgstr "Filtre personnalisé"
@@ -1376,7 +1376,7 @@ msgstr ""
 "Impossible de télécharger le format : le livre n'existe plus dans la "
 "bibliothèque"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:285
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:315
 msgid "Upload done, processing, please wait..."
 msgstr "Téléversement terminé, traitement en cours, veuillez patienter…."
 
@@ -1974,8 +1974,8 @@ msgid "{} Stars"
 msgstr "{} Étoiles"
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:174
-#: cps/templates/layout.html:235 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:179
+#: cps/templates/layout.html:244 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2259
 msgid "Login"
 msgstr "Connexion"
@@ -2002,7 +2002,7 @@ msgstr ""
 "modifications de métadonnées. "
 
 #: cps/render_template.py:75 cps/templates/appearance.html:7
-#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:12
+#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:13
 msgid "Books"
 msgstr "Livres"
 
@@ -2060,7 +2060,7 @@ msgid "Show Random Books"
 msgstr "Montrer des livres au hasard"
 
 #: cps/render_template.py:105 cps/templates/book_table.html:59
-#: cps/templates/book_table.html:105 cps/templates/stats.html:14
+#: cps/templates/book_table.html:105 cps/templates/stats.html:15
 #: cps/web.py:1834
 msgid "Categories"
 msgstr "Catégories"
@@ -2074,7 +2074,7 @@ msgstr "Montrer la section Catégories"
 #: cps/templates/book_table.html:60 cps/templates/book_table.html:106
 #: cps/templates/cwa_settings.html:149 cps/templates/cwa_settings.html:198
 #: cps/templates/magic_shelf_edit.html:92 cps/templates/search_form.html:66
-#: cps/templates/stats.html:15 cps/web.py:1714 cps/web.py:1726
+#: cps/templates/stats.html:16 cps/web.py:1714 cps/web.py:1726
 msgid "Series"
 msgstr "Séries"
 
@@ -2085,7 +2085,7 @@ msgstr "Montrer la section Séries"
 #: cps/render_template.py:111 cps/templates/appearance.html:8
 #: cps/templates/author.html:5 cps/templates/book_table.html:57
 #: cps/templates/book_table.html:103 cps/templates/cwa_settings.html:148
-#: cps/templates/stats.html:13
+#: cps/templates/stats.html:14
 msgid "Authors"
 msgstr "Auteurs"
 
@@ -2153,20 +2153,14 @@ msgstr "Doubles"
 msgid "Show Duplicate Books"
 msgstr "Montrer les livres en double"
 
-#: cps/render_template.py:192
-#, python-format
-msgid ""
-"Update available: %(current)s → %(newest)s. Pull the new image to update."
-msgstr ""
-
-#: cps/render_template.py:229
+#: cps/render_template.py:174
 #, python-format
 msgid "%(count)s strings still need a %(language)s translation."
 msgstr ""
 
 #: cps/search.py:54 cps/search.py:441 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:225 cps/templates/search.html:5
+#: cps/templates/layout.html:234 cps/templates/search.html:5
 #: cps/templates/search.html:6 cps/templates/search_form.html:121
 msgid "Search"
 msgstr "Chercher"
@@ -2612,7 +2606,7 @@ msgstr ""
 msgid "Please wait one minute to register next user"
 msgstr "Merci de patienter une minute pour enregistrer un nouvel utilisateur"
 
-#: cps/templates/layout.html:176 cps/templates/login.html:77
+#: cps/templates/layout.html:181 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2138 cps/web.py:2142
 #: cps/web.py:2147 cps/web.py:2151 cps/web.py:2157 cps/web.py:2182
 #: cps/web.py:2186 cps/web.py:2199 cps/web.py:2202
@@ -2764,7 +2758,12 @@ msgstr "Un compte existant a été trouvé pour cette adresse de courriel."
 msgid "Invalid book ID."
 msgstr "Identifiant du livre invalide."
 
-#: cps/progress_syncing/protocols/kosync.py:495
+#: cps/templates/layout.html:169 cps/templates/stats.html:8
+#: cps/templates/whats_new.html:6 cps/whats_new.py:137
+msgid "What's new"
+msgstr ""
+
+#: cps/progress_syncing/protocols/kosync.py:496
 msgid "KOReader Sync Plugin"
 msgstr "Plugin KOReader Sync"
 
@@ -3046,11 +3045,11 @@ msgstr "Valeurs de colonnes autorisées"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:194
-#: cps/templates/layout.html:197 cps/templates/layout.html:200
-#: cps/templates/layout.html:203 cps/templates/layout.html:206
-#: cps/templates/layout.html:209 cps/templates/layout.html:253
-#: cps/templates/layout.html:281 cps/templates/read.html:58
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:206
+#: cps/templates/layout.html:209 cps/templates/layout.html:212
+#: cps/templates/layout.html:215 cps/templates/layout.html:218
+#: cps/templates/layout.html:262 cps/templates/layout.html:311
+#: cps/templates/read.html:58
 msgid "Close"
 msgstr "Fermer"
 
@@ -3088,7 +3087,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:262
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:271
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
 #: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
@@ -3388,7 +3387,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Exécuter la récupération automatique des livres reliés"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:121 cps/templates/layout.html:169
+#: cps/templates/layout.html:121 cps/templates/layout.html:174
 msgid "System"
 msgstr ""
 
@@ -3424,7 +3423,7 @@ msgstr "Arrêter Scriptorium"
 msgid "Are you sure you want to restart?"
 msgstr "Voulez-vous vraiment redémarrer Scriptorium?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:288
+#: cps/templates/admin.html:175 cps/templates/layout.html:318
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
@@ -3552,7 +3551,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:160 cps/templates/layout.html:232
+#: cps/templates/layout.html:164 cps/templates/layout.html:241
 #, fuzzy
 msgid "Profile"
 msgstr "Votre profil"
@@ -3633,16 +3632,16 @@ msgstr "Notes"
 msgid "Preview"
 msgstr "Aperçu"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:168
+#: cps/templates/appearance.html:156 cps/templates/layout.html:173
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:170
+#: cps/templates/appearance.html:157 cps/templates/layout.html:175
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Clair"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:171
+#: cps/templates/appearance.html:158 cps/templates/layout.html:176
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Sombre"
@@ -4011,7 +4010,7 @@ msgid "Add to shelf"
 msgstr "Ajouter à l'étagère"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:45
-#: cps/templates/layout.html:237
+#: cps/templates/layout.html:246
 #, fuzzy
 msgid "More"
 msgstr "Plus de"
@@ -4278,7 +4277,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:283 cps/templates/login.html:35
+#: cps/templates/layout.html:313 cps/templates/login.html:35
 #: cps/templates/user_edit.html:51 cps/templates/user_edit.html:62
 #, fuzzy
 msgid "Show password"
@@ -5750,7 +5749,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:62
-#: cps/templates/layout.html:58 cps/templates/layout.html:224
+#: cps/templates/layout.html:58 cps/templates/layout.html:233
 #, fuzzy
 msgid "Library"
 msgstr "Dans la librairie"
@@ -6198,7 +6197,7 @@ msgstr "Ajouter à l'étagère"
 msgid "Create a Kobo shelf"
 msgstr "Créer une étagère"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:284
+#: cps/templates/detail.html:207 cps/templates/layout.html:314
 #, fuzzy
 msgid "Show more"
 msgstr "Afficher non-lus"
@@ -6614,7 +6613,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:287
+#: cps/templates/grid.html:21 cps/templates/layout.html:317
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6956,7 +6955,7 @@ msgstr ""
 msgid "Smart shelves"
 msgstr "Etagères"
 
-#: cps/templates/layout.html:129 cps/templates/layout.html:243
+#: cps/templates/layout.html:129 cps/templates/layout.html:252
 #: cps/templates/stats.html:6
 msgid "Based on"
 msgstr ""
@@ -6983,116 +6982,154 @@ msgstr "Actualiser la bibliothèque"
 msgid "Account"
 msgstr "Compte"
 
-#: cps/templates/layout.html:162 cps/templates/user_edit.html:25
+#: cps/templates/layout.html:154
+#, fuzzy
+msgid "Update available"
+msgstr "La mise à jour a échoué :"
+
+#: cps/templates/layout.html:162
+#, python-format
+msgid "Update available: %(version)s"
+msgstr ""
+
+#: cps/templates/layout.html:166 cps/templates/user_edit.html:25
 #, fuzzy
 msgid "Devices"
 msgstr "Email de contact"
 
-#: cps/templates/layout.html:165 cps/templates/stats.html:5
+#: cps/templates/layout.html:170 cps/templates/stats.html:5
 msgid "About"
 msgstr "À propos"
 
-#: cps/templates/layout.html:179
+#: cps/templates/layout.html:184
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: cps/templates/layout.html:199
-msgid "See Changelog"
-msgstr "Voir le Changelog"
+#: cps/templates/layout.html:194
+#, fuzzy, python-format
+msgid "Scriptorium %(version)s is available."
+msgstr "Courriel de test de Scriptorium"
 
-#: cps/templates/layout.html:202
+#: cps/templates/layout.html:195
+#, python-format
+msgid ""
+"You have %(version)s. Pull the new image and restart the container to update."
+msgstr ""
+
+#: cps/templates/layout.html:196
+msgid "Release notes"
+msgstr ""
+
+#: cps/templates/layout.html:197
+msgid "Dismiss until the next release"
+msgstr ""
+
+#: cps/templates/layout.html:211
 msgid "Open Duplicates"
 msgstr "Ouvrir les doublons"
 
-#: cps/templates/layout.html:205
+#: cps/templates/layout.html:214
 msgid "Contribute here!"
 msgstr "Contribuer ici !"
 
-#: cps/templates/layout.html:223
+#: cps/templates/layout.html:232
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Configuration principale"
 
-#: cps/templates/layout.html:228
+#: cps/templates/layout.html:237
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:259
+#: cps/templates/layout.html:268
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Êtes-vous vraiment sûr ?"
 
-#: cps/templates/layout.html:263 cps/templates/layout.html:281
+#: cps/templates/layout.html:272 cps/templates/layout.html:311
 #, fuzzy
 msgid "Confirm"
 msgstr "Configuration"
 
-#: cps/templates/layout.html:269
+#: cps/templates/layout.html:278
 msgid "Uploading..."
 msgstr "Téléversement en cours..."
 
-#: cps/templates/layout.html:272
+#: cps/templates/layout.html:281
 msgid "Please do not refresh the page"
 msgstr "Veuillez ne pas rafraîchir la page"
 
-#: cps/templates/layout.html:275
+#: cps/templates/layout.html:284
 msgid "Drop books to add them to the library"
 msgstr ""
 
-#: cps/templates/layout.html:281
+#: cps/templates/layout.html:292
+#, python-format
+msgid "What's new in %(version)s"
+msgstr ""
+
+#: cps/templates/layout.html:304
+msgid "All release notes"
+msgstr ""
+
+#: cps/templates/layout.html:305
+msgid "Got it"
+msgstr ""
+
+#: cps/templates/layout.html:311
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "UUID copié vers le presse-papier"
 
-#: cps/templates/layout.html:282
+#: cps/templates/layout.html:312
 msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
-#: cps/templates/layout.html:283
+#: cps/templates/layout.html:313
 #, fuzzy
 msgid "Hide password"
 msgstr "Mot de passe"
 
-#: cps/templates/layout.html:284
+#: cps/templates/layout.html:314
 #, fuzzy
 msgid "Show less"
 msgstr "Montrer tout"
 
-#: cps/templates/layout.html:284 cps/templates/magic_shelf_edit.html:88
+#: cps/templates/layout.html:314 cps/templates/magic_shelf_edit.html:88
 msgid "Something went wrong, please try again"
 msgstr ""
 
-#: cps/templates/layout.html:285
+#: cps/templates/layout.html:315
 #, fuzzy
 msgid "Upload failed"
 msgstr "La mise à jour a échoué :"
 
-#: cps/templates/layout.html:286
+#: cps/templates/layout.html:316
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "Meilleurs %(count)s"
 
-#: cps/templates/layout.html:287 cps/templates/search_form.html:7
+#: cps/templates/layout.html:317 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "Tous"
 
-#: cps/templates/layout.html:287
+#: cps/templates/layout.html:317
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Le nouveau mot de passe a été envoyé vers votre adresse de courriel"
 
-#: cps/templates/layout.html:288
+#: cps/templates/layout.html:318
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:289
+#: cps/templates/layout.html:319
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "Scan des doublons terminé : %(count)s groupes"
 
-#: cps/templates/layout.html:289
+#: cps/templates/layout.html:319
 #, fuzzy
 msgid "Review"
 msgstr "Aperçu"
@@ -8116,19 +8153,19 @@ msgstr "Livre caché"
 msgid "Save order"
 msgstr ""
 
-#: cps/templates/stats.html:10
+#: cps/templates/stats.html:11
 msgid "Library Statistics"
 msgstr "Statistiques de la librairie Calibre"
 
-#: cps/templates/stats.html:20
+#: cps/templates/stats.html:21
 msgid "System Statistics"
 msgstr "Statistiques système"
 
-#: cps/templates/stats.html:23
+#: cps/templates/stats.html:24
 msgid "Program"
 msgstr "Programme"
 
-#: cps/templates/stats.html:23
+#: cps/templates/stats.html:24
 msgid "Installed Version"
 msgstr "Version installée"
 
@@ -8773,6 +8810,27 @@ msgid ""
 "Delete the selected users? Their shelves and reading progress are removed "
 "too."
 msgstr ""
+
+#: cps/templates/whats_new.html:7
+#, python-format
+msgid "You are running %(version)s."
+msgstr ""
+
+#: cps/templates/whats_new.html:7
+msgid "All releases on GitHub"
+msgstr ""
+
+#: cps/templates/whats_new.html:31
+#, fuzzy
+msgid "No release notes yet"
+msgstr "Montrer la section Séries"
+
+#: cps/templates/whats_new.html:31
+msgid "They appear here after the first release."
+msgstr ""
+
+#~ msgid "See Changelog"
+#~ msgstr "Voir le Changelog"
 
 #, fuzzy
 #~ msgid "Set up KOReader"
