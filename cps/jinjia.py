@@ -271,6 +271,26 @@ def kobo_overview_global(user):
     return kobo_overview(user)
 
 
+@jinjia.app_template_global('device_shown')
+def device_shown_global(device, user=None):
+    """Whether the library shows this reading device ('kobo' or 'koreader') to the user."""
+    from . import devices
+    return devices.shows(user if user is not None else current_user, device)
+
+
+@jinjia.app_template_global('device_available')
+def device_available_global(device):
+    """Whether the administrator has turned sync on for this reading device."""
+    from . import devices
+    return devices.available(device)
+
+
+@jinjia.app_template_global('koreader_overview')
+def koreader_overview_global(user):
+    from .reading_overview import koreader_overview
+    return koreader_overview(user)
+
+
 @jinjia.app_template_global('avatar_url')
 def avatar_url_global(user):
     """URL of the user's profile picture, or None when they have none."""

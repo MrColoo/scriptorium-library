@@ -157,17 +157,23 @@
     </div>
     {%- endif %}
 
-    {%- if kobo_status %}
-    <section class="card kobo-card" aria-labelledby="kobo-heading">
-      <span class="icon-tile">{{ ui.icon('device') }}</span>
+    {%- set progress = reading_progress %}
+    {%- if kobo_status or progress %}
+    <section class="card kobo-card" aria-labelledby="progress-heading">
+      <span class="icon-tile">{{ ui.icon('book-open' if progress and progress.source == 'koreader' else 'device') }}</span>
       <div class="grow">
-        <h2 class="card-title" id="kobo-heading">{{ _('On your Kobo') }}</h2>
-        {%- if kosync_progress is not none %}
+        {%- if progress %}
+        <h2 class="card-title" id="progress-heading">{{ _('Reading progress') }}</h2>
         <div class="row">
-          <div class="progress progress--lg progress--inline"><span style="width: {{ kosync_progress|int }}%"></span></div>
-          <span class="small muted">{{ kosync_progress|formatfloat(0) }}%{% if kosync_progress_timestamp %} · {{ kosync_progress_timestamp|formatdate }}{% endif %}</span>
+          <div class="progress progress--lg progress--inline"><span style="width: {{ progress.percent|int }}%"></span></div>
+          <span class="small muted">{{ progress.percent|formatfloat(0) }}% ·
+            {%- if progress.source == 'koreader' %} {{ _('KOReader on %(device)s', device=progress.device|replace('_', ' ')) if progress.device else 'KOReader' }}
+            {%- else %} Kobo{% endif %}
+            {%- if progress.when %} · {{ progress.when|formatdate }}{% endif %}</span>
         </div>
-        {%- elif not kobo_status.has_token %}
+        {%- else %}
+        <h2 class="card-title" id="progress-heading">{{ _('On your Kobo') }}</h2>
+        {%- if not kobo_status.has_token %}
         <span class="small muted">{{ _('Kobo sync is not set up for your account yet.') }}</span>
         {%- elif kobo_status.only_shelves and not kobo_status.in_kobo_shelves %}
         <span class="small muted">{{ _('Not synced. Add it to a Kobo shelf to send it to your device.') }}</span>
@@ -176,7 +182,9 @@
         {%- else %}
         <span class="small muted">{{ _('Will be sent to your Kobo on the next sync.') }}</span>
         {%- endif %}
+        {%- endif %}
       </div>
+      {%- if kobo_status %}
       {%- if not kobo_status.has_token %}
       <a class="btn" href="{{ url_for('web.profile') }}#kobo">{{ _('Set up Kobo') }}</a>
       {%- elif kobo_status.only_shelves %}
@@ -188,15 +196,7 @@
       <a class="btn" href="{{ url_for('shelf.create_shelf') }}">{{ _('Create a Kobo shelf') }}</a>
         {%- endif %}
       {%- endif %}
-    </section>
-    {%- elif kosync_progress is not none %}
-    <section class="card kobo-card">
-      <span class="icon-tile">{{ ui.icon('book-open') }}</span>
-      <div class="grow">
-        <h2 class="card-title">{{ _('Reading progress') }}</h2>
-        <div class="row"><div class="progress progress--lg progress--inline"><span style="width: {{ kosync_progress|int }}%"></span></div>
-          <span class="small muted">{{ kosync_progress|formatfloat(0) }}%</span></div>
-      </div>
+      {%- endif %}
     </section>
     {%- endif %}
 

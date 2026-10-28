@@ -537,12 +537,19 @@ def render_books_list(data, sort_param, book_id, page):
 
         continue_reading = []
         kobo_last_sync = None
+        koreader_last_sync = None
         if website == "newest" and page == 1 and not current_user.is_anonymous:
             continue_reading = reading_overview.get_continue_reading(current_user.id)
-            kobo_last_sync = reading_overview.humanize_since(reading_overview.get_kobo_last_sync(current_user.id))
+            from . import devices
+            if devices.shows(current_user, "kobo"):
+                kobo_last_sync = reading_overview.humanize_since(reading_overview.get_kobo_last_sync(current_user.id))
+            if devices.shows(current_user, "koreader"):
+                koreader_last_sync = reading_overview.humanize_since(
+                    reading_overview.get_koreader_last_sync(current_user.id))
         return render_title_template('index.html', random=random, entries=entries, pagination=pagination,
                                      title=title, page=website, order=order[1],
-                                     continue_reading=continue_reading, kobo_last_sync=kobo_last_sync)
+                                     continue_reading=continue_reading, kobo_last_sync=kobo_last_sync,
+                                     koreader_last_sync=koreader_last_sync)
 
 
 def render_rated_books(page, book_id, order):
@@ -3008,19 +3015,7 @@ def show_book(book_id):
             if media_format.format.lower() in constants.EXTENSIONS_AUDIO:
                 entry.audio_entries.append(media_format.format.lower())
 
-        kosync_progress = None
-        kosync_progress_timestamp = None
-        if current_user.is_authenticated:
-            try:
-                kobo_state = (ub.session.query(ub.KoboReadingState)
-                              .filter(ub.KoboReadingState.user_id == int(current_user.id),
-                                      ub.KoboReadingState.book_id == book_id)
-                              .first())
-                if kobo_state and kobo_state.current_bookmark:
-                    kosync_progress = kobo_state.current_bookmark.progress_percent
-                    kosync_progress_timestamp = kobo_state.current_bookmark.last_modified
-            except Exception as e:
-                log.debug(f"Failed to load KOReader progress for book {book_id}: {e}")
+        reading_progress = reading_overview.get_book_progress(current_user, book_id)
 
         cwa_db = CWA_DB()
         cwa_settings = cwa_db.cwa_settings
@@ -3033,8 +3028,7 @@ def show_book(book_id):
                                      title=entry.title,
                                      books_shelfs=book_in_shelves,
                                      cwa_settings=cwa_settings,
-                                     kosync_progress=kosync_progress,
-                                     kosync_progress_timestamp=kosync_progress_timestamp,
+                                     reading_progress=reading_progress,
                                      kobo_status=kobo_status,
                                      page="book")
     else:

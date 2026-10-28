@@ -3,7 +3,7 @@
 {% block body %}
 <div class="page-header">
   <div>
-    <span class="page-eyebrow"><a href="{{ url_for('web.profile') }}#kobo">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Profile') }}</a></span>
+    <span class="page-eyebrow"><a href="{{ url_for('web.profile') }}#koreader">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Profile') }}</a></span>
     <h1 class="page-title">{{ _('Sync with KOReader') }}</h1>
     <span class="page-subtitle">{{ _('The Scriptorium plugin keeps your reading position in step between KOReader and this library.') }}</span>
   </div>
@@ -45,7 +45,7 @@
       <p class="muted">{{ _('Open a book, tap the top of the screen, open the Tools menu and choose “Scriptorium Sync”. Enter:') }}</p>
       <dl class="dl">
         <dt>{{ _('Server URL') }}</dt>
-        <dd><div class="code-line"><code id="kosync-url">{{ request.url_root }}</code><button class="btn btn-sm" type="button" data-copy-target="#kosync-url">{{ ui.icon('copy') }}{{ _('Copy') }}</button></div></dd>
+        <dd><div class="code-line"><code id="kosync-url">{{ request.url_root.rstrip('/') }}</code><button class="btn btn-sm" type="button" data-copy-target="#kosync-url">{{ ui.icon('copy') }}{{ _('Copy') }}</button></div></dd>
         <dt>{{ _('Username') }}</dt><dd>{{ current_user.name }}</dd>
         <dt>{{ _('Password') }}</dt><dd>{{ _('Your password for this library') }}</dd>
       </dl>

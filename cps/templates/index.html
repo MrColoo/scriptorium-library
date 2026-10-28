@@ -11,6 +11,9 @@
     {%- if kobo_last_sync %}
     <span class="status-line"><span class="status-dot status-dot--ok"></span>{{ _('Kobo synced %(when)s', when=kobo_last_sync) }}</span>
     {%- endif %}
+    {%- if koreader_last_sync %}
+    <span class="status-line"><span class="status-dot status-dot--ok"></span>{{ _('KOReader synced %(when)s', when=koreader_last_sync) }}</span>
+    {%- endif %}
   </div>
   <div class="continue-grid">
     {%- for item in continue_reading %}

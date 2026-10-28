@@ -158,7 +158,9 @@
             {%- if not current_user.is_anonymous %}
             <div class="menu-label">{{ current_user.name }}</div>
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}">{{ ui.icon('user') }}<span class="grow">{{ _('Profile') }}</span></a>
-            <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}#kobo">{{ ui.icon('device') }}<span class="grow">{{ _('Kobo sync') }}</span></a>
+            {%- if device_shown('kobo') or device_shown('koreader') %}
+            <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}#devices">{{ ui.icon('device') }}<span class="grow">{{ _('Devices') }}</span></a>
+            {%- endif %}
             <a class="menu-item" role="menuitem" href="{{ url_for('appearance.customize') }}">{{ ui.icon('sparkles') }}<span class="grow">{{ _('Customize') }}</span></a>
             <a class="menu-item" role="menuitem" href="{{ url_for('about.package_versions') }}">{{ ui.icon('info') }}<span class="grow">{{ _('About') }} {{ instance }}</span></a>
             {%- endif %}
@@ -222,7 +224,13 @@
     <a href="{{ url_for('web.index') }}"{% if page == 'newest' %} aria-current="page"{% endif %}>{{ ui.icon('grid') }}{{ _('Library') }}</a>
     <a href="{{ url_for('search.advanced_search') }}"{% if page == 'advsearch' %} aria-current="page"{% endif %}>{{ ui.icon('search') }}{{ _('Search') }}</a>
     {%- if not current_user.is_anonymous %}
+    {%- if device_shown('kobo') %}
     <a href="{{ url_for('web.profile') }}#kobo"{% if page == 'me' %} aria-current="page"{% endif %}>{{ ui.icon('device') }}{{ _('Kobo') }}</a>
+    {%- elif device_shown('koreader') %}
+    <a href="{{ url_for('web.profile') }}#koreader"{% if page == 'me' %} aria-current="page"{% endif %}>{{ ui.icon('book-open') }}KOReader</a>
+    {%- else %}
+    <a href="{{ url_for('web.profile') }}"{% if page == 'me' %} aria-current="page"{% endif %}>{{ ui.icon('user') }}{{ _('Profile') }}</a>
+    {%- endif %}
     {%- else %}
     <a href="{{ url_for('web.login') }}">{{ ui.icon('log-in') }}{{ _('Login') }}</a>
     {%- endif %}

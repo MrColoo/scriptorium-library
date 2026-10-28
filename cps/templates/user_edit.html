@@ -4,6 +4,11 @@
 {%- set is_admin_view = current_user.role_admin() and not profile %}
 {%- set is_anon = content.role_anonymous() %}
 {%- set kobo = kobo_overview(content) if (kobo_support and not new_user and not is_anon) else none %}
+{%- set koreader_on = device_available('koreader') and not new_user and not is_anon %}
+{%- set use_kobo = kobo is not none and device_shown('kobo', content) %}
+{%- set use_koreader = koreader_on and device_shown('koreader', content) %}
+{%- set koreader = koreader_overview(content) if use_koreader else none %}
+{%- set show_devices = not new_user and not is_anon and (kobo is not none or koreader_on or current_user.role_admin()) %}
 <div class="page-header">
   <div class="identity">
     {{ ui.avatar(content, 'avatar--lg') }}
@@ -17,8 +22,8 @@
 
 <nav class="tabs" aria-label="{{ _('Sections') }}">
   <a class="tab" href="#account">{{ _('Account') }}</a>
-  {%- if kobo is not none %}<a class="tab" href="#kobo">{{ ui.icon('device', 'icon-sm') }}Kobo</a>{% endif %}
-  <a class="tab" href="#devices">{{ _('eReaders') }}</a>
+  {%- if show_devices %}<a class="tab" href="#devices">{{ ui.icon('device', 'icon-sm') }}{{ _('Devices') }}</a>{% endif %}
+  <a class="tab" href="#ereaders">{{ _('eReaders') }}</a>
   <a class="tab" href="#preferences">{{ _('Preferences') }}</a>
   {%- if not is_anon and not new_user %}<a class="tab" href="#shelves">{{ _('Shelves & OPDS') }}</a>{% endif %}
   {%- if is_admin_view %}<a class="tab" href="#permissions">{{ _('Permissions') }}</a>{% endif %}
@@ -93,8 +98,43 @@
   </section>
 </form>
 
-{#- Kobo: its own forms, so it lives outside the main form; its toggle still belongs to it via form="user-form". -#}
-{%- if kobo is not none %}
+{#- Reading devices: their own forms, so they live outside the main form; the Kobo shelf choice still
+    belongs to it via form="user-form". -#}
+{%- if show_devices %}
+<section class="stack-lg" id="devices" aria-labelledby="devices-h">
+  <div class="stack-sm" style="gap: 4px;">
+    <h2 id="devices-h" style="font-size: 20px;">{{ _('Your reading devices') }}</h2>
+    <p class="muted">{{ _('Turn on the ones you read with. Progress, shortcuts and setup steps appear only for them.') }}</p>
+  </div>
+  <div class="device-picker">
+    {%- if kobo is not none %}
+    <form class="device-option" method="post" action="{{ url_for('devices.set_device', user_id=content.id, device='kobo') }}">
+      {{ ui.csrf_field() }}
+      <span class="icon-tile">{{ ui.icon('device') }}</span>
+      <label class="device-option-text" for="use-kobo"><span class="setting-title">Kobo</span>
+        <span class="hint">{{ _('Uses the reader built into every Kobo. Books, shelves and progress sync on their own, with nothing to install.') }}</span></label>
+      <input type="checkbox" class="switch" id="use-kobo" name="use" data-autosubmit{% if use_kobo %} checked{% endif %}>
+    </form>
+    {%- endif %}
+    {%- if koreader_on %}
+    <form class="device-option" method="post" action="{{ url_for('devices.set_device', user_id=content.id, device='koreader') }}">
+      {{ ui.csrf_field() }}
+      <span class="icon-tile">{{ ui.icon('book-open') }}</span>
+      <label class="device-option-text" for="use-koreader"><span class="setting-title">KOReader</span>
+        <span class="hint">{{ _('An open-source reader for Kobo, Kindle, PocketBook and Android. A plugin keeps your reading position in step.') }}</span></label>
+      <input type="checkbox" class="switch" id="use-koreader" name="use" data-autosubmit{% if use_koreader %} checked{% endif %}>
+    </form>
+    {%- endif %}
+  </div>
+  {%- if current_user.role_admin() and (kobo is none or not koreader_on) %}
+  <p class="hint">
+    {%- if kobo is none %}{{ _('Kobo sync is turned off for this library.') }} <a href="{{ url_for('admin.configuration') }}#kobo">{{ _('Turn it on') }}</a>{% endif %}
+    {%- if kobo is none and not koreader_on %} · {% endif %}
+    {%- if not koreader_on %}{{ _('KOReader sync is turned off for this library.') }} <a href="{{ url_for('cwa_settings.set_cwa_settings') }}">{{ _('Turn it on') }}</a>{% endif %}
+  </p>
+  {%- endif %}
+
+{%- if use_kobo %}
 <section class="stack" id="kobo" aria-labelledby="kobo-h">
   <div class="row-between">
     <div class="stack-sm" style="gap: 4px;">
@@ -207,20 +247,88 @@
                 data-confirm-action="{{ _('Force full kobo sync') }}" data-confirm-danger="false">{{ ui.icon('refresh') }}{{ _('Force full kobo sync') }}</button>
         {%- endif %}
       </section>
+      {%- if kobo.token or kobo.books_on_device %}
       <section class="card card--dashed">
-        <h3>{{ _('Using KOReader?') }}</h3>
-        <p class="small muted">{{ _('Reading progress can also sync from KOReader with the Scriptorium plugin.') }}</p>
-        <a class="small strong" href="{{ url_for('kosync.kosync_plugin_page') }}">{{ _('Set up KOReader') }} →</a>
+        <h3>{{ _('Switching to KOReader?') }}</h3>
+        <p class="small muted">{{ _('If you install KOReader on this Kobo, remove it here so the two do not both sync. Your reading progress stays.') }}</p>
+        <form method="post" action="{{ url_for('devices.remove_kobo', user_id=content.id) }}"
+              data-confirm="{{ _('The sync address stops working and Kobo features are hidden. Books already on the device stay there, and your reading progress is kept.') }}"
+              data-confirm-action="{{ _('Remove Kobo') }}">
+          {{ ui.csrf_field() }}
+          <button class="btn btn-link danger-text" type="submit">{{ ui.icon('trash') }}{{ _('Remove Kobo') }}</button>
+        </form>
       </section>
+      {%- endif %}
     </aside>
   </div>
 </section>
 {%- endif %}
 
+{%- if use_koreader %}
+<section class="stack" id="koreader" aria-labelledby="koreader-h">
+  <div class="stack-sm" style="gap: 4px;">
+    <h2 id="koreader-h" style="font-size: 20px;">{{ _('Sync with KOReader') }}</h2>
+    <p class="muted">{{ _('Your reading position follows you between KOReader, other devices and this library. Read status updates on its own.') }}</p>
+  </div>
+  <div class="split">
+    <ol class="steps split-main">
+      <li class="step">
+        <span class="step-marker {{ 'step-marker--done' if koreader.last_sync else 'step-marker--current' }}">{% if koreader.last_sync %}{{ ui.icon('check') }}{% else %}1{% endif %}</span>
+        <div class="step-body">
+          <h3>{{ _('Install the plugin') }}</h3>
+          <p class="muted">{{ _('Unzip it into the %(dir)s folder on the device, then restart KOReader.', dir='koreader/plugins/') }}</p>
+          <div><a class="btn" href="{{ url_for('static', filename='koplugin.zip') }}" download>{{ ui.icon('download') }}{{ _('Download plugin') }}</a></div>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-marker {{ 'step-marker--done' if koreader.last_sync else '' }}">{% if koreader.last_sync %}{{ ui.icon('check') }}{% else %}2{% endif %}</span>
+        <div class="step-body">
+          <h3>{{ _('Sign in from KOReader') }}</h3>
+          <p class="muted">{{ _('Open a book, tap the top of the screen and choose Tools → Scriptorium Sync. Use this server address with your username and password:') }}</p>
+          <div class="code-line">
+            <code id="koreader-server">{{ request.url_root.rstrip('/') }}</code>
+            <button class="btn btn-primary" type="button" data-copy-target="#koreader-server">{{ ui.icon('copy') }}{{ _('Copy') }}</button>
+          </div>
+        </div>
+      </li>
+      <li class="step">
+        <span class="step-marker">3</span>
+        <div class="step-body">
+          <h3>{{ _('Read') }}</h3>
+          <p class="muted">{{ _('Progress is sent when you turn pages, close a book or leave KOReader. Books are matched by file, so use copies downloaded from this library.') }}</p>
+          <a class="small strong" href="{{ url_for('kosync.kosync_plugin_page') }}">{{ _('Full guide and troubleshooting') }} →</a>
+        </div>
+      </li>
+    </ol>
+    <aside class="split-aside">
+      <section class="card" aria-labelledby="koreader-device-h">
+        <div class="row row-nowrap" style="gap: 12px;">
+          <span class="icon-tile">{{ ui.icon('book-open') }}</span>
+          <div class="stack-sm" style="gap: 2px;">
+            <h3 id="koreader-device-h">KOReader</h3>
+            {%- if koreader.last_sync %}
+            <span class="status-line"><span class="status-dot status-dot--ok"></span>{{ _('Last sync %(when)s', when=koreader.last_sync) }}</span>
+            {%- else %}
+            <span class="status-line"><span class="status-dot status-dot--warn"></span>{{ _('Waiting for the first sync') }}</span>
+            {%- endif %}
+          </div>
+        </div>
+        <dl class="dl dl--compact">
+          {%- if koreader.device %}<dt>{{ _('Device') }}</dt><dd>{{ koreader.device|replace('_', ' ') }}</dd>{% endif %}
+          <dt>{{ _('Books with progress') }}</dt><dd>{{ koreader.books }}</dd>
+        </dl>
+      </section>
+    </aside>
+  </div>
+</section>
+{%- endif %}
+</section>
+{%- endif %}
+
 <div class="stack-lg">
   {#- eReaders (email) -#}
-  <section class="card" id="devices" aria-labelledby="devices-h">
-    <div class="card-header"><div><h2 class="card-title" id="devices-h">{{ _('Send to eReader') }}</h2>
+  <section class="card" id="ereaders" aria-labelledby="ereaders-h">
+    <div class="card-header"><div><h2 class="card-title" id="ereaders-h">{{ _('Send to eReader') }}</h2>
       <p class="card-subtitle">{{ _('Books are emailed to these addresses, for example a Kindle or PocketBook address.') }}</p></div></div>
     <div class="form-grid">
       <div class="field">

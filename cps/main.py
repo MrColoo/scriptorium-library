@@ -36,6 +36,7 @@ def main():
     from .progress_syncing.protocols.kosync import kosync
     from .duplicates import duplicates
     from .appearance import appearance
+    from .devices import devices
     try:
         from .kobo import kobo, get_kobo_activated
         from .kobo_auth import kobo_auth
@@ -86,6 +87,7 @@ def main():
     app.register_blueprint(kosync)
     app.register_blueprint(duplicates)
     app.register_blueprint(appearance)
+    app.register_blueprint(devices)
     if kobo_available:
         app.register_blueprint(kobo)
         app.register_blueprint(kobo_auth)

@@ -9,8 +9,10 @@
 from datetime import datetime, timezone
 
 from flask_babel import format_timedelta
+from sqlalchemy import desc, func
 
 from . import calibre_db, db, logger, ub
+from .progress_syncing.models import KOSyncProgress
 
 log = logger.create()
 
@@ -92,8 +94,8 @@ def get_kobo_book_status(user, book_id, book_shelf_ids):
 
     book_shelf_ids: ids of the shelves the book is on.
     """
-    from . import config
-    if not config.config_kobo_sync or not user.is_authenticated or user.is_anonymous:
+    from . import devices
+    if not user.is_authenticated or user.is_anonymous or not devices.shows(user, "kobo"):
         return None
     try:
         has_token = user.remote_auth_token.filter(ub.RemoteAuthToken.token_type == 1).first() is not None
@@ -151,3 +153,85 @@ def kobo_overview(user):
         "only_shelves": bool(user.kobo_only_shelves_sync),
         "shelves": kobo_shelves,
     }
+
+
+def _as_utc(moment):
+    if moment is None:
+        return None
+    if moment.tzinfo is None:
+        return moment.replace(tzinfo=timezone.utc)
+    return moment.astimezone(timezone.utc)
+
+
+def _koreader_records(user_id):
+    return ub.session.query(KOSyncProgress).filter(KOSyncProgress.user_id == int(user_id))
+
+
+def koreader_overview(user):
+    """What the KOReader section of a profile needs: last sync, device name and books synced."""
+    overview = {"last_sync": None, "device": None, "books": 0}
+    if user is None or getattr(user, "is_anonymous", True):
+        return overview
+    try:
+        latest = _koreader_records(user.id).order_by(desc(KOSyncProgress.timestamp)).first()
+        overview["books"] = (ub.session.query(func.count(KOSyncProgress.id))
+                             .filter(KOSyncProgress.user_id == int(user.id)).scalar() or 0)
+        if latest is not None:
+            overview["last_sync"] = humanize_since(_as_utc(latest.timestamp))
+            overview["device"] = latest.device
+    except Exception as e:
+        log.debug("Could not read KOReader progress: %s", e)
+    return overview
+
+
+def get_book_progress(user, book_id):
+    """The latest reading progress for a book and where it came from, or None.
+
+    Returns {percent (0-100 float), source ('kobo' or 'koreader'), device (str or None), when (datetime)}.
+    Otherwise the newer of the Kobo bookmark and the KOReader record wins.
+    """
+    if user is None or getattr(user, "is_anonymous", True):
+        return None
+    candidates = []
+    try:
+        state = (ub.session.query(ub.KoboReadingState)
+                 .filter(ub.KoboReadingState.user_id == int(user.id), ub.KoboReadingState.book_id == int(book_id))
+                 .first())
+        if state is not None and state.current_bookmark is not None \
+                and state.current_bookmark.progress_percent is not None:
+            bookmark = state.current_bookmark
+            candidates.append({"percent": float(bookmark.progress_percent), "source": "kobo", "device": None,
+                               "when": _as_utc(bookmark.last_modified or state.last_modified)})
+        record = (_koreader_records(user.id)
+                  .filter(KOSyncProgress.document == str(int(book_id)))
+                  .order_by(desc(KOSyncProgress.timestamp)).first())
+        if record is not None:
+            candidates.append({"percent": float(record.percentage), "source": "koreader",
+                               "device": record.device, "when": _as_utc(record.timestamp)})
+    except Exception as e:
+        log.debug("Could not load reading progress for book %s: %s", book_id, e)
+        return None
+    if not candidates:
+        return None
+    if len(candidates) == 2 and abs(candidates[0]["percent"] - candidates[1]["percent"]) < 0.01:
+        # KOReader also writes its percentage into the Kobo bookmark, a moment after its own record:
+        # the same value in both places is KOReader's.
+        return candidates[1]
+    oldest = datetime.min.replace(tzinfo=timezone.utc)
+    return max(candidates, key=lambda c: c["when"] or oldest)
+
+
+def get_koreader_last_sync(user_id):
+    """UTC datetime of the user's last KOReader sync, or None."""
+    try:
+        latest = (ub.session.query(func.max(KOSyncProgress.timestamp))
+                  .filter(KOSyncProgress.user_id == int(user_id)).scalar())
+    except Exception as e:
+        log.debug("Could not read KOReader sync time: %s", e)
+        return None
+    if isinstance(latest, str):
+        try:
+            latest = datetime.fromisoformat(latest[:26])
+        except ValueError:
+            return None
+    return _as_utc(latest)
