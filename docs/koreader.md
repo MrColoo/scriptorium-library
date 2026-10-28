@@ -12,10 +12,12 @@ The first start after enabling it computes a checksum for every book file so KOR
 can be matched to library books. On large libraries this takes a while and can briefly lock the
 library; enable it at a quiet time.
 
+Then each user turns it on for themselves: *Profile → Devices → KOReader*. The steps below appear
+right there, with your server address ready to copy. The full guide is on the **KOReader sync**
+page (`/kosync`).
+
 ## Install the plugin
 
-The full, personalised instructions are on the **KOReader sync** page (*Profile → Using KOReader?
-→ Set up KOReader*, or `/kosync`). In short:
 
 1. Download `koplugin.zip` from that page.
 2. Connect the device to your computer and extract the zip straight into `koreader/plugins/` on the
@@ -27,8 +29,8 @@ The full, personalised instructions are on the **KOReader sync** page (*Profile 
 Open a book, tap the top of the screen, open the **Tools** menu and choose **Scriptorium Sync**.
 Enter:
 
-- **Server URL**: the address shown on the KOReader sync page (your library address followed by
-  `/kosync`).
+- **Server URL**: your library address, exactly as shown under *Profile → Devices → KOReader*
+  (for example `https://books.example.com`). Do not add `/kosync`: the plugin does that itself.
 - **Username** and **password**: the same ones you use for the web interface.
 
 ## How it works
@@ -39,8 +41,17 @@ Enter:
   from the library (via OPDS, the web interface or email). A file converted or edited elsewhere
   will not match.
 - Progress updates the read status in the library: 0% is *unread*, anything in between is
-  *reading*, 99% and above is *finished*. The position is also shared with the web reader and,
-  as a percentage, with Kobo sync.
+  *reading*, 99% and above is *finished*.
+- The book page shows it under *Reading progress*, with the device it came from, and the home page
+  lists the book under *Continue reading*. *Profile → Devices → KOReader* shows the last sync, the
+  device and how many books have progress.
+- The percentage is also shared with Kobo sync, so a Kobo using its own reader picks it up.
+
+## KOReader on a Kobo
+
+If you used Kobo sync before installing KOReader on the same device, press **Remove Kobo** in
+*Profile → Devices*. The Kobo sync address stops working and Kobo features are hidden; your reading
+progress and read status are kept.
 
 ## Troubleshooting
 

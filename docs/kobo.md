@@ -19,7 +19,8 @@ For the best experience on a Kobo, set *Settings → Automation → Conversion �
 
 ## 2. Create your sync address (every user)
 
-*Profile → Kobo → Create sync address.*
+*Profile → Devices → Kobo → Create sync address.* (If Kobo is not listed there, turn it on with
+the switch at the top of *Devices*.)
 
 Open the profile page from an address the Kobo can reach — your server's LAN IP or domain, not
 `localhost` — because the address is built from the one in your browser. Scriptorium warns you if it
@@ -56,14 +57,23 @@ library.
 ## Reading progress
 
 Your position, the read/unread status and the time spent reading flow from the Kobo to Scriptorium at
-every sync. The book page shows them under *On your Kobo*, and the home page lists what you are
+every sync. The book page shows them under *Reading progress*, and the home page lists what you are
 reading under *Continue reading*.
 
 If you also use KOReader, see [KOReader](koreader.md).
 
+## No Kobo, or moving to KOReader
+
+Every user picks the devices they read with in *Profile → Devices*. Turn Kobo off and its
+shortcuts, setup steps and book-page card disappear for you; turn it back on at any time.
+
+If you install KOReader on your Kobo, press **Remove Kobo** in the same place. The sync address
+stops working, so the built-in reader and KOReader do not both sync, and Kobo features are hidden.
+Books already on the device stay there, and your reading progress and read status are kept.
+
 ## Re-sending everything
 
-*Profile → Kobo → Force full kobo sync* makes the next sync send every book again. Use it after
+*Profile → Devices → Kobo → Force full kobo sync* makes the next sync send every book again. Use it after
 changing covers or metadata in bulk, or when the device and library have drifted apart.
 
 ## Troubleshooting
