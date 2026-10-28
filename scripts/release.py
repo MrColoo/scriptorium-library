@@ -167,8 +167,15 @@ def git(*args, capture=True):
     return (result.stdout or "").strip()
 
 
-def latest_tag():
-    tags = [t for t in git("tag", "--list", "v*").splitlines() if TAG_RE.match(t) and not is_prerelease(t)]
+def latest_tag(data=None):
+    """The newest final Scriptorium release that is tagged.
+
+    Only tags with an entry in the release notes count: a clone that also fetched
+    Calibre-Web-Automated's history has its tags (v4.0.8, …), which are not ours.
+    """
+    ours = {entry.get("version") for entry in (data or load_notes()).get("releases") or [] if isinstance(entry, dict)}
+    tags = [t for t in git("tag", "--list", "v*").splitlines()
+            if t in ours and TAG_RE.match(t) and not is_prerelease(t)]
     tags.sort(key=lambda t: releases.parse_version(t))
     return tags[-1] if tags else None
 
@@ -181,10 +188,10 @@ def prepare(version, dry_run=False, today=None):
         raise ReleaseError("commit or stash your changes first")
     if git("tag", "--list", version):
         raise ReleaseError("tag {} already exists".format(version))
-    previous = latest_tag()
+    data = load_notes()
+    previous = latest_tag(data)
     if previous and not is_prerelease(version) and not releases.is_newer(version, previous):
         raise ReleaseError("{} is not newer than the latest release {}".format(version, previous))
-    data = load_notes()
     issues = problems(data, version, need_date=False)
     if issues:
         raise ReleaseError("release notes are not ready:\n  - " + "\n  - ".join(issues))

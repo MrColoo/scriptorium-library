@@ -132,9 +132,21 @@ def test_prepare_refuses_dirty_tree_old_version_and_existing_tag(repo):
     (path / "stray.txt").unlink()
     with pytest.raises(release.ReleaseError, match="already exists"):
         release.prepare("v1.0.0")
+    notes = path / "cps" / "release_notes.json"
+    data = json.loads(notes.read_text(encoding="utf-8"))
+    data["releases"].append(dict(copy.deepcopy(READY), version="v3.0.0"))
+    notes.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    run("commit", "-q", "-am", "notes for v3.0.0")
     run("tag", "-a", "v3.0.0", "-m", "v3.0.0")
-    with pytest.raises(release.ReleaseError, match="not newer"):
+    with pytest.raises(release.ReleaseError, match="not newer than the latest release v3.0.0"):
         release.prepare("v2.0.0")
+
+
+def test_upstream_tags_are_not_scriptorium_releases(repo):
+    path, run = repo
+    run("tag", "-a", "v4.0.8", "-m", "Calibre-Web-Automated v4.0.8")  # fetched from upstream, no notes
+    release.prepare("v2.0.0", today=date(2026, 11, 2))
+    assert _git(path, "cat-file", "-t", "v2.0.0") == "tag"
 
 
 def test_prepare_refuses_other_branches(repo):
