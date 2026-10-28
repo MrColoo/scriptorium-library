@@ -45,7 +45,7 @@ from .cw_babel import get_available_locale
 from .usermanagement import login_required_if_no_ano
 from .kobo_sync_status import remove_synced_book
 from . import magic_shelf
-from . import reading_overview
+from . import reading_overview, similar
 from .render_template import render_title_template
 from .kobo_sync_status import change_archived_books
 from . import limiter
@@ -3016,6 +3016,7 @@ def show_book(book_id):
                 entry.audio_entries.append(media_format.format.lower())
 
         reading_progress = reading_overview.get_book_progress(current_user, book_id)
+        similar_books = similar.for_book(entry)
 
         cwa_db = CWA_DB()
         cwa_settings = cwa_db.cwa_settings
@@ -3029,6 +3030,7 @@ def show_book(book_id):
                                      books_shelfs=book_in_shelves,
                                      cwa_settings=cwa_settings,
                                      reading_progress=reading_progress,
+                                     similar_books=similar_books,
                                      kobo_status=kobo_status,
                                      page="book")
     else:

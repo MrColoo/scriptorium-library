@@ -269,6 +269,22 @@
     </dl>
   </article>
 </div>
+
+{%- if similar_books %}
+<section class="section similar-books" aria-labelledby="similar-heading">
+  <div class="section-header">
+    <div>
+      <h2 id="similar-heading">{{ _('More like this') }}</h2>
+      <p class="muted small">{{ _('From your library: the same authors and the closest genres.') }}</p>
+    </div>
+  </div>
+  <div class="book-grid book-grid--sm">
+    {%- for book in similar_books %}
+    {{ ui.book_card(book) }}
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
 {% endblock %}
 
 {% block modal %}
