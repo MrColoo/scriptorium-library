@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 22:37+0100\n"
+"POT-Creation-Date: 2026-10-28 22:46+0100\n"
 "PO-Revision-Date: 2025-11-17 12:21-0300\n"
 "Last-Translator: minakmostoles <xxx@xxx.com>\n"
 "Language-Team: es <LL@li.org>\n"
@@ -1349,7 +1349,7 @@ msgstr "ID del libro faltante o no válido para la carga del formato"
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr "No se puede subir el formato: el libro ya no existe en la biblioteca"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:386
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:366
 msgid "Upload done, processing, please wait..."
 msgstr "Carga completada, procesando, por favor espere..."
 
@@ -2200,26 +2200,6 @@ msgstr ""
 msgid "Advanced Search"
 msgstr "Búsqueda avanzada"
 
-#: cps/self_update.py:142
-#, fuzzy
-msgid "You already have the latest version."
-msgstr ""
-"Actualización no disponible. Ya tienes instalada la versión más reciente"
-
-#: cps/self_update.py:145
-msgid "One-click updates are not set up on this server."
-msgstr ""
-
-#: cps/self_update.py:148
-#, fuzzy
-msgid "An update is already running."
-msgstr "Duplicados"
-
-#: cps/self_update.py:154
-#, python-format
-msgid "The backup failed, so nothing was changed: %(error)s"
-msgstr ""
-
 #: cps/shelf.py:48 cps/shelf.py:136
 msgid "Invalid shelf specified"
 msgstr "Estantería especificada no válida"
@@ -2777,7 +2757,7 @@ msgid "Invalid book ID."
 msgstr "ID inválido del libro."
 
 #: cps/templates/layout.html:176 cps/templates/stats.html:9
-#: cps/templates/whats_new.html:6 cps/whats_new.py:169
+#: cps/templates/whats_new.html:6 cps/whats_new.py:168
 msgid "What's new"
 msgstr ""
 
@@ -3079,9 +3059,9 @@ msgstr "Valores permitidos en columna"
 #: cps/templates/duplicates.html:110 cps/templates/layout.html:206
 #: cps/templates/layout.html:209 cps/templates/layout.html:212
 #: cps/templates/layout.html:215 cps/templates/layout.html:218
-#: cps/templates/layout.html:261 cps/templates/layout.html:297
-#: cps/templates/layout.html:382 cps/templates/read.html:58
-#: cps/templates/year.html:42
+#: cps/templates/layout.html:261 cps/templates/layout.html:295
+#: cps/templates/layout.html:334 cps/templates/layout.html:362
+#: cps/templates/read.html:58 cps/templates/year.html:42
 msgid "Close"
 msgstr "Cerrar"
 
@@ -3458,7 +3438,7 @@ msgstr "Detener Servicio"
 msgid "Are you sure you want to restart?"
 msgstr "¿Realmente quieres reiniciar?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:389
+#: cps/templates/admin.html:175 cps/templates/layout.html:369
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
@@ -4311,7 +4291,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:384 cps/templates/login.html:35
+#: cps/templates/layout.html:364 cps/templates/login.html:35
 #: cps/templates/user_edit.html:51 cps/templates/user_edit.html:62
 #, fuzzy
 msgid "Show password"
@@ -6253,7 +6233,7 @@ msgid_plural "%(num)s highlights"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cps/templates/detail.html:210 cps/templates/layout.html:385
+#: cps/templates/detail.html:210 cps/templates/layout.html:365
 #, fuzzy
 msgid "Show more"
 msgstr "Mostrar No Leídos"
@@ -6674,7 +6654,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:388
+#: cps/templates/grid.html:21 cps/templates/layout.html:368
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -7002,7 +6982,7 @@ msgstr ""
 msgid "Server URL"
 msgstr "Puerto del Servidor"
 
-#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:338
+#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:322
 #: cps/templates/remote_login.html:15 cps/templates/user_edit.html:160
 #: cps/templates/user_edit.html:290
 #, fuzzy
@@ -7140,7 +7120,7 @@ msgstr ""
 msgid "Are you sure?"
 msgstr "¿Estás realmente seguro/a?"
 
-#: cps/templates/layout.html:271 cps/templates/layout.html:382
+#: cps/templates/layout.html:271 cps/templates/layout.html:362
 msgid "Confirm"
 msgstr ""
 
@@ -7157,152 +7137,106 @@ msgid "Drop books to add them to the library"
 msgstr ""
 
 #: cps/templates/layout.html:293
-msgid ""
-"The update is taking longer than expected. Check your server, then reload "
-"this page."
-msgstr ""
-
-#: cps/templates/layout.html:295
 #, fuzzy
 msgid "Scriptorium update"
 msgstr "Log de Scriptorium: "
 
-#: cps/templates/layout.html:300
+#: cps/templates/layout.html:298
 #, fuzzy
 msgid "New version available:"
 msgstr "No hay información del lanzamiento disponible"
 
-#: cps/templates/layout.html:311
+#: cps/templates/layout.html:309
 msgid ""
 "A new version of Scriptorium is available, with the latest features and "
 "fixes."
 msgstr ""
 
-#: cps/templates/layout.html:321
+#: cps/templates/layout.html:320
 msgid ""
-"Check the release notes for breaking changes before updating. Your databases "
-"are backed up first."
+"To update, back up your config folder, then run this next to your docker-"
+"compose.yml:"
 msgstr ""
 
-#: cps/templates/layout.html:322
-msgid "Release notes"
+#: cps/templates/layout.html:325
+msgid "Check the release notes for breaking changes before updating."
 msgstr ""
 
 #: cps/templates/layout.html:326
-#, fuzzy
-msgid "Backing up your databases"
-msgstr "Copia de seguridad de metadatos"
-
-#: cps/templates/layout.html:327
-#, fuzzy
-msgid "Downloading the new version"
-msgstr "Descargar registro"
-
-#: cps/templates/layout.html:328
-#, fuzzy
-msgid "Restarting Scriptorium"
-msgstr "Primeros pasos con Scriptorium"
-
-#: cps/templates/layout.html:329
-#, fuzzy
-msgid "Done, reloading…"
-msgstr "¡Colabora aquí!"
-
-#: cps/templates/layout.html:336
-msgid "Run this next to your docker-compose.yml:"
+msgid "Release notes"
 msgstr ""
 
-#: cps/templates/layout.html:339
-msgid ""
-"For one-click updates, connect an update service such as Watchtower: see the "
-"installation guide."
-msgstr ""
-
-#: cps/templates/layout.html:345
+#: cps/templates/layout.html:330
 msgid "Automatically check for new updates"
 msgstr ""
 
-#: cps/templates/layout.html:349
-msgid "Later"
-msgstr ""
-
-#: cps/templates/layout.html:351
-#, fuzzy
-msgid "Update now"
-msgstr "Canal de Actualización"
-
-#: cps/templates/layout.html:353
-#, fuzzy
-msgid "How to update"
-msgstr "No se pudieron actualizar las etiquetas"
-
-#: cps/templates/layout.html:363
+#: cps/templates/layout.html:343
 #, python-format
 msgid "What's new in %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:375
+#: cps/templates/layout.html:355
 msgid "All release notes"
 msgstr ""
 
-#: cps/templates/layout.html:376
+#: cps/templates/layout.html:356
 msgid "Got it"
 msgstr ""
 
-#: cps/templates/layout.html:382
+#: cps/templates/layout.html:362
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "UUID copiado al portapapeles"
 
-#: cps/templates/layout.html:383
+#: cps/templates/layout.html:363
 msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
-#: cps/templates/layout.html:384
+#: cps/templates/layout.html:364
 #, fuzzy
 msgid "Hide password"
 msgstr "Contraseña"
 
-#: cps/templates/layout.html:385
+#: cps/templates/layout.html:365
 #, fuzzy
 msgid "Show less"
 msgstr "Mostrar todo"
 
-#: cps/templates/layout.html:385 cps/templates/magic_shelf_edit.html:88
+#: cps/templates/layout.html:365 cps/templates/magic_shelf_edit.html:88
 msgid "Something went wrong, please try again"
 msgstr ""
 
-#: cps/templates/layout.html:386
+#: cps/templates/layout.html:366
 #, fuzzy
 msgid "Upload failed"
 msgstr "Falló la actualización:"
 
-#: cps/templates/layout.html:387
+#: cps/templates/layout.html:367
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "Top %(count)s"
 
-#: cps/templates/layout.html:388 cps/templates/search_form.html:7
+#: cps/templates/layout.html:368 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "Cualquiera"
 
-#: cps/templates/layout.html:388
+#: cps/templates/layout.html:368
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Seleccione al menos una dirección de correo electrónico"
 
-#: cps/templates/layout.html:389
+#: cps/templates/layout.html:369
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:390
+#: cps/templates/layout.html:370
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "Escaneo de duplicados completado: %(count)s grupos"
 
-#: cps/templates/layout.html:390
+#: cps/templates/layout.html:370
 #, fuzzy
 msgid "Review"
 msgstr "Vista previa"
@@ -9445,6 +9379,39 @@ msgstr ""
 #, fuzzy
 msgid "Back to the library"
 msgstr "Autores en esta Biblioteca"
+
+#, fuzzy
+#~ msgid "You already have the latest version."
+#~ msgstr ""
+#~ "Actualización no disponible. Ya tienes instalada la versión más reciente"
+
+#, fuzzy
+#~ msgid "An update is already running."
+#~ msgstr "Duplicados"
+
+#, fuzzy
+#~ msgid "Backing up your databases"
+#~ msgstr "Copia de seguridad de metadatos"
+
+#, fuzzy
+#~ msgid "Downloading the new version"
+#~ msgstr "Descargar registro"
+
+#, fuzzy
+#~ msgid "Restarting Scriptorium"
+#~ msgstr "Primeros pasos con Scriptorium"
+
+#, fuzzy
+#~ msgid "Done, reloading…"
+#~ msgstr "¡Colabora aquí!"
+
+#, fuzzy
+#~ msgid "Update now"
+#~ msgstr "Canal de Actualización"
+
+#, fuzzy
+#~ msgid "How to update"
+#~ msgstr "No se pudieron actualizar las etiquetas"
 
 #, fuzzy
 #~ msgid "Update available"

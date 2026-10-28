@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web (GPLV3)\n"
 "Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 22:37+0100\n"
+"POT-Creation-Date: 2026-10-28 22:46+0100\n"
 "PO-Revision-Date: 2026-04-26 13:31+0200\n"
 "Last-Translator: Michiel Cornelissen <michiel.cornelissen+gitbhun at "
 "proton.me>\n"
@@ -53,8 +53,6 @@ msgstr "Onbekende opdracht"
 msgid ""
 "Success! Books queued for Metadata Backup, please check Tasks for result"
 msgstr ""
-"Gelukt! E-Mail wordt verzonden naar %(email)s, controleer de taken voor het "
-"resultaat"
 
 #: cps/admin.py:225
 msgid ""
@@ -1301,7 +1299,7 @@ msgstr "Ontbrekend of ongeldig boek-ID voor formaat upload"
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr ""
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:386
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:366
 msgid "Upload done, processing, please wait..."
 msgstr "Uploaden voltooid, bezig met verwerken..."
 
@@ -2134,25 +2132,6 @@ msgstr ""
 msgid "Advanced Search"
 msgstr "Geavanceerd zoeken"
 
-#: cps/self_update.py:142
-#, fuzzy
-msgid "You already have the latest version."
-msgstr "Er is geen update beschikbaar"
-
-#: cps/self_update.py:145
-msgid "One-click updates are not set up on this server."
-msgstr ""
-
-#: cps/self_update.py:148
-#, fuzzy
-msgid "An update is already running."
-msgstr "Duplicaten"
-
-#: cps/self_update.py:154
-#, python-format
-msgid "The backup failed, so nothing was changed: %(error)s"
-msgstr ""
-
 #: cps/shelf.py:48 cps/shelf.py:136
 msgid "Invalid shelf specified"
 msgstr "Ongeldige boekenplank opgegeven"
@@ -2711,7 +2690,7 @@ msgid "Invalid book ID."
 msgstr "Ongeldige boek ID."
 
 #: cps/templates/layout.html:176 cps/templates/stats.html:9
-#: cps/templates/whats_new.html:6 cps/whats_new.py:169
+#: cps/templates/whats_new.html:6 cps/whats_new.py:168
 msgid "What's new"
 msgstr ""
 
@@ -2734,7 +2713,7 @@ msgstr ""
 
 #: cps/tasks/auto_send.py:34
 msgid "Preparing to send to eReader..."
-msgstr "%(book)s verzonden naar eReader"
+msgstr ""
 
 #: cps/tasks/auto_send.py:56
 msgid "Checking available formats..."
@@ -3007,9 +2986,9 @@ msgstr "Toegestane kolomwaarden"
 #: cps/templates/duplicates.html:110 cps/templates/layout.html:206
 #: cps/templates/layout.html:209 cps/templates/layout.html:212
 #: cps/templates/layout.html:215 cps/templates/layout.html:218
-#: cps/templates/layout.html:261 cps/templates/layout.html:297
-#: cps/templates/layout.html:382 cps/templates/read.html:58
-#: cps/templates/year.html:42
+#: cps/templates/layout.html:261 cps/templates/layout.html:295
+#: cps/templates/layout.html:334 cps/templates/layout.html:362
+#: cps/templates/read.html:58 cps/templates/year.html:42
 msgid "Close"
 msgstr "Sluiten"
 
@@ -3383,7 +3362,7 @@ msgstr "Scriptorium stoppen"
 msgid "Are you sure you want to restart?"
 msgstr "Weet je zeker dat je Scriptorium wilt herstarten?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:389
+#: cps/templates/admin.html:175 cps/templates/layout.html:369
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
@@ -4232,7 +4211,7 @@ msgid "Ok"
 msgstr "Oké"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:384 cps/templates/login.html:35
+#: cps/templates/layout.html:364 cps/templates/login.html:35
 #: cps/templates/user_edit.html:51 cps/templates/user_edit.html:62
 #, fuzzy
 msgid "Show password"
@@ -6128,7 +6107,7 @@ msgid_plural "%(num)s highlights"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cps/templates/detail.html:210 cps/templates/layout.html:385
+#: cps/templates/detail.html:210 cps/templates/layout.html:365
 #, fuzzy
 msgid "Show more"
 msgstr "Ongelezen boeken tonen"
@@ -6543,7 +6522,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:388
+#: cps/templates/grid.html:21 cps/templates/layout.html:368
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6865,7 +6844,7 @@ msgstr ""
 msgid "Server URL"
 msgstr "Serverpoort"
 
-#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:338
+#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:322
 #: cps/templates/remote_login.html:15 cps/templates/user_edit.html:160
 #: cps/templates/user_edit.html:290
 msgid "Copy"
@@ -7003,7 +6982,7 @@ msgstr ""
 msgid "Are you sure?"
 msgstr "Weet je het zeker?"
 
-#: cps/templates/layout.html:271 cps/templates/layout.html:382
+#: cps/templates/layout.html:271 cps/templates/layout.html:362
 #, fuzzy
 msgid "Confirm"
 msgstr "Instellingen"
@@ -7021,152 +7000,106 @@ msgid "Drop books to add them to the library"
 msgstr ""
 
 #: cps/templates/layout.html:293
-msgid ""
-"The update is taking longer than expected. Check your server, then reload "
-"this page."
-msgstr ""
-
-#: cps/templates/layout.html:295
 #, fuzzy
 msgid "Scriptorium update"
 msgstr "Toon Scriptorium logbestand: "
 
-#: cps/templates/layout.html:300
+#: cps/templates/layout.html:298
 #, fuzzy
 msgid "New version available:"
 msgstr "Geen update-informatie beschikbaar"
 
-#: cps/templates/layout.html:311
+#: cps/templates/layout.html:309
 msgid ""
 "A new version of Scriptorium is available, with the latest features and "
 "fixes."
 msgstr ""
 
-#: cps/templates/layout.html:321
+#: cps/templates/layout.html:320
 msgid ""
-"Check the release notes for breaking changes before updating. Your databases "
-"are backed up first."
+"To update, back up your config folder, then run this next to your docker-"
+"compose.yml:"
 msgstr ""
 
-#: cps/templates/layout.html:322
-msgid "Release notes"
+#: cps/templates/layout.html:325
+msgid "Check the release notes for breaking changes before updating."
 msgstr ""
 
 #: cps/templates/layout.html:326
-#, fuzzy
-msgid "Backing up your databases"
-msgstr "metagegevens opslaan"
-
-#: cps/templates/layout.html:327
-#, fuzzy
-msgid "Downloading the new version"
-msgstr "Downloaden log"
-
-#: cps/templates/layout.html:328
-#, fuzzy
-msgid "Restarting Scriptorium"
-msgstr "Aan de slag met Scriptorium"
-
-#: cps/templates/layout.html:329
-#, fuzzy
-msgid "Done, reloading…"
-msgstr "Draag hier bij!"
-
-#: cps/templates/layout.html:336
-msgid "Run this next to your docker-compose.yml:"
+msgid "Release notes"
 msgstr ""
 
-#: cps/templates/layout.html:339
-msgid ""
-"For one-click updates, connect an update service such as Watchtower: see the "
-"installation guide."
-msgstr ""
-
-#: cps/templates/layout.html:345
+#: cps/templates/layout.html:330
 msgid "Automatically check for new updates"
 msgstr ""
 
-#: cps/templates/layout.html:349
-msgid "Later"
-msgstr ""
-
-#: cps/templates/layout.html:351
-#, fuzzy
-msgid "Update now"
-msgstr "Updatekanaal"
-
-#: cps/templates/layout.html:353
-#, fuzzy
-msgid "How to update"
-msgstr "Locatie aanmaken voor omslag mislukt"
-
-#: cps/templates/layout.html:363
+#: cps/templates/layout.html:343
 #, python-format
 msgid "What's new in %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:375
+#: cps/templates/layout.html:355
 msgid "All release notes"
 msgstr ""
 
-#: cps/templates/layout.html:376
+#: cps/templates/layout.html:356
 msgid "Got it"
 msgstr ""
 
-#: cps/templates/layout.html:382
+#: cps/templates/layout.html:362
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "Zoeken in bibliotheek mislukt"
 
-#: cps/templates/layout.html:383
+#: cps/templates/layout.html:363
 msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
-#: cps/templates/layout.html:384
+#: cps/templates/layout.html:364
 #, fuzzy
 msgid "Hide password"
 msgstr "Wachtwoord"
 
-#: cps/templates/layout.html:385
+#: cps/templates/layout.html:365
 #, fuzzy
 msgid "Show less"
 msgstr "Alle talen"
 
-#: cps/templates/layout.html:385 cps/templates/magic_shelf_edit.html:88
+#: cps/templates/layout.html:365 cps/templates/magic_shelf_edit.html:88
 msgid "Something went wrong, please try again"
 msgstr ""
 
-#: cps/templates/layout.html:386
+#: cps/templates/layout.html:366
 #, fuzzy
 msgid "Upload failed"
 msgstr "Update mislukt:"
 
-#: cps/templates/layout.html:387
+#: cps/templates/layout.html:367
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "%(name)ss profiel"
 
-#: cps/templates/layout.html:388 cps/templates/search_form.html:7
+#: cps/templates/layout.html:368 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "Willekeurig"
 
-#: cps/templates/layout.html:388
+#: cps/templates/layout.html:368
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Een nieuw wachtwoord is verzonden naar je e-mailadres"
 
-#: cps/templates/layout.html:389
+#: cps/templates/layout.html:369
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:390
+#: cps/templates/layout.html:370
 #, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr ""
 
-#: cps/templates/layout.html:390
+#: cps/templates/layout.html:370
 #, fuzzy
 msgid "Review"
 msgstr "Voorbeeld"
@@ -9290,18 +9223,39 @@ msgstr ""
 msgid "Back to the library"
 msgstr "Auteurs in deze bibliotheek"
 
-#, fuzzy
+#~ msgid "You already have the latest version."
+#~ msgstr "Er is geen update beschikbaar"
+
+#~ msgid "An update is already running."
+#~ msgstr "Duplicaten"
+
+#~ msgid "Backing up your databases"
+#~ msgstr "metagegevens opslaan"
+
+#~ msgid "Downloading the new version"
+#~ msgstr "Downloaden log"
+
+#~ msgid "Restarting Scriptorium"
+#~ msgstr "Aan de slag met Scriptorium"
+
+#~ msgid "Done, reloading…"
+#~ msgstr "Draag hier bij!"
+
+#~ msgid "Update now"
+#~ msgstr "Updatekanaal"
+
+#~ msgid "How to update"
+#~ msgstr "Locatie aanmaken voor omslag mislukt"
+
 #~ msgid "Update available"
 #~ msgstr "Update mislukt:"
 
-#, fuzzy, python-format
 #~ msgid "Scriptorium %(version)s is available."
 #~ msgstr "Scriptorium - test-e-mail"
 
 #~ msgid "See Changelog"
 #~ msgstr "Zie Changelog"
 
-#, fuzzy
 #~ msgid "Set up KOReader"
 #~ msgstr "PDF lezer"
 
