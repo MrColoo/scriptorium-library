@@ -356,6 +356,16 @@
   </section>
 
   {#- Preferences -#}
+  {%- if profile and not is_anon %}
+  <section class="card" id="history" aria-labelledby="history-h">
+    <div class="row-between">
+      <div><h2 class="card-title" id="history-h">{{ _('Reading history') }}</h2>
+        <p class="card-subtitle">{{ _('Coming from Goodreads or The StoryGraph? Import what you have read, with dates, and your want-to-read list.') }}</p></div>
+      <a class="btn" href="{{ url_for('reading_import.start') }}">{{ ui.icon('upload') }}{{ _('Import') }}</a>
+    </div>
+  </section>
+  {%- endif %}
+
   <section class="card" id="preferences" aria-labelledby="prefs-h">
     <div class="card-header"><div><h2 class="card-title" id="prefs-h">{{ _('Preferences') }}</h2></div>
       {%- if not is_admin_view and not is_anon %}

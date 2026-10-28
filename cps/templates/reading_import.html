@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block content_class %}content--narrow{% endblock %}
+{% block body %}
+<div class="page-header">
+  <div>
+    <span class="page-eyebrow"><a href="{{ url_for('web.profile') }}">{{ ui.icon('chevron-left', 'icon-sm') }}{{ _('Profile') }}</a></span>
+    <h1 class="page-title">{{ _('Import your reading history') }}</h1>
+    <span class="page-subtitle">{{ _('Bring what you read on Goodreads or The StoryGraph: finished books with their dates, what you are reading, and your want-to-read list.') }}</span>
+  </div>
+</div>
+
+{%- if step == 'upload' %}
+<div class="import-sources">
+  <section class="card">
+    <h2 class="card-title">Goodreads</h2>
+    <p class="small muted">{{ _('My Books → Import and export → Export Library. Download the CSV when it is ready.') }}</p>
+  </section>
+  <section class="card">
+    <h2 class="card-title">The StoryGraph</h2>
+    <p class="small muted">{{ _('Manage Account → Export StoryGraph Library. The CSV arrives by email or as a download.') }}</p>
+  </section>
+</div>
+<form class="card" method="post" enctype="multipart/form-data" action="{{ url_for('reading_import.preview') }}">
+  {{ ui.csrf_field() }}
+  <label class="import-drop" data-local-drop>
+    <span class="icon-tile">{{ ui.icon('upload') }}</span>
+    <strong>{{ _('Choose or drop the exported CSV') }}</strong>
+    <span class="small muted" data-file-name>{{ _('Nothing is changed until you confirm the preview.') }}</span>
+    <input type="file" name="file" accept=".csv,text/csv" required>
+  </label>
+  <div class="row-between">
+    <p class="hint">{{ _('Books are matched to your library by ISBN, then by title and author. Reviews and ratings stay where they are.') }}</p>
+    <button class="btn btn-primary" type="submit">{{ _('Preview') }}</button>
+  </div>
+</form>
+
+{%- else %}
+<section class="card">
+  <div class="stat-grid">
+    <div class="stat"><span class="stat-label">{{ _('In the export') }}</span><span class="stat-value">{{ total }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Found in your library') }}</span><span class="stat-value">{{ matched }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Changes') }}</span><span class="stat-value">{{ actions|length }}</span></div>
+  </div>
+  <p class="small muted">{{ _('From %(source)s.', source='Goodreads' if source == 'goodreads' else 'The StoryGraph') }} {{ _('Books already marked as read stay read; nothing is ever marked unread.') }}</p>
+</section>
+
+{%- set groups = [('finish', _('Mark as finished')), ('date', _('Add the date you finished them')), ('start', _('Mark as reading')), ('shelve', _('Add to “%(shelf)s”', shelf=_('Want to read')))] %}
+{%- for kind, label in groups if counts[kind] %}
+<details class="card import-group"{% if loop.first %} open{% endif %}>
+  <summary><span class="grow strong">{{ label }}</span><span class="badge">{{ counts[kind] }}</span></summary>
+  <ul class="import-list">
+    {%- for action in actions if action.action == kind %}
+    {%- set book = books.get(action.book_id) %}
+    {%- if book %}
+    <li>
+      <a class="cover" href="{{ url_for('web.show_book', book_id=book.id) }}" tabindex="-1" aria-hidden="true">{{ ui.cover_img(book, sizes='32px', alt='') }}</a>
+      <span class="grow"><a href="{{ url_for('web.show_book', book_id=book.id) }}">{{ book.title }}</a>
+        <span class="small muted">{{ book.authors|map(attribute='name')|join(', ') }}</span></span>
+      {%- if action.date %}<span class="small muted tabular">{{ action.date }}</span>{% endif %}
+    </li>
+    {%- endif %}
+    {%- endfor %}
+  </ul>
+</details>
+{%- endfor %}
+
+{%- if unmatched %}
+<details class="card import-group">
+  <summary><span class="grow strong">{{ _('Not in your library') }}</span><span class="badge">{{ unmatched|length }}</span></summary>
+  <ul class="import-list import-list--plain">
+    {%- for row in unmatched[:300] %}
+    <li><span class="grow">{{ row.title }}<span class="small muted">{{ row.authors|join(', ') }}</span></span></li>
+    {%- endfor %}
+  </ul>
+  {%- if unmatched|length > 300 %}<p class="hint">{{ _('And %(num)s more.', num=unmatched|length - 300) }}</p>{% endif %}
+</details>
+{%- endif %}
+
+<form class="toolbar import-confirm" method="post" action="{{ url_for('reading_import.apply_import') }}">
+  {{ ui.csrf_field() }}
+  <input type="hidden" name="token" value="{{ token }}">
+  <a class="btn btn-ghost" href="{{ url_for('reading_import.start') }}">{{ _('Cancel') }}</a>
+  <button class="btn btn-primary" type="submit"{% if not actions %} disabled{% endif %}>{{ ngettext('Import %(num)s change', 'Import %(num)s changes', actions|length, num=actions|length) }}</button>
+</form>
+{%- endif %}
+{% endblock %}

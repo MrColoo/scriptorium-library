@@ -537,6 +537,20 @@ dialog.modal--sm { width: min(420px, calc(100vw - 32px)); }
 .year-teaser-spines i:nth-child(3) { height: 82%; background: #5B8E7D; } .year-teaser-spines i:nth-child(4) { height: 94%; background: #F2CC8F; }
 .year-teaser-spines i:nth-child(5) { height: 64%; background: #2E6F95; }
 
+/* Reading history import */
+.import-sources { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.import-drop { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 34px 20px; text-align: center;
+  border: 1.5px dashed var(--border-strong); border-radius: var(--radius-lg); cursor: pointer; transition: border-color .12s, background .12s; }
+.import-drop:hover, .import-drop:focus-within { border-color: var(--accent); background: var(--accent-soft); }
+.import-drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.import-group summary { display: flex; align-items: center; gap: 10px; cursor: pointer; list-style: none; }
+.import-group summary::-webkit-details-marker { display: none; }
+.import-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; max-height: 420px; overflow-y: auto; }
+.import-list li { display: flex; align-items: center; gap: 12px; }
+.import-list .cover { width: 30px; flex: none; }
+.import-list .grow { display: flex; flex-direction: column; min-width: 0; }
+.import-confirm { justify-content: flex-end; }
+
 /* What's new */
 dialog.whats-new { width: min(520px, calc(100vw - 32px)); }
 .whats-new-hero { padding: 26px 24px 18px; display: flex; flex-direction: column; gap: 8px;

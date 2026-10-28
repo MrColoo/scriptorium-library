@@ -512,11 +512,24 @@
     input.value = "";
   });
 
+  // A file field inside [data-local-drop] shows the chosen file's name in its [data-file-name].
+  doc.addEventListener("change", function (e) {
+    var input = e.target;
+    if (!input || input.type !== "file" || !input.closest) return;
+    var area = input.closest("[data-local-drop]");
+    var label = area && area.querySelector("[data-file-name]");
+    if (label && input.files && input.files[0]) label.textContent = input.files[0].name;
+  });
+
   // Drag & drop anywhere on the page uploads to the library.
   var dropOverlay = doc.querySelector(".dropzone-overlay");
   if (dropOverlay && body.dataset.uploadUrl) {
     var depth = 0;
-    var hasFiles = function (e) { return e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], "Files") !== -1; };
+    // Drops on a [data-local-drop] area (for example a file field) are left to that field.
+    var hasFiles = function (e) {
+      if (e.target && e.target.closest && e.target.closest("[data-local-drop]")) return false;
+      return e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], "Files") !== -1;
+    };
     window.addEventListener("dragenter", function (e) { if (!hasFiles(e)) return; depth++; dropOverlay.classList.add("is-active"); });
     window.addEventListener("dragleave", function (e) { if (!hasFiles(e)) return; depth = Math.max(0, depth - 1); if (!depth) dropOverlay.classList.remove("is-active"); });
     window.addEventListener("dragover", function (e) { if (hasFiles(e)) e.preventDefault(); });
