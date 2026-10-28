@@ -1,0 +1,256 @@
+{%- import "_macros.html" as ui with context -%}
+{%- set s = summary -%}
+{%- set palette = ['#C8553D', '#E9B44C', '#2E6F95', '#5B8E7D', '#8E5572', '#D98E73', '#3D5A80', '#B5838D', '#6D597A', '#E07A5F', '#81B29A', '#F2CC8F'] -%}
+<!DOCTYPE html>
+<html lang="{{ current_user.locale or 'en' }}" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#120F1C">
+  <title>{{ title }} · Scriptorium</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/year.css') }}">
+</head>
+<body class="yr">
+<script type="application/json" id="year-data">{{ {
+  'year': s.year, 'name': user_name, 'finished': s.finished, 'hours': hours, 'streak': s.streak,
+  'highlights': s.highlights, 'active_days': s.active_days,
+  'author': s.authors[0].name if s.authors else '', 'genre': s.genres[0].name if s.genres else '',
+  'covers': (s.books|map(attribute='id')|list)[-5:],
+  'cover_url': url_for('web.get_cover', book_id=0, resolution='md')
+}|tojson }}</script>
+<script type="application/json" id="year-i18n">{{ {
+  'title': _('My %(year)s in books', year=s.year), 'books': _('books finished'), 'hours': _('hours reading'),
+  'streak': _('days in a row'), 'highlights': _('highlights'), 'top_author': _('Top author'),
+  'top_genre': _('Top genre'), 'style': (_('The Voracious Reader') if s.style == 'voracious' else _('The Saga Seeker') if s.style == 'saga' else _('The Devoted Reader') if s.style == 'devotee' else _('The Explorer') if s.style == 'explorer' else _('The Slow Savourer') if s.style == 'savourer' else ''),
+  'file': 'scriptorium-' ~ s.year ~ '.png', 'saved': _('Image saved'), 'pause': _('Pause'), 'play': _('Play')
+}|tojson }}</script>
+
+<div class="yr-stage" id="yr-stage" aria-roledescription="{{ _('story') }}">
+  <div class="yr-progress" aria-hidden="true"></div>
+  <header class="yr-top">
+    <a class="yr-brand" href="{{ url_for('web.index') }}"><img src="{{ url_for('static', filename='icon.svg') }}" alt="" width="24" height="24">Scriptorium</a>
+    <span class="grow"></span>
+    {%- if years|length > 1 %}
+    <nav class="yr-years" aria-label="{{ _('Year') }}">
+      {%- for y in years[:4] %}<a href="{{ url_for('year_review.show', year=y) }}"{% if y == s.year %} aria-current="page"{% endif %}>{{ y }}</a>{% endfor %}
+    </nav>
+    {%- endif %}
+    <button class="yr-icon" type="button" data-yr-pause aria-label="{{ _('Pause') }}">{{ ui.icon('pause') }}</button>
+    <a class="yr-icon" href="{{ url_for('web.index') }}" aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</a>
+  </header>
+
+{%- if has_story %}
+  <main class="yr-slides" id="yr-slides">
+
+    {#- 1 · Intro -#}
+    <section class="yr-slide yr-s-intro" data-hold>
+      <div class="yr-shelf yr-shelf--intro" aria-hidden="true">
+        {%- for i in range(18) %}<span class="yr-spine" style="--i:{{ i }};--c:{{ palette[(i * 5) % palette|length] }};--h:{{ 62 + (i * 37) % 34 }}%"></span>{% endfor %}
+      </div>
+      <p class="yr-eyebrow">{{ _('Scriptorium · %(year)s', year=s.year) }}</p>
+      <h1 class="yr-display">{{ _('%(name)s, this was your %(year)s in books.', name=user_name, year=s.year) }}</h1>
+      <p class="yr-hint">{{ _('Tap to begin') }} →</p>
+    </section>
+
+    {#- 2 · Books finished -#}
+    {%- if s.finished %}
+    <section class="yr-slide yr-s-finished">
+      <p class="yr-eyebrow">{{ _('This year you finished') }}</p>
+      <p class="yr-number" data-count="{{ s.finished }}">{{ s.finished }}</p>
+      <p class="yr-lead">{{ ngettext('book. One whole story, cover to cover.', 'books. Every one of them, cover to cover.', s.finished) }}</p>
+      {%- if s.started > s.finished %}<p class="yr-sub">{{ _('And you opened %(num)s more along the way.', num=s.started - s.finished) }}</p>{% endif %}
+      <div class="yr-shelf yr-shelf--titles" aria-hidden="true">
+        {%- for book in s.books %}<span class="yr-spine yr-spine--title" style="--i:{{ loop.index0 }};--c:{{ palette[(book.id * 7) % palette|length] }};--h:{{ 70 + (book.id * 13) % 28 }}%"><span>{{ book.title }}</span></span>{% endfor %}
+      </div>
+    </section>
+    {%- elif s.started %}
+    <section class="yr-slide yr-s-finished">
+      <p class="yr-eyebrow">{{ _('This year you opened') }}</p>
+      <p class="yr-number" data-count="{{ s.started }}">{{ s.started }}</p>
+      <p class="yr-lead">{{ ngettext('book. The best part is still ahead.', 'books. The best parts are still ahead.', s.started) }}</p>
+    </section>
+    {%- endif %}
+
+    {#- 3 · Time -#}
+    {%- if hours >= 1 %}
+    <section class="yr-slide yr-s-time">
+      <div class="yr-rings" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p class="yr-eyebrow">{{ _('Time with a book in your hands') }}</p>
+      <p class="yr-number" data-count="{{ hours }}">{{ hours }}</p>
+      <p class="yr-lead">{{ ngettext('hour of reading on your Kobo.', 'hours of reading on your Kobo.', hours) }}</p>
+      {%- if hours >= 4 %}<p class="yr-sub">{{ _('That is about %(num)s films, without the popcorn.', num=(hours / 2)|round|int) }}</p>{% endif %}
+    </section>
+    {%- endif %}
+
+    {#- 4 · First and last -#}
+    {%- if s.first and s.last %}
+    <section class="yr-slide yr-s-bookends">
+      <p class="yr-eyebrow">{{ _('Your bookends') }}</p>
+      <div class="yr-bookends">
+        <figure class="yr-cover yr-cover--left">
+          <img src="{{ url_for('web.get_cover', book_id=s.first.id, resolution='md') }}" alt="">
+          <figcaption><span>{{ _('You opened the year with') }}</span><strong>{{ s.first.title }}</strong></figcaption>
+        </figure>
+        <figure class="yr-cover yr-cover--right">
+          <img src="{{ url_for('web.get_cover', book_id=s.last.id, resolution='md') }}" alt="">
+          <figcaption><span>{{ _('and closed it with') }}</span><strong>{{ s.last.title }}</strong></figcaption>
+        </figure>
+      </div>
+    </section>
+    {%- endif %}
+
+    {#- 5 · Authors -#}
+    {%- if s.authors %}
+    <section class="yr-slide yr-s-authors">
+      <p class="yr-eyebrow">{{ _('The voices you returned to') }}</p>
+      <h2 class="yr-title">{{ s.authors[0].name }}</h2>
+      <p class="yr-sub">{{ ngettext('topped your year with %(num)s book.', 'topped your year with %(num)s books.', s.authors[0].count, num=s.authors[0].count) }}</p>
+      <ol class="yr-podium">
+        {%- for author in s.authors %}
+        <li style="--rank:{{ loop.index }};--n:{{ author.count }}"><span class="yr-podium-name">{{ author.name }}</span><span class="yr-podium-bar"><b>{{ loop.index }}</b></span></li>
+        {%- endfor %}
+      </ol>
+    </section>
+    {%- endif %}
+
+    {#- 6 · Genres -#}
+    {%- if s.genres %}
+    <section class="yr-slide yr-s-genres">
+      <p class="yr-eyebrow">{{ _('Your shelves leaned towards') }}</p>
+      <div class="yr-stamps">
+        {%- for genre in s.genres %}
+        <span class="yr-stamp" style="--i:{{ loop.index0 }};--c:{{ palette[(loop.index0 * 3 + 1) % palette|length] }};--s:{{ 1.35 - loop.index0 * 0.15 }}">{{ genre.name }}<small>{{ genre.count }}</small></span>
+        {%- endfor %}
+      </div>
+      {%- if s.series %}<p class="yr-sub">{{ ngettext('And you followed %(num)s series.', 'And you followed %(num)s different series.', s.series, num=s.series) }}</p>{% endif %}
+    </section>
+    {%- endif %}
+
+    {#- 7 · Rhythm -#}
+    {%- if s.active_days %}
+    {%- set peak = s.months|max %}
+    <section class="yr-slide yr-s-rhythm">
+      <p class="yr-eyebrow">{{ _('Your reading rhythm') }}</p>
+      {%- if busiest_month %}<h2 class="yr-title">{{ _('%(month)s was your month.', month=busiest_month|capitalize) }}</h2>{% endif %}
+      <div class="yr-bars" role="img" aria-label="{{ _('Reading days per month') }}">
+        {%- for count in s.months %}
+        <span class="yr-bar{% if count == peak and peak %} is-peak{% endif %}" style="--i:{{ loop.index0 }};--v:{{ (count / peak * 100) if peak else 0 }}%"><i></i><small>{{ months[loop.index0] }}</small></span>
+        {%- endfor %}
+      </div>
+      <div class="yr-facts">
+        {%- if s.time_of_day %}
+        <p><span class="yr-fact-icon">{{ ui.icon('moon' if s.time_of_day in ['evening', 'night'] else 'sun') }}</span>
+          {%- if s.time_of_day == 'morning' %}{{ _('An early-morning reader.') }}{% elif s.time_of_day == 'afternoon' %}{{ _('An afternoon reader.') }}{% elif s.time_of_day == 'evening' %}{{ _('An evening reader.') }}{% else %}{{ _('A true night owl.') }}{% endif %}</p>
+        {%- endif %}
+        {%- if weekday %}<p><span class="yr-fact-icon">{{ ui.icon('calendar') }}</span>{{ _('%(day)s was your reading day.', day=weekday|capitalize) }}</p>{% endif %}
+      </div>
+    </section>
+    {%- endif %}
+
+    {#- 8 · Streak -#}
+    {%- if s.streak >= 2 %}
+    <section class="yr-slide yr-s-streak">
+      <p class="yr-eyebrow">{{ _('Your longest streak') }}</p>
+      <p class="yr-number" data-count="{{ s.streak }}">{{ s.streak }}</p>
+      <p class="yr-lead">{{ _('days in a row with a book.') }}</p>
+      <p class="yr-sub">{{ ngettext('%(num)s reading day in total.', '%(num)s reading days in total.', s.active_days, num=s.active_days) }}</p>
+      <div class="yr-calendar" data-year="{{ s.year }}" data-days="{{ s.days|join(',') }}" aria-hidden="true"></div>
+    </section>
+    {%- endif %}
+
+    {#- 9 · Quote -#}
+    {%- if s.quote %}
+    <section class="yr-slide yr-s-quote">
+      <p class="yr-eyebrow">{{ _('The line you kept') }}</p>
+      <figure class="yr-paper">
+        <blockquote>{{ s.quote.text }}</blockquote>
+        {%- if s.quote.note %}<p class="yr-margin-note">{{ s.quote.note }}</p>{% endif %}
+        <figcaption>{{ s.quote.book_title }}{% if s.quote.authors %} · {{ s.quote.authors|join(', ') }}{% endif %}</figcaption>
+      </figure>
+      <p class="yr-sub">{{ ngettext('One of %(num)s highlight this year.', 'One of %(num)s highlights this year.', s.highlights, num=s.highlights) }}</p>
+    </section>
+    {%- endif %}
+
+    {#- 10 · Library -#}
+    {%- if s.added %}
+    <section class="yr-slide yr-s-library">
+      <div class="yr-rain" aria-hidden="true">
+        {%- for i in range(14) %}<span style="--i:{{ i }};--c:{{ palette[(i * 7) % palette|length] }};--x:{{ (i * 53) % 96 }}%"></span>{% endfor %}
+      </div>
+      <p class="yr-eyebrow">{{ _('Meanwhile, in the library') }}</p>
+      <p class="yr-number" data-count="{{ s.added }}">{{ s.added }}</p>
+      <p class="yr-lead">{{ ngettext('new book found a place on the shelves.', 'new books found a place on the shelves.', s.added) }}</p>
+    </section>
+    {%- endif %}
+
+    {#- 11 · Style -#}
+    {%- if s.style %}
+    <section class="yr-slide yr-s-style yr-style--{{ s.style }}">
+      <p class="yr-eyebrow">{{ _('Your reader profile') }}</p>
+      <svg class="yr-seal" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="yr-seal-path" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+        <circle cx="100" cy="100" r="92" class="yr-seal-ring"/>
+        <circle cx="100" cy="100" r="58" class="yr-seal-core"/>
+        <text class="yr-seal-text"><textPath href="#yr-seal-path" textLength="458" lengthAdjust="spacing">SCRIPTORIUM · {{ s.year }} · EX LIBRIS · {{ s.year }} ·</textPath></text>
+        <text x="100" y="114" text-anchor="middle" class="yr-seal-glyph">{% if s.style == 'voracious' %}∞{% elif s.style == 'saga' %}§{% elif s.style == 'devotee' %}♥{% elif s.style == 'explorer' %}✶{% else %}❦{% endif %}</text>
+      </svg>
+      {%- if s.style == 'voracious' %}
+      <h2 class="yr-title">{{ _('The Voracious Reader') }}</h2><p class="yr-lead">{{ _('%(num)s books in a year. The shelves can barely keep up with you.', num=s.finished) }}</p>
+      {%- elif s.style == 'saga' %}
+      <h2 class="yr-title">{{ _('The Saga Seeker') }}</h2><p class="yr-lead">{{ _('Once a world has you, you stay for the whole series.') }}</p>
+      {%- elif s.style == 'devotee' %}
+      <h2 class="yr-title">{{ _('The Devoted Reader') }}</h2><p class="yr-lead">{{ _('When an author speaks to you, you read everything they wrote.') }}</p>
+      {%- elif s.style == 'explorer' %}
+      <h2 class="yr-title">{{ _('The Explorer') }}</h2><p class="yr-lead">{{ _('A different shelf every time. Your curiosity has no favourite genre.') }}</p>
+      {%- else %}
+      <h2 class="yr-title">{{ _('The Slow Savourer') }}</h2><p class="yr-lead">{{ _('Fewer books, read closely. Every page counted.') }}</p>
+      {%- endif %}
+    </section>
+    {%- endif %}
+
+    {#- 12 · Summary -#}
+    <section class="yr-slide yr-s-summary" data-hold>
+      <article class="yr-poster">
+        <header><img src="{{ url_for('static', filename='icon.svg') }}" alt="" width="28" height="28"><span>{{ _('%(name)s · %(year)s in books', name=user_name, year=s.year) }}</span></header>
+        {%- if s.books %}
+        <div class="yr-poster-covers">{% for book in s.books[-5:] %}<img src="{{ url_for('web.get_cover', book_id=book.id, resolution='md') }}" alt="" style="--i:{{ loop.index0 }}">{% endfor %}</div>
+        {%- endif %}
+        <dl class="yr-poster-stats">
+          <div><dt>{{ _('Books') }}</dt><dd>{{ s.finished }}</dd></div>
+          {%- if hours >= 1 %}<div><dt>{{ _('Hours') }}</dt><dd>{{ hours }}</dd></div>{% endif %}
+          <div><dt>{{ _('Streak') }}</dt><dd>{{ s.streak }}</dd></div>
+          <div><dt>{{ _('Highlights') }}</dt><dd>{{ s.highlights }}</dd></div>
+        </dl>
+        <dl class="yr-poster-tops">
+          {%- if s.authors %}<div><dt>{{ _('Top author') }}</dt><dd>{{ s.authors[0].name }}</dd></div>{% endif %}
+          {%- if s.genres %}<div><dt>{{ _('Top genre') }}</dt><dd>{{ s.genres[0].name }}</dd></div>{% endif %}
+        </dl>
+      </article>
+      <div class="yr-actions">
+        <button class="yr-btn yr-btn--primary" type="button" data-yr-save>{{ ui.icon('download') }}{{ _('Save image') }}</button>
+        <button class="yr-btn" type="button" data-yr-replay>{{ ui.icon('rotate-ccw') }}{{ _('Watch again') }}</button>
+      </div>
+    </section>
+  </main>
+  <button class="yr-tap yr-tap--prev" type="button" data-yr-prev aria-label="{{ _('Previous') }}"></button>
+  <button class="yr-tap yr-tap--next" type="button" data-yr-next aria-label="{{ _('Next') }}"></button>
+{%- else %}
+  <main class="yr-slides">
+    <section class="yr-slide yr-s-intro is-active">
+      <div class="yr-shelf yr-shelf--intro" aria-hidden="true">
+        {%- for i in range(10) %}<span class="yr-spine" style="--i:{{ i }};--c:{{ palette[(i * 5) % palette|length] }};--h:{{ 62 + (i * 37) % 34 }}%"></span>{% endfor %}
+      </div>
+      <p class="yr-eyebrow">{{ _('Scriptorium · %(year)s', year=s.year) }}</p>
+      <h1 class="yr-display">{{ _('Your %(year)s story is still unwritten.', year=s.year) }}</h1>
+      <p class="yr-lead">{{ _('Finish a book, sync your Kobo or KOReader, or highlight a passage: your year in books fills itself in as you read.') }}</p>
+      <p><a class="yr-btn yr-btn--primary" href="{{ url_for('web.index') }}">{{ _('Back to the library') }}</a></p>
+    </section>
+  </main>
+{%- endif %}
+</div>
+<script src="{{ url_for('static', filename='js/year.js') }}" defer></script>
+</body>
+</html>

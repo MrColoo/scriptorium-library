@@ -39,6 +39,7 @@ def main():
     from .devices import devices
     from .whats_new import whats_new
     from .annotations import annotations
+    from .year_review import year_review
     try:
         from .kobo import kobo, get_kobo_activated
         from .kobo_auth import kobo_auth
@@ -92,6 +93,7 @@ def main():
     app.register_blueprint(devices)
     app.register_blueprint(whats_new)
     app.register_blueprint(annotations)
+    app.register_blueprint(year_review)
     if kobo_available:
         app.register_blueprint(kobo)
         app.register_blueprint(kobo_auth)

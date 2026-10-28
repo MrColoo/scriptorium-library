@@ -3,6 +3,15 @@
 {%- set is_home = page == 'newest' %}
 {%- set total = pagination.total_count if pagination else (entries|length) %}
 
+{%- if year_teaser %}
+<a class="year-teaser" href="{{ url_for('year_review.show', year=year_teaser) }}">
+  <span class="year-teaser-spines" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+  <span class="grow"><strong>{{ _('Your %(year)s in books is ready', year=year_teaser) }}</strong>
+    <span>{{ _('The books, the hours, the lines you kept. Two minutes, full screen.') }}</span></span>
+  {{ ui.icon('arrow-right') }}
+</a>
+{%- endif %}
+
 {%- if is_home and continue_reading %}
 <section class="section" aria-labelledby="continue-heading">
   <div class="section-header">

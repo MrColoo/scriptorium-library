@@ -524,6 +524,19 @@ dialog.modal--sm { width: min(420px, calc(100vw - 32px)); }
 .highlight-meta { font-size: 12px; color: var(--text-faint); }
 .highlights-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
 
+/* Year in books teaser (December and early January) */
+.year-teaser { display: flex; align-items: center; gap: 18px; padding: 18px 22px; margin-bottom: 8px; border-radius: var(--radius-lg); color: #F6EEDD;
+  background: radial-gradient(60% 120% at 0% 0%, #8E5572, transparent 70%), radial-gradient(60% 120% at 100% 100%, #C8553D, transparent 70%), #1B1530;
+  box-shadow: var(--shadow-lg); text-decoration: none; }
+.year-teaser:hover { color: #fff; }
+.year-teaser strong { display: block; font-family: var(--font-serif); font-size: 21px; line-height: 1.2; }
+.year-teaser span span, .year-teaser .grow > span { font-size: 14px; opacity: .8; }
+.year-teaser-spines { display: flex; align-items: flex-end; gap: 3px; height: 44px; flex: none; }
+.year-teaser-spines i { width: 9px; border-radius: 2px; background: #E9B44C; }
+.year-teaser-spines i:nth-child(1) { height: 70%; background: #C8553D; } .year-teaser-spines i:nth-child(2) { height: 100%; }
+.year-teaser-spines i:nth-child(3) { height: 82%; background: #5B8E7D; } .year-teaser-spines i:nth-child(4) { height: 94%; background: #F2CC8F; }
+.year-teaser-spines i:nth-child(5) { height: 64%; background: #2E6F95; }
+
 /* What's new */
 dialog.whats-new { width: min(520px, calc(100vw - 32px)); }
 .whats-new-hero { padding: 26px 24px 18px; display: flex; flex-direction: column; gap: 8px;

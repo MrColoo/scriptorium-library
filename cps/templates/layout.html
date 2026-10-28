@@ -70,6 +70,7 @@
       {%- endfor %}
       {%- if not current_user.is_anonymous %}
       <a class="nav-link" href="{{ url_for('annotations.highlights_page') }}"{% if page == 'highlights' %} aria-current="page"{% endif %}>{{ ui.icon('highlight') }}<span class="nav-label">{{ _('Highlights') }}</span></a>
+      <a class="nav-link" href="{{ url_for('year_review.current_year') }}">{{ ui.icon('sparkles') }}<span class="nav-label">{{ _('Your year in books') }}</span></a>
       {%- endif %}
     </nav>
 

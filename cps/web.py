@@ -13,6 +13,7 @@ import copy
 import importlib
 import re
 import zipfile
+from datetime import date
 import xml.etree.ElementTree as ET
 
 from flask import Blueprint, jsonify
@@ -546,10 +547,17 @@ def render_books_list(data, sort_param, book_id, page):
             if devices.shows(current_user, "koreader"):
                 koreader_last_sync = reading_overview.humanize_since(
                     reading_overview.get_koreader_last_sync(current_user.id))
+        year_teaser = None
+        if website == "newest" and page == 1 and not current_user.is_anonymous:
+            today = date.today()
+            if today.month == 12:
+                year_teaser = today.year
+            elif today.month == 1 and today.day <= 15:
+                year_teaser = today.year - 1
         return render_title_template('index.html', random=random, entries=entries, pagination=pagination,
                                      title=title, page=website, order=order[1],
                                      continue_reading=continue_reading, kobo_last_sync=kobo_last_sync,
-                                     koreader_last_sync=koreader_last_sync)
+                                     koreader_last_sync=koreader_last_sync, year_teaser=year_teaser)
 
 
 def render_rated_books(page, book_id, order):
