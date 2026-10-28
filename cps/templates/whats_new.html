@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content_class %}content--narrow{% endblock %}
+{% block body %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _("What's new") }}</h1>
+    <span class="page-subtitle">{{ _('You are running %(version)s.', version=installed) }} <a href="{{ releases_url }}" rel="noopener" target="_blank">{{ _('All releases on GitHub') }}</a></span>
+  </div>
+</div>
+
+{%- if notes %}
+<div class="release-notes">
+  {%- for note in notes %}
+  <article class="card card--flush" aria-labelledby="release-{{ loop.index }}">
+    <header class="whats-new-hero">
+      <span class="whats-new-eyebrow">{{ note.version }}{% if note.date %} · {{ note.date }}{% endif %}</span>
+      <h2 id="release-{{ loop.index }}">{{ note.title }}</h2>
+    </header>
+    <div class="modal-body">
+      <ul class="whats-new-list">
+        {%- for item in note.highlights %}
+        <li><span class="whats-new-marker" aria-hidden="true">{{ ui.icon('check') }}</span>
+          <span><strong>{{ item.title }}</strong>{% if item.text %}<span class="muted">{{ item.text }}</span>{% endif %}</span></li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </article>
+  {%- endfor %}
+</div>
+{%- else %}
+{{ ui.empty_state('sparkles', _('No release notes yet'), _('They appear here after the first release.')) }}
+{%- endif %}
+{% endblock %}

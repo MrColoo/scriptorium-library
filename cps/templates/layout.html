@@ -151,17 +151,22 @@
         </label>
         {%- endif %}
         <details class="menu">
-          <summary class="btn btn-icon btn-ghost" aria-label="{{ _('Account') }}" title="{{ current_user.name }}">
+          <summary class="btn btn-icon btn-ghost has-dot" aria-label="{{ _('Account') }}{% if update_notice and not update_notice.dismissed %} · {{ _('Update available') }}{% endif %}" title="{{ current_user.name }}">
             {%- if current_user.is_anonymous %}{{ ui.icon('user') }}{% else %}{{ ui.avatar(current_user) }}{% endif -%}
+            {%- if update_notice and not update_notice.dismissed %}<span class="notify-dot" aria-hidden="true"></span>{% endif -%}
           </summary>
           <div class="menu-panel" role="menu">
             {%- if not current_user.is_anonymous %}
             <div class="menu-label">{{ current_user.name }}</div>
+            {%- if update_notice %}
+            <a class="menu-item menu-item--accent" role="menuitem" href="{{ update_notice.url }}" target="_blank" rel="noopener">{{ ui.icon('bell') }}<span class="grow">{{ _('Update available: %(version)s', version=update_notice.version) }}</span>{{ ui.icon('external', 'icon-sm') }}</a>
+            {%- endif %}
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}">{{ ui.icon('user') }}<span class="grow">{{ _('Profile') }}</span></a>
             {%- if device_shown('kobo') or device_shown('koreader') %}
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}#devices">{{ ui.icon('device') }}<span class="grow">{{ _('Devices') }}</span></a>
             {%- endif %}
             <a class="menu-item" role="menuitem" href="{{ url_for('appearance.customize') }}">{{ ui.icon('sparkles') }}<span class="grow">{{ _('Customize') }}</span></a>
+            <a class="menu-item" role="menuitem" href="{{ url_for('whats_new.page') }}">{{ ui.icon('history') }}<span class="grow">{{ _("What's new") }}</span></a>
             <a class="menu-item" role="menuitem" href="{{ url_for('about.package_versions') }}">{{ ui.icon('info') }}<span class="grow">{{ _('About') }} {{ instance }}</span></a>
             {%- endif %}
             <div class="menu-sep"></div>
@@ -184,6 +189,13 @@
     </header>
 
     <main id="main" class="content {% block content_class %}{% endblock %}" tabindex="-1">
+      {%- if update_notice and not update_notice.dismissed %}
+      <div class="alert alert--info update-notice">{{ ui.icon('bell') }}<div class="alert-body">
+        <strong>{{ _('Scriptorium %(version)s is available.', version=update_notice.version) }}</strong>
+        {{ _('You have %(version)s. Pull the new image and restart the container to update.', version=update_notice.installed) }}
+        <a href="{{ update_notice.url }}" rel="noopener" target="_blank">{{ _('Release notes') }}</a></div>
+        <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss data-dismiss-url="{{ url_for('whats_new.dismiss_update') }}" aria-label="{{ _('Dismiss until the next release') }}" title="{{ _('Dismiss until the next release') }}">{{ ui.icon('x') }}</button></div>
+      {%- endif %}
       {%- with messages = get_flashed_messages(with_categories=True) %}
       {%- set inline = messages|rejectattr(0, 'in', ['success', 'info', 'cwa_refresh', 'theme_migration'])|list %}
       {%- if inline %}
@@ -194,9 +206,6 @@
           <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
           {%- elif category == 'warning' %}
         <div class="alert alert--warning" role="alert">{{ ui.icon('alert') }}<div class="alert-body">{{ message }}</div>
-          <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
-          {%- elif category == 'cwa_update' %}
-        <div class="alert alert--info">{{ ui.icon('bell') }}<div class="alert-body">{{ message }} <a href="https://github.com/Mrcoloo/scriptorium-library/releases" rel="noopener" target="_blank">{{ _('See Changelog') }}</a></div>
           <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button></div>
           {%- elif category == 'duplicate_scan_setup' %}
         <div class="alert alert--info">{{ ui.icon('copy') }}<div class="alert-body">{{ message }} <a href="{{ url_for('duplicates.show_duplicates') }}">{{ _('Open Duplicates') }}</a></div>
@@ -277,6 +286,27 @@
 
   {% block modal %}{% endblock %}
 
+  {%- if whats_new_popup %}
+  <dialog class="modal whats-new" id="whats-new-dialog" aria-labelledby="whats-new-title" data-seen-url="{{ url_for('whats_new.mark_seen') }}">
+    <div class="whats-new-hero">
+      <span class="whats-new-eyebrow">{{ ui.icon('sparkles', 'icon-sm') }}{{ _("What's new in %(version)s", version=whats_new_popup.version) }}</span>
+      <h2 id="whats-new-title">{{ whats_new_popup.title }}</h2>
+    </div>
+    <div class="modal-body">
+      <ul class="whats-new-list">
+        {%- for item in whats_new_popup.highlights %}
+        <li><span class="whats-new-marker" aria-hidden="true">{{ ui.icon('check') }}</span>
+          <span><strong>{{ item.title }}</strong>{% if item.text %}<span class="muted">{{ item.text }}</span>{% endif %}</span></li>
+        {%- endfor %}
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <a class="btn btn-ghost" href="{{ url_for('whats_new.page') }}">{{ _('All release notes') }}</a>
+      <button type="button" class="btn btn-primary" data-dialog-close autofocus>{{ _('Got it') }}</button>
+    </div>
+  </dialog>
+  {%- endif %}
+
   <script type="application/json" id="app-i18n">{{ {
     'close': _('Close'), 'confirm': _('Confirm'), 'copied': _('Copied to clipboard'),
     'copy_failed': _('Could not copy, select the text and copy it manually'),
@@ -293,6 +323,7 @@
   <script type="application/json" id="duplicate-notification-data" data-status-url="{{ url_for('duplicates.get_duplicate_status') }}" data-page-url="{{ url_for('duplicates.show_duplicates') }}">{{ duplicate_notification|tojson }}</script>
   <script src="{{ url_for('static', filename='js/duplicate-notifier.js') }}" defer></script>
   {%- endif %}
+  {%- if whats_new_popup %}<script src="{{ url_for('static', filename='js/whats-new.js') }}" defer></script>{% endif %}
   {% block js %}{% endblock %}
 </body>
 </html>

@@ -501,6 +501,25 @@ dialog.modal--sm { width: min(420px, calc(100vw - 32px)); }
 .modal-footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; padding: 16px 20px 18px; }
 .modal-body:last-child { padding-bottom: 20px; }
 
+/* What's new */
+dialog.whats-new { width: min(520px, calc(100vw - 32px)); }
+.whats-new-hero { padding: 26px 24px 18px; display: flex; flex-direction: column; gap: 8px;
+  background: radial-gradient(120% 140% at 0% 0%, color-mix(in oklch, var(--accent) 26%, transparent), transparent 62%),
+              radial-gradient(90% 120% at 100% 0%, color-mix(in oklch, var(--accent) 14%, transparent), transparent 70%);
+  border-bottom: 1px solid var(--border); }
+.whats-new-hero h2 { font-family: var(--font-serif); font-size: 26px; line-height: 1.15; }
+.whats-new-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; letter-spacing: .02em; color: var(--accent-text); }
+.whats-new-list { list-style: none; margin: 0; padding: 4px 0 0; display: flex; flex-direction: column; gap: 14px; }
+.whats-new-list li { display: flex; gap: 12px; align-items: flex-start; }
+.whats-new-list li > span:last-child { display: flex; flex-direction: column; gap: 2px; color: var(--text); }
+.whats-new-marker { flex: none; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-text); margin-top: 1px; }
+.whats-new-marker .icon { width: 13px; height: 13px; }
+.release-notes { display: flex; flex-direction: column; gap: 16px; }
+.release-notes .whats-new-hero { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+.has-dot { position: relative; }
+.notify-dot { position: absolute; top: 4px; right: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--danger); box-shadow: 0 0 0 2px var(--bg); }
+.menu-item--accent, .menu-item--accent .icon { color: var(--accent-text); }
+
 /* ---------- Tabs ---------- */
 .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
 .tabs::-webkit-scrollbar { display: none; }

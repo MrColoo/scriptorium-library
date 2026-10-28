@@ -37,6 +37,7 @@ def main():
     from .duplicates import duplicates
     from .appearance import appearance
     from .devices import devices
+    from .whats_new import whats_new
     try:
         from .kobo import kobo, get_kobo_activated
         from .kobo_auth import kobo_auth
@@ -88,6 +89,7 @@ def main():
     app.register_blueprint(duplicates)
     app.register_blueprint(appearance)
     app.register_blueprint(devices)
+    app.register_blueprint(whats_new)
     if kobo_available:
         app.register_blueprint(kobo)
         app.register_blueprint(kobo_auth)

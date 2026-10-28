@@ -1,0 +1,42 @@
+{
+  "releases": [
+    {
+      "version": "v1.0.0",
+      "date": "2026-10-28",
+      "title": {
+        "en": "Welcome to Scriptorium",
+        "it": "Ti diamo il benvenuto in Scriptorium"
+      },
+      "highlights": [
+        {
+          "title": {"en": "A new interface", "it": "Una nuova interfaccia"},
+          "text": {
+            "en": "Every page redesigned, in light and dark, and built for phones as much as desktops.",
+            "it": "Ogni pagina ridisegnata, in chiaro e scuro, pensata per il telefono quanto per il computer."
+          }
+        },
+        {
+          "title": {"en": "Your own colours", "it": "I tuoi colori"},
+          "text": {
+            "en": "Open Customize from your account menu: eleven ready-made styles, a random mix or your own palette.",
+            "it": "Apri Personalizza dal menu del tuo account: undici stili pronti, un mix casuale o la tua palette."
+          }
+        },
+        {
+          "title": {"en": "Your reading devices", "it": "I tuoi dispositivi di lettura"},
+          "text": {
+            "en": "Choose Kobo, KOReader or both in Profile → Devices. Progress from either shows on every book and in Continue reading.",
+            "it": "Scegli Kobo, KOReader o entrambi in Profilo → Dispositivi. I progressi di entrambi compaiono su ogni libro e in Continua a leggere."
+          }
+        },
+        {
+          "title": {"en": "Better readers", "it": "Lettori migliori"},
+          "text": {
+            "en": "An EPUB reader with themes and typography settings, and an audiobook player that remembers where you stopped.",
+            "it": "Un lettore EPUB con temi e impostazioni tipografiche, e un lettore di audiolibri che ricorda dove avevi interrotto."
+          }
+        }
+      ]
+    }
+  ]
+}

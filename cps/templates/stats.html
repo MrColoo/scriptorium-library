@@ -5,6 +5,7 @@
     <h1 class="page-title">{{ _('About') }} {{ instance }}</h1>
     <span class="page-subtitle">Scriptorium · {{ _('Based on') }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated" rel="noopener" target="_blank">Calibre-Web-Automated</a>, <a href="https://github.com/janeczku/calibre-web" rel="noopener" target="_blank">Calibre-Web</a> {{ _('and') }} <a href="https://calibre-ebook.com" rel="noopener" target="_blank">Calibre</a></span>
   </div>
+  <a class="btn" href="{{ url_for('whats_new.page') }}">{{ ui.icon('history') }}{{ _("What's new") }}</a>
 </div>
 <section class="section" aria-labelledby="lib-stats-h">
   <h2 id="lib-stats-h">{{ _('Library Statistics') }}</h2>
