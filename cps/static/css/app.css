@@ -551,6 +551,11 @@ dialog.modal--sm { width: min(420px, calc(100vw - 32px)); }
 .import-list .grow { display: flex; flex-direction: column; min-width: 0; }
 .import-confirm { justify-content: flex-end; }
 
+/* Shared books and offline page */
+.share-card { flex-direction: row; align-items: flex-start; gap: 16px; }
+.share-list { margin: 8px 0 0; padding-left: 18px; color: var(--text-2); }
+.offline { align-items: center; text-align: center; }
+
 /* What's new */
 dialog.whats-new { width: min(520px, calc(100vw - 32px)); }
 .whats-new-hero { padding: 26px 24px 18px; display: flex; flex-direction: column; gap: 8px;

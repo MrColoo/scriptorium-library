@@ -41,6 +41,7 @@ def main():
     from .annotations import annotations
     from .year_review import year_review
     from .reading_import import reading_import
+    from .pwa import pwa
     try:
         from .kobo import kobo, get_kobo_activated
         from .kobo_auth import kobo_auth
@@ -96,6 +97,7 @@ def main():
     app.register_blueprint(annotations)
     app.register_blueprint(year_review)
     app.register_blueprint(reading_import)
+    app.register_blueprint(pwa)
     if kobo_available:
         app.register_blueprint(kobo)
         app.register_blueprint(kobo_auth)

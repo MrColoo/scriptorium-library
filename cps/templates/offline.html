@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>{{ _('Offline') }} · Scriptorium</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <script src="{{ url_for('static', filename='js/theme-init.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+<main class="auth" id="main">
+  <div class="auth-card offline">
+    <img class="brand-logo brand-logo--lg" src="{{ url_for('static', filename='icon.svg') }}" alt="" width="64" height="64">
+    <h1>{{ _('You are offline') }}</h1>
+    <p class="muted">{{ _('Scriptorium will be back as soon as this device reaches your server again. Books already on your e-reader are still there.') }}</p>
+    <a class="btn btn-primary" href="{{ url_for('web.index') }}">{{ _('Try again') }}</a>
+  </div>
+</main>
+</body>
+</html>

@@ -774,6 +774,29 @@
       .catch(function () { btn.classList.remove("is-loading"); toast(t("error", "Something went wrong"), "error"); });
   });
 
+  // ---------- Installable app ----------
+  // The service worker lives at the site root (see cps/pwa.py); browsers only allow it on HTTPS or localhost.
+  if ("serviceWorker" in navigator && body.dataset.swUrl && window.isSecureContext) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register(body.dataset.swUrl).catch(function () { /* the site works without it */ });
+    });
+  }
+  var installPrompt = null;
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    installPrompt = e;
+    Array.prototype.forEach.call(doc.querySelectorAll("[data-install-app]"), function (el) { el.hidden = false; });
+  });
+  doc.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest("[data-install-app]");
+    if (!btn || !installPrompt) return;
+    installPrompt.prompt();
+    installPrompt.userChoice.then(function () {
+      installPrompt = null;
+      Array.prototype.forEach.call(doc.querySelectorAll("[data-install-app]"), function (el) { el.hidden = true; });
+    });
+  });
+
   window.CWA = {
     t: t,
     toast: toast,

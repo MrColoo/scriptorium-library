@@ -42,7 +42,8 @@
       {%- endif %}
       {%- if signed_in and current_user.role_upload() and g.allow_upload %}
       data-upload-url="{{ url_for('edit-book.upload') }}"
-      {%- endif %}>
+      {%- endif %}
+      data-sw-url="{{ service_worker_url() }}">
   {#- Legacy scripts read the token from this input; new code uses the meta tag. #}
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
   <a class="skip-link" href="#main">{{ _('Skip to content') }}</a>
@@ -169,6 +170,7 @@
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}#devices">{{ ui.icon('device') }}<span class="grow">{{ _('Devices') }}</span></a>
             {%- endif %}
             <a class="menu-item" role="menuitem" href="{{ url_for('appearance.customize') }}">{{ ui.icon('sparkles') }}<span class="grow">{{ _('Customize') }}</span></a>
+            <button class="menu-item" type="button" role="menuitem" data-install-app hidden>{{ ui.icon('download') }}<span class="grow">{{ _('Install app') }}</span></button>
             <a class="menu-item" role="menuitem" href="{{ url_for('whats_new.page') }}">{{ ui.icon('history') }}<span class="grow">{{ _("What's new") }}</span></a>
             <a class="menu-item" role="menuitem" href="{{ url_for('about.package_versions') }}">{{ ui.icon('info') }}<span class="grow">{{ _('About') }} {{ instance }}</span></a>
             {%- endif %}

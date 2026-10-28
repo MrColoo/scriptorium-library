@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content_class %}content--narrow{% endblock %}
+{% block body %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _('Add shared books') }}</h1>
+    <span class="page-subtitle">{{ _('Books shared from another app on this device are added to the library here.') }}</span>
+  </div>
+</div>
+<section class="card share-card" id="share-status" data-can-upload="{{ 'true' if (current_user.role_upload() and g.allow_upload) else 'false' }}">
+  <span class="icon-tile">{{ ui.icon('upload') }}</span>
+  <div class="grow">
+    <p class="strong" data-share-message>{{ _('Looking for shared books…') }}</p>
+    <ul class="share-list" data-share-list></ul>
+  </div>
+</section>
+<script type="application/json" id="share-i18n">{{ {
+  'none': _('Nothing was shared. Use “Share” in another app and pick Scriptorium.'),
+  'missed': _('The book did not arrive: open Scriptorium once from the home screen, then share it again.'),
+  'found': _('%(num)s book(s) received. Uploading…', num='%d'),
+  'no_permission': _('Your account cannot upload books. Ask an administrator for upload permission.'),
+  'unsupported': _('This browser cannot receive shared books.')
+}|tojson }}</script>
+{% endblock %}
+{% block js %}<script src="{{ url_for('static', filename='js/share.js') }}"></script>{% endblock %}
