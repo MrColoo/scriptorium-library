@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 21:49+0100\n"
+"POT-Creation-Date: 2026-10-28 22:20+0100\n"
 "PO-Revision-Date: 2025-11-24 17:12+0100\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -125,7 +125,7 @@ msgid "UI Configuration"
 msgstr "Configurazione dell'interfaccia utente"
 
 #: cps/admin.py:623 cps/admin.py:1303 cps/db.py:988 cps/search.py:154
-#: cps/web.py:897
+#: cps/web.py:905
 #, python-format
 msgid "Custom Column No.%(column)d does not exist in calibre database"
 msgstr ""
@@ -150,7 +150,7 @@ msgid "{} users deleted successfully"
 msgstr "{} utenti eliminati correttamente"
 
 #: cps/admin.py:753 cps/templates/config_view_edit.html:75
-#: cps/templates/user_edit.html:379 cps/templates/user_table.html:34
+#: cps/templates/user_edit.html:389 cps/templates/user_table.html:34
 msgid "Show All"
 msgstr "Mostra tutto"
 
@@ -404,7 +404,7 @@ msgstr "Tutto OK! Account Gmail verificato."
 #: cps/admin.py:2562 cps/admin.py:2833 cps/editbooks.py:1062
 #: cps/editbooks.py:1860 cps/shelf.py:107 cps/shelf.py:175 cps/shelf.py:236
 #: cps/shelf.py:280 cps/shelf.py:321 cps/shelf.py:395 cps/shelf.py:517
-#: cps/tasks/convert.py:145 cps/web.py:2758
+#: cps/tasks/convert.py:145 cps/web.py:2766
 #, python-format
 msgid "Oops! Database Error: %(error)s."
 msgstr "Errore nel database: %(error)s."
@@ -446,7 +446,7 @@ msgstr "Durata non valida per l'attività specificata"
 msgid "Scheduled tasks settings updated"
 msgstr "Impostazioni delle attività pianificate aggiornate"
 
-#: cps/admin.py:1821 cps/admin.py:1965 cps/admin.py:2829 cps/web.py:2181
+#: cps/admin.py:1821 cps/admin.py:1965 cps/admin.py:2829 cps/web.py:2189
 msgid "Oops! An unknown error occurred. Please try again later."
 msgstr "Si è verificato un errore sconosciuto. Per favore riprova più tardi."
 
@@ -454,7 +454,7 @@ msgstr "Si è verificato un errore sconosciuto. Per favore riprova più tardi."
 msgid "Settings DB is not Writeable"
 msgstr "Il DB delle impostazioni non è scrivibile"
 
-#: cps/admin.py:1844 cps/opds.py:199 cps/web.py:2684 cps/web.py:2809
+#: cps/admin.py:1844 cps/opds.py:199 cps/web.py:2692 cps/web.py:2817
 msgid "title"
 msgstr "titolo"
 
@@ -623,7 +623,7 @@ msgstr "Impostazioni del database aggiornate"
 msgid "Database Configuration"
 msgstr "Configurazione del database"
 
-#: cps/admin.py:2518 cps/web.py:2150
+#: cps/admin.py:2518 cps/web.py:2158
 msgid "Oops! Please complete all fields."
 msgstr "Per favore completa tutti i campi."
 
@@ -659,7 +659,7 @@ msgstr ""
 "Non rimarrebbe nessun utente amministratore, non è possibile eliminare "
 "l'utente"
 
-#: cps/admin.py:2784 cps/web.py:2493
+#: cps/admin.py:2784 cps/web.py:2501
 msgid "Email can't be empty and has to be a valid Email"
 msgstr "L'e-mail non può essere vuota e deve essere un'e-mail valida"
 
@@ -807,6 +807,15 @@ msgstr ""
 "Ripristino completato. Backup e log salvati in %(dir)s. Tutti i dati "
 "collegati ai libri sono stati azzerati."
 
+#: cps/annotations.py:238
+msgid "Note"
+msgstr "Nota"
+
+#: cps/annotations.py:251 cps/templates/highlights.html:6
+#: cps/templates/layout.html:73 cps/templates/year.html:225
+msgid "Highlights"
+msgstr "Sottolineature"
+
 #: cps/appearance.py:29 cps/templates/appearance.html:53
 #: cps/templates/appearance.html:55
 msgid "Classic"
@@ -861,7 +870,7 @@ msgid "Your style is saved."
 msgstr "Il tuo stile è salvato."
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:168
+#: cps/templates/layout.html:172
 msgid "Customize"
 msgstr "Personalizza"
 
@@ -1237,9 +1246,9 @@ msgstr "Immagini del profilo"
 #: cps/db.py:1273 cps/templates/appearance.html:56
 #: cps/templates/config_edit.html:110 cps/templates/config_view_edit.html:39
 #: cps/templates/config_view_edit.html:47 cps/templates/email_edit.html:44
-#: cps/templates/search_form.html:13 cps/web.py:710 cps/web.py:744
-#: cps/web.py:789 cps/web.py:829 cps/web.py:858 cps/web.py:1671 cps/web.py:1708
-#: cps/web.py:1759 cps/web.py:1791 cps/web.py:1830
+#: cps/templates/search_form.html:13 cps/web.py:718 cps/web.py:752
+#: cps/web.py:797 cps/web.py:837 cps/web.py:866 cps/web.py:1679 cps/web.py:1716
+#: cps/web.py:1767 cps/web.py:1799 cps/web.py:1838
 msgid "None"
 msgstr "Nessuna"
 
@@ -1306,7 +1315,7 @@ msgstr "ID libro mancante o non valido per il caricamento del formato"
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr "Impossibile caricare il formato: il libro non è più nella libreria"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:315
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:319
 msgid "Upload done, processing, please wait..."
 msgstr "Caricamento terminato, elaborazione in corso..."
 
@@ -1342,8 +1351,8 @@ msgstr ""
 msgid "File to be uploaded must have an extension"
 msgstr "Il file da caricare deve avere un'estensione"
 
-#: cps/editbooks.py:861 cps/editbooks.py:1483 cps/web.py:677 cps/web.py:2870
-#: cps/web.py:2962 cps/web.py:3036
+#: cps/editbooks.py:861 cps/editbooks.py:1483 cps/web.py:685 cps/web.py:2878
+#: cps/web.py:2970 cps/web.py:3048
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr ""
@@ -1469,7 +1478,7 @@ msgid "%(format)s not found: %(fn)s"
 msgstr "%(format)s non trovato: %(fn)s"
 
 #: cps/helper.py:113 cps/helper.py:244 cps/templates/admin.html:33
-#: cps/templates/detail.html:97 cps/templates/detail.html:280
+#: cps/templates/detail.html:97 cps/templates/detail.html:299
 #: cps/templates/user_edit.html:331
 msgid "Send to eReader"
 msgstr "Invia all'eReader"
@@ -1884,10 +1893,49 @@ msgstr "descrizione"
 msgid "{} Stars"
 msgstr "{} stelle"
 
+#: cps/pwa.py:54 cps/templates/share.html:6
+msgid "Add shared books"
+msgstr "Aggiungi i libri condivisi"
+
+#: cps/reading_import.py:262 cps/reading_import.py:357
+#: cps/templates/reading_import.html:47
+msgid "Want to read"
+msgstr "Da leggere"
+
+#: cps/reading_import.py:310 cps/reading_import.py:338
+#: cps/templates/reading_import.html:7
+msgid "Import your reading history"
+msgstr "Importa la tua cronologia di lettura"
+
+#: cps/reading_import.py:319
+msgid "Choose the CSV file you exported."
+msgstr "Scegli il file CSV che hai esportato."
+
+#: cps/reading_import.py:323
+msgid "The file is too large."
+msgstr "Il file è troppo grande."
+
+#: cps/reading_import.py:328
+msgid "This does not look like a Goodreads or StoryGraph export."
+msgstr "Non sembra un’esportazione di Goodreads o StoryGraph."
+
+#: cps/reading_import.py:348
+msgid "This preview has expired. Upload the file again."
+msgstr "L’anteprima è scaduta. Carica di nuovo il file."
+
+#: cps/reading_import.py:355
+#, python-format
+msgid ""
+"Imported: %(read)s finished, %(reading)s being read, %(shelved)s added to "
+"“%(shelf)s”."
+msgstr ""
+"Importati: %(read)s finiti, %(reading)s in lettura, %(shelved)s aggiunti a "
+"“%(shelf)s”."
+
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:179
-#: cps/templates/layout.html:244 cps/templates/login.html:44
-#: cps/templates/register.html:29 cps/web.py:2259
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:184
+#: cps/templates/layout.html:249 cps/templates/login.html:44
+#: cps/templates/register.html:29 cps/web.py:2267
 msgid "Login"
 msgstr "Accesso"
 
@@ -1912,7 +1960,8 @@ msgstr ""
 "quale i controlli su importazioni e modifiche dei metadati sono rapidi. "
 
 #: cps/render_template.py:75 cps/templates/appearance.html:7
-#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:13
+#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:14
+#: cps/templates/year.html:222
 msgid "Books"
 msgstr "Libri"
 
@@ -1937,7 +1986,7 @@ msgstr "Libri scaricati"
 msgid "Show Downloaded Books"
 msgstr "Mostra Libri scaricati"
 
-#: cps/render_template.py:92 cps/web.py:567
+#: cps/render_template.py:92 cps/web.py:575
 msgid "Top Rated Books"
 msgstr "Libri più votati"
 
@@ -1945,7 +1994,7 @@ msgstr "Libri più votati"
 msgid "Show Top Rated Books"
 msgstr "Mostra Libri più votati"
 
-#: cps/render_template.py:95 cps/web.py:916
+#: cps/render_template.py:95 cps/web.py:924
 msgid "Read Books"
 msgstr "Libri letti"
 
@@ -1953,7 +2002,7 @@ msgstr "Libri letti"
 msgid "Show Read and Unread"
 msgstr "Mostra Libri letti e Libri da leggere"
 
-#: cps/render_template.py:99 cps/web.py:919
+#: cps/render_template.py:99 cps/web.py:927
 msgid "Unread Books"
 msgstr "Libri da leggere"
 
@@ -1961,7 +2010,7 @@ msgstr "Libri da leggere"
 msgid "Show unread"
 msgstr "Mostra da leggere"
 
-#: cps/render_template.py:102 cps/templates/index.html:43
+#: cps/render_template.py:102 cps/templates/index.html:52
 msgid "Discover"
 msgstr "Libri casuali"
 
@@ -1970,8 +2019,8 @@ msgid "Show Random Books"
 msgstr "Mostra Libri casuali"
 
 #: cps/render_template.py:105 cps/templates/book_table.html:59
-#: cps/templates/book_table.html:105 cps/templates/stats.html:15
-#: cps/web.py:1834
+#: cps/templates/book_table.html:105 cps/templates/stats.html:16
+#: cps/web.py:1842
 msgid "Categories"
 msgstr "Categorie"
 
@@ -1984,7 +2033,7 @@ msgstr "Mostra sezione Categorie"
 #: cps/templates/book_table.html:60 cps/templates/book_table.html:106
 #: cps/templates/cwa_settings.html:149 cps/templates/cwa_settings.html:198
 #: cps/templates/magic_shelf_edit.html:92 cps/templates/search_form.html:66
-#: cps/templates/stats.html:16 cps/web.py:1714 cps/web.py:1726
+#: cps/templates/stats.html:17 cps/web.py:1722 cps/web.py:1734
 msgid "Series"
 msgstr "Serie"
 
@@ -1995,7 +2044,7 @@ msgstr "Mostra sezione Serie"
 #: cps/render_template.py:111 cps/templates/appearance.html:8
 #: cps/templates/author.html:5 cps/templates/book_table.html:57
 #: cps/templates/book_table.html:103 cps/templates/cwa_settings.html:148
-#: cps/templates/stats.html:14
+#: cps/templates/stats.html:15
 msgid "Authors"
 msgstr "Autori"
 
@@ -2004,7 +2053,7 @@ msgid "Show Author Section"
 msgstr "Mostra sezione Autori"
 
 #: cps/render_template.py:115 cps/templates/book_table.html:62
-#: cps/templates/book_table.html:109 cps/web.py:1682
+#: cps/templates/book_table.html:109 cps/web.py:1690
 msgid "Publishers"
 msgstr "Editori"
 
@@ -2014,7 +2063,7 @@ msgstr "Mostra sezione Editori"
 
 #: cps/render_template.py:118 cps/templates/book_table.html:61
 #: cps/templates/book_table.html:108 cps/templates/search_form.html:68
-#: cps/web.py:1806
+#: cps/web.py:1814
 msgid "Languages"
 msgstr "Lingue"
 
@@ -2022,7 +2071,7 @@ msgstr "Lingue"
 msgid "Show Language Section"
 msgstr "Mostra sezione Lingue"
 
-#: cps/render_template.py:122 cps/web.py:1766
+#: cps/render_template.py:122 cps/web.py:1774
 msgid "Ratings"
 msgstr "Valutazioni"
 
@@ -2038,7 +2087,7 @@ msgstr "Formati di file"
 msgid "Show File Formats Section"
 msgstr "Mostra sezione Formati di file"
 
-#: cps/render_template.py:129 cps/web.py:942
+#: cps/render_template.py:129 cps/web.py:950
 msgid "Archived Books"
 msgstr "Libri archiviati"
 
@@ -2046,7 +2095,7 @@ msgstr "Libri archiviati"
 msgid "Show Archived Books"
 msgstr "Mostra Libri archiviati"
 
-#: cps/render_template.py:134 cps/templates/book_table.html:7 cps/web.py:1495
+#: cps/render_template.py:134 cps/templates/book_table.html:7 cps/web.py:1503
 msgid "Books List"
 msgstr "Elenco libri"
 
@@ -2069,9 +2118,10 @@ msgid "%(count)s strings still need a %(language)s translation."
 msgstr "%(count)s stringhe devono ancora essere tradotte in %(language)s."
 
 #: cps/search.py:54 cps/search.py:441 cps/templates/book_edit.html:254
-#: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:234 cps/templates/search.html:5
-#: cps/templates/search.html:6 cps/templates/search_form.html:121
+#: cps/templates/feed.xml:34 cps/templates/highlights.html:19
+#: cps/templates/index.xml:12 cps/templates/layout.html:239
+#: cps/templates/search.html:5 cps/templates/search.html:6
+#: cps/templates/search_form.html:121
 msgid "Search"
 msgstr "Cerca"
 
@@ -2104,7 +2154,7 @@ msgstr ""
 "Errore nella ricerca delle colonne personalizzate. Per favore riavvia "
 "Scriptorium"
 
-#: cps/search.py:385 cps/search.py:417 cps/templates/layout.html:140
+#: cps/search.py:385 cps/search.py:417 cps/templates/layout.html:144
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2228,7 +2278,7 @@ msgstr ""
 "accessibile"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:123 cps/templates/tasks.html:5
+#: cps/templates/layout.html:128 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Attività"
 
@@ -2299,142 +2349,142 @@ msgstr ""
 msgid "No release information available"
 msgstr "Nessuna informazione disponibile sulla versione"
 
-#: cps/web.py:127
+#: cps/web.py:128
 msgid "You are using the default password. Choose a new one to continue."
 msgstr ""
 "Stai usando la password predefinita. Scegline una nuova per continuare."
 
-#: cps/web.py:534 cps/web.py:536
+#: cps/web.py:535 cps/web.py:537
 #, python-format
 msgid "Books (%(count)s)"
 msgstr "Libri (%(count)s)"
 
-#: cps/web.py:579
+#: cps/web.py:587
 msgid "Discover (Random Books)"
 msgstr "Libri casuali"
 
-#: cps/web.py:629
+#: cps/web.py:637
 msgid "Hot Books (Most Downloaded)"
 msgstr "Libri hot (i più scaricati)"
 
-#: cps/web.py:660
+#: cps/web.py:668
 #, python-format
 msgid "Downloaded books by %(user)s"
 msgstr "Libri scaricati da %(user)s"
 
-#: cps/web.py:693
+#: cps/web.py:701
 #, python-format
 msgid "Author: %(name)s"
 msgstr "Autore: %(name)s"
 
-#: cps/web.py:729
+#: cps/web.py:737
 #, python-format
 msgid "Publisher: %(name)s"
 msgstr "Editore: %(name)s"
 
-#: cps/web.py:757
+#: cps/web.py:765
 #, python-format
 msgid "Series: %(serie)s"
 msgstr "Serie: %(serie)s"
 
-#: cps/web.py:771
+#: cps/web.py:779
 msgid "Rating: None"
 msgstr "Valutazione: nessuna"
 
-#: cps/web.py:780
+#: cps/web.py:788
 #, python-format
 msgid "Rating: %(rating)s stars"
 msgstr "Valutazione: %(rating)s stelle"
 
-#: cps/web.py:811
+#: cps/web.py:819
 #, python-format
 msgid "File format: %(format)s"
 msgstr "Formato file: %(format)s"
 
-#: cps/web.py:848
+#: cps/web.py:856
 #, python-format
 msgid "Category: %(name)s"
 msgstr "Categoria: %(name)s"
 
-#: cps/web.py:877
+#: cps/web.py:885
 #, python-format
 msgid "Language: %(name)s"
 msgstr "Lingua: %(name)s"
 
-#: cps/web.py:1005
+#: cps/web.py:1013
 msgid "Error loading magic shelf"
 msgstr "Errore nel caricare lo scaffale intelligente"
 
-#: cps/web.py:1030
+#: cps/web.py:1038
 #, python-format
 msgid "Magic Shelf: %(icon)s %(name)s"
 msgstr "Scaffale intelligente: %(icon)s %(name)s"
 
-#: cps/web.py:1103
+#: cps/web.py:1111
 msgid "No rules provided"
 msgstr "Nessuna regola indicata"
 
-#: cps/web.py:1109
+#: cps/web.py:1117
 msgid "Invalid rules format"
 msgstr "Formato delle regole non valido"
 
-#: cps/web.py:1131
+#: cps/web.py:1139
 msgid "Error processing rules"
 msgstr "Errore nell'elaborare le regole"
 
-#: cps/web.py:1135
+#: cps/web.py:1143
 msgid "Invalid request"
 msgstr "Richiesta non valida"
 
-#: cps/web.py:1179
+#: cps/web.py:1187
 msgid "Name and rules are required"
 msgstr "Nome e regole sono obbligatori"
 
-#: cps/web.py:1182 cps/web.py:1279
+#: cps/web.py:1190 cps/web.py:1287
 msgid "Shelf name too long (max 100 characters)"
 msgstr "Nome dello scaffale troppo lungo (max 100 caratteri)"
 
-#: cps/web.py:1204
+#: cps/web.py:1212
 msgid "Error creating shelf"
 msgstr "Errore nel creare lo scaffale"
 
-#: cps/templates/layout.html:108 cps/web.py:1218
+#: cps/templates/layout.html:113 cps/web.py:1226
 msgid "Create Magic Shelf"
 msgstr "Crea scaffale intelligente"
 
-#: cps/web.py:1272
+#: cps/web.py:1280
 msgid "Permission denied to change public status"
 msgstr "Non hai i permessi per rendere pubblico o privato lo scaffale"
 
-#: cps/web.py:1276
+#: cps/web.py:1284
 msgid "Shelf name is required"
 msgstr "Il nome dello scaffale è obbligatorio"
 
-#: cps/web.py:1310
+#: cps/web.py:1318
 msgid "Error updating shelf"
 msgstr "Errore nell'aggiornare lo scaffale"
 
-#: cps/web.py:1325
+#: cps/web.py:1333
 msgid "Edit Magic Shelf"
 msgstr "Modifica scaffale intelligente"
 
-#: cps/web.py:1338
+#: cps/web.py:1346
 msgid "Shelf not found"
 msgstr "Scaffale non trovato"
 
-#: cps/web.py:1343
+#: cps/web.py:1351
 msgid "Permission denied"
 msgstr "Permesso negato"
 
-#: cps/web.py:1374
+#: cps/web.py:1382
 msgid "Shelf duplicated successfully"
 msgstr "Scaffale duplicato"
 
-#: cps/web.py:1380
+#: cps/web.py:1388
 msgid "Error duplicating shelf"
 msgstr "Errore nel duplicare lo scaffale"
 
-#: cps/templates/magic_shelf_edit.html:64 cps/web.py:1407
+#: cps/templates/magic_shelf_edit.html:64 cps/web.py:1415
 msgid ""
 "System shelves cannot be deleted. You can hide them in your user profile "
 "settings."
@@ -2442,100 +2492,100 @@ msgstr ""
 "Gli scaffali di sistema non si possono eliminare. Puoi nasconderli dalle "
 "impostazioni del profilo."
 
-#: cps/web.py:1424
+#: cps/web.py:1432
 msgid "Error deleting shelf"
 msgstr "Errore nell'eliminare lo scaffale"
 
-#: cps/web.py:1440
+#: cps/web.py:1448
 msgid ""
 "You cannot hide your own shelves. Delete them instead if you don't want them."
 msgstr "Non puoi nascondere i tuoi scaffali: eliminali se non ti servono."
 
-#: cps/web.py:1450
+#: cps/web.py:1458
 msgid "Shelf already hidden"
 msgstr "Scaffale già nascosto"
 
-#: cps/web.py:1464
+#: cps/web.py:1472
 msgid "Error hiding shelf"
 msgstr "Errore nel nascondere lo scaffale"
 
-#: cps/web.py:1478
+#: cps/web.py:1486
 msgid "Shelf was not hidden"
 msgstr "Lo scaffale non era nascosto"
 
-#: cps/web.py:1487
+#: cps/web.py:1495
 msgid "Error unhiding shelf"
 msgstr "Errore nel mostrare di nuovo lo scaffale"
 
-#: cps/templates/admin.html:34 cps/web.py:1641
+#: cps/templates/admin.html:34 cps/web.py:1649
 msgid "Downloads"
 msgstr "Scaricati"
 
-#: cps/web.py:1793
+#: cps/web.py:1801
 msgid "File formats list"
 msgstr "Elenco formati di file"
 
-#: cps/web.py:2033 cps/web.py:2071
+#: cps/web.py:2041 cps/web.py:2079
 msgid "Please configure the SMTP mail settings first..."
 msgstr "Configura prima le impostazioni della posta SMTP..."
 
-#: cps/web.py:2037
+#: cps/web.py:2045
 msgid "Oops! Please update your profile with a valid eReader Email."
 msgstr "Per favore aggiorna il tuo profilo con un'e-mail eReader valida."
 
-#: cps/web.py:2059
+#: cps/web.py:2067
 #, python-format
 msgid "Success! Book queued for sending to %(eReadermail)s"
 msgstr "Tutto OK! Libro in coda per l'invio a %(eReadermail)s"
 
-#: cps/web.py:2062 cps/web.py:2120
+#: cps/web.py:2070 cps/web.py:2128
 #, python-format
 msgid "Oops! There was an error sending book: %(res)s"
 msgstr "Si è verificato un errore durante l'invio del libro: %(res)s"
 
-#: cps/web.py:2079 cps/web.py:2089
+#: cps/web.py:2087 cps/web.py:2097
 msgid "No email addresses selected"
 msgstr "Nessun indirizzo email selezionato"
 
-#: cps/web.py:2096
+#: cps/web.py:2104
 msgid "Additional email addresses are disabled for your account."
 msgstr "Gli indirizzi email aggiuntivi sono disattivati per il tuo account."
 
-#: cps/web.py:2118
+#: cps/web.py:2126
 msgid "Success! Book queued for sending to the selected address(es)!"
 msgstr "Fatto! Il libro è in coda per l'invio agli indirizzi selezionati."
 
-#: cps/web.py:2137
+#: cps/web.py:2145
 msgid "Please wait one minute to register next user"
 msgstr "Attendi un minuto per registrare il prossimo utente"
 
-#: cps/templates/layout.html:181 cps/templates/login.html:77
-#: cps/templates/register.html:22 cps/web.py:2138 cps/web.py:2142
-#: cps/web.py:2147 cps/web.py:2151 cps/web.py:2157 cps/web.py:2182
-#: cps/web.py:2186 cps/web.py:2199 cps/web.py:2202
+#: cps/templates/layout.html:186 cps/templates/login.html:77
+#: cps/templates/register.html:22 cps/web.py:2146 cps/web.py:2150
+#: cps/web.py:2155 cps/web.py:2159 cps/web.py:2165 cps/web.py:2190
+#: cps/web.py:2194 cps/web.py:2207 cps/web.py:2210
 msgid "Register"
 msgstr "Registrati"
 
-#: cps/web.py:2141 cps/web.py:2306
+#: cps/web.py:2149 cps/web.py:2314
 msgid "Connection error to limiter backend, please contact your administrator"
 msgstr ""
 "Il server e-mail non è configurato, per favore contatta l'amministratore"
 
-#: cps/web.py:2146 cps/web.py:2198
+#: cps/web.py:2154 cps/web.py:2206
 msgid ""
 "Oops! Email server is not configured, please contact your administrator."
 msgstr ""
 "Il server e-mail non è configurato, per favore contatta l'amministratore."
 
-#: cps/web.py:2184
+#: cps/web.py:2192
 msgid "Oops! Your Email is not allowed."
 msgstr "La tua email non è consentita."
 
-#: cps/web.py:2187
+#: cps/web.py:2195
 msgid "Success! Confirmation Email has been sent."
 msgstr "Tutto OK! L'e-mail di conferma è stata inviata."
 
-#: cps/web.py:2235
+#: cps/web.py:2243
 msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
@@ -2543,7 +2593,7 @@ msgstr ""
 "Rilevato un ciclo di autenticazione. Se hai problemi ad accedere, contatta "
 "l'amministratore."
 
-#: cps/web.py:2280
+#: cps/web.py:2288
 msgid ""
 "OAuth authentication is not properly configured. Please contact "
 "administrator."
@@ -2551,28 +2601,28 @@ msgstr ""
 "L'autenticazione OAuth non è configurata correttamente. Contatta "
 "l'amministratore."
 
-#: cps/web.py:2285 cps/web.py:2312
+#: cps/web.py:2293 cps/web.py:2320
 msgid "Cannot activate LDAP authentication"
 msgstr "Impossibile attivare l'autenticazione LDAP"
 
-#: cps/web.py:2294
+#: cps/web.py:2302
 msgid "Standard login is disabled."
 msgstr "L'accesso con nome utente e password è disattivato."
 
-#: cps/web.py:2302
+#: cps/web.py:2310
 msgid "Please wait one minute before next login"
 msgstr "Attendi un minuto prima del prossimo accesso"
 
-#: cps/web.py:2320
+#: cps/web.py:2328
 msgid "Username cannot be empty"
 msgstr "Il nome utente non può essere vuoto"
 
-#: cps/web.py:2332
+#: cps/web.py:2340
 #, python-format
 msgid "you are now logged in as: '%(nickname)s'"
 msgstr "ora sei connesso come: '%(nickname)s'"
 
-#: cps/web.py:2351
+#: cps/web.py:2359
 #, python-format
 msgid ""
 "Welcome! Your account has been automatically created. You are now logged in "
@@ -2581,7 +2631,7 @@ msgstr ""
 "Benvenuto! Il tuo account è stato creato automaticamente. Hai effettuato "
 "l'accesso come '%(nickname)s'"
 
-#: cps/web.py:2356 cps/web.py:2359
+#: cps/web.py:2364 cps/web.py:2367
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
@@ -2589,7 +2639,7 @@ msgstr ""
 "Autenticazione riuscita, ma la creazione dell'account non è andata a buon "
 "fine. Contatta l'amministratore."
 
-#: cps/web.py:2363
+#: cps/web.py:2371
 msgid ""
 "Authentication successful, but no local account found. Please contact your "
 "administrator to create your account."
@@ -2597,7 +2647,7 @@ msgstr ""
 "Autenticazione riuscita, ma non esiste un account locale. Chiedi "
 "all'amministratore di crearlo."
 
-#: cps/web.py:2371
+#: cps/web.py:2379
 #, python-format
 msgid ""
 "Fallback Login as: '%(nickname)s', LDAP Server not reachable, or user not "
@@ -2606,61 +2656,66 @@ msgstr ""
 "Accesso di riserva come: '%(nickname)s', il server LDAP non è raggiungibile "
 "o l'utente è sconosciuto"
 
-#: cps/web.py:2377
+#: cps/web.py:2385
 #, python-format
 msgid "Could not login: %(message)s"
 msgstr "Impossibile accedere: %(message)s"
 
-#: cps/web.py:2400 cps/web.py:2401 cps/web.py:2447
+#: cps/web.py:2408 cps/web.py:2409 cps/web.py:2455
 msgid "Wrong Username or Password"
 msgstr "Nome utente o password errati"
 
-#: cps/web.py:2409
+#: cps/web.py:2417
 msgid "New Password was sent to your email address"
 msgstr "La nuova password è stata inviata al tuo indirizzo e-mail"
 
-#: cps/web.py:2413
+#: cps/web.py:2421
 msgid "An unknown error occurred. Please try again later."
 msgstr "Si è verificato un errore sconosciuto, riprova più tardi."
 
-#: cps/web.py:2415
+#: cps/web.py:2423
 msgid "Please enter valid username to reset password"
 msgstr "Inserisci un nome utente valido per reimpostare la password"
 
-#: cps/web.py:2426
+#: cps/web.py:2434
 #, python-format
 msgid "You are now logged in as: '%(nickname)s'"
 msgstr "Ora sei connesso come: '%(nickname)s'"
 
-#: cps/web.py:2482
+#: cps/web.py:2490
 msgid "Current password is incorrect"
 msgstr "La password attuale non è corretta"
 
-#: cps/web.py:2484
+#: cps/web.py:2492
 msgid "Please choose a password other than the default one"
 msgstr "Scegli una password diversa da quella predefinita"
 
-#: cps/web.py:2726 cps/web.py:2854
+#: cps/web.py:2734 cps/web.py:2862
 #, python-format
 msgid "%(name)s's Profile"
 msgstr "Profilo di %(name)s"
 
-#: cps/web.py:2747
+#: cps/web.py:2755
 msgid "Success! Profile Updated"
 msgstr "Tutto OK! Profilo aggiornato"
 
-#: cps/web.py:2753
+#: cps/web.py:2761
 msgid "Oops! An account already exists for this Email."
 msgstr "Esiste già un account per questa e-mail."
 
-#: cps/web.py:2975
+#: cps/web.py:2983
 msgid "Invalid book ID."
 msgstr "Book ID non valido."
 
-#: cps/templates/layout.html:169 cps/templates/stats.html:8
+#: cps/templates/layout.html:174 cps/templates/stats.html:9
 #: cps/templates/whats_new.html:6 cps/whats_new.py:137
 msgid "What's new"
 msgstr "Novità"
+
+#: cps/year_review.py:268
+#, python-format
+msgid "Your %(year)s in books"
+msgstr "Il tuo %(year)s in libri"
 
 #: cps/progress_syncing/protocols/kosync.py:496
 msgid "KOReader Sync Plugin"
@@ -2839,8 +2894,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "Cancellazione della cache delle miniature delle copertine"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:147
-#: cps/templates/layout.html:148 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:151
+#: cps/templates/layout.html:152 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Caricamento"
 
@@ -2860,7 +2915,7 @@ msgid "Pages"
 msgstr "Pagine"
 
 #: cps/templates/_macros.html:75 cps/templates/book_table.html:132
-#: cps/templates/user_table.html:66
+#: cps/templates/user_table.html:66 cps/templates/year.html:238
 msgid "Previous"
 msgstr "Precedente"
 
@@ -2871,6 +2926,7 @@ msgstr "Pagina %(page)s"
 
 #: cps/templates/_macros.html:89 cps/templates/book_table.html:132
 #: cps/templates/feed.xml:22 cps/templates/user_table.html:66
+#: cps/templates/year.html:239
 msgid "Next"
 msgstr "Successivo"
 
@@ -2931,12 +2987,12 @@ msgid "Allowed and denied values"
 msgstr "Valori consentiti e negati"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
-#: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:206
-#: cps/templates/layout.html:209 cps/templates/layout.html:212
-#: cps/templates/layout.html:215 cps/templates/layout.html:218
-#: cps/templates/layout.html:262 cps/templates/layout.html:311
-#: cps/templates/read.html:58
+#: cps/templates/book_table.html:51 cps/templates/detail.html:300
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:211
+#: cps/templates/layout.html:214 cps/templates/layout.html:217
+#: cps/templates/layout.html:220 cps/templates/layout.html:223
+#: cps/templates/layout.html:266 cps/templates/layout.html:315
+#: cps/templates/read.html:58 cps/templates/year.html:42
 msgid "Close"
 msgstr "Chiudi"
 
@@ -2975,12 +3031,13 @@ msgstr "Fermare l'esecuzione in corso? I libri già elaborati restano tali."
 #: cps/templates/book_edit.html:236 cps/templates/book_table.html:67
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
-#: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:271
+#: cps/templates/cwa_settings.html:260 cps/templates/detail.html:326
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:275
 #: cps/templates/magic_shelf_edit.html:61
-#: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
-#: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
-#: cps/templates/tasks.html:56 cps/templates/user_edit.html:497
+#: cps/templates/profile_pictures.html:29 cps/templates/reading_import.html:82
+#: cps/templates/schedule_edit.html:34 cps/templates/shelf_edit.html:32
+#: cps/templates/shelf_order.html:35 cps/templates/tasks.html:56
+#: cps/templates/user_edit.html:507
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -3032,7 +3089,7 @@ msgstr "Disattivo"
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:126
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:131
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -3270,7 +3327,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Avvia recupero automatico da Hardcover"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:121 cps/templates/layout.html:174
+#: cps/templates/layout.html:126 cps/templates/layout.html:179
 msgid "System"
 msgstr "Sistema"
 
@@ -3306,26 +3363,26 @@ msgstr "Arresta Scriptorium"
 msgid "Are you sure you want to restart?"
 msgstr "Sei sicuro di voler riavviare Scriptorium?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:318
+#: cps/templates/admin.html:175 cps/templates/layout.html:322
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 "Riavvio in corso: la pagina si ricarica quando il server torna disponibile."
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:246 cps/templates/layout.html:87
+#: cps/templates/detail.html:249 cps/templates/layout.html:92
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Scaffali"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:139
+#: cps/templates/appearance.html:14 cps/templates/layout.html:143
 msgid "Search titles, authors, series…"
 msgstr "Cerca titoli, autori, serie…"
 
-#: cps/templates/appearance.html:20 cps/templates/index.html:9
+#: cps/templates/appearance.html:20 cps/templates/index.html:18
 msgid "Continue reading"
 msgstr "Continua a leggere"
 
-#: cps/templates/appearance.html:31 cps/templates/index.html:30
+#: cps/templates/appearance.html:31 cps/templates/index.html:39
 msgid "In progress"
 msgstr "In lettura"
 
@@ -3429,7 +3486,8 @@ msgid "Vivid"
 msgstr "Vivace"
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:164 cps/templates/layout.html:241
+#: cps/templates/layout.html:168 cps/templates/layout.html:246
+#: cps/templates/reading_import.html:6
 msgid "Profile"
 msgstr "Profilo"
 
@@ -3473,7 +3531,7 @@ msgstr "Barra superiore"
 msgid "Sidebar and page"
 msgstr "Barra laterale e pagina"
 
-#: cps/templates/appearance.html:122 cps/templates/user_edit.html:396
+#: cps/templates/appearance.html:122 cps/templates/user_edit.html:406
 msgid "Sidebar"
 msgstr "Barra laterale"
 
@@ -3503,20 +3561,20 @@ msgstr "Titoli"
 
 #: cps/templates/appearance.html:155 cps/templates/book_edit.html:132
 #: cps/templates/book_edit.html:136 cps/templates/duplicates.html:49
-#: cps/templates/magic_shelf_edit.html:60
+#: cps/templates/magic_shelf_edit.html:60 cps/templates/reading_import.html:33
 msgid "Preview"
 msgstr "Anteprima"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:173
+#: cps/templates/appearance.html:156 cps/templates/layout.html:178
 msgid "Appearance"
 msgstr "Aspetto"
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:175
+#: cps/templates/appearance.html:157 cps/templates/layout.html:180
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Chiaro"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:176
+#: cps/templates/appearance.html:158 cps/templates/layout.html:181
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Scuro"
@@ -3662,7 +3720,7 @@ msgid "Number in series"
 msgstr "Numero nella serie"
 
 #: cps/templates/book_edit.html:101 cps/templates/book_edit.html:271
-#: cps/templates/detail.html:212 cps/templates/search_form.html:65
+#: cps/templates/detail.html:215 cps/templates/search_form.html:65
 msgid "Tags"
 msgstr "Etichette"
 
@@ -3694,7 +3752,7 @@ msgstr "Nessuna valutazione"
 
 #: cps/templates/book_edit.html:129 cps/templates/book_edit.html:270
 #: cps/templates/book_table.html:63 cps/templates/cwa_settings.html:148
-#: cps/templates/detail.html:205 cps/templates/magic_shelf_edit.html:95
+#: cps/templates/detail.html:208 cps/templates/magic_shelf_edit.html:95
 msgid "Description"
 msgstr "Descrizione"
 
@@ -3714,7 +3772,7 @@ msgstr ""
 "L'HTML di base viene mantenuto (paragrafi, grassetto, corsivo, elenchi, "
 "link). Script e stili vengono rimossi al salvataggio."
 
-#: cps/templates/book_edit.html:141 cps/templates/detail.html:233
+#: cps/templates/book_edit.html:141 cps/templates/detail.html:236
 msgid "Identifiers"
 msgstr "Identificatori"
 
@@ -3750,12 +3808,12 @@ msgstr "Scegli immagine…"
 msgid "Custom columns"
 msgstr "Colonne personalizzate"
 
-#: cps/templates/book_edit.html:193 cps/templates/detail.html:255
+#: cps/templates/book_edit.html:193 cps/templates/detail.html:258
 #: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:82
 msgid "Yes"
 msgstr "Sì"
 
-#: cps/templates/book_edit.html:194 cps/templates/detail.html:255
+#: cps/templates/book_edit.html:194 cps/templates/detail.html:258
 #: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:83
 msgid "No"
 msgstr "No"
@@ -3777,7 +3835,7 @@ msgstr "Escludi i progressi di lettura dalla sincronizzazione con Hardcover"
 #: cps/templates/cwa_settings.html:259 cps/templates/email_edit.html:71
 #: cps/templates/magic_shelf_edit.html:59
 #: cps/templates/profile_pictures.html:28 cps/templates/schedule_edit.html:33
-#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:496
+#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:506
 msgid "Save"
 msgstr "Salva"
 
@@ -3865,8 +3923,8 @@ msgstr "Unisci"
 msgid "Add to shelf"
 msgstr "Aggiungi allo scaffale"
 
-#: cps/templates/book_table.html:26 cps/templates/index.html:45
-#: cps/templates/layout.html:246
+#: cps/templates/book_table.html:26 cps/templates/index.html:54
+#: cps/templates/layout.html:251
 msgid "More"
 msgstr "Altro"
 
@@ -4143,7 +4201,7 @@ msgid "Ok"
 msgstr "OK"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:313 cps/templates/login.html:35
+#: cps/templates/layout.html:317 cps/templates/login.html:35
 #: cps/templates/user_edit.html:51 cps/templates/user_edit.html:62
 msgid "Show password"
 msgstr "Mostra password"
@@ -4854,35 +4912,35 @@ msgstr "Lingua predefinita"
 msgid "Default Visible Language of Books"
 msgstr "Lingua predefinita di presentazione dei libri"
 
-#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:481
+#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:491
 msgid "Admin User"
 msgstr "Utente amministratore"
 
-#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:482
+#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:492
 msgid "Allow Downloads"
 msgstr "Consenti download"
 
-#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:483
+#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:493
 msgid "Allow eBook Viewer"
 msgstr "Consenti visualizzatore eBook"
 
-#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:484
+#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:494
 msgid "Allow Uploads"
 msgstr "Consenti caricamenti"
 
-#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:485
+#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:495
 msgid "Allow Edit"
 msgstr "Consenti modifiche"
 
-#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:486
+#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:496
 msgid "Allow Delete Books"
 msgstr "Consenti eliminazione libri"
 
-#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:488
+#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:498
 msgid "Allow Changing Password"
 msgstr "Consenti modifica password"
 
-#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:489
+#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:499
 msgid "Allow Editing Public Shelves"
 msgstr "Consenti modifica scaffali pubblici"
 
@@ -4890,12 +4948,12 @@ msgstr "Consenti modifica scaffali pubblici"
 msgid "Default Visibilities for New Users"
 msgstr "Visibilità predefinita per i nuovi utenti"
 
-#: cps/templates/config_view_edit.html:96 cps/templates/user_edit.html:403
+#: cps/templates/config_view_edit.html:96 cps/templates/user_edit.html:413
 #: cps/templates/user_table.html:26
 msgid "Show Random Books in Detail View"
 msgstr "Mostra Libri casuali nella visualizzazione dettagliata"
 
-#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:408
+#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:418
 msgid "Add Allowed/Denied Tags"
 msgstr "Aggiungi etichetta consentiti/negati"
 
@@ -5053,6 +5111,7 @@ msgid "Services"
 msgstr "Servizi"
 
 #: cps/templates/cwa_settings.html:73 cps/templates/cwa_settings.html:108
+#: cps/templates/user_edit.html:364
 msgid "Import"
 msgstr "Importazione"
 
@@ -5401,7 +5460,7 @@ msgstr ""
 "I libri sono considerati duplicati quando tutti i campi selezionati "
 "coincidono."
 
-#: cps/templates/cwa_settings.html:198 cps/templates/detail.html:298
+#: cps/templates/cwa_settings.html:198 cps/templates/detail.html:317
 msgid "Format"
 msgstr "Formato"
 
@@ -5640,8 +5699,8 @@ msgstr "Gli intervalli lunghi possono richiedere più tempo"
 msgid "User Activity"
 msgstr "Attività degli utenti"
 
-#: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:62
-#: cps/templates/layout.html:58 cps/templates/layout.html:233
+#: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:71
+#: cps/templates/layout.html:59 cps/templates/layout.html:238
 msgid "Library"
 msgstr "Libreria"
 
@@ -5974,7 +6033,7 @@ msgstr "Leggi nel browser"
 msgid "Listen"
 msgstr "Ascolta"
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:89
+#: cps/templates/detail.html:117 cps/templates/layout.html:94
 #: cps/templates/user_edit.html:216
 msgid "Create Shelf"
 msgstr "Crea scaffale"
@@ -6042,49 +6101,64 @@ msgstr "Aggiungi al Kobo"
 msgid "Create a Kobo shelf"
 msgstr "Crea uno scaffale Kobo"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:314
+#: cps/templates/detail.html:203 cps/templates/highlights.html:30
+#, python-format
+msgid "%(num)s highlight"
+msgid_plural "%(num)s highlights"
+msgstr[0] "%(num)s sottolineatura"
+msgstr[1] "%(num)s sottolineature"
+
+#: cps/templates/detail.html:210 cps/templates/layout.html:318
 msgid "Show more"
 msgstr "Mostra di più"
 
-#: cps/templates/detail.html:217
+#: cps/templates/detail.html:220
 #, python-format
 msgid "Remove tag %(name)s"
 msgstr "Rimuovi etichetta %(name)s"
 
-#: cps/templates/detail.html:222 cps/templates/detail.html:223
-#: cps/templates/detail.html:224
+#: cps/templates/detail.html:225 cps/templates/detail.html:226
+#: cps/templates/detail.html:227
 msgid "Add tag"
 msgstr "Aggiungi etichetta"
 
-#: cps/templates/detail.html:266 cps/templates/magic_shelf_edit.html:94
+#: cps/templates/detail.html:269 cps/templates/magic_shelf_edit.html:94
 msgid "Date added"
 msgstr "Data di aggiunta"
 
-#: cps/templates/detail.html:267 cps/templates/magic_shelf_edit.html:94
+#: cps/templates/detail.html:270 cps/templates/magic_shelf_edit.html:94
 msgid "Last modified"
 msgstr "Ultima modifica"
 
-#: cps/templates/detail.html:268
+#: cps/templates/detail.html:271
 msgid "ID"
 msgstr "ID"
 
-#: cps/templates/detail.html:285
+#: cps/templates/detail.html:280
+msgid "More like this"
+msgstr "Altri libri simili"
+
+#: cps/templates/detail.html:281
+msgid "From your library: the same authors and the closest genres."
+msgstr "Dalla tua libreria: stessi autori e generi più vicini."
+
+#: cps/templates/detail.html:304
 msgid "Send to"
 msgstr "Invia a"
 
-#: cps/templates/detail.html:292
+#: cps/templates/detail.html:311
 msgid "Other addresses"
 msgstr "Altri indirizzi"
 
-#: cps/templates/detail.html:293
+#: cps/templates/detail.html:312
 msgid "example@domain.com, another@domain.com"
 msgstr "esempio@dominio.it, altro@dominio.it"
 
-#: cps/templates/detail.html:294 cps/templates/user_edit.html:337
+#: cps/templates/detail.html:313 cps/templates/user_edit.html:337
 msgid "Separate several addresses with commas."
 msgstr "Separa più indirizzi con una virgola."
 
-#: cps/templates/detail.html:308
+#: cps/templates/detail.html:327
 msgid "Send"
 msgstr "Invia"
 
@@ -6393,7 +6467,7 @@ msgid "(Magic)"
 msgstr "(Intelligente)"
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:96
+#: cps/templates/layout.html:101
 msgid "(Public)"
 msgstr "(Pubblico)"
 
@@ -6433,7 +6507,7 @@ msgstr "A–Z"
 msgid "Z–A"
 msgstr "Z–A"
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:317
+#: cps/templates/grid.html:21 cps/templates/layout.html:321
 #: cps/templates/list.html:27
 msgid "Filter"
 msgstr "Filtra"
@@ -6446,7 +6520,7 @@ msgstr "Filtra serie"
 msgid "Filter by initial"
 msgstr "Filtra per iniziale"
 
-#: cps/templates/grid.html:46 cps/templates/index.html:67
+#: cps/templates/grid.html:46 cps/templates/index.html:76
 #: cps/templates/shelf.html:12
 #, python-format
 msgid "%(num)s book"
@@ -6543,6 +6617,47 @@ msgstr ""
 "Rifiutare tutti gli abbinamenti in sospeso? Quei libri non verranno più "
 "proposti."
 
+#: cps/templates/highlights.html:7
+msgid "Passages and notes from your Kobo and KOReader, gathered by book."
+msgstr "Passaggi e note dal tuo Kobo e da KOReader, raccolti per libro."
+
+#: cps/templates/highlights.html:10 cps/templates/highlights.html:32
+msgid "Export as Markdown"
+msgstr "Esporta in Markdown"
+
+#: cps/templates/highlights.html:17 cps/templates/highlights.html:18
+msgid "Search highlights"
+msgstr "Cerca nelle sottolineature"
+
+#: cps/templates/highlights.html:20
+msgid "Show all"
+msgstr "Mostra tutto"
+
+#: cps/templates/highlights.html:50
+#, python-format
+msgid "No highlights match “%(query)s”"
+msgstr "Nessuna sottolineatura corrisponde a “%(query)s”"
+
+#: cps/templates/highlights.html:54
+msgid "No highlights yet"
+msgstr "Ancora nessuna sottolineatura"
+
+#: cps/templates/highlights.html:55
+msgid ""
+"Highlight a passage on your Kobo or in KOReader and it appears here after "
+"the next sync."
+msgstr ""
+"Sottolinea un passaggio sul Kobo o in KOReader: comparirà qui dopo la "
+"prossima sincronizzazione."
+
+#: cps/templates/highlights.html:56
+msgid ""
+"KOReader needs version 1.1 or later of the Scriptorium plugin: download it "
+"again from Profile → Devices."
+msgstr ""
+"KOReader richiede la versione 1.1 o successiva del plugin Scriptorium: "
+"scaricalo di nuovo da Profilo → Dispositivi."
+
 #: cps/templates/http_error.html:19
 msgid "Scriptorium Instance is unconfigured, please contact your administrator"
 msgstr ""
@@ -6560,60 +6675,70 @@ msgstr "Disconnetti utente"
 msgid "Create Issue"
 msgstr "Segnala problema"
 
-#: cps/templates/index.html:12
+#: cps/templates/index.html:9
+#, python-format
+msgid "Your %(year)s in books is ready"
+msgstr "Il tuo %(year)s in libri è pronto"
+
+#: cps/templates/index.html:10
+msgid "The books, the hours, the lines you kept. Two minutes, full screen."
+msgstr ""
+"I libri, le ore, le frasi che hai custodito. Due minuti, a tutto schermo."
+
+#: cps/templates/index.html:21
 #, python-format
 msgid "Kobo synced %(when)s"
 msgstr "Kobo sincronizzato %(when)s"
 
-#: cps/templates/index.html:15
+#: cps/templates/index.html:24
 #, python-format
 msgid "KOReader synced %(when)s"
 msgstr "KOReader sincronizzato %(when)s"
 
-#: cps/templates/index.html:28
+#: cps/templates/index.html:37
 #, python-format
 msgid "%(time)s left"
 msgstr "mancano %(time)s"
 
-#: cps/templates/index.html:59 cps/templates/magic_shelf_edit.html:6
+#: cps/templates/index.html:68 cps/templates/magic_shelf_edit.html:6
 msgid "Smart shelf"
 msgstr "Scaffale intelligente"
 
-#: cps/templates/index.html:72
+#: cps/templates/index.html:81
 msgid "Refresh shelf to update with latest changes"
 msgstr "Aggiorna lo scaffale con le ultime modifiche"
 
-#: cps/templates/index.html:72
+#: cps/templates/index.html:81
 msgid "Refresh"
 msgstr "Aggiorna"
 
-#: cps/templates/index.html:74
+#: cps/templates/index.html:83
 msgid "Edit rules"
 msgstr "Modifica regole"
 
-#: cps/templates/index.html:78
+#: cps/templates/index.html:87
 msgid "Show Shelf"
 msgstr "Mostra scaffale"
 
-#: cps/templates/index.html:78
+#: cps/templates/index.html:87
 msgid "Hide Shelf"
 msgstr "Nascondi scaffale"
 
-#: cps/templates/index.html:90
+#: cps/templates/index.html:99
 msgid "Your library is empty"
 msgstr "La tua libreria è vuota"
 
-#: cps/templates/index.html:90
+#: cps/templates/index.html:99
 msgid ""
 "Upload books or drop them into the ingest folder, and they will show up here."
 msgstr ""
 "Carica dei libri o mettili nella cartella di importazione: compariranno qui."
 
-#: cps/templates/index.html:92
+#: cps/templates/index.html:101
 msgid "No books here"
 msgstr "Nessun libro qui"
 
-#: cps/templates/index.html:92
+#: cps/templates/index.html:101
 msgid "Nothing matches this view yet."
 msgstr "Ancora niente in questa vista."
 
@@ -6748,79 +6873,82 @@ msgstr ""
 "Se l'accesso non riesce, controlla l'URL del server e di riuscire ad "
 "accedere a questo sito con lo stesso nome utente e password."
 
-#: cps/templates/layout.html:48
+#: cps/templates/layout.html:49
 msgid "Skip to content"
 msgstr "Vai al contenuto"
 
-#: cps/templates/layout.html:52
+#: cps/templates/layout.html:53
 msgid "Library navigation"
 msgstr "Navigazione della libreria"
 
-#: cps/templates/layout.html:77
+#: cps/templates/layout.html:74
+msgid "Your year in books"
+msgstr "Il tuo anno in libri"
+
+#: cps/templates/layout.html:82
 msgid "Browse"
 msgstr "Naviga"
 
-#: cps/templates/layout.html:100
+#: cps/templates/layout.html:105
 msgid "No shelves yet"
 msgstr "Ancora nessuno scaffale"
 
-#: cps/templates/layout.html:106 cps/templates/user_edit.html:417
+#: cps/templates/layout.html:111 cps/templates/user_edit.html:427
 msgid "Smart shelves"
 msgstr "Scaffali intelligenti"
 
-#: cps/templates/layout.html:129 cps/templates/layout.html:252
-#: cps/templates/stats.html:6
-msgid "Based on"
-msgstr "Basato su"
-
-#: cps/templates/layout.html:135
+#: cps/templates/layout.html:139
 msgid "Toggle Navigation"
 msgstr "Attiva/disattiva navigazione"
 
-#: cps/templates/layout.html:138
+#: cps/templates/layout.html:142
 msgid "Search Library"
 msgstr "Cerca nella biblioteca"
 
-#: cps/templates/layout.html:140
+#: cps/templates/layout.html:144
 msgid "Advanced"
 msgstr "Avanzata"
 
-#: cps/templates/layout.html:144
+#: cps/templates/layout.html:148
 msgid "Refresh Library"
 msgstr "Aggiorna la libreria"
 
-#: cps/templates/layout.html:154 cps/templates/user_edit.html:24
+#: cps/templates/layout.html:158 cps/templates/user_edit.html:24
 #: cps/templates/user_edit.html:37
 msgid "Account"
 msgstr "Account"
 
-#: cps/templates/layout.html:154
+#: cps/templates/layout.html:158
 msgid "Update available"
 msgstr "Aggiornamento disponibile"
 
-#: cps/templates/layout.html:162
+#: cps/templates/layout.html:166
 #, python-format
 msgid "Update available: %(version)s"
 msgstr "Aggiornamento disponibile: %(version)s"
 
-#: cps/templates/layout.html:166 cps/templates/user_edit.html:25
+#: cps/templates/layout.html:170 cps/templates/user_edit.html:25
 msgid "Devices"
 msgstr "Dispositivi"
 
-#: cps/templates/layout.html:170 cps/templates/stats.html:5
+#: cps/templates/layout.html:173
+msgid "Install app"
+msgstr "Installa l’app"
+
+#: cps/templates/layout.html:175 cps/templates/stats.html:5
 msgid "About"
 msgstr "Informazioni su"
 
-#: cps/templates/layout.html:184
+#: cps/templates/layout.html:189
 msgid "Logout"
 msgstr "Disconnetti"
 
-#: cps/templates/layout.html:194
+#: cps/templates/layout.html:199
 #, python-format
 msgid "Scriptorium %(version)s is available."
 msgstr "È disponibile Scriptorium %(version)s."
 
-#: cps/templates/layout.html:195
+#: cps/templates/layout.html:200
 #, python-format
 msgid ""
 "You have %(version)s. Pull the new image and restart the container to update."
@@ -6828,112 +6956,112 @@ msgstr ""
 "Hai la %(version)s. Scarica la nuova immagine e riavvia il container per "
 "aggiornare."
 
-#: cps/templates/layout.html:196
+#: cps/templates/layout.html:201
 msgid "Release notes"
 msgstr "Note di rilascio"
 
-#: cps/templates/layout.html:197
+#: cps/templates/layout.html:202
 msgid "Dismiss until the next release"
 msgstr "Nascondi fino alla prossima versione"
 
-#: cps/templates/layout.html:211
+#: cps/templates/layout.html:216
 msgid "Open Duplicates"
 msgstr "Apri duplicati"
 
-#: cps/templates/layout.html:214
+#: cps/templates/layout.html:219
 msgid "Contribute here!"
 msgstr "Clicca per contribuire!"
 
-#: cps/templates/layout.html:232
+#: cps/templates/layout.html:237
 msgid "Quick navigation"
 msgstr "Navigazione rapida"
 
-#: cps/templates/layout.html:237
+#: cps/templates/layout.html:242
 msgid "Kobo"
 msgstr "Kobo"
 
-#: cps/templates/layout.html:268
+#: cps/templates/layout.html:272
 msgid "Are you sure?"
 msgstr "Sei sicuro?"
 
-#: cps/templates/layout.html:272 cps/templates/layout.html:311
+#: cps/templates/layout.html:276 cps/templates/layout.html:315
 msgid "Confirm"
 msgstr "Conferma"
 
-#: cps/templates/layout.html:278
+#: cps/templates/layout.html:282
 msgid "Uploading..."
 msgstr "Caricamento in corso..."
 
-#: cps/templates/layout.html:281
+#: cps/templates/layout.html:285
 msgid "Please do not refresh the page"
 msgstr "Per favore non aggiornare la pagina"
 
-#: cps/templates/layout.html:284
+#: cps/templates/layout.html:288
 msgid "Drop books to add them to the library"
 msgstr "Rilascia i libri per aggiungerli alla libreria"
 
-#: cps/templates/layout.html:292
+#: cps/templates/layout.html:296
 #, python-format
 msgid "What's new in %(version)s"
 msgstr "Novità della %(version)s"
 
-#: cps/templates/layout.html:304
+#: cps/templates/layout.html:308
 msgid "All release notes"
 msgstr "Tutte le note di rilascio"
 
-#: cps/templates/layout.html:305
+#: cps/templates/layout.html:309
 msgid "Got it"
 msgstr "Ho capito"
 
-#: cps/templates/layout.html:311
+#: cps/templates/layout.html:315
 msgid "Copied to clipboard"
 msgstr "Copiato negli appunti"
 
-#: cps/templates/layout.html:312
+#: cps/templates/layout.html:316
 msgid "Could not copy, select the text and copy it manually"
 msgstr "Copia non riuscita: seleziona il testo e copialo a mano"
 
-#: cps/templates/layout.html:313
+#: cps/templates/layout.html:317
 msgid "Hide password"
 msgstr "Nascondi password"
 
-#: cps/templates/layout.html:314
+#: cps/templates/layout.html:318
 msgid "Show less"
 msgstr "Mostra meno"
 
-#: cps/templates/layout.html:314 cps/templates/magic_shelf_edit.html:88
+#: cps/templates/layout.html:318 cps/templates/magic_shelf_edit.html:88
 msgid "Something went wrong, please try again"
 msgstr "Qualcosa è andato storto, riprova"
 
-#: cps/templates/layout.html:315
+#: cps/templates/layout.html:319
 msgid "Upload failed"
 msgstr "Caricamento non riuscito"
 
-#: cps/templates/layout.html:316
+#: cps/templates/layout.html:320
 #, python-format
 msgid "%(count)s files"
 msgstr "%(count)s file"
 
-#: cps/templates/layout.html:317 cps/templates/search_form.html:7
+#: cps/templates/layout.html:321 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "Qualsiasi"
 
-#: cps/templates/layout.html:317
+#: cps/templates/layout.html:321
 msgid "Choose at least one address"
 msgstr "Scegli almeno un indirizzo"
 
-#: cps/templates/layout.html:318
+#: cps/templates/layout.html:322
 msgid "Enter a URL first"
 msgstr "Inserisci prima un URL"
 
-#: cps/templates/layout.html:319
+#: cps/templates/layout.html:323
 #, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "Possibili duplicati trovati: %(count)s gruppi."
 
-#: cps/templates/layout.html:319
+#: cps/templates/layout.html:323
 msgid "Review"
 msgstr "Controlla"
 
@@ -6976,11 +7104,12 @@ msgstr "Posizione"
 msgid "Back 30 seconds"
 msgstr "Indietro di 30 secondi"
 
-#: cps/templates/listenmp3.html:41
+#: cps/templates/listenmp3.html:41 cps/templates/year.html:28
 msgid "Play"
 msgstr "Riproduci"
 
-#: cps/templates/listenmp3.html:41
+#: cps/templates/listenmp3.html:41 cps/templates/year.html:28
+#: cps/templates/year.html:41
 msgid "Pause"
 msgstr "Pausa"
 
@@ -7347,6 +7476,26 @@ msgstr "è più recente di"
 msgid "is older than"
 msgstr "è più vecchio di"
 
+#: cps/templates/offline.html:7
+msgid "Offline"
+msgstr "Offline"
+
+#: cps/templates/offline.html:16
+msgid "You are offline"
+msgstr "Sei offline"
+
+#: cps/templates/offline.html:17
+msgid ""
+"Scriptorium will be back as soon as this device reaches your server again. "
+"Books already on your e-reader are still there."
+msgstr ""
+"Scriptorium tornerà appena questo dispositivo raggiungerà di nuovo il tuo "
+"server. I libri già sul tuo e-reader sono ancora lì."
+
+#: cps/templates/offline.html:18
+msgid "Try again"
+msgstr "Riprova"
+
 #: cps/templates/osd.xml:5
 msgid "Scriptorium eBook Catalog"
 msgstr "Catalogo eBook Scriptorium"
@@ -7626,6 +7775,102 @@ msgstr "Nascondi"
 msgid "DJVU Reader"
 msgstr "Lettore DJVU"
 
+#: cps/templates/reading_import.html:8
+msgid ""
+"Bring what you read on Goodreads or The StoryGraph: finished books with "
+"their dates, what you are reading, and your want-to-read list."
+msgstr ""
+"Porta qui ciò che hai letto su Goodreads o The StoryGraph: i libri finiti "
+"con le date, quelli in lettura e la lista dei libri da leggere."
+
+#: cps/templates/reading_import.html:16
+msgid ""
+"My Books → Import and export → Export Library. Download the CSV when it is "
+"ready."
+msgstr ""
+"My Books → Import and export → Export Library. Scarica il CSV quando è "
+"pronto."
+
+#: cps/templates/reading_import.html:20
+msgid ""
+"Manage Account → Export StoryGraph Library. The CSV arrives by email or as a "
+"download."
+msgstr ""
+"Manage Account → Export StoryGraph Library. Il CSV arriva via email o come "
+"download."
+
+#: cps/templates/reading_import.html:27
+msgid "Choose or drop the exported CSV"
+msgstr "Scegli o trascina qui il CSV esportato"
+
+#: cps/templates/reading_import.html:28
+msgid "Nothing is changed until you confirm the preview."
+msgstr "Non cambia nulla finché non confermi l’anteprima."
+
+#: cps/templates/reading_import.html:32
+msgid ""
+"Books are matched to your library by ISBN, then by title and author. Reviews "
+"and ratings stay where they are."
+msgstr ""
+"I libri vengono abbinati alla tua libreria per ISBN, poi per titolo e "
+"autore. Recensioni e voti restano dove sono."
+
+#: cps/templates/reading_import.html:40
+msgid "In the export"
+msgstr "Nell’esportazione"
+
+#: cps/templates/reading_import.html:41
+msgid "Found in your library"
+msgstr "Trovati nella tua libreria"
+
+#: cps/templates/reading_import.html:42
+msgid "Changes"
+msgstr "Modifiche"
+
+#: cps/templates/reading_import.html:44
+#, python-format
+msgid "From %(source)s."
+msgstr "Da %(source)s."
+
+#: cps/templates/reading_import.html:44
+msgid "Books already marked as read stay read; nothing is ever marked unread."
+msgstr ""
+"I libri già segnati come letti restano letti; nulla viene mai segnato come "
+"non letto."
+
+#: cps/templates/reading_import.html:47
+msgid "Mark as finished"
+msgstr "Segna come finiti"
+
+#: cps/templates/reading_import.html:47
+msgid "Add the date you finished them"
+msgstr "Aggiungi la data di fine lettura"
+
+#: cps/templates/reading_import.html:47
+msgid "Mark as reading"
+msgstr "Segna come in lettura"
+
+#: cps/templates/reading_import.html:47
+#, python-format
+msgid "Add to “%(shelf)s”"
+msgstr "Aggiungi a “%(shelf)s”"
+
+#: cps/templates/reading_import.html:69
+msgid "Not in your library"
+msgstr "Non presenti nella tua libreria"
+
+#: cps/templates/reading_import.html:75
+#, python-format
+msgid "And %(num)s more."
+msgstr "E altri %(num)s."
+
+#: cps/templates/reading_import.html:83
+#, python-format
+msgid "Import %(num)s change"
+msgid_plural "Import %(num)s changes"
+msgstr[0] "Importa %(num)s modifica"
+msgstr[1] "Importa %(num)s modifiche"
+
 #: cps/templates/readpdf.html:32
 msgid "PDF Reader"
 msgstr "Lettore PDF"
@@ -7809,6 +8054,47 @@ msgstr "Da:"
 msgid "To:"
 msgstr "A:"
 
+#: cps/templates/share.html:7
+msgid ""
+"Books shared from another app on this device are added to the library here."
+msgstr ""
+"I libri condivisi da un’altra app su questo dispositivo vengono aggiunti qui "
+"alla libreria."
+
+#: cps/templates/share.html:13
+msgid "Looking for shared books…"
+msgstr "Cerco i libri condivisi…"
+
+#: cps/templates/share.html:18
+msgid "Nothing was shared. Use “Share” in another app and pick Scriptorium."
+msgstr ""
+"Non è stato condiviso nulla. Usa “Condividi” in un’altra app e scegli "
+"Scriptorium."
+
+#: cps/templates/share.html:19
+msgid ""
+"The book did not arrive: open Scriptorium once from the home screen, then "
+"share it again."
+msgstr ""
+"Il libro non è arrivato: apri Scriptorium una volta dalla schermata Home, "
+"poi condividilo di nuovo."
+
+#: cps/templates/share.html:20
+#, python-format
+msgid "%(num)s book(s) received. Uploading…"
+msgstr "Libri ricevuti: %(num)s. Caricamento in corso…"
+
+#: cps/templates/share.html:21
+msgid ""
+"Your account cannot upload books. Ask an administrator for upload permission."
+msgstr ""
+"Il tuo account non può caricare libri. Chiedi a un amministratore il "
+"permesso di caricamento."
+
+#: cps/templates/share.html:22
+msgid "This browser cannot receive shared books."
+msgstr "Questo browser non può ricevere libri condivisi."
+
 #: cps/templates/shelf.html:9
 msgid "Public"
 msgstr "Pubblico"
@@ -7905,19 +8191,35 @@ msgstr "Libro nascosto"
 msgid "Save order"
 msgstr "Salva ordine"
 
-#: cps/templates/stats.html:11
+#: cps/templates/stats.html:6
+msgid "Based on"
+msgstr "Basato su"
+
+#: cps/templates/stats.html:7
+msgid ""
+"Free software under the GNU General Public License v3 or later, with no "
+"warranty."
+msgstr ""
+"Software libero con licenza GNU General Public License v3 o successiva, "
+"senza alcuna garanzia."
+
+#: cps/templates/stats.html:7
+msgid "Source code"
+msgstr "Codice sorgente"
+
+#: cps/templates/stats.html:12
 msgid "Library Statistics"
 msgstr "Statistiche della biblioteca"
 
-#: cps/templates/stats.html:21
+#: cps/templates/stats.html:22
 msgid "System Statistics"
 msgstr "Statistiche del sistema"
 
-#: cps/templates/stats.html:24
+#: cps/templates/stats.html:25
 msgid "Program"
 msgstr "Programma"
 
-#: cps/templates/stats.html:24
+#: cps/templates/stats.html:25
 msgid "Installed Version"
 msgstr "Versione installata"
 
@@ -8016,7 +8318,7 @@ msgstr "Programmazione annullata"
 msgid "eReaders"
 msgstr "eReader"
 
-#: cps/templates/user_edit.html:27 cps/templates/user_edit.html:360
+#: cps/templates/user_edit.html:27 cps/templates/user_edit.html:370
 msgid "Preferences"
 msgstr "Preferenze"
 
@@ -8024,7 +8326,7 @@ msgstr "Preferenze"
 msgid "Shelves & OPDS"
 msgstr "Scaffali e OPDS"
 
-#: cps/templates/user_edit.html:29 cps/templates/user_edit.html:479
+#: cps/templates/user_edit.html:29 cps/templates/user_edit.html:489
 msgid "Permissions"
 msgstr "Permessi"
 
@@ -8385,91 +8687,103 @@ msgstr ""
 "Ogni libro appena importato viene inviato via email agli indirizzi sopra."
 
 #: cps/templates/user_edit.html:362
+msgid "Reading history"
+msgstr "Cronologia di lettura"
+
+#: cps/templates/user_edit.html:363
+msgid ""
+"Coming from Goodreads or The StoryGraph? Import what you have read, with "
+"dates, and your want-to-read list."
+msgstr ""
+"Arrivi da Goodreads o The StoryGraph? Importa ciò che hai letto, con le "
+"date, e la tua lista dei libri da leggere."
+
+#: cps/templates/user_edit.html:372
 msgid "Colours and style"
 msgstr "Colori e stile"
 
-#: cps/templates/user_edit.html:368
+#: cps/templates/user_edit.html:378
 msgid "Interface Language"
 msgstr "Lingua dell'interfaccia"
 
-#: cps/templates/user_edit.html:377
+#: cps/templates/user_edit.html:387
 msgid "Language of Books"
 msgstr "Lingua dei libri"
 
-#: cps/templates/user_edit.html:384
+#: cps/templates/user_edit.html:394
 msgid "Only show books in this language."
 msgstr "Mostra solo i libri in questa lingua."
 
-#: cps/templates/user_edit.html:388
+#: cps/templates/user_edit.html:398
 msgid "Hardcover API Token"
 msgstr "Token API di Hardcover"
 
-#: cps/templates/user_edit.html:390
+#: cps/templates/user_edit.html:400
 msgid "Used to fetch metadata from Hardcover and sync reading progress."
 msgstr ""
 "Serve per recuperare i metadati da Hardcover e sincronizzare i progressi di "
 "lettura."
 
-#: cps/templates/user_edit.html:409
+#: cps/templates/user_edit.html:419
 msgid "Add allowed/Denied Custom Column Values"
 msgstr "Aggiungi valori personali consentiti/negati nelle colonne"
 
-#: cps/templates/user_edit.html:418
+#: cps/templates/user_edit.html:428
 msgid ""
 "Choose how smart shelves are ordered in the sidebar and which ones you see."
 msgstr ""
 "Scegli come ordinare gli scaffali intelligenti nella barra laterale e quali "
 "vedere."
 
-#: cps/templates/user_edit.html:420
+#: cps/templates/user_edit.html:430
 msgid "Order Mode"
 msgstr "Ordinamento"
 
-#: cps/templates/user_edit.html:422
+#: cps/templates/user_edit.html:432
 msgid "Manual (drag to reorder)"
 msgstr "Manuale (trascina per riordinare)"
 
-#: cps/templates/user_edit.html:422
+#: cps/templates/user_edit.html:432
 msgid "Name (A-Z)"
 msgstr "Nome (A-Z)"
 
-#: cps/templates/user_edit.html:422
+#: cps/templates/user_edit.html:432
 msgid "Name (Z-A)"
 msgstr "Nome (Z-A)"
 
-#: cps/templates/user_edit.html:423
+#: cps/templates/user_edit.html:433
 msgid "Book count (high to low)"
 msgstr "Numero di libri (decrescente)"
 
-#: cps/templates/user_edit.html:423
+#: cps/templates/user_edit.html:433
 msgid "Book count (low to high)"
 msgstr "Numero di libri (crescente)"
 
-#: cps/templates/user_edit.html:424
+#: cps/templates/user_edit.html:434
 msgid "Created (newest first)"
 msgstr "Creazione (prima i più recenti)"
 
-#: cps/templates/user_edit.html:424
+#: cps/templates/user_edit.html:434
 msgid "Created (oldest first)"
 msgstr "Creazione (prima i più vecchi)"
 
-#: cps/templates/user_edit.html:425
+#: cps/templates/user_edit.html:435
 msgid "Recently modified"
 msgstr "Modificati di recente"
 
-#: cps/templates/user_edit.html:425
+#: cps/templates/user_edit.html:435
 msgid "Least recently modified"
 msgstr "Modificati meno di recente"
 
-#: cps/templates/user_edit.html:446
+#: cps/templates/user_edit.html:456
 msgid "Visible in the sidebar"
 msgstr "Visibili nella barra laterale"
 
-#: cps/templates/user_edit.html:460
+#: cps/templates/user_edit.html:470
 msgid "OPDS Catalog Order"
 msgstr "Ordine del catalogo OPDS"
 
-#: cps/templates/user_edit.html:461
+#: cps/templates/user_edit.html:471
 msgid ""
 "Order and visibility of the entries e-reader apps see at the top of the OPDS "
 "catalog."
@@ -8477,27 +8791,27 @@ msgstr ""
 "Ordine e visibilità delle voci che le app di lettura vedono all'inizio del "
 "catalogo OPDS."
 
-#: cps/templates/user_edit.html:470
+#: cps/templates/user_edit.html:480
 #, python-format
 msgid "Show %(name)s"
 msgstr "Mostra %(name)s"
 
-#: cps/templates/user_edit.html:470
+#: cps/templates/user_edit.html:480
 msgid "Visible"
 msgstr "Visibile"
 
-#: cps/templates/user_edit.html:481
+#: cps/templates/user_edit.html:491
 msgid "Full access to settings and users."
 msgstr "Accesso completo a impostazioni e utenti."
 
-#: cps/templates/user_edit.html:500 cps/templates/user_table.html:60
+#: cps/templates/user_edit.html:510 cps/templates/user_table.html:60
 #, python-format
 msgid "Delete %(name)s? Their shelves and reading progress are removed too."
 msgstr ""
 "Eliminare %(name)s? Verranno rimossi anche i suoi scaffali e i progressi di "
 "lettura."
 
-#: cps/templates/user_edit.html:500 cps/templates/user_edit.html:502
+#: cps/templates/user_edit.html:510 cps/templates/user_edit.html:512
 #: cps/templates/user_table.html:59
 msgid "Delete User"
 msgstr "Elimina utente"
@@ -8596,6 +8910,289 @@ msgstr "Ancora nessuna nota di rilascio"
 #: cps/templates/whats_new.html:31
 msgid "They appear here after the first release."
 msgstr "Compariranno qui dopo la prima versione."
+
+#: cps/templates/year.html:25
+#, python-format
+msgid "My %(year)s in books"
+msgstr "Il mio %(year)s in libri"
+
+#: cps/templates/year.html:25
+msgid "books finished"
+msgstr "libri finiti"
+
+#: cps/templates/year.html:25
+msgid "hours reading"
+msgstr "ore di lettura"
+
+#: cps/templates/year.html:26
+msgid "days in a row"
+msgstr "giorni di fila"
+
+#: cps/templates/year.html:26
+msgid "highlights"
+msgstr "sottolineature"
+
+#: cps/templates/year.html:26 cps/templates/year.html:228
+msgid "Top author"
+msgstr "Autore preferito"
+
+#: cps/templates/year.html:27 cps/templates/year.html:229
+msgid "Top genre"
+msgstr "Genere preferito"
+
+#: cps/templates/year.html:27 cps/templates/year.html:201
+msgid "The Voracious Reader"
+msgstr "Divoralibri"
+
+#: cps/templates/year.html:27 cps/templates/year.html:203
+msgid "The Saga Seeker"
+msgstr "Amante delle saghe"
+
+#: cps/templates/year.html:27 cps/templates/year.html:205
+msgid "The Devoted Reader"
+msgstr "Cuore fedele"
+
+#: cps/templates/year.html:27 cps/templates/year.html:207
+msgid "The Explorer"
+msgstr "Spirito esploratore"
+
+#: cps/templates/year.html:27 cps/templates/year.html:209
+msgid "The Slow Savourer"
+msgstr "Palato raffinato"
+
+#: cps/templates/year.html:28
+msgid "Image saved"
+msgstr "Immagine salvata"
+
+#: cps/templates/year.html:31
+msgid "story"
+msgstr "storia"
+
+#: cps/templates/year.html:37
+msgid "Year"
+msgstr "Anno"
+
+#: cps/templates/year.html:53 cps/templates/year.html:246
+#, python-format
+msgid "Scriptorium · %(year)s"
+msgstr "Scriptorium · %(year)s"
+
+#: cps/templates/year.html:54
+#, python-format
+msgid "%(name)s, this was your %(year)s in books."
+msgstr "%(name)s, ecco il tuo %(year)s in libri."
+
+#: cps/templates/year.html:55
+msgid "Tap to begin"
+msgstr "Tocca per iniziare"
+
+#: cps/templates/year.html:61
+msgid "This year you finished"
+msgstr "Quest’anno hai finito"
+
+#: cps/templates/year.html:63
+msgid "book. One whole story, cover to cover."
+msgid_plural "books. Every one of them, cover to cover."
+msgstr[0] "libro. Una storia intera, dalla prima all’ultima pagina."
+msgstr[1] "libri. Ognuno dalla prima all’ultima pagina."
+
+#: cps/templates/year.html:64
+#, python-format
+msgid "And you opened %(num)s more along the way."
+msgstr "E strada facendo ne hai aperti altri %(num)s."
+
+#: cps/templates/year.html:71
+msgid "This year you opened"
+msgstr "Quest’anno hai aperto"
+
+#: cps/templates/year.html:73
+msgid "book. The best part is still ahead."
+msgid_plural "books. The best parts are still ahead."
+msgstr[0] "libro. Il meglio deve ancora venire."
+msgstr[1] "libri. Il meglio deve ancora venire."
+
+#: cps/templates/year.html:81
+msgid "Time with a book in your hands"
+msgstr "Il tempo con un libro tra le mani"
+
+#: cps/templates/year.html:83
+msgid "hour of reading on your Kobo."
+msgid_plural "hours of reading on your Kobo."
+msgstr[0] "ora di lettura sul tuo Kobo."
+msgstr[1] "ore di lettura sul tuo Kobo."
+
+#: cps/templates/year.html:84
+#, python-format
+msgid "That is about %(num)s films, without the popcorn."
+msgstr "Più o meno %(num)s film, senza i popcorn."
+
+#: cps/templates/year.html:91
+msgid "Your bookends"
+msgstr "Il tuo inizio e la tua fine"
+
+#: cps/templates/year.html:95
+msgid "You opened the year with"
+msgstr "Hai aperto l’anno con"
+
+#: cps/templates/year.html:99
+msgid "and closed it with"
+msgstr "e l’hai chiuso con"
+
+#: cps/templates/year.html:108
+msgid "The voices you returned to"
+msgstr "Le voci che hai cercato più spesso"
+
+#: cps/templates/year.html:110
+#, python-format
+msgid "topped your year with %(num)s book."
+msgid_plural "topped your year with %(num)s books."
+msgstr[0] "in testa al tuo anno con %(num)s libro."
+msgstr[1] "in testa al tuo anno con %(num)s libri."
+
+#: cps/templates/year.html:122
+msgid "Your shelves leaned towards"
+msgstr "I tuoi scaffali pendevano verso"
+
+#: cps/templates/year.html:128
+#, python-format
+msgid "And you followed %(num)s series."
+msgid_plural "And you followed %(num)s different series."
+msgstr[0] "E hai seguito %(num)s serie."
+msgstr[1] "E hai seguito %(num)s serie diverse."
+
+#: cps/templates/year.html:136
+msgid "Your reading rhythm"
+msgstr "Il tuo ritmo di lettura"
+
+#: cps/templates/year.html:137
+#, python-format
+msgid "%(month)s was your month."
+msgstr "%(month)s è stato il tuo mese."
+
+#: cps/templates/year.html:138
+msgid "Reading days per month"
+msgstr "Giorni di lettura al mese"
+
+#: cps/templates/year.html:146
+msgid "An early-morning reader."
+msgstr "Lettura all’alba."
+
+#: cps/templates/year.html:146
+msgid "An afternoon reader."
+msgstr "Lettura di pomeriggio."
+
+#: cps/templates/year.html:146
+msgid "An evening reader."
+msgstr "Lettura di sera."
+
+#: cps/templates/year.html:146
+msgid "A true night owl."
+msgstr "Un vero animale notturno."
+
+#: cps/templates/year.html:148
+#, python-format
+msgid "%(day)s was your reading day."
+msgstr "%(day)s: il tuo giorno di lettura."
+
+#: cps/templates/year.html:156
+msgid "Your longest streak"
+msgstr "La tua serie più lunga"
+
+#: cps/templates/year.html:158
+msgid "days in a row with a book."
+msgstr "giorni di fila con un libro."
+
+#: cps/templates/year.html:159
+#, python-format
+msgid "%(num)s reading day in total."
+msgid_plural "%(num)s reading days in total."
+msgstr[0] "%(num)s giorno di lettura in tutto."
+msgstr[1] "%(num)s giorni di lettura in tutto."
+
+#: cps/templates/year.html:167
+msgid "The line you kept"
+msgstr "La frase che hai custodito"
+
+#: cps/templates/year.html:173
+#, python-format
+msgid "One of %(num)s highlight this year."
+msgid_plural "One of %(num)s highlights this year."
+msgstr[0] "Una di %(num)s sottolineatura quest’anno."
+msgstr[1] "Una di %(num)s sottolineature quest’anno."
+
+#: cps/templates/year.html:183
+msgid "Meanwhile, in the library"
+msgstr "Intanto, in biblioteca"
+
+#: cps/templates/year.html:185
+msgid "new book found a place on the shelves."
+msgid_plural "new books found a place on the shelves."
+msgstr[0] "nuovo libro ha trovato posto sugli scaffali."
+msgstr[1] "nuovi libri hanno trovato posto sugli scaffali."
+
+#: cps/templates/year.html:192
+msgid "Your reader profile"
+msgstr "Il tuo profilo di lettura"
+
+#: cps/templates/year.html:201
+#, python-format
+msgid "%(num)s books in a year. The shelves can barely keep up with you."
+msgstr "%(num)s libri in un anno. Gli scaffali fanno fatica a starti dietro."
+
+#: cps/templates/year.html:203
+msgid "Once a world has you, you stay for the whole series."
+msgstr "Quando un mondo ti conquista, resti fino all’ultimo volume."
+
+#: cps/templates/year.html:205
+msgid "When an author speaks to you, you read everything they wrote."
+msgstr "Quando un autore ti parla, leggi tutto quello che ha scritto."
+
+#: cps/templates/year.html:207
+msgid "A different shelf every time. Your curiosity has no favourite genre."
+msgstr ""
+"Uno scaffale diverso ogni volta. La tua curiosità non ha un genere preferito."
+
+#: cps/templates/year.html:209
+msgid "Fewer books, read closely. Every page counted."
+msgstr "Meno libri, letti da vicino. Ogni pagina ha contato."
+
+#: cps/templates/year.html:217
+#, python-format
+msgid "%(name)s · %(year)s in books"
+msgstr "%(name)s · %(year)s in libri"
+
+#: cps/templates/year.html:223
+msgid "Hours"
+msgstr "Ore"
+
+#: cps/templates/year.html:224
+msgid "Streak"
+msgstr "Serie"
+
+#: cps/templates/year.html:233
+msgid "Save image"
+msgstr "Salva immagine"
+
+#: cps/templates/year.html:234
+msgid "Watch again"
+msgstr "Guarda di nuovo"
+
+#: cps/templates/year.html:247
+#, python-format
+msgid "Your %(year)s story is still unwritten."
+msgstr "La storia del tuo %(year)s è ancora da scrivere."
+
+#: cps/templates/year.html:248
+msgid ""
+"Finish a book, sync your Kobo or KOReader, or highlight a passage: your year "
+"in books fills itself in as you read."
+msgstr ""
+"Finisci un libro, sincronizza il Kobo o KOReader, sottolinea un passaggio: "
+"il tuo anno in libri si riempie mentre leggi."
+
+#: cps/templates/year.html:249
+msgid "Back to the library"
+msgstr "Torna alla libreria"
 
 #~ msgid ""
 #~ "Update available: %(current)s → %(newest)s. Pull the new image to update."
@@ -8759,12 +9356,6 @@ msgstr "Compariranno qui dopo la prima versione."
 
 #~ msgid "Unarchive"
 #~ msgstr "Rimuovi dall'archivio"
-
-#~ msgid "Mark as read"
-#~ msgstr "Contrassegna come letto"
-
-#~ msgid "Mark as unread"
-#~ msgstr "Contrassegna come da leggere"
 
 #~ msgid "Select all"
 #~ msgstr "Seleziona tutto"
@@ -9325,9 +9916,6 @@ msgstr "Compariranno qui dopo la prima versione."
 
 #~ msgid "View & Resolve Duplicates"
 #~ msgstr "Seleziona i duplicati"
-
-#~ msgid "Sign in to your library"
-#~ msgstr "Serie in questa biblioteca"
 
 #~ msgid "Show Calibre-Web Log: "
 #~ msgstr "Mostra log di Calibre-Web: "

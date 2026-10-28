@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 21:49+0100\n"
+"POT-Creation-Date: 2026-10-28 22:20+0100\n"
 "PO-Revision-Date: 2025-09-08 00:53+0900\n"
 "Last-Translator: limeade23 <admin@limeade.me>\n"
 "Language-Team: Korean <>\n"
@@ -127,7 +127,7 @@ msgid "UI Configuration"
 msgstr "UI 설정"
 
 #: cps/admin.py:623 cps/admin.py:1303 cps/db.py:988 cps/search.py:154
-#: cps/web.py:897
+#: cps/web.py:905
 #, python-format
 msgid "Custom Column No.%(column)d does not exist in calibre database"
 msgstr "사용자 정의 열 번호 %(column)d이(가) calibre 데이터베이스에 없습니다."
@@ -151,7 +151,7 @@ msgid "{} users deleted successfully"
 msgstr "{} 사용자를 삭제했습니다."
 
 #: cps/admin.py:753 cps/templates/config_view_edit.html:75
-#: cps/templates/user_edit.html:379 cps/templates/user_table.html:34
+#: cps/templates/user_edit.html:389 cps/templates/user_table.html:34
 msgid "Show All"
 msgstr "모두 보기"
 
@@ -379,7 +379,7 @@ msgstr "Gmail 계정 인증에 성공했습니다."
 #: cps/admin.py:2562 cps/admin.py:2833 cps/editbooks.py:1062
 #: cps/editbooks.py:1860 cps/shelf.py:107 cps/shelf.py:175 cps/shelf.py:236
 #: cps/shelf.py:280 cps/shelf.py:321 cps/shelf.py:395 cps/shelf.py:517
-#: cps/tasks/convert.py:145 cps/web.py:2758
+#: cps/tasks/convert.py:145 cps/web.py:2766
 #, python-format
 msgid "Oops! Database Error: %(error)s."
 msgstr "데이터베이스 오류가 발생했습니다: %(error)s."
@@ -419,7 +419,7 @@ msgstr "작업 종료 시간이 올바르지 않습니다."
 msgid "Scheduled tasks settings updated"
 msgstr "예약 작업 설정이 업데이트되었습니다."
 
-#: cps/admin.py:1821 cps/admin.py:1965 cps/admin.py:2829 cps/web.py:2181
+#: cps/admin.py:1821 cps/admin.py:1965 cps/admin.py:2829 cps/web.py:2189
 msgid "Oops! An unknown error occurred. Please try again later."
 msgstr "알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해 주세요."
 
@@ -427,7 +427,7 @@ msgstr "알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해
 msgid "Settings DB is not Writeable"
 msgstr "설정 데이터베이스에 저장할 수 없습니다."
 
-#: cps/admin.py:1844 cps/opds.py:199 cps/web.py:2684 cps/web.py:2809
+#: cps/admin.py:1844 cps/opds.py:199 cps/web.py:2692 cps/web.py:2817
 msgid "title"
 msgstr "제목"
 
@@ -593,7 +593,7 @@ msgstr "데이터베이스 설정이 업데이트되었습니다."
 msgid "Database Configuration"
 msgstr "데이터베이스 설정"
 
-#: cps/admin.py:2518 cps/web.py:2150
+#: cps/admin.py:2518 cps/web.py:2158
 msgid "Oops! Please complete all fields."
 msgstr "모든 항목을 입력해주세요."
 
@@ -627,7 +627,7 @@ msgstr "게스트 사용자는 삭제할 수 없습니다."
 msgid "No admin user remaining, can't delete user"
 msgstr "남은 관리자가 없어 사용자를 삭제할 수 없습니다."
 
-#: cps/admin.py:2784 cps/web.py:2493
+#: cps/admin.py:2784 cps/web.py:2501
 msgid "Email can't be empty and has to be a valid Email"
 msgstr "이메일 주소는 비워둘 수 없고, 올바른 형식이어야 합니다."
 
@@ -770,6 +770,17 @@ msgstr ""
 "복원 완료. 백업 및 복원 로그가 %(dir)s 에 저장되었습니다. 책과 연결된 모든 데"
 "이터가 초기화되었습니다."
 
+#: cps/annotations.py:238
+#, fuzzy
+msgid "Note"
+msgstr "참고:"
+
+#: cps/annotations.py:251 cps/templates/highlights.html:6
+#: cps/templates/layout.html:73 cps/templates/year.html:225
+#, fuzzy
+msgid "Highlights"
+msgstr "높이"
+
 #: cps/appearance.py:29 cps/templates/appearance.html:53
 #: cps/templates/appearance.html:55
 msgid "Classic"
@@ -825,7 +836,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:168
+#: cps/templates/layout.html:172
 #, fuzzy
 msgid "Customize"
 msgstr "사용자 지정 필터"
@@ -1205,9 +1216,9 @@ msgstr "계정 사진 변경"
 #: cps/db.py:1273 cps/templates/appearance.html:56
 #: cps/templates/config_edit.html:110 cps/templates/config_view_edit.html:39
 #: cps/templates/config_view_edit.html:47 cps/templates/email_edit.html:44
-#: cps/templates/search_form.html:13 cps/web.py:710 cps/web.py:744
-#: cps/web.py:789 cps/web.py:829 cps/web.py:858 cps/web.py:1671 cps/web.py:1708
-#: cps/web.py:1759 cps/web.py:1791 cps/web.py:1830
+#: cps/templates/search_form.html:13 cps/web.py:718 cps/web.py:752
+#: cps/web.py:797 cps/web.py:837 cps/web.py:866 cps/web.py:1679 cps/web.py:1716
+#: cps/web.py:1767 cps/web.py:1799 cps/web.py:1838
 msgid "None"
 msgstr "없음"
 
@@ -1273,7 +1284,7 @@ msgid "Cannot upload format: Book no longer exists in library"
 msgstr ""
 "형식을 업로드할 수 없습니다: 책이 더 이상 라이브러리에 존재하지 않습니다"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:315
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:319
 msgid "Upload done, processing, please wait..."
 msgstr "업로드 완료, 처리 중입니다. 잠시만 기다려 주세요."
 
@@ -1308,8 +1319,8 @@ msgstr "파일 확장자 '%(ext)s'은(는) 서버에 업로드할 수 없습니�
 msgid "File to be uploaded must have an extension"
 msgstr "확장자가 없는 파일은 업로드할 수 없습니다."
 
-#: cps/editbooks.py:861 cps/editbooks.py:1483 cps/web.py:677 cps/web.py:2870
-#: cps/web.py:2962 cps/web.py:3036
+#: cps/editbooks.py:861 cps/editbooks.py:1483 cps/web.py:685 cps/web.py:2878
+#: cps/web.py:2970 cps/web.py:3048
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr "선택한 책을 사용할 수 없습니다. 파일이 없거나 접근할 수 없습니다."
@@ -1429,7 +1440,7 @@ msgid "%(format)s not found: %(fn)s"
 msgstr "%(format)s을(를) 찾을 수 없습니다: %(fn)s"
 
 #: cps/helper.py:113 cps/helper.py:244 cps/templates/admin.html:33
-#: cps/templates/detail.html:97 cps/templates/detail.html:280
+#: cps/templates/detail.html:97 cps/templates/detail.html:299
 #: cps/templates/user_edit.html:331
 msgid "Send to eReader"
 msgstr "전자책 리더로 보내기"
@@ -1822,10 +1833,49 @@ msgstr "설명"
 msgid "{} Stars"
 msgstr "{} Stars"
 
+#: cps/pwa.py:54 cps/templates/share.html:6
+#, fuzzy
+msgid "Add shared books"
+msgstr "읽음"
+
+#: cps/reading_import.py:262 cps/reading_import.py:357
+#: cps/templates/reading_import.html:47
+msgid "Want to read"
+msgstr ""
+
+#: cps/reading_import.py:310 cps/reading_import.py:338
+#: cps/templates/reading_import.html:7
+#, fuzzy
+msgid "Import your reading history"
+msgstr "Scriptorium - 전체 가져오기 내역"
+
+#: cps/reading_import.py:319
+msgid "Choose the CSV file you exported."
+msgstr ""
+
+#: cps/reading_import.py:323
+msgid "The file is too large."
+msgstr ""
+
+#: cps/reading_import.py:328
+msgid "This does not look like a Goodreads or StoryGraph export."
+msgstr ""
+
+#: cps/reading_import.py:348
+msgid "This preview has expired. Upload the file again."
+msgstr ""
+
+#: cps/reading_import.py:355
+#, python-format
+msgid ""
+"Imported: %(read)s finished, %(reading)s being read, %(shelved)s added to "
+"“%(shelf)s”."
+msgstr ""
+
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:179
-#: cps/templates/layout.html:244 cps/templates/login.html:44
-#: cps/templates/register.html:29 cps/web.py:2259
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:184
+#: cps/templates/layout.html:249 cps/templates/login.html:44
+#: cps/templates/register.html:29 cps/web.py:2267
 msgid "Login"
 msgstr "로그인"
 
@@ -1850,7 +1900,8 @@ msgstr ""
 "체 검사가 필요합니다. "
 
 #: cps/render_template.py:75 cps/templates/appearance.html:7
-#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:13
+#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:14
+#: cps/templates/year.html:222
 msgid "Books"
 msgstr "전체"
 
@@ -1875,7 +1926,7 @@ msgstr "받은 적 있는"
 msgid "Show Downloaded Books"
 msgstr "다운로드 받은 적 있는 책 보기"
 
-#: cps/render_template.py:92 cps/web.py:567
+#: cps/render_template.py:92 cps/web.py:575
 msgid "Top Rated Books"
 msgstr "베스트"
 
@@ -1883,7 +1934,7 @@ msgstr "베스트"
 msgid "Show Top Rated Books"
 msgstr "평점 높은 책 보기"
 
-#: cps/render_template.py:95 cps/web.py:916
+#: cps/render_template.py:95 cps/web.py:924
 msgid "Read Books"
 msgstr "읽음"
 
@@ -1891,7 +1942,7 @@ msgstr "읽음"
 msgid "Show Read and Unread"
 msgstr "읽은 책과 안 읽은 책 보기"
 
-#: cps/render_template.py:99 cps/web.py:919
+#: cps/render_template.py:99 cps/web.py:927
 msgid "Unread Books"
 msgstr "읽지 않음"
 
@@ -1899,7 +1950,7 @@ msgstr "읽지 않음"
 msgid "Show unread"
 msgstr "읽지 않은 책 보기"
 
-#: cps/render_template.py:102 cps/templates/index.html:43
+#: cps/render_template.py:102 cps/templates/index.html:52
 msgid "Discover"
 msgstr "둘러보기"
 
@@ -1908,8 +1959,8 @@ msgid "Show Random Books"
 msgstr "무작위 추천 보기"
 
 #: cps/render_template.py:105 cps/templates/book_table.html:59
-#: cps/templates/book_table.html:105 cps/templates/stats.html:15
-#: cps/web.py:1834
+#: cps/templates/book_table.html:105 cps/templates/stats.html:16
+#: cps/web.py:1842
 msgid "Categories"
 msgstr "카테고리"
 
@@ -1922,7 +1973,7 @@ msgstr "카테고리 보기"
 #: cps/templates/book_table.html:60 cps/templates/book_table.html:106
 #: cps/templates/cwa_settings.html:149 cps/templates/cwa_settings.html:198
 #: cps/templates/magic_shelf_edit.html:92 cps/templates/search_form.html:66
-#: cps/templates/stats.html:16 cps/web.py:1714 cps/web.py:1726
+#: cps/templates/stats.html:17 cps/web.py:1722 cps/web.py:1734
 msgid "Series"
 msgstr "시리즈"
 
@@ -1933,7 +1984,7 @@ msgstr "시리즈 보기"
 #: cps/render_template.py:111 cps/templates/appearance.html:8
 #: cps/templates/author.html:5 cps/templates/book_table.html:57
 #: cps/templates/book_table.html:103 cps/templates/cwa_settings.html:148
-#: cps/templates/stats.html:14
+#: cps/templates/stats.html:15
 msgid "Authors"
 msgstr "저자"
 
@@ -1942,7 +1993,7 @@ msgid "Show Author Section"
 msgstr "저자 보기"
 
 #: cps/render_template.py:115 cps/templates/book_table.html:62
-#: cps/templates/book_table.html:109 cps/web.py:1682
+#: cps/templates/book_table.html:109 cps/web.py:1690
 msgid "Publishers"
 msgstr "출판사"
 
@@ -1952,7 +2003,7 @@ msgstr "출판사 보기"
 
 #: cps/render_template.py:118 cps/templates/book_table.html:61
 #: cps/templates/book_table.html:108 cps/templates/search_form.html:68
-#: cps/web.py:1806
+#: cps/web.py:1814
 msgid "Languages"
 msgstr "언어"
 
@@ -1960,7 +2011,7 @@ msgstr "언어"
 msgid "Show Language Section"
 msgstr "언어 보기"
 
-#: cps/render_template.py:122 cps/web.py:1766
+#: cps/render_template.py:122 cps/web.py:1774
 msgid "Ratings"
 msgstr "평점"
 
@@ -1976,7 +2027,7 @@ msgstr "파일 형식"
 msgid "Show File Formats Section"
 msgstr "파일 형식 보기"
 
-#: cps/render_template.py:129 cps/web.py:942
+#: cps/render_template.py:129 cps/web.py:950
 msgid "Archived Books"
 msgstr "보관함"
 
@@ -1984,7 +2035,7 @@ msgstr "보관함"
 msgid "Show Archived Books"
 msgstr "보관된 책 보기"
 
-#: cps/render_template.py:134 cps/templates/book_table.html:7 cps/web.py:1495
+#: cps/render_template.py:134 cps/templates/book_table.html:7 cps/web.py:1503
 msgid "Books List"
 msgstr "책 목록"
 
@@ -2007,9 +2058,10 @@ msgid "%(count)s strings still need a %(language)s translation."
 msgstr ""
 
 #: cps/search.py:54 cps/search.py:441 cps/templates/book_edit.html:254
-#: cps/templates/feed.xml:34 cps/templates/index.xml:12
-#: cps/templates/layout.html:234 cps/templates/search.html:5
-#: cps/templates/search.html:6 cps/templates/search_form.html:121
+#: cps/templates/feed.xml:34 cps/templates/highlights.html:19
+#: cps/templates/index.xml:12 cps/templates/layout.html:239
+#: cps/templates/search.html:5 cps/templates/search.html:6
+#: cps/templates/search_form.html:121
 msgid "Search"
 msgstr "검색"
 
@@ -2042,7 +2094,7 @@ msgstr ""
 "사용자 정의 열을 검색하는 동안 오류가 발생했습니다. Scriptorium을 다시 시작"
 "해 주세요."
 
-#: cps/search.py:385 cps/search.py:417 cps/templates/layout.html:140
+#: cps/search.py:385 cps/search.py:417 cps/templates/layout.html:144
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2164,7 +2216,7 @@ msgstr ""
 "다"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:123 cps/templates/tasks.html:5
+#: cps/templates/layout.html:128 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "작업"
 
@@ -2232,275 +2284,275 @@ msgstr ""
 msgid "No release information available"
 msgstr "업데이트 정보가 없습니다."
 
-#: cps/web.py:127
+#: cps/web.py:128
 msgid "You are using the default password. Choose a new one to continue."
 msgstr ""
 
-#: cps/web.py:534 cps/web.py:536
+#: cps/web.py:535 cps/web.py:537
 #, fuzzy, python-format
 msgid "Books (%(count)s)"
 msgstr "상위 %(count)s개"
 
-#: cps/web.py:579
+#: cps/web.py:587
 msgid "Discover (Random Books)"
 msgstr "추천 (무작위)"
 
-#: cps/web.py:629
+#: cps/web.py:637
 msgid "Hot Books (Most Downloaded)"
 msgstr "인기 책 (가장 많이 다운로드된 책)"
 
-#: cps/web.py:660
+#: cps/web.py:668
 #, python-format
 msgid "Downloaded books by %(user)s"
 msgstr "%(user)s이(가) 다운로드한 책"
 
-#: cps/web.py:693
+#: cps/web.py:701
 #, python-format
 msgid "Author: %(name)s"
 msgstr "저자: %(name)s"
 
-#: cps/web.py:729
+#: cps/web.py:737
 #, python-format
 msgid "Publisher: %(name)s"
 msgstr "출판사: %(name)s"
 
-#: cps/web.py:757
+#: cps/web.py:765
 #, python-format
 msgid "Series: %(serie)s"
 msgstr "시리즈: %(serie)s"
 
-#: cps/web.py:771
+#: cps/web.py:779
 msgid "Rating: None"
 msgstr "평점: 없음"
 
-#: cps/web.py:780
+#: cps/web.py:788
 #, python-format
 msgid "Rating: %(rating)s stars"
 msgstr "평점: %(rating)s"
 
-#: cps/web.py:811
+#: cps/web.py:819
 #, python-format
 msgid "File format: %(format)s"
 msgstr "파일 형식: %(format)s"
 
-#: cps/web.py:848
+#: cps/web.py:856
 #, python-format
 msgid "Category: %(name)s"
 msgstr "카테고리: %(name)s"
 
-#: cps/web.py:877
+#: cps/web.py:885
 #, python-format
 msgid "Language: %(name)s"
 msgstr "언어: %(name)s"
 
-#: cps/web.py:1005
+#: cps/web.py:1013
 msgid "Error loading magic shelf"
 msgstr "매직 책장을 불러오는 중 오류가 발생했습니다"
 
-#: cps/web.py:1030
+#: cps/web.py:1038
 #, fuzzy, python-format
 msgid "Magic Shelf: %(icon)s %(name)s"
 msgstr "서재: '%(name)s'"
 
-#: cps/web.py:1103
+#: cps/web.py:1111
 msgid "No rules provided"
 msgstr "규칙이 제공되지 않았습니다"
 
-#: cps/web.py:1109
+#: cps/web.py:1117
 msgid "Invalid rules format"
 msgstr "규칙 형식이 올바르지 않습니다"
 
-#: cps/web.py:1131
+#: cps/web.py:1139
 msgid "Error processing rules"
 msgstr "규칙 처리 중 오류가 발생했습니다"
 
-#: cps/web.py:1135
+#: cps/web.py:1143
 msgid "Invalid request"
 msgstr "잘못된 요청입니다"
 
-#: cps/web.py:1179
+#: cps/web.py:1187
 msgid "Name and rules are required"
 msgstr "이름과 규칙은 필수입니다"
 
-#: cps/web.py:1182 cps/web.py:1279
+#: cps/web.py:1190 cps/web.py:1287
 msgid "Shelf name too long (max 100 characters)"
 msgstr "책장 이름이 너무 깁니다 (최대 100자)"
 
-#: cps/web.py:1204
+#: cps/web.py:1212
 msgid "Error creating shelf"
 msgstr "책장 생성 중 오류가 발생했습니다"
 
-#: cps/templates/layout.html:108 cps/web.py:1218
+#: cps/templates/layout.html:113 cps/web.py:1226
 msgid "Create Magic Shelf"
 msgstr "매직 책장 만들기"
 
-#: cps/web.py:1272
+#: cps/web.py:1280
 msgid "Permission denied to change public status"
 msgstr "공개 상태를 변경할 권한이 없습니다"
 
-#: cps/web.py:1276
+#: cps/web.py:1284
 msgid "Shelf name is required"
 msgstr "책장 이름은 필수입니다"
 
-#: cps/web.py:1310
+#: cps/web.py:1318
 msgid "Error updating shelf"
 msgstr "책장 업데이트 중 오류가 발생했습니다"
 
-#: cps/web.py:1325
+#: cps/web.py:1333
 msgid "Edit Magic Shelf"
 msgstr "매직 책장 편집"
 
-#: cps/web.py:1338
+#: cps/web.py:1346
 msgid "Shelf not found"
 msgstr "책장을 찾을 수 없습니다"
 
-#: cps/web.py:1343
+#: cps/web.py:1351
 msgid "Permission denied"
 msgstr "권한이 없습니다"
 
-#: cps/web.py:1374
+#: cps/web.py:1382
 msgid "Shelf duplicated successfully"
 msgstr "책장을 복제했습니다"
 
-#: cps/web.py:1380
+#: cps/web.py:1388
 msgid "Error duplicating shelf"
 msgstr "책장 복제 중 오류가 발생했습니다"
 
-#: cps/templates/magic_shelf_edit.html:64 cps/web.py:1407
+#: cps/templates/magic_shelf_edit.html:64 cps/web.py:1415
 msgid ""
 "System shelves cannot be deleted. You can hide them in your user profile "
 "settings."
 msgstr ""
 "시스템 책장은 삭제할 수 없습니다. 사용자 프로필 설정에서 숨길 수 있습니다."
 
-#: cps/web.py:1424
+#: cps/web.py:1432
 msgid "Error deleting shelf"
 msgstr "책장 삭제 중 오류가 발생했습니다"
 
-#: cps/web.py:1440
+#: cps/web.py:1448
 msgid ""
 "You cannot hide your own shelves. Delete them instead if you don't want them."
 msgstr "자신의 책장은 숨길 수 없습니다. 원하지 않는다면 삭제하세요."
 
-#: cps/web.py:1450
+#: cps/web.py:1458
 msgid "Shelf already hidden"
 msgstr "이미 숨겨진 책장입니다"
 
-#: cps/web.py:1464
+#: cps/web.py:1472
 msgid "Error hiding shelf"
 msgstr "책장 숨기기 중 오류가 발생했습니다"
 
-#: cps/web.py:1478
+#: cps/web.py:1486
 msgid "Shelf was not hidden"
 msgstr "숨겨지지 않은 책장입니다"
 
-#: cps/web.py:1487
+#: cps/web.py:1495
 msgid "Error unhiding shelf"
 msgstr "책장 숨김 해제 중 오류가 발생했습니다"
 
-#: cps/templates/admin.html:34 cps/web.py:1641
+#: cps/templates/admin.html:34 cps/web.py:1649
 msgid "Downloads"
 msgstr "다운로드"
 
-#: cps/web.py:1793
+#: cps/web.py:1801
 msgid "File formats list"
 msgstr "파일 형식 목록"
 
-#: cps/web.py:2033 cps/web.py:2071
+#: cps/web.py:2041 cps/web.py:2079
 msgid "Please configure the SMTP mail settings first..."
 msgstr "SMTP 메일 설정을 해주세요."
 
-#: cps/web.py:2037
+#: cps/web.py:2045
 msgid "Oops! Please update your profile with a valid eReader Email."
 msgstr ""
 "문제가 발생했습니다. 프로필에 유효한 전자책 리더 이메일을 설정해 주세요."
 
-#: cps/web.py:2059
+#: cps/web.py:2067
 #, python-format
 msgid "Success! Book queued for sending to %(eReadermail)s"
 msgstr "%(eReadermail)s에 전송 작업이 추가되었습니다."
 
-#: cps/web.py:2062 cps/web.py:2120
+#: cps/web.py:2070 cps/web.py:2128
 #, python-format
 msgid "Oops! There was an error sending book: %(res)s"
 msgstr "전송 중 오류가 발생했습니다: %(res)s"
 
-#: cps/web.py:2079 cps/web.py:2089
+#: cps/web.py:2087 cps/web.py:2097
 msgid "No email addresses selected"
 msgstr "선택된 이메일 주소가 없습니다"
 
-#: cps/web.py:2096
+#: cps/web.py:2104
 msgid "Additional email addresses are disabled for your account."
 msgstr "회원님의 계정에서는 추가 이메일 주소가 비활성화되어 있습니다."
 
-#: cps/web.py:2118
+#: cps/web.py:2126
 msgid "Success! Book queued for sending to the selected address(es)!"
 msgstr "성공! 선택한 주소로 책 전송이 대기열에 추가되었습니다!"
 
-#: cps/web.py:2137
+#: cps/web.py:2145
 msgid "Please wait one minute to register next user"
 msgstr "다음 사용자를 등록은 1분 뒤 가능합니다."
 
-#: cps/templates/layout.html:181 cps/templates/login.html:77
-#: cps/templates/register.html:22 cps/web.py:2138 cps/web.py:2142
-#: cps/web.py:2147 cps/web.py:2151 cps/web.py:2157 cps/web.py:2182
-#: cps/web.py:2186 cps/web.py:2199 cps/web.py:2202
+#: cps/templates/layout.html:186 cps/templates/login.html:77
+#: cps/templates/register.html:22 cps/web.py:2146 cps/web.py:2150
+#: cps/web.py:2155 cps/web.py:2159 cps/web.py:2165 cps/web.py:2190
+#: cps/web.py:2194 cps/web.py:2207 cps/web.py:2210
 msgid "Register"
 msgstr "등록"
 
-#: cps/web.py:2141 cps/web.py:2306
+#: cps/web.py:2149 cps/web.py:2314
 msgid "Connection error to limiter backend, please contact your administrator"
 msgstr ""
 "Flask-Limiter 시스템 연결에 문제가 발생했습니다. 관리자에게 문의하세요."
 
-#: cps/web.py:2146 cps/web.py:2198
+#: cps/web.py:2154 cps/web.py:2206
 msgid ""
 "Oops! Email server is not configured, please contact your administrator."
 msgstr "이메일 서버가 설정되지 않았습니다. 관리자에게 문의하세요."
 
-#: cps/web.py:2184
+#: cps/web.py:2192
 msgid "Oops! Your Email is not allowed."
 msgstr "사용할 수 없는 이메일입니다."
 
-#: cps/web.py:2187
+#: cps/web.py:2195
 msgid "Success! Confirmation Email has been sent."
 msgstr "인증 이메일을 발송했습니다."
 
-#: cps/web.py:2235
+#: cps/web.py:2243
 msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
 msgstr ""
 "인증 루프가 감지되었습니다. 로그인 문제가 계속되면 관리자에게 문의하세요."
 
-#: cps/web.py:2280
+#: cps/web.py:2288
 msgid ""
 "OAuth authentication is not properly configured. Please contact "
 "administrator."
 msgstr "OAuth 인증이 올바르게 설정되지 않았습니다. 관리자에게 문의하세요."
 
-#: cps/web.py:2285 cps/web.py:2312
+#: cps/web.py:2293 cps/web.py:2320
 msgid "Cannot activate LDAP authentication"
 msgstr "LDAP 인증을 활성화할 수 없습니다."
 
-#: cps/web.py:2294
+#: cps/web.py:2302
 msgid "Standard login is disabled."
 msgstr "일반 로그인이 비활성화되어 있습니다."
 
-#: cps/web.py:2302
+#: cps/web.py:2310
 msgid "Please wait one minute before next login"
 msgstr "1분 후 시도해 주세요."
 
-#: cps/web.py:2320
+#: cps/web.py:2328
 msgid "Username cannot be empty"
 msgstr "사용자 이름은 비워둘 수 없습니다"
 
-#: cps/web.py:2332
+#: cps/web.py:2340
 #, python-format
 msgid "you are now logged in as: '%(nickname)s'"
 msgstr "'%(nickname)s'로 로그인했습니다."
 
-#: cps/web.py:2351
+#: cps/web.py:2359
 #, python-format
 msgid ""
 "Welcome! Your account has been automatically created. You are now logged in "
@@ -2509,13 +2561,13 @@ msgstr ""
 "환영합니다! 계정이 자동으로 생성되었습니다. 현재 '%(nickname)s'(으)로 로그인"
 "되어 있습니다."
 
-#: cps/web.py:2356 cps/web.py:2359
+#: cps/web.py:2364 cps/web.py:2367
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
 msgstr "인증에는 성공했지만 계정 생성에 실패했습니다. 관리자에게 문의하세요."
 
-#: cps/web.py:2363
+#: cps/web.py:2371
 msgid ""
 "Authentication successful, but no local account found. Please contact your "
 "administrator to create your account."
@@ -2523,7 +2575,7 @@ msgstr ""
 "인증에 성공했지만 로컬 계정을 찾을 수 없습니다. 계정 생성을 위해 관리자에게 "
 "문의하세요."
 
-#: cps/web.py:2371
+#: cps/web.py:2379
 #, python-format
 msgid ""
 "Fallback Login as: '%(nickname)s', LDAP Server not reachable, or user not "
@@ -2532,60 +2584,65 @@ msgstr ""
 "'%(nickname)s'(으)로 대체 로그인했습니다. LDAP 서버에 연결할 수 없거나 존재하"
 "지 않는 사용자입니다."
 
-#: cps/web.py:2377
+#: cps/web.py:2385
 #, python-format
 msgid "Could not login: %(message)s"
 msgstr "로그인할 수 없습니다: %(message)s"
 
-#: cps/web.py:2400 cps/web.py:2401 cps/web.py:2447
+#: cps/web.py:2408 cps/web.py:2409 cps/web.py:2455
 msgid "Wrong Username or Password"
 msgstr "사용자 이름 또는 비밀번호가 올바르지 않습니다."
 
-#: cps/web.py:2409
+#: cps/web.py:2417
 msgid "New Password was sent to your email address"
 msgstr "새 비밀번호가 이메일로 전송되었습니다"
 
-#: cps/web.py:2413
+#: cps/web.py:2421
 msgid "An unknown error occurred. Please try again later."
 msgstr "알 수 없는 오류가 발생했습니다. 나중에 다시 시도해 주세요."
 
-#: cps/web.py:2415
+#: cps/web.py:2423
 msgid "Please enter valid username to reset password"
 msgstr "비밀번호를 재설정하려면 올바른 사용자 이름을 입력하세요."
 
-#: cps/web.py:2426
+#: cps/web.py:2434
 #, python-format
 msgid "You are now logged in as: '%(nickname)s'"
 msgstr "'%(nickname)s'로 로그인했습니다."
 
-#: cps/web.py:2482
+#: cps/web.py:2490
 msgid "Current password is incorrect"
 msgstr ""
 
-#: cps/web.py:2484
+#: cps/web.py:2492
 msgid "Please choose a password other than the default one"
 msgstr ""
 
-#: cps/web.py:2726 cps/web.py:2854
+#: cps/web.py:2734 cps/web.py:2862
 #, python-format
 msgid "%(name)s's Profile"
 msgstr "%(name)s 프로필"
 
-#: cps/web.py:2747
+#: cps/web.py:2755
 msgid "Success! Profile Updated"
 msgstr "프로필이 업데이트되었습니다."
 
-#: cps/web.py:2753
+#: cps/web.py:2761
 msgid "Oops! An account already exists for this Email."
 msgstr "이미 등록된 이메일 주소입니다."
 
-#: cps/web.py:2975
+#: cps/web.py:2983
 msgid "Invalid book ID."
 msgstr "잘못된 "
 
-#: cps/templates/layout.html:169 cps/templates/stats.html:8
+#: cps/templates/layout.html:174 cps/templates/stats.html:9
 #: cps/templates/whats_new.html:6 cps/whats_new.py:137
 msgid "What's new"
+msgstr ""
+
+#: cps/year_review.py:268
+#, python-format
+msgid "Your %(year)s in books"
 msgstr ""
 
 #: cps/progress_syncing/protocols/kosync.py:496
@@ -2765,8 +2822,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "표지 섬네일 캐시를 삭제합니다."
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:147
-#: cps/templates/layout.html:148 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:151
+#: cps/templates/layout.html:152 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "업로드"
 
@@ -2786,7 +2843,7 @@ msgid "Pages"
 msgstr ""
 
 #: cps/templates/_macros.html:75 cps/templates/book_table.html:132
-#: cps/templates/user_table.html:66
+#: cps/templates/user_table.html:66 cps/templates/year.html:238
 msgid "Previous"
 msgstr "이전"
 
@@ -2797,6 +2854,7 @@ msgstr ""
 
 #: cps/templates/_macros.html:89 cps/templates/book_table.html:132
 #: cps/templates/feed.xml:22 cps/templates/user_table.html:66
+#: cps/templates/year.html:239
 msgid "Next"
 msgstr "다음"
 
@@ -2869,12 +2927,12 @@ msgid "Allowed and denied values"
 msgstr "허용 항목"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
-#: cps/templates/book_table.html:51 cps/templates/detail.html:281
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:206
-#: cps/templates/layout.html:209 cps/templates/layout.html:212
-#: cps/templates/layout.html:215 cps/templates/layout.html:218
-#: cps/templates/layout.html:262 cps/templates/layout.html:311
-#: cps/templates/read.html:58
+#: cps/templates/book_table.html:51 cps/templates/detail.html:300
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:211
+#: cps/templates/layout.html:214 cps/templates/layout.html:217
+#: cps/templates/layout.html:220 cps/templates/layout.html:223
+#: cps/templates/layout.html:266 cps/templates/layout.html:315
+#: cps/templates/read.html:58 cps/templates/year.html:42
 msgid "Close"
 msgstr "닫기"
 
@@ -2911,12 +2969,13 @@ msgstr ""
 #: cps/templates/book_edit.html:236 cps/templates/book_table.html:67
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
-#: cps/templates/cwa_settings.html:260 cps/templates/detail.html:307
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:271
+#: cps/templates/cwa_settings.html:260 cps/templates/detail.html:326
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:275
 #: cps/templates/magic_shelf_edit.html:61
-#: cps/templates/profile_pictures.html:29 cps/templates/schedule_edit.html:34
-#: cps/templates/shelf_edit.html:32 cps/templates/shelf_order.html:35
-#: cps/templates/tasks.html:56 cps/templates/user_edit.html:497
+#: cps/templates/profile_pictures.html:29 cps/templates/reading_import.html:82
+#: cps/templates/schedule_edit.html:34 cps/templates/shelf_edit.html:32
+#: cps/templates/shelf_order.html:35 cps/templates/tasks.html:56
+#: cps/templates/user_edit.html:507
 msgid "Cancel"
 msgstr "취소"
 
@@ -2970,7 +3029,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:126
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:131
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -3212,7 +3271,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Hardcover 자동 가져오기 실행"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:121 cps/templates/layout.html:174
+#: cps/templates/layout.html:126 cps/templates/layout.html:179
 msgid "System"
 msgstr ""
 
@@ -3248,27 +3307,27 @@ msgstr "종료"
 msgid "Are you sure you want to restart?"
 msgstr "재시작하시겠습니까?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:318
+#: cps/templates/admin.html:175 cps/templates/layout.html:322
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:246 cps/templates/layout.html:87
+#: cps/templates/detail.html:249 cps/templates/layout.html:92
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "서재"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:139
+#: cps/templates/appearance.html:14 cps/templates/layout.html:143
 #, fuzzy
 msgid "Search titles, authors, series…"
 msgstr "제목/저자로 검색"
 
-#: cps/templates/appearance.html:20 cps/templates/index.html:9
+#: cps/templates/appearance.html:20 cps/templates/index.html:18
 #, fuzzy
 msgid "Continue reading"
 msgstr "여기에서 기여하세요!"
 
-#: cps/templates/appearance.html:31 cps/templates/index.html:30
+#: cps/templates/appearance.html:31 cps/templates/index.html:39
 #, fuzzy
 msgid "In progress"
 msgstr "진행률"
@@ -3376,7 +3435,8 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:164 cps/templates/layout.html:241
+#: cps/templates/layout.html:168 cps/templates/layout.html:246
+#: cps/templates/reading_import.html:6
 #, fuzzy
 msgid "Profile"
 msgstr "내 프로필"
@@ -3420,7 +3480,7 @@ msgstr "사용자"
 msgid "Sidebar and page"
 msgstr ""
 
-#: cps/templates/appearance.html:122 cps/templates/user_edit.html:396
+#: cps/templates/appearance.html:122 cps/templates/user_edit.html:406
 msgid "Sidebar"
 msgstr ""
 
@@ -3453,20 +3513,20 @@ msgstr "평점"
 
 #: cps/templates/appearance.html:155 cps/templates/book_edit.html:132
 #: cps/templates/book_edit.html:136 cps/templates/duplicates.html:49
-#: cps/templates/magic_shelf_edit.html:60
+#: cps/templates/magic_shelf_edit.html:60 cps/templates/reading_import.html:33
 msgid "Preview"
 msgstr "미리보기"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:173
+#: cps/templates/appearance.html:156 cps/templates/layout.html:178
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:175
+#: cps/templates/appearance.html:157 cps/templates/layout.html:180
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "밝은색"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:176
+#: cps/templates/appearance.html:158 cps/templates/layout.html:181
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "어두운색"
@@ -3620,7 +3680,7 @@ msgid "Number in series"
 msgstr "시리즈: %(serie)s"
 
 #: cps/templates/book_edit.html:101 cps/templates/book_edit.html:271
-#: cps/templates/detail.html:212 cps/templates/search_form.html:65
+#: cps/templates/detail.html:215 cps/templates/search_form.html:65
 msgid "Tags"
 msgstr "태그"
 
@@ -3653,7 +3713,7 @@ msgstr "평점"
 
 #: cps/templates/book_edit.html:129 cps/templates/book_edit.html:270
 #: cps/templates/book_table.html:63 cps/templates/cwa_settings.html:148
-#: cps/templates/detail.html:205 cps/templates/magic_shelf_edit.html:95
+#: cps/templates/detail.html:208 cps/templates/magic_shelf_edit.html:95
 msgid "Description"
 msgstr "설명"
 
@@ -3672,7 +3732,7 @@ msgid ""
 "styles are removed when saving."
 msgstr ""
 
-#: cps/templates/book_edit.html:141 cps/templates/detail.html:233
+#: cps/templates/book_edit.html:141 cps/templates/detail.html:236
 msgid "Identifiers"
 msgstr "식별자"
 
@@ -3710,12 +3770,12 @@ msgstr "표지 이미지"
 msgid "Custom columns"
 msgstr "두쪽 보기"
 
-#: cps/templates/book_edit.html:193 cps/templates/detail.html:255
+#: cps/templates/book_edit.html:193 cps/templates/detail.html:258
 #: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:82
 msgid "Yes"
 msgstr "예"
 
-#: cps/templates/book_edit.html:194 cps/templates/detail.html:255
+#: cps/templates/book_edit.html:194 cps/templates/detail.html:258
 #: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:83
 msgid "No"
 msgstr "아니오"
@@ -3737,7 +3797,7 @@ msgstr "Hardcover 동기화에서 읽기 진행률 제외"
 #: cps/templates/cwa_settings.html:259 cps/templates/email_edit.html:71
 #: cps/templates/magic_shelf_edit.html:59
 #: cps/templates/profile_pictures.html:28 cps/templates/schedule_edit.html:33
-#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:496
+#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:506
 msgid "Save"
 msgstr "저장"
 
@@ -3829,8 +3889,8 @@ msgstr "병합"
 msgid "Add to shelf"
 msgstr "서재에 추가"
 
-#: cps/templates/book_table.html:26 cps/templates/index.html:45
-#: cps/templates/layout.html:246
+#: cps/templates/book_table.html:26 cps/templates/index.html:54
+#: cps/templates/layout.html:251
 #, fuzzy
 msgid "More"
 msgstr "더보기"
@@ -4094,7 +4154,7 @@ msgid "Ok"
 msgstr "확인"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:313 cps/templates/login.html:35
+#: cps/templates/layout.html:317 cps/templates/login.html:35
 #: cps/templates/user_edit.html:51 cps/templates/user_edit.html:62
 #, fuzzy
 msgid "Show password"
@@ -4762,35 +4822,35 @@ msgstr "기본 언어"
 msgid "Default Visible Language of Books"
 msgstr "책의 기본 표시 언어"
 
-#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:481
+#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:491
 msgid "Admin User"
 msgstr "관리자"
 
-#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:482
+#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:492
 msgid "Allow Downloads"
 msgstr "다운로드 허용"
 
-#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:483
+#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:493
 msgid "Allow eBook Viewer"
 msgstr "책 보기 허용"
 
-#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:484
+#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:494
 msgid "Allow Uploads"
 msgstr "업로드 허용"
 
-#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:485
+#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:495
 msgid "Allow Edit"
 msgstr "편집 허용"
 
-#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:486
+#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:496
 msgid "Allow Delete Books"
 msgstr "책 삭제 허용"
 
-#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:488
+#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:498
 msgid "Allow Changing Password"
 msgstr "비밀번호 변경 허용"
 
-#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:489
+#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:499
 msgid "Allow Editing Public Shelves"
 msgstr "공개 서재 편집 허용"
 
@@ -4798,12 +4858,12 @@ msgstr "공개 서재 편집 허용"
 msgid "Default Visibilities for New Users"
 msgstr "새 사용자 기본 기능"
 
-#: cps/templates/config_view_edit.html:96 cps/templates/user_edit.html:403
+#: cps/templates/config_view_edit.html:96 cps/templates/user_edit.html:413
 #: cps/templates/user_table.html:26
 msgid "Show Random Books in Detail View"
 msgstr "목록 보기에서 무작위 추천 표시"
 
-#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:408
+#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:418
 msgid "Add Allowed/Denied Tags"
 msgstr "허용/거부 태그 추가"
 
@@ -4956,6 +5016,7 @@ msgid "Services"
 msgstr "이메일 서비스"
 
 #: cps/templates/cwa_settings.html:73 cps/templates/cwa_settings.html:108
+#: cps/templates/user_edit.html:364
 #, fuzzy
 msgid "Import"
 msgstr "중요:"
@@ -5280,7 +5341,7 @@ msgstr "Scriptorium 중복 감지 기준"
 msgid "Books count as duplicates when all selected fields match."
 msgstr ""
 
-#: cps/templates/cwa_settings.html:198 cps/templates/detail.html:298
+#: cps/templates/cwa_settings.html:198 cps/templates/detail.html:317
 msgid "Format"
 msgstr "형식"
 
@@ -5514,8 +5575,8 @@ msgstr ""
 msgid "User Activity"
 msgstr ""
 
-#: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:62
-#: cps/templates/layout.html:58 cps/templates/layout.html:233
+#: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:71
+#: cps/templates/layout.html:59 cps/templates/layout.html:238
 #, fuzzy
 msgid "Library"
 msgstr "서재에 있음"
@@ -5891,7 +5952,7 @@ msgstr "웹에서 보기"
 msgid "Listen"
 msgstr "목록"
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:89
+#: cps/templates/detail.html:117 cps/templates/layout.html:94
 #: cps/templates/user_edit.html:216
 msgid "Create Shelf"
 msgstr "책장 만들기"
@@ -5962,52 +6023,67 @@ msgstr "책장에 추가"
 msgid "Create a Kobo shelf"
 msgstr "서재 생성"
 
-#: cps/templates/detail.html:207 cps/templates/layout.html:314
+#: cps/templates/detail.html:203 cps/templates/highlights.html:30
+#, python-format
+msgid "%(num)s highlight"
+msgid_plural "%(num)s highlights"
+msgstr[0] ""
+
+#: cps/templates/detail.html:210 cps/templates/layout.html:318
 #, fuzzy
 msgid "Show more"
 msgstr "읽지 않은 책 보기"
 
-#: cps/templates/detail.html:217
+#: cps/templates/detail.html:220
 #, fuzzy, python-format
 msgid "Remove tag %(name)s"
 msgstr "태그 제거"
 
-#: cps/templates/detail.html:222 cps/templates/detail.html:223
-#: cps/templates/detail.html:224
+#: cps/templates/detail.html:225 cps/templates/detail.html:226
+#: cps/templates/detail.html:227
 msgid "Add tag"
 msgstr "태그 추가"
 
-#: cps/templates/detail.html:266 cps/templates/magic_shelf_edit.html:94
+#: cps/templates/detail.html:269 cps/templates/magic_shelf_edit.html:94
 msgid "Date added"
 msgstr "추가된 날짜"
 
-#: cps/templates/detail.html:267 cps/templates/magic_shelf_edit.html:94
+#: cps/templates/detail.html:270 cps/templates/magic_shelf_edit.html:94
 msgid "Last modified"
 msgstr "마지막 수정"
 
-#: cps/templates/detail.html:268
+#: cps/templates/detail.html:271
 msgid "ID"
 msgstr "ID"
 
-#: cps/templates/detail.html:285
+#: cps/templates/detail.html:280
+#, fuzzy
+msgid "More like this"
+msgstr "방향"
+
+#: cps/templates/detail.html:281
+msgid "From your library: the same authors and the closest genres."
+msgstr ""
+
+#: cps/templates/detail.html:304
 #, fuzzy
 msgid "Send to"
 msgstr "보내기"
 
-#: cps/templates/detail.html:292
+#: cps/templates/detail.html:311
 #, fuzzy
 msgid "Other addresses"
 msgstr "이메일 주소 선택:"
 
-#: cps/templates/detail.html:293
+#: cps/templates/detail.html:312
 msgid "example@domain.com, another@domain.com"
 msgstr "example@domain.com, another@domain.com"
 
-#: cps/templates/detail.html:294 cps/templates/user_edit.html:337
+#: cps/templates/detail.html:313 cps/templates/user_edit.html:337
 msgid "Separate several addresses with commas."
 msgstr ""
 
-#: cps/templates/detail.html:308
+#: cps/templates/detail.html:327
 msgid "Send"
 msgstr "보내기"
 
@@ -6335,7 +6411,7 @@ msgid "(Magic)"
 msgstr "(매직)"
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:96
+#: cps/templates/layout.html:101
 msgid "(Public)"
 msgstr "(공개)"
 
@@ -6374,7 +6450,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:317
+#: cps/templates/grid.html:21 cps/templates/layout.html:321
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6389,7 +6465,7 @@ msgstr "시리즈 입력"
 msgid "Filter by initial"
 msgstr "초성 필터"
 
-#: cps/templates/grid.html:46 cps/templates/index.html:67
+#: cps/templates/grid.html:46 cps/templates/index.html:76
 #: cps/templates/shelf.html:12
 #, python-format
 msgid "%(num)s book"
@@ -6491,6 +6567,45 @@ msgstr ""
 msgid "Reject every pending match? Those books will not be suggested again."
 msgstr ""
 
+#: cps/templates/highlights.html:7
+msgid "Passages and notes from your Kobo and KOReader, gathered by book."
+msgstr ""
+
+#: cps/templates/highlights.html:10 cps/templates/highlights.html:32
+msgid "Export as Markdown"
+msgstr ""
+
+#: cps/templates/highlights.html:17 cps/templates/highlights.html:18
+msgid "Search highlights"
+msgstr ""
+
+#: cps/templates/highlights.html:20
+#, fuzzy
+msgid "Show all"
+msgstr "모두 보기"
+
+#: cps/templates/highlights.html:50
+#, python-format
+msgid "No highlights match “%(query)s”"
+msgstr ""
+
+#: cps/templates/highlights.html:54
+#, fuzzy
+msgid "No highlights yet"
+msgstr "시리즈 보기"
+
+#: cps/templates/highlights.html:55
+msgid ""
+"Highlight a passage on your Kobo or in KOReader and it appears here after "
+"the next sync."
+msgstr ""
+
+#: cps/templates/highlights.html:56
+msgid ""
+"KOReader needs version 1.1 or later of the Scriptorium plugin: download it "
+"again from Profile → Devices."
+msgstr ""
+
 #: cps/templates/http_error.html:19
 msgid "Scriptorium Instance is unconfigured, please contact your administrator"
 msgstr "Scriptorium이 아직 구성되지 않았습니다. 관리자에게 문의하세요."
@@ -6507,61 +6622,70 @@ msgstr "로그아웃"
 msgid "Create Issue"
 msgstr "이슈 생성"
 
-#: cps/templates/index.html:12
+#: cps/templates/index.html:9
+#, python-format
+msgid "Your %(year)s in books is ready"
+msgstr ""
+
+#: cps/templates/index.html:10
+msgid "The books, the hours, the lines you kept. Two minutes, full screen."
+msgstr ""
+
+#: cps/templates/index.html:21
 #, fuzzy, python-format
 msgid "Kobo synced %(when)s"
 msgstr "Kobo 동기화 토큰"
 
-#: cps/templates/index.html:15
+#: cps/templates/index.html:24
 #, fuzzy, python-format
 msgid "KOReader synced %(when)s"
 msgstr "Kobo 동기화 토큰"
 
-#: cps/templates/index.html:28
+#: cps/templates/index.html:37
 #, python-format
 msgid "%(time)s left"
 msgstr ""
 
-#: cps/templates/index.html:59 cps/templates/magic_shelf_edit.html:6
+#: cps/templates/index.html:68 cps/templates/magic_shelf_edit.html:6
 #, fuzzy
 msgid "Smart shelf"
 msgstr "서재 편집"
 
-#: cps/templates/index.html:72
+#: cps/templates/index.html:81
 msgid "Refresh shelf to update with latest changes"
 msgstr "최신 변경 사항을 반영하려면 책장을 새로고침하세요"
 
-#: cps/templates/index.html:72
+#: cps/templates/index.html:81
 msgid "Refresh"
 msgstr "새로고침"
 
-#: cps/templates/index.html:74
+#: cps/templates/index.html:83
 #, fuzzy
 msgid "Edit rules"
 msgstr "책장 규칙 편집"
 
-#: cps/templates/index.html:78
+#: cps/templates/index.html:87
 msgid "Show Shelf"
 msgstr "책장 표시"
 
-#: cps/templates/index.html:78
+#: cps/templates/index.html:87
 msgid "Hide Shelf"
 msgstr "책장 숨기기"
 
-#: cps/templates/index.html:90
+#: cps/templates/index.html:99
 msgid "Your library is empty"
 msgstr ""
 
-#: cps/templates/index.html:90
+#: cps/templates/index.html:99
 msgid ""
 "Upload books or drop them into the ingest folder, and they will show up here."
 msgstr ""
 
-#: cps/templates/index.html:92
+#: cps/templates/index.html:101
 msgid "No books here"
 msgstr ""
 
-#: cps/templates/index.html:92
+#: cps/templates/index.html:101
 #, fuzzy
 msgid "Nothing matches this view yet."
 msgstr "거부할 대기 중인 일치 항목이 없습니다"
@@ -6690,203 +6814,208 @@ msgid ""
 "with the same username and password."
 msgstr ""
 
-#: cps/templates/layout.html:48
+#: cps/templates/layout.html:49
 msgid "Skip to content"
 msgstr ""
 
-#: cps/templates/layout.html:52
+#: cps/templates/layout.html:53
 #, fuzzy
 msgid "Library navigation"
 msgstr "서재 통계"
 
-#: cps/templates/layout.html:77
+#: cps/templates/layout.html:74
+#, fuzzy
+msgid "Your year in books"
+msgstr "검색"
+
+#: cps/templates/layout.html:82
 msgid "Browse"
 msgstr "탐색"
 
-#: cps/templates/layout.html:100
+#: cps/templates/layout.html:105
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:106 cps/templates/user_edit.html:417
+#: cps/templates/layout.html:111 cps/templates/user_edit.html:427
 #, fuzzy
 msgid "Smart shelves"
 msgstr "서재"
 
-#: cps/templates/layout.html:129 cps/templates/layout.html:252
-#: cps/templates/stats.html:6
-msgid "Based on"
-msgstr ""
-
-#: cps/templates/layout.html:135
+#: cps/templates/layout.html:139
 msgid "Toggle Navigation"
 msgstr "메뉴 열기/닫기"
 
-#: cps/templates/layout.html:138
+#: cps/templates/layout.html:142
 msgid "Search Library"
 msgstr "검색"
 
-#: cps/templates/layout.html:140
+#: cps/templates/layout.html:144
 #, fuzzy
 msgid "Advanced"
 msgstr "상세 검색"
 
-#: cps/templates/layout.html:144
+#: cps/templates/layout.html:148
 msgid "Refresh Library"
 msgstr "서재 새로고침"
 
-#: cps/templates/layout.html:154 cps/templates/user_edit.html:24
+#: cps/templates/layout.html:158 cps/templates/user_edit.html:24
 #: cps/templates/user_edit.html:37
 msgid "Account"
 msgstr "계정"
 
-#: cps/templates/layout.html:154
+#: cps/templates/layout.html:158
 #, fuzzy
 msgid "Update available"
 msgstr "업데이트 실패: "
 
-#: cps/templates/layout.html:162
+#: cps/templates/layout.html:166
 #, python-format
 msgid "Update available: %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:166 cps/templates/user_edit.html:25
+#: cps/templates/layout.html:170 cps/templates/user_edit.html:25
 #, fuzzy
 msgid "Devices"
 msgstr "이메일 서비스"
 
-#: cps/templates/layout.html:170 cps/templates/stats.html:5
+#: cps/templates/layout.html:173
+#, fuzzy
+msgid "Install app"
+msgstr "설치 버전"
+
+#: cps/templates/layout.html:175 cps/templates/stats.html:5
 msgid "About"
 msgstr "서재 정보"
 
-#: cps/templates/layout.html:184
+#: cps/templates/layout.html:189
 msgid "Logout"
 msgstr "로그아웃"
 
-#: cps/templates/layout.html:194
+#: cps/templates/layout.html:199
 #, fuzzy, python-format
 msgid "Scriptorium %(version)s is available."
 msgstr "Scriptorium 테스트 이메일"
 
-#: cps/templates/layout.html:195
+#: cps/templates/layout.html:200
 #, python-format
 msgid ""
 "You have %(version)s. Pull the new image and restart the container to update."
 msgstr ""
 
-#: cps/templates/layout.html:196
+#: cps/templates/layout.html:201
 msgid "Release notes"
 msgstr ""
 
-#: cps/templates/layout.html:197
+#: cps/templates/layout.html:202
 msgid "Dismiss until the next release"
 msgstr ""
 
-#: cps/templates/layout.html:211
+#: cps/templates/layout.html:216
 msgid "Open Duplicates"
 msgstr "중복 항목 열기"
 
-#: cps/templates/layout.html:214
+#: cps/templates/layout.html:219
 msgid "Contribute here!"
 msgstr "여기에서 기여하세요!"
 
-#: cps/templates/layout.html:232
+#: cps/templates/layout.html:237
 #, fuzzy
 msgid "Quick navigation"
 msgstr "기본 설정"
 
-#: cps/templates/layout.html:237
+#: cps/templates/layout.html:242
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:268
+#: cps/templates/layout.html:272
 #, fuzzy
 msgid "Are you sure?"
 msgstr "정말로 하시겠습니까?"
 
-#: cps/templates/layout.html:272 cps/templates/layout.html:311
+#: cps/templates/layout.html:276 cps/templates/layout.html:315
 #, fuzzy
 msgid "Confirm"
 msgstr "설정"
 
-#: cps/templates/layout.html:278
+#: cps/templates/layout.html:282
 msgid "Uploading..."
 msgstr "업로드 중"
 
-#: cps/templates/layout.html:281
+#: cps/templates/layout.html:285
 msgid "Please do not refresh the page"
 msgstr "페이지를 새로고침하지 마세요."
 
-#: cps/templates/layout.html:284
+#: cps/templates/layout.html:288
 msgid "Drop books to add them to the library"
 msgstr ""
 
-#: cps/templates/layout.html:292
+#: cps/templates/layout.html:296
 #, python-format
 msgid "What's new in %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:304
+#: cps/templates/layout.html:308
 msgid "All release notes"
 msgstr ""
 
-#: cps/templates/layout.html:305
+#: cps/templates/layout.html:309
 msgid "Got it"
-msgstr ""
-
-#: cps/templates/layout.html:311
-#, fuzzy
-msgid "Copied to clipboard"
-msgstr "UUID가 클립보드에 복사되었습니다"
-
-#: cps/templates/layout.html:312
-msgid "Could not copy, select the text and copy it manually"
-msgstr ""
-
-#: cps/templates/layout.html:313
-#, fuzzy
-msgid "Hide password"
-msgstr "비밀번호"
-
-#: cps/templates/layout.html:314
-#, fuzzy
-msgid "Show less"
-msgstr "모두 보기"
-
-#: cps/templates/layout.html:314 cps/templates/magic_shelf_edit.html:88
-msgid "Something went wrong, please try again"
 msgstr ""
 
 #: cps/templates/layout.html:315
 #, fuzzy
+msgid "Copied to clipboard"
+msgstr "UUID가 클립보드에 복사되었습니다"
+
+#: cps/templates/layout.html:316
+msgid "Could not copy, select the text and copy it manually"
+msgstr ""
+
+#: cps/templates/layout.html:317
+#, fuzzy
+msgid "Hide password"
+msgstr "비밀번호"
+
+#: cps/templates/layout.html:318
+#, fuzzy
+msgid "Show less"
+msgstr "모두 보기"
+
+#: cps/templates/layout.html:318 cps/templates/magic_shelf_edit.html:88
+msgid "Something went wrong, please try again"
+msgstr ""
+
+#: cps/templates/layout.html:319
+#, fuzzy
 msgid "Upload failed"
 msgstr "업데이트 실패: "
 
-#: cps/templates/layout.html:316
+#: cps/templates/layout.html:320
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "상위 %(count)s개"
 
-#: cps/templates/layout.html:317 cps/templates/search_form.html:7
+#: cps/templates/layout.html:321 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "모두"
 
-#: cps/templates/layout.html:317
+#: cps/templates/layout.html:321
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "최소 하나 이상의 이메일 주소를 선택하십시오."
 
-#: cps/templates/layout.html:318
+#: cps/templates/layout.html:322
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:319
+#: cps/templates/layout.html:323
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "중복 검사 완료: %(count)s개 그룹"
 
-#: cps/templates/layout.html:319
+#: cps/templates/layout.html:323
 #, fuzzy
 msgid "Review"
 msgstr "미리보기"
@@ -6931,11 +7060,12 @@ msgstr "위치 기억하기"
 msgid "Back 30 seconds"
 msgstr ""
 
-#: cps/templates/listenmp3.html:41
+#: cps/templates/listenmp3.html:41 cps/templates/year.html:28
 msgid "Play"
 msgstr ""
 
-#: cps/templates/listenmp3.html:41
+#: cps/templates/listenmp3.html:41 cps/templates/year.html:28
+#: cps/templates/year.html:41
 msgid "Pause"
 msgstr ""
 
@@ -7322,6 +7452,24 @@ msgstr ""
 msgid "is older than"
 msgstr ""
 
+#: cps/templates/offline.html:7
+msgid "Offline"
+msgstr ""
+
+#: cps/templates/offline.html:16
+msgid "You are offline"
+msgstr ""
+
+#: cps/templates/offline.html:17
+msgid ""
+"Scriptorium will be back as soon as this device reaches your server again. "
+"Books already on your e-reader are still there."
+msgstr ""
+
+#: cps/templates/offline.html:18
+msgid "Try again"
+msgstr ""
+
 #: cps/templates/osd.xml:5
 msgid "Scriptorium eBook Catalog"
 msgstr "Scriptorium 책 목록"
@@ -7612,6 +7760,96 @@ msgstr "숨기기"
 msgid "DJVU Reader"
 msgstr "DJVU 리더"
 
+#: cps/templates/reading_import.html:8
+msgid ""
+"Bring what you read on Goodreads or The StoryGraph: finished books with "
+"their dates, what you are reading, and your want-to-read list."
+msgstr ""
+
+#: cps/templates/reading_import.html:16
+msgid ""
+"My Books → Import and export → Export Library. Download the CSV when it is "
+"ready."
+msgstr ""
+
+#: cps/templates/reading_import.html:20
+msgid ""
+"Manage Account → Export StoryGraph Library. The CSV arrives by email or as a "
+"download."
+msgstr ""
+
+#: cps/templates/reading_import.html:27
+msgid "Choose or drop the exported CSV"
+msgstr ""
+
+#: cps/templates/reading_import.html:28
+msgid "Nothing is changed until you confirm the preview."
+msgstr ""
+
+#: cps/templates/reading_import.html:32
+msgid ""
+"Books are matched to your library by ISBN, then by title and author. Reviews "
+"and ratings stay where they are."
+msgstr ""
+
+#: cps/templates/reading_import.html:40
+msgid "In the export"
+msgstr ""
+
+#: cps/templates/reading_import.html:41
+#, fuzzy
+msgid "Found in your library"
+msgstr "이 서재의 시리즈"
+
+#: cps/templates/reading_import.html:42
+#, fuzzy
+msgid "Changes"
+msgstr "비밀번호 변경"
+
+#: cps/templates/reading_import.html:44
+#, python-format
+msgid "From %(source)s."
+msgstr ""
+
+#: cps/templates/reading_import.html:44
+msgid "Books already marked as read stay read; nothing is ever marked unread."
+msgstr ""
+
+#: cps/templates/reading_import.html:47
+#, fuzzy
+msgid "Mark as finished"
+msgstr "읽지 않음으로 표시"
+
+#: cps/templates/reading_import.html:47
+msgid "Add the date you finished them"
+msgstr ""
+
+#: cps/templates/reading_import.html:47
+#, fuzzy
+msgid "Mark as reading"
+msgstr "읽음으로 표시"
+
+#: cps/templates/reading_import.html:47
+#, fuzzy, python-format
+msgid "Add to “%(shelf)s”"
+msgstr "서재에 추가"
+
+#: cps/templates/reading_import.html:69
+#, fuzzy
+msgid "Not in your library"
+msgstr "이 서재의 시리즈"
+
+#: cps/templates/reading_import.html:75
+#, python-format
+msgid "And %(num)s more."
+msgstr ""
+
+#: cps/templates/reading_import.html:83
+#, python-format
+msgid "Import %(num)s change"
+msgid_plural "Import %(num)s changes"
+msgstr[0] ""
+
 #: cps/templates/readpdf.html:32
 msgid "PDF Reader"
 msgstr "PDF 리더"
@@ -7799,6 +8037,39 @@ msgstr "시작:"
 msgid "To:"
 msgstr "종료:"
 
+#: cps/templates/share.html:7
+msgid ""
+"Books shared from another app on this device are added to the library here."
+msgstr ""
+
+#: cps/templates/share.html:13
+msgid "Looking for shared books…"
+msgstr ""
+
+#: cps/templates/share.html:18
+msgid "Nothing was shared. Use “Share” in another app and pick Scriptorium."
+msgstr ""
+
+#: cps/templates/share.html:19
+msgid ""
+"The book did not arrive: open Scriptorium once from the home screen, then "
+"share it again."
+msgstr ""
+
+#: cps/templates/share.html:20
+#, python-format
+msgid "%(num)s book(s) received. Uploading…"
+msgstr ""
+
+#: cps/templates/share.html:21
+msgid ""
+"Your account cannot upload books. Ask an administrator for upload permission."
+msgstr ""
+
+#: cps/templates/share.html:22
+msgid "This browser cannot receive shared books."
+msgstr ""
+
 #: cps/templates/shelf.html:9
 #, fuzzy
 msgid "Public"
@@ -7896,19 +8167,34 @@ msgstr "숨긴 책"
 msgid "Save order"
 msgstr ""
 
-#: cps/templates/stats.html:11
+#: cps/templates/stats.html:6
+msgid "Based on"
+msgstr ""
+
+#: cps/templates/stats.html:7
+msgid ""
+"Free software under the GNU General Public License v3 or later, with no "
+"warranty."
+msgstr ""
+
+#: cps/templates/stats.html:7
+#, fuzzy
+msgid "Source code"
+msgstr "출처"
+
+#: cps/templates/stats.html:12
 msgid "Library Statistics"
 msgstr "서재 통계"
 
-#: cps/templates/stats.html:21
+#: cps/templates/stats.html:22
 msgid "System Statistics"
 msgstr "시스템 통계"
 
-#: cps/templates/stats.html:24
+#: cps/templates/stats.html:25
 msgid "Program"
 msgstr "프로그램"
 
-#: cps/templates/stats.html:24
+#: cps/templates/stats.html:25
 msgid "Installed Version"
 msgstr "설치 버전"
 
@@ -8006,7 +8292,7 @@ msgstr "예약 항목이 취소되었습니다"
 msgid "eReaders"
 msgstr "epub 리더"
 
-#: cps/templates/user_edit.html:27 cps/templates/user_edit.html:360
+#: cps/templates/user_edit.html:27 cps/templates/user_edit.html:370
 msgid "Preferences"
 msgstr ""
 
@@ -8015,7 +8301,7 @@ msgstr ""
 msgid "Shelves & OPDS"
 msgstr "서재"
 
-#: cps/templates/user_edit.html:29 cps/templates/user_edit.html:479
+#: cps/templates/user_edit.html:29 cps/templates/user_edit.html:489
 msgid "Permissions"
 msgstr "권한"
 
@@ -8357,113 +8643,124 @@ msgid "Every newly imported book is emailed to the addresses above."
 msgstr ""
 
 #: cps/templates/user_edit.html:362
+#, fuzzy
+msgid "Reading history"
+msgstr "KOReader 진행률"
+
+#: cps/templates/user_edit.html:363
+msgid ""
+"Coming from Goodreads or The StoryGraph? Import what you have read, with "
+"dates, and your want-to-read list."
+msgstr ""
+
+#: cps/templates/user_edit.html:372
 msgid "Colours and style"
 msgstr ""
 
-#: cps/templates/user_edit.html:368
+#: cps/templates/user_edit.html:378
 msgid "Interface Language"
 msgstr "인터페이스 언어"
 
-#: cps/templates/user_edit.html:377
+#: cps/templates/user_edit.html:387
 msgid "Language of Books"
 msgstr "책 언어"
 
-#: cps/templates/user_edit.html:384
+#: cps/templates/user_edit.html:394
 #, fuzzy
 msgid "Only show books in this language."
 msgstr "특정 언어의 책만 표시하도록 라이브러리를 필터링합니다."
 
-#: cps/templates/user_edit.html:388
+#: cps/templates/user_edit.html:398
 msgid "Hardcover API Token"
 msgstr "Hardcover API 토큰"
 
-#: cps/templates/user_edit.html:390
+#: cps/templates/user_edit.html:400
 msgid "Used to fetch metadata from Hardcover and sync reading progress."
 msgstr ""
 
-#: cps/templates/user_edit.html:409
+#: cps/templates/user_edit.html:419
 msgid "Add allowed/Denied Custom Column Values"
 msgstr "허용/거부할 사용자 정의 항목 추가"
 
-#: cps/templates/user_edit.html:418
+#: cps/templates/user_edit.html:428
 #, fuzzy
 msgid ""
 "Choose how smart shelves are ordered in the sidebar and which ones you see."
 msgstr "사이드바에서 매직 책장이 정렬되는 방식을 선택하세요."
 
-#: cps/templates/user_edit.html:420
+#: cps/templates/user_edit.html:430
 msgid "Order Mode"
 msgstr "정렬 방식"
 
-#: cps/templates/user_edit.html:422
+#: cps/templates/user_edit.html:432
 msgid "Manual (drag to reorder)"
 msgstr "수동 (드래그로 순서 변경)"
 
-#: cps/templates/user_edit.html:422
+#: cps/templates/user_edit.html:432
 msgid "Name (A-Z)"
 msgstr "이름 (가나다순)"
 
-#: cps/templates/user_edit.html:422
+#: cps/templates/user_edit.html:432
 msgid "Name (Z-A)"
 msgstr "이름 (역순)"
 
-#: cps/templates/user_edit.html:423
+#: cps/templates/user_edit.html:433
 msgid "Book count (high to low)"
 msgstr "책 수 (많은 순)"
 
-#: cps/templates/user_edit.html:423
+#: cps/templates/user_edit.html:433
 msgid "Book count (low to high)"
 msgstr "책 수 (적은 순)"
 
-#: cps/templates/user_edit.html:424
+#: cps/templates/user_edit.html:434
 msgid "Created (newest first)"
 msgstr "생성일 (최신순)"
 
-#: cps/templates/user_edit.html:424
+#: cps/templates/user_edit.html:434
 msgid "Created (oldest first)"
 msgstr "생성일 (오래된순)"
 
-#: cps/templates/user_edit.html:425
+#: cps/templates/user_edit.html:435
 msgid "Recently modified"
 msgstr "최근 수정됨"
 
-#: cps/templates/user_edit.html:425
+#: cps/templates/user_edit.html:435
 msgid "Least recently modified"
 msgstr "가장 오래전에 수정됨"
 
-#: cps/templates/user_edit.html:446
+#: cps/templates/user_edit.html:456
 msgid "Visible in the sidebar"
 msgstr ""
 
-#: cps/templates/user_edit.html:460
+#: cps/templates/user_edit.html:470
 msgid "OPDS Catalog Order"
 msgstr "OPDS 카탈로그 순서"
 
-#: cps/templates/user_edit.html:461
+#: cps/templates/user_edit.html:471
 msgid ""
 "Order and visibility of the entries e-reader apps see at the top of the OPDS "
 "catalog."
 msgstr ""
 
-#: cps/templates/user_edit.html:470
+#: cps/templates/user_edit.html:480
 #, fuzzy, python-format
 msgid "Show %(name)s"
 msgstr "저자: %(name)s"
 
-#: cps/templates/user_edit.html:470
+#: cps/templates/user_edit.html:480
 msgid "Visible"
 msgstr "표시됨"
 
-#: cps/templates/user_edit.html:481
+#: cps/templates/user_edit.html:491
 msgid "Full access to settings and users."
 msgstr ""
 
-#: cps/templates/user_edit.html:500 cps/templates/user_table.html:60
+#: cps/templates/user_edit.html:510 cps/templates/user_table.html:60
 #, python-format
 msgid "Delete %(name)s? Their shelves and reading progress are removed too."
 msgstr ""
 
-#: cps/templates/user_edit.html:500 cps/templates/user_edit.html:502
+#: cps/templates/user_edit.html:510 cps/templates/user_edit.html:512
 #: cps/templates/user_table.html:59
 msgid "Delete User"
 msgstr "사용자 삭제"
@@ -8561,6 +8858,289 @@ msgstr "시리즈 보기"
 #: cps/templates/whats_new.html:31
 msgid "They appear here after the first release."
 msgstr ""
+
+#: cps/templates/year.html:25
+#, python-format
+msgid "My %(year)s in books"
+msgstr ""
+
+#: cps/templates/year.html:25
+#, fuzzy
+msgid "books finished"
+msgstr "일치하는 항목이 없습니다"
+
+#: cps/templates/year.html:25
+#, fuzzy
+msgid "hours reading"
+msgstr "여기에서 기여하세요!"
+
+#: cps/templates/year.html:26
+msgid "days in a row"
+msgstr ""
+
+#: cps/templates/year.html:26
+msgid "highlights"
+msgstr ""
+
+#: cps/templates/year.html:26 cps/templates/year.html:228
+#, fuzzy
+msgid "Top author"
+msgstr "사용자"
+
+#: cps/templates/year.html:27 cps/templates/year.html:229
+#, fuzzy
+msgid "Top genre"
+msgstr "사용자"
+
+#: cps/templates/year.html:27 cps/templates/year.html:201
+msgid "The Voracious Reader"
+msgstr ""
+
+#: cps/templates/year.html:27 cps/templates/year.html:203
+msgid "The Saga Seeker"
+msgstr ""
+
+#: cps/templates/year.html:27 cps/templates/year.html:205
+#, fuzzy
+msgid "The Devoted Reader"
+msgstr "전자책 리더로 보내기"
+
+#: cps/templates/year.html:27 cps/templates/year.html:207
+msgid "The Explorer"
+msgstr ""
+
+#: cps/templates/year.html:27 cps/templates/year.html:209
+msgid "The Slow Savourer"
+msgstr ""
+
+#: cps/templates/year.html:28
+msgid "Image saved"
+msgstr ""
+
+#: cps/templates/year.html:31
+msgid "story"
+msgstr ""
+
+#: cps/templates/year.html:37
+msgid "Year"
+msgstr ""
+
+#: cps/templates/year.html:53 cps/templates/year.html:246
+#, fuzzy, python-format
+msgid "Scriptorium · %(year)s"
+msgstr "Scriptorium 로그:"
+
+#: cps/templates/year.html:54
+#, python-format
+msgid "%(name)s, this was your %(year)s in books."
+msgstr ""
+
+#: cps/templates/year.html:55
+msgid "Tap to begin"
+msgstr ""
+
+#: cps/templates/year.html:61
+msgid "This year you finished"
+msgstr ""
+
+#: cps/templates/year.html:63
+msgid "book. One whole story, cover to cover."
+msgid_plural "books. Every one of them, cover to cover."
+msgstr[0] ""
+
+#: cps/templates/year.html:64
+#, python-format
+msgid "And you opened %(num)s more along the way."
+msgstr ""
+
+#: cps/templates/year.html:71
+msgid "This year you opened"
+msgstr ""
+
+#: cps/templates/year.html:73
+msgid "book. The best part is still ahead."
+msgid_plural "books. The best parts are still ahead."
+msgstr[0] ""
+
+#: cps/templates/year.html:81
+msgid "Time with a book in your hands"
+msgstr ""
+
+#: cps/templates/year.html:83
+msgid "hour of reading on your Kobo."
+msgid_plural "hours of reading on your Kobo."
+msgstr[0] ""
+
+#: cps/templates/year.html:84
+#, python-format
+msgid "That is about %(num)s films, without the popcorn."
+msgstr ""
+
+#: cps/templates/year.html:91
+msgid "Your bookends"
+msgstr ""
+
+#: cps/templates/year.html:95
+msgid "You opened the year with"
+msgstr ""
+
+#: cps/templates/year.html:99
+msgid "and closed it with"
+msgstr ""
+
+#: cps/templates/year.html:108
+msgid "The voices you returned to"
+msgstr ""
+
+#: cps/templates/year.html:110
+#, python-format
+msgid "topped your year with %(num)s book."
+msgid_plural "topped your year with %(num)s books."
+msgstr[0] ""
+
+#: cps/templates/year.html:122
+msgid "Your shelves leaned towards"
+msgstr ""
+
+#: cps/templates/year.html:128
+#, python-format
+msgid "And you followed %(num)s series."
+msgid_plural "And you followed %(num)s different series."
+msgstr[0] ""
+
+#: cps/templates/year.html:136
+msgid "Your reading rhythm"
+msgstr ""
+
+#: cps/templates/year.html:137
+#, python-format
+msgid "%(month)s was your month."
+msgstr ""
+
+#: cps/templates/year.html:138
+msgid "Reading days per month"
+msgstr ""
+
+#: cps/templates/year.html:146
+msgid "An early-morning reader."
+msgstr ""
+
+#: cps/templates/year.html:146
+msgid "An afternoon reader."
+msgstr ""
+
+#: cps/templates/year.html:146
+#, fuzzy
+msgid "An evening reader."
+msgstr "전자책 리더로 전송 중..."
+
+#: cps/templates/year.html:146
+msgid "A true night owl."
+msgstr ""
+
+#: cps/templates/year.html:148
+#, python-format
+msgid "%(day)s was your reading day."
+msgstr ""
+
+#: cps/templates/year.html:156
+msgid "Your longest streak"
+msgstr ""
+
+#: cps/templates/year.html:158
+msgid "days in a row with a book."
+msgstr ""
+
+#: cps/templates/year.html:159
+#, python-format
+msgid "%(num)s reading day in total."
+msgid_plural "%(num)s reading days in total."
+msgstr[0] ""
+
+#: cps/templates/year.html:167
+msgid "The line you kept"
+msgstr ""
+
+#: cps/templates/year.html:173
+#, python-format
+msgid "One of %(num)s highlight this year."
+msgid_plural "One of %(num)s highlights this year."
+msgstr[0] ""
+
+#: cps/templates/year.html:183
+#, fuzzy
+msgid "Meanwhile, in the library"
+msgstr "이 서재의 저자"
+
+#: cps/templates/year.html:185
+msgid "new book found a place on the shelves."
+msgid_plural "new books found a place on the shelves."
+msgstr[0] ""
+
+#: cps/templates/year.html:192
+msgid "Your reader profile"
+msgstr ""
+
+#: cps/templates/year.html:201
+#, python-format
+msgid "%(num)s books in a year. The shelves can barely keep up with you."
+msgstr ""
+
+#: cps/templates/year.html:203
+msgid "Once a world has you, you stay for the whole series."
+msgstr ""
+
+#: cps/templates/year.html:205
+msgid "When an author speaks to you, you read everything they wrote."
+msgstr ""
+
+#: cps/templates/year.html:207
+msgid "A different shelf every time. Your curiosity has no favourite genre."
+msgstr ""
+
+#: cps/templates/year.html:209
+msgid "Fewer books, read closely. Every page counted."
+msgstr ""
+
+#: cps/templates/year.html:217
+#, python-format
+msgid "%(name)s · %(year)s in books"
+msgstr ""
+
+#: cps/templates/year.html:223
+#, fuzzy
+msgid "Hours"
+msgstr "설명"
+
+#: cps/templates/year.html:224
+msgid "Streak"
+msgstr ""
+
+#: cps/templates/year.html:233
+#, fuzzy
+msgid "Save image"
+msgstr "표지 이미지"
+
+#: cps/templates/year.html:234
+#, fuzzy
+msgid "Watch again"
+msgstr "일치 이유"
+
+#: cps/templates/year.html:247
+#, python-format
+msgid "Your %(year)s story is still unwritten."
+msgstr ""
+
+#: cps/templates/year.html:248
+msgid ""
+"Finish a book, sync your Kobo or KOReader, or highlight a passage: your year "
+"in books fills itself in as you read."
+msgstr ""
+
+#: cps/templates/year.html:249
+#, fuzzy
+msgid "Back to the library"
+msgstr "이 서재의 저자"
 
 #~ msgid "See Changelog"
 #~ msgstr "변경점 확인"
@@ -8730,12 +9310,6 @@ msgstr ""
 
 #~ msgid "Unarchive"
 #~ msgstr "보관 해제"
-
-#~ msgid "Mark as read"
-#~ msgstr "읽음으로 표시"
-
-#~ msgid "Mark as unread"
-#~ msgstr "읽지 않음으로 표시"
 
 #~ msgid "Select all"
 #~ msgstr "모두 선택"
@@ -9482,9 +10056,6 @@ msgstr ""
 #~ msgid "Consider file format when detecting duplicates"
 #~ msgstr "중복 감지 시 파일 형식 고려"
 
-#~ msgid "Note:"
-#~ msgstr "참고:"
-
 #~ msgid ""
 #~ "At least one criterion must be selected. Title and Author are recommended "
 #~ "as core criteria."
@@ -9764,9 +10335,6 @@ msgstr ""
 #~ msgid "Confidence"
 #~ msgstr "신뢰도"
 
-#~ msgid "Match Reason"
-#~ msgstr "일치 이유"
-
 #~ msgid "View on Hardcover"
 #~ msgstr "Hardcover에서 보기"
 
@@ -9874,9 +10442,6 @@ msgstr ""
 
 #~ msgid "View & Resolve Duplicates"
 #~ msgstr "중복 항목 보기 및 해결"
-
-#~ msgid "Sign in to your library"
-#~ msgstr "이 서재의 시리즈"
 
 #~ msgid "Show Calibre-Web Log: "
 #~ msgstr "Calibre-Web 로그 표시: "
