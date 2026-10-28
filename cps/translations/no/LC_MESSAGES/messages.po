@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 22:23+0100\n"
+"POT-Creation-Date: 2026-10-28 22:37+0100\n"
 "PO-Revision-Date: 2023-01-06 11:00+0000\n"
 "Last-Translator: Vegard Fladby <vegard.fladby@gmail.com>\n"
 "Language-Team: \n"
@@ -834,7 +834,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:172
+#: cps/templates/layout.html:174
 msgid "Customize"
 msgstr ""
 
@@ -1286,7 +1286,7 @@ msgstr ""
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr ""
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:319
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:386
 msgid "Upload done, processing, please wait..."
 msgstr ""
 
@@ -1893,8 +1893,8 @@ msgid ""
 msgstr ""
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:184
-#: cps/templates/layout.html:249 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:186
+#: cps/templates/layout.html:244 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2267
 msgid "Login"
 msgstr "Logg Inn"
@@ -2087,7 +2087,7 @@ msgstr ""
 
 #: cps/search.py:54 cps/search.py:441 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/highlights.html:19
-#: cps/templates/index.xml:12 cps/templates/layout.html:239
+#: cps/templates/index.xml:12 cps/templates/layout.html:234
 #: cps/templates/search.html:5 cps/templates/search.html:6
 #: cps/templates/search_form.html:121
 msgid "Search"
@@ -2125,6 +2125,27 @@ msgstr "Feil ved søk etter egendefinerte kolonner. Start Scriptorium på nytt"
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
 msgstr "Avansert søk"
+
+#: cps/self_update.py:142
+#, fuzzy
+msgid "You already have the latest version."
+msgstr ""
+"Ingen oppdatering tilgjengelig. Du har allerede den nyeste versjonen "
+"installert"
+
+#: cps/self_update.py:145
+msgid "One-click updates are not set up on this server."
+msgstr ""
+
+#: cps/self_update.py:148
+#, fuzzy
+msgid "An update is already running."
+msgstr "Slett bok"
+
+#: cps/self_update.py:154
+#, python-format
+msgid "The backup failed, so nothing was changed: %(error)s"
+msgstr ""
 
 #: cps/shelf.py:48 cps/shelf.py:136
 msgid "Invalid shelf specified"
@@ -2536,7 +2557,7 @@ msgstr "Boken ble satt i kø for sending til %(eReadermail)s"
 msgid "Please wait one minute to register next user"
 msgstr ""
 
-#: cps/templates/layout.html:186 cps/templates/login.html:77
+#: cps/templates/layout.html:188 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2146 cps/web.py:2150
 #: cps/web.py:2155 cps/web.py:2159 cps/web.py:2165 cps/web.py:2190
 #: cps/web.py:2194 cps/web.py:2207 cps/web.py:2210
@@ -2685,8 +2706,8 @@ msgstr ""
 msgid "Invalid book ID."
 msgstr "Ugyldig rolle"
 
-#: cps/templates/layout.html:174 cps/templates/stats.html:9
-#: cps/templates/whats_new.html:6 cps/whats_new.py:137
+#: cps/templates/layout.html:176 cps/templates/stats.html:9
+#: cps/templates/whats_new.html:6 cps/whats_new.py:169
 msgid "What's new"
 msgstr ""
 
@@ -2878,8 +2899,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "Tømmer cache for miniatyrbilde for omslag"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:151
-#: cps/templates/layout.html:152 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:157
+#: cps/templates/layout.html:158 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Laste opp"
 
@@ -2983,11 +3004,12 @@ msgstr ""
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:300
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:211
-#: cps/templates/layout.html:214 cps/templates/layout.html:217
-#: cps/templates/layout.html:220 cps/templates/layout.html:223
-#: cps/templates/layout.html:266 cps/templates/layout.html:315
-#: cps/templates/read.html:58 cps/templates/year.html:42
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:206
+#: cps/templates/layout.html:209 cps/templates/layout.html:212
+#: cps/templates/layout.html:215 cps/templates/layout.html:218
+#: cps/templates/layout.html:261 cps/templates/layout.html:297
+#: cps/templates/layout.html:382 cps/templates/read.html:58
+#: cps/templates/year.html:42
 msgid "Close"
 msgstr "Lukk"
 
@@ -3026,7 +3048,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:326
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:275
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:270
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/reading_import.html:82
 #: cps/templates/schedule_edit.html:34 cps/templates/shelf_edit.html:32
@@ -3329,7 +3351,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Aktiver Kobo-synkronisering"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:126 cps/templates/layout.html:179
+#: cps/templates/layout.html:126 cps/templates/layout.html:181
 msgid "System"
 msgstr ""
 
@@ -3365,7 +3387,7 @@ msgstr "Skru av"
 msgid "Are you sure you want to restart?"
 msgstr "Er du sikker på at du vil starte på nytt?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:322
+#: cps/templates/admin.html:175 cps/templates/layout.html:389
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
@@ -3490,7 +3512,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:168 cps/templates/layout.html:246
+#: cps/templates/layout.html:170 cps/templates/layout.html:241
 #: cps/templates/reading_import.html:6
 #, fuzzy
 msgid "Profile"
@@ -3571,17 +3593,17 @@ msgstr "Vurderinger"
 msgid "Preview"
 msgstr ""
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:178
+#: cps/templates/appearance.html:156 cps/templates/layout.html:180
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:180
+#: cps/templates/appearance.html:157 cps/templates/layout.html:182
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 #, fuzzy
 msgid "Light"
 msgstr "Nattlig"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:181
+#: cps/templates/appearance.html:158 cps/templates/layout.html:183
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr ""
@@ -3944,7 +3966,7 @@ msgid "Add to shelf"
 msgstr "Rediger en hylle"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:54
-#: cps/templates/layout.html:251
+#: cps/templates/layout.html:246
 #, fuzzy
 msgid "More"
 msgstr "Mer av"
@@ -4217,7 +4239,7 @@ msgid "Ok"
 msgstr ""
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:317 cps/templates/login.html:35
+#: cps/templates/layout.html:384 cps/templates/login.html:35
 #: cps/templates/user_edit.html:51 cps/templates/user_edit.html:62
 #, fuzzy
 msgid "Show password"
@@ -5651,7 +5673,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:71
-#: cps/templates/layout.html:59 cps/templates/layout.html:238
+#: cps/templates/layout.html:59 cps/templates/layout.html:233
 #, fuzzy
 msgid "Library"
 msgstr "I biblioteket"
@@ -6102,7 +6124,7 @@ msgid_plural "%(num)s highlights"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cps/templates/detail.html:210 cps/templates/layout.html:318
+#: cps/templates/detail.html:210 cps/templates/layout.html:385
 #, fuzzy
 msgid "Show more"
 msgstr "Vis ulest"
@@ -6512,7 +6534,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:321
+#: cps/templates/grid.html:21 cps/templates/layout.html:388
 #: cps/templates/list.html:27
 msgid "Filter"
 msgstr ""
@@ -6833,8 +6855,9 @@ msgstr ""
 msgid "Server URL"
 msgstr "Serverport"
 
-#: cps/templates/kosync_plugin.html:48 cps/templates/remote_login.html:15
-#: cps/templates/user_edit.html:160 cps/templates/user_edit.html:290
+#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:338
+#: cps/templates/remote_login.html:15 cps/templates/user_edit.html:160
+#: cps/templates/user_edit.html:290
 msgid "Copy"
 msgstr ""
 
@@ -6914,172 +6937,228 @@ msgstr "I biblioteket"
 msgid "Advanced"
 msgstr "Avansert søk"
 
-#: cps/templates/layout.html:148
-#, fuzzy
-msgid "Refresh Library"
-msgstr "I biblioteket"
-
-#: cps/templates/layout.html:158 cps/templates/user_edit.html:24
-#: cps/templates/user_edit.html:37
-msgid "Account"
-msgstr ""
-
-#: cps/templates/layout.html:158
-#, fuzzy
-msgid "Update available"
-msgstr "Oppdatering mislyktes:"
-
-#: cps/templates/layout.html:166
+#: cps/templates/layout.html:149
 #, python-format
 msgid "Update available: %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:170 cps/templates/user_edit.html:25
+#: cps/templates/layout.html:154
+#, fuzzy
+msgid "Refresh Library"
+msgstr "I biblioteket"
+
+#: cps/templates/layout.html:164 cps/templates/user_edit.html:24
+#: cps/templates/user_edit.html:37
+msgid "Account"
+msgstr ""
+
+#: cps/templates/layout.html:172 cps/templates/user_edit.html:25
 #, fuzzy
 msgid "Devices"
 msgstr "E-posttjeneste"
 
-#: cps/templates/layout.html:173
+#: cps/templates/layout.html:175
 #, fuzzy
 msgid "Install app"
 msgstr "ikke installert"
 
-#: cps/templates/layout.html:175 cps/templates/stats.html:5
+#: cps/templates/layout.html:177 cps/templates/stats.html:5
 msgid "About"
 msgstr ""
 
-#: cps/templates/layout.html:189
+#: cps/templates/layout.html:191
 msgid "Logout"
 msgstr ""
 
-#: cps/templates/layout.html:199
-#, fuzzy, python-format
-msgid "Scriptorium %(version)s is available."
-msgstr "Scriptorium test e-post"
-
-#: cps/templates/layout.html:200
-#, python-format
-msgid ""
-"You have %(version)s. Pull the new image and restart the container to update."
-msgstr ""
-
-#: cps/templates/layout.html:201
-msgid "Release notes"
-msgstr ""
-
-#: cps/templates/layout.html:202
-msgid "Dismiss until the next release"
-msgstr ""
-
-#: cps/templates/layout.html:216
+#: cps/templates/layout.html:211
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Slett bok"
 
-#: cps/templates/layout.html:219
+#: cps/templates/layout.html:214
 msgid "Contribute here!"
 msgstr ""
 
-#: cps/templates/layout.html:237
+#: cps/templates/layout.html:232
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Grunnleggende konfigurasjon"
 
-#: cps/templates/layout.html:242
+#: cps/templates/layout.html:237
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:272
+#: cps/templates/layout.html:267
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Er du virkelig sikker?"
 
-#: cps/templates/layout.html:276 cps/templates/layout.html:315
+#: cps/templates/layout.html:271 cps/templates/layout.html:382
 #, fuzzy
 msgid "Confirm"
 msgstr "Konfigurasjon"
 
-#: cps/templates/layout.html:282
+#: cps/templates/layout.html:277
 #, fuzzy
 msgid "Uploading..."
 msgstr "Laster inn..."
 
-#: cps/templates/layout.html:285
+#: cps/templates/layout.html:280
 #, fuzzy
 msgid "Please do not refresh the page"
 msgstr "Oppdaterer, vennligst ikke last inn denne siden på nytt"
 
-#: cps/templates/layout.html:288
+#: cps/templates/layout.html:283
 msgid "Drop books to add them to the library"
 msgstr ""
 
-#: cps/templates/layout.html:296
+#: cps/templates/layout.html:293
+msgid ""
+"The update is taking longer than expected. Check your server, then reload "
+"this page."
+msgstr ""
+
+#: cps/templates/layout.html:295
+#, fuzzy
+msgid "Scriptorium update"
+msgstr "Scriptorium test e-post"
+
+#: cps/templates/layout.html:300
+#, fuzzy
+msgid "New version available:"
+msgstr "Ingen utgivelsesinformasjon tilgjengelig"
+
+#: cps/templates/layout.html:311
+msgid ""
+"A new version of Scriptorium is available, with the latest features and "
+"fixes."
+msgstr ""
+
+#: cps/templates/layout.html:321
+msgid ""
+"Check the release notes for breaking changes before updating. Your databases "
+"are backed up first."
+msgstr ""
+
+#: cps/templates/layout.html:322
+msgid "Release notes"
+msgstr ""
+
+#: cps/templates/layout.html:326
+#, fuzzy
+msgid "Backing up your databases"
+msgstr "Sikkerhetskopierer metadata"
+
+#: cps/templates/layout.html:327
+#, fuzzy
+msgid "Downloading the new version"
+msgstr "nedlasting"
+
+#: cps/templates/layout.html:328
+#, fuzzy
+msgid "Restarting Scriptorium"
+msgstr "Kom i gang med Scriptorium"
+
+#: cps/templates/layout.html:329
+#, fuzzy
+msgid "Done, reloading…"
+msgstr "Laster inn..."
+
+#: cps/templates/layout.html:336
+msgid "Run this next to your docker-compose.yml:"
+msgstr ""
+
+#: cps/templates/layout.html:339
+msgid ""
+"For one-click updates, connect an update service such as Watchtower: see the "
+"installation guide."
+msgstr ""
+
+#: cps/templates/layout.html:345
+msgid "Automatically check for new updates"
+msgstr ""
+
+#: cps/templates/layout.html:349
+msgid "Later"
+msgstr ""
+
+#: cps/templates/layout.html:351
+#, fuzzy
+msgid "Update now"
+msgstr "Oppdater kanalen"
+
+#: cps/templates/layout.html:353
+#, fuzzy
+msgid "How to update"
+msgstr "Kunne ikke opprette bane for dekning"
+
+#: cps/templates/layout.html:363
 #, python-format
 msgid "What's new in %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:308
+#: cps/templates/layout.html:375
 msgid "All release notes"
 msgstr ""
 
-#: cps/templates/layout.html:309
+#: cps/templates/layout.html:376
 msgid "Got it"
 msgstr ""
 
-#: cps/templates/layout.html:315
+#: cps/templates/layout.html:382
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "I biblioteket"
 
-#: cps/templates/layout.html:316
+#: cps/templates/layout.html:383
 msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
-#: cps/templates/layout.html:317
+#: cps/templates/layout.html:384
 #, fuzzy
 msgid "Hide password"
 msgstr "Passord"
 
-#: cps/templates/layout.html:318
+#: cps/templates/layout.html:385
 #, fuzzy
 msgid "Show less"
 msgstr "Vis alt"
 
-#: cps/templates/layout.html:318 cps/templates/magic_shelf_edit.html:88
+#: cps/templates/layout.html:385 cps/templates/magic_shelf_edit.html:88
 msgid "Something went wrong, please try again"
 msgstr ""
 
-#: cps/templates/layout.html:319
+#: cps/templates/layout.html:386
 #, fuzzy
 msgid "Upload failed"
 msgstr "Oppdatering mislyktes:"
 
-#: cps/templates/layout.html:320
+#: cps/templates/layout.html:387
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "%(name)s sin profil"
 
-#: cps/templates/layout.html:321 cps/templates/search_form.html:7
+#: cps/templates/layout.html:388 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr ""
 
-#: cps/templates/layout.html:321
+#: cps/templates/layout.html:388
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Nytt passord ble sendt til e-postadressen din"
 
-#: cps/templates/layout.html:322
+#: cps/templates/layout.html:389
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:323
+#: cps/templates/layout.html:390
 #, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr ""
 
-#: cps/templates/layout.html:323
+#: cps/templates/layout.html:390
 msgid "Review"
 msgstr ""
 
@@ -9210,6 +9289,14 @@ msgstr ""
 #, fuzzy
 msgid "Back to the library"
 msgstr "I biblioteket"
+
+#, fuzzy
+#~ msgid "Update available"
+#~ msgstr "Oppdatering mislyktes:"
+
+#, fuzzy, python-format
+#~ msgid "Scriptorium %(version)s is available."
+#~ msgstr "Scriptorium test e-post"
 
 #, fuzzy
 #~ msgid "Set up KOReader"

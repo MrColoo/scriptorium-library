@@ -99,8 +99,11 @@ Placeholders that JavaScript fills in are passed through gettext as values, e.g.
 
 ## Release notes
 
-Every release adds an entry to `cps/release_notes.json`: a version, a date, a title and three to
-five highlights, each text in English (`en`) and in any other language you can write (`it`, …).
+Every release adds an entry to `cps/release_notes.json`: a version, a date, a title, three to
+five highlights (each with an `icon` from the sprite) and a `quote`: a short line from a book that
+fits the release, ideally from a public-domain work. Texts are in English (`en`) and in any other
+language you can write (`it`, …). The update dialog of older installs reads this file from the new
+release's tag on GitHub, so it is what administrators see before updating.
 After an update every user sees the entry for the installed version once, in a dialog; all
 entries are listed under *What's new* in the account menu and on the About page. A patch release
 without its own entry shows its minor's notes, so it does not pop up again. A unit test checks

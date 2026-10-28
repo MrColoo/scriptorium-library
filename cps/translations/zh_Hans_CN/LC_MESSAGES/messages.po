@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 22:23+0100\n"
+"POT-Creation-Date: 2026-10-28 22:37+0100\n"
 "PO-Revision-Date: 2026-02-10 18:28+0800\n"
 "Last-Translator: xlivevil <xlivevil@aliyun.com>\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
@@ -812,7 +812,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:172
+#: cps/templates/layout.html:174
 #, fuzzy
 msgid "Customize"
 msgstr "自定义过滤器"
@@ -1253,7 +1253,7 @@ msgstr "格式上传缺少或无效的书籍 ID"
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr "无法上传格式：图书馆中已不存在该书籍"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:319
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:386
 msgid "Upload done, processing, please wait..."
 msgstr "上传完成，正在处理，请稍候..."
 
@@ -1831,8 +1831,8 @@ msgid ""
 msgstr ""
 
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:184
-#: cps/templates/layout.html:249 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:186
+#: cps/templates/layout.html:244 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2267
 msgid "Login"
 msgstr "登录"
@@ -2016,7 +2016,7 @@ msgstr ""
 
 #: cps/search.py:54 cps/search.py:441 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/highlights.html:19
-#: cps/templates/index.xml:12 cps/templates/layout.html:239
+#: cps/templates/index.xml:12 cps/templates/layout.html:234
 #: cps/templates/search.html:5 cps/templates/search.html:6
 #: cps/templates/search_form.html:121
 msgid "Search"
@@ -2054,6 +2054,25 @@ msgstr "搜索自定义栏目时出错，请重启 Scriptorium"
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
 msgstr "高级搜索"
+
+#: cps/self_update.py:142
+#, fuzzy
+msgid "You already have the latest version."
+msgstr "无可用更新。您已经安装了最新版本"
+
+#: cps/self_update.py:145
+msgid "One-click updates are not set up on this server."
+msgstr ""
+
+#: cps/self_update.py:148
+#, fuzzy
+msgid "An update is already running."
+msgstr "重复项扫描正在运行。"
+
+#: cps/self_update.py:154
+#, python-format
+msgid "The backup failed, so nothing was changed: %(error)s"
+msgstr ""
 
 #: cps/shelf.py:48 cps/shelf.py:136
 msgid "Invalid shelf specified"
@@ -2441,7 +2460,7 @@ msgstr "成功！书籍已排队准备发送至所选的收件人地址！"
 msgid "Please wait one minute to register next user"
 msgstr "请等待一分钟注册下一个用户"
 
-#: cps/templates/layout.html:186 cps/templates/login.html:77
+#: cps/templates/layout.html:188 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2146 cps/web.py:2150
 #: cps/web.py:2155 cps/web.py:2159 cps/web.py:2165 cps/web.py:2190
 #: cps/web.py:2194 cps/web.py:2207 cps/web.py:2210
@@ -2575,8 +2594,8 @@ msgstr "哎呀！该电子邮箱已存在相关账户。"
 msgid "Invalid book ID."
 msgstr "无效的书籍编号。"
 
-#: cps/templates/layout.html:174 cps/templates/stats.html:9
-#: cps/templates/whats_new.html:6 cps/whats_new.py:137
+#: cps/templates/layout.html:176 cps/templates/stats.html:9
+#: cps/templates/whats_new.html:6 cps/whats_new.py:169
 msgid "What's new"
 msgstr ""
 
@@ -2761,8 +2780,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "正在清理封面缩略图缓存"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:151
-#: cps/templates/layout.html:152 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:157
+#: cps/templates/layout.html:158 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "上传书籍"
 
@@ -2867,11 +2886,12 @@ msgstr "显示栏目值"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:300
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:211
-#: cps/templates/layout.html:214 cps/templates/layout.html:217
-#: cps/templates/layout.html:220 cps/templates/layout.html:223
-#: cps/templates/layout.html:266 cps/templates/layout.html:315
-#: cps/templates/read.html:58 cps/templates/year.html:42
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:206
+#: cps/templates/layout.html:209 cps/templates/layout.html:212
+#: cps/templates/layout.html:215 cps/templates/layout.html:218
+#: cps/templates/layout.html:261 cps/templates/layout.html:297
+#: cps/templates/layout.html:382 cps/templates/read.html:58
+#: cps/templates/year.html:42
 msgid "Close"
 msgstr "关闭"
 
@@ -2909,7 +2929,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:326
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:275
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:270
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/reading_import.html:82
 #: cps/templates/schedule_edit.html:34 cps/templates/shelf_edit.html:32
@@ -3210,7 +3230,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "运行“Hardcover自动获取”功能"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:126 cps/templates/layout.html:179
+#: cps/templates/layout.html:126 cps/templates/layout.html:181
 msgid "System"
 msgstr ""
 
@@ -3246,7 +3266,7 @@ msgstr "停止"
 msgid "Are you sure you want to restart?"
 msgstr "您确定要重启吗？"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:322
+#: cps/templates/admin.html:175 cps/templates/layout.html:389
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
@@ -3374,7 +3394,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:168 cps/templates/layout.html:246
+#: cps/templates/layout.html:170 cps/templates/layout.html:241
 #: cps/templates/reading_import.html:6
 #, fuzzy
 msgid "Profile"
@@ -3456,16 +3476,16 @@ msgstr "评分"
 msgid "Preview"
 msgstr "预览"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:178
+#: cps/templates/appearance.html:156 cps/templates/layout.html:180
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:180
+#: cps/templates/appearance.html:157 cps/templates/layout.html:182
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "浅色"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:181
+#: cps/templates/appearance.html:158 cps/templates/layout.html:183
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "深色"
@@ -3828,7 +3848,7 @@ msgid "Add to shelf"
 msgstr "添加到书架"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:54
-#: cps/templates/layout.html:251
+#: cps/templates/layout.html:246
 #, fuzzy
 msgid "More"
 msgstr "更多"
@@ -4092,7 +4112,7 @@ msgid "Ok"
 msgstr "完成"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:317 cps/templates/login.html:35
+#: cps/templates/layout.html:384 cps/templates/login.html:35
 #: cps/templates/user_edit.html:51 cps/templates/user_edit.html:62
 #, fuzzy
 msgid "Show password"
@@ -5507,7 +5527,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:71
-#: cps/templates/layout.html:59 cps/templates/layout.html:238
+#: cps/templates/layout.html:59 cps/templates/layout.html:233
 #, fuzzy
 msgid "Library"
 msgstr "在书库"
@@ -5960,7 +5980,7 @@ msgid "%(num)s highlight"
 msgid_plural "%(num)s highlights"
 msgstr[0] ""
 
-#: cps/templates/detail.html:210 cps/templates/layout.html:318
+#: cps/templates/detail.html:210 cps/templates/layout.html:385
 #, fuzzy
 msgid "Show more"
 msgstr "显示未读"
@@ -6376,7 +6396,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:321
+#: cps/templates/grid.html:21 cps/templates/layout.html:388
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6696,8 +6716,9 @@ msgstr ""
 msgid "Server URL"
 msgstr "服务器端口"
 
-#: cps/templates/kosync_plugin.html:48 cps/templates/remote_login.html:15
-#: cps/templates/user_edit.html:160 cps/templates/user_edit.html:290
+#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:338
+#: cps/templates/remote_login.html:15 cps/templates/user_edit.html:160
+#: cps/templates/user_edit.html:290
 #, fuzzy
 msgid "Copy"
 msgstr "复制 UUID"
@@ -6778,168 +6799,224 @@ msgstr "搜索书库"
 msgid "Advanced"
 msgstr "高级搜索"
 
-#: cps/templates/layout.html:148
-msgid "Refresh Library"
-msgstr "刷新书库"
-
-#: cps/templates/layout.html:158 cps/templates/user_edit.html:24
-#: cps/templates/user_edit.html:37
-msgid "Account"
-msgstr "账号"
-
-#: cps/templates/layout.html:158
-#, fuzzy
-msgid "Update available"
-msgstr "更新失败："
-
-#: cps/templates/layout.html:166
+#: cps/templates/layout.html:149
 #, python-format
 msgid "Update available: %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:170 cps/templates/user_edit.html:25
+#: cps/templates/layout.html:154
+msgid "Refresh Library"
+msgstr "刷新书库"
+
+#: cps/templates/layout.html:164 cps/templates/user_edit.html:24
+#: cps/templates/user_edit.html:37
+msgid "Account"
+msgstr "账号"
+
+#: cps/templates/layout.html:172 cps/templates/user_edit.html:25
 #, fuzzy
 msgid "Devices"
 msgstr "电子邮件服务"
 
-#: cps/templates/layout.html:173
+#: cps/templates/layout.html:175
 #, fuzzy
 msgid "Install app"
 msgstr "已安装版本"
 
-#: cps/templates/layout.html:175 cps/templates/stats.html:5
+#: cps/templates/layout.html:177 cps/templates/stats.html:5
 msgid "About"
 msgstr "关于"
 
-#: cps/templates/layout.html:189
+#: cps/templates/layout.html:191
 msgid "Logout"
 msgstr "注销"
 
-#: cps/templates/layout.html:199
-#, fuzzy, python-format
-msgid "Scriptorium %(version)s is available."
-msgstr "Scriptorium 测试邮件"
-
-#: cps/templates/layout.html:200
-#, python-format
-msgid ""
-"You have %(version)s. Pull the new image and restart the container to update."
-msgstr ""
-
-#: cps/templates/layout.html:201
-msgid "Release notes"
-msgstr ""
-
-#: cps/templates/layout.html:202
-msgid "Dismiss until the next release"
-msgstr ""
-
-#: cps/templates/layout.html:216
+#: cps/templates/layout.html:211
 msgid "Open Duplicates"
 msgstr "打开重复项"
 
-#: cps/templates/layout.html:219
+#: cps/templates/layout.html:214
 msgid "Contribute here!"
 msgstr "在这里贡献！"
 
-#: cps/templates/layout.html:237
+#: cps/templates/layout.html:232
 #, fuzzy
 msgid "Quick navigation"
 msgstr "基本配置"
 
-#: cps/templates/layout.html:242
+#: cps/templates/layout.html:237
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:272
+#: cps/templates/layout.html:267
 #, fuzzy
 msgid "Are you sure?"
 msgstr "您真的确认？"
 
-#: cps/templates/layout.html:276 cps/templates/layout.html:315
+#: cps/templates/layout.html:271 cps/templates/layout.html:382
 #, fuzzy
 msgid "Confirm"
 msgstr "配置"
 
-#: cps/templates/layout.html:282
+#: cps/templates/layout.html:277
 msgid "Uploading..."
 msgstr "正在上传..."
 
-#: cps/templates/layout.html:285
+#: cps/templates/layout.html:280
 msgid "Please do not refresh the page"
 msgstr "请不要刷新页面"
 
-#: cps/templates/layout.html:288
+#: cps/templates/layout.html:283
 msgid "Drop books to add them to the library"
 msgstr ""
 
-#: cps/templates/layout.html:296
+#: cps/templates/layout.html:293
+msgid ""
+"The update is taking longer than expected. Check your server, then reload "
+"this page."
+msgstr ""
+
+#: cps/templates/layout.html:295
+#, fuzzy
+msgid "Scriptorium update"
+msgstr "Scriptorium 日志： "
+
+#: cps/templates/layout.html:300
+#, fuzzy
+msgid "New version available:"
+msgstr "无可用发布信息"
+
+#: cps/templates/layout.html:311
+msgid ""
+"A new version of Scriptorium is available, with the latest features and "
+"fixes."
+msgstr ""
+
+#: cps/templates/layout.html:321
+msgid ""
+"Check the release notes for breaking changes before updating. Your databases "
+"are backed up first."
+msgstr ""
+
+#: cps/templates/layout.html:322
+msgid "Release notes"
+msgstr ""
+
+#: cps/templates/layout.html:326
+#, fuzzy
+msgid "Backing up your databases"
+msgstr "正在备份元数据"
+
+#: cps/templates/layout.html:327
+#, fuzzy
+msgid "Downloading the new version"
+msgstr "下载日志"
+
+#: cps/templates/layout.html:328
+#, fuzzy
+msgid "Restarting Scriptorium"
+msgstr "开启 Scriptorium 之旅"
+
+#: cps/templates/layout.html:329
+#, fuzzy
+msgid "Done, reloading…"
+msgstr "在这里贡献！"
+
+#: cps/templates/layout.html:336
+msgid "Run this next to your docker-compose.yml:"
+msgstr ""
+
+#: cps/templates/layout.html:339
+msgid ""
+"For one-click updates, connect an update service such as Watchtower: see the "
+"installation guide."
+msgstr ""
+
+#: cps/templates/layout.html:345
+msgid "Automatically check for new updates"
+msgstr ""
+
+#: cps/templates/layout.html:349
+msgid "Later"
+msgstr ""
+
+#: cps/templates/layout.html:351
+#, fuzzy
+msgid "Update now"
+msgstr "更新通道"
+
+#: cps/templates/layout.html:353
+#, fuzzy
+msgid "How to update"
+msgstr "更新标签失败"
+
+#: cps/templates/layout.html:363
 #, python-format
 msgid "What's new in %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:308
+#: cps/templates/layout.html:375
 msgid "All release notes"
 msgstr ""
 
-#: cps/templates/layout.html:309
+#: cps/templates/layout.html:376
 msgid "Got it"
 msgstr ""
 
-#: cps/templates/layout.html:315
+#: cps/templates/layout.html:382
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "UUID 已复制至剪贴板"
 
-#: cps/templates/layout.html:316
+#: cps/templates/layout.html:383
 msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
-#: cps/templates/layout.html:317
+#: cps/templates/layout.html:384
 #, fuzzy
 msgid "Hide password"
 msgstr "密码"
 
-#: cps/templates/layout.html:318
+#: cps/templates/layout.html:385
 #, fuzzy
 msgid "Show less"
 msgstr "显示全部"
 
-#: cps/templates/layout.html:318 cps/templates/magic_shelf_edit.html:88
+#: cps/templates/layout.html:385 cps/templates/magic_shelf_edit.html:88
 msgid "Something went wrong, please try again"
 msgstr ""
 
-#: cps/templates/layout.html:319
+#: cps/templates/layout.html:386
 #, fuzzy
 msgid "Upload failed"
 msgstr "更新失败："
 
-#: cps/templates/layout.html:320
+#: cps/templates/layout.html:387
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "前 %(count)s 个"
 
-#: cps/templates/layout.html:321 cps/templates/search_form.html:7
+#: cps/templates/layout.html:388 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "任何"
 
-#: cps/templates/layout.html:321
+#: cps/templates/layout.html:388
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "请至少选择一个电子邮件地址"
 
-#: cps/templates/layout.html:322
+#: cps/templates/layout.html:389
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:323
+#: cps/templates/layout.html:390
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "重复扫描已完成：%(count)s 个组"
 
-#: cps/templates/layout.html:323
+#: cps/templates/layout.html:390
 #, fuzzy
 msgid "Review"
 msgstr "预览"
@@ -9056,6 +9133,14 @@ msgstr ""
 #, fuzzy
 msgid "Back to the library"
 msgstr "位作者在此书库中"
+
+#, fuzzy
+#~ msgid "Update available"
+#~ msgstr "更新失败："
+
+#, fuzzy, python-format
+#~ msgid "Scriptorium %(version)s is available."
+#~ msgstr "Scriptorium 测试邮件"
 
 #~ msgid "See Changelog"
 #~ msgstr "查看更新日志"

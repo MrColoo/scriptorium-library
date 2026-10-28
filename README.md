@@ -234,9 +234,11 @@ Reverse proxies, network shares and permissions are covered in the
 docker compose pull && docker compose up -d
 ```
 
-Administrators see a notice in the interface when a new release is out, and after updating
-every user gets a short *What's new* with the highlights. To pin a version, use a
-release tag such as `ghcr.io/mrcoloo/scriptorium-library:v1.0.0` instead of `latest`.
+When a new release is out, administrators get an update button in the top bar with its highlights.
+Connect an update service such as Watchtower and it becomes a one-click update that backs up your
+databases first ([how](docs/installation.md#one-click-updates)). After updating, every user gets a
+short *What's new*. To pin a version, use a release tag such as
+`ghcr.io/mrcoloo/scriptorium-library:v1.0.0` instead of `latest`.
 
 ### Backup
 
