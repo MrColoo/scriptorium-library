@@ -97,6 +97,18 @@ entries in your language's `messages.po`, keeping `%(name)s` placeholders intact
 Placeholders that JavaScript fills in are passed through gettext as values, e.g.
 `_('%(count)s selected', count='%n')`, so translators see a normal message.
 
+## Release notes
+
+Every release adds an entry to `cps/release_notes.json`: a version, a date, a title and three to
+five highlights, each text in English (`en`) and in any other language you can write (`it`, …).
+After an update every user sees the entry for the installed version once, in a dialog; all
+entries are listed under *What's new* in the account menu and on the About page. A patch release
+without its own entry shows its minor's notes, so it does not pop up again. A unit test checks
+that the file is valid and that every highlight has an English and an Italian title.
+
+Administrators get a notice while a newer release exists on GitHub (looked up at most every 12
+hours, only while *Enable Update Notifications* is on), which they can hide until the next one.
+
 ## Pull requests
 
 Keep the backend close to upstream Calibre-Web-Automated where possible, so fixes can flow both ways. Run
