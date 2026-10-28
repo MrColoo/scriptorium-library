@@ -27,34 +27,40 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 BOOKS = [
     # title, author, series, index, tags, publisher, year, rating(0-10), lang, description
-    ("Il nome della rosa", "Umberto Eco", None, 0, ["Giallo storico", "Medioevo"], "Bompiani", 1980, 8, "ita",
-     "<p>Un monaco francescano indaga su una serie di morti in un'abbazia benedettina.</p>"),
-    ("Il pendolo di Foucault", "Umberto Eco", None, 0, ["Romanzo"], "Bompiani", 1988, 6, "ita", ""),
-    ("Le città invisibili", "Italo Calvino", None, 0, ["Narrativa italiana"], "Einaudi", 1972, 10, "ita",
-     "<p>Marco Polo descrive a Kublai Khan le città del suo impero.</p>"),
-    ("Il barone rampante", "Italo Calvino", "I nostri antenati", 2, ["Narrativa italiana"], "Einaudi", 1957, 8, "ita", ""),
-    ("Il visconte dimezzato", "Italo Calvino", "I nostri antenati", 1, ["Narrativa italiana"], "Einaudi", 1952, 8, "ita", ""),
-    ("Il cavaliere inesistente", "Italo Calvino", "I nostri antenati", 3, ["Narrativa italiana"], "Einaudi", 1959, 6, "ita", ""),
-    ("Lessico famigliare", "Natalia Ginzburg", None, 0, ["Memoir"], "Einaudi", 1963, 8, "ita", ""),
-    ("La coscienza di Zeno", "Italo Svevo", None, 0, ["Classici"], "Cappelli", 1923, 6, "ita", ""),
-    ("Il sistema periodico", "Primo Levi", None, 0, ["Racconti"], "Einaudi", 1975, 10, "ita", ""),
-    ("Il Gattopardo", "Giuseppe Tomasi di Lampedusa", None, 0, ["Classici"], "Feltrinelli", 1958, 8, "ita", ""),
-    ("L'amica geniale", "Elena Ferrante", "L'amica geniale", 1, ["Narrativa italiana"], "E/O", 2011, 8, "ita", ""),
-    ("Storia del nuovo cognome", "Elena Ferrante", "L'amica geniale", 2, ["Narrativa italiana"], "E/O", 2012, 8, "ita", ""),
-    ("Dune", "Frank Herbert", "Dune", 1, ["Fantascienza"], "Chilton", 1965, 10, "eng",
-     "<p>Paul Atreides and the desert planet Arrakis.</p><script>alert('xss')</script>"),
-    ("Dune Messiah", "Frank Herbert", "Dune", 2, ["Fantascienza"], "Putnam", 1969, 6, "eng", ""),
-    ("The Left Hand of Darkness", "Ursula K. Le Guin", "Hainish Cycle", 4, ["Fantascienza"], "Ace", 1969, 10, "eng", ""),
-    ("The Dispossessed", "Ursula K. Le Guin", "Hainish Cycle", 5, ["Fantascienza"], "Harper & Row", 1974, 8, "eng", ""),
-    ("Neuromancer", "William Gibson", "Sprawl", 1, ["Fantascienza", "Cyberpunk"], "Ace", 1984, 8, "eng", ""),
-    ("Solaris", "Stanisław Lem", None, 0, ["Fantascienza"], "MON", 1961, 8, "eng", ""),
-    ("Project Hail Mary", "Andy Weir", None, 0, ["Fantascienza"], "Ballantine", 2021, 8, "eng", ""),
+    ("The Name of the Rose", "Umberto Eco", None, 0, ["Historical mystery", "Middle Ages"], "Harcourt", 1983, 8, "eng",
+     "<p>In 1327 a Franciscan friar and his young novice investigate a string of deaths in a wealthy Benedictine "
+     "abbey, where the library is a labyrinth and some books are not meant to be read.</p>"),
+    ("Foucault's Pendulum", "Umberto Eco", None, 0, ["Literary fiction"], "Harcourt", 1989, 6, "eng", ""),
+    ("Invisible Cities", "Italo Calvino", None, 0, ["Literary fiction"], "Harcourt", 1974, 10, "eng",
+     "<p>Marco Polo describes to Kublai Khan the cities of his empire, each one stranger than the last.</p>"),
+    ("The Baron in the Trees", "Italo Calvino", "Our Ancestors", 2, ["Literary fiction"], "Harcourt", 1959, 8, "eng", ""),
+    ("The Cloven Viscount", "Italo Calvino", "Our Ancestors", 1, ["Literary fiction"], "Harcourt", 1962, 8, "eng", ""),
+    ("The Nonexistent Knight", "Italo Calvino", "Our Ancestors", 3, ["Literary fiction"], "Harcourt", 1962, 6, "eng", ""),
+    ("Family Lexicon", "Natalia Ginzburg", None, 0, ["Memoir"], "NYRB Classics", 2017, 8, "eng", ""),
+    ("Zeno's Conscience", "Italo Svevo", None, 0, ["Classics"], "Vintage", 2003, 6, "eng", ""),
+    ("The Periodic Table", "Primo Levi", None, 0, ["Short stories"], "Schocken", 1984, 10, "eng", ""),
+    ("The Leopard", "Giuseppe Tomasi di Lampedusa", None, 0, ["Classics"], "Pantheon", 1960, 8, "eng",
+     "<p>Sicily, 1860. As Garibaldi's troops land, an ageing prince watches his world end with irony and grace.</p>"),
+    ("My Brilliant Friend", "Elena Ferrante", "Neapolitan Novels", 1, ["Literary fiction"], "Europa Editions", 2012, 8, "eng", ""),
+    ("The Story of a New Name", "Elena Ferrante", "Neapolitan Novels", 2, ["Literary fiction"], "Europa Editions", 2013, 8, "eng", ""),
+    ("Dune", "Frank Herbert", "Dune", 1, ["Science fiction", "Classics"], "Chilton", 1965, 10, "eng",
+     "<p>On the desert planet Arrakis, the only source of the most valuable substance in the universe, young "
+     "Paul Atreides is caught between noble houses, an empire and the people of the deep desert.</p>"),
+    ("Dune Messiah", "Frank Herbert", "Dune", 2, ["Science fiction"], "Putnam", 1969, 6, "eng", ""),
+    ("The Left Hand of Darkness", "Ursula K. Le Guin", "Hainish Cycle", 4, ["Science fiction"], "Ace", 1969, 10, "eng", ""),
+    ("The Dispossessed", "Ursula K. Le Guin", "Hainish Cycle", 5, ["Science fiction"], "Harper & Row", 1974, 8, "eng", ""),
+    ("Neuromancer", "William Gibson", "Sprawl", 1, ["Science fiction", "Cyberpunk"], "Ace", 1984, 8, "eng", ""),
+    ("Solaris", "Stanisław Lem", None, 0, ["Science fiction"], "Walker", 1970, 8, "eng", ""),
+    ("Project Hail Mary", "Andy Weir", None, 0, ["Science fiction"], "Ballantine", 2021, 8, "eng",
+     "<p>A schoolteacher wakes up alone on a spaceship with no memory of how he got there, and the fate of "
+     "Earth depending on him.</p>"),
     ("Klara and the Sun", "Kazuo Ishiguro", None, 0, ["Literary fiction"], "Faber", 2021, 6, "eng", ""),
     ("The Remains of the Day", "Kazuo Ishiguro", None, 0, ["Literary fiction"], "Faber", 1989, 8, "eng", ""),
-    ("Sapiens", "Yuval Noah Harari", None, 0, ["Saggistica", "Storia"], "Harper", 2011, 6, "eng", ""),
-    ("Thinking, Fast and Slow", "Daniel Kahneman", None, 0, ["Saggistica", "Psicologia"], "FSG", 2011, 8, "eng", ""),
+    ("Sapiens", "Yuval Noah Harari", None, 0, ["Non-fiction", "History"], "Harper", 2011, 6, "eng", ""),
+    ("Thinking, Fast and Slow", "Daniel Kahneman", None, 0, ["Non-fiction", "Psychology"], "FSG", 2011, 8, "eng", ""),
+    # Escaping test: every field carries markup that must be shown as text, never run.
     ("<img src=x onerror=alert(1)>", "Test <b>Author</b>", None, 0, ["<script>x</script>"], "Evil & Co", 2020, 2, "eng",
-     "<p onclick=\"alert(1)\">Escaping test book.</p>"),
+     "<p onclick=\"alert(1)\">Escaping test book.</p><script>alert('xss')</script>"),
 ]
 
 PALETTE = [("#2B3A55", "#F3EEE2"), ("#B4552F", "#FFF6EC"), ("#3E7A57", "#F4F1E6"), ("#C9A227", "#2A220C"),
@@ -63,7 +69,7 @@ PALETTE = [("#2B3A55", "#F3EEE2"), ("#B4552F", "#FFF6EC"), ("#3E7A57", "#F4F1E6"
 
 
 def sort_key(text):
-    for article in ("The ", "A ", "An ", "Il ", "Lo ", "La ", "L'", "Le ", "I ", "Gli "):
+    for article in ("The ", "A ", "An "):
         if text.startswith(article):
             return text[len(article):] + ", " + article.strip()
     return text
