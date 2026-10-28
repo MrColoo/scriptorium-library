@@ -38,21 +38,28 @@ itself in order** and **a place you actually enjoy opening**.
 
 <table>
   <tr>
-    <td width="33%" valign="top">
+    <td width="50%" valign="top">
       <h3>📥&nbsp;Drop it in, forget it</h3>
       Copy a file into one folder. Scriptorium imports it, converts it to the format your reader
       wants, fetches cover and metadata, catches duplicates and repairs EPUBs that Amazon would
       reject. All automatically.
     </td>
-    <td width="33%" valign="top">
-      <h3>📖&nbsp;Kobo-first, not Kobo-also</h3>
+    <td width="50%" valign="top">
+      <h3>📖&nbsp;Kobo-first, KOReader-friendly</h3>
       Paste one line on your Kobo and your library, shelves and reading progress stay in step,
-      with no cables and no Calibre desktop app. KOReader, OPDS apps and Send-to-Kindle work too.
+      with no cables and no Calibre desktop app. KOReader syncs progress and highlights too.
     </td>
-    <td width="33%" valign="top">
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h3>✨&nbsp;Your reading life, remembered</h3>
+      Every highlight from your e-reader on one page. A full-screen story of your year in books.
+      Your Goodreads or StoryGraph history imported in a minute.
+    </td>
+    <td width="50%" valign="top">
       <h3>🎨&nbsp;Beautiful, and yours</h3>
-      A clean, fast interface in light and dark, built for phones as much as desktops. Every
-      reader can give it their own colours, from a pre-made theme, a random mix or a hand-tuned palette.
+      A clean, fast interface in light and dark, built for phones and installable as an app. Every
+      reader can give it their own colours, from a ready-made theme to a hand-tuned palette.
     </td>
   </tr>
 </table>
@@ -130,29 +137,35 @@ time. Nothing is locked in.
 
 **Reading**
 - **Kobo sync**: books, shelves as collections, reading progress and a guided setup on your profile.
-- **KOReader sync** plugin for Kindle, PocketBook, Android and jailbroken devices.
+- **KOReader sync** plugin for Kindle, PocketBook, Android and Kobo: progress and highlights.
+- **Your devices, your choice**: turn Kobo and KOReader on or off per user; progress shows where it came from.
 - **Continue reading** on the home page, fed by your devices, with time left in each book.
 - **Built-in readers**: EPUB with themes and typography settings, comics, PDF and plain text, plus an
   audiobook player that remembers where you stopped.
 - **OPDS** catalogue for apps like KyBook, Moon+ Reader and Panels.
 - **Send to eReader** by email, automatically for new books if you like.
 
-**Library**
+**Your reading life**
+- **Your year in books**: a full-screen story of your reading year (books, hours, authors, genres,
+  streaks, the line you kept) with a poster to save and share.
 - **Highlights**: every passage and note from your Kobo or KOReader on one page, searchable and
   exportable to Markdown for Obsidian, Notion or Readwise.
-- **More like this** on every book page, ranked from your own library.
-- **Your year in books**: a full-screen story of your reading year, with a poster to save and share.
-- **Installable app**: add Scriptorium to your phone's home screen, and send a book to the library with
-  *Share → Scriptorium* from any app (needs HTTPS).
 - **Import from Goodreads or The StoryGraph**: finished books with their dates, what you are reading
   and your want-to-read list, after a preview.
+- **More like this** on every book page, ranked from your own library.
+
+**Library**
 - **Shelves and smart shelves** that fill themselves from rules (for example "unread sci-fi" or "added since June").
-- **Multi-user** with permissions, per-user Kobo devices, LDAP, OAuth and generic OIDC sign-in.
+- **Multi-user** with permissions, per-user devices, LDAP, OAuth and generic OIDC sign-in.
 - **Reading statistics**, and an activity log for administrators.
 - **28 languages**.
 
 **Interface**
 - Designed page by page, light and dark, **fully usable on a phone** with a bottom navigation bar.
+- **Installable app**: add Scriptorium to your home screen, and send a book to the library with
+  *Share → Scriptorium* from any app (needs HTTPS).
+- **What's new** after every update, and an update button for administrators with the highlights of
+  the next release.
 - **Personal styles**: eleven themes, a "Surprise me" button and a palette editor, with a live preview.
 - **Security by default**: a strict Content-Security-Policy with no inline scripts, CSRF on every
   action and a password change forced at first login. [More](docs/security.md)
@@ -195,6 +208,19 @@ time. Nothing is locked in.
     </td>
   </tr>
 </table>
+
+<p align="center">
+  <img src="docs/screenshots/year.png" alt="Your year in books: five story slides with a shelf of spines, books finished, a podium of authors, reading days per month and the shareable poster" width="100%">
+  <br><sub><b>Your year in books</b> — tap through your reading year, then save the poster</sub>
+</p>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/screenshots/highlights-dark.png">
+    <img src="docs/screenshots/highlights-light.png" alt="Highlights page: passages and notes grouped by book and chapter, with search and Markdown export" width="100%">
+  </picture>
+  <br><sub><b>Highlights</b> — from your Kobo and KOReader, grouped by book and chapter</sub>
+</p>
 
 <p align="center">
   <img src="docs/screenshots/mobile.png" alt="Scriptorium on a phone: home in light mode, a book page in dark mode, and the Sunset style" width="85%">
@@ -304,8 +330,9 @@ Scriptorium stands on the shoulders of three projects and their contributors:
   library at the core.
 - **[Calibre](https://calibre-ebook.com)** by Kovid Goyal and contributors: conversion and metadata.
 
-Scriptorium redesigns the whole interface and readers, adds personal styles and hardens
-security. The backend stays close to upstream so fixes can flow both ways.
+Scriptorium redesigns the whole interface and readers, adds personal styles, highlights, a year
+in books, history import, per-user devices and an installable app, and hardens security. The
+backend stays close to upstream so fixes can flow both ways.
 
 ## License
 

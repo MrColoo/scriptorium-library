@@ -186,10 +186,10 @@
 .yr-poster-covers { display: flex; justify-content: center; height: 130px; padding: 4px 18px; }
 .yr-poster-covers img { height: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 4px; margin: 0 -10px; min-width: 0;
   transform: rotate(calc((var(--i) - 2) * 6deg)) translateY(calc(var(--i) * (4 - var(--i)) * -4px)); box-shadow: 0 10px 24px rgb(0 0 0 / .3); }
-.yr-poster-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(64px, 1fr)); gap: 8px; margin: 0; }
+.yr-poster-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 16px; margin: 0; }
 .yr-poster-stats div, .yr-poster-tops div { display: flex; flex-direction: column-reverse; }
 .yr-poster-stats dt, .yr-poster-tops dt { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .6; }
-.yr-poster-stats dd { margin: 0; font-family: "Newsreader", Georgia, serif; font-weight: 700; font-size: 32px; line-height: 1; }
+.yr-poster-stats dd { margin: 0; font-family: "Newsreader", Georgia, serif; font-weight: 700; font-size: 38px; line-height: 1; }
 .yr-poster-tops { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0; }
 .yr-poster-tops dd { margin: 0; font-family: "Newsreader", Georgia, serif; font-weight: 600; font-size: 18px; line-height: 1.2; }
 .yr-actions { position: relative; z-index: 4; display: flex; gap: 10px; flex-wrap: wrap; }

@@ -12,6 +12,8 @@ downscaled to 1920 px wide) in light and dark mode.
 | `customize-dark.png` | Customize page with the Aurora style selected |
 | `styled-sunset-light.png` | Home page with the Sunset style |
 | `mobile.png` | Three phone screens side by side |
+| `year.png` | Five slides of Your year in books, on a gradient |
+| `highlights-light.png`, `highlights-dark.png` | Highlights page |
 
 The README shows the light or dark version according to the reader's GitHub theme. Keep the file
 names when you replace an image.
