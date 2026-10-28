@@ -138,6 +138,9 @@ time. Nothing is locked in.
 - **Send to eReader** by email, automatically for new books if you like.
 
 **Library**
+- **Highlights**: every passage and note from your Kobo or KOReader on one page, searchable and
+  exportable to Markdown for Obsidian, Notion or Readwise.
+- **More like this** on every book page, ranked from your own library.
 - **Shelves and smart shelves** that fill themselves from rules (for example "unread sci-fi" or "added since June").
 - **Multi-user** with permissions, per-user Kobo devices, LDAP, OAuth and generic OIDC sign-in.
 - **Reading statistics**, and an activity log for administrators.
@@ -254,11 +257,12 @@ v4.0.8 and reads and writes exactly the same data, so switching is an image swap
 3. Run `docker compose up -d`.
 
 What carries over, and what to know:
-- **No database changes.** Scriptorium adds no tables or columns. Users, shelves, smart shelves,
+- **Your data stays compatible.** Scriptorium changes no existing table or column. It adds one
+  table to `app.db` for your highlights, which CWA simply ignores. Users, shelves, smart shelves,
   reading progress and Kobo and KOReader sync state all carry over, and you can switch back the
   same way.
 - **Your devices keep working.** The Kobo sync address and the KOReader endpoint are unchanged.
-  Re-downloading the KOReader plugin is optional; the new version only changes its display name.
+  Download the KOReader plugin again if you want your KOReader highlights in Scriptorium.
 - **Personal styles** are stored inside each user's existing view settings. CWA simply ignores them.
 - **Your instance title is kept.** To show "Scriptorium" in the header, change it in
   *Settings → Interface*.

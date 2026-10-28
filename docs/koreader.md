@@ -47,6 +47,13 @@ Enter:
   device and how many books have progress.
 - The percentage is also shared with Kobo sync, so a Kobo using its own reader picks it up.
 
+## Highlights
+
+Version 1.1 of the plugin also sends your highlights and notes, together with your progress. They
+appear under *Highlights* in the sidebar, grouped by book, and can be exported as Markdown.
+Deleting a highlight in KOReader deletes it in Scriptorium at the next sync. If you installed the
+plugin before, download it again from *Profile → Devices → KOReader* and replace the old folder.
+
 ## KOReader on a Kobo
 
 If you used Kobo sync before installing KOReader on the same device, press **Remove Kobo** in

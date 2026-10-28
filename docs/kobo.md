@@ -62,6 +62,13 @@ reading under *Continue reading*.
 
 If you also use KOReader, see [KOReader](koreader.md).
 
+## Highlights
+
+Highlights and notes you make in the Kobo's own reader reach Scriptorium when the Kobo syncs. They
+appear under *Highlights* in the sidebar and on each book page, and can be exported as Markdown.
+Highlights made before you updated Scriptorium may only appear once the Kobo sends them again, for
+example after you edit them.
+
 ## No Kobo, or moving to KOReader
 
 Every user picks the devices they read with in *Profile → Devices*. Turn Kobo off and its
