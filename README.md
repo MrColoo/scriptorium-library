@@ -141,6 +141,9 @@ time. Nothing is locked in.
 - **Highlights**: every passage and note from your Kobo or KOReader on one page, searchable and
   exportable to Markdown for Obsidian, Notion or Readwise.
 - **More like this** on every book page, ranked from your own library.
+- **Your year in books**: a full-screen story of your reading year, with a poster to save and share.
+- **Import from Goodreads or The StoryGraph**: finished books with their dates, what you are reading
+  and your want-to-read list, after a preview.
 - **Shelves and smart shelves** that fill themselves from rules (for example "unread sci-fi" or "added since June").
 - **Multi-user** with permissions, per-user Kobo devices, LDAP, OAuth and generic OIDC sign-in.
 - **Reading statistics**, and an activity log for administrators.

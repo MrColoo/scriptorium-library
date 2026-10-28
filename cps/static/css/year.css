@@ -88,7 +88,7 @@
 .yr-shelf--titles { height: 220px; margin-top: 10px; }
 .yr-spine--title { max-width: 40px; }
 .yr-spine--title > span { position: absolute; inset: 18% 0 18%; writing-mode: vertical-rl; transform: rotate(180deg); display: flex; align-items: center;
-  justify-content: center; overflow: hidden; font-family: "Newsreader", Georgia, serif; font-size: 11px; font-weight: 600; letter-spacing: .02em;
+  justify-content: flex-start; overflow: hidden; font-family: "Newsreader", Georgia, serif; font-size: 11px; font-weight: 600; letter-spacing: .02em;
   color: rgb(255 255 255 / .92); white-space: nowrap; text-overflow: ellipsis; text-shadow: 0 1px 1px rgb(0 0 0 / .3); }
 
 /* Time: concentric rings */
