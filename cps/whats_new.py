@@ -7,7 +7,8 @@
 """What's new after an update, and the notice that a newer release is out.
 
 - Every user sees the release notes of the installed version once, in a dialog.
-- Administrators see a notice while a newer release exists, until they dismiss it for that version.
+- Administrators get an update button in the top bar while a newer release exists. It opens a dialog
+  with that release's highlights and quote, read from the release_notes.json of the new version's tag.
 - The newest release is looked up on GitHub in the background, at most every 12 hours and only while
   update notifications are on; until then the version found at container start is used.
 
@@ -36,9 +37,10 @@ SETTINGS_KEY = "whats_new"
 REPOSITORY = "MrColoo/scriptorium-library"
 RELEASES_URL = "https://github.com/{}/releases".format(REPOSITORY)
 LATEST_API_URL = "https://api.github.com/repos/{}/releases/latest".format(REPOSITORY)
+NOTES_URL = "https://raw.githubusercontent.com/{}/{{tag}}/cps/release_notes.json".format(REPOSITORY)
 CHECK_INTERVAL = 12 * 60 * 60
 
-_latest = {"version": None, "checked": 0.0, "running": False}
+_latest = {"version": None, "checked": 0.0, "running": False, "notes": [], "notes_for": None}
 _latest_lock = threading.Lock()
 
 
@@ -80,11 +82,27 @@ def _fetch_latest():
             if releases.parse_version(tag) is not None:
                 with _latest_lock:
                     _latest["version"] = tag
+                _fetch_notes(tag)
     except Exception as e:  # offline, rate limited, GitHub down: keep what we know
         log.debug("Could not check for a new release: %s", e)
     finally:
         with _latest_lock:
             _latest["running"] = False
+
+
+def _fetch_notes(tag):
+    """Release notes as published with the new version, so the dialog can show what it brings."""
+    if _latest.get("notes_for") == tag:
+        return
+    try:
+        response = requests.get(NOTES_URL.format(tag=tag), timeout=5,
+                                headers={"User-Agent": "Scriptorium/{}".format(constants.INSTALLED_VERSION)})
+        if response.status_code == 200:
+            notes = releases.from_data(response.json())
+            with _latest_lock:
+                _latest["notes"], _latest["notes_for"] = notes, tag
+    except Exception as e:
+        log.debug("Could not fetch the release notes of %s: %s", tag, e)
 
 
 def latest_version(check=True):
@@ -109,11 +127,25 @@ def update_notice(user, check=True):
     latest = latest_version(check=check)
     if not releases.is_newer(latest, constants.INSTALLED_VERSION):
         return None
+    with _latest_lock:
+        notes = list(_latest["notes"]) if _latest.get("notes_for") == latest else []
+    if not notes:  # a release can also be described in the notes this version already ships
+        notes = releases.load()
+    coming = [releases.localized(release, _locale())
+              for release in releases.notes_between(constants.INSTALLED_VERSION, latest, notes)]
+    highlights = [item for release in coming for item in release["highlights"]][:6]
+    quote = next((release["quote"] for release in coming if release.get("quote")), None)
+    from . import self_update
     return {
         "version": latest,
         "installed": constants.INSTALLED_VERSION,
         "url": release_url(latest),
         "dismissed": _state(user).get("update_dismissed") == latest,
+        "title": coming[0]["title"] if coming else "",
+        "date": coming[0]["date"] if coming else "",
+        "highlights": highlights,
+        "quote": quote,
+        "can_update": self_update.configured(),
     }
 
 

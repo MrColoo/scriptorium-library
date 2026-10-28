@@ -144,6 +144,12 @@
         <a href="{{ url_for('search.advanced_search') }}" title="{{ _('Advanced Search') }}">{{ _('Advanced') }}</a>
       </form>
       <div class="topbar-actions">
+        {%- if update_notice %}
+        <button class="btn btn-icon update-trigger has-dot" type="button" data-dialog-open="update-dialog" data-update-seen-url="{{ url_for('whats_new.dismiss_update') }}"
+                aria-label="{{ _('Update available: %(version)s', version=update_notice.version) }}" title="{{ _('Update available: %(version)s', version=update_notice.version) }}">
+          {{- ui.icon('download') -}}{%- if not update_notice.dismissed %}<span class="notify-dot notify-dot--ok" aria-hidden="true"></span>{% endif -%}
+        </button>
+        {%- endif %}
         {%- if current_user.is_authenticated and not current_user.is_anonymous %}
         <button class="btn btn-icon" type="button" data-action="library-refresh" aria-label="{{ _('Refresh Library') }}" title="{{ _('Refresh Library') }}">{{ ui.icon('refresh') }}</button>
         {%- endif %}
@@ -155,16 +161,12 @@
         </label>
         {%- endif %}
         <details class="menu">
-          <summary class="btn btn-icon btn-ghost has-dot" aria-label="{{ _('Account') }}{% if update_notice and not update_notice.dismissed %} · {{ _('Update available') }}{% endif %}" title="{{ current_user.name }}">
+          <summary class="btn btn-icon btn-ghost" aria-label="{{ _('Account') }}" title="{{ current_user.name }}">
             {%- if current_user.is_anonymous %}{{ ui.icon('user') }}{% else %}{{ ui.avatar(current_user) }}{% endif -%}
-            {%- if update_notice and not update_notice.dismissed %}<span class="notify-dot" aria-hidden="true"></span>{% endif -%}
           </summary>
           <div class="menu-panel" role="menu">
             {%- if not current_user.is_anonymous %}
             <div class="menu-label">{{ current_user.name }}</div>
-            {%- if update_notice %}
-            <a class="menu-item menu-item--accent" role="menuitem" href="{{ update_notice.url }}" target="_blank" rel="noopener">{{ ui.icon('bell') }}<span class="grow">{{ _('Update available: %(version)s', version=update_notice.version) }}</span>{{ ui.icon('external', 'icon-sm') }}</a>
-            {%- endif %}
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}">{{ ui.icon('user') }}<span class="grow">{{ _('Profile') }}</span></a>
             {%- if device_shown('kobo') or device_shown('koreader') %}
             <a class="menu-item" role="menuitem" href="{{ url_for('web.profile') }}#devices">{{ ui.icon('device') }}<span class="grow">{{ _('Devices') }}</span></a>
@@ -194,13 +196,6 @@
     </header>
 
     <main id="main" class="content {% block content_class %}{% endblock %}" tabindex="-1">
-      {%- if update_notice and not update_notice.dismissed %}
-      <div class="alert alert--info update-notice">{{ ui.icon('bell') }}<div class="alert-body">
-        <strong>{{ _('Scriptorium %(version)s is available.', version=update_notice.version) }}</strong>
-        {{ _('You have %(version)s. Pull the new image and restart the container to update.', version=update_notice.installed) }}
-        <a href="{{ update_notice.url }}" rel="noopener" target="_blank">{{ _('Release notes') }}</a></div>
-        <button class="btn btn-ghost btn-icon btn-sm alert-close" type="button" data-dismiss data-dismiss-url="{{ url_for('whats_new.dismiss_update') }}" aria-label="{{ _('Dismiss until the next release') }}" title="{{ _('Dismiss until the next release') }}">{{ ui.icon('x') }}</button></div>
-      {%- endif %}
       {%- with messages = get_flashed_messages(with_categories=True) %}
       {%- set inline = messages|rejectattr(0, 'in', ['success', 'info', 'cwa_refresh', 'theme_migration'])|list %}
       {%- if inline %}
@@ -289,6 +284,78 @@
   {%- endif %}
 
   {% block modal %}{% endblock %}
+
+  {%- if update_notice %}
+  {%- set u = update_notice %}
+  <dialog class="modal update-dialog" id="update-dialog" aria-labelledby="update-dialog-title"
+          data-start-url="{{ url_for('self_update.start') }}" data-status-url="{{ url_for('self_update.status') }}"
+          data-auto-url="{{ url_for('self_update.auto_check') }}" data-installed="{{ u.installed }}"
+          data-timeout="{{ _('The update is taking longer than expected. Check your server, then reload this page.') }}">
+    <div class="modal-header">
+      <h2 id="update-dialog-title">{{ _('Scriptorium update') }}</h2>
+      <span class="chip update-chip">{{ ui.icon('server', 'icon-sm') }}{{ u.installed }}</span>
+      <button class="btn btn-ghost btn-icon btn-sm" type="button" data-dialog-close aria-label="{{ _('Close') }}">{{ ui.icon('x') }}</button>
+    </div>
+    <div class="modal-body">
+      <div class="update-available">{{ ui.icon('download', 'icon-sm') }}<span>{{ _('New version available:') }}</span><strong>{{ u.version }}</strong>{% if u.date %}<span class="update-date">{{ u.date }}</span>{% endif %}</div>
+
+      {%- if u.highlights %}
+      {%- if u.title %}<p class="update-title">{{ u.title }}</p>{% endif %}
+      <ul class="update-features">
+        {%- for item in u.highlights %}
+        <li><span class="update-feature-icon">{{ ui.icon(item.icon or 'sparkles') }}</span>
+          <span><strong>{{ item.title }}</strong>{% if item.text %}<span class="muted">{{ item.text }}</span>{% endif %}</span></li>
+        {%- endfor %}
+      </ul>
+      {%- else %}
+      <p>{{ _('A new version of Scriptorium is available, with the latest features and fixes.') }}</p>
+      {%- endif %}
+
+      {%- if u.quote %}
+      <figure class="update-quote">
+        <blockquote>{{ u.quote.text }}</blockquote>
+        <figcaption>{{ u.quote.author }}{% if u.quote.book %}, <cite>{{ u.quote.book }}</cite>{% endif %}</figcaption>
+      </figure>
+      {%- endif %}
+
+      <div class="alert alert--info">{{ ui.icon('info') }}<div class="alert-body">{{ _('Check the release notes for breaking changes before updating. Your databases are backed up first.') }}
+        <a href="{{ u.url }}" target="_blank" rel="noopener">{{ _('Release notes') }} →</a></div></div>
+
+      <div class="update-progress" data-update-progress hidden>
+        <ol class="update-steps">
+          <li data-step="backing-up">{{ _('Backing up your databases') }}</li>
+          <li data-step="updating">{{ _('Downloading the new version') }}</li>
+          <li data-step="restarting">{{ _('Restarting Scriptorium') }}</li>
+          <li data-step="done">{{ _('Done, reloading…') }}</li>
+        </ol>
+        <p class="update-error" data-update-error hidden></p>
+      </div>
+
+      {%- if not u.can_update %}
+      <div class="update-manual" data-update-manual hidden>
+        <p class="small muted">{{ _('Run this next to your docker-compose.yml:') }}</p>
+        <div class="code-line"><code id="update-command">docker compose pull &amp;&amp; docker compose up -d</code>
+          <button class="btn btn-sm" type="button" data-copy-target="#update-command">{{ ui.icon('copy') }}{{ _('Copy') }}</button></div>
+        <p class="hint">{{ _('For one-click updates, connect an update service such as Watchtower: see the installation guide.') }}</p>
+      </div>
+      {%- endif %}
+
+      <label class="update-auto">
+        <input type="checkbox" class="switch" data-update-auto checked>
+        <span>{{ _('Automatically check for new updates') }}</span>
+      </label>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" type="button" data-dialog-close>{{ _('Later') }}</button>
+      {%- if u.can_update %}
+      <button class="btn btn-primary" type="button" data-update-start>{{ ui.icon('download') }}{{ _('Update now') }}</button>
+      {%- else %}
+      <button class="btn btn-primary" type="button" data-update-manual-show>{{ ui.icon('download') }}{{ _('How to update') }}</button>
+      {%- endif %}
+    </div>
+  </dialog>
+  <script src="{{ url_for('static', filename='js/update.js') }}" defer></script>
+  {%- endif %}
 
   {%- if whats_new_popup %}
   <dialog class="modal whats-new" id="whats-new-dialog" aria-labelledby="whats-new-title" data-seen-url="{{ url_for('whats_new.mark_seen') }}">

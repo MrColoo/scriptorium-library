@@ -12,9 +12,12 @@ The notes file lists releases, newest first or in any order::
 
     {"releases": [{"version": "v1.1.0", "date": "2026-11-15",
                    "title": {"en": "...", "it": "..."},
-                   "highlights": [{"title": {"en": "..."}, "text": {"en": "..."}}]}]}
+                   "highlights": [{"icon": "sparkles", "title": {"en": "..."}, "text": {"en": "..."}}],
+                   "quote": {"text": {"en": "...", "it": "..."}, "author": "...", "book": "..."}}]}
 
 Every text is either a plain string or a dict of translations keyed by locale ("en" is the fallback).
+"icon" names a symbol of the app's icon sprite. "quote" is a short line from a book that fits the
+release; use public-domain works or very short quotations.
 """
 
 import json
@@ -59,12 +62,25 @@ def _clean(release):
         return None
     highlights = [item for item in release.get("highlights") or []
                   if isinstance(item, dict) and (item.get("title") or item.get("text"))]
+    quote = release.get("quote") if isinstance(release.get("quote"), dict) else None
+    if quote and not quote.get("text"):
+        quote = None
     return {
         "version": str(release["version"]),
         "date": str(release.get("date") or ""),
         "title": release.get("title") or "",
         "highlights": highlights,
+        "quote": quote,
     }
+
+
+def from_data(data):
+    """Valid releases from already-parsed notes data (for example fetched for a newer version), newest first."""
+    if not isinstance(data, dict):
+        return []
+    releases = [r for r in (_clean(item) for item in data.get("releases") or []) if r]
+    releases.sort(key=lambda r: parse_version(r["version"]), reverse=True)
+    return releases
 
 
 def load(path=NOTES_PATH):
@@ -77,11 +93,9 @@ def load(path=NOTES_PATH):
         return _cache["releases"]
     try:
         with open(path, encoding="utf-8") as handle:
-            data = json.load(handle)
-        releases = [r for r in (_clean(item) for item in data.get("releases") or []) if r]
+            releases = from_data(json.load(handle))
     except (OSError, ValueError, AttributeError):
         releases = []
-    releases.sort(key=lambda r: parse_version(r["version"]), reverse=True)
     _cache.update(path=path, mtime=mtime, releases=releases)
     return releases
 
@@ -112,10 +126,23 @@ def localized(release, locale):
     """A copy of a release with every text in the given locale, ready for a template."""
     if release is None:
         return None
+    quote = release.get("quote")
     return {
         "version": release["version"],
         "date": release["date"],
         "title": localize(release["title"], locale),
-        "highlights": [{"title": localize(item.get("title"), locale), "text": localize(item.get("text"), locale)}
+        "highlights": [{"title": localize(item.get("title"), locale), "text": localize(item.get("text"), locale),
+                        "icon": item.get("icon") if isinstance(item.get("icon"), str) else None}
                        for item in release["highlights"]],
+        "quote": {"text": localize(quote.get("text"), locale), "author": localize(quote.get("author"), locale),
+                  "book": localize(quote.get("book"), locale)} if quote else None,
     }
+
+
+def notes_between(installed, latest, releases):
+    """Every release newer than installed and up to latest, newest first: what an update brings."""
+    low, high = parse_version(installed), parse_version(latest)
+    if high is None:
+        return []
+    return [r for r in releases if (low is None or parse_version(r["version"]) > low)
+            and parse_version(r["version"]) <= high]

@@ -85,7 +85,7 @@ class TestReleaseNotes:
         release = releases.notes_for("v1.0.0", releases.load(_notes(tmp_path, RELEASES)))
         italian = releases.localized(release, "it")
         assert italian["title"] == "Prima"
-        assert italian["highlights"] == [{"title": "Stili", "text": "Colours"}]
+        assert italian["highlights"] == [{"title": "Stili", "text": "Colours", "icon": None}]
         assert releases.localized(release, "pt_BR")["title"] == "First"
 
 
