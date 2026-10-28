@@ -26,7 +26,7 @@ release text.
    python3 scripts/release.py new v1.2.0
    ```
 
-   This adds an entry with `TODO`s to `cps/release_notes.json`. Fill in, in English and Italian:
+   This adds an entry with `TODO`s to `cps/release_notes.json`. Fill in, in English:
    a title, one to six highlights (each with an `icon` from `cps/static/img/icons.svg`), and a
    `quote`: a short line from a book that fits the release, with author and book. Prefer
    public-domain works, and keep it to a sentence.
@@ -62,8 +62,8 @@ release text.
 
    - the image is at `ghcr.io/mrcoloo/scriptorium-library` as `v1.2.0`, `v1.2`, `v1` and `latest`,
      for `linux/amd64` and `linux/arm64`, with an SBOM and signed build provenance;
-   - the GitHub release *Scriptorium v1.2.0* has the highlights, the quote, the update command,
-     an Italian version and the list of merged changes;
+   - the GitHub release *Scriptorium v1.2.0* has the highlights, the quote, the update command
+     and the list of merged changes;
    - running installs see the update button within twelve hours (or at their next restart).
 
 ## What the workflow does

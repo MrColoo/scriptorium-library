@@ -22,8 +22,8 @@ def _notes(tmp_path, data):
 
 
 RELEASES = {"releases": [
-    {"version": "v1.0.0", "title": {"en": "First", "it": "Prima"},
-     "highlights": [{"title": {"en": "Styles", "it": "Stili"}, "text": "Colours"}]},
+    {"version": "v1.0.0", "title": {"en": "First", "de": "Erste"},
+     "highlights": [{"title": {"en": "Styles", "de": "Stile"}, "text": "Colours"}]},
     {"version": "v1.2.0", "title": "Third", "highlights": [{"title": "Devices"}]},
     {"version": "v1.1.0", "title": "Second", "highlights": []},
     {"version": "not a version", "title": "Ignored"},
@@ -66,7 +66,6 @@ class TestReleaseNotes:
             assert release["highlights"]
             for item in release["highlights"]:
                 assert releases.localize(item.get("title"), "en")
-                assert releases.localize(item.get("title"), "it")
 
     def test_notes_for_patch_release_fall_back_to_its_minor(self, tmp_path):
         loaded = releases.load(_notes(tmp_path, RELEASES))
@@ -83,9 +82,9 @@ class TestReleaseNotes:
 
     def test_localized(self, tmp_path):
         release = releases.notes_for("v1.0.0", releases.load(_notes(tmp_path, RELEASES)))
-        italian = releases.localized(release, "it")
-        assert italian["title"] == "Prima"
-        assert italian["highlights"] == [{"title": "Stili", "text": "Colours", "icon": None}]
+        german = releases.localized(release, "de")
+        assert german["title"] == "Erste"
+        assert german["highlights"] == [{"title": "Stile", "text": "Colours", "icon": None}]
         assert releases.localized(release, "pt_BR")["title"] == "First"
 
 

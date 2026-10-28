@@ -11,11 +11,12 @@ Pure functions, no Flask: what's new for a version, and whether one version is n
 The notes file lists releases, newest first or in any order::
 
     {"releases": [{"version": "v1.1.0", "date": "2026-11-15",
-                   "title": {"en": "...", "it": "..."},
-                   "highlights": [{"icon": "sparkles", "title": {"en": "..."}, "text": {"en": "..."}}],
-                   "quote": {"text": {"en": "...", "it": "..."}, "author": "...", "book": "..."}}]}
+                   "title": "...",
+                   "highlights": [{"icon": "sparkles", "title": "...", "text": "..."}],
+                   "quote": {"text": "...", "author": "...", "book": "..."}}]}
 
-Every text is either a plain string or a dict of translations keyed by locale ("en" is the fallback).
+Texts are written in English. A text may also be a dict keyed by locale ({"en": ..., "de": ...});
+English is the fallback.
 "icon" names a symbol of the app's icon sprite. "quote" is a short line from a book that fits the
 release; use public-domain works or very short quotations.
 """

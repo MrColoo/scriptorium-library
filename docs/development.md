@@ -100,18 +100,18 @@ Placeholders that JavaScript fills in are passed through gettext as values, e.g.
 ## Release notes
 
 Releases are cut with `scripts/release.py` and published by a workflow: see [Releasing](releasing.md).
-Every release adds an entry to `cps/release_notes.json`: a version, a date, a title, three to
-five highlights (each with an `icon` from the sprite) and a `quote`: a short line from a book that
-fits the release, ideally from a public-domain work. Texts are in English (`en`) and in any other
-language you can write (`it`, …). The update dialog of older installs reads this file from the new
-release's tag on GitHub, so it is what administrators see before updating.
-After an update every user sees the entry for the installed version once, in a dialog; all
-entries are listed under *What's new* in the account menu and on the About page. A patch release
-without its own entry shows its minor's notes, so it does not pop up again. A unit test checks
-that the file is valid and that every highlight has an English and an Italian title.
+Every release adds an entry to `cps/release_notes.json`: a version, a date, a title, one to six
+highlights (each with an `icon` from the sprite) and a `quote`: a short line from a book that fits
+the release, ideally from a public-domain work. Texts are in English.
 
-Administrators get a notice while a newer release exists on GitHub (looked up at most every 12
-hours, only while *Enable Update Notifications* is on), which they can hide until the next one.
+The app reads the same file. The update dialog of older installs fetches it from the new release's
+tag on GitHub, so it is what administrators see before updating. After an update every user sees
+the entry for the installed version once, in a dialog; all entries are listed under *What's new*
+in the account menu and on the About page. A patch release without its own entry shows its
+minor's notes, so it does not pop up again. Unit tests check that every entry is complete.
+
+Administrators get an update button in the top bar while a newer release exists on GitHub (looked
+up at most every 12 hours, only while *Enable Update Notifications* is on).
 
 ## Pull requests
 

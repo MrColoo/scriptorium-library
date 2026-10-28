@@ -3,153 +3,75 @@
     {
       "version": "v1.1.0",
       "date": "2026-10-28",
-      "title": {
-        "en": "Your reading life, remembered",
-        "it": "La tua vita da lettore, ricordata"
-      },
+      "title": "Your reading life, remembered",
       "highlights": [
         {
           "icon": "sparkles",
-          "title": {
-            "en": "Your year in books",
-            "it": "Il tuo anno in libri"
-          },
-          "text": {
-            "en": "A full-screen story of your reading year, with a poster to save and share.",
-            "it": "Il tuo anno di letture raccontato a tutto schermo, con una locandina da salvare e condividere."
-          }
+          "title": "Your year in books",
+          "text": "A full-screen story of your reading year, with a poster to save and share."
         },
         {
           "icon": "highlight",
-          "title": {
-            "en": "Highlights",
-            "it": "Sottolineature"
-          },
-          "text": {
-            "en": "Every passage and note from your Kobo or KOReader on one page, exportable to Markdown.",
-            "it": "Tutti i passaggi e le note dal Kobo o da KOReader in un’unica pagina, esportabili in Markdown."
-          }
+          "title": "Highlights",
+          "text": "Every passage and note from your Kobo or KOReader on one page, exportable to Markdown."
         },
         {
           "icon": "device",
-          "title": {
-            "en": "Your reading devices",
-            "it": "I tuoi dispositivi di lettura"
-          },
-          "text": {
-            "en": "Choose Kobo, KOReader or both in Profile → Devices. Progress from either shows on every book.",
-            "it": "Scegli Kobo, KOReader o entrambi in Profilo → Dispositivi. I progressi compaiono su ogni libro."
-          }
+          "title": "Your reading devices",
+          "text": "Choose Kobo, KOReader or both in Profile → Devices. Progress from either shows on every book."
         },
         {
           "icon": "upload",
-          "title": {
-            "en": "Bring your history",
-            "it": "Porta la tua cronologia"
-          },
-          "text": {
-            "en": "Import what you read on Goodreads or The StoryGraph, with dates and your want-to-read list.",
-            "it": "Importa ciò che hai letto su Goodreads o The StoryGraph, con le date e la lista dei libri da leggere."
-          }
+          "title": "Bring your history",
+          "text": "Import what you read on Goodreads or The StoryGraph, with dates and your want-to-read list."
         },
         {
           "icon": "grid",
-          "title": {
-            "en": "An app, and books like this one",
-            "it": "Un’app, e libri come questo"
-          },
-          "text": {
-            "en": "Install Scriptorium on your home screen, share books to it, and find similar books on every book page.",
-            "it": "Installa Scriptorium nella schermata Home, condividici i libri e trova libri simili in ogni pagina."
-          }
+          "title": "An app, and books like this one",
+          "text": "Install Scriptorium on your home screen, share books to it, and find similar books on every book page."
         }
       ],
       "quote": {
-        "text": {
-          "en": "I declare after all there is no enjoyment like reading!",
-          "it": "Dichiaro che, dopotutto, non c’è piacere come la lettura!"
-        },
+        "text": "I declare after all there is no enjoyment like reading!",
         "author": "Jane Austen",
-        "book": {
-          "en": "Pride and Prejudice",
-          "it": "Orgoglio e pregiudizio"
-        }
+        "book": "Pride and Prejudice"
       }
     },
     {
       "version": "v1.0.0",
       "date": "2026-10-19",
-      "title": {
-        "en": "Welcome to Scriptorium",
-        "it": "Ti diamo il benvenuto in Scriptorium"
-      },
+      "title": "Welcome to Scriptorium",
       "highlights": [
         {
           "icon": "grid",
-          "title": {
-            "en": "A new interface",
-            "it": "Una nuova interfaccia"
-          },
-          "text": {
-            "en": "Every page redesigned, in light and dark, and built for phones as much as desktops.",
-            "it": "Ogni pagina ridisegnata, in chiaro e scuro, pensata per il telefono quanto per il computer."
-          }
+          "title": "A new interface",
+          "text": "Every page redesigned, in light and dark, and built for phones as much as desktops."
         },
         {
           "icon": "sparkles",
-          "title": {
-            "en": "Your own colours",
-            "it": "I tuoi colori"
-          },
-          "text": {
-            "en": "Open Customize from your account menu: eleven ready-made styles, a random mix or your own palette.",
-            "it": "Apri Personalizza dal menu del tuo account: undici stili pronti, un mix casuale o la tua palette."
-          }
+          "title": "Your own colours",
+          "text": "Open Customize from your account menu: eleven ready-made styles, a random mix or your own palette."
         },
         {
           "icon": "device",
-          "title": {
-            "en": "Kobo-first",
-            "it": "Pensato per Kobo"
-          },
-          "text": {
-            "en": "A guided Kobo setup on your profile, and Continue reading fed by your device.",
-            "it": "Una configurazione guidata del Kobo nel profilo e Continua a leggere alimentato dal tuo dispositivo."
-          }
+          "title": "Kobo-first",
+          "text": "A guided Kobo setup on your profile, and Continue reading fed by your device."
         },
         {
           "icon": "book-open",
-          "title": {
-            "en": "Better readers",
-            "it": "Lettori migliori"
-          },
-          "text": {
-            "en": "An EPUB reader with themes and typography settings, and an audiobook player that remembers where you stopped.",
-            "it": "Un lettore EPUB con temi e impostazioni tipografiche, e un lettore di audiolibri che ricorda dove avevi interrotto."
-          }
+          "title": "Better readers",
+          "text": "An EPUB reader with themes and typography settings, and an audiobook player that remembers where you stopped."
         },
         {
           "icon": "shield",
-          "title": {
-            "en": "Safer by default",
-            "it": "Più sicuro di serie"
-          },
-          "text": {
-            "en": "A strict Content-Security-Policy, CSRF protection on every action and a new password at first sign-in.",
-            "it": "Una Content-Security-Policy rigorosa, protezione CSRF su ogni azione e una nuova password al primo accesso."
-          }
+          "title": "Safer by default",
+          "text": "A strict Content-Security-Policy, CSRF protection on every action and a new password at first sign-in."
         }
       ],
       "quote": {
-        "text": {
-          "en": "Begin at the beginning, and go on till you come to the end: then stop.",
-          "it": "Comincia dal principio, e va’ avanti fino alla fine: poi fermati."
-        },
+        "text": "Begin at the beginning, and go on till you come to the end: then stop.",
         "author": "Lewis Carroll",
-        "book": {
-          "en": "Alice’s Adventures in Wonderland",
-          "it": "Alice nel Paese delle Meraviglie"
-        }
+        "book": "Alice’s Adventures in Wonderland"
       }
     }
   ]

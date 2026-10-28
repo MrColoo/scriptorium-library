@@ -30,7 +30,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NOTES_PATH = os.path.join(ROOT, "cps", "release_notes.json")
 IMAGE = "ghcr.io/mrcoloo/scriptorium-library"
 TAG_RE = re.compile(r"^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-[0-9A-Za-z.-]+)?$")
-LOCALES = ("en", "it")
+LOCALES = ("en",)
 
 
 def _releases_module():
@@ -119,15 +119,14 @@ def problems(data, version, need_date=True):
 
 
 def template(version):
-    todo = {"en": "TODO", "it": "TODO"}
     return {"version": version, "date": "",
-            "title": dict(todo),
-            "highlights": [{"icon": "sparkles", "title": dict(todo), "text": dict(todo)} for _ in range(3)],
-            "quote": {"text": dict(todo), "author": "", "book": dict(todo)}}
+            "title": "TODO",
+            "highlights": [{"icon": "sparkles", "title": "TODO", "text": "TODO"} for _ in range(3)],
+            "quote": {"text": "TODO", "author": "", "book": "TODO"}}
 
 
 def render(data, version, repository="MrColoo/scriptorium-library"):
-    """The GitHub release text, from the release notes (English, then Italian in a fold)."""
+    """The GitHub release text, from the release notes."""
     entry = find(data, version)
     if entry is None:
         raise ReleaseError("no release notes for {}".format(version))
@@ -146,15 +145,11 @@ def render(data, version, repository="MrColoo/scriptorium-library"):
         return local["title"], lines
 
     title, lines = section("en")
-    it_title, it_lines = section("it")
     out = ["## {}".format(title), ""] + lines
     out += ["", "### Update", "",
             "Back up your `config` folder, then run next to your `docker-compose.yml`:", "",
             "```bash", "docker compose pull && docker compose up -d", "```", "",
             "Image: `{}:{}`{}".format(IMAGE, version, "" if is_prerelease(version) else " (also `latest`)")]
-    if it_title and it_title != title:
-        out += ["", "<details>", "<summary>🇮🇹 In italiano</summary>", "", "## {}".format(it_title), ""] + it_lines
-        out += ["", "</details>"]
     return "\n".join(out) + "\n"
 
 

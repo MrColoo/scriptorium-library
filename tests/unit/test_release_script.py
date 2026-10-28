@@ -23,9 +23,9 @@ _spec.loader.exec_module(release)
 
 READY = {
     "version": "v2.0.0", "date": "2026-11-01",
-    "title": {"en": "Big things", "it": "Grandi cose"},
-    "highlights": [{"icon": "sparkles", "title": {"en": "A", "it": "A"}, "text": {"en": "Does A.", "it": "Fa A."}}],
-    "quote": {"text": {"en": "Quote.", "it": "Citazione."}, "author": "Someone", "book": {"en": "Book", "it": "Libro"}},
+    "title": "Big things",
+    "highlights": [{"icon": "sparkles", "title": "A", "text": "Does A."}],
+    "quote": {"text": "Quote.", "author": "Someone", "book": "Book"},
 }
 
 
@@ -61,13 +61,13 @@ def test_template_is_not_ready():
     assert any("quote" in issue for issue in issues)
 
 
-def test_missing_italian_unknown_icon_and_date_are_reported():
+def test_missing_text_unknown_icon_and_date_are_reported():
     entry = copy.deepcopy(READY)
-    entry["highlights"][0]["title"].pop("it")
+    entry["highlights"][0]["title"] = ""
     entry["highlights"][0]["icon"] = "no-such-icon"
     entry["date"] = ""
     issues = release.problems(_data(entry), "v2.0.0")
-    assert any("highlight 1 title: missing 'it'" in issue for issue in issues)
+    assert any("highlight 1 title: missing 'en'" in issue for issue in issues)
     assert any("not in the sprite" in issue for issue in issues)
     assert any("date" in issue for issue in issues)
 
@@ -82,7 +82,7 @@ def test_render():
     assert "- **A** — Does A." in text
     assert "> Quote.\n> — Someone, *Book*" in text
     assert "ghcr.io/mrcoloo/scriptorium-library:v2.0.0` (also `latest`)" in text
-    assert "<summary>🇮🇹 In italiano</summary>" in text and "## Grandi cose" in text
+    assert "<details>" not in text
 
 
 def test_render_prerelease_is_not_latest():
