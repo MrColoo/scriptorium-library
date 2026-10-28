@@ -3,6 +3,7 @@
 # Calibre-Web Automated – fork of Calibre-Web
 # Copyright (C) 2018-2025 Calibre-Web contributors
 # Copyright (C) 2024-2025 Calibre-Web Automated contributors
+# Copyright (C) 2026 Mrcoloo (Scriptorium changes)
 # SPDX-License-Identifier: GPL-3.0-or-later
 # See CONTRIBUTORS for full list of authors.
 
@@ -329,6 +330,28 @@ def enrich_response_with_book_info(response_data: Dict[str, Any], document_check
     return response_data, book_id, book_format, book_title, checksum_version
 
 
+def _store_progress_percent(book_read, percentage: float) -> None:
+    """Record the percentage where the web interface and Kobo sync read it.
+
+    The reading state is created when it is missing: a book the user opened in the
+    web reader or marked as reading has a ReadBook row but no reading state, and
+    its KOReader progress used to be dropped. The state's own timestamp is bumped
+    too, so the book moves to the front of "Continue reading".
+    """
+    now = datetime.now(timezone.utc)
+    state = book_read.kobo_reading_state
+    if state is None:
+        state = ub.KoboReadingState(user_id=book_read.user_id, book_id=book_read.book_id)
+        book_read.kobo_reading_state = state
+    if state.current_bookmark is None:
+        state.current_bookmark = ub.KoboBookmark()
+    if state.statistics is None:
+        state.statistics = ub.KoboStatistics()
+    state.current_bookmark.progress_percent = percentage
+    state.current_bookmark.last_modified = now
+    state.last_modified = now
+
+
 def update_book_read_status(user, book_id: int, percentage: float) -> None:
     """
     Update the user's ReadBook status based on reading progress percentage.
@@ -395,11 +418,7 @@ def update_book_read_status(user, book_id: int, percentage: float) -> None:
             log.debug(f"ReadBook status unchanged: {old_status}")
 
         book_read.last_modified = datetime.now(timezone.utc)
-
-        # Update KoboBookmark progress_percent if it exists
-        if book_read.kobo_reading_state and book_read.kobo_reading_state.current_bookmark:
-            book_read.kobo_reading_state.current_bookmark.progress_percent = percentage
-            book_read.kobo_reading_state.current_bookmark.last_modified = datetime.now(timezone.utc)
+        _store_progress_percent(book_read, percentage)
 
     else:
         # Create new ReadBook record
@@ -418,15 +437,7 @@ def update_book_read_status(user, book_id: int, percentage: float) -> None:
             book_read.last_time_started_reading = datetime.now(timezone.utc)
             log.info(f"User {user_id} started reading book {book_id} (new entry)")
 
-        # Create associated KoboReadingState
-        kobo_reading_state = ub.KoboReadingState(
-            user_id=user_id,
-            book_id=book_id
-        )
-        kobo_reading_state.current_bookmark = ub.KoboBookmark()
-        kobo_reading_state.current_bookmark.progress_percent = percentage
-        kobo_reading_state.statistics = ub.KoboStatistics()
-        book_read.kobo_reading_state = kobo_reading_state
+        _store_progress_percent(book_read, percentage)
 
         ub.session.add(book_read)
         log.info(f"User {user_id} book {book_id} created with status {new_status} "
