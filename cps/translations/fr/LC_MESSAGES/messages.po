@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 22:20+0100\n"
+"POT-Creation-Date: 2026-10-28 22:23+0100\n"
 "PO-Revision-Date: 2026-02-11 09:17+0000\n"
 "Last-Translator: Tex <tex@grosist.fr>\n"
 "Language-Team: French\n"
@@ -1984,7 +1984,7 @@ msgstr "Description"
 msgid "{} Stars"
 msgstr "{} Étoiles"
 
-#: cps/pwa.py:54 cps/templates/share.html:6
+#: cps/pwa.py:53 cps/templates/share.html:6
 #, fuzzy
 msgid "Add shared books"
 msgstr "Livres lus"
@@ -8309,22 +8309,16 @@ msgid "Nothing was shared. Use “Share” in another app and pick Scriptorium."
 msgstr ""
 
 #: cps/templates/share.html:19
-msgid ""
-"The book did not arrive: open Scriptorium once from the home screen, then "
-"share it again."
-msgstr ""
-
-#: cps/templates/share.html:20
 #, python-format
 msgid "%(num)s book(s) received. Uploading…"
 msgstr ""
 
-#: cps/templates/share.html:21
+#: cps/templates/share.html:20
 msgid ""
 "Your account cannot upload books. Ask an administrator for upload permission."
 msgstr ""
 
-#: cps/templates/share.html:22
+#: cps/templates/share.html:21
 msgid "This browser cannot receive shared books."
 msgstr ""
 

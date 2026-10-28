@@ -6,17 +6,16 @@
 
 """Installable app: the service worker at the site root, the offline page and the share target.
 
-Books shared from another app are posted to /share-target. The service worker keeps them in a cache
-and opens /share, where the signed-in page uploads them with its CSRF token. The server-side
-/share-target only exists for browsers without the worker: it stores nothing and sends the user on.
+Books shared from another app are posted to /share-target, which only the service worker answers:
+it keeps the files in a cache and opens /share, where the signed-in page uploads them with its CSRF
+token. The server has no /share-target route, so there is no upload endpoint without CSRF protection.
 """
 
 import os
 
-from flask import Blueprint, make_response, redirect, render_template, send_from_directory, url_for
+from flask import Blueprint, make_response, render_template, send_from_directory, url_for
 from flask_babel import gettext as _
 
-from . import csrf
 from .render_template import render_title_template
 from .usermanagement import user_login_required
 
@@ -52,10 +51,3 @@ def offline():
 @user_login_required
 def share():
     return render_title_template("share.html", title=_("Add shared books"), page="share")
-
-
-@csrf.exempt
-@pwa.route("/share-target", methods=["POST"])
-def share_target_fallback():
-    # Reached only when the service worker is not installed yet. Nothing is read or stored here.
-    return redirect(url_for("pwa.share", missed=1), code=303)

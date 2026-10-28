@@ -11,7 +11,6 @@
   var list = box.querySelector("[data-share-list]");
   function say(text) { message.textContent = text; }
 
-  if (new URLSearchParams(window.location.search).has("missed")) { say(T.missed || ""); return; }
   if (!("caches" in window)) { say(T.unsupported || ""); return; }
 
   caches.open("scriptorium-share").then(function (cache) {
