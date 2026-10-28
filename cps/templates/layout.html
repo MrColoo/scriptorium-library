@@ -126,7 +126,6 @@
       <a class="nav-link" href="{{ url_for('admin.admin') }}"{% if page in ['admin', 'config', 'newuser', 'user', 'mailset', 'cwa-settings', 'cwa-stats', 'logfile'] %} aria-current="page"{% endif %}>{{ ui.icon('settings') }}<span class="nav-label">{{ _('Settings') }}</span></a>
       {%- endif %}
     </nav>
-    <p class="credit">{{ _('Based on') }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated" rel="noopener" target="_blank">Calibre-Web-Automated</a></p>
   </aside>
   <div class="nav-scrim" aria-hidden="true"></div>
 
@@ -249,7 +248,6 @@
 {% else %}
 <main id="main" class="auth" tabindex="-1">
   {{ self.body() }}
-  <p class="credit credit--auth">{{ _('Based on') }} <a href="https://github.com/crocodilestick/Calibre-Web-Automated" rel="noopener" target="_blank">Calibre-Web-Automated</a></p>
 </main>
 {% endif %}
 

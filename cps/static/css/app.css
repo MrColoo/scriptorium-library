@@ -1054,8 +1054,3 @@ ol.rank-list li::before { counter-increment: rank; content: counter(rank); width
 /* Scriptorium logo */
 .brand-logo { width: 32px; height: 32px; flex: none; display: block; border-radius: 22%; box-shadow: 0 0 0 1px var(--border); }
 .brand-logo--lg { width: 64px; height: 64px; filter: drop-shadow(0 6px 14px rgb(14 16 22 / .28)); }
-/* Credit line for the upstream projects */
-.credit { margin: 10px 0 0; padding: 0 10px; font-size: 11.5px; color: var(--ap-side-faint, var(--text-faint)); }
-.credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
-.credit a:hover { color: var(--ap-side-text, var(--text)); }
-.credit--auth { margin-top: 24px; text-align: center; color: var(--text-faint); }
