@@ -41,8 +41,7 @@ Set these under `environment:` in `docker-compose.yml`, then run `docker compose
 | --- | --- |
 | `/config/app.db` | Users, shelves, settings, reading progress, highlights. |
 | `/config/cwa.db` | Automation settings and statistics. |
-| `/config/calibre-web.log` | Main log. |
-| `/config/access.log` | Web access log, if enabled. |
+| `/config/access.log` | Web access log, if enabled. The main log goes to the container's output: `docker compose logs`. |
 | `/config/convert-library.log`, `/config/epub-fixer.log` | Logs of the bulk tools. |
 | `/config/processed_books/` | Automatic backups. See [Backups](automation.md#backups). |
 | `/config/.config/calibre/` | Calibre's own settings and plugins. |

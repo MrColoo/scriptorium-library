@@ -25,7 +25,7 @@ explains how the application protects them and what you should do when you deplo
 
 *Limit failed login attempts* is on by default and slows down password guessing. If your library is
 public, a tool such as [fail2ban](https://github.com/fail2ban/fail2ban) can also ban addresses at the
-firewall. Failed sign-ins are written to `/config/calibre-web.log`:
+firewall. Failed sign-ins appear in the container's log, which you read with `docker compose logs`:
 
 ```text
 Login failed for user "someone" IP-address: 203.0.113.7

@@ -17,8 +17,7 @@ docker compose logs --tail 100
 
 To watch live while you try something, use `docker compose logs -f`, and press Ctrl+C to stop.
 
-The container's logs show start-up and imports. The app's own log is `config/calibre-web.log`. In
-the web interface, *Settings → Check Service Status* shows whether the background services are running,
+This shows start-up, imports and everything the app reports. In the web interface, *Settings → Check Service Status* shows whether the background services are running,
 and *Settings → Library tools → Logs & history* has the log of each run.
 
 ## Installing and starting
@@ -214,7 +213,7 @@ open one with:
 - your Scriptorium version, from *About*;
 - what you did, what you expected and what happened;
 - how you run it: host system, reverse proxy, network shares;
-- the relevant part of the logs, or the *Download Debug Package* file. Remove anything private before
-  posting.
+- the relevant part of `docker compose logs`, and the *Download Debug Package* file if asked for it.
+  Remove anything private before posting: the logs can contain your sync address.
 
 For security problems, please follow [SECURITY.md](../SECURITY.md) instead of opening a public issue.

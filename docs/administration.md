@@ -137,16 +137,15 @@ Time zones come from `TZ`. Running and finished jobs are listed under *Tasks* in
 | **About** (account menu) | Installed version and library totals. |
 | **Tasks** | Conversions, emails and maintenance in progress. |
 
-The main log is `/config/calibre-web.log`, or run `docker compose logs -f`. More detail is available
-under *Settings → Server & features → Server → Log Level*.
+The main log is the container's output: run `docker compose logs -f`. More detail is available under *Settings → Server & features → Server → Log Level*.
 
 ## System actions
 
 Under *System* on the Settings page:
 
-- **Download Debug Package**: settings and logs in a zip, for bug reports. Stored passwords are left
-  out, but it can contain your paths, usernames, and a Hardcover key or Gmail token saved in Settings.
-  Look through `settings.txt` and the logs before posting it in public.
+- **Download Debug Package**: settings, library versions and the access log in a zip, for bug reports.
+  Passwords, API keys, tokens and Kobo sync addresses are left out, but your folder paths, server names
+  and the addresses in the access log are not, so look through it before posting it in public.
 - **Reconnect Calibre Database**: reloads `metadata.db`.
 - **Restart** and **Shutdown**: restart or stop the app.
 
