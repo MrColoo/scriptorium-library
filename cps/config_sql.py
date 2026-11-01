@@ -7,6 +7,7 @@
 # See CONTRIBUTORS for full list of authors.
 
 import os
+import re
 import sys
 import json
 
@@ -29,6 +30,9 @@ from .string_helper import strip_whitespaces
 
 log = logger.create()
 _Base = declarative_base()
+
+# Settings that must not leave the server: credentials, and the accounts they belong to
+PRIVATE_SETTING = re.compile(r"_e$|api|token|secret|_password$|_username$|mail_login|limiter_(uri|options)", re.I)
 
 
 class _Flask_Settings(_Base):
@@ -349,9 +353,10 @@ class ConfigSQL(object):
         return True
 
     def to_dict(self):
+        """The settings that are safe to share, for example in the debug package."""
         storage = {}
         for k, v in self.__dict__.items():
-            if k[0] != '_' and not k.endswith("_e") and k != "cli" and 'api' not in k.lower():
+            if k[0] != '_' and k != "cli" and not PRIVATE_SETTING.search(k):
                 storage[k] = v
         return storage
 

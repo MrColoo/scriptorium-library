@@ -13,6 +13,7 @@ from io import BytesIO
 from flask_babel.speaklater import LazyString
 
 import os
+import re
 
 from flask import send_file
 import importlib
@@ -21,6 +22,9 @@ from . import logger, config
 from .about import collect_stats
 
 log = logger.create()
+
+# A Kobo sync address and a magic link work like passwords, and they are logged with each request
+SECRET_IN_LOG = re.compile(rb"(/kobo/|/verify/|with token: )[^/\s\"'?]+")
 
 
 class lazyEncoder(json.JSONEncoder):
@@ -49,6 +53,10 @@ def assemble_logfiles(file_name):
                          download_name=os.path.basename(file_name))
 
 
+def redact_log(data):
+    return SECRET_IN_LOG.sub(rb"\1<redacted>", data)
+
+
 def send_debug():
     file_list = glob.glob(logger.get_logfile(config.config_logfile) + '*')
     file_list.extend(glob.glob(logger.get_accesslogfile(config.config_access_logfile) + '*'))
@@ -60,7 +68,8 @@ def send_debug():
         zf.writestr('settings.txt', json.dumps(config.to_dict(), sort_keys=True, indent=2))
         zf.writestr('libs.txt', json.dumps(collect_stats(), sort_keys=True, indent=2, cls=lazyEncoder))
         for fp in file_list:
-            zf.write(fp, os.path.basename(fp))
+            with open(fp, 'rb') as log_file:
+                zf.writestr(os.path.basename(fp), redact_log(log_file.read()))
     memory_zip.seek(0)
     version = importlib.metadata.version("flask")
     if int(version.split('.')[0]) < 2:
