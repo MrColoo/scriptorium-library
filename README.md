@@ -21,7 +21,7 @@
   <a href="#quick-start"><b>Quick start</b></a> ·
   <a href="#features">Features</a> ·
   <a href="#screenshots">Screenshots</a> ·
-  <a href="docs/installation.md">Docs</a> ·
+  <a href="docs/README.md">Docs</a> ·
   <a href="#coming-from-calibre-web-automated">Coming from CWA?</a>
 </p>
 
@@ -66,7 +66,9 @@ itself in order** and **a place you actually enjoy opening**.
 
 ## Quick start
 
-All you need is [Docker](https://docs.docker.com/get-docker/) with the Compose plugin.
+All you need is [Docker](https://docs.docker.com/get-docker/) with the Compose plugin. New to
+self-hosting? **[Start here](docs/start-here.md)**: a friendly, step-by-step guide that assumes
+nothing.
 
 ```bash
 mkdir scriptorium && cd scriptorium
@@ -251,8 +253,9 @@ time. Nothing is locked in.
 | `TRUSTED_PROXY_COUNT` | `1` | Number of reverse proxies in front of Scriptorium. |
 | `DISABLE_LIBRARY_AUTOMOUNT` | `false` | `true` skips automatic library detection at start-up. |
 
-Reverse proxies, network shares and permissions are covered in the
-[installation guide](docs/installation.md).
+The [configuration reference](docs/configuration.md) lists every variable and setting. Network
+shares and NAS setups are in the [installation reference](docs/installation.md), and HTTPS and
+reverse proxies in [Remote access](docs/remote-access.md).
 
 ### Updating
 
@@ -276,6 +279,8 @@ docker compose start
 ```
 
 To restore, extract the archive in place of the two folders and start the container again.
+[Updating and backups](docs/updating-and-backups.md) covers automatic backups, version pinning and
+moving to a new server.
 
 ## Coming from Calibre-Web-Automated
 
@@ -303,15 +308,20 @@ Coming from plain Calibre-Web? See [the installation guide](docs/installation.md
 
 ## Documentation
 
-| Guide | |
+**[Browse all the documentation →](docs/README.md)**
+
+| If you want to | Read |
 | --- | --- |
-| [Installation](docs/installation.md) | Volumes, environment variables, network shares, reverse proxies |
-| [Kobo](docs/kobo.md) | Sync setup, choosing what to sync, troubleshooting |
-| [KOReader](docs/koreader.md) | Progress sync plugin |
-| [Automation](docs/automation.md) | Ingest, conversion, metadata, duplicates, EPUB fixer, backups |
-| [Security](docs/security.md) | Deploying safely and how the app is hardened |
-| [Development](docs/development.md) | Running from source, tests, front-end conventions, translations |
-| [Releasing](docs/releasing.md) | How versions are tagged, built and published |
+| Install it with no prior experience | [Start here](docs/start-here.md) |
+| Set it up well in ten minutes | [First steps](docs/first-steps.md) |
+| Learn what it can do | [Using Scriptorium](docs/using-scriptorium.md) |
+| Connect a device | [Kobo](docs/kobo.md), [KOReader](docs/koreader.md), [Kindle, email and OPDS](docs/ereaders.md) |
+| Deploy it on a NAS, Pi or server | [Installation reference](docs/installation.md) |
+| Reach it from anywhere, with HTTPS | [Remote access](docs/remote-access.md) |
+| Keep it updated and safe | [Updating and backups](docs/updating-and-backups.md), [Security](docs/security.md) |
+| Run it for others | [Administration](docs/administration.md), [Automation](docs/automation.md), [Configuration reference](docs/configuration.md) |
+| Fix a problem | [Troubleshooting](docs/troubleshooting.md) |
+| Contribute | [Development](docs/development.md), [Releasing](docs/releasing.md) |
 
 ## Contributing
 

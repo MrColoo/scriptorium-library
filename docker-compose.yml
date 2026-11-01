@@ -1,4 +1,5 @@
 # Scriptorium — https://github.com/Mrcoloo/scriptorium-library
+# New to this? Follow docs/start-here.md in the repository: it explains every step.
 # Start with:  docker compose up -d   then open http://<your-server>:8083 (admin / admin123)
 services:
   scriptorium:
@@ -8,7 +9,7 @@ services:
       - PUID=1000            # owner of the files on your volumes: run `id -u`
       - PGID=1000            # run `id -g`
       - TZ=Europe/London     # your time zone, e.g. Europe/Rome, America/New_York
-      # Optional — see README "Environment variables":
+      # Optional — every variable is in docs/configuration.md:
       # - HARDCOVER_TOKEN=your_hardcover_api_key   # Hardcover as a metadata provider
       # - NETWORK_SHARE_MODE=true                  # library or config on NFS/SMB
       # - TRUSTED_PROXY_COUNT=2                    # more than one reverse proxy in front
