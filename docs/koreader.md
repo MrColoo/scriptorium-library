@@ -1,23 +1,22 @@
 # KOReader
 
-[KOReader](https://koreader.rocks/) runs on Kobo, Kindle, PocketBook, Android and more. The Scriptorium
-Sync plugin keeps your reading position in step between KOReader and the library, so you can stop
-on one device and continue on another (or in the browser).
+[KOReader](https://koreader.rocks/) is free reading software for Kobo, Kindle, PocketBook, Android
+and more. The Scriptorium Sync plugin keeps your reading position and highlights in step between
+KOReader and the library, so you can stop on one device and continue on another, or in the browser.
 
 ## Enable it (administrator)
 
-*Settings → Automation → Services → Enable KOReader Sync (Scriptorium Plugin).*
+Turn on *Settings → Automation → Services → Enable KOReader Sync (Scriptorium Plugin)*.
 
-The first start after enabling it computes a checksum for every book file so KOReader's documents
+The first start after enabling it computes a checksum for every book file, so KOReader's documents
 can be matched to library books. On large libraries this takes a while and can briefly lock the
-library; enable it at a quiet time.
+library. Enable it at a quiet time.
 
-Then each user turns it on for themselves: *Profile → Devices → KOReader*. The steps below appear
-right there, with your server address ready to copy. The full guide is on the **KOReader sync**
-page (`/kosync`).
+Then each user turns it on for themselves under *Profile → Devices → KOReader*. The steps below
+appear right there, with your server address ready to copy. The full guide is on the **KOReader
+sync** page (`/kosync`).
 
 ## Install the plugin
-
 
 1. Download `koplugin.zip` from that page.
 2. Connect the device to your computer and extract the zip straight into `koreader/plugins/` on the
@@ -33,13 +32,21 @@ Enter:
   (for example `https://books.example.com`). Do not add `/kosync`: the plugin does that itself.
 - **Username** and **password**: the same ones you use for the web interface.
 
+## Get your books onto the device
+
+The plugin syncs progress, not book files. Get the files in any of these ways, as long as they come
+from the library:
+
+- browse the [OPDS catalogue](ereaders.md#reading-apps-opds) from KOReader's own file browser;
+- download them from the web interface;
+- [send them by email](ereaders.md#send-to-a-kindle-or-any-device-by-email).
+
 ## How it works
 
 - Progress is saved when you turn pages, close or switch books, or leave KOReader, and uploaded
   in the background. Without a connection the plugin retries once the device is back online.
 - Books are matched by a checksum of the file, so the copy on the device must be one downloaded
-  from the library (via OPDS, the web interface or email). A file converted or edited elsewhere
-  will not match.
+  from the library. A file converted or edited elsewhere will not match.
 - Progress updates the read status in the library: 0% is *unread*, anything in between is
   *reading*, 99% and above is *finished*.
 - The book page shows it under *Reading progress*, with the device it came from, and the home page
@@ -57,7 +64,7 @@ plugin before, download it again from *Profile → Devices → KOReader* and rep
 ## KOReader on a Kobo
 
 If you used Kobo sync before installing KOReader on the same device, press **Remove Kobo** in
-*Profile → Devices*. The Kobo sync address stops working and Kobo features are hidden; your reading
+*Profile → Devices*. The Kobo sync address stops working and Kobo features are hidden. Your reading
 progress and read status are kept.
 
 ## Troubleshooting
@@ -65,9 +72,14 @@ progress and read status are kept.
 **The plugin does not appear in the Tools menu.** Check that the folder is exactly
 `koreader/plugins/cwasync.koplugin`, then enable it in *Settings → Tools → Plugin management*.
 
-**Sign-in fails.** Check the server URL (including `/kosync`) and that you can log in to the web
-interface with the same username and password from the device's network. Accounts created
+**Sign-in fails.** Check the server URL, which must not end in `/kosync`, and that you can log in to
+the web interface with the same username and password from the device's network. Accounts created
 through OAuth have no password until an administrator sets one.
 
 **Progress does not sync for one book.** The file on the device is probably not the library's
 copy. Download it again from the library.
+
+**Nothing syncs.** Make sure KOReader Sync is on under *Settings → Automation → Services*, and that
+the device can reach your server. Away from home you need [remote access](remote-access.md).
+
+More help: [Troubleshooting](troubleshooting.md).
