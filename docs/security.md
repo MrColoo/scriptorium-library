@@ -7,16 +7,29 @@ explains how the application protects them and what you should do when you deplo
 
 - **Change the default password.** The first login as `admin` / `admin123` forces a new password
   before anything else can be done.
-- **Use HTTPS from outside your home network**, through a reverse proxy with a real certificate.
-  Then enable *Settings → Server & features → Security → Use via HTTPS* so session cookies are
-  marked `Secure`.
+- **Never forward port 8083 to the internet.** Use a VPN, or a reverse proxy with a real certificate.
+  [Remote access](remote-access.md) compares the options. With HTTPS working, enable
+  *Settings → Server & features → Security → Use via HTTPS* so session cookies are marked `Secure`.
 - **Do not expose the container port directly** when you use reverse-proxy authentication: anyone
   who reaches Scriptorium without the proxy could send the `Remote-User` header and log in as anyone.
 - **Keep the Kobo sync address private.** It works like a password for your books. Regenerate it
   from your profile if it leaks, and revoke it when a device is lost.
-- **Back up `/config`.** It contains `app.db` (users, settings, reading progress) and `cwa.db`.
+- **Give people only the permissions they need**, and keep *Anonymous Browsing* and *Public
+  Registration* off on a public address. See [Administration](administration.md#users).
+- **Back up `/config`.** It contains `app.db` (users, settings, reading progress) and `cwa.db`. Keep
+  backups private: they hold your users' password hashes. See [Backups](updating-and-backups.md#backups).
 - **Keep the image updated.** Administrators see a notice in the interface when a new release is
   out.
+
+### Blocking repeated sign-in attempts
+
+*Limit failed login attempts* is on by default and slows down password guessing. If your library is
+public, a tool such as [fail2ban](https://github.com/fail2ban/fail2ban) can also ban addresses at the
+firewall. Failed sign-ins are written to `/config/calibre-web.log`:
+
+```text
+Login failed for user "someone" IP-address: 203.0.113.7
+```
 
 ## How the application is hardened
 
