@@ -48,6 +48,8 @@ local SYNC_STRATEGY = {
 
 -- Debounce push/pull attempts
 local API_CALL_DEBOUNCE_DELAY = time.s(25)
+-- Reading statistics are synced at most this often while reading (always when a book is closed)
+local STATS_SYNC_INTERVAL = time.s(600)
 
 -- NOTE: This is used in a migration script by ui/data/onetime_migration,
 --       which is why it's public.
@@ -60,6 +62,7 @@ CWASync.default_settings = {
     pages_before_update = nil,
     sync_forward = SYNC_STRATEGY.PROMPT,
     sync_backward = SYNC_STRATEGY.DISABLE,
+    sync_stats = false,  -- Scriptorium extension: share KOReader's reading statistics through the server
 }
 
 function CWASync:init()
@@ -199,6 +202,10 @@ function CWASync:onReaderReady()
     --       Plus, if wifi_enable_action is set to prompt, that also avoids stacking three prompts on top of each other...
     self:registerEvents()
     self:onDispatcherRegisterActions()
+    -- Bring in the time read on other devices, if the network is already up.
+    UIManager:scheduleIn(3, function()
+        self:syncStatistics(false)
+    end)
 
     self.last_page = self.ui:getCurrentPage()
 end
@@ -229,6 +236,25 @@ function CWASync:addToMainMenu(menu_items)
                     else
                         self:login(menu)
                     end
+                end,
+                separator = true,
+            },
+            {
+                text = _("Sync reading statistics"),
+                help_text = _([[Shares KOReader's reading statistics (reading time, pages, streaks) between all your devices through Scriptorium, and shows them on its Reading statistics page.
+
+This sets the cloud sync of the Reading statistics plugin to your Scriptorium server.]]),
+                keep_menu_open = true,
+                checked_func = function() return self.settings.sync_stats end,
+                callback = function(touchmenu_instance)
+                    self:toggleStatsSync(touchmenu_instance)
+                end,
+            },
+            {
+                text = _("Sync reading statistics now"),
+                enabled_func = function() return self.settings.sync_stats and self.settings.password ~= nil end,
+                callback = function()
+                    self:syncStatistics(true)
                 end,
                 separator = true,
             },
@@ -448,6 +474,7 @@ function CWASync:setServer(server)
     server = util.trim(server or ""):gsub("/+$", ""):gsub("/kosync$", "")
     logger.dbg("CWASync: Setting server to:", server)
     self.settings.server = server ~= "" and server or nil
+    self:applyStatsServer()
 end
 
 function CWASync:setSyncForward(strategy)
@@ -542,6 +569,7 @@ function CWASync:doLogin(username, password, menu)
     elseif status then
         self.settings.username = username
         self.settings.password = password
+        self:applyStatsServer()
         if menu then
             menu:updateItems()
         end
@@ -559,6 +587,7 @@ end
 function CWASync:logout(menu)
     self.settings.password = nil
     self.settings.auto_sync = true
+    self:applyStatsServer()
     if menu then
         menu:updateItems()
     end
@@ -724,6 +753,10 @@ function CWASync:updateProgress(ensure_networking, interactive, on_suspend)
         -- can never stop progress sync.
         local ann_ok, ann_err = pcall(self.pushAnnotations, self, doc_digest)
         if not ann_ok then logger.warn("CWASync: could not send highlights:", ann_err) end
+        -- Wi-Fi goes off right after a push on suspend, so statistics wait for the next one.
+        if not on_suspend then
+            self:syncStatistics(false)
+        end
         -- This is solely for onSuspend's sake, to clear the ghosting left by the "Connected" InfoMessage
         if on_suspend then
             -- Our top-level widget should be the "Connected to network" InfoMessage from NetworkMgr's reconnectOrShowNetworkMenu
@@ -829,6 +862,120 @@ function CWASync:pushAnnotations(doc_digest)
                 self.annotations_sent[doc_digest] = signature
             end
         end)
+end
+
+-- Scriptorium extension: reading statistics.
+-- KOReader's Reading statistics plugin can sync its database through a WebDAV folder, merging the copy
+-- on the server into its own. Scriptorium serves that folder at <server>/kosync/webdav with the same
+-- sign-in, so this only points the statistics plugin there and asks it to sync from time to time.
+local function statsDbPath()
+    return require("datastorage"):getSettingsDir() .. "/statistics.sqlite3"
+end
+
+local function isScriptoriumStatsServer(server)
+    return type(server) == "table" and server.type == "webdav" and type(server.address) == "string"
+        and server.address:match("/kosync/webdav/?$") ~= nil
+end
+
+function CWASync:getStatistics()
+    local statistics = self.ui and self.ui.statistics
+    if statistics and statistics.settings and self.ui.cloudstorage then
+        return statistics
+    end
+end
+
+function CWASync:statsServer()
+    return {
+        name = "Scriptorium",
+        type = "webdav",
+        address = self.settings.server .. "/kosync/webdav",
+        username = self.settings.username,
+        password = self.settings.password,
+        url = "/",
+    }
+end
+
+-- Keep the statistics plugin's sync server in step with ours: same address and credentials while
+-- statistics sync is on, and no Scriptorium server once it is off. Returns the statistics plugin.
+function CWASync:applyStatsServer()
+    local statistics = self:getStatistics()
+    if not statistics then return nil end
+    local current = statistics.settings.sync_server
+    if self.settings.sync_stats and self.settings.server and self.settings.password then
+        local wanted = self:statsServer()
+        if not (isScriptoriumStatsServer(current) and current.address == wanted.address
+                and current.username == wanted.username and current.password == wanted.password) then
+            if not (isScriptoriumStatsServer(current) and current.address == wanted.address) then
+                -- A different folder: forget what was uploaded to the old one, as KOReader does.
+                os.remove(statsDbPath() .. ".sync")
+            end
+            statistics.settings.sync_server = wanted
+        end
+    elseif isScriptoriumStatsServer(current) then
+        statistics.settings.sync_server = nil
+        os.remove(statsDbPath() .. ".sync")
+    end
+    return statistics
+end
+
+function CWASync:toggleStatsSync(touchmenu_instance)
+    local function done()
+        if touchmenu_instance then touchmenu_instance:updateItems() end
+    end
+    if self.settings.sync_stats then
+        self.settings.sync_stats = false
+        self:applyStatsServer()
+        return done()
+    end
+    local statistics = self:getStatistics()
+    if not statistics then
+        UIManager:show(InfoMessage:new{
+            text = _("The Reading statistics and Cloud storage plugins must be enabled to sync reading statistics."),
+        })
+        return
+    end
+    if not self.settings.password or not self.settings.server then
+        UIManager:show(InfoMessage:new{ text = _("Set the Scriptorium server and log in first.") })
+        return
+    end
+    local function enable()
+        self.settings.sync_stats = true
+        self:applyStatsServer()
+        done()
+        self:syncStatistics(true)
+    end
+    local current = statistics.settings.sync_server
+    if current and not isScriptoriumStatsServer(current) then
+        UIManager:show(ConfirmBox:new{
+            text = _("Reading statistics already sync with another cloud server. Sync them with Scriptorium instead?"),
+            ok_text = _("Use Scriptorium"),
+            ok_callback = enable,
+        })
+    else
+        enable()
+    end
+end
+
+-- interactive: the user asked, so show the result. force: skip the interval (book closing).
+function CWASync:syncStatistics(interactive, force)
+    if not self.settings.sync_stats then return end
+    local statistics = self:applyStatsServer()
+    if not statistics or not statistics.settings.is_enabled or not statistics.settings.sync_server then
+        return
+    end
+    local now = UIManager:getElapsedTimeSinceBoot()
+    if not interactive and not force and self.stats_timestamp and now - self.stats_timestamp < STATS_SYNC_INTERVAL then
+        return
+    end
+    if not interactive then
+        -- Never turn Wi-Fi on or ask for it just for statistics.
+        local connected_ok, connected = pcall(NetworkMgr.isConnected, NetworkMgr)
+        if not connected_ok or not connected then return end
+    end
+    self.stats_timestamp = now
+    -- A bare call is a silent sync in current KOReader; passing true shows its messages.
+    local ok, err = pcall(statistics.onSyncBookStats, statistics, interactive or nil)
+    if not ok then logger.warn("CWASync: could not sync reading statistics:", err) end
 end
 
 function CWASync:getProgress(ensure_networking, interactive)
@@ -1020,6 +1167,7 @@ function CWASync:_onCloseDocument()
     NetworkMgr:goOnlineToRun(function()
         -- Drop the inner willRerunWhenOnline ;).
         self:updateProgress(false, false)
+        self:syncStatistics(false, true)
     end)
 end
 
