@@ -879,9 +879,29 @@ end
 
 function CWASync:getStatistics()
     local statistics = self.ui and self.ui.statistics
-    if statistics and statistics.settings and self.ui.cloudstorage then
+    if statistics and statistics.settings then
         return statistics
     end
+end
+
+-- Ask the statistics plugin to sync. KOReader 2026.07 and later sync through the Cloud storage plugin
+-- and stay quiet when called without arguments; earlier versions use SyncService, whose own sync
+-- method always talks, so a background sync calls SyncService directly in silent mode.
+local function runStatisticsSync(statistics, interactive)
+    local cloudstorage = statistics.ui and statistics.ui.cloudstorage
+    if cloudstorage and cloudstorage.sync then
+        statistics:onSyncBookStats(interactive or nil)
+        return
+    end
+    local has_service, SyncService = pcall(require, "frontend/apps/cloudstorage/syncservice")
+    if interactive or not has_service or type(statistics.onSync) ~= "function" then
+        statistics:onSyncBookStats()
+        return
+    end
+    UIManager:nextTick(function()
+        local ok, err = pcall(SyncService.sync, statistics.settings.sync_server, statsDbPath(), statistics.onSync, true)
+        if not ok then logger.warn("CWASync: reading statistics sync failed:", err) end
+    end)
 end
 
 function CWASync:statsServer()
@@ -930,7 +950,7 @@ function CWASync:toggleStatsSync(touchmenu_instance)
     local statistics = self:getStatistics()
     if not statistics then
         UIManager:show(InfoMessage:new{
-            text = _("The Reading statistics and Cloud storage plugins must be enabled to sync reading statistics."),
+            text = _("Open a book first, with the Reading statistics plugin enabled."),
         })
         return
     end
@@ -973,8 +993,7 @@ function CWASync:syncStatistics(interactive, force)
         if not connected_ok or not connected then return end
     end
     self.stats_timestamp = now
-    -- A bare call is a silent sync in current KOReader; passing true shows its messages.
-    local ok, err = pcall(statistics.onSyncBookStats, statistics, interactive or nil)
+    local ok, err = pcall(runStatisticsSync, statistics, interactive)
     if not ok then logger.warn("CWASync: could not sync reading statistics:", err) end
 end
 
