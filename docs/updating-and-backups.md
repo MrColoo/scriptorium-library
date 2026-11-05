@@ -16,6 +16,9 @@ Update in three steps, from the folder with your `docker-compose.yml`:
    ```
 
 3. Open Scriptorium. It takes a minute or two to start, and every user sees a short *What's new*.
+4. If you use KOReader, check whether the release needs a newer plugin: Scriptorium shows *Update
+   the KOReader plugin* on the home page when one of your devices is behind. See
+   [Keeping the plugin up to date](koreader.md#keeping-the-plugin-up-to-date).
 
 Your books and settings live outside the container, so replacing it does not touch them. Old images
 take up disk space after a few updates. To clear unused ones:

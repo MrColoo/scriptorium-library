@@ -32,6 +32,17 @@ Enter:
   (for example `https://books.example.com`). Do not add `/kosync`: the plugin does that itself.
 - **Username** and **password**: the same ones you use for the web interface.
 
+## Keeping the plugin up to date
+
+New Scriptorium releases sometimes need a newer plugin. Since version 1.2 the plugin tells the server
+its version, so Scriptorium knows when a device is behind: *Update the KOReader plugin* then appears
+next to *Continue reading* on the home page, and *Profile → Devices → KOReader* lists the devices to
+update, with the download button.
+
+To update, download the plugin again, replace the `cwasync.koplugin` folder in `koreader/plugins/`
+and restart KOReader. Your sign-in and settings are kept. Devices that have not synced for two months
+are not counted.
+
 ## Get your books onto the device
 
 The plugin syncs progress, not book files. Get the files in any of these ways, as long as they come

@@ -141,6 +141,10 @@ A full-screen story of your reading year. Tap to move forward, or let it play. I
 finished, hours reading, your first and last book, top authors and genres, your rhythm through the
 year, a line you kept and your reader type. The last slide is a poster you can save and share.
 
+With [reading statistics](#reading-statistics) from KOReader, the story uses the real time you spent
+reading and adds your reading clock (the hours of the day you read most), the book you spent the
+most time with, and your biggest reading day.
+
 <img src="screenshots/year.png" alt="Your year in books: five story slides, from books finished to the shareable poster" width="100%">
 
 Open it from the sidebar. It needs reading data from a connected device or an

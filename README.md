@@ -149,7 +149,7 @@ time. Nothing is locked in.
 
 **Your reading life**
 - **Your year in books**: a full-screen story of your reading year (books, hours, authors, genres,
-  streaks, the line you kept) with a poster to save and share.
+  streaks, your reading clock, the book you lived in, the line you kept) with a poster to save and share.
 - **Highlights**: every passage and note from your Kobo or KOReader on one page, searchable and
   exportable to Markdown for Obsidian, Notion or Readwise.
 - **Reading statistics**: time read, streaks, a calendar of your year and your habits, shared
