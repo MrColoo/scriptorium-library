@@ -139,7 +139,7 @@ time. Nothing is locked in.
 
 **Reading**
 - **Kobo sync**: books, shelves as collections, reading progress and a guided setup on your profile.
-- **KOReader sync** plugin for Kindle, PocketBook, Android and Kobo: progress and highlights.
+- **KOReader sync** plugin for Kindle, PocketBook, Android and Kobo: progress, highlights and reading statistics.
 - **Your devices, your choice**: turn Kobo and KOReader on or off per user; progress shows where it came from.
 - **Continue reading** on the home page, fed by your devices, with time left in each book.
 - **Built-in readers**: EPUB with themes and typography settings, comics, PDF and plain text, plus an
@@ -152,6 +152,8 @@ time. Nothing is locked in.
   streaks, the line you kept) with a poster to save and share.
 - **Highlights**: every passage and note from your Kobo or KOReader on one page, searchable and
   exportable to Markdown for Obsidian, Notion or Readwise.
+- **Reading statistics**: time read, streaks, a calendar of your year and your habits, shared
+  between all your KOReader devices.
 - **Import from Goodreads or The StoryGraph**: finished books with their dates, what you are reading
   and your want-to-read list, after a preview.
 - **More like this** on every book page, ranked from your own library.

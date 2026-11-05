@@ -65,6 +65,35 @@ With KOReader on more than one device, for example a Kobo and a phone, each devi
 kept side by side: a sync from one never removes the other's. Version 1.2 of the plugin tells two
 devices of the same model apart too.
 
+## Reading statistics
+
+KOReader measures how long you read every page. Scriptorium can share those statistics between all
+your KOReader devices and show them on the **Reading statistics** page in the sidebar: time read
+today and this week, your current and best streak, a calendar of your reading year, the hours and
+days you read most, your pace, and the time spent on each book with an estimate of the time left.
+
+Turn it on once on each device: *Tools → Scriptorium Sync → Sync reading statistics*. It needs
+plugin 1.2 or later, and KOReader's own *Reading statistics* and *Cloud storage* plugins, which are
+on by default.
+
+- The plugin points KOReader's statistics sync at your Scriptorium server, using the same sign-in.
+  KOReader merges the statistics of every device on the device itself, so each one ends up with the
+  same totals and streaks, and anything that shows KOReader's statistics on the device sees them too.
+- Statistics sync when you open a book, every ten minutes or so while you read with the network on,
+  and when you close a book. *Sync reading statistics now* does it right away.
+- The first sync merges what each device already had. Nothing is lost.
+- If statistics were already syncing to another cloud folder, the plugin asks before switching.
+- Removing a book from KOReader's statistics removes it on your other devices at their next sync. This
+  is how KOReader's sync works.
+
+<details>
+<summary><b>Setting it up by hand</b></summary>
+
+Without the plugin, or to check the setup: in KOReader, add a WebDAV server under *Cloud storage*
+with the address `https://your-server/kosync/webdav`, your Scriptorium username and password, then
+pick it in *Reading statistics → Settings → Cloud sync*.
+</details>
+
 ## KOReader on a Kobo
 
 If you used Kobo sync before installing KOReader on the same device, press **Remove Kobo** in
@@ -86,6 +115,10 @@ through OAuth have no password until an administrator sets one.
 
 **Progress does not sync for one book.** The file on the device is probably not the library's
 copy. Download it again from the library.
+
+**Reading statistics stay empty.** Check that *Sync reading statistics* is ticked on the device, that
+KOReader's *Reading statistics* plugin is enabled, and press *Sync reading statistics now* with the
+network on. The page shows when the statistics were last updated.
 
 **Nothing syncs.** Make sure KOReader Sync is on under *Settings → Automation → Services*, and that
 the device can reach your server. Away from home you need [remote access](remote-access.md).

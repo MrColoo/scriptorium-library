@@ -30,6 +30,7 @@ From the sidebar you can also open:
 | **Books List** | A table for sorting and editing many books at once. |
 | **Duplicates** | Possible duplicates, if you can edit books. See [Duplicates](automation.md#duplicates). |
 | **Highlights** | Passages and notes from your e-reader. |
+| **Reading statistics** | Reading time, streaks and habits from KOReader. |
 | **Your year in books** | Your reading year as a story. |
 
 *Browse* lists **Categories** (tags), **Series**, **Authors**, **Publishers**, **Languages**,
@@ -119,6 +120,20 @@ sync, grouped by book and chapter, with your notes.
 
 Highlights are private: only you see yours. Requirements for each device are in the [Kobo](kobo.md#highlights)
 and [KOReader](koreader.md#highlights) guides.
+
+## Reading statistics
+
+With KOReader, **Reading statistics** in the sidebar shows how you read, gathered from all your
+devices:
+
+- time read today and this week, and your current and best streak of reading days;
+- a calendar of the last year, shaded by how long you read each day;
+- the last 30 days and the last 12 months as charts, and the hours and days you read most;
+- your habits: total time, pages, sessions, the longest one and your pace;
+- every book with the time you spent on it, how far you are and roughly how long is left.
+
+Turn it on once on each device, as explained in [KOReader](koreader.md#reading-statistics). The
+same statistics then appear in KOReader on all your devices.
 
 ## Your year in books
 

@@ -163,6 +163,12 @@ Browsers only allow it over HTTPS. See [Remote access](remote-access.md).
 
 It needs reading data. Connect a device or [import your history](using-scriptorium.md#import-from-goodreads-or-the-storygraph).
 
+### Reading statistics are empty
+
+They come from KOReader. Turn on *Sync reading statistics* on each device, as described in
+[KOReader](koreader.md#reading-statistics), and make sure KOReader sync is on under *Settings →
+Automation → Services*.
+
 ### Highlights do not appear
 
 Sync your device first. KOReader needs version 1.1 or newer of the plugin. On a Kobo, older

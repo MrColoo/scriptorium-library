@@ -45,7 +45,7 @@ connect your [Kobo](kobo.md) or [KOReader](koreader.md).
 | [Using Scriptorium](using-scriptorium.md) | A tour: search, shelves, smart shelves, readers, highlights, your year in books, import, styles, the app. |
 | [Getting books onto your devices](ereaders.md) | Which method suits your device. Email, Kindle and OPDS. |
 | [Kobo](kobo.md) | Wireless sync of books, shelves, progress and highlights. |
-| [KOReader](koreader.md) | Progress and highlights with the Scriptorium plugin. |
+| [KOReader](koreader.md) | Progress, highlights and reading statistics with the Scriptorium plugin. |
 
 ### Running a server
 
