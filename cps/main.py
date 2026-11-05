@@ -40,6 +40,7 @@ def main():
     from .whats_new import whats_new
     from .annotations import annotations
     from .year_review import year_review
+    from .reading_stats import reading_stats
     from .reading_import import reading_import
     from .pwa import pwa
     try:
@@ -96,6 +97,7 @@ def main():
     app.register_blueprint(whats_new)
     app.register_blueprint(annotations)
     app.register_blueprint(year_review)
+    app.register_blueprint(reading_stats)
     app.register_blueprint(reading_import)
     app.register_blueprint(pwa)
     if kobo_available:

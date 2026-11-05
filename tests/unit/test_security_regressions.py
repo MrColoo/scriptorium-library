@@ -62,6 +62,9 @@ def test_cover_enforcer_does_not_use_a_shell():
 CSRF_EXEMPT_ALLOWED = {
     # Called by e-readers or other CWA processes, which cannot send a CSRF token.
     "cps/kobo.py", "cps/readingservices.py", "cps/gdrive.py", "cps/progress_syncing/protocols/kosync.py",
+    # KOReader's statistics sync (WebDAV): Basic auth only, and PUT/PROPFIND cannot cross origins
+    # without a CORS preflight, which the server never grants.
+    "cps/reading_stats.py",
 }
 
 

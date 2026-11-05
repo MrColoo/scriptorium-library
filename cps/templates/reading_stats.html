@@ -1,0 +1,192 @@
+{% extends "layout.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reading-stats.css') }}">
+{% endblock %}
+{% block body %}
+{%- set s = summary -%}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">{{ _('Reading statistics') }}</h1>
+    <span class="page-subtitle">
+      {%- if s %}{{ _('From KOReader on all your devices. Updated %(date)s at %(time)s.', date=s.synced|formatdate, time=s.synced.strftime('%H:%M')) }}
+      {%- else %}{{ _('Your reading time from KOReader, gathered from all your devices.') }}{% endif -%}
+    </span>
+  </div>
+</div>
+
+{%- if not s %}
+<div class="empty rs-empty">
+  <span class="icon-tile">{{ ui.icon('chart') }}</span>
+  <h2>{{ _('No reading statistics yet') }}</h2>
+  {%- if not kosync_enabled %}
+  <p class="muted">{{ _('KOReader sync is turned off for this library. Ask an administrator to turn it on in Settings → Automation.') }}</p>
+  {%- else %}
+  <p class="muted">{{ _('KOReader measures how long you read. Share it with Scriptorium and every device shows the same time, streaks and progress.') }}</p>
+  <ol class="rs-steps">
+    <li>{{ _('Install version 1.2 or later of the Scriptorium plugin on each device.') }} <a href="{{ url_for('kosync.kosync_plugin_page') }}">{{ _('Download plugin') }}</a></li>
+    <li>{{ _('In KOReader, open Tools → Scriptorium Sync and turn on Sync reading statistics.') }}</li>
+    <li>{{ _('Read a few pages. The statistics appear here after the next sync.') }}</li>
+  </ol>
+  <details class="rs-manual">
+    <summary>{{ _('Set it up by hand instead') }}</summary>
+    <p>{{ _('In KOReader, add a WebDAV server under Cloud storage with this address and your Scriptorium username and password, then choose it in Reading statistics → Settings → Cloud sync:') }}</p>
+    <code class="rs-code">{{ server_url }}/kosync/webdav</code>
+  </details>
+  {%- endif %}
+</div>
+{%- else %}
+
+<section class="rs-tiles" aria-label="{{ _('At a glance') }}">
+  <div class="rs-tile rs-tile--today">
+    <span class="rs-tile-label">{{ _('Today') }}</span>
+    <span class="rs-tile-value">{{ s.today|reading_time }}</span>
+    <span class="rs-tile-note">{% if s.today %}{{ _('Keep it going.') }}{% else %}{{ _('Not opened a book yet today.') }}{% endif %}</span>
+  </div>
+  <div class="rs-tile">
+    <span class="rs-tile-label">{{ _('This week') }}</span>
+    <span class="rs-tile-value">{{ s.week|reading_time }}</span>
+    <span class="rs-tile-note">{{ _('This month: %(time)s', time=s.month|reading_time) }}</span>
+  </div>
+  <div class="rs-tile rs-tile--streak{% if s.current_streak %} is-active{% endif %}">
+    <span class="rs-tile-label">{{ ui.icon('flame') }} {{ _('Current streak') }}</span>
+    <span class="rs-tile-value">{{ streak_text }}</span>
+    <span class="rs-tile-note">{% if s.current_streak and not s.today %}{{ _('Read today to keep it.') }}{% elif s.current_streak %}{{ _('Reading every day.') }}{% else %}{{ _('Start a new one today.') }}{% endif %}</span>
+  </div>
+  <div class="rs-tile">
+    <span class="rs-tile-label">{{ _('Best streak') }}</span>
+    <span class="rs-tile-value">{{ best_text }}</span>
+    <span class="rs-tile-note">{{ _('This year: %(time)s', time=s.year|reading_time) }}</span>
+  </div>
+</section>
+
+<section class="card rs-card" aria-labelledby="rs-calendar-h">
+  <header class="rs-card-header">
+    <h2 id="rs-calendar-h">{{ _('Your reading year') }}</h2>
+    <span class="muted small">{{ ngettext('%(num)s reading day', '%(num)s reading days', s.reading_days, num=s.reading_days) }}{% if s.first_day %} · {{ _('since %(date)s', date=s.first_day|formatdate) }}{% endif %}</span>
+  </header>
+  <div class="rs-heatmap-scroll">
+    <div class="rs-heatmap" role="img" aria-label="{{ _('Reading time per day over the last year') }}">
+      <div class="rs-heatmap-months" aria-hidden="true">
+        {%- for index, label in month_marks %}<span style="grid-column: {{ index + 1 }}">{{ label }}</span>{% endfor %}
+      </div>
+      <div class="rs-heatmap-days" aria-hidden="true">
+        <span style="grid-row: 1">{{ weekday_labels[0] }}</span><span style="grid-row: 3">{{ weekday_labels[2] }}</span><span style="grid-row: 5">{{ weekday_labels[4] }}</span>
+      </div>
+      <div class="rs-heatmap-grid">
+        {%- for week in s.weeks %}{% for day in week %}
+        <span class="rs-day" data-level="{{ day.level }}"{% if day.future %} data-future{% endif %}
+              title="{{ day.date|formatdate }}{% if not day.future %}: {{ day.seconds|reading_time if day.seconds else _('no reading') }}{% endif %}"></span>
+        {%- endfor %}{% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="rs-legend" aria-hidden="true">
+    <span>{{ _('Less') }}</span>
+    {%- for level in range(5) %}<span class="rs-day" data-level="{{ level }}"></span>{% endfor %}
+    <span>{{ _('More') }}</span>
+  </div>
+</section>
+
+<div class="rs-row">
+  <section class="card rs-card" aria-labelledby="rs-30-h">
+    <header class="rs-card-header">
+      <h2 id="rs-30-h">{{ _('Last 30 days') }}</h2>
+      <span class="muted small">{{ _('Average %(time)s a day', time=average_30|reading_time) }}</span>
+    </header>
+    <div class="rs-bars rs-bars--days" role="img" aria-label="{{ _('Reading time per day over the last 30 days') }}">
+      {%- if day_average %}<span class="rs-average" style="bottom: {{ day_average }}px"></span>{% endif %}
+      {%- for day in s.last_30 %}
+      <span class="rs-bar{% if loop.last %} is-today{% endif %}" style="height: {{ [day_heights[loop.index0], 2 if day.seconds else 0]|max }}px" title="{{ day.date|formatdate }}: {{ day.seconds|reading_time if day.seconds else _('no reading') }}"></span>
+      {%- endfor %}
+    </div>
+    <div class="rs-axis" aria-hidden="true"><span>{{ s.last_30[0].date|formatdate }}</span><span>{{ _('Today') }}</span></div>
+  </section>
+
+  <section class="card rs-card" aria-labelledby="rs-12-h">
+    <header class="rs-card-header">
+      <h2 id="rs-12-h">{{ _('Last 12 months') }}</h2>
+      <span class="muted small">{{ _('This year: %(time)s', time=s.year|reading_time) }}</span>
+    </header>
+    <div class="rs-bars rs-bars--months" role="img" aria-label="{{ _('Reading time per month over the last year') }}">
+      {%- for month in s.months %}
+      <span class="rs-bar{% if loop.last %} is-today{% endif %}" style="height: {{ [month_heights[loop.index0], 2 if month.seconds else 0]|max }}px" title="{{ month_labels[loop.index0] }}: {{ month.seconds|reading_time if month.seconds else _('no reading') }}"></span>
+      {%- endfor %}
+    </div>
+    <div class="rs-axis rs-axis--months" aria-hidden="true">{% for label in month_labels %}<span>{{ label }}</span>{% endfor %}</div>
+  </section>
+</div>
+
+<div class="rs-row">
+  <section class="card rs-card" aria-labelledby="rs-hours-h">
+    <header class="rs-card-header">
+      <h2 id="rs-hours-h">{{ _('Time of day') }}</h2>
+      {%- if busiest_hour is not none %}<span class="muted small">{{ _('You read most around %(hour)s', hour='%02d:00'|format(busiest_hour)) }}</span>{% endif %}
+    </header>
+    <div class="rs-bars rs-bars--small" role="img" aria-label="{{ _('Reading time by hour of the day') }}">
+      {%- for height in hour_heights %}
+      <span class="rs-bar{% if loop.index0 == busiest_hour %} is-today{% endif %}" style="height: {{ [height, 2 if s.hours[loop.index0] else 0]|max }}px" title="{{ '%02d:00'|format(loop.index0) }}: {{ s.hours[loop.index0]|reading_time }}"></span>
+      {%- endfor %}
+    </div>
+    <div class="rs-axis rs-axis--hours" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>
+  </section>
+
+  <section class="card rs-card" aria-labelledby="rs-week-h">
+    <header class="rs-card-header">
+      <h2 id="rs-week-h">{{ _('Days of the week') }}</h2>
+      {%- if busiest_weekday %}<span class="muted small">{{ _('Your favourite day: %(day)s', day=busiest_weekday) }}</span>{% endif %}
+    </header>
+    {%- set top_weekday = s.weekdays.index(s.weekdays|max) %}
+    <div class="rs-bars rs-bars--small rs-bars--week" role="img" aria-label="{{ _('Reading time by day of the week') }}">
+      {%- for height in weekday_heights %}
+      <span class="rs-bar{% if loop.index0 == top_weekday and s.weekdays[loop.index0] %} is-today{% endif %}" style="height: {{ [height, 2 if s.weekdays[loop.index0] else 0]|max }}px" title="{{ weekday_labels[loop.index0] }}: {{ s.weekdays[loop.index0]|reading_time }}"></span>
+      {%- endfor %}
+    </div>
+    <div class="rs-axis rs-axis--week" aria-hidden="true">{% for label in weekday_labels %}<span>{{ label }}</span>{% endfor %}</div>
+  </section>
+</div>
+
+<section class="card rs-card" aria-labelledby="rs-habits-h">
+  <header class="rs-card-header"><h2 id="rs-habits-h">{{ _('Your habits') }}</h2></header>
+  <div class="stat-grid">
+    <div class="stat"><span class="stat-label">{{ _('Total reading time') }}</span><span class="stat-value">{{ s.total_seconds|reading_time }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Books') }}</span><span class="stat-value">{{ s.books }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Pages read') }}</span><span class="stat-value">{{ s.pages }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('On a reading day') }}</span><span class="stat-value">{{ s.average_day|reading_time }}</span><span class="stat-note">{{ _('on average') }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Reading sessions') }}</span><span class="stat-value">{{ s.sessions }}</span><span class="stat-note">{{ _('average %(time)s', time=s.average_session|reading_time) }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Longest session') }}</span><span class="stat-value">{{ s.longest_session|reading_time }}</span></div>
+    <div class="stat"><span class="stat-label">{{ _('Pace') }}</span><span class="stat-value">{{ _('%(pages)s pages/h', pages=s.pages_per_hour|round|int) }}</span><span class="stat-note">{{ _('%(seconds)s s per page', seconds=s.seconds_per_page|round|int) }}</span></div>
+  </div>
+</section>
+
+<section class="card rs-card" aria-labelledby="rs-books-h">
+  <header class="rs-card-header">
+    <h2 id="rs-books-h">{{ _('Books') }}</h2>
+    <span class="muted small">{{ _('Most recently read first') }}</span>
+  </header>
+  <ol class="rs-books">
+    {%- for item in s.book_list[:100] %}
+    {%- set book = library.get(item.id) %}
+    <li class="rs-book">
+      {%- if book %}
+      <a class="cover" href="{{ url_for('web.show_book', book_id=book.id) }}" tabindex="-1" aria-hidden="true">{{ ui.cover_img(book, sizes='44px', alt='') }}</a>
+      {%- else %}
+      <span class="rs-cover-placeholder" aria-hidden="true">{{ item.title[:1] }}</span>
+      {%- endif %}
+      <div class="rs-book-main">
+        <h3>{% if book %}<a href="{{ url_for('web.show_book', book_id=book.id) }}">{{ book.title }}</a>{% else %}{{ item.title }}{% endif %}</h3>
+        <span class="muted small">{{ book.authors|map(attribute='name')|join(', ') if book else item.authors }}</span>
+        {%- if item.progress is not none %}
+        <div class="rs-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ (item.progress * 100)|round|int }}" aria-label="{{ _('Pages read') }}"><span style="width: {{ (item.progress * 100)|round(1) }}%"></span></div>
+        <span class="faint small">{{ _('%(read)s of %(total)s pages', read=item.pages, total=item.total_pages) }}{% if item.left %} · {{ _('about %(time)s left', time=item.left|reading_time) }}{% elif item.progress >= 0.99 %} · {{ _('finished') }}{% endif %}</span>
+        {%- endif %}
+      </div>
+      <div class="rs-book-side">
+        <span class="rs-book-time">{{ item.seconds|reading_time }}</span>
+        <span class="faint small">{{ item.last|formatdate }}</span>
+      </div>
+    </li>
+    {%- endfor %}
+  </ol>
+</section>
+{%- endif %}
+{% endblock %}
