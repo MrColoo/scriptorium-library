@@ -1,6 +1,38 @@
 {
   "releases": [
     {
+      "version": "v1.2.0",
+      "date": "2026-11-05",
+      "title": "Every page, on every device",
+      "highlights": [
+        {
+          "icon": "chart",
+          "title": "Reading statistics",
+          "text": "Reading time, streaks, a calendar of your year and your habits, shared between all your KOReader devices."
+        },
+        {
+          "icon": "sparkles",
+          "title": "A richer year in books",
+          "text": "Real reading time from KOReader, your reading clock, the book you lived in and your biggest reading day."
+        },
+        {
+          "icon": "highlight",
+          "title": "Highlights from every device",
+          "text": "KOReader on a Kobo and on a phone keep their highlights side by side: a sync from one no longer removes the other's."
+        },
+        {
+          "icon": "download",
+          "title": "Update the KOReader plugin",
+          "text": "Version 1.2 brings statistics sync and works with menus such as ZenOS. Download it again from Profile → Devices; Scriptorium reminds you until every device has it."
+        }
+      ],
+      "quote": {
+        "text": "As if you could kill time without injuring eternity.",
+        "author": "Henry David Thoreau",
+        "book": "Walden"
+      }
+    },
+    {
       "version": "v1.1.0",
       "date": "2026-10-28",
       "title": "Your reading life, remembered",
