@@ -25,7 +25,7 @@ end
 local CWASync = WidgetContainer:extend{
     name = "cwasync",
     title = _("Login to Scriptorium Server"),
-    version = "1.1.0",  -- Plugin version
+    version = "1.2.0",  -- Plugin version
 
     push_timestamp = nil,
     pull_timestamp = nil,
@@ -211,15 +211,10 @@ function CWASync:addToMainMenu(menu_items)
             {
                 text = _("Set Scriptorium Server"),
                 keep_menu_open = true,
-                tap_input_func = function()
-                    return {
-                        -- @translators Server address defined by user for progress sync.
-                        title = _("Scriptorium Server Address"),
-                        input = self.settings.server or "https://",
-                        callback = function(input)
-                            self:setServer(input)
-                        end,
-                    }
+                -- A plain callback rather than tap_input_func: menus that replace KOReader's own
+                -- (such as ZenOS) ignore tap_input_func, and the item then did nothing.
+                callback = function()
+                    self:editServer()
                 end,
             },
             {
@@ -228,15 +223,11 @@ function CWASync:addToMainMenu(menu_items)
                         or _("Login")
                 end,
                 keep_menu_open = true,
-                callback_func = function()
+                callback = function(menu)
                     if self.settings.password then
-                        return function(menu)
-                            self:logout(menu)
-                        end
+                        self:logout(menu)
                     else
-                        return function(menu)
-                            self:login(menu)
-                        end
+                        self:login(menu)
                     end
                 end,
                 separator = true,
@@ -419,7 +410,42 @@ function CWASync:setPagesBeforeUpdate(pages_before_update)
     self.settings.pages_before_update = pages_before_update > 0 and pages_before_update or nil
 end
 
+function CWASync:editServer()
+    local InputDialog = require("ui/widget/inputdialog")
+    local dialog
+    dialog = InputDialog:new{
+        -- @translators Server address defined by user for progress sync.
+        title = _("Scriptorium Server Address"),
+        input = self.settings.server or "https://",
+        input_hint = "https://books.example.com",
+        buttons = {
+            {
+                {
+                    text = _("Cancel"),
+                    id = "close",
+                    callback = function()
+                        UIManager:close(dialog)
+                    end,
+                },
+                {
+                    text = _("Save"),
+                    is_enter_default = true,
+                    callback = function()
+                        self:setServer(dialog:getInputText())
+                        UIManager:close(dialog)
+                    end,
+                },
+            },
+        },
+    }
+    UIManager:show(dialog)
+    dialog:onShowKeyboard()
+end
+
 function CWASync:setServer(server)
+    -- Accept the address as people paste it: no spaces, no trailing slash, and without /kosync,
+    -- which the plugin adds itself.
+    server = util.trim(server or ""):gsub("/+$", ""):gsub("/kosync$", "")
     logger.dbg("CWASync: Setting server to:", server)
     self.settings.server = server ~= "" and server or nil
 end
@@ -796,6 +822,7 @@ function CWASync:pushAnnotations(doc_digest)
         doc_digest,
         annotations,
         Device.model,
+        self.device_id,
         function(ok, body)
             logger.dbg("CWASync: [Push] highlights:", #annotations, "ok:", ok, "body:", body)
             if ok then

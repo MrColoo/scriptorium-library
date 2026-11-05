@@ -49,12 +49,14 @@
             "required_params": [
                 "document",
                 "annotations",
-                "device"
+                "device",
+                "device_id"
             ],
             "payload": [
                 "document",
                 "annotations",
-                "device"
+                "device",
+                "device_id"
             ],
             "expected_status": [
                 200,

@@ -172,6 +172,7 @@ function CWASyncClient:update_annotations(
         document,
         annotations,
         device,
+        device_id,
         callback)
     self.client:reset_middlewares()
     self.client:enable("Format.JSON")
@@ -187,6 +188,7 @@ function CWASyncClient:update_annotations(
                 document = document,
                 annotations = annotations,
                 device = device,
+                device_id = device_id,
             })
         end)
         if ok then
