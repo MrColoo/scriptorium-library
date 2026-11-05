@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 22:46+0100\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-11-05 10:26+0100\n"
 "PO-Revision-Date: 2026-02-16 03:01+0100\n"
 "Last-Translator: Kónya Márton <konyamarci52@proton.me>\n"
 "Language-Team: \n"
@@ -804,12 +804,12 @@ msgstr ""
 "Visszaállítás sikeres. Biztonsági mentések és naplófájlok elkészültek: "
 "%(dir)s. Minden könyvhöz kapcsolódó adat visszaállítva."
 
-#: cps/annotations.py:238
+#: cps/annotations.py:270
 #, fuzzy
 msgid "Note"
 msgstr "Megjegyzés:"
 
-#: cps/annotations.py:251 cps/templates/highlights.html:6
+#: cps/annotations.py:283 cps/templates/highlights.html:6
 #: cps/templates/layout.html:73 cps/templates/year.html:225
 #, fuzzy
 msgid "Highlights"
@@ -870,7 +870,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:174
+#: cps/templates/layout.html:175
 #, fuzzy
 msgid "Customize"
 msgstr "Egyedi szűrő"
@@ -1322,7 +1322,7 @@ msgstr "Hiányzó vagy érvénytelen könyv azonosító a feltöltendő formátu
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr "Nem tölthető fel a formátum: A könyv már nem létezik a könyvtárban"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:366
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:367
 msgid "Upload done, processing, please wait..."
 msgstr "Feltöltés kész, feldolgozás alatt, kérlek várj..."
 
@@ -1935,9 +1935,41 @@ msgid ""
 "“%(shelf)s”."
 msgstr ""
 
+#: cps/reading_stats.py:332
+#, fuzzy
+msgid "Unknown book"
+msgstr "Ismeretlen"
+
+#: cps/reading_stats.py:393
+msgid "< 1 min"
+msgstr ""
+
+#: cps/reading_stats.py:396
+#, fuzzy, python-format
+msgid "%(minutes)s min"
+msgstr "Késleltetés (percben):"
+
+#: cps/reading_stats.py:397
+#, python-format
+msgid "%(hours)s h %(minutes)02d min"
+msgstr ""
+
+#: cps/reading_stats.py:451 cps/reading_stats.py:452
+#, python-format
+msgid "%(num)s day"
+msgid_plural "%(num)s days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cps/reading_stats.py:454 cps/templates/layout.html:74
+#: cps/templates/reading_stats.html:9
+#, fuzzy
+msgid "Reading statistics"
+msgstr "Felhasználó beállítások"
+
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:186
-#: cps/templates/layout.html:244 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:187
+#: cps/templates/layout.html:245 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2267
 msgid "Login"
 msgstr "Belépés"
@@ -1961,7 +1993,8 @@ msgid ""
 msgstr ""
 
 #: cps/render_template.py:75 cps/templates/appearance.html:7
-#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:14
+#: cps/templates/cwa_stats_tabs.html:177 cps/templates/reading_stats.html:152
+#: cps/templates/reading_stats.html:163 cps/templates/stats.html:14
 #: cps/templates/year.html:222
 msgid "Books"
 msgstr "Könyvek"
@@ -2120,7 +2153,7 @@ msgstr ""
 
 #: cps/search.py:54 cps/search.py:441 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/highlights.html:19
-#: cps/templates/index.xml:12 cps/templates/layout.html:234
+#: cps/templates/index.xml:12 cps/templates/layout.html:235
 #: cps/templates/search.html:5 cps/templates/search.html:6
 #: cps/templates/search_form.html:121
 msgid "Search"
@@ -2155,7 +2188,7 @@ msgstr ""
 "Hiba az egyéni oszlopok keresése során. Kérjük, indítsa újra a Scriptorium "
 "alkalmazást"
 
-#: cps/search.py:385 cps/search.py:417 cps/templates/layout.html:144
+#: cps/search.py:385 cps/search.py:417 cps/templates/layout.html:145
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2276,7 +2309,7 @@ msgid "Error opening shelf. Shelf does not exist or is not accessible"
 msgstr "Hiba a polc megnyitásakor. A polc nem létezik vagy nem elérhető"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:128 cps/templates/tasks.html:5
+#: cps/templates/layout.html:129 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Feladatok"
 
@@ -2444,7 +2477,7 @@ msgstr "Polc név túl hosszú (max. 100 karakter)"
 msgid "Error creating shelf"
 msgstr "Hiba polc létrehozásakor"
 
-#: cps/templates/layout.html:113 cps/web.py:1226
+#: cps/templates/layout.html:114 cps/web.py:1226
 msgid "Create Magic Shelf"
 msgstr "Varázspolc létrehozása"
 
@@ -2556,7 +2589,7 @@ msgstr "Siker! A könyv a megadott e-mail cím(ek)re hamarosan elküldve!"
 msgid "Please wait one minute to register next user"
 msgstr "Kérjük várjon egy percet a következő felhasználó létrehozásával"
 
-#: cps/templates/layout.html:188 cps/templates/login.html:77
+#: cps/templates/layout.html:189 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2146 cps/web.py:2150
 #: cps/web.py:2155 cps/web.py:2159 cps/web.py:2165 cps/web.py:2190
 #: cps/web.py:2194 cps/web.py:2207 cps/web.py:2210
@@ -2705,7 +2738,7 @@ msgstr "Már létezik felhasználó ehhez az e-mail címhez."
 msgid "Invalid book ID."
 msgstr "Érvénytelen könyv azonosító."
 
-#: cps/templates/layout.html:176 cps/templates/stats.html:9
+#: cps/templates/layout.html:177 cps/templates/stats.html:9
 #: cps/templates/whats_new.html:6 cps/whats_new.py:168
 msgid "What's new"
 msgstr ""
@@ -2900,8 +2933,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "Borító bélyegképek gyorsítótárának törlése"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:157
-#: cps/templates/layout.html:158 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:158
+#: cps/templates/layout.html:159 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Feltöltés"
 
@@ -3006,11 +3039,11 @@ msgstr "Engedélyezett oszlop értékek"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:300
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:206
-#: cps/templates/layout.html:209 cps/templates/layout.html:212
-#: cps/templates/layout.html:215 cps/templates/layout.html:218
-#: cps/templates/layout.html:261 cps/templates/layout.html:295
-#: cps/templates/layout.html:334 cps/templates/layout.html:362
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:207
+#: cps/templates/layout.html:210 cps/templates/layout.html:213
+#: cps/templates/layout.html:216 cps/templates/layout.html:219
+#: cps/templates/layout.html:262 cps/templates/layout.html:296
+#: cps/templates/layout.html:335 cps/templates/layout.html:363
 #: cps/templates/read.html:58 cps/templates/year.html:42
 msgid "Close"
 msgstr "Bezárás"
@@ -3049,7 +3082,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:326
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:270
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:271
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/reading_import.html:82
 #: cps/templates/schedule_edit.html:34 cps/templates/shelf_edit.html:32
@@ -3108,7 +3141,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:131
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:132
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -3350,7 +3383,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Hardcover automatikus azonosító-lekérés futtatása"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:126 cps/templates/layout.html:181
+#: cps/templates/layout.html:127 cps/templates/layout.html:182
 msgid "System"
 msgstr ""
 
@@ -3386,17 +3419,17 @@ msgstr "Leállítás"
 msgid "Are you sure you want to restart?"
 msgstr "Valóban újra akarja indítani a Scriptoriumet?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:369
+#: cps/templates/admin.html:175 cps/templates/layout.html:370
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:249 cps/templates/layout.html:92
+#: cps/templates/detail.html:249 cps/templates/layout.html:93
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Polcok"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:143
+#: cps/templates/appearance.html:14 cps/templates/layout.html:144
 #, fuzzy
 msgid "Search titles, authors, series…"
 msgstr "Keresés cím/író alapján"
@@ -3514,7 +3547,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:170 cps/templates/layout.html:241
+#: cps/templates/layout.html:171 cps/templates/layout.html:242
 #: cps/templates/reading_import.html:6
 #, fuzzy
 msgid "Profile"
@@ -3595,16 +3628,16 @@ msgstr "Értékelések"
 msgid "Preview"
 msgstr "Előnézet"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:180
+#: cps/templates/appearance.html:156 cps/templates/layout.html:181
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:182
+#: cps/templates/appearance.html:157 cps/templates/layout.html:183
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Világos"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:183
+#: cps/templates/appearance.html:158 cps/templates/layout.html:184
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Sötét"
@@ -3968,7 +4001,7 @@ msgid "Add to shelf"
 msgstr "Hozzáadás polchoz"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:54
-#: cps/templates/layout.html:246
+#: cps/templates/layout.html:247 cps/templates/reading_stats.html:86
 #, fuzzy
 msgid "More"
 msgstr "Több tőle:"
@@ -4233,7 +4266,7 @@ msgid "Ok"
 msgstr "Ok"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:364 cps/templates/login.html:35
+#: cps/templates/layout.html:365 cps/templates/login.html:35
 #: cps/templates/user_edit.html:51 cps/templates/user_edit.html:62
 #, fuzzy
 msgid "Show password"
@@ -5647,7 +5680,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:71
-#: cps/templates/layout.html:59 cps/templates/layout.html:233
+#: cps/templates/layout.html:59 cps/templates/layout.html:234
 #, fuzzy
 msgid "Library"
 msgstr "Könyvtárban"
@@ -6023,7 +6056,7 @@ msgstr "Olvasás böngészőben"
 msgid "Listen"
 msgstr "Lista"
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:94
+#: cps/templates/detail.html:117 cps/templates/layout.html:95
 #: cps/templates/user_edit.html:216
 msgid "Create Shelf"
 msgstr "Polc készítése"
@@ -6101,7 +6134,7 @@ msgid_plural "%(num)s highlights"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cps/templates/detail.html:210 cps/templates/layout.html:365
+#: cps/templates/detail.html:210 cps/templates/layout.html:366
 #, fuzzy
 msgid "Show more"
 msgstr "Olvasatlan könyvek megjelenítése"
@@ -6478,7 +6511,7 @@ msgid "(Magic)"
 msgstr "(Varázs)"
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:101
+#: cps/templates/layout.html:102
 msgid "(Public)"
 msgstr "(Nyilvános)"
 
@@ -6516,7 +6549,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:368
+#: cps/templates/grid.html:21 cps/templates/layout.html:369
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6834,7 +6867,7 @@ msgstr ""
 msgid "Server URL"
 msgstr "Szerver port"
 
-#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:322
+#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:323
 #: cps/templates/remote_login.html:15 cps/templates/user_edit.html:160
 #: cps/templates/user_edit.html:290
 #, fuzzy
@@ -6886,210 +6919,210 @@ msgstr ""
 msgid "Library navigation"
 msgstr "A Calibre könyvár statisztikái"
 
-#: cps/templates/layout.html:74
+#: cps/templates/layout.html:75
 #, fuzzy
 msgid "Your year in books"
 msgstr "Keresés"
 
-#: cps/templates/layout.html:82
+#: cps/templates/layout.html:83
 msgid "Browse"
 msgstr "Böngészés"
 
-#: cps/templates/layout.html:105
+#: cps/templates/layout.html:106
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:111 cps/templates/user_edit.html:427
+#: cps/templates/layout.html:112 cps/templates/user_edit.html:427
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Polcok"
 
-#: cps/templates/layout.html:139
+#: cps/templates/layout.html:140
 msgid "Toggle Navigation"
 msgstr "Navigáció átkapcsolása"
 
-#: cps/templates/layout.html:142
+#: cps/templates/layout.html:143
 msgid "Search Library"
 msgstr "Keresés könyvtárban"
 
-#: cps/templates/layout.html:144
+#: cps/templates/layout.html:145
 #, fuzzy
 msgid "Advanced"
 msgstr "Részletes keresés"
 
-#: cps/templates/layout.html:149
+#: cps/templates/layout.html:150
 #, python-format
 msgid "Update available: %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:154
+#: cps/templates/layout.html:155
 msgid "Refresh Library"
 msgstr "Könyvtár frissítése"
 
-#: cps/templates/layout.html:164 cps/templates/user_edit.html:24
+#: cps/templates/layout.html:165 cps/templates/user_edit.html:24
 #: cps/templates/user_edit.html:37
 msgid "Account"
 msgstr "Felhasználói fiók"
 
-#: cps/templates/layout.html:172 cps/templates/user_edit.html:25
+#: cps/templates/layout.html:173 cps/templates/user_edit.html:25
 #, fuzzy
 msgid "Devices"
 msgstr "E-mail szolgáltatás"
 
-#: cps/templates/layout.html:175
+#: cps/templates/layout.html:176
 #, fuzzy
 msgid "Install app"
 msgstr "Telepített verzió"
 
-#: cps/templates/layout.html:177 cps/templates/stats.html:5
+#: cps/templates/layout.html:178 cps/templates/stats.html:5
 msgid "About"
 msgstr "Névjegy"
 
-#: cps/templates/layout.html:191
+#: cps/templates/layout.html:192
 msgid "Logout"
 msgstr "Kilépés"
 
-#: cps/templates/layout.html:211
+#: cps/templates/layout.html:212
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Ismétlődő könyvek"
 
-#: cps/templates/layout.html:214
+#: cps/templates/layout.html:215
 msgid "Contribute here!"
 msgstr "Segíts te is!"
 
-#: cps/templates/layout.html:232
+#: cps/templates/layout.html:233
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Alapvető beállítások"
 
-#: cps/templates/layout.html:237
+#: cps/templates/layout.html:238
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:267
+#: cps/templates/layout.html:268
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Biztosan?"
 
-#: cps/templates/layout.html:271 cps/templates/layout.html:362
+#: cps/templates/layout.html:272 cps/templates/layout.html:363
 #, fuzzy
 msgid "Confirm"
 msgstr "Konfiguráció"
 
-#: cps/templates/layout.html:277
+#: cps/templates/layout.html:278
 msgid "Uploading..."
 msgstr "Feltöltés..."
 
-#: cps/templates/layout.html:280
+#: cps/templates/layout.html:281
 msgid "Please do not refresh the page"
 msgstr "Kérjük ne frissítse az oldalt!"
 
-#: cps/templates/layout.html:283
+#: cps/templates/layout.html:284
 msgid "Drop books to add them to the library"
 msgstr ""
 
-#: cps/templates/layout.html:293
+#: cps/templates/layout.html:294
 #, fuzzy
 msgid "Scriptorium update"
 msgstr "Scriptorium napló: "
 
-#: cps/templates/layout.html:298
+#: cps/templates/layout.html:299
 #, fuzzy
 msgid "New version available:"
 msgstr "Megjelenési információ nem érhető el"
 
-#: cps/templates/layout.html:309
+#: cps/templates/layout.html:310
 msgid ""
 "A new version of Scriptorium is available, with the latest features and "
 "fixes."
 msgstr ""
 
-#: cps/templates/layout.html:320
+#: cps/templates/layout.html:321
 msgid ""
 "To update, back up your config folder, then run this next to your docker-"
 "compose.yml:"
 msgstr ""
 
-#: cps/templates/layout.html:325
+#: cps/templates/layout.html:326
 msgid "Check the release notes for breaking changes before updating."
 msgstr ""
 
-#: cps/templates/layout.html:326
+#: cps/templates/layout.html:327
 msgid "Release notes"
 msgstr ""
 
-#: cps/templates/layout.html:330
+#: cps/templates/layout.html:331
 msgid "Automatically check for new updates"
 msgstr ""
 
-#: cps/templates/layout.html:343
+#: cps/templates/layout.html:344
 #, python-format
 msgid "What's new in %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:355
+#: cps/templates/layout.html:356
 msgid "All release notes"
 msgstr ""
 
-#: cps/templates/layout.html:356
+#: cps/templates/layout.html:357
 msgid "Got it"
 msgstr ""
 
-#: cps/templates/layout.html:362
+#: cps/templates/layout.html:363
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "UUID kimásolva vágólapra"
 
-#: cps/templates/layout.html:363
+#: cps/templates/layout.html:364
 msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
-#: cps/templates/layout.html:364
+#: cps/templates/layout.html:365
 #, fuzzy
 msgid "Hide password"
 msgstr "Jelszó"
 
-#: cps/templates/layout.html:365
+#: cps/templates/layout.html:366
 #, fuzzy
 msgid "Show less"
 msgstr "Minden megjelenítése"
 
-#: cps/templates/layout.html:365 cps/templates/magic_shelf_edit.html:88
+#: cps/templates/layout.html:366 cps/templates/magic_shelf_edit.html:88
 msgid "Something went wrong, please try again"
 msgstr ""
 
-#: cps/templates/layout.html:366
+#: cps/templates/layout.html:367
 #, fuzzy
 msgid "Upload failed"
 msgstr "A frissítés nem sikerült:"
 
-#: cps/templates/layout.html:367
+#: cps/templates/layout.html:368
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "Legjobb %(count)s"
 
-#: cps/templates/layout.html:368 cps/templates/search_form.html:7
+#: cps/templates/layout.html:369 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "Bármelyik"
 
-#: cps/templates/layout.html:368
+#: cps/templates/layout.html:369
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Válasszon e-mail címeket:"
 
-#: cps/templates/layout.html:369
+#: cps/templates/layout.html:370
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:370
+#: cps/templates/layout.html:371
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "Ismétlődők keresése befejeződött: %(count)s csoport"
 
-#: cps/templates/layout.html:370
+#: cps/templates/layout.html:371
 #, fuzzy
 msgid "Review"
 msgstr "Előnézet"
@@ -7921,6 +7954,267 @@ msgid_plural "Import %(num)s changes"
 msgstr[0] ""
 msgstr[1] ""
 
+#: cps/templates/reading_stats.html:11
+#, python-format
+msgid "From KOReader on all your devices. Updated %(date)s at %(time)s."
+msgstr ""
+
+#: cps/templates/reading_stats.html:12
+msgid "Your reading time from KOReader, gathered from all your devices."
+msgstr ""
+
+#: cps/templates/reading_stats.html:20
+#, fuzzy
+msgid "No reading statistics yet"
+msgstr "Nincsenek elutasítható függőben lévő találatok"
+
+#: cps/templates/reading_stats.html:22
+msgid ""
+"KOReader sync is turned off for this library. Ask an administrator to turn "
+"it on in Settings → Automation."
+msgstr ""
+
+#: cps/templates/reading_stats.html:24
+msgid ""
+"KOReader measures how long you read. Share it with Scriptorium and every "
+"device shows the same time, streaks and progress."
+msgstr ""
+
+#: cps/templates/reading_stats.html:26
+msgid "Install version 1.2 or later of the Scriptorium plugin on each device."
+msgstr ""
+
+#: cps/templates/reading_stats.html:26 cps/templates/user_edit.html:280
+#, fuzzy
+msgid "Download plugin"
+msgstr "Napló letöltése"
+
+#: cps/templates/reading_stats.html:27
+msgid ""
+"In KOReader, open Tools → Scriptorium Sync and turn on Sync reading "
+"statistics."
+msgstr ""
+
+#: cps/templates/reading_stats.html:28
+msgid "Read a few pages. The statistics appear here after the next sync."
+msgstr ""
+
+#: cps/templates/reading_stats.html:31
+msgid "Set it up by hand instead"
+msgstr ""
+
+#: cps/templates/reading_stats.html:32
+msgid ""
+"In KOReader, add a WebDAV server under Cloud storage with this address and "
+"your Scriptorium username and password, then choose it in Reading statistics "
+"→ Settings → Cloud sync:"
+msgstr ""
+
+#: cps/templates/reading_stats.html:39
+msgid "At a glance"
+msgstr ""
+
+#: cps/templates/reading_stats.html:41 cps/templates/reading_stats.html:102
+msgid "Today"
+msgstr ""
+
+#: cps/templates/reading_stats.html:43
+msgid "Keep it going."
+msgstr ""
+
+#: cps/templates/reading_stats.html:43
+msgid "Not opened a book yet today."
+msgstr ""
+
+#: cps/templates/reading_stats.html:46
+msgid "This week"
+msgstr ""
+
+#: cps/templates/reading_stats.html:48
+#, python-format
+msgid "This month: %(time)s"
+msgstr ""
+
+#: cps/templates/reading_stats.html:51
+#, fuzzy
+msgid "Current streak"
+msgstr "Jelenlegi verzió"
+
+#: cps/templates/reading_stats.html:53
+msgid "Read today to keep it."
+msgstr ""
+
+#: cps/templates/reading_stats.html:53
+#, fuzzy
+msgid "Reading every day."
+msgstr "KOReader állapot"
+
+#: cps/templates/reading_stats.html:53
+msgid "Start a new one today."
+msgstr ""
+
+#: cps/templates/reading_stats.html:56
+#, fuzzy
+msgid "Best streak"
+msgstr "Formátum kiválasztása:"
+
+#: cps/templates/reading_stats.html:58 cps/templates/reading_stats.html:108
+#, fuzzy, python-format
+msgid "This year: %(time)s"
+msgstr "Kiadó: %(name)s"
+
+#: cps/templates/reading_stats.html:64
+#, fuzzy
+msgid "Your reading year"
+msgstr "Segíts te is!"
+
+#: cps/templates/reading_stats.html:65
+#, fuzzy, python-format
+msgid "%(num)s reading day"
+msgid_plural "%(num)s reading days"
+msgstr[0] "Segíts te is!"
+msgstr[1] "Segíts te is!"
+
+#: cps/templates/reading_stats.html:65
+#, python-format
+msgid "since %(date)s"
+msgstr ""
+
+#: cps/templates/reading_stats.html:68
+msgid "Reading time per day over the last year"
+msgstr ""
+
+#: cps/templates/reading_stats.html:78 cps/templates/reading_stats.html:99
+#: cps/templates/reading_stats.html:112
+#, fuzzy
+msgid "no reading"
+msgstr "Segíts te is!"
+
+#: cps/templates/reading_stats.html:84
+msgid "Less"
+msgstr ""
+
+#: cps/templates/reading_stats.html:93
+msgid "Last 30 days"
+msgstr ""
+
+#: cps/templates/reading_stats.html:94
+#, python-format
+msgid "Average %(time)s a day"
+msgstr ""
+
+#: cps/templates/reading_stats.html:96
+msgid "Reading time per day over the last 30 days"
+msgstr ""
+
+#: cps/templates/reading_stats.html:107
+#, fuzzy
+msgid "Last 12 months"
+msgstr "Hónap napja"
+
+#: cps/templates/reading_stats.html:110
+msgid "Reading time per month over the last year"
+msgstr ""
+
+#: cps/templates/reading_stats.html:122
+#, fuzzy
+msgid "Time of day"
+msgstr "Időpont:"
+
+#: cps/templates/reading_stats.html:123
+#, python-format
+msgid "You read most around %(hour)s"
+msgstr ""
+
+#: cps/templates/reading_stats.html:125
+msgid "Reading time by hour of the day"
+msgstr ""
+
+#: cps/templates/reading_stats.html:135
+#, fuzzy
+msgid "Days of the week"
+msgstr "Hét napja:"
+
+#: cps/templates/reading_stats.html:136
+#, python-format
+msgid "Your favourite day: %(day)s"
+msgstr ""
+
+#: cps/templates/reading_stats.html:139
+msgid "Reading time by day of the week"
+msgstr ""
+
+#: cps/templates/reading_stats.html:149
+#, fuzzy
+msgid "Your habits"
+msgstr "Az e-mail címed"
+
+#: cps/templates/reading_stats.html:151
+msgid "Total reading time"
+msgstr ""
+
+#: cps/templates/reading_stats.html:153 cps/templates/reading_stats.html:179
+#, fuzzy
+msgid "Pages read"
+msgstr "Olvasottnak jelölve"
+
+#: cps/templates/reading_stats.html:154
+#, fuzzy
+msgid "On a reading day"
+msgstr "Legyen olvasott"
+
+#: cps/templates/reading_stats.html:154
+msgid "on average"
+msgstr ""
+
+#: cps/templates/reading_stats.html:155
+#, fuzzy
+msgid "Reading sessions"
+msgstr "Felhasználó beállítások"
+
+#: cps/templates/reading_stats.html:155
+#, fuzzy, python-format
+msgid "average %(time)s"
+msgstr "Nyelv: %(name)s"
+
+#: cps/templates/reading_stats.html:156
+msgid "Longest session"
+msgstr ""
+
+#: cps/templates/reading_stats.html:157
+msgid "Pace"
+msgstr ""
+
+#: cps/templates/reading_stats.html:157
+#, python-format
+msgid "%(pages)s pages/h"
+msgstr ""
+
+#: cps/templates/reading_stats.html:157
+#, fuzzy, python-format
+msgid "%(seconds)s s per page"
+msgstr "Könyvek oldalanként"
+
+#: cps/templates/reading_stats.html:164
+#, fuzzy
+msgid "Most recently read first"
+msgstr "Nemrég szerkesztett"
+
+#: cps/templates/reading_stats.html:180
+#, fuzzy, python-format
+msgid "%(read)s of %(total)s pages"
+msgstr "A következő polc létre lett hozva: %(title)s"
+
+#: cps/templates/reading_stats.html:180
+#, python-format
+msgid "about %(time)s left"
+msgstr ""
+
+#: cps/templates/reading_stats.html:180
+#, fuzzy
+msgid "finished"
+msgstr "Végrehajtva"
+
 #: cps/templates/readpdf.html:32
 msgid "PDF Reader"
 msgstr "PDF olvasó"
@@ -8634,11 +8928,6 @@ msgstr "Napló letöltése"
 #, python-format
 msgid "Unzip it into the %(dir)s folder on the device, then restart KOReader."
 msgstr ""
-
-#: cps/templates/user_edit.html:280
-#, fuzzy
-msgid "Download plugin"
-msgstr "Napló letöltése"
 
 #: cps/templates/user_edit.html:287
 msgid ""
@@ -9818,9 +10107,6 @@ msgstr "Szerzők ebben a könyvtárban"
 #~ msgid "Rate Limiting"
 #~ msgstr "Korlátozás"
 
-#~ msgid "Marked as read"
-#~ msgstr "Olvasottnak jelölve"
-
 #~ msgid "Marked as unread"
 #~ msgstr "Olvasatlannak jelölve"
 
@@ -10110,9 +10396,6 @@ msgstr "Szerzők ebben a könyvtárban"
 
 #~ msgid "Register New Account"
 #~ msgstr "Új felhasználó regisztrálása"
-
-#~ msgid "Your Email"
-#~ msgstr "Az e-mail címed"
 
 #~ msgid "On another device, login and visit:"
 #~ msgstr "Másik eszközön jelentkezzen be és látogassa meg:"

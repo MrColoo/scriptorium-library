@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
-"Report-Msgid-Bugs-To: https://github.com/Mrcoloo/scriptorium-library/issues\n"
-"POT-Creation-Date: 2026-10-28 22:46+0100\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-11-05 10:26+0100\n"
 "PO-Revision-Date: 2025-08-11 07:03+0000\n"
 "Last-Translator: Andrej Kralj\n"
 "Language-Team: Slovenian\n"
@@ -800,12 +800,12 @@ msgstr ""
 "Obnova končana. Varnostne kopije in dnevnik obnove so shranjeni v %(dir)s. "
 "Vsi podatki, povezani s knjigami, so bili ponastavljeni."
 
-#: cps/annotations.py:238
+#: cps/annotations.py:270
 #, fuzzy
 msgid "Note"
 msgstr "Opomba:"
 
-#: cps/annotations.py:251 cps/templates/highlights.html:6
+#: cps/annotations.py:283 cps/templates/highlights.html:6
 #: cps/templates/layout.html:73 cps/templates/year.html:225
 #, fuzzy
 msgid "Highlights"
@@ -866,7 +866,7 @@ msgid "Your style is saved."
 msgstr ""
 
 #: cps/appearance.py:91 cps/templates/appearance.html:67
-#: cps/templates/layout.html:174
+#: cps/templates/layout.html:175
 #, fuzzy
 msgid "Customize"
 msgstr "Filter po meri"
@@ -1336,7 +1336,7 @@ msgstr "Manjkajoč ali neveljaven ID knjige za nalaganje formata"
 msgid "Cannot upload format: Book no longer exists in library"
 msgstr "Formata ni mogoče naložiti: Knjiga ne obstaja več v knjižnici"
 
-#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:366
+#: cps/editbooks.py:152 cps/editbooks.py:179 cps/templates/layout.html:367
 msgid "Upload done, processing, please wait..."
 msgstr "Prenos opravljen, obdelujem, prosim počakajte..."
 
@@ -1958,9 +1958,41 @@ msgid ""
 "“%(shelf)s”."
 msgstr ""
 
+#: cps/reading_stats.py:332
+#, fuzzy
+msgid "Unknown book"
+msgstr "Neznano"
+
+#: cps/reading_stats.py:393
+msgid "< 1 min"
+msgstr ""
+
+#: cps/reading_stats.py:396
+#, fuzzy, python-format
+msgid "%(minutes)s min"
+msgstr "Zakasnitev (minute):"
+
+#: cps/reading_stats.py:397
+#, python-format
+msgid "%(hours)s h %(minutes)02d min"
+msgstr ""
+
+#: cps/reading_stats.py:451 cps/reading_stats.py:452
+#, python-format
+msgid "%(num)s day"
+msgid_plural "%(num)s days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: cps/reading_stats.py:454 cps/templates/layout.html:74
+#: cps/templates/reading_stats.html:9
+#, fuzzy
+msgid "Reading statistics"
+msgstr "Nastavitve"
+
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
-#: cps/templates/config_edit.html:86 cps/templates/layout.html:186
-#: cps/templates/layout.html:244 cps/templates/login.html:44
+#: cps/templates/config_edit.html:86 cps/templates/layout.html:187
+#: cps/templates/layout.html:245 cps/templates/login.html:44
 #: cps/templates/register.html:29 cps/web.py:2267
 msgid "Login"
 msgstr "Prijava"
@@ -1984,7 +2016,8 @@ msgid ""
 msgstr ""
 
 #: cps/render_template.py:75 cps/templates/appearance.html:7
-#: cps/templates/cwa_stats_tabs.html:177 cps/templates/stats.html:14
+#: cps/templates/cwa_stats_tabs.html:177 cps/templates/reading_stats.html:152
+#: cps/templates/reading_stats.html:163 cps/templates/stats.html:14
 #: cps/templates/year.html:222
 msgid "Books"
 msgstr "Knjige"
@@ -2144,7 +2177,7 @@ msgstr ""
 
 #: cps/search.py:54 cps/search.py:441 cps/templates/book_edit.html:254
 #: cps/templates/feed.xml:34 cps/templates/highlights.html:19
-#: cps/templates/index.xml:12 cps/templates/layout.html:234
+#: cps/templates/index.xml:12 cps/templates/layout.html:235
 #: cps/templates/search.html:5 cps/templates/search.html:6
 #: cps/templates/search_form.html:121
 msgid "Search"
@@ -2177,7 +2210,7 @@ msgstr "Prebrani status = '%(status)s'"
 msgid "Error on search for custom columns, please restart Scriptorium"
 msgstr "Napaka pri iskanju stolpcev po meri, ponovno zaženite Scriptorium"
 
-#: cps/search.py:385 cps/search.py:417 cps/templates/layout.html:144
+#: cps/search.py:385 cps/search.py:417 cps/templates/layout.html:145
 #: cps/templates/search.html:5 cps/templates/search.html:37
 #: cps/templates/search_form.html:22
 msgid "Advanced Search"
@@ -2298,7 +2331,7 @@ msgid "Error opening shelf. Shelf does not exist or is not accessible"
 msgstr "Napaka pri odpiranju police. Polica ne obstaja ali ni dostopna"
 
 #: cps/tasks_status.py:37 cps/templates/duplicates.html:28
-#: cps/templates/layout.html:128 cps/templates/tasks.html:5
+#: cps/templates/layout.html:129 cps/templates/tasks.html:5
 msgid "Tasks"
 msgstr "Opravila"
 
@@ -2470,7 +2503,7 @@ msgstr "Ime police je predolgo (največ 100 znakov)"
 msgid "Error creating shelf"
 msgstr "Napaka pri brisanju police"
 
-#: cps/templates/layout.html:113 cps/web.py:1226
+#: cps/templates/layout.html:114 cps/web.py:1226
 #, fuzzy
 msgid "Create Magic Shelf"
 msgstr "Ustvari polico"
@@ -2594,7 +2627,7 @@ msgstr "Uspeh! Knjiga je v vrsti za pošiljanje v %(eReadermail)s"
 msgid "Please wait one minute to register next user"
 msgstr "Počakajte eno minuto za registracijo naslednjega uporabnika"
 
-#: cps/templates/layout.html:188 cps/templates/login.html:77
+#: cps/templates/layout.html:189 cps/templates/login.html:77
 #: cps/templates/register.html:22 cps/web.py:2146 cps/web.py:2150
 #: cps/web.py:2155 cps/web.py:2159 cps/web.py:2165 cps/web.py:2190
 #: cps/web.py:2194 cps/web.py:2207 cps/web.py:2210
@@ -2737,7 +2770,7 @@ msgstr "Ups! Račun za to e-pošto že obstaja."
 msgid "Invalid book ID."
 msgstr "Neveljavna vloga"
 
-#: cps/templates/layout.html:176 cps/templates/stats.html:9
+#: cps/templates/layout.html:177 cps/templates/stats.html:9
 #: cps/templates/whats_new.html:6 cps/whats_new.py:168
 msgid "What's new"
 msgstr ""
@@ -2933,8 +2966,8 @@ msgid "Clearing cover thumbnail cache"
 msgstr "Čiščenje predpomnilnika sličic naslovnice"
 
 #: cps/tasks/upload.py:28 cps/templates/admin.html:45
-#: cps/templates/appearance.html:16 cps/templates/layout.html:157
-#: cps/templates/layout.html:158 cps/templates/user_table.html:24
+#: cps/templates/appearance.html:16 cps/templates/layout.html:158
+#: cps/templates/layout.html:159 cps/templates/user_table.html:24
 msgid "Upload"
 msgstr "Naloži"
 
@@ -3039,11 +3072,11 @@ msgstr "Dovoljene vrednosti stolpcev"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
 #: cps/templates/book_table.html:51 cps/templates/detail.html:300
-#: cps/templates/duplicates.html:110 cps/templates/layout.html:206
-#: cps/templates/layout.html:209 cps/templates/layout.html:212
-#: cps/templates/layout.html:215 cps/templates/layout.html:218
-#: cps/templates/layout.html:261 cps/templates/layout.html:295
-#: cps/templates/layout.html:334 cps/templates/layout.html:362
+#: cps/templates/duplicates.html:110 cps/templates/layout.html:207
+#: cps/templates/layout.html:210 cps/templates/layout.html:213
+#: cps/templates/layout.html:216 cps/templates/layout.html:219
+#: cps/templates/layout.html:262 cps/templates/layout.html:296
+#: cps/templates/layout.html:335 cps/templates/layout.html:363
 #: cps/templates/read.html:58 cps/templates/year.html:42
 msgid "Close"
 msgstr "Zapri"
@@ -3082,7 +3115,7 @@ msgstr ""
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
 #: cps/templates/cwa_settings.html:260 cps/templates/detail.html:326
-#: cps/templates/duplicates.html:113 cps/templates/layout.html:270
+#: cps/templates/duplicates.html:113 cps/templates/layout.html:271
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/reading_import.html:82
 #: cps/templates/schedule_edit.html:34 cps/templates/shelf_edit.html:32
@@ -3143,7 +3176,7 @@ msgstr ""
 #: cps/templates/cwa_convert_library.html:6 cps/templates/cwa_epub_fixer.html:6
 #: cps/templates/cwa_list_logs.html:6 cps/templates/cwa_settings.html:65
 #: cps/templates/cwa_stats_tabs.html:32 cps/templates/email_edit.html:6
-#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:131
+#: cps/templates/hardcover_review_matches.html:5 cps/templates/layout.html:132
 #: cps/templates/logviewer.html:5 cps/templates/profile_pictures.html:5
 #: cps/templates/read.html:40 cps/templates/readcbr.html:49
 #: cps/templates/readcbr.html:73 cps/templates/readcbr.html:99
@@ -3389,7 +3422,7 @@ msgid "Run Hardcover auto-fetch"
 msgstr "Hardcover API žeton"
 
 #: cps/templates/admin.html:148 cps/templates/cwa_stats_tabs.html:68
-#: cps/templates/layout.html:126 cps/templates/layout.html:181
+#: cps/templates/layout.html:127 cps/templates/layout.html:182
 msgid "System"
 msgstr ""
 
@@ -3425,17 +3458,17 @@ msgstr "Izklop"
 msgid "Are you sure you want to restart?"
 msgstr "Ali ste prepričani, da želite znova zagnati računalnik?"
 
-#: cps/templates/admin.html:175 cps/templates/layout.html:369
+#: cps/templates/admin.html:175 cps/templates/layout.html:370
 msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:249 cps/templates/layout.html:92
+#: cps/templates/detail.html:249 cps/templates/layout.html:93
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Police"
 
-#: cps/templates/appearance.html:14 cps/templates/layout.html:143
+#: cps/templates/appearance.html:14 cps/templates/layout.html:144
 #, fuzzy
 msgid "Search titles, authors, series…"
 msgstr "Iskanje po naslovu/avtorju"
@@ -3553,7 +3586,7 @@ msgid "Vivid"
 msgstr ""
 
 #: cps/templates/appearance.html:66 cps/templates/kosync_plugin.html:6
-#: cps/templates/layout.html:170 cps/templates/layout.html:241
+#: cps/templates/layout.html:171 cps/templates/layout.html:242
 #: cps/templates/reading_import.html:6
 #, fuzzy
 msgid "Profile"
@@ -3636,16 +3669,16 @@ msgstr "Ocene"
 msgid "Preview"
 msgstr "Prejšnji"
 
-#: cps/templates/appearance.html:156 cps/templates/layout.html:180
+#: cps/templates/appearance.html:156 cps/templates/layout.html:181
 msgid "Appearance"
 msgstr ""
 
-#: cps/templates/appearance.html:157 cps/templates/layout.html:182
+#: cps/templates/appearance.html:157 cps/templates/layout.html:183
 #: cps/templates/read.html:63 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Svetlo"
 
-#: cps/templates/appearance.html:158 cps/templates/layout.html:183
+#: cps/templates/appearance.html:158 cps/templates/layout.html:184
 #: cps/templates/read.html:65 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Temno"
@@ -4011,7 +4044,7 @@ msgid "Add to shelf"
 msgstr "Dodaj na polico"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:54
-#: cps/templates/layout.html:246
+#: cps/templates/layout.html:247 cps/templates/reading_stats.html:86
 #, fuzzy
 msgid "More"
 msgstr "Več po"
@@ -4283,7 +4316,7 @@ msgid "Ok"
 msgstr "V redu"
 
 #: cps/templates/config_edit.html:16 cps/templates/email_edit.html:61
-#: cps/templates/layout.html:364 cps/templates/login.html:35
+#: cps/templates/layout.html:365 cps/templates/login.html:35
 #: cps/templates/user_edit.html:51 cps/templates/user_edit.html:62
 #, fuzzy
 msgid "Show password"
@@ -5772,7 +5805,7 @@ msgid "User Activity"
 msgstr ""
 
 #: cps/templates/cwa_stats_tabs.html:68 cps/templates/index.html:71
-#: cps/templates/layout.html:59 cps/templates/layout.html:233
+#: cps/templates/layout.html:59 cps/templates/layout.html:234
 #, fuzzy
 msgid "Library"
 msgstr "V knjižnici"
@@ -6150,7 +6183,7 @@ msgstr "Preberi v brskalniku"
 msgid "Listen"
 msgstr "Seznam"
 
-#: cps/templates/detail.html:117 cps/templates/layout.html:94
+#: cps/templates/detail.html:117 cps/templates/layout.html:95
 #: cps/templates/user_edit.html:216
 #, fuzzy
 msgid "Create Shelf"
@@ -6229,7 +6262,7 @@ msgid_plural "%(num)s highlights"
 msgstr[0] ""
 msgstr[1] ""
 
-#: cps/templates/detail.html:210 cps/templates/layout.html:365
+#: cps/templates/detail.html:210 cps/templates/layout.html:366
 #, fuzzy
 msgid "Show more"
 msgstr "Prikaži neprebrane"
@@ -6610,7 +6643,7 @@ msgid "(Magic)"
 msgstr "(Čarobno)"
 
 #: cps/templates/feed.xml:88 cps/templates/feed.xml:90
-#: cps/templates/layout.html:101
+#: cps/templates/layout.html:102
 msgid "(Public)"
 msgstr "(Javno)"
 
@@ -6650,7 +6683,7 @@ msgstr ""
 msgid "Z–A"
 msgstr ""
 
-#: cps/templates/grid.html:21 cps/templates/layout.html:368
+#: cps/templates/grid.html:21 cps/templates/layout.html:369
 #: cps/templates/list.html:27
 #, fuzzy
 msgid "Filter"
@@ -6977,7 +7010,7 @@ msgstr ""
 msgid "Server URL"
 msgstr "Vrata strežnika"
 
-#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:322
+#: cps/templates/kosync_plugin.html:48 cps/templates/layout.html:323
 #: cps/templates/remote_login.html:15 cps/templates/user_edit.html:160
 #: cps/templates/user_edit.html:290
 #, fuzzy
@@ -7029,210 +7062,210 @@ msgstr ""
 msgid "Library navigation"
 msgstr "Statistika knjižnice"
 
-#: cps/templates/layout.html:74
+#: cps/templates/layout.html:75
 #, fuzzy
 msgid "Your year in books"
 msgstr "Iskanje"
 
-#: cps/templates/layout.html:82
+#: cps/templates/layout.html:83
 msgid "Browse"
 msgstr "Brskaj"
 
-#: cps/templates/layout.html:105
+#: cps/templates/layout.html:106
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:111 cps/templates/user_edit.html:427
+#: cps/templates/layout.html:112 cps/templates/user_edit.html:427
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Police"
 
-#: cps/templates/layout.html:139
+#: cps/templates/layout.html:140
 msgid "Toggle Navigation"
 msgstr "Preklopi navigacijo"
 
-#: cps/templates/layout.html:142
+#: cps/templates/layout.html:143
 msgid "Search Library"
 msgstr "Iskanje po knjižnici"
 
-#: cps/templates/layout.html:144
+#: cps/templates/layout.html:145
 #, fuzzy
 msgid "Advanced"
 msgstr "Napredno iskanje"
 
-#: cps/templates/layout.html:149
+#: cps/templates/layout.html:150
 #, python-format
 msgid "Update available: %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:154
+#: cps/templates/layout.html:155
 #, fuzzy
 msgid "Refresh Library"
 msgstr "Iskanje po knjižnici"
 
-#: cps/templates/layout.html:164 cps/templates/user_edit.html:24
+#: cps/templates/layout.html:165 cps/templates/user_edit.html:24
 #: cps/templates/user_edit.html:37
 msgid "Account"
 msgstr "Račun"
 
-#: cps/templates/layout.html:172 cps/templates/user_edit.html:25
+#: cps/templates/layout.html:173 cps/templates/user_edit.html:25
 #, fuzzy
 msgid "Devices"
 msgstr "Storitev e-pošte"
 
-#: cps/templates/layout.html:175
+#: cps/templates/layout.html:176
 #, fuzzy
 msgid "Install app"
 msgstr "Nameščena različica"
 
-#: cps/templates/layout.html:177 cps/templates/stats.html:5
+#: cps/templates/layout.html:178 cps/templates/stats.html:5
 msgid "About"
 msgstr "O programu"
 
-#: cps/templates/layout.html:191
+#: cps/templates/layout.html:192
 msgid "Logout"
 msgstr "Odjava"
 
-#: cps/templates/layout.html:211
+#: cps/templates/layout.html:212
 #, fuzzy
 msgid "Open Duplicates"
 msgstr "Dvojniki"
 
-#: cps/templates/layout.html:214
+#: cps/templates/layout.html:215
 msgid "Contribute here!"
 msgstr "Prispevajte tukaj!"
 
-#: cps/templates/layout.html:232
+#: cps/templates/layout.html:233
 #, fuzzy
 msgid "Quick navigation"
 msgstr "Osnovne nastavitve"
 
-#: cps/templates/layout.html:237
+#: cps/templates/layout.html:238
 msgid "Kobo"
 msgstr ""
 
-#: cps/templates/layout.html:267
+#: cps/templates/layout.html:268
 #, fuzzy
 msgid "Are you sure?"
 msgstr "Ste res prepričani?"
 
-#: cps/templates/layout.html:271 cps/templates/layout.html:362
+#: cps/templates/layout.html:272 cps/templates/layout.html:363
 msgid "Confirm"
 msgstr ""
 
-#: cps/templates/layout.html:277
+#: cps/templates/layout.html:278
 msgid "Uploading..."
 msgstr "Nalaganje..."
 
-#: cps/templates/layout.html:280
+#: cps/templates/layout.html:281
 msgid "Please do not refresh the page"
 msgstr "Ne osvežuj strani"
 
-#: cps/templates/layout.html:283
+#: cps/templates/layout.html:284
 msgid "Drop books to add them to the library"
 msgstr ""
 
-#: cps/templates/layout.html:293
+#: cps/templates/layout.html:294
 #, fuzzy
 msgid "Scriptorium update"
 msgstr "Prikaži dnevnik Scriptorium:"
 
-#: cps/templates/layout.html:298
+#: cps/templates/layout.html:299
 #, fuzzy
 msgid "New version available:"
 msgstr "Informacije o izdaji niso na voljo"
 
-#: cps/templates/layout.html:309
+#: cps/templates/layout.html:310
 msgid ""
 "A new version of Scriptorium is available, with the latest features and "
 "fixes."
 msgstr ""
 
-#: cps/templates/layout.html:320
+#: cps/templates/layout.html:321
 msgid ""
 "To update, back up your config folder, then run this next to your docker-"
 "compose.yml:"
 msgstr ""
 
-#: cps/templates/layout.html:325
+#: cps/templates/layout.html:326
 msgid "Check the release notes for breaking changes before updating."
 msgstr ""
 
-#: cps/templates/layout.html:326
+#: cps/templates/layout.html:327
 msgid "Release notes"
 msgstr ""
 
-#: cps/templates/layout.html:330
+#: cps/templates/layout.html:331
 msgid "Automatically check for new updates"
 msgstr ""
 
-#: cps/templates/layout.html:343
+#: cps/templates/layout.html:344
 #, python-format
 msgid "What's new in %(version)s"
 msgstr ""
 
-#: cps/templates/layout.html:355
+#: cps/templates/layout.html:356
 msgid "All release notes"
 msgstr ""
 
-#: cps/templates/layout.html:356
+#: cps/templates/layout.html:357
 msgid "Got it"
 msgstr ""
 
-#: cps/templates/layout.html:362
+#: cps/templates/layout.html:363
 #, fuzzy
 msgid "Copied to clipboard"
 msgstr "UUID kopiran v odložišče"
 
-#: cps/templates/layout.html:363
+#: cps/templates/layout.html:364
 msgid "Could not copy, select the text and copy it manually"
 msgstr ""
 
-#: cps/templates/layout.html:364
+#: cps/templates/layout.html:365
 #, fuzzy
 msgid "Hide password"
 msgstr "Geslo"
 
-#: cps/templates/layout.html:365
+#: cps/templates/layout.html:366
 #, fuzzy
 msgid "Show less"
 msgstr "Pokaži vse"
 
-#: cps/templates/layout.html:365 cps/templates/magic_shelf_edit.html:88
+#: cps/templates/layout.html:366 cps/templates/magic_shelf_edit.html:88
 msgid "Something went wrong, please try again"
 msgstr ""
 
-#: cps/templates/layout.html:366
+#: cps/templates/layout.html:367
 #, fuzzy
 msgid "Upload failed"
 msgstr "Posodobitev ni uspela:"
 
-#: cps/templates/layout.html:367
+#: cps/templates/layout.html:368
 #, fuzzy, python-format
 msgid "%(count)s files"
 msgstr "Najboljših %(count)s"
 
-#: cps/templates/layout.html:368 cps/templates/search_form.html:7
+#: cps/templates/layout.html:369 cps/templates/search_form.html:7
 #: cps/templates/search_form.html:41 cps/templates/search_form.html:51
 #: cps/templates/search_form.html:55 cps/templates/search_form.html:82
 msgid "Any"
 msgstr "Vse"
 
-#: cps/templates/layout.html:368
+#: cps/templates/layout.html:369
 #, fuzzy
 msgid "Choose at least one address"
 msgstr "Novo geslo je bilo poslano na vaš e-poštni naslov"
 
-#: cps/templates/layout.html:369
+#: cps/templates/layout.html:370
 msgid "Enter a URL first"
 msgstr ""
 
-#: cps/templates/layout.html:370
+#: cps/templates/layout.html:371
 #, fuzzy, python-format
 msgid "Possible duplicates found: %(count)s groups."
 msgstr "Iskanje dvojnikov končano: %(count)s skupin"
 
-#: cps/templates/layout.html:370
+#: cps/templates/layout.html:371
 #, fuzzy
 msgid "Review"
 msgstr "Prejšnji"
@@ -8072,6 +8105,267 @@ msgid_plural "Import %(num)s changes"
 msgstr[0] ""
 msgstr[1] ""
 
+#: cps/templates/reading_stats.html:11
+#, python-format
+msgid "From KOReader on all your devices. Updated %(date)s at %(time)s."
+msgstr ""
+
+#: cps/templates/reading_stats.html:12
+msgid "Your reading time from KOReader, gathered from all your devices."
+msgstr ""
+
+#: cps/templates/reading_stats.html:20
+#, fuzzy
+msgid "No reading statistics yet"
+msgstr "Ni ujemanj na čakanju za zavrnitev"
+
+#: cps/templates/reading_stats.html:22
+msgid ""
+"KOReader sync is turned off for this library. Ask an administrator to turn "
+"it on in Settings → Automation."
+msgstr ""
+
+#: cps/templates/reading_stats.html:24
+msgid ""
+"KOReader measures how long you read. Share it with Scriptorium and every "
+"device shows the same time, streaks and progress."
+msgstr ""
+
+#: cps/templates/reading_stats.html:26
+msgid "Install version 1.2 or later of the Scriptorium plugin on each device."
+msgstr ""
+
+#: cps/templates/reading_stats.html:26 cps/templates/user_edit.html:280
+#, fuzzy
+msgid "Download plugin"
+msgstr "Prenesi"
+
+#: cps/templates/reading_stats.html:27
+msgid ""
+"In KOReader, open Tools → Scriptorium Sync and turn on Sync reading "
+"statistics."
+msgstr ""
+
+#: cps/templates/reading_stats.html:28
+msgid "Read a few pages. The statistics appear here after the next sync."
+msgstr ""
+
+#: cps/templates/reading_stats.html:31
+msgid "Set it up by hand instead"
+msgstr ""
+
+#: cps/templates/reading_stats.html:32
+msgid ""
+"In KOReader, add a WebDAV server under Cloud storage with this address and "
+"your Scriptorium username and password, then choose it in Reading statistics "
+"→ Settings → Cloud sync:"
+msgstr ""
+
+#: cps/templates/reading_stats.html:39
+msgid "At a glance"
+msgstr ""
+
+#: cps/templates/reading_stats.html:41 cps/templates/reading_stats.html:102
+msgid "Today"
+msgstr ""
+
+#: cps/templates/reading_stats.html:43
+msgid "Keep it going."
+msgstr ""
+
+#: cps/templates/reading_stats.html:43
+msgid "Not opened a book yet today."
+msgstr ""
+
+#: cps/templates/reading_stats.html:46
+msgid "This week"
+msgstr ""
+
+#: cps/templates/reading_stats.html:48
+#, python-format
+msgid "This month: %(time)s"
+msgstr ""
+
+#: cps/templates/reading_stats.html:51
+#, fuzzy
+msgid "Current streak"
+msgstr "Trenutna različica"
+
+#: cps/templates/reading_stats.html:53
+msgid "Read today to keep it."
+msgstr ""
+
+#: cps/templates/reading_stats.html:53
+#, fuzzy
+msgid "Reading every day."
+msgstr "Napredek"
+
+#: cps/templates/reading_stats.html:53
+msgid "Start a new one today."
+msgstr ""
+
+#: cps/templates/reading_stats.html:56
+#, fuzzy
+msgid "Best streak"
+msgstr "Brisanje vrste:"
+
+#: cps/templates/reading_stats.html:58 cps/templates/reading_stats.html:108
+#, fuzzy, python-format
+msgid "This year: %(time)s"
+msgstr "Založnik: %(name)s"
+
+#: cps/templates/reading_stats.html:64
+#, fuzzy
+msgid "Your reading year"
+msgstr "Prispevajte tukaj!"
+
+#: cps/templates/reading_stats.html:65
+#, fuzzy, python-format
+msgid "%(num)s reading day"
+msgid_plural "%(num)s reading days"
+msgstr[0] "Prispevajte tukaj!"
+msgstr[1] "Prispevajte tukaj!"
+
+#: cps/templates/reading_stats.html:65
+#, python-format
+msgid "since %(date)s"
+msgstr ""
+
+#: cps/templates/reading_stats.html:68
+msgid "Reading time per day over the last year"
+msgstr ""
+
+#: cps/templates/reading_stats.html:78 cps/templates/reading_stats.html:99
+#: cps/templates/reading_stats.html:112
+#, fuzzy
+msgid "no reading"
+msgstr "Prispevajte tukaj!"
+
+#: cps/templates/reading_stats.html:84
+msgid "Less"
+msgstr ""
+
+#: cps/templates/reading_stats.html:93
+msgid "Last 30 days"
+msgstr ""
+
+#: cps/templates/reading_stats.html:94
+#, python-format
+msgid "Average %(time)s a day"
+msgstr ""
+
+#: cps/templates/reading_stats.html:96
+msgid "Reading time per day over the last 30 days"
+msgstr ""
+
+#: cps/templates/reading_stats.html:107
+#, fuzzy
+msgid "Last 12 months"
+msgstr "Dan v mesecu:"
+
+#: cps/templates/reading_stats.html:110
+msgid "Reading time per month over the last year"
+msgstr ""
+
+#: cps/templates/reading_stats.html:122
+#, fuzzy
+msgid "Time of day"
+msgstr "Čas dneva:"
+
+#: cps/templates/reading_stats.html:123
+#, python-format
+msgid "You read most around %(hour)s"
+msgstr ""
+
+#: cps/templates/reading_stats.html:125
+msgid "Reading time by hour of the day"
+msgstr ""
+
+#: cps/templates/reading_stats.html:135
+#, fuzzy
+msgid "Days of the week"
+msgstr "Dan v tednu:"
+
+#: cps/templates/reading_stats.html:136
+#, python-format
+msgid "Your favourite day: %(day)s"
+msgstr ""
+
+#: cps/templates/reading_stats.html:139
+msgid "Reading time by day of the week"
+msgstr ""
+
+#: cps/templates/reading_stats.html:149
+#, fuzzy
+msgid "Your habits"
+msgstr "Vaš e-poštni naslov"
+
+#: cps/templates/reading_stats.html:151
+msgid "Total reading time"
+msgstr ""
+
+#: cps/templates/reading_stats.html:153 cps/templates/reading_stats.html:179
+#, fuzzy
+msgid "Pages read"
+msgstr "Označi kot neprebrano"
+
+#: cps/templates/reading_stats.html:154
+#, fuzzy
+msgid "On a reading day"
+msgstr "Označi kot neprebrano"
+
+#: cps/templates/reading_stats.html:154
+msgid "on average"
+msgstr ""
+
+#: cps/templates/reading_stats.html:155
+#, fuzzy
+msgid "Reading sessions"
+msgstr "Nastavitve"
+
+#: cps/templates/reading_stats.html:155
+#, fuzzy, python-format
+msgid "average %(time)s"
+msgstr "Jezik: %(name)s"
+
+#: cps/templates/reading_stats.html:156
+msgid "Longest session"
+msgstr ""
+
+#: cps/templates/reading_stats.html:157
+msgid "Pace"
+msgstr ""
+
+#: cps/templates/reading_stats.html:157
+#, python-format
+msgid "%(pages)s pages/h"
+msgstr ""
+
+#: cps/templates/reading_stats.html:157
+#, fuzzy, python-format
+msgid "%(seconds)s s per page"
+msgstr "Število knjig na stran"
+
+#: cps/templates/reading_stats.html:164
+#, fuzzy
+msgid "Most recently read first"
+msgstr "Zadnjič spremenjeno"
+
+#: cps/templates/reading_stats.html:180
+#, fuzzy, python-format
+msgid "%(read)s of %(total)s pages"
+msgstr "Ustvarjena polica %(title)s"
+
+#: cps/templates/reading_stats.html:180
+#, python-format
+msgid "about %(time)s left"
+msgstr ""
+
+#: cps/templates/reading_stats.html:180
+#, fuzzy
+msgid "finished"
+msgstr "Končano"
+
 #: cps/templates/readpdf.html:32
 msgid "PDF Reader"
 msgstr "Bralnik PDF"
@@ -8799,11 +9093,6 @@ msgstr "Prenesi"
 #, python-format
 msgid "Unzip it into the %(dir)s folder on the device, then restart KOReader."
 msgstr ""
-
-#: cps/templates/user_edit.html:280
-#, fuzzy
-msgid "Download plugin"
-msgstr "Prenesi"
 
 #: cps/templates/user_edit.html:287
 msgid ""
@@ -10310,9 +10599,6 @@ msgstr "Avtorjev v tej knjižnici"
 #~ "Samodejna razrešitev se zažene, ko iskanje dvojnikov zazna nove dvojnike. "
 #~ "Opuščene skupine dvojnikov se nikoli ne razrešijo samodejno."
 
-#~ msgid "Marked as read"
-#~ msgstr "Označi kot neprebrano"
-
 #~ msgid "Marked as unread"
 #~ msgstr "Označi kot neprebrano"
 
@@ -10676,9 +10962,6 @@ msgstr "Avtorjev v tej knjižnici"
 
 #~ msgid "Register New Account"
 #~ msgstr "Registracija novega računa"
-
-#~ msgid "Your Email"
-#~ msgstr "Vaš e-poštni naslov"
 
 #~ msgid "On another device, login and visit:"
 #~ msgstr "V drugi napravi se prijavite in obiščite:"
