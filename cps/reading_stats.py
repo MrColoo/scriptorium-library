@@ -329,7 +329,8 @@ def summarize(books, rows, today=None):
         if progress is not None and progress < 0.99 and entry["turns"] >= 5:
             left = max(0, total_pages - read) * pace
         book_list.append({
-            "id": book_id, "title": info.get("title") or _("Unknown book"), "authors": info.get("authors") or "",
+            "id": book_id, "title": info.get("title") or _("Unknown book"),
+            "authors": ", ".join(name for name in (info.get("authors") or "").split("\n") if name),
             "md5": info.get("md5"), "seconds": entry["seconds"], "pages": read, "total_pages": total_pages,
             "progress": progress, "left": left, "first": datetime.fromtimestamp(entry["first"]),
             "last": datetime.fromtimestamp(entry["last"]),
@@ -397,8 +398,8 @@ def reading_time(seconds):
     return _("%(hours)s h %(minutes)02d min", hours=hours, minutes=minutes)
 
 
-def _library_books(book_list):
-    """Library books for the statistics' books, matched by file checksum, that the user may see."""
+def library_books(book_list):
+    """Library books for the statistics' books ({id, md5}), matched by file checksum, that the user may see."""
     from .progress_syncing.protocols.kosync import get_book_by_checksum
     from . import db
     ids = {}
@@ -428,7 +429,7 @@ def page():
     context = {"summary": summary, "kosync_enabled": is_koreader_sync_enabled(),
                "server_url": request.host_url.rstrip("/") + request.script_root}
     if summary:
-        library = _library_books(summary["book_list"])
+        library = library_books(summary["book_list"])
         day_heights, day_top = _bars([d["seconds"] for d in summary["last_30"]])
         month_heights, _top = _bars([m["seconds"] for m in summary["months"]])
         hour_heights, _top = _bars(summary["hours"], 80)
