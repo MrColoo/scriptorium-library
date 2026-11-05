@@ -61,6 +61,10 @@ appear under *Highlights* in the sidebar, grouped by book, and can be exported a
 Deleting a highlight in KOReader deletes it in Scriptorium at the next sync. If you installed the
 plugin before, download it again from *Profile → Devices → KOReader* and replace the old folder.
 
+With KOReader on more than one device, for example a Kobo and a phone, each device's highlights are
+kept side by side: a sync from one never removes the other's. Version 1.2 of the plugin tells two
+devices of the same model apart too.
+
 ## KOReader on a Kobo
 
 If you used Kobo sync before installing KOReader on the same device, press **Remove Kobo** in
@@ -71,6 +75,10 @@ progress and read status are kept.
 
 **The plugin does not appear in the Tools menu.** Check that the folder is exactly
 `koreader/plugins/cwasync.koplugin`, then enable it in *Settings → Tools → Plugin management*.
+
+**Set Scriptorium Server does nothing.** Some KOReader add-ons that replace the menus, such as
+ZenOS, ignored this entry in plugin 1.1. Download the plugin again (version 1.2 or later) and replace
+the old folder.
 
 **Sign-in fails.** Check the server URL, which must not end in `/kosync`, and that you can log in to
 the web interface with the same username and password from the device's network. Accounts created
