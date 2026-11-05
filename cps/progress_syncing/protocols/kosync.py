@@ -812,12 +812,15 @@ def update_annotations():
     Request body:
         {
             "document": "abc123...",   # Required: partial MD5 of the file, as for progress
-            "device": "Kobo_libra2",   # Optional
+            "device": "Kobo_libra2",   # Optional: the device model
+            "device_id": "3f2a…",      # Optional: KOReader's id for this device (plugin 1.2 and later)
             "annotations": [{"id": "...", "text": "...", "note": "...", "chapter": "...",
                              "color": "yellow", "datetime": "2026-10-28 21:15:03", "pos": "..."}]
         }
 
-    The list replaces the highlights stored for that book, so deleting one on the device deletes it here.
+    The list replaces the highlights that device stored for that book, so deleting one on the device
+    deletes it here, while the highlights of the user's other KOReader devices stay. Plugin 1.1 sends no
+    device_id, so its devices are told apart by model.
     Returns 200 with the number stored, or 202 when the document is not a book of this library.
     """
     try:
@@ -842,7 +845,9 @@ def update_annotations():
         if not book_id:
             return create_sync_response({"document": document, "stored": 0}, 202)
         from ... import annotations
-        stored, removed = annotations.replace_koreader(user.id, book_id, items)
+        device = data.get("device_id") or data.get("device")
+        stored, removed = annotations.replace_koreader(user.id, book_id, items,
+                                                       device if isinstance(device, str) else None)
         ub.session.commit()
         log.info(f"Stored {stored} KOReader highlights for user {user.id}, book {book_id} ({removed} removed)")
         return create_sync_response({"document": document, "calibre_book_id": book_id, "stored": stored})

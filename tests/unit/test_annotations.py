@@ -82,7 +82,7 @@ class TestKOReader:
         annotations.replace_koreader(1, 7, [{"id": "d2|p2", "text": "Two", "note": "Added a note"}])
         session.commit()
         rows = _rows(session, "koreader")
-        assert [(row.source_id, row.note) for row in rows] == [("d2|p2", "Added a note")]
+        assert [(row.source_id, row.note) for row in rows] == [("device:unknown/d2|p2", "Added a note")]
 
     def test_replace_only_touches_that_book(self, session):
         annotations.replace_koreader(1, 7, [{"id": "a", "text": "Seven"}])
@@ -96,6 +96,49 @@ class TestKOReader:
         annotations.replace_koreader(1, 7, [])
         session.commit()
         assert [row.source for row in _rows(session)] == ["kobo"]
+
+    def test_two_devices_keep_their_own_highlights(self, session):
+        annotations.replace_koreader(1, 7, [{"id": "k1", "text": "From the Kobo"}], device="kobo-id")
+        session.commit()
+        annotations.replace_koreader(1, 7, [{"id": "p1", "text": "From the phone"}], device="phone-id")
+        session.commit()
+        assert sorted(row.text for row in _rows(session)) == ["From the Kobo", "From the phone"]
+        annotations.replace_koreader(1, 7, [], device="phone-id")
+        session.commit()
+        assert [row.text for row in _rows(session)] == ["From the Kobo"]
+
+    def test_highlights_from_before_the_update_are_taken_over(self, session):
+        session.add(annotations.ub.ReaderAnnotation(user_id=1, book_id=7, source="koreader", source_id="k1", text="Old"))
+        session.add(annotations.ub.ReaderAnnotation(user_id=1, book_id=7, source="koreader", source_id="k2", text="Gone"))
+        session.commit()
+        annotations.replace_koreader(1, 7, [{"id": "p1", "text": "Phone"}], device="phone-id")
+        session.commit()
+        assert len(_rows(session)) == 3  # another device's old highlights are left alone
+        annotations.replace_koreader(1, 7, [{"id": "k1", "text": "Old"}], device="kobo-id")
+        session.commit()
+        annotations.replace_koreader(1, 7, [{"id": "k1", "text": "Old", "note": "Now with a note"}], device="kobo-id")
+        session.commit()
+        kobo = [row for row in _rows(session) if row.source_id.startswith("device:kobo-id/")]
+        assert [(row.source_id, row.note) for row in kobo] == [("device:kobo-id/k1", "Now with a note")]
+
+    def test_the_same_highlight_from_two_devices_is_shown_once(self, session, monkeypatch):
+        same = {"id": "x", "text": "Shared", "pos": "/body/p[2]"}
+        annotations.replace_koreader(1, 7, [same], device="kobo-id")
+        annotations.replace_koreader(1, 7, [same, {"id": "y", "text": "Other", "pos": "/body/p[9]"}], device="phone-id")
+        session.commit()
+        book = SimpleNamespace(id=7)
+
+        class Query:
+            def filter(self, *args):
+                return self
+
+            def all(self):
+                return [book]
+
+        monkeypatch.setattr(annotations.calibre_db, "session", SimpleNamespace(query=lambda *a: Query()), raising=False)
+        monkeypatch.setattr(annotations.calibre_db, "common_filters", lambda *a, **k: True, raising=False)
+        groups = annotations.grouped(1)
+        assert sorted(row.text for row in groups[0]["highlights"]) == ["Other", "Shared"]
 
     def test_id_falls_back_to_position_and_date(self):
         fields = annotations.normalize_koreader({"text": "T", "pos": "/body/p[3]", "datetime": "2026-10-01 10:00:00"})

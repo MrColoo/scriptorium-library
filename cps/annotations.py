@@ -136,8 +136,22 @@ def apply_kobo_patch(user_id, book_id, data):
     return stored, deleted
 
 
-def replace_koreader(user_id, book_id, items):
-    """Make the stored KOReader highlights of a book match the list the device sent. The caller commits."""
+DEVICE_PREFIX = "device:"
+
+
+def _device_scope(device):
+    """Prefix of the source ids of one KOReader device, e.g. 'device:3f2a…/'."""
+    return "{}{}/".format(DEVICE_PREFIX, _clip(device, 64) or "unknown")
+
+
+def replace_koreader(user_id, book_id, items, device=None):
+    """Make the highlights one KOReader device holds for a book match the list it sent. The caller commits.
+
+    Each device only replaces its own, so with KOReader on a Kobo and on a phone, a sync from one never
+    removes the other's highlights. Highlights stored before devices were told apart carry no device:
+    the device that sends one of them again takes it over, and the others leave them alone.
+    """
+    scope = _device_scope(device)
     wanted = {}
     for item in (items or [])[:MAX_ITEMS]:
         fields = normalize_koreader(item)
@@ -149,11 +163,15 @@ def replace_koreader(user_id, book_id, items):
         ub.ReaderAnnotation.source == "koreader").all()
     removed = 0
     for row in existing:
-        if row.source_id not in wanted:
-            ub.session.delete(row)
-            removed += 1
-    for fields in wanted.values():
-        _upsert(user_id, book_id, "koreader", fields)
+        if row.source_id.startswith(scope):
+            if row.source_id[len(scope):] not in wanted:
+                ub.session.delete(row)
+                removed += 1
+        elif not row.source_id.startswith(DEVICE_PREFIX) and row.source_id in wanted:
+            row.source_id = scope + row.source_id
+    ub.session.flush()
+    for source_id, fields in wanted.items():
+        _upsert(user_id, book_id, "koreader", dict(fields, source_id=scope + source_id))
     return len(wanted), removed
 
 
@@ -184,6 +202,19 @@ def count_for_book(user_id, book_id):
         return 0
 
 
+def _without_copies(rows):
+    """The same highlight sent by two devices (same place, same words) is shown once."""
+    seen = set()
+    unique = []
+    for row in rows:
+        key = (row.position, (row.text or "").strip(), (row.note or "").strip())
+        if row.position and key in seen:
+            continue
+        seen.add(key)
+        unique.append(row)
+    return unique
+
+
 def grouped(user_id, book_id=None, query=None):
     """[{book, highlights: [rows], latest}] newest first, only books the user may see."""
     rows = ub.session.query(ub.ReaderAnnotation).filter(ub.ReaderAnnotation.user_id == int(user_id))
@@ -212,6 +243,7 @@ def grouped(user_id, book_id=None, query=None):
         if book_id_ not in books:
             continue
         items.sort(key=lambda row: (row.chapter is None, when(row)))
+        items = _without_copies(items)
         groups.append({"book": books[book_id_], "highlights": items, "latest": max(when(row) for row in items)})
     groups.sort(key=lambda group: group["latest"], reverse=True)
     return groups
