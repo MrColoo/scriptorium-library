@@ -76,3 +76,36 @@ def test_empty_year_has_no_story():
     summary = year_review.summarize(2026, [], [], 0, [], [], 0)
     assert summary["first"] is None and summary["style"] is None
     assert not year_review.has_story(summary)
+
+
+def _pages(day, hour, minutes, book="Dune", key=1, book_id=None, first_page=1):
+    """KOReader statistics rows: one page a minute from `hour` on `day` (local time)."""
+    card = {"key": key, "id": book_id, "title": book, "authors": ["Frank Herbert"]}
+    start = datetime(2026, *day, hour)
+    return [{"when": start.replace(minute=m % 60, hour=hour + m // 60), "seconds": 60, "book": card,
+             "page": first_page + m} for m in range(minutes)]
+
+
+def test_koreader_statistics_feed_the_year():
+    pages = _pages((3, 2), 22, 120) + _pages((3, 3), 22, 30, first_page=200) \
+        + _pages((5, 1), 8, 50, book="Emma", key=2, book_id=9) \
+        + [dict(_pages((1, 1), 9, 1)[0], when=datetime(2025, 12, 31, 23))]  # last year: left out
+    summary = year_review.summarize(2026, [], [], 10, [], [], 0, pages)
+    assert summary["minutes"] == 10 + 200
+    assert summary["pages_read"] == 200
+    assert summary["started"] == 2  # Dune and Emma, read in KOReader
+    assert summary["active_days"] == 3
+    assert summary["streak"] == 2
+    assert summary["clock"][22] == 90 and summary["clock"][23] == 60 and summary["clock"][8] == 50
+    assert summary["peak_hour"] == 22
+    assert summary["time_of_day"] == "evening"
+    assert summary["top_book"] == {"id": None, "title": "Dune", "authors": ["Frank Herbert"], "minutes": 150, "pages": 150}
+    assert summary["biggest_day"] == {"date": "2026-03-02", "minutes": 120}
+    assert year_review.has_story(summary)
+
+
+def test_clock_rays_point_midnight_up():
+    rays = year_review.clock_rays([0] * 6 + [30] + [0] * 17)
+    assert rays[0]["x1"] == rays[0]["x2"] == 130 and rays[0]["y2"] < rays[0]["y1"]
+    assert rays[6]["peak"] and rays[6]["x2"] > rays[0]["x2"]
+    assert not year_review.clock_rays([0] * 24)[6]["peak"]

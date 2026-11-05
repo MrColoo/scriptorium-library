@@ -13,7 +13,9 @@ user and year. What it can use:
 - reading time measured by the Kobo,
 - activity timestamps: web reader opens, downloads, Kobo and KOReader syncs, highlights,
 - highlights and notes,
-- books added to the library.
+- books added to the library,
+- KOReader's reading statistics, shared by the plugin (see reading_stats): the minutes of every page
+  read, which give the real reading time, the hours and days you read, and your most-read book.
 """
 
 from collections import Counter
@@ -108,22 +110,40 @@ def pick_quote(highlights):
     return candidates[0]
 
 
-def summarize(year, finished, started, minutes, activity, highlights, added):
+def summarize(year, finished, started, minutes, activity, highlights, added, pages=None):
     """Everything the slides need, as JSON-ready values.
 
     finished / started: lists of book dicts {id, title, authors, tags, series, when (datetime)}
     minutes: reading minutes measured by the Kobo; activity: list of datetimes;
-    highlights: list of {text, note, book_id, book_title, authors}; added: books added to the library.
+    highlights: list of {text, note, book_id, book_title, authors}; added: books added to the library;
+    pages: pages read in KOReader, as {when (local datetime), seconds, book: {key, title, authors, id}, page}.
     """
     finished = sorted(finished, key=lambda book: book["when"])
+    pages = [row for row in (pages or []) if row["when"].year == year and row["seconds"] > 0]
     moments = [_local(moment) for moment in activity if _in_year(moment, year)]
     moments += [_local(book["when"]) for book in finished]
-    days = {moment.date() for moment in moments}
+    days = {moment.date() for moment in moments} | {row["when"].date() for row in pages}
     months = [0] * 12
     for day in days:
         months[day.month - 1] += 1
+    # Measured reading time outweighs a single event, so pages count by the minute.
     hours = Counter(moment.hour for moment in moments)
     weekdays = Counter(moment.weekday() for moment in moments)
+    clock = [0] * 24
+    per_day = Counter()
+    per_book = {}
+    for row in pages:
+        clock[row["when"].hour] += row["seconds"]
+        per_day[row["when"].date()] += row["seconds"]
+        weekdays[row["when"].weekday()] += row["seconds"] / 60
+        entry = per_book.setdefault(row["book"]["key"], dict(row["book"], seconds=0, pages=set()))
+        entry["seconds"] += row["seconds"]
+        entry["pages"].add(row["page"])
+    for hour, seconds in enumerate(clock):
+        hours[hour] += seconds / 60
+    read_seconds = sum(clock)
+    top_book = max(per_book.values(), key=lambda entry: entry["seconds"]) if per_book else None
+    biggest_day = per_day.most_common(1)[0] if per_day else None
 
     def tops(values, limit):
         return [{"name": name, "count": count} for name, count in Counter(values).most_common(limit)]
@@ -135,8 +155,16 @@ def summarize(year, finished, started, minutes, activity, highlights, added):
     return {
         "year": year,
         "finished": len(finished),
-        "started": len(started),
-        "minutes": int(minutes or 0),
+        # Books read in KOReader count as opened too, library or not.
+        "started": len(started) + sum(1 for entry in per_book.values()
+                                      if not entry.get("id") or entry["id"] not in {book["id"] for book in started}),
+        "minutes": int(minutes or 0) + int(read_seconds // 60),
+        "pages_read": sum(len(entry["pages"]) for entry in per_book.values()),
+        "clock": [round(seconds / 60) for seconds in clock],
+        "peak_hour": clock.index(max(clock)) if read_seconds else None,
+        "top_book": {"id": top_book.get("id"), "title": top_book["title"], "authors": top_book.get("authors") or [],
+                     "minutes": round(top_book["seconds"] / 60), "pages": len(top_book["pages"])} if top_book else None,
+        "biggest_day": {"date": biggest_day[0].isoformat(), "minutes": round(biggest_day[1] / 60)} if biggest_day else None,
         "books": [card(book) for book in finished[-30:]],
         "first": card(finished[0]) if finished else None,
         "last": card(finished[-1]) if len(finished) > 1 else None,
@@ -158,7 +186,8 @@ def summarize(year, finished, started, minutes, activity, highlights, added):
 
 
 def has_story(summary):
-    return bool(summary["finished"] or summary["started"] or summary["active_days"] or summary["highlights"])
+    return bool(summary["finished"] or summary["started"] or summary["active_days"] or summary["highlights"]
+                or summary["minutes"])
 
 
 # ---------- Gathering ----------
@@ -229,7 +258,37 @@ def collect(user, year):
     start = datetime(year, 1, 1)
     added = calibre_db.session.query(db.Books.id).filter(db.Books.timestamp >= start,
                                                         db.Books.timestamp < datetime(year + 1, 1, 1)).count()
-    return summarize(year, finished, started, minutes, activity, highlights, added)
+    return summarize(year, finished, started, minutes, activity, highlights, added, _koreader_pages(user_id, year))
+
+
+def _koreader_pages(user_id, year):
+    """This year's pages from the user's shared KOReader statistics, with the library book when known."""
+    import os
+    import sqlite3
+    from . import reading_stats
+    path = reading_stats.stats_path(user_id)
+    if not os.path.isfile(path):
+        return []
+    try:
+        books, rows = reading_stats.load(path)
+    except sqlite3.Error as e:
+        log.warning("Could not read the reading statistics of user %s: %s", user_id, e)
+        return []
+    first, last = datetime(year, 1, 1).timestamp(), datetime(year + 1, 1, 1).timestamp()
+    rows = [row for row in rows if first <= row[2] < last]
+    used = {row[0] for row in rows}
+    library = reading_stats.library_books([dict(books.get(book_id, {}), id=book_id) for book_id in used
+                                           if books.get(book_id)])
+    cards = {}
+    for book_id in used:
+        info = books.get(book_id, {})
+        match = library.get(book_id)
+        cards[book_id] = {"key": book_id, "id": match.id if match else None,
+                          "title": match.title if match else (info.get("title") or _("Unknown book")),
+                          "authors": [a.name for a in match.authors][:2] if match
+                          else [a for a in (info.get("authors") or "").split("\n") if a][:2]}
+    return [{"when": datetime.fromtimestamp(start), "seconds": duration, "book": cards[book_id], "page": page}
+            for book_id, page, start, duration, _total in rows]
 
 
 def available_years(user):
@@ -263,6 +322,25 @@ def show(year):
     busiest = format_date(date(year, summary["busiest_month"], 1), "LLLL") if summary["busiest_month"] else None
     # 2024-01-01 was a Monday, so weekday n is 2024-01-(n+1).
     weekday = format_date(date(2024, 1, summary["weekday"] + 1), "EEEE") if summary["weekday"] is not None else None
+    biggest_day = None
+    if summary["biggest_day"]:
+        biggest_day = format_date(date.fromisoformat(summary["biggest_day"]["date"]), "d MMMM")
     return render_template("year.html", summary=summary, years=years, has_story=has_story(summary),
                            user_name=current_user.name, months=months, busiest_month=busiest, weekday=weekday,
-                           hours=round(summary["minutes"] / 60), title=_("Your %(year)s in books", year=year))
+                           hours=round(summary["minutes"] / 60), clock=clock_rays(summary["clock"]),
+                           biggest_day=biggest_day, title=_("Your %(year)s in books", year=year))
+
+
+def clock_rays(minutes_per_hour, center=130, inner=50, longest=72):
+    """SVG lines for a 24-hour reading clock: one ray per hour, midnight at the top, longer for more minutes."""
+    import math
+    top = max(minutes_per_hour) if minutes_per_hour and max(minutes_per_hour) > 0 else 0
+    rays = []
+    for hour, minutes in enumerate(minutes_per_hour):
+        angle = math.radians(hour * 15 - 90)
+        length = 4 + (minutes / top * longest if top else 0)
+        cos, sin = math.cos(angle), math.sin(angle)
+        rays.append({"hour": hour, "minutes": minutes, "peak": bool(top) and minutes == top,
+                     "x1": round(center + inner * cos, 2), "y1": round(center + inner * sin, 2),
+                     "x2": round(center + (inner + length) * cos, 2), "y2": round(center + (inner + length) * sin, 2)})
+    return rays

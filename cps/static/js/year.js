@@ -211,7 +211,7 @@
         // Stats card
         var top = 1140;
         ctx.fillStyle = "#F6EEDD"; roundRect(ctx, 70, top, W - 140, 600, 40); ctx.fill();
-        var stats = [[DATA.finished, T.books], [DATA.hours, T.hours], [DATA.streak, T.streak], [DATA.highlights, T.highlights]]
+        var stats = [[DATA.finished, T.books], [DATA.hours, T.hours], [DATA.streak, T.streak], [DATA.highlights, T.highlights], [DATA.pages, T.pages]]
           .filter(function (s) { return s[0] > 0; }).slice(0, 4);
         stats.forEach(function (s, k) {
           var col = k % 2, row = Math.floor(k / 2), x = 130 + col * 440, y = top + 150 + row * 190;

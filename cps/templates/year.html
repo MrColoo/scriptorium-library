@@ -15,15 +15,15 @@
 </head>
 <body class="yr">
 <script type="application/json" id="year-data">{{ {
-  'year': s.year, 'name': user_name, 'finished': s.finished, 'hours': hours, 'streak': s.streak,
-  'highlights': s.highlights, 'active_days': s.active_days,
+  'year': s.year, 'name': user_name, 'finished': s.finished or s.started, 'hours': hours, 'streak': s.streak,
+  'highlights': s.highlights, 'active_days': s.active_days, 'pages': s.pages_read,
   'author': s.authors[0].name if s.authors else '', 'genre': s.genres[0].name if s.genres else '',
   'covers': (s.books|map(attribute='id')|list)[-5:],
   'cover_url': url_for('web.get_cover', book_id=0, resolution='md')
 }|tojson }}</script>
 <script type="application/json" id="year-i18n">{{ {
   'title': _('My %(year)s in books', year=s.year), 'books': _('books finished'), 'hours': _('hours reading'),
-  'streak': _('days in a row'), 'highlights': _('highlights'), 'top_author': _('Top author'),
+  'streak': _('days in a row'), 'highlights': _('highlights'), 'pages': _('pages read'), 'top_author': _('Top author'),
   'top_genre': _('Top genre'), 'style': (_('The Voracious Reader') if s.style == 'voracious' else _('The Saga Seeker') if s.style == 'saga' else _('The Devoted Reader') if s.style == 'devotee' else _('The Explorer') if s.style == 'explorer' else _('The Slow Savourer') if s.style == 'savourer' else ''),
   'file': 'scriptorium-' ~ s.year ~ '.png', 'saved': _('Image saved'), 'pause': _('Pause'), 'play': _('Play')
 }|tojson }}</script>
@@ -80,8 +80,56 @@
       <div class="yr-rings" aria-hidden="true"><span></span><span></span><span></span></div>
       <p class="yr-eyebrow">{{ _('Time with a book in your hands') }}</p>
       <p class="yr-number" data-count="{{ hours }}">{{ hours }}</p>
-      <p class="yr-lead">{{ ngettext('hour of reading on your Kobo.', 'hours of reading on your Kobo.', hours) }}</p>
-      {%- if hours >= 4 %}<p class="yr-sub">{{ _('That is about %(num)s films, without the popcorn.', num=(hours / 2)|round|int) }}</p>{% endif %}
+      <p class="yr-lead">{{ ngettext('hour of reading.', 'hours of reading.', hours) }}</p>
+      {%- if s.pages_read %}<p class="yr-sub">{{ ngettext('%(num)s page turned, one after another.', '%(num)s pages turned, one after another.', s.pages_read, num=s.pages_read) }}</p>
+      {%- elif hours >= 4 %}<p class="yr-sub">{{ _('That is about %(num)s films, without the popcorn.', num=(hours / 2)|round|int) }}</p>{% endif %}
+    </section>
+    {%- endif %}
+
+    {#- 3b · Reading clock (KOReader) -#}
+    {%- if s.peak_hour is not none %}
+    <section class="yr-slide yr-s-clock">
+      <p class="yr-eyebrow">{{ _('Your reading clock') }}</p>
+      <svg class="yr-clock" viewBox="0 0 260 260" role="img" aria-label="{{ _('Minutes read at each hour of the day') }}">
+        <circle class="yr-clock-face" cx="130" cy="130" r="46"/>
+        {%- for ray in clock %}
+        <line class="yr-clock-ray{% if ray.peak %} is-peak{% endif %}" style="--i:{{ ray.hour }}" x1="{{ ray.x1 }}" y1="{{ ray.y1 }}" x2="{{ ray.x2 }}" y2="{{ ray.y2 }}"/>
+        {%- endfor %}
+        <text class="yr-clock-mark" x="130" y="22" text-anchor="middle">00</text>
+        <text class="yr-clock-mark" x="244" y="134" text-anchor="middle">06</text>
+        <text class="yr-clock-mark" x="130" y="248" text-anchor="middle">12</text>
+        <text class="yr-clock-mark" x="16" y="134" text-anchor="middle">18</text>
+        <text class="yr-clock-hour" x="130" y="138" text-anchor="middle">{{ '%02d:00'|format(s.peak_hour) }}</text>
+      </svg>
+      <h2 class="yr-title">{{ _('Your favourite hour: %(hour)s.', hour='%02d:00'|format(s.peak_hour)) }}</h2>
+      <p class="yr-sub">{% if s.peak_hour >= 22 or s.peak_hour < 5 %}{{ _('When the house goes quiet, the pages come out.') }}{% elif s.peak_hour < 12 %}{{ _('A chapter before the day begins.') }}{% elif s.peak_hour < 18 %}{{ _('A story in the middle of the day.') }}{% else %}{{ _('Evenings belong to books.') }}{% endif %}</p>
+    </section>
+    {%- endif %}
+
+    {#- 3c · The book you lived in (KOReader) -#}
+    {%- if s.top_book and s.top_book.minutes >= 30 %}
+    {%- set tb = s.top_book %}
+    <section class="yr-slide yr-s-topbook">
+      <p class="yr-eyebrow">{{ _('The book you lived in') }}</p>
+      {%- if tb.id %}
+      <figure class="yr-cover yr-cover--hero"><img src="{{ url_for('web.get_cover', book_id=tb.id, resolution='md') }}" alt=""></figure>
+      {%- else %}
+      <div class="yr-shelf yr-shelf--one" aria-hidden="true"><span class="yr-spine yr-spine--title" style="--i:0;--c:{{ palette[3] }};--h:92%"><span>{{ tb.title }}</span></span></div>
+      {%- endif %}
+      <h2 class="yr-title">{{ tb.title }}</h2>
+      {%- if tb.authors %}<p class="yr-sub">{{ tb.authors|join(', ') }}</p>{% endif %}
+      <p class="yr-lead">{% if tb.minutes >= 90 %}{{ _('%(hours)s hours together, over %(pages)s pages.', hours=(tb.minutes / 60)|round|int, pages=tb.pages) }}{% else %}{{ _('%(minutes)s minutes together, over %(pages)s pages.', minutes=tb.minutes, pages=tb.pages) }}{% endif %}</p>
+    </section>
+    {%- endif %}
+
+    {#- 3d · Biggest day (KOReader) -#}
+    {%- if s.biggest_day and s.biggest_day.minutes >= 45 %}
+    <section class="yr-slide yr-s-bigday">
+      <div class="yr-sun" aria-hidden="true"></div>
+      <p class="yr-eyebrow">{{ _('Your biggest reading day') }}</p>
+      <h2 class="yr-title">{{ biggest_day }}</h2>
+      <p class="yr-number" data-count="{{ s.biggest_day.minutes }}">{{ s.biggest_day.minutes }}</p>
+      <p class="yr-lead">{{ _('minutes with a book, in a single day.') }}</p>
     </section>
     {%- endif %}
 
@@ -219,10 +267,11 @@
         <div class="yr-poster-covers">{% for book in s.books[-5:] %}<img src="{{ url_for('web.get_cover', book_id=book.id, resolution='md') }}" alt="" style="--i:{{ loop.index0 }}">{% endfor %}</div>
         {%- endif %}
         <dl class="yr-poster-stats">
-          <div><dt>{{ _('Books') }}</dt><dd>{{ s.finished }}</dd></div>
+          <div><dt>{{ _('Books') }}</dt><dd>{{ s.finished or s.started }}</dd></div>
           {%- if hours >= 1 %}<div><dt>{{ _('Hours') }}</dt><dd>{{ hours }}</dd></div>{% endif %}
           <div><dt>{{ _('Streak') }}</dt><dd>{{ s.streak }}</dd></div>
-          <div><dt>{{ _('Highlights') }}</dt><dd>{{ s.highlights }}</dd></div>
+          {%- if s.highlights or not s.pages_read %}<div><dt>{{ _('Highlights') }}</dt><dd>{{ s.highlights }}</dd></div>
+          {%- else %}<div><dt>{{ _('Pages') }}</dt><dd>{{ s.pages_read }}</dd></div>{% endif %}
         </dl>
         <dl class="yr-poster-tops">
           {%- if s.authors %}<div><dt>{{ _('Top author') }}</dt><dd>{{ s.authors[0].name }}</dd></div>{% endif %}
