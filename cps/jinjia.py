@@ -291,6 +291,17 @@ def koreader_overview_global(user):
     return koreader_overview(user)
 
 
+@jinjia.app_template_global('koreader_plugin_version')
+def koreader_plugin_version_global():
+    return constants.KOREADER_PLUGIN_VERSION
+
+
+@jinjia.app_template_global('outdated_koreader_plugins')
+def outdated_koreader_plugins_global(user):
+    from .reading_overview import outdated_koreader_plugins
+    return outdated_koreader_plugins(user)
+
+
 @jinjia.app_template_global('avatar_url')
 def avatar_url_global(user):
     """URL of the user's profile picture, or None when they have none."""

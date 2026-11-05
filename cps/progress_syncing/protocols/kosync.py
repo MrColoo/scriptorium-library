@@ -750,6 +750,9 @@ def update_progress():
 
         # CRITICAL: Always commit kosync_progress first before attempting ReadBook updates
         # This ensures sync location is persisted even if ReadBook update fails
+        from ...reading_overview import note_koreader_plugin
+        note_koreader_plugin(user, device_id or device, device, request.headers.get("X-Scriptorium-Plugin"))
+
         try:
             ub.session.commit()
             log.info(f"Saved kosync progress: user={user.id}, document={document}, "

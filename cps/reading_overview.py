@@ -235,3 +235,65 @@ def get_koreader_last_sync(user_id):
         except ValueError:
             return None
     return _as_utc(latest)
+
+
+# ---------- KOReader plugin version ----------
+
+PLUGIN_KEY = "koreader_plugins"
+PLUGIN_RECENT_DAYS = 60
+
+
+def _version_tuple(version):
+    try:
+        return tuple(int(part) for part in str(version).split(".")[:3])
+    except ValueError:
+        return None
+
+
+def note_koreader_plugin(user, device_key, device_name, version):
+    """Remember which plugin version a KOReader device uses. The caller commits.
+
+    Plugins before 1.2 send no version, which is recorded as None ("older"). Written only when something
+    changed, or once a day, so a progress push does not rewrite the user's settings every time.
+    """
+    try:
+        if not device_key:
+            return
+        version = (version or "").strip()[:20] or None
+        settings = dict(user.view_settings or {})
+        devices = dict(settings.get(PLUGIN_KEY) or {})
+        key = str(device_key)[:100]
+        today = datetime.now(timezone.utc).date().isoformat()
+        entry = devices.get(key) or {}
+        if entry.get("version") == version and entry.get("device") == device_name and entry.get("seen") == today:
+            return
+        devices[key] = {"version": version, "device": (device_name or "")[:100], "seen": today}
+        if len(devices) > 20:  # keep the most recently seen devices
+            devices = dict(sorted(devices.items(), key=lambda item: item[1].get("seen") or "")[-20:])
+        settings[PLUGIN_KEY] = devices
+        user.view_settings = settings
+        from sqlalchemy.orm.attributes import flag_modified
+        flag_modified(user, "view_settings")
+    except Exception as e:
+        log.debug("Could not record the KOReader plugin version: %s", e)
+
+
+def outdated_koreader_plugins(user, today=None):
+    """Devices seen recently that run an older plugin: [{device, version}] (version None means before 1.2)."""
+    from . import constants
+    if user is None or getattr(user, "is_anonymous", True):
+        return []
+    current = _version_tuple(constants.KOREADER_PLUGIN_VERSION)
+    today = today or datetime.now(timezone.utc).date()
+    outdated = []
+    for entry in ((user.view_settings or {}).get(PLUGIN_KEY) or {}).values():
+        try:
+            seen = datetime.fromisoformat(entry.get("seen") or "").date()
+        except ValueError:
+            continue
+        if (today - seen).days > PLUGIN_RECENT_DAYS:
+            continue
+        version = _version_tuple(entry.get("version")) if entry.get("version") else None
+        if version is None or (current and version < current):
+            outdated.append({"device": entry.get("device") or "KOReader", "version": entry.get("version")})
+    return sorted(outdated, key=lambda item: item["device"])

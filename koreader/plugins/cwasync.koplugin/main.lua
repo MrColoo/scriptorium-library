@@ -549,7 +549,8 @@ function CWASync:doLogin(username, password, menu)
     local CWASyncClient = require("CWASyncClient")
     local client = CWASyncClient:new{
         service_url = self.settings.server .. "/kosync",
-        service_spec = self.path .. "/api.json"
+        service_spec = self.path .. "/api.json",
+        plugin_version = self.version,
     }
     Device:setIgnoreInput(true)
     local ok, status, body = pcall(client.authorize, client, username, password)
@@ -707,7 +708,8 @@ function CWASync:updateProgress(ensure_networking, interactive, on_suspend)
     local CWASyncClient = require("CWASyncClient")
     local client = CWASyncClient:new{
         service_url = self.settings.server .. "/kosync",
-        service_spec = self.path .. "/api.json"
+        service_spec = self.path .. "/api.json",
+        plugin_version = self.version,
     }
     local doc_digest = self:getDocumentDigest()
     if not doc_digest then
@@ -847,7 +849,8 @@ function CWASync:pushAnnotations(doc_digest)
     local CWASyncClient = require("CWASyncClient")
     local client = CWASyncClient:new{
         service_url = self.settings.server .. "/kosync",
-        service_spec = self.path .. "/api.json"
+        service_spec = self.path .. "/api.json",
+        plugin_version = self.version,
     }
     client:update_annotations(
         self.settings.username,
@@ -1022,7 +1025,8 @@ function CWASync:getProgress(ensure_networking, interactive)
     local CWASyncClient = require("CWASyncClient")
     local client = CWASyncClient:new{
         service_url = self.settings.server .. "/kosync",
-        service_spec = self.path .. "/api.json"
+        service_spec = self.path .. "/api.json",
+        plugin_version = self.version,
     }
     local doc_digest = self:getDocumentDigest()
     if not doc_digest then

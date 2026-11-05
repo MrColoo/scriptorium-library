@@ -10,6 +10,7 @@ local AUTH_TIMEOUTS     = { 5, 10 }
 local CWASyncClient = {
     service_spec = nil,
     service_url = nil,
+    plugin_version = nil,  -- sent with every request, so the server can suggest updating the plugin
 }
 
 function CWASyncClient:new(o)
@@ -26,8 +27,12 @@ function CWASyncClient:init()
         base_url = self.service_url,
     })
     package.loaded["Spore.Middleware.GinClient"] = {}
+    local plugin_version = self.plugin_version
     require("Spore.Middleware.GinClient").call = function(_, req)
         req.headers["accept"] = "application/vnd.koreader.v1+json"
+        if plugin_version then
+            req.headers["x-scriptorium-plugin"] = plugin_version
+        end
     end
     package.loaded["Spore.Middleware.CWASyncAuth"] = {}
     require("Spore.Middleware.CWASyncAuth").call = function(args, req)

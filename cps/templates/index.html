@@ -21,7 +21,11 @@
     <span class="status-line"><span class="status-dot status-dot--ok"></span>{{ _('Kobo synced %(when)s', when=kobo_last_sync) }}</span>
     {%- endif %}
     {%- if koreader_last_sync %}
+    {%- if outdated_koreader_plugins(current_user) %}
+    <a class="status-line" href="{{ url_for('web.profile') }}#koreader"><span class="status-dot status-dot--warn"></span>{{ _('Update the KOReader plugin') }}</a>
+    {%- else %}
     <span class="status-line"><span class="status-dot status-dot--ok"></span>{{ _('KOReader synced %(when)s', when=koreader_last_sync) }}</span>
+    {%- endif %}
     {%- endif %}
   </div>
   <div class="continue-grid">
