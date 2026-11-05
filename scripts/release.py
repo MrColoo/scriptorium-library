@@ -184,6 +184,12 @@ def prepare(version, dry_run=False, today=None):
         raise ReleaseError("commit or stash your changes first")
     if git("tag", "--list", version):
         raise ReleaseError("tag {} already exists".format(version))
+    # macOS and Windows ignore case in file names, so an upstream tag such as V1.2.0 blocks v1.2.0.
+    clashes = [t for t in git("tag", "--list").splitlines() if t.lower() == version.lower() and t != version]
+    if clashes:
+        raise ReleaseError("tag {} clashes with {} on this case-insensitive file system. It comes from "
+                           "Calibre-Web-Automated's history, not from this project: delete it locally with "
+                           "git tag -d {}".format(clashes[0], version, clashes[0]))
     data = load_notes()
     previous = latest_tag(data)
     if previous and not is_prerelease(version) and not releases.is_newer(version, previous):

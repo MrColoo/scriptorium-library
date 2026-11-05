@@ -167,3 +167,17 @@ def test_prepare_tags_without_an_empty_commit_when_already_dated(repo):
     release.prepare("v2.0.0", today=date(2026, 11, 2))
     assert _git(path, "rev-parse", "v2.0.0^{commit}") == head
     assert _git(path, "log", "-1", "--format=%s") == "notes ready"
+
+
+def test_prepare_explains_a_tag_that_differs_only_in_case(repo, monkeypatch):
+    path, run = repo
+    real_git = release.git
+
+    def git(*args, capture=True):
+        if args == ("tag", "--list"):  # as on macOS, where V2.0.0 and v2.0.0 cannot both exist
+            return real_git(*args) + "\nV2.0.0"
+        return real_git(*args, capture=capture)
+
+    monkeypatch.setattr(release, "git", git)
+    with pytest.raises(release.ReleaseError, match="git tag -d V2.0.0"):
+        release.prepare("v2.0.0", today=date(2026, 11, 2))
