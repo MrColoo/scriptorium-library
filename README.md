@@ -19,6 +19,7 @@
 
 <p align="center">
   <a href="#quick-start"><b>Quick start</b></a> ·
+  <a href="#see-it-in-action">Demo</a> ·
   <a href="#features">Features</a> ·
   <a href="#screenshots">Screenshots</a> ·
   <a href="docs/README.md">Docs</a> ·
@@ -63,6 +64,15 @@ itself in order** and **a place you actually enjoy opening**.
     </td>
   </tr>
 </table>
+
+## See it in action
+
+<p align="center">
+  <a href="https://github.com/MrColoo/scriptorium-library/raw/main/docs/media/scriptorium-demo.mp4">
+    <img src="docs/media/scriptorium-demo-poster.jpg" alt="Watch the one-minute tour of Scriptorium: automatic imports, the library, Kobo and KOReader sync, reading statistics, highlights, your year in books and personal styles" width="100%">
+  </a>
+  <br><sub>One minute: importing a book, the library, Kobo and KOReader sync, reading statistics, highlights, your year in books and personal styles.</sub>
+</p>
 
 ## Quick start
 

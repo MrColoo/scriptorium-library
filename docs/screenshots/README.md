@@ -17,3 +17,10 @@ downscaled to 1920 px wide) in light and dark mode.
 
 The README shows the light or dark version according to the reader's GitHub theme. Keep the file
 names when you replace an image.
+
+## Demo video
+
+`docs/media/scriptorium-demo.mp4` (1920×1080, 30 fps, one minute) and its cover
+`docs/media/scriptorium-demo-poster.jpg` are linked from the project README. The video is built from
+screenshots of a demo library like these, animated in a browser page and encoded with H.264. Keep it
+under 10 MB, so it can also be uploaded to GitHub and played inline in the README.
