@@ -67,12 +67,8 @@ itself in order** and **a place you actually enjoy opening**.
 
 ## See it in action
 
-<p align="center">
-  <a href="https://github.com/MrColoo/scriptorium-library/raw/main/docs/media/scriptorium-demo.mp4">
-    <img src="docs/media/scriptorium-demo-poster.jpg" alt="Watch the one-minute tour of Scriptorium: automatic imports, the library, Kobo and KOReader sync, reading statistics, highlights, your year in books and personal styles" width="100%">
-  </a>
-  <br><sub>One minute: importing a book, the library, Kobo and KOReader sync, reading statistics, highlights, your year in books and personal styles.</sub>
-</p>
+https://github.com/user-attachments/assets/0daf9b44-333a-4edd-873a-d19131faa2f7
+<p align="center"><sub>One minute: importing a book, the library, Kobo and KOReader sync, reading statistics, highlights, your year in books and personal styles.</sub></p>
 
 ## Quick start
 
