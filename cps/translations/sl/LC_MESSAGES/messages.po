@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-09 21:46+0100\n"
+"POT-Creation-Date: 2026-11-09 21:53+0100\n"
 "PO-Revision-Date: 2025-08-11 07:03+0000\n"
 "Last-Translator: Andrej Kralj\n"
 "Language-Team: Slovenian\n"
@@ -131,7 +131,7 @@ msgid "UI Configuration"
 msgstr "Nastavitve uporabniškega vmesnika"
 
 #: cps/admin.py:623 cps/admin.py:1303 cps/db.py:988 cps/search.py:154
-#: cps/web.py:909
+#: cps/web.py:910
 #, python-format
 msgid "Custom Column No.%(column)d does not exist in calibre database"
 msgstr "Stolpec po meri št. %(column)d ne obstaja v zbirki podatkov Calibre"
@@ -402,7 +402,7 @@ msgstr "Uspeh! Račun Gmail je potrjen."
 #: cps/admin.py:2562 cps/admin.py:2833 cps/editbooks.py:1062
 #: cps/editbooks.py:1860 cps/shelf.py:107 cps/shelf.py:175 cps/shelf.py:236
 #: cps/shelf.py:280 cps/shelf.py:321 cps/shelf.py:395 cps/shelf.py:517
-#: cps/tasks/convert.py:145 cps/web.py:2770
+#: cps/tasks/convert.py:145 cps/web.py:2776
 #, python-format
 msgid "Oops! Database Error: %(error)s."
 msgstr "Ups! Napaka podatkovne baze: %(error)s."
@@ -445,7 +445,7 @@ msgstr "Nepravilno trajanje za določeno nalogo"
 msgid "Scheduled tasks settings updated"
 msgstr "Posodobljene nastavitve načrtovanih opravil"
 
-#: cps/admin.py:1821 cps/admin.py:1965 cps/admin.py:2829 cps/web.py:2193
+#: cps/admin.py:1821 cps/admin.py:1965 cps/admin.py:2829 cps/web.py:2194
 msgid "Oops! An unknown error occurred. Please try again later."
 msgstr "Ups! Zgodila se je neznana napaka. Prosimo, poskusite znova pozneje."
 
@@ -453,7 +453,7 @@ msgstr "Ups! Zgodila se je neznana napaka. Prosimo, poskusite znova pozneje."
 msgid "Settings DB is not Writeable"
 msgstr "DB nastavitev ni mogoče zapisati"
 
-#: cps/admin.py:1844 cps/opds.py:199 cps/web.py:2696 cps/web.py:2821
+#: cps/admin.py:1844 cps/opds.py:199 cps/web.py:2702 cps/web.py:2827
 #, fuzzy
 msgid "title"
 msgstr "Naslov"
@@ -621,7 +621,7 @@ msgstr "Posodobljene nastavitve zbirke podatkov"
 msgid "Database Configuration"
 msgstr "Nastavitev zbirke podatkov"
 
-#: cps/admin.py:2518 cps/web.py:2162
+#: cps/admin.py:2518 cps/web.py:2163
 msgid "Oops! Please complete all fields."
 msgstr "Ups! Izpolnite vsa polja."
 
@@ -656,7 +656,7 @@ msgid "No admin user remaining, can't delete user"
 msgstr ""
 "Ni preostalega uporabnika administratorja, uporabnika ni mogoče izbrisati"
 
-#: cps/admin.py:2784 cps/web.py:2505
+#: cps/admin.py:2784 cps/web.py:2506
 msgid "Email can't be empty and has to be a valid Email"
 msgstr "E-pošta ne sme biti prazna in mora biti veljavna."
 
@@ -800,12 +800,12 @@ msgstr ""
 "Obnova končana. Varnostne kopije in dnevnik obnove so shranjeni v %(dir)s. "
 "Vsi podatki, povezani s knjigami, so bili ponastavljeni."
 
-#: cps/annotations.py:382 cps/templates/read.html:61
+#: cps/annotations.py:400 cps/templates/read.html:61
 #, fuzzy
 msgid "Note"
 msgstr "Opomba:"
 
-#: cps/annotations.py:395 cps/templates/highlights.html:6
+#: cps/annotations.py:413 cps/templates/highlights.html:6
 #: cps/templates/layout.html:73 cps/templates/year.html:273
 #, fuzzy
 msgid "Highlights"
@@ -1265,9 +1265,9 @@ msgstr "Upravljanje profilnih slik"
 #: cps/db.py:1273 cps/templates/appearance.html:56
 #: cps/templates/config_edit.html:110 cps/templates/config_view_edit.html:39
 #: cps/templates/config_view_edit.html:47 cps/templates/email_edit.html:44
-#: cps/templates/search_form.html:13 cps/web.py:722 cps/web.py:756
-#: cps/web.py:801 cps/web.py:841 cps/web.py:870 cps/web.py:1683 cps/web.py:1720
-#: cps/web.py:1771 cps/web.py:1803 cps/web.py:1842
+#: cps/templates/search_form.html:13 cps/web.py:723 cps/web.py:757
+#: cps/web.py:802 cps/web.py:842 cps/web.py:871 cps/web.py:1684 cps/web.py:1721
+#: cps/web.py:1772 cps/web.py:1804 cps/web.py:1843
 msgid "None"
 msgstr "Nobeno"
 
@@ -1373,8 +1373,8 @@ msgstr "Datoteke s končnico '%(ext)s' ni dovoljeno naložiti na ta strežnik"
 msgid "File to be uploaded must have an extension"
 msgstr "Datoteka, ki jo želite naložiti, mora imeti končnico"
 
-#: cps/editbooks.py:861 cps/editbooks.py:1483 cps/web.py:689 cps/web.py:2882
-#: cps/web.py:2975 cps/web.py:3053
+#: cps/editbooks.py:861 cps/editbooks.py:1483 cps/web.py:690 cps/web.py:2888
+#: cps/web.py:2981 cps/web.py:3059
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr "Ups! Izbrana knjiga ni na voljo. Datoteka ne obstaja ali ni dostopna"
@@ -1993,7 +1993,7 @@ msgstr "Nastavitve"
 #: cps/remotelogin.py:76 cps/templates/config_edit.html:32
 #: cps/templates/config_edit.html:86 cps/templates/layout.html:187
 #: cps/templates/layout.html:245 cps/templates/login.html:44
-#: cps/templates/register.html:29 cps/web.py:2271
+#: cps/templates/register.html:29 cps/web.py:2272
 msgid "Login"
 msgstr "Prijava"
 
@@ -2043,7 +2043,7 @@ msgstr "Prenesene knjige"
 msgid "Show Downloaded Books"
 msgstr "Prikaži prenesene knjige"
 
-#: cps/render_template.py:92 cps/web.py:579
+#: cps/render_template.py:92 cps/web.py:580
 msgid "Top Rated Books"
 msgstr "Najbolje ocenjene knjige"
 
@@ -2051,7 +2051,7 @@ msgstr "Najbolje ocenjene knjige"
 msgid "Show Top Rated Books"
 msgstr "Prikaži najbolje ocenjene knjige"
 
-#: cps/render_template.py:95 cps/web.py:928
+#: cps/render_template.py:95 cps/web.py:929
 msgid "Read Books"
 msgstr "Prebrane knjige"
 
@@ -2059,7 +2059,7 @@ msgstr "Prebrane knjige"
 msgid "Show Read and Unread"
 msgstr "Prikaži prebrano in neprebrano"
 
-#: cps/render_template.py:99 cps/web.py:931
+#: cps/render_template.py:99 cps/web.py:932
 msgid "Unread Books"
 msgstr "Neprebrane knjige"
 
@@ -2077,7 +2077,7 @@ msgstr "Prikaži naključne knjige"
 
 #: cps/render_template.py:105 cps/templates/book_table.html:59
 #: cps/templates/book_table.html:105 cps/templates/stats.html:16
-#: cps/web.py:1846
+#: cps/web.py:1847
 msgid "Categories"
 msgstr "Kategorije"
 
@@ -2090,7 +2090,7 @@ msgstr "Prikaži oddelek kategorije"
 #: cps/templates/book_table.html:60 cps/templates/book_table.html:106
 #: cps/templates/cwa_settings.html:149 cps/templates/cwa_settings.html:198
 #: cps/templates/magic_shelf_edit.html:92 cps/templates/search_form.html:66
-#: cps/templates/stats.html:17 cps/web.py:1726 cps/web.py:1738
+#: cps/templates/stats.html:17 cps/web.py:1727 cps/web.py:1739
 msgid "Series"
 msgstr "Serije"
 
@@ -2110,7 +2110,7 @@ msgid "Show Author Section"
 msgstr "Prikaži razdelek avtorjev"
 
 #: cps/render_template.py:115 cps/templates/book_table.html:62
-#: cps/templates/book_table.html:109 cps/web.py:1694
+#: cps/templates/book_table.html:109 cps/web.py:1695
 msgid "Publishers"
 msgstr "Založniki"
 
@@ -2120,7 +2120,7 @@ msgstr "Prikaži razdelek založnikov"
 
 #: cps/render_template.py:118 cps/templates/book_table.html:61
 #: cps/templates/book_table.html:108 cps/templates/search_form.html:68
-#: cps/web.py:1818
+#: cps/web.py:1819
 msgid "Languages"
 msgstr "Jeziki"
 
@@ -2128,7 +2128,7 @@ msgstr "Jeziki"
 msgid "Show Language Section"
 msgstr "Prikaži razdelek jezikov"
 
-#: cps/render_template.py:122 cps/web.py:1778
+#: cps/render_template.py:122 cps/web.py:1779
 msgid "Ratings"
 msgstr "Ocene"
 
@@ -2144,7 +2144,7 @@ msgstr "Vrste datotek"
 msgid "Show File Formats Section"
 msgstr "Prikaži razdelek vrste datotek"
 
-#: cps/render_template.py:129 cps/web.py:954
+#: cps/render_template.py:129 cps/web.py:955
 msgid "Archived Books"
 msgstr "Arhivirane knjige"
 
@@ -2152,7 +2152,7 @@ msgstr "Arhivirane knjige"
 msgid "Show Archived Books"
 msgstr "Prikaži arhivirane knjige"
 
-#: cps/render_template.py:134 cps/templates/book_table.html:7 cps/web.py:1507
+#: cps/render_template.py:134 cps/templates/book_table.html:7 cps/web.py:1508
 msgid "Books List"
 msgstr "Seznam knjig"
 
@@ -2409,144 +2409,144 @@ msgstr ""
 msgid "Books (%(count)s)"
 msgstr "Najboljših %(count)s"
 
-#: cps/web.py:591
+#: cps/web.py:592
 msgid "Discover (Random Books)"
 msgstr "Odkrivanje (naključne knjige)"
 
-#: cps/web.py:641
+#: cps/web.py:642
 msgid "Hot Books (Most Downloaded)"
 msgstr "Vroče knjige (največkrat prenesene)"
 
-#: cps/web.py:672
+#: cps/web.py:673
 #, python-format
 msgid "Downloaded books by %(user)s"
 msgstr "Prenesene knjige od %(user)s"
 
-#: cps/web.py:705
+#: cps/web.py:706
 #, python-format
 msgid "Author: %(name)s"
 msgstr "Avtor: %(name)s"
 
-#: cps/web.py:741
+#: cps/web.py:742
 #, python-format
 msgid "Publisher: %(name)s"
 msgstr "Založnik: %(name)s"
 
-#: cps/web.py:769
+#: cps/web.py:770
 #, python-format
 msgid "Series: %(serie)s"
 msgstr "Serija: %(serie)s"
 
-#: cps/web.py:783
+#: cps/web.py:784
 msgid "Rating: None"
 msgstr "Ocena: brez"
 
-#: cps/web.py:792
+#: cps/web.py:793
 #, python-format
 msgid "Rating: %(rating)s stars"
 msgstr "Ocena: %(rating)s zvezdic"
 
-#: cps/web.py:823
+#: cps/web.py:824
 #, python-format
 msgid "File format: %(format)s"
 msgstr "Vrsta datoteke: %(format)s"
 
-#: cps/web.py:860
+#: cps/web.py:861
 #, python-format
 msgid "Category: %(name)s"
 msgstr "Kategorija: %(name)s"
 
-#: cps/web.py:889
+#: cps/web.py:890
 #, python-format
 msgid "Language: %(name)s"
 msgstr "Jezik: %(name)s"
 
-#: cps/web.py:1017
+#: cps/web.py:1018
 #, fuzzy
 msgid "Error loading magic shelf"
 msgstr "Napaka pri brisanju police"
 
-#: cps/web.py:1042
+#: cps/web.py:1043
 #, fuzzy, python-format
 msgid "Magic Shelf: %(icon)s %(name)s"
 msgstr "Polica: '%(name)s'"
 
-#: cps/web.py:1115
+#: cps/web.py:1116
 msgid "No rules provided"
 msgstr "Pravila niso navedena"
 
-#: cps/web.py:1121
+#: cps/web.py:1122
 #, fuzzy
 msgid "Invalid rules format"
 msgstr "Nepravilna oblike e-poštnega naslova"
 
-#: cps/web.py:1143
+#: cps/web.py:1144
 msgid "Error processing rules"
 msgstr "Napaka pri obdelavi pravil"
 
-#: cps/web.py:1147
+#: cps/web.py:1148
 #, fuzzy
 msgid "Invalid request"
 msgstr "Neveljavna vloga"
 
-#: cps/web.py:1191
+#: cps/web.py:1192
 #, fuzzy
 msgid "Name and rules are required"
 msgstr "Zahtevani so tako uporabniško ime kot podatki o sliki."
 
-#: cps/web.py:1194 cps/web.py:1291
+#: cps/web.py:1195 cps/web.py:1292
 msgid "Shelf name too long (max 100 characters)"
 msgstr "Ime police je predolgo (največ 100 znakov)"
 
-#: cps/web.py:1216
+#: cps/web.py:1217
 #, fuzzy
 msgid "Error creating shelf"
 msgstr "Napaka pri brisanju police"
 
-#: cps/templates/layout.html:114 cps/web.py:1230
+#: cps/templates/layout.html:114 cps/web.py:1231
 #, fuzzy
 msgid "Create Magic Shelf"
 msgstr "Ustvari polico"
 
-#: cps/web.py:1284
+#: cps/web.py:1285
 msgid "Permission denied to change public status"
 msgstr "Dovoljenje za spreminjanje javnega statusa je zavrnjeno"
 
-#: cps/web.py:1288
+#: cps/web.py:1289
 #, fuzzy
 msgid "Shelf name is required"
 msgstr "To polje je obvezno"
 
-#: cps/web.py:1322
+#: cps/web.py:1323
 #, fuzzy
 msgid "Error updating shelf"
 msgstr "Napaka pri brisanju police"
 
-#: cps/web.py:1337
+#: cps/web.py:1338
 #, fuzzy
 msgid "Edit Magic Shelf"
 msgstr "Urejanje police"
 
-#: cps/web.py:1350
+#: cps/web.py:1351
 #, fuzzy
 msgid "Shelf not found"
 msgstr "Ne najdem uporabnika"
 
-#: cps/web.py:1355
+#: cps/web.py:1356
 msgid "Permission denied"
 msgstr "Dostop zavrnjen"
 
-#: cps/web.py:1386
+#: cps/web.py:1387
 #, fuzzy
 msgid "Shelf duplicated successfully"
 msgstr "{} uporabnikov uspešno izbrisanih"
 
-#: cps/web.py:1392
+#: cps/web.py:1393
 #, fuzzy
 msgid "Error duplicating shelf"
 msgstr "Napaka pri brisanju police"
 
-#: cps/templates/magic_shelf_edit.html:64 cps/web.py:1419
+#: cps/templates/magic_shelf_edit.html:64 cps/web.py:1420
 msgid ""
 "System shelves cannot be deleted. You can hide them in your user profile "
 "settings."
@@ -2554,154 +2554,154 @@ msgstr ""
 "Sistemskih polic ni mogoče izbrisati. Lahko jih skrijete v nastavitvah "
 "uporabniškega profila."
 
-#: cps/web.py:1436
+#: cps/web.py:1437
 #, fuzzy
 msgid "Error deleting shelf"
 msgstr "Napaka pri brisanju police"
 
-#: cps/web.py:1452
+#: cps/web.py:1453
 msgid ""
 "You cannot hide your own shelves. Delete them instead if you don't want them."
 msgstr ""
 "Svojih lastnih polic ne morete skriti. Če jih ne želite, jih raje izbrišite."
 
-#: cps/web.py:1462
+#: cps/web.py:1463
 msgid "Shelf already hidden"
 msgstr "Polica je že skrita"
 
-#: cps/web.py:1476
+#: cps/web.py:1477
 #, fuzzy
 msgid "Error hiding shelf"
 msgstr "Napaka pri brisanju police"
 
-#: cps/web.py:1490
+#: cps/web.py:1491
 msgid "Shelf was not hidden"
 msgstr "Polica ni bila skrita"
 
-#: cps/web.py:1499
+#: cps/web.py:1500
 #, fuzzy
 msgid "Error unhiding shelf"
 msgstr "Napaka pri brisanju police"
 
-#: cps/templates/admin.html:34 cps/web.py:1653
+#: cps/templates/admin.html:34 cps/web.py:1654
 msgid "Downloads"
 msgstr "Prenosi"
 
-#: cps/web.py:1805
+#: cps/web.py:1806
 msgid "File formats list"
 msgstr "Seznam vrste datotek"
 
-#: cps/web.py:2045 cps/web.py:2083
+#: cps/web.py:2046 cps/web.py:2084
 msgid "Please configure the SMTP mail settings first..."
 msgstr "Najprej nastavite nastavitve pošte SMTP..."
 
-#: cps/web.py:2049
+#: cps/web.py:2050
 msgid "Oops! Please update your profile with a valid eReader Email."
 msgstr "Ups! Posodobite svoj profil z veljavnim e-poštnim naslovom eReaderja."
 
-#: cps/web.py:2071
+#: cps/web.py:2072
 #, python-format
 msgid "Success! Book queued for sending to %(eReadermail)s"
 msgstr "Uspeh! Knjiga je v vrsti za pošiljanje v %(eReadermail)s"
 
-#: cps/web.py:2074 cps/web.py:2132
+#: cps/web.py:2075 cps/web.py:2133
 #, python-format
 msgid "Oops! There was an error sending book: %(res)s"
 msgstr "Ups! Pri pošiljanju knjige je prišlo do napake: %(res)s"
 
-#: cps/web.py:2091 cps/web.py:2101
+#: cps/web.py:2092 cps/web.py:2102
 msgid "No email addresses selected"
 msgstr "Noben e-poštni naslov ni bil izbran"
 
-#: cps/web.py:2108
+#: cps/web.py:2109
 #, fuzzy
 msgid "Additional email addresses are disabled for your account."
 msgstr "Vnesite dodatne e-poštne naslove (ločene z vejico):"
 
-#: cps/web.py:2130
+#: cps/web.py:2131
 #, fuzzy
 msgid "Success! Book queued for sending to the selected address(es)!"
 msgstr "Uspeh! Knjiga je v vrsti za pošiljanje v %(eReadermail)s"
 
-#: cps/web.py:2149
+#: cps/web.py:2150
 msgid "Please wait one minute to register next user"
 msgstr "Počakajte eno minuto za registracijo naslednjega uporabnika"
 
 #: cps/templates/layout.html:189 cps/templates/login.html:77
-#: cps/templates/register.html:22 cps/web.py:2150 cps/web.py:2154
-#: cps/web.py:2159 cps/web.py:2163 cps/web.py:2169 cps/web.py:2194
-#: cps/web.py:2198 cps/web.py:2211 cps/web.py:2214
+#: cps/templates/register.html:22 cps/web.py:2151 cps/web.py:2155
+#: cps/web.py:2160 cps/web.py:2164 cps/web.py:2170 cps/web.py:2195
+#: cps/web.py:2199 cps/web.py:2212 cps/web.py:2215
 msgid "Register"
 msgstr "Registriraj"
 
-#: cps/web.py:2153 cps/web.py:2318
+#: cps/web.py:2154 cps/web.py:2319
 msgid "Connection error to limiter backend, please contact your administrator"
 msgstr ""
 "Napaka pri povezavi z zalednim strežnikom limiterja, obrnite se na skrbnika"
 
-#: cps/web.py:2158 cps/web.py:2210
+#: cps/web.py:2159 cps/web.py:2211
 msgid ""
 "Oops! Email server is not configured, please contact your administrator."
 msgstr "Ups! E-poštni strežnik ni nastavljen, obrnite se na skrbnika."
 
-#: cps/web.py:2196
+#: cps/web.py:2197
 msgid "Oops! Your Email is not allowed."
 msgstr "Ups! Vaša e-pošta ni dovoljena."
 
-#: cps/web.py:2199
+#: cps/web.py:2200
 msgid "Success! Confirmation Email has been sent."
 msgstr "Uspeh! Potrditveno e-poštno sporočilo je bilo poslano."
 
-#: cps/web.py:2247
+#: cps/web.py:2248
 #, fuzzy
 msgid ""
 "Authentication loop detected. If you're experiencing login issues, please "
 "contact your administrator."
 msgstr "Instanca Scriptorium ni nastavljena, obrni se na skrbnika"
 
-#: cps/web.py:2292
+#: cps/web.py:2293
 #, fuzzy
 msgid ""
 "OAuth authentication is not properly configured. Please contact "
 "administrator."
 msgstr "Ups! E-poštni strežnik ni nastavljen, obrnite se na skrbnika."
 
-#: cps/web.py:2297 cps/web.py:2324
+#: cps/web.py:2298 cps/web.py:2325
 msgid "Cannot activate LDAP authentication"
 msgstr "Ni mogoče aktivirati avtentikacije LDAP"
 
-#: cps/web.py:2306
+#: cps/web.py:2307
 msgid "Standard login is disabled."
 msgstr "Standardna prijava je onemogočena."
 
-#: cps/web.py:2314
+#: cps/web.py:2315
 msgid "Please wait one minute before next login"
 msgstr "Pred naslednjo prijavo počakajte eno minuto"
 
-#: cps/web.py:2332
+#: cps/web.py:2333
 msgid "Username cannot be empty"
 msgstr "Uporabniško ime ne more biti prazno"
 
-#: cps/web.py:2344
+#: cps/web.py:2345
 #, python-format
 msgid "you are now logged in as: '%(nickname)s'"
 msgstr "prijavljeni ste kot: '%(nickname)s'"
 
-#: cps/web.py:2363
+#: cps/web.py:2364
 #, fuzzy, python-format
 msgid ""
 "Welcome! Your account has been automatically created. You are now logged in "
 "as: '%(nickname)s'"
 msgstr "Uspeh! Prijavljeni ste kot: %(nickname)s"
 
-#: cps/web.py:2368 cps/web.py:2371
+#: cps/web.py:2369 cps/web.py:2372
 #, fuzzy
 msgid ""
 "Authentication successful, but account creation failed. Please contact your "
 "administrator."
 msgstr "Instanca Scriptorium ni nastavljena, obrni se na skrbnika"
 
-#: cps/web.py:2375
+#: cps/web.py:2376
 msgid ""
 "Authentication successful, but no local account found. Please contact your "
 "administrator to create your account."
@@ -2709,7 +2709,7 @@ msgstr ""
 "Prijava uspešna, vendar lokalni račun ni bil najden. Obrnite se na skrbnika "
 "za ustvarjanje računa."
 
-#: cps/web.py:2383
+#: cps/web.py:2384
 #, python-format
 msgid ""
 "Fallback Login as: '%(nickname)s', LDAP Server not reachable, or user not "
@@ -2718,54 +2718,54 @@ msgstr ""
 "Rezervna prijava kot: %(nickname)s, strežnik LDAP ni dosegljiv ali uporabnik "
 "ni znan"
 
-#: cps/web.py:2389
+#: cps/web.py:2390
 #, python-format
 msgid "Could not login: %(message)s"
 msgstr "Ni se mogel prijaviti: %(message)s"
 
-#: cps/web.py:2412 cps/web.py:2413 cps/web.py:2459
+#: cps/web.py:2413 cps/web.py:2414 cps/web.py:2460
 msgid "Wrong Username or Password"
 msgstr "Napačno uporabniško ime ali geslo"
 
-#: cps/web.py:2421
+#: cps/web.py:2422
 msgid "New Password was sent to your email address"
 msgstr "Novo geslo je bilo poslano na vaš e-poštni naslov"
 
-#: cps/web.py:2425
+#: cps/web.py:2426
 msgid "An unknown error occurred. Please try again later."
 msgstr "Zgodila se je neznana napaka. Prosimo, poskusite znova pozneje."
 
-#: cps/web.py:2427
+#: cps/web.py:2428
 msgid "Please enter valid username to reset password"
 msgstr "Za ponastavitev gesla vnesite veljavno uporabniško ime"
 
-#: cps/web.py:2438
+#: cps/web.py:2439
 #, python-format
 msgid "You are now logged in as: '%(nickname)s'"
 msgstr "Prijavljeni ste kot: '%(nickname)s'"
 
-#: cps/web.py:2494
+#: cps/web.py:2495
 msgid "Current password is incorrect"
 msgstr ""
 
-#: cps/web.py:2496
+#: cps/web.py:2497
 msgid "Please choose a password other than the default one"
 msgstr ""
 
-#: cps/web.py:2738 cps/web.py:2866
+#: cps/web.py:2744 cps/web.py:2872
 #, python-format
 msgid "%(name)s's Profile"
 msgstr "%(name)s profil"
 
-#: cps/web.py:2759
+#: cps/web.py:2765
 msgid "Success! Profile Updated"
 msgstr "Uspeh! Profil posodobljen"
 
-#: cps/web.py:2765
+#: cps/web.py:2771
 msgid "Oops! An account already exists for this Email."
 msgstr "Ups! Račun za to e-pošto že obstaja."
 
-#: cps/web.py:2988
+#: cps/web.py:2994
 #, fuzzy
 msgid "Invalid book ID."
 msgstr "Neveljavna vloga"
@@ -3120,7 +3120,7 @@ msgstr ""
 #: cps/templates/profile_pictures.html:29 cps/templates/reading_import.html:82
 #: cps/templates/schedule_edit.html:34 cps/templates/shelf_edit.html:32
 #: cps/templates/shelf_order.html:35 cps/templates/tasks.html:56
-#: cps/templates/user_edit.html:516
+#: cps/templates/user_edit.html:520
 msgid "Cancel"
 msgstr "Prekliči"
 
@@ -3951,7 +3951,7 @@ msgstr "Onemogoči sinhronizacijo napredka branja v Hardcover"
 #: cps/templates/cwa_settings.html:259 cps/templates/email_edit.html:71
 #: cps/templates/magic_shelf_edit.html:59
 #: cps/templates/profile_pictures.html:28 cps/templates/schedule_edit.html:33
-#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:515
+#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:519
 msgid "Save"
 msgstr "Shrani"
 
@@ -5020,35 +5020,35 @@ msgstr "Privzeti jezik"
 msgid "Default Visible Language of Books"
 msgstr "Privzet vidni jezik knjig"
 
-#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:500
+#: cps/templates/config_view_edit.html:81 cps/templates/user_edit.html:504
 msgid "Admin User"
 msgstr "Administratorski uporabnik"
 
-#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:501
+#: cps/templates/config_view_edit.html:82 cps/templates/user_edit.html:505
 msgid "Allow Downloads"
 msgstr "Dovoli prenose"
 
-#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:502
+#: cps/templates/config_view_edit.html:83 cps/templates/user_edit.html:506
 msgid "Allow eBook Viewer"
 msgstr "Dovoli pregledovalnik e-knjig"
 
-#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:503
+#: cps/templates/config_view_edit.html:84 cps/templates/user_edit.html:507
 msgid "Allow Uploads"
 msgstr "Dovoli nalaganje"
 
-#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:504
+#: cps/templates/config_view_edit.html:85 cps/templates/user_edit.html:508
 msgid "Allow Edit"
 msgstr "Omogoči urejanje"
 
-#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:505
+#: cps/templates/config_view_edit.html:86 cps/templates/user_edit.html:509
 msgid "Allow Delete Books"
 msgstr "Dovoli izbris knjig"
 
-#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:507
+#: cps/templates/config_view_edit.html:87 cps/templates/user_edit.html:511
 msgid "Allow Changing Password"
 msgstr "Dovoli spreminjanje gesla"
 
-#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:508
+#: cps/templates/config_view_edit.html:88 cps/templates/user_edit.html:512
 msgid "Allow Editing Public Shelves"
 msgstr "Omogoči urejanje javnih polic"
 
@@ -5061,7 +5061,7 @@ msgstr "Privzete vidnosti za nove uporabnike"
 msgid "Show Random Books in Detail View"
 msgstr "Prikaži naključne knjige v podrobnem pogledu"
 
-#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:427
+#: cps/templates/config_view_edit.html:101 cps/templates/user_edit.html:431
 msgid "Add Allowed/Denied Tags"
 msgstr "Dodajanje oznak dovoljeno/zavrnjeno"
 
@@ -7095,7 +7095,7 @@ msgstr "Brskaj"
 msgid "No shelves yet"
 msgstr ""
 
-#: cps/templates/layout.html:112 cps/templates/user_edit.html:436
+#: cps/templates/layout.html:112 cps/templates/user_edit.html:440
 #, fuzzy
 msgid "Smart shelves"
 msgstr "Police"
@@ -8924,7 +8924,7 @@ msgstr ""
 msgid "Shelves & OPDS"
 msgstr "Police"
 
-#: cps/templates/user_edit.html:29 cps/templates/user_edit.html:498
+#: cps/templates/user_edit.html:29 cps/templates/user_edit.html:502
 #, fuzzy
 msgid "Permissions"
 msgstr "Različica"
@@ -9312,90 +9312,94 @@ msgstr "Hardcover API žeton"
 msgid "Used to fetch metadata from Hardcover and sync reading progress."
 msgstr ""
 
-#: cps/templates/user_edit.html:428
+#: cps/templates/user_edit.html:425
+msgid "Show a passage of the day from your highlights on the home page"
+msgstr ""
+
+#: cps/templates/user_edit.html:432
 msgid "Add allowed/Denied Custom Column Values"
 msgstr "Dodajanje dovoljenih/zavrnjenih vrednosti stolpcev po meri"
 
-#: cps/templates/user_edit.html:437
+#: cps/templates/user_edit.html:441
 msgid ""
 "Choose how smart shelves are ordered in the sidebar and which ones you see."
 msgstr ""
 
-#: cps/templates/user_edit.html:439
+#: cps/templates/user_edit.html:443
 msgid "Order Mode"
 msgstr ""
 
-#: cps/templates/user_edit.html:441
+#: cps/templates/user_edit.html:445
 msgid "Manual (drag to reorder)"
 msgstr ""
 
-#: cps/templates/user_edit.html:441
+#: cps/templates/user_edit.html:445
 msgid "Name (A-Z)"
 msgstr ""
 
-#: cps/templates/user_edit.html:441
+#: cps/templates/user_edit.html:445
 msgid "Name (Z-A)"
 msgstr ""
 
-#: cps/templates/user_edit.html:442
+#: cps/templates/user_edit.html:446
 msgid "Book count (high to low)"
 msgstr ""
 
-#: cps/templates/user_edit.html:442
+#: cps/templates/user_edit.html:446
 msgid "Book count (low to high)"
 msgstr ""
 
-#: cps/templates/user_edit.html:443
+#: cps/templates/user_edit.html:447
 msgid "Created (newest first)"
 msgstr ""
 
-#: cps/templates/user_edit.html:443
+#: cps/templates/user_edit.html:447
 msgid "Created (oldest first)"
 msgstr ""
 
-#: cps/templates/user_edit.html:444
+#: cps/templates/user_edit.html:448
 #, fuzzy
 msgid "Recently modified"
 msgstr "Zadnjič spremenjeno"
 
-#: cps/templates/user_edit.html:444
+#: cps/templates/user_edit.html:448
 #, fuzzy
 msgid "Least recently modified"
 msgstr "Zadnjič spremenjeno"
 
-#: cps/templates/user_edit.html:465
+#: cps/templates/user_edit.html:469
 msgid "Visible in the sidebar"
 msgstr ""
 
-#: cps/templates/user_edit.html:479
+#: cps/templates/user_edit.html:483
 msgid "OPDS Catalog Order"
 msgstr "Vrstni red OPDS kataloga"
 
-#: cps/templates/user_edit.html:480
+#: cps/templates/user_edit.html:484
 msgid ""
 "Order and visibility of the entries e-reader apps see at the top of the OPDS "
 "catalog."
 msgstr ""
 
-#: cps/templates/user_edit.html:489
+#: cps/templates/user_edit.html:493
 #, fuzzy, python-format
 msgid "Show %(name)s"
 msgstr "Avtor: %(name)s"
 
-#: cps/templates/user_edit.html:489
+#: cps/templates/user_edit.html:493
 msgid "Visible"
 msgstr "Vidno"
 
-#: cps/templates/user_edit.html:500
+#: cps/templates/user_edit.html:504
 msgid "Full access to settings and users."
 msgstr ""
 
-#: cps/templates/user_edit.html:519 cps/templates/user_table.html:60
+#: cps/templates/user_edit.html:523 cps/templates/user_table.html:60
 #, python-format
 msgid "Delete %(name)s? Their shelves and reading progress are removed too."
 msgstr ""
 
-#: cps/templates/user_edit.html:519 cps/templates/user_edit.html:521
+#: cps/templates/user_edit.html:523 cps/templates/user_edit.html:525
 #: cps/templates/user_table.html:59
 msgid "Delete User"
 msgstr "Izbriši uporabnika"
