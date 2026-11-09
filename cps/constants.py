@@ -130,6 +130,14 @@ LDAP_AUTH_SIMPLE         = 0
 DEFAULT_MAIL_SERVER = "mail.example.org"
 
 DEFAULT_PASSWORD    = "admin123"  # nosec
+# A new installation creates its first account in the browser; this brings back admin / admin123.
+DEFAULT_ADMIN_ENV   = "SCRIPTORIUM_DEFAULT_ADMIN"
+
+
+def default_admin_requested():
+    """Whether a new installation should get the shipped admin / admin123 account."""
+    from os import environ
+    return environ.get(DEFAULT_ADMIN_ENV, "").strip().lower() in ("1", "true", "yes", "on")
 DEFAULT_PORT        = 8083
 env_CWA_PORT_OVERRIDE = os.environ.get("CWA_PORT_OVERRIDE")
 if env_CWA_PORT_OVERRIDE:

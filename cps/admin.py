@@ -155,6 +155,8 @@ def before_request():
                                  'web.login',
                                  'web.login_post',
                                  'web.logout',
+                                 'first_run.setup',
+                                 'first_run.create',
                                  'admin.load_dialogtexts',
                                  'admin.ajax_pathchooser'):
         return redirect(url_for('admin.db_configuration'))
@@ -2547,6 +2549,8 @@ def _handle_new_user(to_save, content, languages, translations, kobo_support):
         content.denied_column_value = config.config_denied_column_value
         # No default value for kobo sync shelf setting
         content.kobo_only_shelves_sync = to_save.get("kobo_only_shelves_sync", 0) == "on"
+        from .first_run import mark_for_welcome
+        mark_for_welcome(content)
         ub.session.add(content)
         ub.session.commit()
         flash(_("User '%(user)s' created", user=content.name), category="success")

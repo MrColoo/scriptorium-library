@@ -44,6 +44,7 @@ def main():
     from .web_reader import web_reader
     from .reading_import import reading_import
     from .pwa import pwa
+    from .first_run import first_run
     try:
         from .kobo import kobo, get_kobo_activated
         from .kobo_auth import kobo_auth
@@ -102,6 +103,7 @@ def main():
     app.register_blueprint(web_reader)
     app.register_blueprint(reading_import)
     app.register_blueprint(pwa)
+    app.register_blueprint(first_run)
     if kobo_available:
         app.register_blueprint(kobo)
         app.register_blueprint(kobo_auth)

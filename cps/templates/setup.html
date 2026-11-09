@@ -1,0 +1,67 @@
+{% set bare_layout = true %}
+{% extends "layout.html" %}
+{% block body %}
+<div class="auth-card setup-card">
+  <div class="auth-head">
+    <img class="brand-logo brand-logo--lg" src="{{ url_for('static', filename='icon.svg') }}" alt="" width="64" height="64">
+    <div class="stack-sm">
+      <span class="setup-eyebrow">{{ _('First start') }}</span>
+      <h1 class="setup-title">{{ _('Welcome to %(name)s', name=instance) }}</h1>
+      <p>{{ _('Create the administrator account. It runs the library, its settings and the accounts of the people you share it with.') }}</p>
+    </div>
+  </div>
+
+  <form class="auth-panel" method="post" action="{{ url_for('first_run.create') }}" novalidate data-setup-form>
+    {{ ui.csrf_field() }}
+    <div class="field{% if errors.name %} field--error{% endif %}">
+      <label for="name">{{ _('Username') }}</label>
+      <input class="input" type="text" id="name" name="name" value="{{ name }}" required maxlength="64"
+             autocapitalize="off" autocorrect="off" autocomplete="username" spellcheck="false" autofocus
+             {%- if errors.name %} aria-invalid="true" aria-describedby="name-error"{% endif %}>
+      {%- if errors.name %}
+      <span class="field-error" id="name-error">{{ errors.name }}</span>
+      {%- else %}
+      <span class="field-hint">{{ _('You sign in with it. You can add other people later, in Settings.') }}</span>
+      {%- endif %}
+    </div>
+
+    <div class="field{% if errors.password %} field--error{% endif %}">
+      <label for="password">{{ _('Password') }}</label>
+      <div class="password-field">
+        <input class="input" type="password" id="password" name="password" required autocomplete="new-password"
+               aria-describedby="password-strength password-rules{% if errors.password %} password-error{% endif %}"
+               {%- if errors.password %} aria-invalid="true"{% endif %} data-setup-password>
+        <button class="btn btn-ghost btn-icon" type="button" data-password-toggle aria-pressed="false" aria-label="{{ _('Show password') }}">{{ ui.icon('eye') }}</button>
+      </div>
+      <div class="setup-strength">
+        <div class="strength" aria-hidden="true" data-strength><span></span><span></span><span></span><span></span></div>
+        <span class="setup-strength-label" id="password-strength" aria-live="polite" data-strength-label></span>
+      </div>
+      {%- if errors.password %}
+      <span class="field-error" id="password-error">{{ errors.password }}</span>
+      {%- endif %}
+      {%- if config.config_password_policy %}
+      <ul class="setup-rules" id="password-rules">
+        {%- if config.config_password_min_length %}
+        <li data-rule="length" data-min="{{ config.config_password_min_length }}">{{ ui.icon('check', 'icon-sm') }}<span>{{ _('At least %(num)s characters', num=config.config_password_min_length) }}</span></li>
+        {%- endif %}
+        {%- if config.config_password_number %}<li data-rule="number">{{ ui.icon('check', 'icon-sm') }}<span>{{ _('a number') }}</span></li>{% endif %}
+        {%- if config.config_password_lower %}<li data-rule="lower">{{ ui.icon('check', 'icon-sm') }}<span>{{ _('a lowercase letter') }}</span></li>{% endif %}
+        {%- if config.config_password_upper %}<li data-rule="upper">{{ ui.icon('check', 'icon-sm') }}<span>{{ _('an uppercase letter') }}</span></li>{% endif %}
+        {%- if config.config_password_character %}<li data-rule="letter">{{ ui.icon('check', 'icon-sm') }}<span>{{ _('a letter') }}</span></li>{% endif %}
+        {%- if config.config_password_special %}<li data-rule="special">{{ ui.icon('check', 'icon-sm') }}<span>{{ _('a special character') }}</span></li>{% endif %}
+      </ul>
+      {%- endif %}
+    </div>
+
+    <button class="btn btn-primary btn-lg btn-block" type="submit" data-setup-submit>{{ _('Create account') }}{{ ui.icon('arrow-right') }}</button>
+  </form>
+
+  <p class="setup-note">{{ ui.icon('lock', 'icon-sm') }}<span>{{ _('This page appears only once, until the first account exists. Finish it before you share the address of your library.') }}</span></p>
+</div>
+<script type="application/json" id="setup-i18n">{{ {
+  'empty': '', 'too_short': _('Too short'), 'weak': _('Weak'), 'fair': _('Fair'),
+  'good': _('Good'), 'strong': _('Strong'), 'common': _('Too easy to guess')
+}|tojson }}</script>
+<script src="{{ url_for('static', filename='js/setup.js') }}" defer></script>
+{% endblock %}

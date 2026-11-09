@@ -1344,7 +1344,10 @@ def init_db(app_db_path):
         clean_database(session)
     else:
         Base.metadata.create_all(engine)
-        create_admin_user(session)
+        # A new installation creates its first account in the browser (see first_run), unless the
+        # shipped admin / admin123 account is asked for, as automated installs and tests do.
+        if constants.default_admin_requested():
+            create_admin_user(session)
         create_anonymous_user(session)
 
 

@@ -327,6 +327,7 @@ def cwa_container_dind(test_volumes_dind):
         "--name", container_name,
         "-e", f"PUID={test_uid}",
         "-e", f"PGID={test_gid}",
+        "-e", "SCRIPTORIUM_DEFAULT_ADMIN=true",  # tests sign in as admin / admin123
         "-v", f"{library_volume}:/calibre-library",
         "-v", f"{ingest_volume}:/cwa-book-ingest",
         "ghcr.io/mrcoloo/scriptorium-library:latest"

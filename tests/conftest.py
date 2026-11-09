@@ -556,6 +556,7 @@ services:
       - PGID={test_gid}
       - TZ=UTC
       - NETWORK_SHARE_MODE=false
+      - SCRIPTORIUM_DEFAULT_ADMIN=true  # tests sign in as admin / admin123
     volumes:
       - {test_volumes['config']}:/config
       - {test_volumes['ingest']}:/cwa-book-ingest
