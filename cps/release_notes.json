@@ -1,6 +1,43 @@
 {
   "releases": [
     {
+      "version": "v1.3.0",
+      "date": "",
+      "title": "Pick up anywhere",
+      "highlights": [
+        {
+          "icon": "book-open",
+          "title": "The built-in reader joins your devices",
+          "text": "It opens where your Kobo or KOReader stopped, to the paragraph, and KOReader continues from the browser. Time spent reading in it counts in your statistics."
+        },
+        {
+          "icon": "highlight",
+          "title": "Highlights everywhere",
+          "text": "Highlight and add notes in the browser. Your Kobo and KOReader highlights appear in the book, browser highlights reach KOReader, and a highlight deleted in KOReader or in the browser goes from both."
+        },
+        {
+          "icon": "sparkles",
+          "title": "A passage of the day",
+          "text": "One of your highlights at the top of the home page, a different one each day. Turn it off in your profile if you prefer."
+        },
+        {
+          "icon": "key",
+          "title": "A friendlier first start",
+          "text": "New installations no longer ship with admin / admin123: you create your account in the browser, then a short tour shows you around."
+        },
+        {
+          "icon": "download",
+          "title": "Update the KOReader plugin",
+          "text": "Version 1.3 follows the built-in reader and brings its highlights to your device. Download it again from Profile → Devices; Scriptorium reminds you until every device has it."
+        }
+      ],
+      "quote": {
+        "text": "To produce a mighty book, you must choose a mighty theme.",
+        "author": "Herman Melville",
+        "book": "Moby-Dick"
+      }
+    },
+    {
       "version": "v1.2.0",
       "date": "2026-11-05",
       "title": "Every page, on every device",
