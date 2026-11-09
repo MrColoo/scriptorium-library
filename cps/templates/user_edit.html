@@ -423,6 +423,7 @@
         {%- if profile and not is_anon %}
         <input type="hidden" name="passage_setting" value="1" form="user-form">
         <label class="check"><input type="checkbox" name="show_passage" form="user-form" {% if shows_passage(content) %}checked{% endif %}><span>{{ _('Show a passage of the day from your highlights on the home page') }}</span></label>
+        <button type="button" class="btn btn-link small welcome-again" data-post="{{ url_for('first_run.welcome_again') }}" data-redirect="{{ url_for('web.index') }}">{{ ui.icon('sparkles', 'icon-sm') }}{{ _('Show the welcome tour again') }}</button>
         {%- endif %}
       </div>
     </div>

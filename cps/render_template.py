@@ -192,9 +192,15 @@ def render_title_template(*args, **kwargs):
         magic_shelf_routes = {"render": False, "create": False}
     whats_new_popup = None
     update_notice = None
+    welcome_tour = False
+    try:
+        from . import first_run
+        welcome_tour = request.endpoint == 'web.index' and first_run.shows_welcome(current_user)
+    except Exception as e:
+        log.debug("Could not check the welcome tour: %s", e)
     try:
         from . import whats_new
-        if request.endpoint != 'whats_new.page':
+        if request.endpoint != 'whats_new.page' and not welcome_tour:
             whats_new_popup = whats_new.popup_for(current_user)
         if current_user.role_admin() and CWA_DB().cwa_settings.get('cwa_update_notifications', 1):
             update_notice = whats_new.update_notice(current_user)
@@ -278,7 +284,7 @@ def render_title_template(*args, **kwargs):
                        accept=config.upload_formats(),
                        magic_shelf_routes=magic_shelf_routes,
                        duplicate_notification=duplicate_notification,
-                       whats_new_popup=whats_new_popup, update_notice=update_notice,
+                       whats_new_popup=whats_new_popup, update_notice=update_notice, welcome_tour=welcome_tour,
                        *args, **kwargs)
     except PermissionError:
         log.error("No permission to access {} file.".format(args[0]))

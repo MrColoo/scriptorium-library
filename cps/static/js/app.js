@@ -45,7 +45,8 @@
       headers: headers,
       body: options.body,
       credentials: "same-origin",
-      redirect: options.redirect || "follow"
+      redirect: options.redirect || "follow",
+      keepalive: !!options.keepalive  // finishes even if the user leaves the page right away
     });
   }
 

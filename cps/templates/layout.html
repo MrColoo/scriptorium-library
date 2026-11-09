@@ -359,6 +359,64 @@
   </dialog>
   {%- endif %}
 
+  {%- if welcome_tour %}
+  {%- set welcome_steps = [] %}
+  {%- if current_user.role_upload() or current_user.role_admin() %}
+  {%- set _added = welcome_steps.append({'icon': 'upload', 'title': _('Bring in your books'),
+      'text': _('Drop EPUB, PDF, MOBI and more on Upload, or into the ingest folder. Scriptorium imports them, fills in the metadata and converts what your e-reader cannot open.'),
+      'where': _('Upload, at the top of every page')}) %}
+  {%- endif %}
+  {%- set _added = welcome_steps.append({'icon': 'device', 'title': _('Connect your e-reader'),
+      'text': _('A Kobo syncs your books, progress and highlights over Wi-Fi, without cables. KOReader gets a plugin. Any device can receive books by email.'),
+      'where': _('Profile → Devices')}) %}
+  {%- set _added = welcome_steps.append({'icon': 'book-open', 'title': _('Read anywhere'),
+      'text': _('The built-in reader opens where your e-reader stopped, and your e-reader continues from the browser. Your highlights follow you on every device.'),
+      'where': _('Read in Browser, on every book page')}) %}
+  {%- set _added = welcome_steps.append({'icon': 'chart', 'title': _('Your reading life'),
+      'text': _('All your highlights on one page, reading statistics and streaks, a story of your year in books, and a passage of the day on the home page.'),
+      'where': _('Highlights, Reading statistics and Your year in books, in the sidebar')}) %}
+  {%- set _added = welcome_steps.append({'icon': 'sparkles', 'title': _('Make it yours'),
+      'text': _('Light or dark, and personal styles with your own colours and fonts. Shelves and smart shelves keep your books in order.'),
+      'where': _('Profile → Appearance')}) %}
+  {%- if current_user.role_admin() %}
+  {%- set _added = welcome_steps.append({'icon': 'users', 'title': _('Share your library'),
+      'text': _('Add an account for each person: everyone gets their own shelves, progress and highlights. Turn on remote access to read away from home.'),
+      'where': _('Settings → Users')}) %}
+  {%- endif %}
+  <dialog class="modal welcome" id="welcome-dialog" aria-labelledby="welcome-title" data-static
+          data-done-url="{{ url_for('first_run.welcome_done') }}">
+    <div class="welcome-steps">
+      <section class="welcome-step welcome-step--intro" data-welcome-step>
+        <img class="brand-logo brand-logo--lg" src="{{ url_for('static', filename='icon.svg') }}" alt="" width="64" height="64">
+        <span class="welcome-eyebrow">{{ _('Your library is ready') }}</span>
+        <h2 class="welcome-title" id="welcome-title">{{ _('Welcome, %(name)s', name=current_user.name) }}</h2>
+        <p>{{ _('A minute to see the best of Scriptorium. You can skip it and find it again in your profile.') }}</p>
+      </section>
+      {%- for step in welcome_steps %}
+      <section class="welcome-step" data-welcome-step hidden>
+        <span class="welcome-icon" aria-hidden="true">{{ ui.icon(step.icon) }}</span>
+        <span class="welcome-eyebrow">{{ _('%(step)s of %(total)s', step=loop.index, total=welcome_steps|length) }}</span>
+        <h2 class="welcome-title">{{ step.title }}</h2>
+        <p>{{ step.text }}</p>
+        <span class="welcome-where">{{ ui.icon('arrow-right', 'icon-sm') }}{{ step.where }}</span>
+      </section>
+      {%- endfor %}
+    </div>
+    <div class="welcome-foot">
+      <div class="welcome-dots" aria-hidden="true">
+        <i></i>{% for step in welcome_steps %}<i></i>{% endfor %}
+      </div>
+      <div class="welcome-actions">
+        <button type="button" class="btn btn-ghost" data-welcome-skip>{{ _('Skip') }}</button>
+        <button type="button" class="btn" data-welcome-back hidden>{{ _('Back') }}</button>
+        <button type="button" class="btn btn-primary" data-welcome-next autofocus
+                data-label-next="{{ _('Next') }}" data-label-start="{{ _('Show me') }}" data-label-done="{{ _('Start reading') }}">{{ _('Show me') }}</button>
+      </div>
+    </div>
+  </dialog>
+  <script src="{{ url_for('static', filename='js/welcome.js') }}" defer></script>
+  {%- endif %}
+
   <script type="application/json" id="app-i18n">{{ {
     'close': _('Close'), 'confirm': _('Confirm'), 'copied': _('Copied to clipboard'),
     'copy_failed': _('Could not copy, select the text and copy it manually'),

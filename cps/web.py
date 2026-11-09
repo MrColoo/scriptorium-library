@@ -2184,6 +2184,8 @@ def register_post():
         except Exception:
             pass
         try:
+            from .first_run import mark_for_welcome
+            mark_for_welcome(content)
             ub.session.add(content)
             ub.session.commit()
             if feature_support['oauth']:
