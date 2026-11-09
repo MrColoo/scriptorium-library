@@ -17,7 +17,8 @@
 Everything lives in the reader_annotation table, one row per highlight.
 """
 
-from datetime import datetime, timezone
+import hashlib
+from datetime import date, datetime, timezone
 
 from flask import Blueprint, Response, request
 from flask_babel import gettext as _
@@ -327,6 +328,37 @@ def grouped(user_id, book_id=None, query=None):
         groups.append({"book": books[book_id_], "highlights": items, "latest": max(when(row) for row in items)})
     groups.sort(key=lambda group: group["latest"], reverse=True)
     return groups
+
+
+PASSAGE_MIN = 40     # shorter ones are a word or a name, not a passage
+PASSAGE_MAX = 700    # longer ones do not read well as a quote
+
+
+def passage_of_the_day(user_id, today=None):
+    """One of the user's highlights, the same all day and another the next: {highlight, book} or None.
+
+    Picked from the highlights of every device and the built-in reader, in books the user may see.
+    """
+    try:
+        rows = ub.session.query(ub.ReaderAnnotation).filter(
+            ub.ReaderAnnotation.user_id == int(user_id), ub.ReaderAnnotation.text.isnot(None),
+            func.length(ub.ReaderAnnotation.text).between(PASSAGE_MIN, PASSAGE_MAX)
+        ).order_by(ub.ReaderAnnotation.id).limit(MAX_ITEMS).all()
+        rows = _without_copies(rows)
+        if not rows:
+            return None
+        visible = {book.id: book for book in calibre_db.session.query(db.Books)
+                   .filter(db.Books.id.in_({row.book_id for row in rows}))
+                   .filter(calibre_db.common_filters()).all()}
+        rows = [row for row in rows if row.book_id in visible]
+        if not rows:
+            return None
+        seed = "{}:{}".format(int(user_id), (today or date.today()).isoformat()).encode()
+        row = rows[int(hashlib.sha256(seed).hexdigest(), 16) % len(rows)]
+        return {"highlight": row, "book": visible[row.book_id]}
+    except Exception as e:
+        log.debug("No passage of the day: %s", e)
+        return None
 
 
 def to_markdown(groups):

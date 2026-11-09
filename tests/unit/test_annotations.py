@@ -209,3 +209,31 @@ def test_markdown_export():
     assert "> Fear is the mind-killer.\n> I will face my fear." in markdown
     assert "**Note:** Reread this" in markdown
     assert markdown.count("## Book One") == 1
+
+
+class TestPassageOfTheDay:
+    @pytest.fixture
+    def library(self, monkeypatch):
+        books = {7: SimpleNamespace(id=7, title="Moby-Dick"), 8: SimpleNamespace(id=8, title="Emma")}
+        query = SimpleNamespace(filter=lambda *a: query, all=lambda: [books[7], books[8]])
+        monkeypatch.setattr(annotations.calibre_db, "session", SimpleNamespace(query=lambda *a: query), raising=False)
+        monkeypatch.setattr(annotations.calibre_db, "common_filters", lambda: True, raising=False)
+        return books
+
+    def _add(self, session, book_id, source_id, text):
+        session.add(annotations.ub.ReaderAnnotation(user_id=1, book_id=book_id, source="kobo", source_id=source_id, text=text))
+        session.commit()
+
+    def test_the_same_all_day_and_from_the_users_highlights(self, session, library):
+        from datetime import date
+        self._add(session, 7, "a", "Call me Ishmael. Some years ago, never mind how long precisely.")
+        self._add(session, 8, "b", "Emma Woodhouse, handsome, clever, and rich, with a comfortable home.")
+        self._add(session, 8, "c", "Too short.")
+        days = [date(2026, 11, day) for day in range(1, 21)]
+        picks = [annotations.passage_of_the_day(1, today=day)["highlight"].source_id for day in days]
+        assert set(picks) == {"a", "b"}
+        assert annotations.passage_of_the_day(1, today=days[0])["highlight"].source_id == picks[0]
+        assert annotations.passage_of_the_day(2) is None
+
+    def test_none_without_highlights(self, session, library):
+        assert annotations.passage_of_the_day(1) is None

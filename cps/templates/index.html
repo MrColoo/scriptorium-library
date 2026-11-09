@@ -12,6 +12,27 @@
 </a>
 {%- endif %}
 
+{%- if is_home and passage %}
+{%- set hl = passage.highlight %}
+<figure class="passage" aria-labelledby="passage-heading" data-color="{{ hl.color or 'yellow' }}">
+  <figcaption class="passage-head">
+    <h2 id="passage-heading" class="passage-label">{{ _('Passage of the day') }}</h2>
+    <a class="passage-all" href="{{ url_for('annotations.highlights_page') }}">{{ _('All highlights') }}{{ ui.icon('arrow-right', 'icon-sm') }}</a>
+  </figcaption>
+  <blockquote class="passage-text">{{ hl.text }}</blockquote>
+  {%- if hl.note %}
+  <p class="passage-note">{{ ui.icon('edit', 'icon-sm') }}<span>{{ hl.note }}</span></p>
+  {%- endif %}
+  <a class="passage-book" href="{{ url_for('web.show_book', book_id=passage.book.id) }}">
+    <span class="cover">{{ ui.cover_img(passage.book, sizes='36px', alt='') }}</span>
+    <span class="passage-book-body">
+      <span class="passage-book-title">{{ passage.book.title }}</span>
+      <span class="muted small truncate">{{ passage.book.authors|map(attribute='name')|join(', ') }}{% if hl.chapter %} · {{ hl.chapter }}{% endif %}</span>
+    </span>
+  </a>
+</figure>
+{%- endif %}
+
 {%- if is_home and continue_reading %}
 <section class="section" aria-labelledby="continue-heading">
   <div class="section-header">

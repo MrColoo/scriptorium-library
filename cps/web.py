@@ -539,8 +539,11 @@ def render_books_list(data, sort_param, book_id, page):
         continue_reading = []
         kobo_last_sync = None
         koreader_last_sync = None
+        passage = None
         if website == "newest" and page == 1 and not current_user.is_anonymous:
             continue_reading = reading_overview.get_continue_reading(current_user.id)
+            from . import annotations
+            passage = annotations.passage_of_the_day(current_user.id)
             from . import devices
             if devices.shows(current_user, "kobo"):
                 kobo_last_sync = reading_overview.humanize_since(reading_overview.get_kobo_last_sync(current_user.id))
@@ -557,7 +560,8 @@ def render_books_list(data, sort_param, book_id, page):
         return render_title_template('index.html', random=random, entries=entries, pagination=pagination,
                                      title=title, page=website, order=order[1],
                                      continue_reading=continue_reading, kobo_last_sync=kobo_last_sync,
-                                     koreader_last_sync=koreader_last_sync, year_teaser=year_teaser)
+                                     koreader_last_sync=koreader_last_sync, year_teaser=year_teaser,
+                                     passage=passage)
 
 
 def render_rated_books(page, book_id, order):
