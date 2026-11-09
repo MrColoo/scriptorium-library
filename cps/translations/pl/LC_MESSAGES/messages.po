@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre Web - polski (POT: 2021-06-12 08:52)\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-05 11:12+0100\n"
+"POT-Creation-Date: 2026-11-09 16:08+0100\n"
 "PO-Revision-Date: 2021-06-12 15:35+0200\n"
 "Last-Translator: Radosław Kierznowski <radek.kierznowski@outlook.com>\n"
 "Language-Team: \n"
@@ -1463,7 +1463,7 @@ msgid "%(format)s not found: %(fn)s"
 msgstr "%(format)s nie znaleziono: %(fn)s"
 
 #: cps/helper.py:113 cps/helper.py:244 cps/templates/admin.html:33
-#: cps/templates/detail.html:97 cps/templates/detail.html:299
+#: cps/templates/detail.html:97 cps/templates/detail.html:300
 #: cps/templates/user_edit.html:340
 msgid "Send to eReader"
 msgstr "Wyślij na czytnik e-booków"
@@ -1902,26 +1902,26 @@ msgid ""
 msgstr ""
 
 # ???
-#: cps/reading_stats.py:332 cps/year_review.py:287
+#: cps/reading_stats.py:269 cps/reading_stats.py:411 cps/year_review.py:283
 #, fuzzy
 msgid "Unknown book"
 msgstr "Nieznany"
 
-#: cps/reading_stats.py:394
+#: cps/reading_stats.py:472
 msgid "< 1 min"
 msgstr ""
 
-#: cps/reading_stats.py:397
+#: cps/reading_stats.py:475
 #, fuzzy, python-format
 msgid "%(minutes)s min"
 msgstr "Limit czasu (minuty):"
 
-#: cps/reading_stats.py:398
+#: cps/reading_stats.py:476
 #, python-format
 msgid "%(hours)s h %(minutes)02d min"
 msgstr ""
 
-#: cps/reading_stats.py:452 cps/reading_stats.py:453
+#: cps/reading_stats.py:530 cps/reading_stats.py:531
 #, python-format
 msgid "%(num)s day"
 msgid_plural "%(num)s days"
@@ -1929,7 +1929,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: cps/reading_stats.py:455 cps/templates/layout.html:74
+#: cps/reading_stats.py:533 cps/templates/layout.html:74
 #: cps/templates/reading_stats.html:9
 #, fuzzy
 msgid "Reading statistics"
@@ -1961,8 +1961,8 @@ msgid ""
 msgstr ""
 
 #: cps/render_template.py:75 cps/templates/appearance.html:7
-#: cps/templates/cwa_stats_tabs.html:177 cps/templates/reading_stats.html:152
-#: cps/templates/reading_stats.html:163 cps/templates/stats.html:14
+#: cps/templates/cwa_stats_tabs.html:177 cps/templates/reading_stats.html:153
+#: cps/templates/reading_stats.html:164 cps/templates/stats.html:14
 #: cps/templates/year.html:270
 msgid "Books"
 msgstr "Książki"
@@ -2723,7 +2723,7 @@ msgstr "Nieprawidłowe ID książki."
 msgid "What's new"
 msgstr ""
 
-#: cps/year_review.py:331
+#: cps/year_review.py:327
 #, python-format
 msgid "Your %(year)s in books"
 msgstr ""
@@ -3018,13 +3018,13 @@ msgid "Allowed and denied values"
 msgstr "Dozwolone wartości kolumn"
 
 #: cps/templates/_restrictions.html:11 cps/templates/book_edit.html:248
-#: cps/templates/book_table.html:51 cps/templates/detail.html:300
+#: cps/templates/book_table.html:51 cps/templates/detail.html:301
 #: cps/templates/duplicates.html:110 cps/templates/layout.html:207
 #: cps/templates/layout.html:210 cps/templates/layout.html:213
 #: cps/templates/layout.html:216 cps/templates/layout.html:219
 #: cps/templates/layout.html:262 cps/templates/layout.html:296
 #: cps/templates/layout.html:335 cps/templates/layout.html:363
-#: cps/templates/read.html:58 cps/templates/year.html:42
+#: cps/templates/read.html:73 cps/templates/year.html:42
 msgid "Close"
 msgstr "Zamknij"
 
@@ -3061,7 +3061,7 @@ msgstr ""
 #: cps/templates/book_edit.html:236 cps/templates/book_table.html:67
 #: cps/templates/book_table.html:84 cps/templates/config_db.html:59
 #: cps/templates/config_edit.html:290 cps/templates/config_view_edit.html:109
-#: cps/templates/cwa_settings.html:260 cps/templates/detail.html:326
+#: cps/templates/cwa_settings.html:260 cps/templates/detail.html:327
 #: cps/templates/duplicates.html:113 cps/templates/layout.html:271
 #: cps/templates/magic_shelf_edit.html:61
 #: cps/templates/profile_pictures.html:29 cps/templates/reading_import.html:82
@@ -3405,7 +3405,7 @@ msgid "Restarting, the page reloads when the server is back."
 msgstr ""
 
 #: cps/templates/appearance.html:10 cps/templates/detail.html:102
-#: cps/templates/detail.html:249 cps/templates/layout.html:93
+#: cps/templates/detail.html:250 cps/templates/layout.html:93
 #: cps/templates/search_form.html:67
 msgid "Shelves"
 msgstr "Półki"
@@ -3616,12 +3616,12 @@ msgid "Appearance"
 msgstr ""
 
 #: cps/templates/appearance.html:157 cps/templates/layout.html:183
-#: cps/templates/read.html:63 cps/templates/readcbr.html:107
+#: cps/templates/read.html:78 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Jasny"
 
 #: cps/templates/appearance.html:158 cps/templates/layout.html:184
-#: cps/templates/read.html:65 cps/templates/readcbr.html:108
+#: cps/templates/read.html:80 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Ciemny"
 
@@ -3774,7 +3774,7 @@ msgid "Number in series"
 msgstr "Cykl: %(serie)s"
 
 #: cps/templates/book_edit.html:101 cps/templates/book_edit.html:271
-#: cps/templates/detail.html:215 cps/templates/search_form.html:65
+#: cps/templates/detail.html:216 cps/templates/search_form.html:65
 msgid "Tags"
 msgstr "Etykiety"
 
@@ -3807,7 +3807,7 @@ msgstr "Ocena"
 
 #: cps/templates/book_edit.html:129 cps/templates/book_edit.html:270
 #: cps/templates/book_table.html:63 cps/templates/cwa_settings.html:148
-#: cps/templates/detail.html:208 cps/templates/magic_shelf_edit.html:95
+#: cps/templates/detail.html:209 cps/templates/magic_shelf_edit.html:95
 msgid "Description"
 msgstr "Opis"
 
@@ -3826,7 +3826,7 @@ msgid ""
 "styles are removed when saving."
 msgstr ""
 
-#: cps/templates/book_edit.html:141 cps/templates/detail.html:236
+#: cps/templates/book_edit.html:141 cps/templates/detail.html:237
 msgid "Identifiers"
 msgstr "Identyfikatory"
 
@@ -3864,12 +3864,12 @@ msgstr "Okładka"
 msgid "Custom columns"
 msgstr "Dwie kolumny"
 
-#: cps/templates/book_edit.html:193 cps/templates/detail.html:258
+#: cps/templates/book_edit.html:193 cps/templates/detail.html:259
 #: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:82
 msgid "Yes"
 msgstr "Tak"
 
-#: cps/templates/book_edit.html:194 cps/templates/detail.html:258
+#: cps/templates/book_edit.html:194 cps/templates/detail.html:259
 #: cps/templates/magic_shelf_edit.html:90 cps/templates/search_form.html:83
 msgid "No"
 msgstr "Nie"
@@ -3891,8 +3891,9 @@ msgstr ""
 #: cps/templates/config_edit.html:289 cps/templates/config_view_edit.html:108
 #: cps/templates/cwa_settings.html:259 cps/templates/email_edit.html:71
 #: cps/templates/magic_shelf_edit.html:59
-#: cps/templates/profile_pictures.html:28 cps/templates/schedule_edit.html:33
-#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:515
+#: cps/templates/profile_pictures.html:28 cps/templates/read.html:62
+#: cps/templates/schedule_edit.html:33 cps/templates/shelf_edit.html:31
+#: cps/templates/user_edit.html:515
 msgid "Save"
 msgstr "Zapisz"
 
@@ -3985,7 +3986,7 @@ msgid "Add to shelf"
 msgstr "Dodaj do półki"
 
 #: cps/templates/book_table.html:26 cps/templates/index.html:58
-#: cps/templates/layout.html:247 cps/templates/reading_stats.html:86
+#: cps/templates/layout.html:247 cps/templates/reading_stats.html:87
 #, fuzzy
 msgid "More"
 msgstr "Więcej według"
@@ -5453,7 +5454,7 @@ msgstr "Menedżer duplikatów Scriptorium"
 msgid "Books count as duplicates when all selected fields match."
 msgstr ""
 
-#: cps/templates/cwa_settings.html:198 cps/templates/detail.html:317
+#: cps/templates/cwa_settings.html:198 cps/templates/detail.html:318
 #, fuzzy
 msgid "Format"
 msgstr "Format końcowy"
@@ -6103,46 +6104,50 @@ msgstr "Postęp"
 msgid "KOReader on %(device)s"
 msgstr "Skonfiguruj synchronizację KOReader"
 
-#: cps/templates/detail.html:175
+#: cps/templates/detail.html:171 cps/templates/highlights.html:43
+msgid "Built-in reader"
+msgstr ""
+
+#: cps/templates/detail.html:176
 msgid "On your Kobo"
 msgstr ""
 
-#: cps/templates/detail.html:177
+#: cps/templates/detail.html:178
 msgid "Kobo sync is not set up for your account yet."
 msgstr ""
 
-#: cps/templates/detail.html:179
+#: cps/templates/detail.html:180
 msgid "Not synced. Add it to a Kobo shelf to send it to your device."
 msgstr ""
 
-#: cps/templates/detail.html:181
+#: cps/templates/detail.html:182
 msgid "On your device, not started yet."
 msgstr ""
 
-#: cps/templates/detail.html:183
+#: cps/templates/detail.html:184
 msgid "Will be sent to your Kobo on the next sync."
 msgstr ""
 
-#: cps/templates/detail.html:189
+#: cps/templates/detail.html:190
 msgid "Set up Kobo"
 msgstr ""
 
-#: cps/templates/detail.html:192
+#: cps/templates/detail.html:193
 #, fuzzy
 msgid "Remove from Kobo"
 msgstr "Przywróć z archiwum"
 
-#: cps/templates/detail.html:194
+#: cps/templates/detail.html:195
 #, fuzzy
 msgid "Add to Kobo"
 msgstr "Dodaj do półki"
 
-#: cps/templates/detail.html:196
+#: cps/templates/detail.html:197
 #, fuzzy
 msgid "Create a Kobo shelf"
 msgstr "Utwórz półkę"
 
-#: cps/templates/detail.html:203 cps/templates/highlights.html:30
+#: cps/templates/detail.html:204 cps/templates/highlights.html:30
 #, python-format
 msgid "%(num)s highlight"
 msgid_plural "%(num)s highlights"
@@ -6150,61 +6155,61 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: cps/templates/detail.html:210 cps/templates/layout.html:366
+#: cps/templates/detail.html:211 cps/templates/layout.html:366
 #, fuzzy
 msgid "Show more"
 msgstr "Pokaż nieprzeczytane"
 
-#: cps/templates/detail.html:220
+#: cps/templates/detail.html:221
 #, fuzzy, python-format
 msgid "Remove tag %(name)s"
 msgstr "Usuń"
 
-#: cps/templates/detail.html:225 cps/templates/detail.html:226
-#: cps/templates/detail.html:227
+#: cps/templates/detail.html:226 cps/templates/detail.html:227
+#: cps/templates/detail.html:228
 msgid "Add tag"
 msgstr ""
 
-#: cps/templates/detail.html:269 cps/templates/magic_shelf_edit.html:94
+#: cps/templates/detail.html:270 cps/templates/magic_shelf_edit.html:94
 msgid "Date added"
 msgstr ""
 
-#: cps/templates/detail.html:270 cps/templates/magic_shelf_edit.html:94
+#: cps/templates/detail.html:271 cps/templates/magic_shelf_edit.html:94
 msgid "Last modified"
 msgstr ""
 
-#: cps/templates/detail.html:271
+#: cps/templates/detail.html:272
 msgid "ID"
 msgstr ""
 
-#: cps/templates/detail.html:280
+#: cps/templates/detail.html:281
 #, fuzzy
 msgid "More like this"
 msgstr "Kierunek"
 
-#: cps/templates/detail.html:281
+#: cps/templates/detail.html:282
 msgid "From your library: the same authors and the closest genres."
 msgstr ""
 
-#: cps/templates/detail.html:304
+#: cps/templates/detail.html:305
 #, fuzzy
 msgid "Send to"
 msgstr "Wyślij"
 
-#: cps/templates/detail.html:311
+#: cps/templates/detail.html:312
 #, fuzzy
 msgid "Other addresses"
 msgstr "Wybierz adresy e-mail:"
 
-#: cps/templates/detail.html:312
+#: cps/templates/detail.html:313
 msgid "example@domain.com, another@domain.com"
 msgstr ""
 
-#: cps/templates/detail.html:313 cps/templates/user_edit.html:346
+#: cps/templates/detail.html:314 cps/templates/user_edit.html:346
 msgid "Separate several addresses with commas."
 msgstr ""
 
-#: cps/templates/detail.html:327
+#: cps/templates/detail.html:328
 msgid "Send"
 msgstr "Wyślij"
 
@@ -6679,7 +6684,9 @@ msgid "Reject every pending match? Those books will not be suggested again."
 msgstr ""
 
 #: cps/templates/highlights.html:7
-msgid "Passages and notes from your Kobo and KOReader, gathered by book."
+msgid ""
+"Passages and notes from your Kobo, KOReader and the built-in reader, "
+"gathered by book."
 msgstr ""
 
 #: cps/templates/highlights.html:10 cps/templates/highlights.html:32
@@ -6707,8 +6714,8 @@ msgstr "Pokaż sekcję serii"
 
 #: cps/templates/highlights.html:55
 msgid ""
-"Highlight a passage on your Kobo or in KOReader and it appears here after "
-"the next sync."
+"Highlight a passage on your Kobo, in KOReader or in the built-in reader, and "
+"it appears here."
 msgstr ""
 
 #: cps/templates/highlights.html:56
@@ -7690,72 +7697,129 @@ msgstr "Następna strona"
 msgid "Loading…"
 msgstr "Ładowanie..."
 
+#: cps/templates/read.html:51
+#, fuzzy
+msgid "Highlight"
+msgstr "Wysokość"
+
+#: cps/templates/read.html:53
+#, fuzzy
+msgid "Yellow"
+msgstr "Zezwalaj"
+
+#: cps/templates/read.html:53
+#, fuzzy
+msgid "Green"
+msgstr "Grecki"
+
+#: cps/templates/read.html:53
+msgid "Blue"
+msgstr ""
+
+#: cps/templates/read.html:53
+msgid "Pink"
+msgstr ""
+
+#: cps/templates/read.html:54
+#, fuzzy, python-format
+msgid "Highlight in %(color)s"
+msgstr "Wysokość"
+
 #: cps/templates/read.html:57
+#, fuzzy
+msgid "Add a note"
+msgstr "Dodaj do półki"
+
+#: cps/templates/read.html:58
+#, fuzzy
+msgid "Remove highlight"
+msgstr "Pokaż sekcję serii"
+
+#: cps/templates/read.html:61
+#, fuzzy
+msgid "Your note"
+msgstr "Twój adres e-mail"
+
+#: cps/templates/read.html:72
 #, fuzzy
 msgid "Reading settings"
 msgstr "Ustawienia"
 
-#: cps/templates/read.html:61 cps/templates/readcbr.html:104
+#: cps/templates/read.html:76 cps/templates/readcbr.html:104
 #: cps/templates/readtxt.html:23
 msgid "Theme"
 msgstr "Motyw"
 
-#: cps/templates/read.html:64
+#: cps/templates/read.html:79
 msgid "Sepia"
 msgstr "Sepia"
 
-#: cps/templates/read.html:66
+#: cps/templates/read.html:81
 msgid "Black"
 msgstr "Czarny"
 
-#: cps/templates/read.html:70
+#: cps/templates/read.html:85
 #, fuzzy
 msgid "Text size"
 msgstr "Rozmiary czcionki"
 
-#: cps/templates/read.html:74
+#: cps/templates/read.html:89
 msgid "Font"
 msgstr "Czcionka"
 
-#: cps/templates/read.html:76
+#: cps/templates/read.html:91
 #, fuzzy
 msgid "Book default"
 msgstr "Szczegóły książki"
 
-#: cps/templates/read.html:78
+#: cps/templates/read.html:93
 msgid "Yahei"
 msgstr "Yahei"
 
-#: cps/templates/read.html:79
+#: cps/templates/read.html:94
 msgid "SimSun"
 msgstr "SimSun"
 
-#: cps/templates/read.html:80
+#: cps/templates/read.html:95
 msgid "KaiTi"
 msgstr "KaiTi"
 
-#: cps/templates/read.html:84
+#: cps/templates/read.html:99
 msgid "Layout"
 msgstr ""
 
-#: cps/templates/read.html:86
+#: cps/templates/read.html:101
 msgid "Two columns"
 msgstr "Dwie kolumny"
 
-#: cps/templates/read.html:87
+#: cps/templates/read.html:102
 msgid "One column"
 msgstr "Jedna kolumna"
 
-#: cps/templates/read.html:90
+#: cps/templates/read.html:105
 msgid "Reflow text when sidebars are open."
 msgstr "Przepływ tekstu, gdy paski boczne są otwarte."
 
-#: cps/templates/read.html:105
+#: cps/templates/read.html:126
 msgid "This EPUB could not be opened. It may be damaged or DRM-protected."
 msgstr ""
 
-#: cps/templates/read.html:105
+#: cps/templates/read.html:126
 msgid "Something went wrong while loading this book."
+msgstr ""
+
+#: cps/templates/read.html:127
+#, python-format
+msgid "Continuing where you left off on your Kobo (%(percent)s)."
+msgstr ""
+
+#: cps/templates/read.html:128
+#, python-format
+msgid "Continuing where you left off in KOReader (%(percent)s)."
+msgstr ""
+
+#: cps/templates/read.html:129
+msgid "The highlight could not be saved. Check your connection."
 msgstr ""
 
 #: cps/templates/readcbr.html:78
@@ -7984,120 +8048,128 @@ msgstr[2] ""
 
 #: cps/templates/reading_stats.html:11
 #, python-format
-msgid "From KOReader on all your devices. Updated %(date)s at %(time)s."
+msgid "From KOReader and the built-in reader. Updated %(date)s at %(time)s."
 msgstr ""
 
 #: cps/templates/reading_stats.html:12
-msgid "Your reading time from KOReader, gathered from all your devices."
+msgid ""
+"Your reading time from KOReader and the built-in reader, gathered from all "
+"your devices."
 msgstr ""
 
 #: cps/templates/reading_stats.html:20
 msgid "No reading statistics yet"
 msgstr ""
 
-#: cps/templates/reading_stats.html:22
+#: cps/templates/reading_stats.html:21
+msgid ""
+"Books you read in the built-in reader are counted on their own: open one and "
+"read a few pages."
+msgstr ""
+
+#: cps/templates/reading_stats.html:23
 msgid ""
 "KOReader sync is turned off for this library. Ask an administrator to turn "
 "it on in Settings → Automation."
 msgstr ""
 
-#: cps/templates/reading_stats.html:24
+#: cps/templates/reading_stats.html:25
 msgid ""
 "KOReader measures how long you read. Share it with Scriptorium and every "
 "device shows the same time, streaks and progress."
 msgstr ""
 
-#: cps/templates/reading_stats.html:26
+#: cps/templates/reading_stats.html:27
 msgid "Install version 1.2 or later of the Scriptorium plugin on each device."
 msgstr ""
 
 # ???
-#: cps/templates/reading_stats.html:26 cps/templates/user_edit.html:279
+#: cps/templates/reading_stats.html:27 cps/templates/user_edit.html:279
 #: cps/templates/user_edit.html:289
 #, fuzzy
 msgid "Download plugin"
 msgstr "Pobierz log"
 
-#: cps/templates/reading_stats.html:27
+#: cps/templates/reading_stats.html:28
 msgid ""
 "In KOReader, open Tools → Scriptorium Sync and turn on Sync reading "
 "statistics."
 msgstr ""
 
-#: cps/templates/reading_stats.html:28
+#: cps/templates/reading_stats.html:29
 msgid "Read a few pages. The statistics appear here after the next sync."
 msgstr ""
 
-#: cps/templates/reading_stats.html:31
+#: cps/templates/reading_stats.html:32
 msgid "Set it up by hand instead"
 msgstr ""
 
-#: cps/templates/reading_stats.html:32
+#: cps/templates/reading_stats.html:33
 msgid ""
 "In KOReader, add a WebDAV server under Cloud storage with this address and "
 "your Scriptorium username and password, then choose it in Reading statistics "
 "→ Settings → Cloud sync:"
 msgstr ""
 
-#: cps/templates/reading_stats.html:39
+#: cps/templates/reading_stats.html:40
 msgid "At a glance"
 msgstr ""
 
-#: cps/templates/reading_stats.html:41 cps/templates/reading_stats.html:102
+#: cps/templates/reading_stats.html:42 cps/templates/reading_stats.html:103
 msgid "Today"
 msgstr ""
 
-#: cps/templates/reading_stats.html:43
+#: cps/templates/reading_stats.html:44
 msgid "Keep it going."
 msgstr ""
 
-#: cps/templates/reading_stats.html:43
+#: cps/templates/reading_stats.html:44
 msgid "Not opened a book yet today."
 msgstr ""
 
-#: cps/templates/reading_stats.html:46
+#: cps/templates/reading_stats.html:47
 msgid "This week"
 msgstr ""
 
-#: cps/templates/reading_stats.html:48
+#: cps/templates/reading_stats.html:49
 #, python-format
 msgid "This month: %(time)s"
 msgstr ""
 
-#: cps/templates/reading_stats.html:51
+#: cps/templates/reading_stats.html:52
 #, fuzzy
 msgid "Current streak"
 msgstr "Bieżąca wersja"
 
-#: cps/templates/reading_stats.html:53
+#: cps/templates/reading_stats.html:54
 msgid "Read today to keep it."
 msgstr ""
 
-#: cps/templates/reading_stats.html:53
+#: cps/templates/reading_stats.html:54
 #, fuzzy
 msgid "Reading every day."
 msgstr "Postęp"
 
-#: cps/templates/reading_stats.html:53
+#: cps/templates/reading_stats.html:54
 msgid "Start a new one today."
 msgstr ""
 
-#: cps/templates/reading_stats.html:56
+#: cps/templates/reading_stats.html:57
 #, fuzzy
 msgid "Best streak"
 msgstr "Wybierz format:"
 
-#: cps/templates/reading_stats.html:58 cps/templates/reading_stats.html:108
+#: cps/templates/reading_stats.html:59 cps/templates/reading_stats.html:109
 #, fuzzy, python-format
 msgid "This year: %(time)s"
 msgstr "Wydawca: %(name)s"
 
-#: cps/templates/reading_stats.html:64
+#: cps/templates/reading_stats.html:65
 #, fuzzy
 msgid "Your reading year"
 msgstr "Wesprzyj tutaj!"
 
-#: cps/templates/reading_stats.html:65
+#: cps/templates/reading_stats.html:66
 #, fuzzy, python-format
 msgid "%(num)s reading day"
 msgid_plural "%(num)s reading days"
@@ -8105,138 +8177,138 @@ msgstr[0] "Wesprzyj tutaj!"
 msgstr[1] "Wesprzyj tutaj!"
 msgstr[2] "Wesprzyj tutaj!"
 
-#: cps/templates/reading_stats.html:65
+#: cps/templates/reading_stats.html:66
 #, python-format
 msgid "since %(date)s"
 msgstr ""
 
-#: cps/templates/reading_stats.html:68
+#: cps/templates/reading_stats.html:69
 msgid "Reading time per day over the last year"
 msgstr ""
 
-#: cps/templates/reading_stats.html:78 cps/templates/reading_stats.html:99
-#: cps/templates/reading_stats.html:112
+#: cps/templates/reading_stats.html:79 cps/templates/reading_stats.html:100
+#: cps/templates/reading_stats.html:113
 #, fuzzy
 msgid "no reading"
 msgstr "Wesprzyj tutaj!"
 
-#: cps/templates/reading_stats.html:84
+#: cps/templates/reading_stats.html:85
 msgid "Less"
 msgstr ""
 
-#: cps/templates/reading_stats.html:93
+#: cps/templates/reading_stats.html:94
 msgid "Last 30 days"
 msgstr ""
 
-#: cps/templates/reading_stats.html:94
+#: cps/templates/reading_stats.html:95
 #, python-format
 msgid "Average %(time)s a day"
 msgstr ""
 
-#: cps/templates/reading_stats.html:96
+#: cps/templates/reading_stats.html:97
 msgid "Reading time per day over the last 30 days"
 msgstr ""
 
-#: cps/templates/reading_stats.html:107
+#: cps/templates/reading_stats.html:108
 msgid "Last 12 months"
 msgstr ""
 
-#: cps/templates/reading_stats.html:110
+#: cps/templates/reading_stats.html:111
 msgid "Reading time per month over the last year"
 msgstr ""
 
-#: cps/templates/reading_stats.html:122
+#: cps/templates/reading_stats.html:123
 msgid "Time of day"
 msgstr ""
 
-#: cps/templates/reading_stats.html:123
+#: cps/templates/reading_stats.html:124
 #, python-format
 msgid "You read most around %(hour)s"
 msgstr ""
 
-#: cps/templates/reading_stats.html:125
+#: cps/templates/reading_stats.html:126
 msgid "Reading time by hour of the day"
 msgstr ""
 
-#: cps/templates/reading_stats.html:135
+#: cps/templates/reading_stats.html:136
 msgid "Days of the week"
 msgstr ""
 
-#: cps/templates/reading_stats.html:136
+#: cps/templates/reading_stats.html:137
 #, python-format
 msgid "Your favourite day: %(day)s"
 msgstr ""
 
-#: cps/templates/reading_stats.html:139
+#: cps/templates/reading_stats.html:140
 msgid "Reading time by day of the week"
 msgstr ""
 
-#: cps/templates/reading_stats.html:149
+#: cps/templates/reading_stats.html:150
 #, fuzzy
 msgid "Your habits"
 msgstr "Twój adres e-mail"
 
-#: cps/templates/reading_stats.html:151
+#: cps/templates/reading_stats.html:152
 msgid "Total reading time"
 msgstr ""
 
-#: cps/templates/reading_stats.html:153 cps/templates/reading_stats.html:179
+#: cps/templates/reading_stats.html:154 cps/templates/reading_stats.html:180
 #, fuzzy
 msgid "Pages read"
 msgstr "Oznacz jako przeczytane"
 
-#: cps/templates/reading_stats.html:154
+#: cps/templates/reading_stats.html:155
 #, fuzzy
 msgid "On a reading day"
 msgstr "Oznacz jako przeczytane"
 
-#: cps/templates/reading_stats.html:154
+#: cps/templates/reading_stats.html:155
 msgid "on average"
 msgstr ""
 
-#: cps/templates/reading_stats.html:155
+#: cps/templates/reading_stats.html:156
 #, fuzzy
 msgid "Reading sessions"
 msgstr "Ustawienia"
 
-#: cps/templates/reading_stats.html:155
+#: cps/templates/reading_stats.html:156
 #, fuzzy, python-format
 msgid "average %(time)s"
 msgstr "Język: %(name)s"
 
-#: cps/templates/reading_stats.html:156
+#: cps/templates/reading_stats.html:157
 msgid "Longest session"
 msgstr ""
 
-#: cps/templates/reading_stats.html:157
+#: cps/templates/reading_stats.html:158
 msgid "Pace"
 msgstr ""
 
-#: cps/templates/reading_stats.html:157
+#: cps/templates/reading_stats.html:158
 #, python-format
 msgid "%(pages)s pages/h"
 msgstr ""
 
-#: cps/templates/reading_stats.html:157
+#: cps/templates/reading_stats.html:158
 #, fuzzy, python-format
 msgid "%(seconds)s s per page"
 msgstr "Liczba książek na stronie"
 
-#: cps/templates/reading_stats.html:164
+#: cps/templates/reading_stats.html:165
 msgid "Most recently read first"
 msgstr ""
 
-#: cps/templates/reading_stats.html:180
+#: cps/templates/reading_stats.html:181
 #, fuzzy, python-format
 msgid "%(read)s of %(total)s pages"
 msgstr "Półka %(title)s została utworzona"
 
-#: cps/templates/reading_stats.html:180
+#: cps/templates/reading_stats.html:181
 #, python-format
 msgid "about %(time)s left"
 msgstr ""
 
-#: cps/templates/reading_stats.html:180
+#: cps/templates/reading_stats.html:181
 #, fuzzy
 msgid "finished"
 msgstr "Zakończone"
