@@ -318,6 +318,10 @@ class ConfigSQL(object):
     def get_mail_settings(self):
         return {k: v for k, v in self.__dict__.items() if k.startswith('mail_')}
 
+    def upload_formats(self):
+        """Allowed upload extensions. Audiobooks are left out until they are supported again."""
+        return [ext for ext in (self.config_upload_formats or "").split(',') if ext not in constants.EXTENSIONS_AUDIO]
+
     def get_mail_server_configured(self):
         return bool((self.mail_server != constants.DEFAULT_MAIL_SERVER and self.mail_server_type == 0)
                     or (self.mail_gmail_token != {} and self.mail_server_type == 1))

@@ -360,7 +360,7 @@ def edit_selected_books():
 
 # Helper to validate upload according to server settings
 def _validate_uploaded_file(uploaded_file):
-    allowed_extensions = config.config_upload_formats.split(',')
+    allowed_extensions = config.upload_formats()
     if uploaded_file:
         if config.config_check_extensions and allowed_extensions != ['']:
             if not validate_mime_type(uploaded_file, allowed_extensions):
@@ -368,7 +368,7 @@ def _validate_uploaded_file(uploaded_file):
                 return False
     if '.' in uploaded_file.filename:
         file_ext = uploaded_file.filename.rsplit('.', 1)[-1].lower()
-        if file_ext not in allowed_extensions and '' not in allowed_extensions:
+        if file_ext in constants.EXTENSIONS_AUDIO or (file_ext not in allowed_extensions and '' not in allowed_extensions):
             flash(_("File extension '%(ext)s' is not allowed to be uploaded to this server",
                     ext=file_ext), category="error")
             return False
@@ -1258,7 +1258,7 @@ def create_book_on_upload(modify_date, meta):
 
 def file_handling_on_upload(requested_file):
     # check if file extension is correct
-    allowed_extensions = config.config_upload_formats.split(',')
+    allowed_extensions = config.upload_formats()
     if requested_file:
         if config.config_check_extensions and allowed_extensions != ['']:
             if not validate_mime_type(requested_file, allowed_extensions):
@@ -1266,7 +1266,7 @@ def file_handling_on_upload(requested_file):
                 return None, Response(json.dumps({"location": url_for("web.index")}), mimetype='application/json')
     if '.' in requested_file.filename:
         file_ext = requested_file.filename.rsplit('.', 1)[-1].lower()
-        if file_ext not in allowed_extensions and '' not in allowed_extensions:
+        if file_ext in constants.EXTENSIONS_AUDIO or (file_ext not in allowed_extensions and '' not in allowed_extensions):
             flash(
                 _("File extension '%(ext)s' is not allowed to be uploaded to this server",
                   ext=file_ext), category="error")
@@ -1798,7 +1798,7 @@ def upload_book_formats(requested_files, book, book_id, no_cover=True):
     # Check and handle Uploaded file
     to_save = dict()
     error = False
-    allowed_extensions = config.config_upload_formats.split(',')
+    allowed_extensions = config.upload_formats()
     for requested_file in requested_files:
         current_filename = requested_file.filename
         if config.config_check_extensions and allowed_extensions != ['']:
@@ -1813,7 +1813,7 @@ def upload_book_formats(requested_files, book, book_id, no_cover=True):
                 continue
             if '.' in current_filename:
                 file_ext = current_filename.rsplit('.', 1)[-1].lower()
-                if file_ext not in allowed_extensions and '' not in allowed_extensions:
+                if file_ext in constants.EXTENSIONS_AUDIO or (file_ext not in allowed_extensions and '' not in allowed_extensions):
                     flash(_("File extension '%(ext)s' is not allowed to be uploaded to this server", ext=file_ext),
                           category="error")
                     error = True

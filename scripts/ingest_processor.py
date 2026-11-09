@@ -543,7 +543,8 @@ class NewBookProcessor:
         self.hierarchy_of_success = {
             'epub','kepub','lit','mobi','azw','azw3','fb2','fbz','azw4','prc','odt','lrf','pdb','cbz','pml','rb','cbr','cb7','cbc','chm','djvu','snb','tcr','pdf','docx','rtf','html','htmlz','txtz','txt'
         }
-        self.supported_audiobook_formats = {'m4b', 'm4a', 'mp4'}
+        # Audiobooks are not supported yet: they are left alone like any other unknown format.
+        self.supported_audiobook_formats = set()
 
         # Directories
         self.ingest_folder, self.library_dir, self.tmp_conversion_dir = self.get_dirs("/app/calibre-web-automated/dirs.json")
