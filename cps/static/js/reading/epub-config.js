@@ -17,6 +17,7 @@
     start: cfg.start || null,
     highlights: cfg.highlights || [],
     positionUrl: cfg.positionUrl,
+    format: cfg.format || "epub",
     highlightUrl: cfg.highlightUrl,
     highlightDeleteUrl: cfg.highlightDeleteUrl,
     pagesUrl: cfg.pagesUrl,

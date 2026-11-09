@@ -122,6 +122,7 @@
     'start': start_position,
     'highlights': reader_highlights or [],
     'positionUrl': url_for('web_reader.save_position', book_id=bookid),
+    'format': book_format,
     'highlightUrl': url_for('web_reader.save_highlight', book_id=bookid),
     'highlightDeleteUrl': url_for('web_reader.delete_highlight', book_id=bookid),
     'pagesUrl': url_for('web_reader.save_pages', book_id=bookid),

@@ -51,7 +51,7 @@
     var percent = percentOf(cfi);
     if (percent === null || cfi === lastSaved) return;
     lastSaved = cfi;
-    post(cfg.positionUrl, { cfi: cfi, percent: Math.round(percent * 100) / 100 }, keepalive)
+    post(cfg.positionUrl, { cfi: cfi, percent: Math.round(percent * 100) / 100, format: cfg.format }, keepalive)
       .catch(function () { lastSaved = null; });
   }
 
@@ -59,17 +59,19 @@
 
   book.ready.then(function () {
     var start = cfg.start;
-    if (start && start.source === "web" && start.cfi) {
-      return rendition.display(start.cfi).catch(function () { return null; }).then(function () { return locationsReady; });
+    function announce() {
+      if (!start || start.source === "web") return;
+      var message = start.source === "koreader" ? i18n.from_koreader : i18n.from_kobo;
+      if (message) toast(message.replace("{percent}", Math.round(start.percent) + "%"));
+    }
+    if (start && start.cfi) {  // an exact position: the reader's own, or KOReader's translated
+      return rendition.display(start.cfi).then(announce, function () { return null; }).then(function () { return locationsReady; });
     }
     return locationsReady.then(function () {
       if (!start || !(start.percent > 0.5)) return null;
       var cfi = book.locations.cfiFromPercentage(Math.min(start.percent, 100) / 100);
       if (!cfi) return null;
-      return rendition.display(cfi).then(function () {
-        var message = start.source === "koreader" ? i18n.from_koreader : i18n.from_kobo;
-        if (message) toast(message.replace("{percent}", Math.round(start.percent) + "%"));
-      });
+      return rendition.display(cfi).then(announce);
     });
   }).catch(function (error) {
     try { console.warn("Could not restore the reading position", error); } catch (e) {}

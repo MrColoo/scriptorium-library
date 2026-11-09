@@ -85,6 +85,49 @@ class TestPosition:
                                                       "device": "Kobo Libra"}
 
 
+class TestKOReaderPositions:
+    @pytest.fixture
+    def epub(self, tmp_path):
+        import zipfile
+        path = tmp_path / "book.epub"
+        with zipfile.ZipFile(path, "w") as z:
+            z.writestr("META-INF/container.xml", '<container xmlns="urn:oasis:names:tc:opendocument:xmlns:container">'
+                       '<rootfiles><rootfile full-path="content.opf"/></rootfiles></container>')
+            z.writestr("content.opf", '<package xmlns="http://www.idpf.org/2007/opf"><metadata/><manifest>'
+                       '<item id="c" href="c.xhtml"/></manifest><spine><itemref idref="c"/></spine></package>')
+            z.writestr("c.xhtml", '<html xmlns="http://www.w3.org/1999/xhtml"><head/><body><p>A</p><p>B</p></body></html>')
+        return str(path)
+
+    def test_the_readers_position_is_written_for_koreader(self, session, monkeypatch):
+        import cps.progress_syncing.settings as settings
+        monkeypatch.setattr(settings, "is_koreader_sync_enabled", lambda: True)
+        user = _user()
+        web_reader.share_with_koreader(user, 7, "/body/DocFragment[1]/body/p[2]", 42.0)
+        session.commit()
+        record = session.query(KOSyncProgress).one()
+        assert (record.document, record.progress, record.percentage, record.device, record.device_id) == \
+            ("7", "/body/DocFragment[1]/body/p[2]", 42.0, "Scriptorium", "scriptorium-web")
+        # Not a KOReader device of the user's: the book page keeps its own source.
+        assert reading_overview.get_book_progress(user, 7) is None
+        # A later KOReader sync takes the same record over, as it does between devices.
+        web_reader.share_with_koreader(user, 7, None, 43.0)
+        session.commit()
+        assert session.query(KOSyncProgress).count() == 1 and session.query(KOSyncProgress).one().progress == ""
+
+    def test_nothing_is_written_when_koreader_sync_is_off(self, session, monkeypatch):
+        import cps.progress_syncing.settings as settings
+        monkeypatch.setattr(settings, "is_koreader_sync_enabled", lambda: False)
+        web_reader.share_with_koreader(_user(), 7, "/body/DocFragment[1]/body/p[2]", 42.0)
+        assert session.query(KOSyncProgress).count() == 0
+
+    def test_koreaders_position_opens_on_the_same_paragraph(self, session, epub):
+        session.add(KOSyncProgress(user_id=1, document="7", progress="/body/DocFragment[1]/body/p[2]",
+                                   percentage=80.0, device="Kobo Libra", device_id="libra", timestamp=NOW))
+        session.commit()
+        start = web_reader.start_position(_user(), 7, epub)
+        assert start == {"cfi": "epubcfi(/6/2!/4/4)", "percent": 80.0, "source": "koreader", "device": "Kobo Libra"}
+
+
 class TestReadingTime:
     @pytest.fixture(autouse=True)
     def config_dir(self, tmp_path, monkeypatch):

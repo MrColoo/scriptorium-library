@@ -9,7 +9,7 @@
 from datetime import datetime, timezone
 
 from flask_babel import format_timedelta
-from sqlalchemy import desc, func
+from sqlalchemy import desc, func, or_
 
 from . import calibre_db, db, logger, ub
 from .progress_syncing.models import KOSyncProgress
@@ -164,7 +164,10 @@ def _as_utc(moment):
 
 
 def _koreader_records(user_id):
-    return ub.session.query(KOSyncProgress).filter(KOSyncProgress.user_id == int(user_id))
+    """KOReader progress from devices; the copies the built-in reader writes for KOReader are left out."""
+    return ub.session.query(KOSyncProgress).filter(KOSyncProgress.user_id == int(user_id),
+                                                   or_(KOSyncProgress.device_id.is_(None),
+                                                       KOSyncProgress.device_id != "scriptorium-web"))
 
 
 def koreader_overview(user):

@@ -8,19 +8,22 @@
 
 - Position: the reader saves where you are (an EPUB CFI and a percentage). The percentage goes where
   KOReader's does, the Kobo reading state, so the book page, "Continue reading" and the read status
-  follow it; the CFI is kept in the user's view settings so the reader reopens on the exact spot. When
-  the reader opens, it starts from the most recent position of the three.
+  follow it; the CFI is kept in the user's view settings so the reader reopens on the exact spot. The
+  position is also written for KOReader, translated into its own notation (see epub_positions), so a
+  KOReader device offers to continue from it. When the reader opens, it starts from the most recent
+  position of the three, translating KOReader's back into a CFI.
 - Highlights: stored with the Kobo and KOReader ones (source "web"), so the Highlights page shows them.
 - Statistics: time spent on each page, added to the reading statistics (see reading_stats).
 """
 
+import os
 from datetime import datetime, timezone
 
 from flask import Blueprint, abort, jsonify, request
 from sqlalchemy import desc
 from sqlalchemy.orm.attributes import flag_modified
 
-from . import calibre_db, logger, ub
+from . import calibre_db, config, epub_positions, logger, ub
 from .cw_login import current_user
 from .usermanagement import user_login_required
 
@@ -32,6 +35,9 @@ POSITIONS_KEY = "reader_positions"
 MAX_POSITIONS = 300
 MAX_CFI = 2048
 COLORS = ("yellow", "green", "blue", "pink")
+WEB_DEVICE = "Scriptorium"            # how the built-in reader appears to KOReader
+WEB_DEVICE_ID = "scriptorium-web"
+READER_FORMATS = ("epub", "kepub")
 
 
 def _book_or_404(book_id):
@@ -79,9 +85,29 @@ def remember_position(user, book_id, cfi, percent, now=None):
     flag_modified(user, "view_settings")
 
 
-def start_position(user, book_id):
+def book_file(book, book_format):
+    """Path of the book's file in a format the reader opens, or None."""
+    book_format = (book_format or "").lower()
+    if book_format not in READER_FORMATS:
+        return None
+    for data in book.data:
+        if data.format.lower() == book_format:
+            path = os.path.join(config.get_book_path(), book.path, "{}.{}".format(data.name, book_format))
+            return path if os.path.isfile(path) else None
+    return None
+
+
+def _koreader_record(user_id, book_id):
+    from .progress_syncing.models import KOSyncProgress
+    return (ub.session.query(KOSyncProgress)
+            .filter(KOSyncProgress.user_id == int(user_id), KOSyncProgress.document == str(int(book_id)))
+            .order_by(desc(KOSyncProgress.timestamp)).first())
+
+
+def start_position(user, book_id, path=None):
     """Where the reader should open: the newest of its own position and the Kobo or KOReader progress.
 
+    path is the file the reader shows: with it, KOReader's position is translated to an exact CFI.
     Returns {cfi or None, percent, source ('web', 'kobo' or 'koreader'), device} or None.
     """
     from .reading_overview import get_book_progress
@@ -91,13 +117,38 @@ def start_position(user, book_id):
     if progress["source"] == "web":
         own = saved_position(user, book_id)
         return {"cfi": own["cfi"] if own else None, "percent": progress["percent"], "source": "web", "device": None}
-    return {"cfi": None, "percent": progress["percent"], "source": progress["source"], "device": progress.get("device")}
+    cfi = None
+    if progress["source"] == "koreader" and path:
+        record = _koreader_record(user.id, book_id)
+        cfi = epub_positions.xpointer_to_cfi(path, record.progress) if record else None
+    return {"cfi": cfi, "percent": progress["percent"], "source": progress["source"], "device": progress.get("device")}
+
+
+def share_with_koreader(user, book_id, xpointer, percent):
+    """Write the reader's position where KOReader reads it, so a device offers to continue from here.
+
+    KOReader keeps one record per book, whichever device wrote it last; the plugin goes to the
+    percentage when the XPointer does not exist in its copy of the book. The caller commits.
+    """
+    from .progress_syncing.models import KOSyncProgress
+    from .progress_syncing.settings import is_koreader_sync_enabled
+    if not is_koreader_sync_enabled():
+        return
+    record = _koreader_record(user.id, book_id)
+    if record is None:
+        record = KOSyncProgress(user_id=int(user.id), document=str(int(book_id)))
+        ub.session.add(record)
+    record.progress = xpointer or ""
+    record.percentage = percent
+    record.device = WEB_DEVICE
+    record.device_id = WEB_DEVICE_ID
+    record.timestamp = datetime.now(timezone.utc)
 
 
 @web_reader.route("/read/<int:book_id>/position", methods=["POST"])
 @user_login_required
 def save_position(book_id):
-    _book_or_404(book_id)
+    book = _book_or_404(book_id)
     data = _payload()
     cfi = _clip(data.get("cfi"), MAX_CFI)
     try:
@@ -110,6 +161,8 @@ def save_position(book_id):
     remember_position(current_user, book_id, cfi, percent)
     if percent > 0:  # the very start of a book says nothing about having read it, finished or not
         update_book_read_status(current_user, book_id, percent)  # read status and the shared percentage
+        path = book_file(book, data.get("format"))
+        share_with_koreader(current_user, book_id, epub_positions.cfi_to_xpointer(path, cfi) if path else None, percent)
     ub.session_commit()
     return "", 204
 
