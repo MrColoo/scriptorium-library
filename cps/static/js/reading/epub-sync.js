@@ -160,6 +160,38 @@
   }
   book.ready.then(function () { Object.keys(marks).forEach(draw); });
 
+  // Highlights are drawn over the page, and epub.js places them again only when the page changes size.
+  // When the text moves under them (font size, typeface, one or two columns, window size) they are
+  // placed again where the words now are: once the new style applies, and again once fonts have loaded.
+  var redrawTimers = [];
+  function redrawMarks() {
+    redrawTimers.forEach(clearTimeout);
+    redrawTimers = [150, 700].map(function (delay) {
+      return setTimeout(function () {
+        try {
+          rendition.views().forEach(function (view) { if (view && view.pane) view.pane.render(); });
+        } catch (e) { /* no page shown yet */ }
+      }, delay);
+    });
+  }
+  function watchContents(contents) {
+    var doc = contents && contents.document;
+    if (!doc || doc.__scWatched) return;
+    doc.__scWatched = true;
+    if (typeof contents.on === "function") contents.on("resize", redrawMarks);
+    // The reader's settings restyle the page through <style> elements and inline styles.
+    try {
+      new MutationObserver(redrawMarks).observe(doc.documentElement, {
+        subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ["style", "class"]
+      });
+    } catch (e) { /* old browser: the other triggers remain */ }
+    if (doc.fonts && doc.fonts.addEventListener) doc.fonts.addEventListener("loadingdone", redrawMarks);
+  }
+  rendition.hooks.content.register(watchContents);
+  try { rendition.getContents().forEach(watchContents); } catch (e) { /* nothing rendered yet */ }
+  ["resized", "relocated", "layout", "rendered"].forEach(function (name) { rendition.on(name, redrawMarks); });
+  window.addEventListener("resize", redrawMarks);
+
   var bar = document.getElementById("hl-bar");
   var noteForm = bar && bar.querySelector("[data-hl-note-form]");
   var noteText = noteForm && noteForm.querySelector("textarea");
