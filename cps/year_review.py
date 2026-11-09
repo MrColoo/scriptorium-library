@@ -262,15 +262,11 @@ def collect(user, year):
 
 
 def _koreader_pages(user_id, year):
-    """This year's pages from the user's shared KOReader statistics, with the library book when known."""
-    import os
+    """This year's pages from KOReader and the built-in reader, with the library book when known."""
     import sqlite3
     from . import reading_stats
-    path = reading_stats.stats_path(user_id)
-    if not os.path.isfile(path):
-        return []
     try:
-        books, rows = reading_stats.load(path)
+        books, rows = reading_stats.load_all(user_id)
     except sqlite3.Error as e:
         log.warning("Could not read the reading statistics of user %s: %s", user_id, e)
         return []

@@ -4,7 +4,7 @@
 <div class="page-header">
   <div>
     <h1 class="page-title">{{ _('Highlights') }}</h1>
-    <span class="page-subtitle">{{ _('Passages and notes from your Kobo and KOReader, gathered by book.') }}</span>
+    <span class="page-subtitle">{{ _('Passages and notes from your Kobo, KOReader and the built-in reader, gathered by book.') }}</span>
   </div>
   {%- if total %}
   <a class="btn" href="{{ url_for('annotations.export_markdown', book=book_id) if book_id else url_for('annotations.export_markdown') }}" download>{{ ui.icon('download') }}{{ _('Export as Markdown') }}</a>
@@ -40,7 +40,7 @@
     <li class="highlight" data-color="{{ (item.color or 'yellow')|lower }}">
       {%- if item.text %}<blockquote>{{ item.text }}</blockquote>{% endif %}
       {%- if item.note %}<p class="highlight-note">{{ ui.icon('edit', 'icon-sm') }}<span>{{ item.note }}</span></p>{% endif %}
-      <span class="highlight-meta">{{ 'KOReader' if item.source == 'koreader' else 'Kobo' }}{% if item.created %} · {{ item.created|formatdate }}{% endif %}</span>
+      <span class="highlight-meta">{{ 'KOReader' if item.source == 'koreader' else _('Built-in reader') if item.source == 'web' else 'Kobo' }}{% if item.created %} · {{ item.created|formatdate }}{% endif %}</span>
     </li>
     {%- endfor %}
   </ol>
@@ -52,7 +52,7 @@
 <div class="empty">
   <span class="icon-tile">{{ ui.icon('highlight') }}</span>
   <h2>{{ _('No highlights yet') }}</h2>
-  <p class="muted">{{ _('Highlight a passage on your Kobo or in KOReader and it appears here after the next sync.') }}</p>
+  <p class="muted">{{ _('Highlight a passage on your Kobo, in KOReader or in the built-in reader, and it appears here.') }}</p>
   <p class="hint">{{ _('KOReader needs version 1.1 or later of the Scriptorium plugin: download it again from Profile → Devices.') }}</p>
 </div>
   {%- endif %}

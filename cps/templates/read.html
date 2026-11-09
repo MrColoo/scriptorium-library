@@ -48,6 +48,21 @@
     <div id="next" class="arrow" role="button" aria-label="{{ _('Next page') }}">{{ ui.icon('chevron-right') }}</div>
     <div id="progress" aria-live="polite">0%</div>
     <div id="loader" role="status" aria-label="{{ _('Loading…') }}"><span class="spinner"></span></div>
+    <div id="hl-bar" class="hl-bar" role="toolbar" aria-label="{{ _('Highlight') }}" hidden>
+      <div class="hl-row">
+        {%- for color, label in [('yellow', _('Yellow')), ('green', _('Green')), ('blue', _('Blue')), ('pink', _('Pink'))] %}
+        <button type="button" class="hl-color" data-hl-color="{{ color }}" title="{{ label }}" aria-label="{{ _('Highlight in %(color)s', color=label) }}"></button>
+        {%- endfor %}
+        <span class="hl-sep" aria-hidden="true"></span>
+        <button type="button" class="hl-btn" data-hl-note title="{{ _('Add a note') }}" aria-label="{{ _('Add a note') }}">{{ ui.icon('edit') }}</button>
+        <button type="button" class="hl-btn" data-hl-delete title="{{ _('Remove highlight') }}" aria-label="{{ _('Remove highlight') }}">{{ ui.icon('trash') }}</button>
+      </div>
+      <form class="hl-note" data-hl-note-form hidden>
+        <textarea rows="3" maxlength="2000" placeholder="{{ _('Your note') }}" aria-label="{{ _('Your note') }}"></textarea>
+        <button type="submit" class="hl-save">{{ _('Save') }}</button>
+      </form>
+    </div>
+    <div id="reader-toast" class="reader-toast" role="status" aria-live="polite" hidden></div>
   </div>
 
   <div class="modal md-effect-1" id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-h">
@@ -100,9 +115,18 @@
     'bookUrl': url_for('web.serve_book', book_id=bookid, book_format=book_format, anyname='file.epub'),
     'bookmark': bookmark.bookmark_key if bookmark else '',
     'useBookmarks': current_user.is_authenticated and not current_user.is_anonymous,
-    'kosyncPercent': kosync_progress if kosync_progress is defined else none,
+    'signedIn': current_user.is_authenticated and not current_user.is_anonymous,
+    'start': start_position,
+    'highlights': reader_highlights or [],
+    'positionUrl': url_for('web_reader.save_position', book_id=bookid),
+    'highlightUrl': url_for('web_reader.save_highlight', book_id=bookid),
+    'highlightDeleteUrl': url_for('web_reader.delete_highlight', book_id=bookid),
+    'pagesUrl': url_for('web_reader.save_pages', book_id=bookid),
     'themeCss': url_for('static', filename='css/epub_themes.css'),
-    'i18n': {'open_failed': _('This EPUB could not be opened. It may be damaged or DRM-protected.'), 'load_failed': _('Something went wrong while loading this book.')}
+    'i18n': {'open_failed': _('This EPUB could not be opened. It may be damaged or DRM-protected.'), 'load_failed': _('Something went wrong while loading this book.'),
+             'from_kobo': _('Continuing where you left off on your Kobo (%(percent)s).', percent='{percent}'),
+             'from_koreader': _('Continuing where you left off in KOReader (%(percent)s).', percent='{percent}'),
+             'highlight_failed': _('The highlight could not be saved. Check your connection.')}
   }|tojson }}</script>
   <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/compress/jszip_epub.min.js') }}"></script>
@@ -111,6 +135,6 @@
   <script src="{{ url_for('static', filename='js/libs/screenfull.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/libs/reader.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/reading/epub.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/reading/epub-progress.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/reading/epub-sync.js') }}"></script>
 </body>
 </html>

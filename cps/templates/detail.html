@@ -160,7 +160,7 @@
     {%- set progress = reading_progress %}
     {%- if kobo_status or progress %}
     <section class="card kobo-card" aria-labelledby="progress-heading">
-      <span class="icon-tile">{{ ui.icon('book-open' if progress and progress.source == 'koreader' else 'device') }}</span>
+      <span class="icon-tile">{{ ui.icon('book-open' if progress and progress.source in ['koreader', 'web'] else 'device') }}</span>
       <div class="grow">
         {%- if progress %}
         <h2 class="card-title" id="progress-heading">{{ _('Reading progress') }}</h2>
@@ -168,6 +168,7 @@
           <div class="progress progress--lg progress--inline"><span style="width: {{ progress.percent|int }}%"></span></div>
           <span class="small muted">{{ progress.percent|formatfloat(0) }}% ·
             {%- if progress.source == 'koreader' %} {{ _('KOReader on %(device)s', device=progress.device|replace('_', ' ')) if progress.device else 'KOReader' }}
+            {%- elif progress.source == 'web' %} {{ _('Built-in reader') }}
             {%- else %} Kobo{% endif %}
             {%- if progress.when %} · {{ progress.when|formatdate }}{% endif %}</span>
         </div>

@@ -10,7 +10,8 @@ var reader;
     EPUBJS.cssPath = calibre.cssPath;
 
     window.reader = reader = ePubReader(calibre.bookUrl, {
-        restore: true,
+        // The position comes from the server (epub-sync.js), so every device and browser agrees on it.
+        restore: false,
         bookmarks: calibre.bookmark ? [calibre.bookmark] : []
     });
 

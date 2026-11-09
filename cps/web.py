@@ -2889,17 +2889,16 @@ def read_book(book_id, book_format):
                                                              ub.Bookmark.book_id == book_id,
                                                              ub.Bookmark.format == book_format.upper())).first()
 
-    kosync_progress = None
-    if current_user.is_authenticated:
+    # Where to open (the newest of the reader's, the Kobo's and KOReader's position) and the reader's highlights
+    start_position = None
+    reader_highlights = []
+    if current_user.is_authenticated and not current_user.is_anonymous:
+        from . import web_reader
         try:
-            kobo_state = (ub.session.query(ub.KoboReadingState)
-                          .filter(ub.KoboReadingState.user_id == int(current_user.id),
-                                  ub.KoboReadingState.book_id == book_id)
-                          .first())
-            if kobo_state and kobo_state.current_bookmark:
-                kosync_progress = kobo_state.current_bookmark.progress_percent
+            start_position = web_reader.start_position(current_user, book_id)
+            reader_highlights = web_reader.highlights_for(current_user, book_id)
         except Exception as e:
-            log.debug(f"Failed to load KOReader progress for book {book_id}: {e}")
+            log.debug("Could not load the reading position of book %s: %s", book_id, e)
     # Track read activity
     if current_user.is_authenticated:
         try:
@@ -2936,7 +2935,8 @@ def read_book(book_id, book_format):
     if book_format.lower() in ("epub", "kepub"):
         log.debug("Start epub reader for %d (%s)", book_id, book_format.lower())
         return render_title_template('read.html', bookid=book_id, title=book.title,
-                                     bookmark=bookmark, kosync_progress=kosync_progress,
+                                     bookmark=bookmark, start_position=start_position,
+                                     reader_highlights=reader_highlights,
                                      book_format=book_format.lower())
     elif book_format.lower() == "pdf":
         log.debug("Start pdf reader for %d", book_id)

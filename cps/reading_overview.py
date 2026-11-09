@@ -187,8 +187,8 @@ def koreader_overview(user):
 def get_book_progress(user, book_id):
     """The latest reading progress for a book and where it came from, or None.
 
-    Returns {percent (0-100 float), source ('kobo' or 'koreader'), device (str or None), when (datetime)}.
-    Otherwise the newer of the Kobo bookmark and the KOReader record wins.
+    Returns {percent (0-100 float), source ('kobo', 'koreader' or 'web'), device (str or None), when (datetime)}.
+    The newest of the Kobo bookmark, the KOReader record and the built-in reader's position wins.
     """
     if user is None or getattr(user, "is_anonymous", True):
         return None
@@ -208,15 +208,21 @@ def get_book_progress(user, book_id):
         if record is not None:
             candidates.append({"percent": float(record.percentage), "source": "koreader",
                                "device": record.device, "when": _as_utc(record.timestamp)})
+        from .web_reader import saved_position
+        own = saved_position(user, book_id)
+        if own is not None:
+            candidates.append({"percent": own["percent"], "source": "web", "device": None,
+                               "when": _as_utc(own["when"])})
     except Exception as e:
         log.debug("Could not load reading progress for book %s: %s", book_id, e)
         return None
     if not candidates:
         return None
-    if len(candidates) == 2 and abs(candidates[0]["percent"] - candidates[1]["percent"]) < 0.01:
-        # KOReader also writes its percentage into the Kobo bookmark, a moment after its own record:
-        # the same value in both places is KOReader's.
-        return candidates[1]
+    others = [c for c in candidates if c["source"] != "kobo"]
+    if len(others) < len(candidates) and any(abs(c["percent"] - candidates[0]["percent"]) < 0.01 for c in others):
+        # KOReader and the built-in reader also write their percentage into the Kobo bookmark, a moment
+        # after their own record: the same value there is theirs, not the Kobo's.
+        candidates = others
     oldest = datetime.min.replace(tzinfo=timezone.utc)
     return max(candidates, key=lambda c: c["when"] or oldest)
 

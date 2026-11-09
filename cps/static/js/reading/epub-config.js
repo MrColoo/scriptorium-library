@@ -13,7 +13,13 @@
     bookUrl: cfg.bookUrl,
     bookmark: cfg.bookmark || "",
     useBookmarks: cfg.useBookmarks === true,
-    kosyncPercent: cfg.kosyncPercent,
+    signedIn: cfg.signedIn === true,
+    start: cfg.start || null,
+    highlights: cfg.highlights || [],
+    positionUrl: cfg.positionUrl,
+    highlightUrl: cfg.highlightUrl,
+    highlightDeleteUrl: cfg.highlightDeleteUrl,
+    pagesUrl: cfg.pagesUrl,
     i18n: cfg.i18n || {}
   };
   window.themes = {

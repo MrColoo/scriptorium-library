@@ -12,6 +12,8 @@ the result. Scriptorium is that folder (`/kosync/webdav/`, with the same sign-in
 so every device ends up with the statistics of all of them, and the page reads the latest copy.
 
 Each user has one file in `<config>/reading_stats/`. Nothing is written to the app's databases.
+The built-in reader keeps its own pages in a second file with the same layout (`<id>-web.sqlite3`),
+written only by the server, and the page reads both.
 The uploaded file comes from a device, so it is only ever opened read-only and immutable, with
 SQLite's untrusted-schema protections on, and only its two plain tables are read.
 """
@@ -59,6 +61,11 @@ def stats_path(user_id):
     return os.path.join(stats_dir(), "{}.sqlite3".format(int(user_id)))
 
 
+def web_stats_path(user_id):
+    """Pages read in the built-in reader, in KOReader's layout."""
+    return os.path.join(stats_dir(), "{}-web.sqlite3".format(int(user_id)))
+
+
 def etag_for(path):
     try:
         info = os.stat(path)
@@ -88,8 +95,8 @@ def looks_like_statistics(path):
         return False
 
 
-def _open(path):
-    conn = sqlite3.connect("file:{}?mode=ro&immutable=1".format(path), uri=True)
+def _open(path, immutable=True):
+    conn = sqlite3.connect("file:{}?mode=ro{}".format(path, "&immutable=1" if immutable else ""), uri=True)
     try:
         conn.execute("PRAGMA trusted_schema = OFF")
         conn.execute("PRAGMA cell_size_check = ON")
@@ -129,7 +136,7 @@ def store_upload(user_id, stream, length, if_match=None):
                 os.replace(path, path + ".prev")
             os.replace(temp_path, path)
             temp_path = None
-        _cache.pop(path, None)
+        _cache.clear()
         return 204 if current else 201
     finally:
         if temp_path and os.path.exists(temp_path):
@@ -214,9 +221,9 @@ def webdav_file(name):
 
 # ---------- Reading the statistics ----------
 
-def load(path):
+def load(path, immutable=True):
     """(books, rows) from a statistics file: books by id, rows as (id_book, page, start, duration, total_pages)."""
-    with closing(_open(path)) as conn:
+    with closing(_open(path, immutable)) as conn:
         books = {}
         for book_id, title, authors, md5, pages in conn.execute(
                 "SELECT id, title, authors, md5, pages FROM book"):
@@ -224,6 +231,78 @@ def load(path):
         rows = conn.execute(
             "SELECT id_book, page, start_time, duration, total_pages FROM page_stat_data "
             "WHERE duration > 0 AND start_time > 0 ORDER BY start_time").fetchall()
+    return books, rows
+
+
+WEB_BOOK_OFFSET = 1_000_000  # keeps the built-in reader's books apart from KOReader's
+MAX_PAGE_SECONDS = 120         # a page left open longer counts as two minutes, as in KOReader
+MIN_PAGE_SECONDS = 3           # quicker page turns are skimming, not reading
+
+_WEB_SCHEMA = """
+CREATE TABLE IF NOT EXISTS book (id integer PRIMARY KEY autoincrement, title text, authors text, notes integer,
+    last_open integer, highlights integer, pages integer, series text, language text, md5 text,
+    total_read_time integer, total_read_pages integer);
+CREATE UNIQUE INDEX IF NOT EXISTS book_title_authors_md5 ON book(title, authors, md5);
+CREATE TABLE IF NOT EXISTS page_stat_data (id_book integer, page integer NOT NULL DEFAULT 0,
+    start_time integer NOT NULL DEFAULT 0, duration integer NOT NULL DEFAULT 0, total_pages integer NOT NULL DEFAULT 0,
+    UNIQUE (id_book, page, start_time), FOREIGN KEY(id_book) REFERENCES book(id));
+CREATE INDEX IF NOT EXISTS page_stat_data_start_time ON page_stat_data(start_time);
+"""
+
+
+def store_web_pages(user_id, book, md5, pages, now=None):
+    """Add pages read in the built-in reader. pages: [(page, start_time, duration, total_pages)]. Returns the count."""
+    now = int(now or datetime.now().timestamp())
+    rows = []
+    for item in pages[:500]:
+        try:
+            page, start, duration, total = (int(value) for value in item)
+        except (TypeError, ValueError):
+            continue
+        if page < 1 or total < 1 or not now - 7 * 86400 <= start <= now + 60 or duration < MIN_PAGE_SECONDS:
+            continue
+        rows.append((min(page, total), start, min(duration, MAX_PAGE_SECONDS), total))
+    if not rows:
+        return 0
+    os.makedirs(stats_dir(), exist_ok=True)
+    path = web_stats_path(user_id)
+    title = book.title or _("Unknown book")
+    authors = "\n".join(author.name for author in book.authors)
+    key = md5 or "scriptorium-{}".format(book.id)
+    with _write_lock, closing(sqlite3.connect(path)) as conn:
+        conn.executescript(_WEB_SCHEMA)
+        conn.execute("INSERT OR IGNORE INTO book (title, authors, md5, pages, notes, highlights, last_open, "
+                     "total_read_time, total_read_pages) VALUES (?, ?, ?, ?, 0, 0, 0, 0, 0)",
+                     (title, authors, key, rows[-1][3]))
+        book_id = conn.execute("SELECT id FROM book WHERE title = ? AND authors = ? AND md5 = ?",
+                               (title, authors, key)).fetchone()[0]
+        conn.executemany("INSERT OR IGNORE INTO page_stat_data VALUES (?, ?, ?, ?, ?)",
+                         [(book_id, page, start, duration, total) for page, start, duration, total in rows])
+        conn.execute("UPDATE book SET last_open = ?, pages = ? WHERE id = ?", (now, rows[-1][3], book_id))
+        conn.commit()
+    _cache.clear()
+    return len(rows)
+
+
+def load_all(user_id):
+    """KOReader's statistics and the built-in reader's, as one (books, rows). A book read in both,
+    recognised by its file checksum, is one book."""
+    books, rows = {}, []
+    if os.path.isfile(stats_path(user_id)):
+        books, rows = load(stats_path(user_id))
+    web = web_stats_path(user_id)
+    if os.path.isfile(web):
+        web_books, web_rows = load(web, immutable=False)
+        by_md5 = {info["md5"]: book_id for book_id, info in books.items() if info["md5"]}
+        mapping = {}
+        for web_id, info in web_books.items():
+            if info["md5"] in by_md5:
+                mapping[web_id] = by_md5[info["md5"]]
+            else:
+                mapping[web_id] = WEB_BOOK_OFFSET + web_id
+                books[mapping[web_id]] = info
+        rows = sorted(list(rows) + [(mapping[row[0]],) + tuple(row[1:]) for row in web_rows if row[0] in mapping],
+                      key=lambda row: row[2])
     return books, rows
 
 
@@ -365,22 +444,21 @@ def summarize(books, rows, today=None):
 
 
 def for_user(user_id, today=None):
-    """The summary for a user, or None when no device has synced statistics yet."""
-    path = stats_path(user_id)
-    tag = etag_for(path)
-    if not tag:
+    """The summary for a user, or None before any reading was measured (KOReader or the built-in reader)."""
+    paths = [path for path in (stats_path(user_id), web_stats_path(user_id)) if os.path.isfile(path)]
+    if not paths:
         return None
-    key = (tag, today or date.today())
-    cached = _cache.get(path)
+    key = (tuple(etag_for(path) for path in paths), today or date.today())
+    cached = _cache.get(user_id)
     if cached and cached[0] == key:
         return cached[1]
     try:
-        summary = summarize(*load(path), today=today)
+        summary = summarize(*load_all(user_id), today=today)
     except sqlite3.Error as e:
         log.warning("Could not read the reading statistics of user %s: %s", user_id, e)
         return None
-    summary["synced"] = datetime.fromtimestamp(os.path.getmtime(path))
-    _cache[path] = (key, summary)
+    summary["synced"] = datetime.fromtimestamp(max(os.path.getmtime(path) for path in paths))
+    _cache[user_id] = (key, summary)
     return summary
 
 
