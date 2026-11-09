@@ -24,6 +24,7 @@ Set these under `environment:` in `docker-compose.yml`, then run `docker compose
 | `CWA_PORT_OVERRIDE` | `8083` | Port the web server listens on inside the container. Below 1024 also needs `cap_add: [NET_BIND_SERVICE]`. |
 | `CWA_WATCH_MODE` | `inotify` | `poll` forces polling for new files, even on local disks. |
 | `DISABLE_LIBRARY_AUTOMOUNT` | `false` | `true` skips the automatic library detection at start-up. |
+| `SCRIPTORIUM_DEFAULT_ADMIN` | `false` | `true` gives a new installation the `admin` / `admin123` account, as Calibre-Web does, instead of asking for the first account in the browser. A new password is asked at the first sign-in. For automated installs and tests. Installations that already have accounts are not affected. |
 | `SESSION_COOKIE_SECURE` | `false` | `true` marks session cookies `Secure`. Always on when OAuth or *Use via HTTPS* is enabled. |
 | `COOKIE_PREFIX` | – | Prefix for cookie names. Useful when several apps share a domain. |
 | `OAUTH_SSL_STRICT` | `1` | `0` skips certificate checks when talking to an OAuth provider. Only for a private provider with a self-signed certificate. |

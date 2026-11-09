@@ -5,8 +5,10 @@ explains how the application protects them and what you should do when you deplo
 
 ## Deploying safely
 
-- **Change the default password.** The first login as `admin` / `admin123` forces a new password
-  before anything else can be done.
+- **Create the first account straight away.** A new installation has no default account: the first
+  person to open it creates the administrator. Do it before the address is reachable by others.
+  Installations that still use `admin` / `admin123` (upgrades, or `SCRIPTORIUM_DEFAULT_ADMIN=true`)
+  get a new password forced at the first sign-in.
 - **Never forward port 8083 to the internet.** Use a VPN, or a reverse proxy with a real certificate.
   [Remote access](remote-access.md) compares the options. With HTTPS working, enable
   *Settings → Server & features → Security → Use via HTTPS* so session cookies are marked `Secure`.

@@ -33,8 +33,10 @@ services:
     restart: unless-stopped
 ```
 
-Start it with `docker compose up -d` and open `http://<server>:8083`. The first login is
-`admin` / `admin123`, and Scriptorium asks for a new password before anything else.
+Start it with `docker compose up -d` and open `http://<server>:8083`. The first page creates the
+administrator account: choose a username and a password. Do it before you share the address, as
+whoever opens it first creates that account. An upgrade from Calibre-Web or Calibre-Web-Automated
+keeps your accounts and skips this page.
 
 Only ever change the **left** side of the volume and port mappings. The paths inside the container
 (`/config`, `/cwa-book-ingest`, `/calibre-library`) are fixed. All environment variables are in the

@@ -82,8 +82,8 @@ curl -O https://raw.githubusercontent.com/MrColoo/scriptorium-library/main/docke
 docker compose up -d
 ```
 
-Open **http://localhost:8083** and sign in with `admin` / `admin123`. You'll be asked to choose a
-new password right away.
+Open **http://localhost:8083** and create your account: the first page asks for a username and a
+password, then a short tour shows you around.
 
 Now drop an EPUB, PDF, MOBI or any other ebook into the `ingest` folder next to the compose file
 and watch it appear in your library. Then [connect your Kobo](docs/kobo.md); it takes about
@@ -262,6 +262,7 @@ time. Nothing is locked in.
 | `CWA_WATCH_MODE` | `inotify` | `poll` forces polling for new files. |
 | `TRUSTED_PROXY_COUNT` | `1` | Number of reverse proxies in front of Scriptorium. |
 | `DISABLE_LIBRARY_AUTOMOUNT` | `false` | `true` skips automatic library detection at start-up. |
+| `SCRIPTORIUM_DEFAULT_ADMIN` | `false` | `true` gives a new installation the `admin` / `admin123` account instead of the setup page, for automated installs. |
 
 The [configuration reference](docs/configuration.md) lists every variable and setting. Network
 shares and NAS setups are in the [installation reference](docs/installation.md), and HTTPS and

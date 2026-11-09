@@ -26,7 +26,8 @@ PYTHONPATH=scripts:. CWA_PORT_OVERRIDE=8089 \
 .venv/bin/python cps.py -p /tmp/cwa-dev/config/app.db
 ```
 
-Open `http://localhost:8089`, sign in as `admin` / `admin123`, choose a new password, and point
+Open `http://localhost:8089`, create the first account (or start with
+`SCRIPTORIUM_DEFAULT_ADMIN=true` to get `admin` / `admin123`), and point
 *Settings → Calibre library* at `/tmp/cwa-dev/library`. `DEVELOP_ON=true` reloads templates
 without a restart; Python changes need one. Static files are versioned by content hash, so edited
 CSS and JS are picked up on the next page load.

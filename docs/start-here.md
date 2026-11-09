@@ -155,18 +155,20 @@ docker compose ps
 
 When the status says `healthy`, it is ready.
 
-## Step 5: Sign in
+## Step 5: Create your account
 
 Open **http://localhost:8083** in a browser on the same computer. If Scriptorium runs on another
 machine, use that machine's address instead (see [Step 7](#step-7-reach-it-from-your-other-devices)).
 
-Sign in with:
+The first time, Scriptorium asks you to create your account:
 
-- Username: `admin`
-- Password: `admin123`
+- **Username**: the name you will sign in with.
+- **Password**: at least 8 characters, with a number, a lowercase and an uppercase letter, and a
+  special character. A bar shows how strong it is, and each rule turns green once it is met. Keep it
+  somewhere safe.
 
-You will be asked to choose a new password straight away. It needs at least 8 characters, with a
-number, a lowercase and an uppercase letter, and a special character. Keep it somewhere safe.
+Then the library opens with a short tour of the main features. You can skip it and see it again
+from your profile.
 
 ## Step 6: Add your first book
 
