@@ -27,7 +27,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/screenshots/hero.png" alt="Scriptorium on desktop and phone: a dark library with a colourful header, the Continue reading row showing Kobo progress" width="100%">
+  <img src="docs/screenshots/hero.png" alt="Scriptorium on an e-reader, a desktop and a phone: Moby-Dick open at 38% on the e-reader, the same book at 38% in Continue reading on the desktop, and the Highlights page on the phone" width="100%">
 </p>
 
 ---

@@ -5,7 +5,7 @@ downscaled to 1920 px wide) in light and dark mode.
 
 | File | Shows |
 | --- | --- |
-| `hero.png` | Desktop with the Aurora style and a phone with the Sunset style, on a gradient |
+| `hero.png` | An e-ink reader at the same point as the desktop's Continue reading (classic style, light) and a phone (classic style, dark, Highlights), on the demo video's background |
 | `library-light.png`, `library-dark.png` | Home page |
 | `book-light.png`, `book-dark.png` | A book page |
 | `kobo-light.png`, `kobo-dark.png` | Profile → Kobo setup |
