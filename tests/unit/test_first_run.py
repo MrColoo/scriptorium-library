@@ -44,6 +44,9 @@ def test_a_new_database(tmp_path, monkeypatch, asked, names):
     monkeypatch.setattr(ub, "_healthcheck_app_db", lambda path: None)
     monkeypatch.setattr(ub, "create_system_magic_shelves_for_user", lambda user_id: 0, raising=False)
     monkeypatch.setattr(magic_shelf, "create_system_magic_shelves", lambda user_id: 0)
+    # init_db replaces the module's session and path: put them back afterwards
+    monkeypatch.setattr(ub, "session", ub.session)
+    monkeypatch.setattr(ub, "app_DB_path", getattr(ub, "app_DB_path", None), raising=False)
     ub.init_db(str(tmp_path / "app.db"))
     try:
         assert sorted(user.name for user in ub.session.query(ub.User).all()) == names
