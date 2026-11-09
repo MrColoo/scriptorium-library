@@ -129,7 +129,7 @@ sync.
 
 - Search across everything you have marked.
 - The home page opens with a **passage of the day**: one of your highlights, a different one each
-  day, with its book and your note.
+  day, with its book and your note. Turn it off in your profile if you prefer a quieter home page.
 - Open a book to see only its highlights.
 - **Export as Markdown** gives you a file ready for Obsidian, Notion or Readwise.
 
