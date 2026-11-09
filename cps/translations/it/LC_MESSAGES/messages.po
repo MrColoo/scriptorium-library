@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-09 22:17+0100\n"
+"POT-Creation-Date: 2026-11-09 22:41+0100\n"
 "PO-Revision-Date: 2025-11-24 17:12+0100\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -807,11 +807,11 @@ msgstr ""
 "Ripristino completato. Backup e log salvati in %(dir)s. Tutti i dati "
 "collegati ai libri sono stati azzerati."
 
-#: cps/annotations.py:400 cps/templates/read.html:61
+#: cps/annotations.py:472 cps/templates/read.html:61
 msgid "Note"
 msgstr "Nota"
 
-#: cps/annotations.py:413 cps/templates/highlights.html:6
+#: cps/annotations.py:485 cps/templates/highlights.html:6
 #: cps/templates/layout.html:73 cps/templates/year.html:273
 msgid "Highlights"
 msgstr "Sottolineature"
@@ -7920,12 +7920,15 @@ msgstr ""
 "Non è stato possibile salvare l’evidenziazione. Controlla la connessione."
 
 #: cps/templates/read.html:138
-msgid "Highlighted in KOReader. Change it on the device."
-msgstr "Sottolineatura fatta in KOReader. Si modifica sul dispositivo."
+msgid ""
+"Highlighted in KOReader. Deleting it here deletes it on the device too, at "
+"its next sync."
+msgstr "Sottolineatura fatta in KOReader. Se la cancelli qui, viene cancellata anche sul dispositivo alla sincronizzazione successiva."
 
 #: cps/templates/read.html:139
-msgid "Highlighted on your Kobo. Change it on the device."
-msgstr "Sottolineatura fatta sul tuo Kobo. Si modifica sul dispositivo."
+msgid ""
+"Highlighted on your Kobo. Deleting it here removes it from Scriptorium only."
+msgstr "Sottolineatura fatta sul tuo Kobo. Se la cancelli qui, sparisce solo da Scriptorium."
 
 #: cps/templates/readcbr.html:78
 msgid "Keyboard Shortcuts"

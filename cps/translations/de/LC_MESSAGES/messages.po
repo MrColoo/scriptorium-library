@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-09 22:17+0100\n"
+"POT-Creation-Date: 2026-11-09 22:41+0100\n"
 "PO-Revision-Date: 2026-07-20 20:00+0000\n"
 "Last-Translator: Krux86Language-Team: German\n"
 "Language-Team: de <LL@li.org>\n"
@@ -793,12 +793,12 @@ msgstr ""
 "Wiederherstellung abgeschlossen. Backups und Log unter %(dir)s gespeichert. "
 "Alle buchverknüpften Daten wurden zurückgesetzt."
 
-#: cps/annotations.py:400 cps/templates/read.html:61
+#: cps/annotations.py:472 cps/templates/read.html:61
 #, fuzzy
 msgid "Note"
 msgstr "Hinweis:"
 
-#: cps/annotations.py:413 cps/templates/highlights.html:6
+#: cps/annotations.py:485 cps/templates/highlights.html:6
 #: cps/templates/layout.html:73 cps/templates/year.html:273
 #, fuzzy
 msgid "Highlights"
@@ -8041,11 +8041,14 @@ msgid "The highlight could not be saved. Check your connection."
 msgstr ""
 
 #: cps/templates/read.html:138
-msgid "Highlighted in KOReader. Change it on the device."
+msgid ""
+"Highlighted in KOReader. Deleting it here deletes it on the device too, at "
+"its next sync."
 msgstr ""
 
 #: cps/templates/read.html:139
-msgid "Highlighted on your Kobo. Change it on the device."
+msgid ""
+"Highlighted on your Kobo. Deleting it here removes it from Scriptorium only."
 msgstr ""
 
 #: cps/templates/readcbr.html:78
