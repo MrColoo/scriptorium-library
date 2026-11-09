@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-09 16:08+0100\n"
+"POT-Creation-Date: 2026-11-09 16:11+0100\n"
 "PO-Revision-Date: 2025-09-08 00:53+0900\n"
 "Last-Translator: limeade23 <admin@limeade.me>\n"
 "Language-Team: Korean <>\n"
@@ -770,7 +770,7 @@ msgstr ""
 "복원 완료. 백업 및 복원 로그가 %(dir)s 에 저장되었습니다. 책과 연결된 모든 데"
 "이터가 초기화되었습니다."
 
-#: cps/annotations.py:270
+#: cps/annotations.py:270 cps/templates/read.html:57
 #, fuzzy
 msgid "Note"
 msgstr "참고:"
@@ -2965,7 +2965,7 @@ msgstr "허용 항목"
 #: cps/templates/layout.html:216 cps/templates/layout.html:219
 #: cps/templates/layout.html:262 cps/templates/layout.html:296
 #: cps/templates/layout.html:335 cps/templates/layout.html:363
-#: cps/templates/read.html:73 cps/templates/year.html:42
+#: cps/templates/read.html:76 cps/templates/year.html:42
 msgid "Close"
 msgstr "닫기"
 
@@ -3555,12 +3555,12 @@ msgid "Appearance"
 msgstr ""
 
 #: cps/templates/appearance.html:157 cps/templates/layout.html:183
-#: cps/templates/read.html:78 cps/templates/readcbr.html:107
+#: cps/templates/read.html:81 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "밝은색"
 
 #: cps/templates/appearance.html:158 cps/templates/layout.html:184
-#: cps/templates/read.html:80 cps/templates/readcbr.html:108
+#: cps/templates/read.html:83 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "어두운색"
 
@@ -3829,9 +3829,8 @@ msgstr "Hardcover 동기화에서 읽기 진행률 제외"
 #: cps/templates/config_edit.html:289 cps/templates/config_view_edit.html:108
 #: cps/templates/cwa_settings.html:259 cps/templates/email_edit.html:71
 #: cps/templates/magic_shelf_edit.html:59
-#: cps/templates/profile_pictures.html:28 cps/templates/read.html:62
-#: cps/templates/schedule_edit.html:33 cps/templates/shelf_edit.html:31
-#: cps/templates/user_edit.html:515
+#: cps/templates/profile_pictures.html:28 cps/templates/schedule_edit.html:33
+#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:515
 msgid "Save"
 msgstr "저장"
 
@@ -7655,89 +7654,102 @@ msgid "Remove highlight"
 msgstr "시리즈 보기"
 
 #: cps/templates/read.html:61
+msgid "Write a thought about this passage…"
+msgstr ""
+
+#: cps/templates/read.html:61
 #, fuzzy
 msgid "Your note"
 msgstr "이메일 주소"
 
-#: cps/templates/read.html:72
+#: cps/templates/read.html:63
+msgid "Saved with the highlight, and shown on the Highlights page."
+msgstr ""
+
+#: cps/templates/read.html:64
+#, fuzzy
+msgid "Save note"
+msgstr "서재에 추가"
+
+#: cps/templates/read.html:75
 #, fuzzy
 msgid "Reading settings"
 msgstr "사용자 설정"
 
-#: cps/templates/read.html:76 cps/templates/readcbr.html:104
+#: cps/templates/read.html:79 cps/templates/readcbr.html:104
 #: cps/templates/readtxt.html:23
 msgid "Theme"
 msgstr "테마"
 
-#: cps/templates/read.html:79
+#: cps/templates/read.html:82
 msgid "Sepia"
 msgstr "세피아"
 
-#: cps/templates/read.html:81
+#: cps/templates/read.html:84
 msgid "Black"
 msgstr "검은색"
 
-#: cps/templates/read.html:85
+#: cps/templates/read.html:88
 #, fuzzy
 msgid "Text size"
 msgstr "파일 크기"
 
-#: cps/templates/read.html:89
+#: cps/templates/read.html:92
 msgid "Font"
 msgstr "글꼴"
 
-#: cps/templates/read.html:91
+#: cps/templates/read.html:94
 #, fuzzy
 msgid "Book default"
 msgstr "책 상세정보"
 
-#: cps/templates/read.html:93
+#: cps/templates/read.html:96
 msgid "Yahei"
 msgstr "Yahei"
 
-#: cps/templates/read.html:94
+#: cps/templates/read.html:97
 msgid "SimSun"
 msgstr "SimSun"
 
-#: cps/templates/read.html:95
+#: cps/templates/read.html:98
 msgid "KaiTi"
 msgstr "KaiTi"
 
-#: cps/templates/read.html:99
+#: cps/templates/read.html:102
 msgid "Layout"
 msgstr ""
 
-#: cps/templates/read.html:101
+#: cps/templates/read.html:104
 msgid "Two columns"
 msgstr "두쪽 보기"
 
-#: cps/templates/read.html:102
+#: cps/templates/read.html:105
 msgid "One column"
 msgstr "한쪽 보기"
 
-#: cps/templates/read.html:105
+#: cps/templates/read.html:108
 msgid "Reflow text when sidebars are open."
 msgstr "사이드바가 열릴 경우 텍스트를 재정렬합니다."
 
-#: cps/templates/read.html:126
+#: cps/templates/read.html:129
 msgid "This EPUB could not be opened. It may be damaged or DRM-protected."
 msgstr ""
 
-#: cps/templates/read.html:126
+#: cps/templates/read.html:129
 msgid "Something went wrong while loading this book."
 msgstr ""
 
-#: cps/templates/read.html:127
+#: cps/templates/read.html:130
 #, python-format
 msgid "Continuing where you left off on your Kobo (%(percent)s)."
 msgstr ""
 
-#: cps/templates/read.html:128
+#: cps/templates/read.html:131
 #, python-format
 msgid "Continuing where you left off in KOReader (%(percent)s)."
 msgstr ""
 
-#: cps/templates/read.html:129
+#: cps/templates/read.html:132
 msgid "The highlight could not be saved. Check your connection."
 msgstr ""
 

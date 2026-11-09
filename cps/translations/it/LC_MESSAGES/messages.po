@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-09 16:08+0100\n"
+"POT-Creation-Date: 2026-11-09 16:11+0100\n"
 "PO-Revision-Date: 2025-11-24 17:12+0100\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -807,7 +807,7 @@ msgstr ""
 "Ripristino completato. Backup e log salvati in %(dir)s. Tutti i dati "
 "collegati ai libri sono stati azzerati."
 
-#: cps/annotations.py:270
+#: cps/annotations.py:270 cps/templates/read.html:57
 msgid "Note"
 msgstr "Nota"
 
@@ -3024,7 +3024,7 @@ msgstr "Valori consentiti e negati"
 #: cps/templates/layout.html:216 cps/templates/layout.html:219
 #: cps/templates/layout.html:262 cps/templates/layout.html:296
 #: cps/templates/layout.html:335 cps/templates/layout.html:363
-#: cps/templates/read.html:73 cps/templates/year.html:42
+#: cps/templates/read.html:76 cps/templates/year.html:42
 msgid "Close"
 msgstr "Chiudi"
 
@@ -3602,12 +3602,12 @@ msgid "Appearance"
 msgstr "Aspetto"
 
 #: cps/templates/appearance.html:157 cps/templates/layout.html:183
-#: cps/templates/read.html:78 cps/templates/readcbr.html:107
+#: cps/templates/read.html:81 cps/templates/readcbr.html:107
 msgid "Light"
 msgstr "Chiaro"
 
 #: cps/templates/appearance.html:158 cps/templates/layout.html:184
-#: cps/templates/read.html:80 cps/templates/readcbr.html:108
+#: cps/templates/read.html:83 cps/templates/readcbr.html:108
 msgid "Dark"
 msgstr "Scuro"
 
@@ -3866,9 +3866,8 @@ msgstr "Escludi i progressi di lettura dalla sincronizzazione con Hardcover"
 #: cps/templates/config_edit.html:289 cps/templates/config_view_edit.html:108
 #: cps/templates/cwa_settings.html:259 cps/templates/email_edit.html:71
 #: cps/templates/magic_shelf_edit.html:59
-#: cps/templates/profile_pictures.html:28 cps/templates/read.html:62
-#: cps/templates/schedule_edit.html:33 cps/templates/shelf_edit.html:31
-#: cps/templates/user_edit.html:515
+#: cps/templates/profile_pictures.html:28 cps/templates/schedule_edit.html:33
+#: cps/templates/shelf_edit.html:31 cps/templates/user_edit.html:515
 msgid "Save"
 msgstr "Salva"
 
@@ -7669,87 +7668,99 @@ msgid "Remove highlight"
 msgstr "Rimuovi evidenziazione"
 
 #: cps/templates/read.html:61
+msgid "Write a thought about this passage…"
+msgstr "Scrivi un pensiero su questo passaggio…"
+
+#: cps/templates/read.html:61
 msgid "Your note"
 msgstr "La tua nota"
 
-#: cps/templates/read.html:72
+#: cps/templates/read.html:63
+msgid "Saved with the highlight, and shown on the Highlights page."
+msgstr "Salvata con l’evidenziazione e mostrata nella pagina Sottolineature."
+
+#: cps/templates/read.html:64
+msgid "Save note"
+msgstr "Salva nota"
+
+#: cps/templates/read.html:75
 msgid "Reading settings"
 msgstr "Impostazioni di lettura"
 
-#: cps/templates/read.html:76 cps/templates/readcbr.html:104
+#: cps/templates/read.html:79 cps/templates/readcbr.html:104
 #: cps/templates/readtxt.html:23
 msgid "Theme"
 msgstr "Tema"
 
-#: cps/templates/read.html:79
+#: cps/templates/read.html:82
 msgid "Sepia"
 msgstr "Seppia"
 
-#: cps/templates/read.html:81
+#: cps/templates/read.html:84
 msgid "Black"
 msgstr "Nero"
 
-#: cps/templates/read.html:85
+#: cps/templates/read.html:88
 msgid "Text size"
 msgstr "Dimensione del testo"
 
-#: cps/templates/read.html:89
+#: cps/templates/read.html:92
 msgid "Font"
 msgstr "Carattere"
 
-#: cps/templates/read.html:91
+#: cps/templates/read.html:94
 msgid "Book default"
 msgstr "Predefinito del libro"
 
-#: cps/templates/read.html:93
+#: cps/templates/read.html:96
 msgid "Yahei"
 msgstr "Yahei"
 
-#: cps/templates/read.html:94
+#: cps/templates/read.html:97
 msgid "SimSun"
 msgstr "SimSun"
 
-#: cps/templates/read.html:95
+#: cps/templates/read.html:98
 msgid "KaiTi"
 msgstr "KaiTi"
 
-#: cps/templates/read.html:99
+#: cps/templates/read.html:102
 msgid "Layout"
 msgstr "Impaginazione"
 
-#: cps/templates/read.html:101
+#: cps/templates/read.html:104
 msgid "Two columns"
 msgstr "Due colonne"
 
-#: cps/templates/read.html:102
+#: cps/templates/read.html:105
 msgid "One column"
 msgstr "Una colonna"
 
-#: cps/templates/read.html:105
+#: cps/templates/read.html:108
 msgid "Reflow text when sidebars are open."
 msgstr "Adatta il testo quando le barre laterali sono aperte."
 
-#: cps/templates/read.html:126
+#: cps/templates/read.html:129
 msgid "This EPUB could not be opened. It may be damaged or DRM-protected."
 msgstr ""
 "Impossibile aprire questo EPUB. Potrebbe essere danneggiato o protetto da "
 "DRM."
 
-#: cps/templates/read.html:126
+#: cps/templates/read.html:129
 msgid "Something went wrong while loading this book."
 msgstr "Qualcosa è andato storto nel caricare il libro."
 
-#: cps/templates/read.html:127
+#: cps/templates/read.html:130
 #, python-format
 msgid "Continuing where you left off on your Kobo (%(percent)s)."
 msgstr "Riprendi da dove avevi lasciato sul tuo Kobo (%(percent)s)."
 
-#: cps/templates/read.html:128
+#: cps/templates/read.html:131
 #, python-format
 msgid "Continuing where you left off in KOReader (%(percent)s)."
 msgstr "Riprendi da dove avevi lasciato in KOReader (%(percent)s)."
 
-#: cps/templates/read.html:129
+#: cps/templates/read.html:132
 msgid "The highlight could not be saved. Check your connection."
 msgstr ""
 "Non è stato possibile salvare l’evidenziazione. Controlla la connessione."
