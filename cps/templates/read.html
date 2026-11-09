@@ -54,12 +54,15 @@
         <button type="button" class="hl-color" data-hl-color="{{ color }}" title="{{ label }}" aria-label="{{ _('Highlight in %(color)s', color=label) }}"></button>
         {%- endfor %}
         <span class="hl-sep" aria-hidden="true"></span>
-        <button type="button" class="hl-btn" data-hl-note title="{{ _('Add a note') }}" aria-label="{{ _('Add a note') }}">{{ ui.icon('edit') }}</button>
+        <button type="button" class="hl-btn hl-btn--label" data-hl-note title="{{ _('Add a note') }}">{{ ui.icon('edit') }}<span>{{ _('Note') }}</span></button>
         <button type="button" class="hl-btn" data-hl-delete title="{{ _('Remove highlight') }}" aria-label="{{ _('Remove highlight') }}">{{ ui.icon('trash') }}</button>
       </div>
       <form class="hl-note" data-hl-note-form hidden>
-        <textarea rows="3" maxlength="2000" placeholder="{{ _('Your note') }}" aria-label="{{ _('Your note') }}"></textarea>
-        <button type="submit" class="hl-save">{{ _('Save') }}</button>
+        <textarea rows="3" maxlength="2000" placeholder="{{ _('Write a thought about this passage…') }}" aria-label="{{ _('Your note') }}"></textarea>
+        <div class="hl-note-actions">
+          <span class="hl-hint">{{ _('Saved with the highlight, and shown on the Highlights page.') }}</span>
+          <button type="submit" class="hl-save">{{ _('Save note') }}</button>
+        </div>
       </form>
     </div>
     <div id="reader-toast" class="reader-toast" role="status" aria-live="polite" hidden></div>

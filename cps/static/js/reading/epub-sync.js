@@ -145,9 +145,16 @@
   (cfg.highlights || []).forEach(function (item) { marks[item.cfi] = item; });
 
   function draw(cfi) {
+    var color = COLORS[marks[cfi].color] || COLORS.yellow;
     try { rendition.annotations.remove(cfi, "highlight"); } catch (e) {}
+    try { rendition.annotations.remove(cfi, "underline"); } catch (e) {}
     rendition.annotations.highlight(cfi, {}, function (event) { openBar(cfi, event && event.target); }, "sc-highlight",
-      { fill: COLORS[marks[cfi].color] || COLORS.yellow, "fill-opacity": "0.38", "mix-blend-mode": "multiply" });
+      { fill: color, "fill-opacity": "0.38", "mix-blend-mode": "multiply" });
+    if (marks[cfi].note) {
+      // A passage with a note also gets a line under it, so notes can be spotted while reading.
+      rendition.annotations.underline(cfi, {}, function (event) { openBar(cfi, event && event.target); }, "sc-note",
+        { stroke: color, "stroke-width": "2", "stroke-opacity": "0.9" });
+    }
   }
   book.ready.then(function () { Object.keys(marks).forEach(draw); });
 
@@ -194,8 +201,8 @@
     openedAt = Date.now();
     active = { cfi: cfi, text: marks[cfi] ? marks[cfi].text : "" };
     deleteButton.hidden = false;
-    noteForm.hidden = true;
     noteText.value = (marks[cfi] && marks[cfi].note) || "";
+    noteForm.hidden = !noteText.value;
     markColor(marks[cfi] && marks[cfi].color);
     place(element && element.getBoundingClientRect ? element.getBoundingClientRect() : null);
   }
@@ -259,6 +266,7 @@
         var cfi = active.cfi;
         delete marks[cfi];
         try { rendition.annotations.remove(cfi, "highlight"); } catch (e) {}
+        try { rendition.annotations.remove(cfi, "underline"); } catch (e) {}
         post(cfg.highlightDeleteUrl, { cfi: cfi }).catch(function () { toast(i18n.highlight_failed); });
         hideBar();
       }
