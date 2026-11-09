@@ -64,6 +64,11 @@ from the library:
   lists the book under *Continue reading*. *Profile → Devices → KOReader* shows the last sync, the
   device and how many books have progress.
 - The percentage is also shared with Kobo sync, so a Kobo using its own reader picks it up.
+- The built-in reader takes part too. Read a few pages in the browser and KOReader offers to continue
+  from there, as it does for another device: the position comes from the device called
+  *Scriptorium*. Both directions are exact to the paragraph when KOReader reads the same file as the
+  browser. With another copy, such as a KEPUB on a Kobo, plugin 1.3 or later goes to the same
+  percentage instead.
 
 ## Highlights
 

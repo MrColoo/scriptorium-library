@@ -106,9 +106,10 @@ forward.
 
 The EPUB reader is one of your reading devices, like a Kobo or KOReader:
 
-- **It continues where you left off**, on any of them. Open a book you were reading on your Kobo and
-  it starts at the same point, with a short message saying so. Your place in the reader goes back
-  the other way too: the book page, *Continue reading* and your Kobo see it.
+- **It continues where you left off**, on any of them. Open a book you were reading on your Kobo or
+  in KOReader and it starts at the same point, with a short message saying so. KOReader's position
+  is followed to the paragraph. It works the other way too: the book page, *Continue reading* and
+  your Kobo see where you are, and KOReader offers to continue from there at its next sync.
 - **Highlights**: select some text, pick a colour, and add a note if you like. Tap a highlight to
   change its colour, edit the note or remove it. They appear on the [Highlights](#highlights) page.
 - **Reading time** is measured page by page and counts in [Reading statistics](#reading-statistics)
