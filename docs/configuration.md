@@ -107,7 +107,7 @@ allowed or denied tags.
 
 **Imported from the ingest folder:** ACSM, AZW, AZW3, AZW4, CB7, CBC, CBR, CBZ, CHM, DJVU, DOCX, EPUB,
 FB2, FBZ, HTML, HTMLZ, KEPUB, KFX, KFX-ZIP, LIT, LRF, MOBI, ODT, PDB, PDF, PML, PRC, RB, RTF, SNB,
-TCR, TXT, TXTZ. Audiobooks: M4A, M4B, MP4.
+TCR, TXT, TXTZ.
 
 **Automatic target format:** AZW3, EPUB, KEPUB, MOBI, PDF.
 

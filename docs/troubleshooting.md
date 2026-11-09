@@ -198,9 +198,6 @@ advanced editing tools, and your library stays compatible with it.
 **Can I run it without Docker?** Docker is the supported way. Running from source is meant for
 [development](development.md).
 
-**Does it work with audiobooks?** Yes, with a player in the browser that remembers your position.
-Drop M4B, M4A or MP4 files in `ingest`, or upload other audio formats.
-
 **Does it send anything to the internet?** Only what you turn on, such as metadata lookups and Kobo
 store requests, plus a check for new releases on GitHub, which you can turn off. There is no
 telemetry, and no account with this project.

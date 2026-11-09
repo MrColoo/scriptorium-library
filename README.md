@@ -148,8 +148,8 @@ time. Nothing is locked in.
 - **KOReader sync** plugin for Kindle, PocketBook, Android and Kobo: progress, highlights and reading statistics.
 - **Your devices, your choice**: turn Kobo and KOReader on or off per user; progress shows where it came from.
 - **Continue reading** on the home page, fed by your devices, with time left in each book.
-- **Built-in readers**: EPUB with themes and typography settings, comics, PDF and plain text, plus an
-  audiobook player that remembers where you stopped.
+- **Built-in readers**: EPUB with themes and typography settings, comics, PDF and plain text. The EPUB
+  reader picks up where your Kobo or KOReader left off, and its highlights and reading time join the rest.
 - **OPDS** catalogue for apps like KyBook, Moon+ Reader and Panels.
 - **Send to eReader** by email, automatically for new books if you like.
 

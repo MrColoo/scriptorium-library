@@ -47,7 +47,7 @@ exclude each value.
 
 ## A book page
 
-- **Read in Browser**: opens the reader. Audiobooks open a player that remembers where you stopped.
+- **Read in Browser**: opens the reader, where you last were on any device.
 - **Download**: pick the format.
 - **Send to eReader**: email it to your device. See [Kindle and email](ereaders.md#send-to-a-kindle-or-any-device-by-email).
 - **Shelves**: add it to or remove it from shelves.
@@ -103,14 +103,22 @@ forward.
 | CBZ, CBR, CBT | Comic reader. |
 | DjVu | DjVu viewer. |
 | TXT | Text reader. |
-| MP3, M4B, M4A, MP4, OGG, Opus, WAV, FLAC | Audiobook player. |
 
-Your position is remembered for each book.
+The EPUB reader is one of your reading devices, like a Kobo or KOReader:
+
+- **It continues where you left off**, on any of them. Open a book you were reading on your Kobo and
+  it starts at the same point, with a short message saying so. Your place in the reader goes back
+  the other way too: the book page, *Continue reading* and your Kobo see it.
+- **Highlights**: select some text, pick a colour, and add a note if you like. Tap a highlight to
+  change its colour, edit the note or remove it. They appear on the [Highlights](#highlights) page.
+- **Reading time** is measured page by page and counts in [Reading statistics](#reading-statistics)
+  and [Your year in books](#your-year-in-books), together with KOReader.
 
 ## Highlights
 
-Every passage you highlight on your Kobo or in KOReader appears under **Highlights** after the next
-sync, grouped by book and chapter, with your notes.
+Every passage you highlight on your Kobo, in KOReader or in the built-in reader appears under
+**Highlights**, grouped by book and chapter, with your notes. Those from devices arrive with the next
+sync.
 
 <img src="screenshots/highlights-light.png" alt="Highlights page: passages and notes grouped by book and chapter, with search and Markdown export" width="100%">
 
@@ -123,8 +131,8 @@ and [KOReader](koreader.md#highlights) guides.
 
 ## Reading statistics
 
-With KOReader, **Reading statistics** in the sidebar shows how you read, gathered from all your
-devices:
+**Reading statistics** in the sidebar shows how you read, gathered from KOReader on all your devices
+and from the built-in reader:
 
 - time read today and this week, and your current and best streak of reading days;
 - a calendar of the last year, shaded by how long you read each day;
@@ -132,8 +140,9 @@ devices:
 - your habits: total time, pages, sessions, the longest one and your pace;
 - every book with the time you spent on it, how far you are and roughly how long is left.
 
-Turn it on once on each device, as explained in [KOReader](koreader.md#reading-statistics). The
-same statistics then appear in KOReader on all your devices.
+The built-in reader counts on its own. For KOReader, turn it on once on each device, as explained in
+[KOReader](koreader.md#reading-statistics); its statistics then appear in KOReader on all your devices
+too. Time spent in the built-in reader shows only in Scriptorium.
 
 ## Your year in books
 
