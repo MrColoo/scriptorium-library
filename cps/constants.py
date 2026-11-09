@@ -181,7 +181,7 @@ STABLE_VERSION = os.environ.get("CWA_STABLE_VERSION") or _read_text("/app/CWA_ST
 
 USER_AGENT = f"Calibre-Web-Automated/{INSTALLED_VERSION}"
 # The Scriptorium Sync plugin for KOReader shipped with this version (koreader/plugins/cwasync.koplugin).
-KOREADER_PLUGIN_VERSION = "1.2.0"
+KOREADER_PLUGIN_VERSION = "1.3.0"
 
 NIGHTLY_VERSION = dict()
 NIGHTLY_VERSION[0] = '0af52f205358b0147ee3430f9e6c8fe007c0ea77'

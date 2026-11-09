@@ -274,7 +274,7 @@
   {%- if outdated %}
   <div class="alert alert--warning" role="status">{{ ui.icon('download') }}<div class="alert-body">
     <strong>{{ _('Update the KOReader plugin') }}</strong>
-    <span>{{ _('Version %(version)s brings reading statistics and fixes. These devices still use an older one: %(devices)s.', version=koreader_plugin_version(), devices=outdated|map(attribute='device')|join(', ')) }}</span>
+    <span>{{ _('Version %(version)s of the plugin is out, with new features and fixes. These devices still use an older one: %(devices)s.', version=koreader_plugin_version(), devices=outdated|map(attribute='device')|join(', ')) }}</span>
     <span>{{ _('Download it, replace the cwasync.koplugin folder in koreader/plugins/ on each device and restart KOReader.') }}</span>
     <div><a class="btn btn-sm" href="{{ url_for('static', filename='koplugin.zip') }}" download>{{ ui.icon('download') }}{{ _('Download plugin') }}</a></div>
   </div></div>

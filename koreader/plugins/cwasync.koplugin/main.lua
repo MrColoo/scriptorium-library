@@ -25,7 +25,7 @@ end
 local CWASync = WidgetContainer:extend{
     name = "cwasync",
     title = _("Login to Scriptorium Server"),
-    version = "1.2.0",  -- Plugin version
+    version = "1.3.0",  -- Plugin version
 
     push_timestamp = nil,
     pull_timestamp = nil,
@@ -674,12 +674,16 @@ function CWASync:getDocumentDigest()
     return nil
 end
 
-function CWASync:syncToProgress(progress)
-    logger.dbg("CWASync: [Sync] progress to", progress)
+function CWASync:syncToProgress(progress, percentage)
+    logger.dbg("CWASync: [Sync] progress to", progress, percentage)
     if self.ui.document.info.has_pages then
         self.ui:handleEvent(Event:new("GotoPage", tonumber(progress)))
-    else
+    elseif type(progress) == "string" and progress ~= "" and self.ui.document:isXPointerInDocument(progress) then
         self.ui:handleEvent(Event:new("GotoXPointer", progress))
+    elseif percentage then
+        -- Scriptorium extension: a position from the built-in reader, or from another copy of the book,
+        -- that does not exist in this file. The percentage still lands close.
+        self.ui:handleEvent(Event:new("GotoPercent", percentage * 100))
     end
 end
 
@@ -1127,7 +1131,7 @@ function CWASync:getProgress(ensure_networking, interactive)
             if interactive then
                 -- If user actively pulls progress from other devices,
                 -- we always update the progress without further confirmation.
-                self:syncToProgress(body.progress)
+                self:syncToProgress(body.progress, body.percentage)
                 showSyncedMessage()
                 return
             end
@@ -1141,7 +1145,7 @@ function CWASync:getProgress(ensure_networking, interactive)
             end
             if self_older then
                 if self.settings.sync_forward == SYNC_STRATEGY.SILENT then
-                    self:syncToProgress(body.progress)
+                    self:syncToProgress(body.progress, body.percentage)
                     showSyncedMessage()
                 elseif self.settings.sync_forward == SYNC_STRATEGY.PROMPT then
                     UIManager:show(ConfirmBox:new{
@@ -1149,13 +1153,13 @@ function CWASync:getProgress(ensure_networking, interactive)
                                  Math.round(body.percentage * 100),
                                  body.device),
                         ok_callback = function()
-                            self:syncToProgress(body.progress)
+                            self:syncToProgress(body.progress, body.percentage)
                         end,
                     })
                 end
             else -- if not self_older then
                 if self.settings.sync_backward == SYNC_STRATEGY.SILENT then
-                    self:syncToProgress(body.progress)
+                    self:syncToProgress(body.progress, body.percentage)
                     showSyncedMessage()
                 elseif self.settings.sync_backward == SYNC_STRATEGY.PROMPT then
                     UIManager:show(ConfirmBox:new{
@@ -1163,7 +1167,7 @@ function CWASync:getProgress(ensure_networking, interactive)
                                  Math.round(body.percentage * 100),
                                  body.device),
                         ok_callback = function()
-                            self:syncToProgress(body.progress)
+                            self:syncToProgress(body.progress, body.percentage)
                         end,
                     })
                 end
