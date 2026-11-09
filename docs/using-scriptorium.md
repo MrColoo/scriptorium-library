@@ -114,7 +114,8 @@ The EPUB reader is one of your reading devices, like a Kobo or KOReader:
   change its colour, edit the note or remove it. They appear on the [Highlights](#highlights) page,
   and in KOReader too with plugin 1.3.
 - **Your devices' highlights** are drawn in the book as well, found by their words. Tap one to read
-  where it comes from and its note; change it on the device it was made on. A highlight made in
+  where it comes from and its note, or to delete it: a KOReader highlight is then deleted on the
+  device too, at its next sync, while a Kobo one stays on the Kobo. Change them on the device. A highlight made in
   another edition of the book, whose words are not in this file, only shows on the Highlights page.
 - **Reading time** is measured page by page and counts in [Reading statistics](#reading-statistics)
   and [Your year in books](#your-year-in-books), together with KOReader.
