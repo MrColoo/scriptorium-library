@@ -156,6 +156,10 @@ button.reader-btn { border: 0; background: none; padding: 0; }
   box-shadow: 0 10px 28px rgba(0, 0, 0, .25); font-size: 14px; text-align: center; }
 .reader-toast[hidden] { display: none; }
 .hl-btn--label { width: auto; gap: 6px; padding: 0 10px; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; }
+.hl-from { display: flex; flex-direction: column; gap: 6px; max-width: 300px; padding: 2px 4px; }
+.hl-from[hidden], .hl-row[hidden], .hl-from-note[hidden] { display: none; }
+.hl-from-label { font-size: 12px; font-weight: 600; color: var(--r-muted); }
+.hl-from-note { margin: 0; font-size: 14px; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 40vh; overflow: auto; }
 .hl-note-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .hl-hint { font-size: 11.5px; line-height: 1.3; color: var(--r-muted); }
 .hl-note { width: 300px; }

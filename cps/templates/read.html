@@ -49,7 +49,11 @@
     <div id="progress" aria-live="polite">0%</div>
     <div id="loader" role="status" aria-label="{{ _('Loading…') }}"><span class="spinner"></span></div>
     <div id="hl-bar" class="hl-bar" role="toolbar" aria-label="{{ _('Highlight') }}" hidden>
-      <div class="hl-row">
+      <div class="hl-from" data-hl-from hidden>
+        <span class="hl-from-label" data-hl-from-label></span>
+        <p class="hl-from-note" data-hl-from-note hidden></p>
+      </div>
+      <div class="hl-row" data-hl-edit>
         {%- for color, label in [('yellow', _('Yellow')), ('green', _('Green')), ('blue', _('Blue')), ('pink', _('Pink'))] %}
         <button type="button" class="hl-color" data-hl-color="{{ color }}" title="{{ label }}" aria-label="{{ _('Highlight in %(color)s', color=label) }}"></button>
         {%- endfor %}
@@ -130,7 +134,9 @@
     'i18n': {'open_failed': _('This EPUB could not be opened. It may be damaged or DRM-protected.'), 'load_failed': _('Something went wrong while loading this book.'),
              'from_kobo': _('Continuing where you left off on your Kobo (%(percent)s).', percent='{percent}'),
              'from_koreader': _('Continuing where you left off in KOReader (%(percent)s).', percent='{percent}'),
-             'highlight_failed': _('The highlight could not be saved. Check your connection.')}
+             'highlight_failed': _('The highlight could not be saved. Check your connection.'),
+             'highlight_from_koreader': _('Highlighted in KOReader. Change it on the device.'),
+             'highlight_from_kobo': _('Highlighted on your Kobo. Change it on the device.')}
   }|tojson }}</script>
   <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/compress/jszip_epub.min.js') }}"></script>

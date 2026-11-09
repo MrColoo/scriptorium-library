@@ -164,6 +164,21 @@
   var noteForm = bar && bar.querySelector("[data-hl-note-form]");
   var noteText = noteForm && noteForm.querySelector("textarea");
   var deleteButton = bar && bar.querySelector("[data-hl-delete]");
+  var editRow = bar && bar.querySelector("[data-hl-edit]");
+  var fromBox = bar && bar.querySelector("[data-hl-from]");
+  var fromNote = fromBox && fromBox.querySelector("[data-hl-from-note]");
+
+  // Highlights made on a Kobo or in KOReader are shown with where they come from, and changed there.
+  function showFrom(mark) {
+    var device = mark && mark.source;
+    fromBox.hidden = !device;
+    editRow.hidden = !!device;
+    if (!device) return;
+    fromBox.querySelector("[data-hl-from-label]").textContent =
+      device === "kobo" ? i18n.highlight_from_kobo : i18n.highlight_from_koreader;
+    fromNote.textContent = mark.note || "";
+    fromNote.hidden = !mark.note;
+  }
   var active = null;   // {cfi, text, contents (only for a fresh selection)}
 
   function chapter() {
@@ -202,9 +217,10 @@
     if (!bar || !cfg.signedIn) return;
     openedAt = Date.now();
     active = { cfi: cfi, text: marks[cfi] ? marks[cfi].text : "" };
+    showFrom(marks[cfi]);
     deleteButton.hidden = false;
     noteText.value = (marks[cfi] && marks[cfi].note) || "";
-    noteForm.hidden = !noteText.value;
+    noteForm.hidden = !noteText.value || !!(marks[cfi] && marks[cfi].source);
     markColor(marks[cfi] && marks[cfi].color);
     place(element && element.getBoundingClientRect ? element.getBoundingClientRect() : null);
   }
@@ -226,6 +242,7 @@
       var text = range ? range.toString().replace(/\s+/g, " ").trim() : "";
       if (!text) return;
       active = { cfi: cfiRange, text: text.slice(0, 20000), contents: contents };
+      showFrom(null);
       deleteButton.hidden = !marks[cfiRange];
       noteForm.hidden = true;
       noteText.value = "";
@@ -240,7 +257,7 @@
   }
 
   function save(changes) {
-    if (!active) return;
+    if (!active || (marks[active.cfi] && marks[active.cfi].source)) return;
     var cfi = active.cfi;
     var mark = marks[cfi] = Object.assign({ color: "yellow", note: "", text: active.text }, marks[cfi], changes);
     draw(cfi);
@@ -264,7 +281,7 @@
         noteText.focus();
         return;
       }
-      if (event.target.closest("[data-hl-delete]") && active && marks[active.cfi]) {
+      if (event.target.closest("[data-hl-delete]") && active && marks[active.cfi] && !marks[active.cfi].source) {
         var cfi = active.cfi;
         delete marks[cfi];
         try { rendition.annotations.remove(cfi, "highlight"); } catch (e) {}

@@ -13,7 +13,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-from cps import config_sql, constants, reading_overview, reading_stats, ub, web_reader
+from cps import annotations, config_sql, constants, reading_overview, reading_stats, ub, web_reader
 from cps.progress_syncing.models import KOSyncProgress
 
 pytestmark = pytest.mark.unit
@@ -126,6 +126,36 @@ class TestKOReaderPositions:
         session.commit()
         start = web_reader.start_position(_user(), 7, epub)
         assert start == {"cfi": "epubcfi(/6/2!/4/4)", "percent": 80.0, "source": "koreader", "device": "Kobo Libra"}
+
+
+class TestDeviceHighlights:
+    def test_highlights_from_devices_are_drawn_where_their_words_are(self, session, tmp_path):
+        import zipfile
+        path = tmp_path / "book.epub"
+        with zipfile.ZipFile(path, "w") as z:
+            z.writestr("META-INF/container.xml", '<container xmlns="urn:oasis:names:tc:opendocument:xmlns:container">'
+                       '<rootfiles><rootfile full-path="content.opf"/></rootfiles></container>')
+            z.writestr("content.opf", '<package xmlns="http://www.idpf.org/2007/opf"><metadata/><manifest>'
+                       '<item id="c" href="c.xhtml"/></manifest><spine><itemref idref="c"/></spine></package>')
+            z.writestr("c.xhtml", '<html xmlns="http://www.w3.org/1999/xhtml"><head/><body>'
+                       '<p>Call me Ishmael.</p>\n<p>Some years ago, never mind how long.</p></body></html>')
+        for source, source_id, text, color in [
+                ("web", "epubcfi(/6/2!/4/2,/1:0,/1:4)", "Call", "blue"),
+                ("koreader", "device:libra/1", "Ishmael.\nSome years ago", "red"),
+                ("koreader", "device:phone/1", "Ishmael.\nSome years ago", "red"),   # the same, from another device
+                ("kobo", "k1", "never mind how long", None),
+                ("kobo", "k2", "words from another edition", None)]:
+            session.add(annotations.ub.ReaderAnnotation(user_id=1, book_id=7, source=source, source_id=source_id,
+                                                        text=text, color=color, note="Why?" if source == "kobo" else None,
+                                                        position="/body/DocFragment[1]/body/p[1]" if source == "koreader" else None))
+        session.commit()
+        user = _user()
+        assert [item["cfi"] for item in web_reader.highlights_for(user, 7)] == ["epubcfi(/6/2!/4/2,/1:0,/1:4)"]
+        found = web_reader.highlights_for(user, 7, str(path))
+        assert [(item.get("source"), item["cfi"], item["color"], item["note"]) for item in found] == [
+            (None, "epubcfi(/6/2!/4/2,/1:0,/1:4)", "blue", ""),
+            ("koreader", "epubcfi(/6/2!/4,/2/1:8,/4/1:14)", "pink", ""),
+            ("kobo", "epubcfi(/6/2!/4/4,/1:16,/1:35)", "yellow", "Why?")]
 
 
 class TestReadingTime:

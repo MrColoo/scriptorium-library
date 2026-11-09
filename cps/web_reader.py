@@ -23,7 +23,7 @@ from flask import Blueprint, abort, jsonify, request
 from sqlalchemy import desc
 from sqlalchemy.orm.attributes import flag_modified
 
-from . import calibre_db, config, epub_positions, logger, ub
+from . import annotations, calibre_db, config, epub_positions, logger, ub
 from .cw_login import current_user
 from .usermanagement import user_login_required
 
@@ -34,7 +34,7 @@ web_reader = Blueprint('web_reader', __name__)
 POSITIONS_KEY = "reader_positions"
 MAX_POSITIONS = 300
 MAX_CFI = 2048
-COLORS = ("yellow", "green", "blue", "pink")
+COLORS = ("yellow", "green", "blue", "pink")  # as annotations.READER_COLORS
 WEB_DEVICE = "Scriptorium"            # how the built-in reader appears to KOReader
 WEB_DEVICE_ID = "scriptorium-web"
 READER_FORMATS = ("epub", "kepub")
@@ -169,13 +169,34 @@ def save_position(book_id):
 
 # ---------- Highlights ----------
 
-def highlights_for(user, book_id):
-    """The built-in reader's highlights for a book, for the reader to draw."""
+DEVICE_SOURCES = ("koreader", "kobo")
+MAX_DEVICE_HIGHLIGHTS = 1000
+
+
+def highlights_for(user, book_id, path=None):
+    """Highlights for the reader to draw: its own, and, given the book file, those made on a Kobo or in KOReader.
+
+    A device's highlights are found in the file by their words (see epub_positions.highlight_ranges); the
+    ones whose words are not found, in a copy of the book that differs, are left out. They can be read
+    here but changed only on the device.
+    """
     rows = ub.session.query(ub.ReaderAnnotation).filter(
-        ub.ReaderAnnotation.user_id == int(user.id), ub.ReaderAnnotation.book_id == int(book_id),
-        ub.ReaderAnnotation.source == "web").order_by(ub.ReaderAnnotation.created).all()
-    return [{"cfi": row.source_id, "color": row.color or "yellow", "note": row.note or "", "text": row.text or ""}
-            for row in rows]
+        ub.ReaderAnnotation.user_id == int(user.id), ub.ReaderAnnotation.book_id == int(book_id)
+    ).order_by(ub.ReaderAnnotation.created).all()
+    own = [{"cfi": row.source_id, "color": row.color or "yellow", "note": row.note or "", "text": row.text or ""}
+           for row in rows if row.source == "web"]
+    if not path:
+        return own
+    devices = annotations._without_copies([row for row in rows if row.source in DEVICE_SOURCES and row.text])[:MAX_DEVICE_HIGHLIGHTS]
+    ranges = epub_positions.highlight_ranges(path, [(row.text, row.position if row.source == "koreader" else None)
+                                                    for row in devices])
+    seen = {item["cfi"] for item in own}
+    for row, cfi in zip(devices, ranges):
+        if cfi and cfi not in seen:
+            seen.add(cfi)
+            own.append({"cfi": cfi, "color": annotations.reader_color(row.color), "note": row.note or "", "text": row.text,
+                        "source": row.source})
+    return own
 
 
 @web_reader.route("/read/<int:book_id>/highlights", methods=["POST"])

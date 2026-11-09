@@ -177,3 +177,207 @@ def xpointer_to_cfi(path, xpointer):
     except Exception as e:
         log.debug("Could not translate %s in %s: %s", xpointer, path, e)
         return None
+
+
+# ---------- Highlights: finding the words in the book ----------
+#
+# A highlight made on a device carries its words and roughly where they start. The built-in reader needs
+# an exact CFI range instead, so the words are looked up in the chapter's text. Whitespace is left out
+# on both sides: devices turn line breaks and runs of spaces into one space or a new line, and paragraphs
+# may sit side by side in the markup with nothing between them.
+
+_SKIP_CHARS = {"­", "​", "‌", "‍", "﻿"}
+_MIN_WORDS = 2
+_found = {}
+
+
+def _squeeze(text):
+    return "".join(char for char in text if not char.isspace() and char not in _SKIP_CHARS)
+
+
+def _utf16(text):
+    """Offsets in the reader are counted in UTF-16 units, as in JavaScript."""
+    return len(text.encode("utf-16-le")) // 2
+
+
+class _Chapter:
+    """The text of one spine item without whitespace, and where each piece comes from.
+
+    epub.js numbers the text nodes of an element on their own (step 1 is the first text node, 3 the
+    second and so on), whatever elements stand between them, so that is how they are counted here.
+    """
+
+    def __init__(self, body):
+        self.body = body
+        self.parts = []  # (start in self.text, element, index of the text node in it, raw text)
+        chunks, length = [], 0
+        counters = {}
+
+        def add(owner, raw):
+            nonlocal length
+            index = counters.get(owner, 0)
+            counters[owner] = index + 1
+            squeezed = _squeeze(raw)
+            if squeezed:
+                self.parts.append((length, owner, index, raw))
+                chunks.append(squeezed)
+                length += len(squeezed)
+
+        def walk(node):
+            if node.text:
+                add(node, node.text)
+            for child in node:
+                if isinstance(child.tag, str):
+                    walk(child)
+                if child.tail:
+                    add(node, child.tail)
+
+        walk(body)
+        self.text = "".join(chunks)
+        self.starts = [part[0] for part in self.parts]
+
+    def start_of(self, element):
+        """Where an element's text begins, or None."""
+        for start, owner, _index, _raw in self.parts:
+            if owner is element or element in owner.iterancestors():
+                return start
+        return None
+
+    def point(self, position, end=False):
+        """(element, text node index, UTF-16 offset) of a character of self.text, or of the end of one."""
+        import bisect
+        target = position - 1 if end else position
+        part = self.parts[bisect.bisect_right(self.starts, target) - 1]
+        start, owner, index, raw = part
+        seen = start
+        for offset, char in enumerate(raw):
+            if char.isspace() or char in _SKIP_CHARS:
+                continue
+            if seen == target:
+                return owner, index, _utf16(raw[:offset + 1] if end else raw[:offset])
+            seen += 1
+        return owner, index, _utf16(raw)
+
+
+def _element_steps(element, html):
+    steps = []
+    node = element
+    while node is not None and node is not html:
+        parent = node.getparent()
+        steps.append(2 * (_elements(parent).index(node) + 1))
+        node = parent
+    return list(reversed(steps))
+
+
+def _range_cfi(book, index, chapter, first, last):
+    start, end = chapter.point(first), chapter.point(last, end=True)
+    html = chapter.body.getparent()
+    start_steps = _element_steps(start[0], html)
+    end_steps = _element_steps(end[0], html)
+    common = 0
+    while common < min(len(start_steps), len(end_steps)) and start_steps[common] == end_steps[common]:
+        common += 1
+
+    def relative(steps, point):
+        return "".join("/{}".format(step) for step in steps[common:]) + "/{}:{}".format(2 * point[1] + 1, point[2])
+
+    return "epubcfi(/{}/{}!/{},{},{})".format(book.spine_step, 2 * index, "/".join(str(s) for s in start_steps[:common]),
+                                              relative(start_steps, start), relative(end_steps, end))
+
+
+def _hint(book, xpointer):
+    """(spine index, element) a KOReader position points at, as far as it goes."""
+    match = _XPOINTER.match(xpointer or "")
+    if not match:
+        return None, None
+    index = int(match.group(1))
+    body = book.body(index)
+    if body is None:
+        return None, None
+    node = body
+    for part in (match.group(2) or "").split("/"):
+        if not part:
+            continue
+        name, _, position = part.partition("[")
+        position = int(position.rstrip("]") or 1) if position else 1
+        same = [child for child in _elements(node) if _name(child) == name.lower()]
+        if len(same) < position:
+            break
+        node = same[position - 1]
+    return index, node
+
+
+def highlight_ranges(path, highlights):
+    """The built-in reader's CFI range for each highlight made elsewhere, or None where the words are not found.
+
+    highlights: [(text, xpointer or None)]. With KOReader's start position the chapter it names is searched
+    first and the match nearest to it wins; without one (a Kobo highlight) the whole book is searched.
+    """
+    results = [None] * len(highlights)
+    try:
+        key = (path, os.path.getmtime(path))
+        book = _book(path)
+    except Exception as e:
+        log.debug("Cannot look for highlights in %s: %s", path, e)
+        return results
+    chapters = {}
+
+    def chapter(index):
+        if index not in chapters:
+            body = book.body(index)
+            chapters[index] = _Chapter(body) if body is not None else None
+        return chapters[index]
+
+    for number, (text, xpointer) in enumerate(highlights):
+        wanted = _squeeze(text or "")
+        if len((text or "").split()) < _MIN_WORDS and len(wanted) < 12:
+            continue  # a word or two could be anywhere
+        cache_key = (key, wanted, xpointer)
+        if cache_key in _found:
+            results[number] = _found[cache_key]
+            continue
+        try:
+            hinted, element = _hint(book, xpointer)
+            order = list(range(1, len(book.items) + 1))
+            if hinted:
+                order.remove(hinted)
+                order.insert(0, hinted)
+            cfi = None
+            for index in order:
+                current = chapter(index)
+                if current is None:
+                    continue
+                matches = []
+                position = current.text.find(wanted)
+                while position != -1 and len(matches) < 50:
+                    matches.append(position)
+                    position = current.text.find(wanted, position + 1)
+                if not matches:
+                    continue
+                best = matches[0]
+                if index == hinted and element is not None:
+                    near = current.start_of(element)
+                    if near is not None:
+                        best = min(matches, key=lambda found: abs(found - near))
+                cfi = _range_cfi(book, index, current, best, best + len(wanted))
+                break
+        except Exception as e:
+            log.debug("Could not place a highlight in %s: %s", path, e)
+            cfi = None
+        if len(_found) > 2000:
+            _found.clear()
+        _found[cache_key] = results[number] = cfi
+    return results
+
+
+def range_xpointers(path, cfi_range):
+    """KOReader's positions for the start and the end of a CFI range of the built-in reader: (pos0, pos1).
+
+    Either is None when it cannot be worked out; they are exact to the character only in plain text.
+    """
+    match = re.match(r"^epubcfi\(([^,]*),([^,]*),([^,]*)\)$", cfi_range or "")
+    if not match:
+        return cfi_to_xpointer(path, cfi_range), None
+    base, start, end = match.groups()
+    return (cfi_to_xpointer(path, "epubcfi({}{})".format(base, start)),
+            cfi_to_xpointer(path, "epubcfi({}{})".format(base, end)))

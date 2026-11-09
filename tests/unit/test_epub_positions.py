@@ -77,3 +77,53 @@ def test_a_damaged_file_gives_nothing(tmp_path):
     broken.write_bytes(b"not a zip")
     assert epub_positions.cfi_to_xpointer(str(broken), "epubcfi(/6/4!/4/6)") is None
     assert epub_positions.xpointer_to_cfi(str(broken), "/body/DocFragment[2]/body/p[1]") is None
+
+
+class TestHighlights:
+    """Highlights made on a device are found in the book by their words, for the built-in reader to draw."""
+
+    @pytest.fixture
+    def book(self, tmp_path):
+        path = tmp_path / "highlights.epub"
+        with zipfile.ZipFile(path, "w") as z:
+            z.writestr("META-INF/container.xml",
+                       '<container xmlns="urn:oasis:names:tc:opendocument:xmlns:container">'
+                       '<rootfiles><rootfile full-path="OEBPS/content.opf"/></rootfiles></container>')
+            z.writestr("OEBPS/content.opf",
+                       '<package xmlns="http://www.idpf.org/2007/opf"><metadata/><manifest>'
+                       '<item id="a" href="one.xhtml"/><item id="b" href="two.xhtml"/></manifest>'
+                       '<spine><itemref idref="a"/><itemref idref="b"/></spine></package>')
+            z.writestr("OEBPS/one.xhtml", '<html xmlns="http://www.w3.org/1999/xhtml"><body>'
+                       '<p>One <em>very</em> short line, Call me Ishmael.</p></body></html>')
+            z.writestr("OEBPS/two.xhtml", CHAPTER_2)
+        return str(path)
+
+    def test_words_across_paragraphs(self, book):
+        # KOReader joins paragraphs with a new line; the markup has spaces and line breaks between them.
+        found = epub_positions.highlight_ranges(book, [("Call me Ishmael.\nSome years", "/body/DocFragment[2]/body/p[1]/text().0")])
+        assert found == ["epubcfi(/6/4!/4,/6/1:0,/8/1:10)"]
+
+    def test_words_across_inline_markup(self, book):
+        # No <head>: the body is step 2. "One " is the paragraph's first text node (step 1) and " short
+        # line…" its second (step 3), as epub.js counts them.
+        assert epub_positions.highlight_ranges(book, [("very short line", None)]) == ["epubcfi(/6/2!/2/2,/2/1:0,/3:11)"]
+
+    def test_the_match_nearest_to_the_device_position_wins(self, book):
+        # The same words open chapter one too: with KOReader's position, chapter two is searched first.
+        assert epub_positions.highlight_ranges(book, [("Call me Ishmael.", "/body/DocFragment[2]/body/p[1]")]) == \
+            ["epubcfi(/6/4!/4/6,/1:0,/1:16)"]
+        # Without one (a Kobo highlight), the first in the book.
+        assert epub_positions.highlight_ranges(book, [("Call me Ishmael.", None)]) == ["epubcfi(/6/2!/2/2,/3:13,/3:29)"]
+
+    def test_inside_nested_elements(self, book):
+        assert epub_positions.highlight_ranges(book, [("in the scene. Second", "/body/DocFragment[2]/body/div[1]")]) == \
+            ["epubcfi(/6/4!/4/4,/2/1:6,/4/1:6)"]
+
+    def test_words_not_in_the_book_and_single_words_give_nothing(self, book):
+        assert epub_positions.highlight_ranges(book, [("not in this book at all", None), ("Ishmael", None), ("", None)]) == \
+            [None, None, None]
+
+    def test_web_highlights_start_where_koreader_can_go(self, book):
+        assert epub_positions.range_xpointers(book, "epubcfi(/6/4!/4,/6/1:0,/8/1:10)") == \
+            ("/body/DocFragment[2]/body/p[1]/text().0", "/body/DocFragment[2]/body/p[2]/text().10")
+        assert epub_positions.range_xpointers(book, "nonsense") == (None, None)

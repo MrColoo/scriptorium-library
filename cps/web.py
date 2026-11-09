@@ -2895,9 +2895,9 @@ def read_book(book_id, book_format):
     if current_user.is_authenticated and not current_user.is_anonymous:
         from . import web_reader
         try:
-            start_position = web_reader.start_position(current_user, book_id,
-                                                       web_reader.book_file(book, book_format))
-            reader_highlights = web_reader.highlights_for(current_user, book_id)
+            reader_file = web_reader.book_file(book, book_format)
+            start_position = web_reader.start_position(current_user, book_id, reader_file)
+            reader_highlights = web_reader.highlights_for(current_user, book_id, reader_file)
         except Exception as e:
             log.debug("Could not load the reading position of book %s: %s", book_id, e)
     # Track read activity
