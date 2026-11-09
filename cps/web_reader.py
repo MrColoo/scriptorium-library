@@ -177,8 +177,8 @@ def highlights_for(user, book_id, path=None):
     """Highlights for the reader to draw: its own, and, given the book file, those made on a Kobo or in KOReader.
 
     A device's highlights are found in the file by their words (see epub_positions.highlight_ranges); the
-    ones whose words are not found, in a copy of the book that differs, are left out. They can be read
-    here but changed only on the device.
+    ones whose words are not found, in a copy of the book that differs, are left out. They can be deleted
+    here (see annotations.delete_device_highlight) and changed only on the device.
     """
     rows = ub.session.query(ub.ReaderAnnotation).filter(
         ub.ReaderAnnotation.user_id == int(user.id), ub.ReaderAnnotation.book_id == int(book_id)
@@ -195,7 +195,7 @@ def highlights_for(user, book_id, path=None):
         if cfi and cfi not in seen:
             seen.add(cfi)
             own.append({"cfi": cfi, "color": annotations.reader_color(row.color), "note": row.note or "", "text": row.text,
-                        "source": row.source})
+                        "source": row.source, "id": row.id})
     return own
 
 
@@ -225,7 +225,16 @@ def save_highlight(book_id):
 @web_reader.route("/read/<int:book_id>/highlights/delete", methods=["POST"])
 @user_login_required
 def delete_highlight(book_id):
-    cfi = _clip(_payload().get("cfi"), 500)
+    data = _payload()
+    if data.get("id") is not None:  # a highlight made on a Kobo or in KOReader
+        try:
+            row_id = int(data.get("id"))
+        except (TypeError, ValueError):
+            abort(400)
+        deleted = annotations.delete_device_highlight(current_user, book_id, row_id)
+        ub.session_commit("Device highlight {} deleted in the reader by user {}".format(row_id, current_user.id))
+        return ("", 204) if deleted else ("", 404)
+    cfi = _clip(data.get("cfi"), 500)
     if not cfi:
         abort(400)
     deleted = ub.session.query(ub.ReaderAnnotation).filter(

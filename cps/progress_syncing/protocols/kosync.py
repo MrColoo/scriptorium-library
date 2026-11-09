@@ -856,8 +856,10 @@ def update_annotations():
             removed_web = []  # absent, or an empty Lua table encoded as an object
         from ... import annotations
         device = data.get("device_id") or data.get("device")
-        stored, removed = annotations.replace_koreader(user.id, book_id, items,
-                                                       device if isinstance(device, str) else None, removed_web)
+        device = device if isinstance(device, str) else None
+        annotations.forget_deleted(user, book_id, device, items)
+        stored, removed = annotations.replace_koreader(user.id, book_id, items, device, removed_web,
+                                                       annotations.deleted_on_server(user, book_id))
         ub.session.commit()
         log.info(f"Stored {stored} KOReader highlights for user {user.id}, book {book_id} ({removed} removed)")
         return create_sync_response({"document": document, "calibre_book_id": book_id, "stored": stored})
@@ -882,7 +884,8 @@ def get_annotations(document: str):
                              "datetime": "2026-10-28 21:15:03", "pos0": "/body/DocFragment[3]/body/p[4]"}]
         }
 
-    pos0, where KOReader should find the words, is left out when it cannot be worked out.
+    pos0, where KOReader should find the words, is left out when it cannot be worked out. "deleted" lists
+    the device's own highlights deleted in Scriptorium ("device:<id>/<highlight id>"), for it to remove.
     Returns 202 with no highlights when the document is not a book of this library.
     """
     try:
@@ -903,7 +906,8 @@ def get_annotations(document: str):
         if book is not None:
             path = web_reader.book_file(book, "epub") or web_reader.book_file(book, "kepub")
         items = annotations.web_for_koreader(user.id, book_id, path)
-        return create_sync_response({"document": document, "calibre_book_id": book_id, "annotations": items})
+        return create_sync_response({"document": document, "calibre_book_id": book_id, "annotations": items,
+                                     "deleted": sorted(annotations.deleted_on_server(user, book_id))})
     except KOSyncError as e:
         return handle_sync_error(e)
     except SQLAlchemyError as e:

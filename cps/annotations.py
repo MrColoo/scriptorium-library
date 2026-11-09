@@ -10,6 +10,10 @@
   as they arrive (updated and deleted ones included), whether or not Hardcover is configured.
 - KOReader: the Scriptorium plugin sends every highlight of the open book with its progress; the list
   replaces what was stored for that book, so deletions on the device carry over.
+- Highlights from a device can be deleted in the built-in reader. A KOReader one is remembered as
+  deleted (``user.view_settings["deleted_device_highlights"]``) until the device has removed it too:
+  the plugin learns about it when it fetches the reader's highlights, and until then the device's own
+  list does not bring it back. A Kobo one is only removed here: the Kobo keeps it.
 - The built-in reader (source "web"): its highlights also go to KOReader. Plugin 1.3 fetches them and
   adds them to the book on the device, marked with their id here ("web:<id>"). When it sends them back,
   a changed note or colour updates the highlight here, and one deleted on the device is deleted here.
@@ -191,7 +195,73 @@ def _apply_web_changes(user_id, book_id, changed, removed_ids):
     return removed
 
 
-def replace_koreader(user_id, book_id, items, device=None, removed_web=None):
+DELETED_KEY = "deleted_device_highlights"
+MAX_DELETED = 2000
+
+
+def deleted_on_server(user, book_id):
+    """Source ids of the KOReader highlights of a book deleted in Scriptorium, not yet removed on the device."""
+    state = (getattr(user, "view_settings", None) or {}).get(DELETED_KEY) or {}
+    return set(state.get(str(int(book_id))) or []) if isinstance(state, dict) else set()
+
+
+def _save_deleted(user, book_id, ids):
+    from sqlalchemy.orm.attributes import flag_modified
+    settings = dict(user.view_settings or {})
+    state = dict(settings.get(DELETED_KEY) or {})
+    if ids:
+        state[str(int(book_id))] = sorted(ids)[:MAX_DELETED]
+    else:
+        state.pop(str(int(book_id)), None)
+    if state:
+        settings[DELETED_KEY] = state
+    else:
+        settings.pop(DELETED_KEY, None)
+    user.view_settings = settings
+    flag_modified(user, "view_settings")
+
+
+def delete_device_highlight(user, book_id, row_id):
+    """Delete a Kobo or KOReader highlight from Scriptorium, with its copies from other devices. The caller commits.
+
+    Returns the number of rows deleted. KOReader ones are remembered so the device removes them too.
+    """
+    row = ub.session.query(ub.ReaderAnnotation).filter(
+        ub.ReaderAnnotation.id == int(row_id), ub.ReaderAnnotation.user_id == int(user.id),
+        ub.ReaderAnnotation.book_id == int(book_id), ub.ReaderAnnotation.source.in_(SOURCES)).first()
+    if row is None:
+        return 0
+    rows = [row]
+    if row.position:
+        rows += ub.session.query(ub.ReaderAnnotation).filter(
+            ub.ReaderAnnotation.user_id == int(user.id), ub.ReaderAnnotation.book_id == int(book_id),
+            ub.ReaderAnnotation.source == row.source, ub.ReaderAnnotation.id != row.id,
+            ub.ReaderAnnotation.position == row.position, ub.ReaderAnnotation.text == row.text).all()
+    gone = {r.source_id for r in rows if r.source == "koreader"}
+    if gone:
+        _save_deleted(user, book_id, deleted_on_server(user, book_id) | gone)
+    for r in rows:
+        ub.session.delete(r)
+    return len(rows)
+
+
+def forget_deleted(user, book_id, device, items):
+    """Stop remembering the deleted highlights this device no longer has. The caller commits."""
+    deleted = deleted_on_server(user, book_id)
+    if not deleted:
+        return
+    scope = _device_scope(device)
+    sent = set()
+    for item in items or []:
+        fields = normalize_koreader(item) if isinstance(item, dict) else None
+        if fields:
+            sent.add(scope + fields["source_id"])
+    still = {source_id for source_id in deleted if not source_id.startswith(scope) or source_id in sent}
+    if still != deleted:
+        _save_deleted(user, book_id, still)
+
+
+def replace_koreader(user_id, book_id, items, device=None, removed_web=None, deleted=None):
     """Make the highlights one KOReader device holds for a book match the list it sent. The caller commits.
 
     Each device only replaces its own, so with KOReader on a Kobo and on a phone, a sync from one never
@@ -199,7 +269,9 @@ def replace_koreader(user_id, book_id, items, device=None, removed_web=None):
     the device that sends one of them again takes it over, and the others leave them alone.
     Highlights the device got from the built-in reader come back with their id here: they stay the
     reader's, with the device's note and colour; removed_web lists those deleted on the device.
+    deleted: source ids of highlights deleted in Scriptorium that the device has not removed yet.
     """
+    deleted = deleted or set()
     scope = _device_scope(device)
     wanted = {}
     web_changes = {}
@@ -209,7 +281,7 @@ def replace_koreader(user_id, book_id, items, device=None, removed_web=None):
             web_changes[web_id] = item
             continue
         fields = normalize_koreader(item)
-        if fields:
+        if fields and scope + fields["source_id"] not in deleted and fields["source_id"] not in deleted:
             wanted[fields["source_id"]] = fields
     removed_ids = {web_id for web_id in map(_web_id, (removed_web or [])[:MAX_ITEMS]) if web_id is not None}
     removed = _apply_web_changes(user_id, book_id, web_changes, removed_ids - set(web_changes))

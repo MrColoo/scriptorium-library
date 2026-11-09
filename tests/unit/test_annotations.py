@@ -247,3 +247,56 @@ def test_the_passage_of_the_day_can_be_turned_off(monkeypatch):
     assert not annotations.shows_passage(user) and user.view_settings["theme"] == "dark"
     annotations.set_passage(user, True)
     assert annotations.shows_passage(user) and annotations.PASSAGE_KEY not in user.view_settings
+
+
+class TestDeletedInTheReader:
+    """A device's highlight deleted in the built-in reader stays deleted, and KOReader is told."""
+
+    @pytest.fixture
+    def user(self, monkeypatch):
+        monkeypatch.setattr("sqlalchemy.orm.attributes.flag_modified", lambda *a: None)
+        return SimpleNamespace(id=1, view_settings={})
+
+    def _koreader(self, session, device, item_id, text="Call me Ishmael. Some years ago", position="/body/p[3]"):
+        row = annotations.ub.ReaderAnnotation(user_id=1, book_id=7, source="koreader",
+                                              source_id="device:{}/{}".format(device, item_id), text=text, position=position)
+        session.add(row)
+        session.commit()
+        return row
+
+    def test_koreader_highlight_with_its_copies(self, session, user):
+        row = self._koreader(session, "libra", "a")
+        self._koreader(session, "phone", "b")  # the same passage, from another device
+        self._koreader(session, "libra", "c", text="Another passage entirely", position="/body/p[9]")
+        assert annotations.delete_device_highlight(user, 7, row.id) == 2
+        session.commit()
+        assert [r.source_id for r in _rows(session)] == ["device:libra/c"]
+        assert annotations.deleted_on_server(user, 7) == {"device:libra/a", "device:phone/b"}
+
+    def test_the_device_does_not_bring_it_back_and_is_then_forgotten(self, session, user):
+        row = self._koreader(session, "libra", "a")
+        annotations.delete_device_highlight(user, 7, row.id)
+        session.commit()
+        still_there = [{"id": "a", "text": row.text, "pos": "/body/p[3]"}, {"id": "n", "text": "A new one"}]
+        annotations.forget_deleted(user, 7, "libra", still_there)
+        annotations.replace_koreader(1, 7, still_there, device="libra", deleted=annotations.deleted_on_server(user, 7))
+        session.commit()
+        assert [r.source_id for r in _rows(session)] == ["device:libra/n"]
+        assert annotations.deleted_on_server(user, 7) == {"device:libra/a"}
+        # The device has removed it: nothing left to remember. Another device's deletions are kept.
+        user.view_settings[annotations.DELETED_KEY]["7"].append("device:phone/z")
+        annotations.forget_deleted(user, 7, "libra", [{"id": "n", "text": "A new one"}])
+        assert annotations.deleted_on_server(user, 7) == {"device:phone/z"}
+
+    def test_kobo_highlights_are_only_removed_here(self, session, user):
+        annotations.apply_kobo_patch(1, 7, {"updatedAnnotations": [_kobo("k1")]})
+        session.commit()
+        row = _rows(session, "kobo")[0]
+        assert annotations.delete_device_highlight(user, 7, row.id) == 1
+        session.commit()
+        assert _rows(session) == [] and annotations.deleted_on_server(user, 7) == set()
+
+    def test_only_the_users_own(self, session, user):
+        row = self._koreader(session, "libra", "a")
+        assert annotations.delete_device_highlight(SimpleNamespace(id=2, view_settings={}), 7, row.id) == 0
+        assert annotations.delete_device_highlight(user, 8, row.id) == 0

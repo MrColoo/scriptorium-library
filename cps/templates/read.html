@@ -135,8 +135,8 @@
              'from_kobo': _('Continuing where you left off on your Kobo (%(percent)s).', percent='{percent}'),
              'from_koreader': _('Continuing where you left off in KOReader (%(percent)s).', percent='{percent}'),
              'highlight_failed': _('The highlight could not be saved. Check your connection.'),
-             'highlight_from_koreader': _('Highlighted in KOReader. Change it on the device.'),
-             'highlight_from_kobo': _('Highlighted on your Kobo. Change it on the device.')}
+             'highlight_from_koreader': _('Highlighted in KOReader. Deleting it here deletes it on the device too, at its next sync.'),
+             'highlight_from_kobo': _('Highlighted on your Kobo. Deleting it here removes it from Scriptorium only.')}
   }|tojson }}</script>
   <script src="{{ url_for('static', filename='js/libs/jquery.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/compress/jszip_epub.min.js') }}"></script>

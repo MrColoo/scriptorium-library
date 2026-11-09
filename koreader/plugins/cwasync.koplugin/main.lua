@@ -799,6 +799,12 @@ local function positionString(value)
     return nil
 end
 
+-- The id a highlight is known by on the server: when it was made and where.
+local function annotationId(item)
+    local pos = positionString(item.page) or positionString(item.pageno)
+    return tostring(item.datetime or "") .. "|" .. tostring(pos or ""), pos
+end
+
 function CWASync:getAnnotationsForSync()
     local list = {}
     local signature = {}
@@ -809,9 +815,9 @@ function CWASync:getAnnotationsForSync()
             local note = item.note
             -- Page bookmarks have no drawer; keep them only when they carry a note.
             if (item.drawer and text and text ~= "") or (note and note ~= "") then
-                local pos = positionString(item.page) or positionString(item.pageno)
+                local id, pos = annotationId(item)
                 table.insert(list, {
-                    id = tostring(item.datetime or "") .. "|" .. tostring(pos or ""),
+                    id = id,
                     text = item.drawer and text or nil,
                     note = note,
                     chapter = item.chapter,
@@ -1022,7 +1028,37 @@ function CWASync:addWebHighlight(item)
     return true
 end
 
-function CWASync:applyWebHighlights(list)
+-- Highlights of this device deleted in Scriptorium's built-in reader: delete them here too.
+-- The server names them "device:<device id>/<id>" (plugin 1.1 and older highlights: just "<id>").
+function CWASync:removeDeletedHighlights(deleted)
+    if type(deleted) ~= "table" or #deleted == 0 or not (self.ui.bookmark and self.ui.bookmark.removeItemByIndex) then
+        return false
+    end
+    local gone = {}
+    local scope = "device:" .. tostring(self.device_id or Device.model or "unknown"):sub(1, 64) .. "/"
+    for _, id in ipairs(deleted) do
+        if type(id) == "string" then
+            if id:sub(1, #scope) == scope then
+                gone[id:sub(#scope + 1)] = true
+            elseif not id:find("^device:") then
+                gone[id] = true
+            end
+        end
+    end
+    local remove = {}
+    for index, item in ipairs(self.ui.annotation.annotations) do
+        if not item.scriptorium_id and gone[(annotationId(item))] then
+            table.insert(remove, index)
+        end
+    end
+    table.sort(remove, function(a, b) return a > b end)
+    for _, index in ipairs(remove) do
+        self.ui.bookmark:removeItemByIndex(index)
+    end
+    return #remove > 0
+end
+
+function CWASync:applyWebHighlights(list, deleted)
     local annotation = self.ui.annotation
     local seen = self:webHighlightsSeen()
     local local_items = {}
@@ -1071,6 +1107,9 @@ function CWASync:applyWebHighlights(list)
         end
     end
     self:saveWebHighlightsSeen(seen)
+    if self:removeDeletedHighlights(deleted) then
+        changed = true
+    end
     if changed then
         UIManager:setDirty(self.ui.dialog, "ui")
         self.annotations_sent = {}  -- what the server has changed: send the book's highlights again
@@ -1108,7 +1147,7 @@ function CWASync:pullAnnotations(doc_digest)
             local list = body.annotations
             if type(list) ~= "table" then return end
             self.web_searches = 0
-            local done, err = pcall(self.applyWebHighlights, self, list)
+            local done, err = pcall(self.applyWebHighlights, self, list, body.deleted)
             if not done then logger.warn("CWASync: could not add highlights from the browser:", err) end
         end)
 end
