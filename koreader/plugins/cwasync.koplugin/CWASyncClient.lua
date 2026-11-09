@@ -178,6 +178,7 @@ function CWASyncClient:update_annotations(
         annotations,
         device,
         device_id,
+        removed_web,
         callback)
     self.client:reset_middlewares()
     self.client:enable("Format.JSON")
@@ -194,12 +195,46 @@ function CWASyncClient:update_annotations(
                 annotations = annotations,
                 device = device,
                 device_id = device_id,
+                removed_web = removed_web,
             })
         end)
         if ok then
             callback(res.status == 200 or res.status == 202, res.body)
         else
             logger.dbg("CWASyncClient:update_annotations failure:", res)
+            callback(false, res and res.body)
+        end
+    end)
+    self.client:enable("AsyncHTTP", {thread = co})
+    coroutine.resume(co)
+    if UIManager.looper then UIManager:setInputTimeout() end
+    socketutil:reset_timeout()
+end
+
+-- Scriptorium extension (plugin 1.3): the highlights made in the built-in reader for a document.
+function CWASyncClient:get_annotations(
+        username,
+        password,
+        document,
+        callback)
+    self.client:reset_middlewares()
+    self.client:enable("Format.JSON")
+    self.client:enable("GinClient")
+    self.client:enable("CWASyncAuth", {
+        username = username,
+        password = password,
+    })
+    socketutil:set_timeout(PROGRESS_TIMEOUTS[1], PROGRESS_TIMEOUTS[2])
+    local co = coroutine.create(function()
+        local ok, res = pcall(function()
+            return self.client:get_annotations({
+                document = document,
+            })
+        end)
+        if ok then
+            callback(res.status == 200, res.body)
+        else
+            logger.dbg("CWASyncClient:get_annotations failure:", res)
             callback(false, res and res.body)
         end
     end)

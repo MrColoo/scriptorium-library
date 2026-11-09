@@ -10,6 +10,9 @@
   as they arrive (updated and deleted ones included), whether or not Hardcover is configured.
 - KOReader: the Scriptorium plugin sends every highlight of the open book with its progress; the list
   replaces what was stored for that book, so deletions on the device carry over.
+- The built-in reader (source "web"): its highlights also go to KOReader. Plugin 1.3 fetches them and
+  adds them to the book on the device, marked with their id here ("web:<id>"). When it sends them back,
+  a changed note or colour updates the highlight here, and one deleted on the device is deleted here.
 
 Everything lives in the reader_annotation table, one row per highlight.
 """
@@ -30,6 +33,11 @@ log = logger.create()
 annotations = Blueprint('annotations', __name__)
 
 SOURCES = ("kobo", "koreader")
+WEB_ID_PREFIX = "web:"
+READER_COLORS = ("yellow", "green", "blue", "pink")
+# KOReader's colour names, shown with the nearest of the built-in reader's own
+_NEAREST_COLOR = {"red": "pink", "purple": "pink", "orange": "yellow", "olive": "green", "cyan": "blue",
+                  "gray": "yellow", "grey": "yellow"}
 MAX_TEXT = 20000
 MAX_SHORT = 500
 MAX_ITEMS = 10000
@@ -100,6 +108,19 @@ def normalize_koreader(item):
     }
 
 
+def reader_color(value):
+    """The built-in reader's colour closest to a device's colour name."""
+    value = (value or "").strip().lower() if isinstance(value, str) else ""
+    return value if value in READER_COLORS else _NEAREST_COLOR.get(value, "yellow")
+
+
+def _web_id(value):
+    """The row id in "web:<id>", or None."""
+    if isinstance(value, str) and value.startswith(WEB_ID_PREFIX) and value[len(WEB_ID_PREFIX):].isdigit():
+        return int(value[len(WEB_ID_PREFIX):])
+    return None
+
+
 def _upsert(user_id, book_id, source, fields):
     row = ub.session.query(ub.ReaderAnnotation).filter(
         ub.ReaderAnnotation.user_id == int(user_id),
@@ -144,24 +165,57 @@ def _device_scope(device):
     return "{}{}/".format(DEVICE_PREFIX, _clip(device, 64) or "unknown")
 
 
-def replace_koreader(user_id, book_id, items, device=None):
+def _web_rows(user_id, book_id, ids):
+    if not ids:
+        return []
+    return ub.session.query(ub.ReaderAnnotation).filter(
+        ub.ReaderAnnotation.user_id == int(user_id), ub.ReaderAnnotation.book_id == int(book_id),
+        ub.ReaderAnnotation.source == "web", ub.ReaderAnnotation.id.in_(list(ids))).all()
+
+
+def _apply_web_changes(user_id, book_id, changed, removed_ids):
+    """Notes and colours changed in KOReader on highlights of the built-in reader, and the ones deleted there."""
+    removed = 0
+    for row in _web_rows(user_id, book_id, removed_ids):
+        ub.session.delete(row)
+        removed += 1
+    for row in _web_rows(user_id, book_id, changed):
+        item = changed[row.id]
+        note = _clip(item.get("note"), MAX_TEXT)
+        if note != row.note:
+            row.note = note
+        color = item.get("color")
+        if isinstance(color, str) and color in READER_COLORS and color != row.color:
+            row.color = color  # KOReader's other colours have no match here: the reader's stays
+    return removed
+
+
+def replace_koreader(user_id, book_id, items, device=None, removed_web=None):
     """Make the highlights one KOReader device holds for a book match the list it sent. The caller commits.
 
     Each device only replaces its own, so with KOReader on a Kobo and on a phone, a sync from one never
     removes the other's highlights. Highlights stored before devices were told apart carry no device:
     the device that sends one of them again takes it over, and the others leave them alone.
+    Highlights the device got from the built-in reader come back with their id here: they stay the
+    reader's, with the device's note and colour; removed_web lists those deleted on the device.
     """
     scope = _device_scope(device)
     wanted = {}
+    web_changes = {}
     for item in (items or [])[:MAX_ITEMS]:
+        web_id = _web_id(item.get("scriptorium_id")) if isinstance(item, dict) else None
+        if web_id is not None:
+            web_changes[web_id] = item
+            continue
         fields = normalize_koreader(item)
         if fields:
             wanted[fields["source_id"]] = fields
+    removed_ids = {web_id for web_id in map(_web_id, (removed_web or [])[:MAX_ITEMS]) if web_id is not None}
+    removed = _apply_web_changes(user_id, book_id, web_changes, removed_ids - set(web_changes))
     existing = ub.session.query(ub.ReaderAnnotation).filter(
         ub.ReaderAnnotation.user_id == int(user_id),
         ub.ReaderAnnotation.book_id == int(book_id),
         ub.ReaderAnnotation.source == "koreader").all()
-    removed = 0
     for row in existing:
         if row.source_id.startswith(scope):
             if row.source_id[len(scope):] not in wanted:
@@ -173,6 +227,32 @@ def replace_koreader(user_id, book_id, items, device=None):
     for source_id, fields in wanted.items():
         _upsert(user_id, book_id, "koreader", dict(fields, source_id=scope + source_id))
     return len(wanted), removed
+
+
+def web_for_koreader(user_id, book_id, path=None):
+    """The built-in reader's highlights of a book, for the KOReader plugin to add to the book on the device.
+
+    pos0 and pos1 are where it starts and ends in KOReader's notation, translated through the library's
+    file (see epub_positions); the plugin checks the words there and looks for them in the book otherwise.
+    """
+    from . import epub_positions
+    rows = ub.session.query(ub.ReaderAnnotation).filter(
+        ub.ReaderAnnotation.user_id == int(user_id), ub.ReaderAnnotation.book_id == int(book_id),
+        ub.ReaderAnnotation.source == "web").order_by(ub.ReaderAnnotation.created).limit(MAX_ITEMS).all()
+    result = []
+    for row in rows:
+        if not row.text:
+            continue
+        item = {"id": "{}{}".format(WEB_ID_PREFIX, row.id), "text": row.text, "note": row.note or "",
+                "color": row.color or "yellow", "chapter": row.chapter or "",
+                "datetime": (row.created or datetime.now(timezone.utc)).strftime("%Y-%m-%d %H:%M:%S")}
+        pos0, pos1 = epub_positions.range_xpointers(path, row.source_id) if path else (None, None)
+        if pos0:
+            item["pos0"] = pos0
+        if pos0 and pos1:
+            item["pos1"] = pos1
+        result.append(item)
+    return result
 
 
 def store_kobo_request(user, entitlement_id, data):

@@ -818,8 +818,10 @@ function CWASync:getAnnotationsForSync()
                     color = item.color,
                     datetime = item.datetime,
                     pos = pos,
+                    scriptorium_id = item.scriptorium_id,
                 })
-                table.insert(signature, tostring(item.datetime_updated or item.datetime or "") .. tostring(note or ""))
+                table.insert(signature, tostring(item.datetime_updated or item.datetime or "") .. tostring(note or "")
+                    .. tostring(item.color or ""))
             end
         end
     else
@@ -847,7 +849,8 @@ end
 
 function CWASync:pushAnnotations(doc_digest)
     local annotations, signature = self:getAnnotationsForSync()
-    if self.annotations_sent[doc_digest] == signature then
+    local removed_web = self:removedWebHighlights(annotations)
+    if self.annotations_sent[doc_digest] == signature and #removed_web == 0 then
         return
     end
     local CWASyncClient = require("CWASyncClient")
@@ -863,11 +866,250 @@ function CWASync:pushAnnotations(doc_digest)
         annotations,
         Device.model,
         self.device_id,
+        removed_web,
         function(ok, body)
             logger.dbg("CWASync: [Push] highlights:", #annotations, "ok:", ok, "body:", body)
             if ok then
                 self.annotations_sent[doc_digest] = signature
+                self:forgetWebHighlights(removed_web)
             end
+        end)
+end
+
+-- Scriptorium extension (plugin 1.3): highlights made in the built-in reader.
+-- They are added to the book here and found by their words: the server says roughly where each one
+-- starts, but the copy on this device may differ from the library's (a KEPUB, say), so the words decide.
+-- Each keeps its id on the server ("web:<id>") in scriptorium_id: a note or colour changed here goes
+-- back to it, and deleting it here deletes it there. The book's settings remember the ones added, with
+-- the note and colour they had, so one deleted here is not added again, and only changes made in the
+-- browser since are brought over.
+local WEB_HIGHLIGHTS_KEY = "scriptorium_web_highlights"
+local SEARCH_MAX_HITS = 200
+local SEARCHES_PER_PULL = 8
+-- The built-in reader's colours, as KOReader names them
+local WEB_COLORS = { yellow = "yellow", green = "green", blue = "blue", pink = "purple" }
+
+local function squeeze(text)
+    -- Without whitespace, soft hyphens or no-break spaces: the two readers lay text out differently.
+    return (tostring(text or ""):gsub("\194\173", ""):gsub("\194\160", ""):gsub("%s+", ""))
+end
+
+local function words(text, count, from_end)
+    local list = {}
+    for word in tostring(text or ""):gmatch("%S+") do
+        table.insert(list, word)
+    end
+    local first = from_end and math.max(1, #list - count + 1) or 1
+    local last = from_end and #list or math.min(#list, count)
+    return table.concat(list, " ", first, last)
+end
+
+function CWASync:webHighlightsSeen()
+    local seen = self.ui.doc_settings and self.ui.doc_settings:readSetting(WEB_HIGHLIGHTS_KEY)
+    return type(seen) == "table" and seen or {}
+end
+
+function CWASync:saveWebHighlightsSeen(seen)
+    if self.ui.doc_settings then
+        self.ui.doc_settings:saveSetting(WEB_HIGHLIGHTS_KEY, seen)
+    end
+end
+
+-- Ids of highlights added from the built-in reader that are no longer in the book: deleted here.
+function CWASync:removedWebHighlights(annotations)
+    local present = {}
+    for _, item in ipairs(annotations or {}) do
+        if item.scriptorium_id then present[item.scriptorium_id] = true end
+    end
+    local removed = {}
+    for id, info in pairs(self:webHighlightsSeen()) do
+        if not present[id] and type(info) == "table" and info.added then
+            table.insert(removed, id)
+        end
+    end
+    table.sort(removed)
+    return removed
+end
+
+-- The server has deleted them: keep remembering them only as gone, so they are never added again.
+function CWASync:forgetWebHighlights(ids)
+    if not ids or #ids == 0 or not self.ui or not self.ui.document then return end
+    local seen = self:webHighlightsSeen()
+    for _, id in ipairs(ids) do
+        seen[id] = { gone = true }
+    end
+    self:saveWebHighlightsSeen(seen)
+end
+
+-- Where the words of a highlight are in this book: pos0, pos1 and the text there, or nil.
+function CWASync:findWebHighlight(item)
+    local document = self.ui.document
+    local wanted = squeeze(item.text)
+    if wanted == "" then return end
+    local function textBetween(pos0, pos1)
+        local ok, text = pcall(document.getTextFromXPointers, document, pos0, pos1)
+        return ok and type(text) == "string" and text or nil
+    end
+    -- The server's positions, when this is the same file as the library's
+    if type(item.pos0) == "string" and type(item.pos1) == "string"
+            and document:isXPointerInDocument(item.pos0) and document:isXPointerInDocument(item.pos1) then
+        local text = textBetween(item.pos0, item.pos1)
+        if text and squeeze(text) == wanted then
+            return item.pos0, item.pos1, text
+        end
+    end
+    -- Otherwise look for the first and the last words. Each search reads the whole book, which takes a
+    -- moment on an e-reader, so pullAnnotations does only a few at a time.
+    self.web_searches = (self.web_searches or 0) + 1
+    local function search(from_end)
+        for _, count in ipairs({ 8, 4, 2, 1 }) do
+            local ok, hits = pcall(document.findAllText, document, words(item.text, count, from_end),
+                false, 0, SEARCH_MAX_HITS, false)
+            if ok and type(hits) == "table" and #hits > 0 then return hits, count end
+        end
+        return {}
+    end
+    local starts, count = search(false)
+    if #starts == 0 then return end
+    local ends = starts  -- up to eight words, all found by the first search
+    if count ~= 8 or words(item.text, 9) ~= words(item.text, 8) then
+        ends = search(true)
+    end
+    -- The start nearest to where the server says it is comes first.
+    local hint = type(item.pos0) == "string" and document:isXPointerInDocument(item.pos0)
+        and document:getPageFromXPointer(item.pos0)
+    if hint then
+        local distance = {}
+        for _, hit in ipairs(starts) do
+            distance[hit] = math.abs((document:getPageFromXPointer(hit.start) or 0) - hint)
+        end
+        table.sort(starts, function(a, b) return distance[a] < distance[b] end)
+    end
+    -- The same words, give or take a little punctuation the two readers see differently
+    local slack = math.max(3, math.floor(#wanted / 20))
+    for _, first in ipairs(starts) do
+        for _, last in ipairs(ends) do
+            if (document:compareXPointers(first.start, last["end"]) or -1) >= 0 then
+                local text = textBetween(first.start, last["end"])
+                local found = squeeze(text)
+                if found == wanted or (#found > 0 and math.abs(#found - #wanted) <= slack) then
+                    return first.start, last["end"], text
+                end
+                if #found > #wanted + slack then break end -- too far: try the next start
+            end
+        end
+    end
+end
+
+function CWASync:addWebHighlight(item)
+    local pos0, pos1, text = self:findWebHighlight(item)
+    if not pos0 then return false end
+    local highlight = self.ui.view and self.ui.view.highlight or {}
+    local new = {
+        page = pos0,
+        pos0 = pos0,
+        pos1 = pos1,
+        text = util.cleanupSelectedText(text or item.text),
+        datetime = item.datetime,
+        drawer = highlight.saved_drawer or "lighten",
+        color = WEB_COLORS[item.color] or highlight.saved_color or "yellow",
+        note = (item.note and item.note ~= "") and item.note or nil,
+        chapter = self.ui.toc and self.ui.toc:getTocTitleByPage(pos0) or item.chapter,
+        scriptorium_id = item.id,
+    }
+    local index = self.ui.annotation:addItem(new)
+    self.ui:handleEvent(Event:new("AnnotationsModified", { new, nb_highlights_added = 1, index_modified = index }))
+    return true
+end
+
+function CWASync:applyWebHighlights(list)
+    local annotation = self.ui.annotation
+    local seen = self:webHighlightsSeen()
+    local local_items = {}
+    for index, item in ipairs(annotation.annotations) do
+        if item.scriptorium_id then local_items[item.scriptorium_id] = index end
+    end
+    local on_server, changed = {}, false
+    for _, item in ipairs(list) do
+        if type(item) == "table" and type(item.id) == "string" then
+            on_server[item.id] = true
+            local before = seen[item.id]
+            local index = local_items[item.id]
+            if index then
+                -- Changed in the browser since it was added: bring the note and colour over.
+                local here = annotation.annotations[index]
+                local note = (item.note and item.note ~= "") and item.note or nil
+                if type(before) == "table" and (before.note ~= item.note or before.color ~= item.color) then
+                    here.note = note
+                    here.color = WEB_COLORS[item.color] or here.color
+                    self.ui:handleEvent(Event:new("AnnotationsModified", { here }))
+                    changed = true
+                end
+                seen[item.id] = { added = true, note = item.note, color = item.color }
+            elseif before == nil and (self.web_searches or 0) < SEARCHES_PER_PULL then
+                if self:addWebHighlight(item) then
+                    seen[item.id] = { added = true, note = item.note, color = item.color }
+                    changed = true
+                else
+                    seen[item.id] = { missing = true }  -- not in this copy of the book: not searched again
+                end
+            end
+        end
+    end
+    -- Deleted in the browser: delete it here too.
+    local remove = {}
+    for id, index in pairs(local_items) do
+        if not on_server[id] then table.insert(remove, index) end
+    end
+    table.sort(remove, function(a, b) return a > b end)
+    for _, index in ipairs(remove) do
+        local id = annotation.annotations[index].scriptorium_id
+        if self.ui.bookmark and self.ui.bookmark.removeItemByIndex then
+            self.ui.bookmark:removeItemByIndex(index)
+            seen[id] = { gone = true }
+            changed = true
+        end
+    end
+    self:saveWebHighlightsSeen(seen)
+    if changed then
+        UIManager:setDirty(self.ui.dialog, "ui")
+        self.annotations_sent = {}  -- what the server has changed: send the book's highlights again
+    end
+end
+
+function CWASync:pullAnnotations(doc_digest)
+    local annotation = self.ui and self.ui.annotation
+    local document = self.ui and self.ui.document
+    -- Reflowable books only (EPUB and the like), with KOReader's annotations module (2024.07 and later).
+    if not (self.ui.rolling and annotation and annotation.addItem and type(annotation.annotations) == "table"
+            and document and document.findAllText and document.getTextFromXPointers) then
+        return
+    end
+    local CWASyncClient = require("CWASyncClient")
+    local client = CWASyncClient:new{
+        service_url = self.settings.server .. "/kosync",
+        service_spec = self.path .. "/api.json",
+        plugin_version = self.version,
+    }
+    client:get_annotations(
+        self.settings.username,
+        self.settings.password,
+        doc_digest,
+        function(ok, body)
+            if type(body) == "string" and body:find("^%s*{") then
+                local decoded_ok, decoded = pcall(Json.decode, body)
+                body = decoded_ok and decoded or nil
+            end
+            -- The book may have been closed meanwhile; a list only comes with a library book.
+            if not ok or type(body) ~= "table" or not self.ui or self.ui.document ~= document
+                    or self:getDocumentDigest() ~= doc_digest then
+                return
+            end
+            local list = body.annotations
+            if type(list) ~= "table" then return end
+            self.web_searches = 0
+            local done, err = pcall(self.applyWebHighlights, self, list)
+            if not done then logger.warn("CWASync: could not add highlights from the browser:", err) end
         end)
 end
 
@@ -1051,6 +1293,12 @@ function CWASync:getProgress(ensure_networking, interactive)
         function(ok, body)
             logger.dbg("CWASync: [Pull] progress for", self.view.document.file)
             logger.dbg("CWASync: ok:", ok, "body:", body)
+            -- Scriptorium extension: then the highlights made in the browser. Guarded so a problem
+            -- here can never stop progress sync.
+            UIManager:nextTick(function()
+                local ann_ok, ann_err = pcall(self.pullAnnotations, self, doc_digest)
+                if not ann_ok then logger.warn("CWASync: could not fetch highlights:", ann_err) end
+            end)
 
             if not ok or not body then
                 if interactive then

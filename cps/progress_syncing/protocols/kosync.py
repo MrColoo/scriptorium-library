@@ -818,8 +818,12 @@ def update_annotations():
             "device": "Kobo_libra2",   # Optional: the device model
             "device_id": "3f2a…",      # Optional: KOReader's id for this device (plugin 1.2 and later)
             "annotations": [{"id": "...", "text": "...", "note": "...", "chapter": "...",
-                             "color": "yellow", "datetime": "2026-10-28 21:15:03", "pos": "..."}]
+                             "color": "yellow", "datetime": "2026-10-28 21:15:03", "pos": "..."}],
+            "removed_web": ["web:12"]  # Optional (plugin 1.3): highlights of the built-in reader deleted on the device
         }
+
+    Highlights the device got from the built-in reader carry "scriptorium_id": "web:<id>"; they update
+    that highlight's note and colour instead of being stored as the device's.
 
     The list replaces the highlights that device stored for that book, so deleting one on the device
     deletes it here, while the highlights of the user's other KOReader devices stay. Plugin 1.1 sends no
@@ -847,10 +851,13 @@ def update_annotations():
         book_id = get_book_by_checksum(document)[0]
         if not book_id:
             return create_sync_response({"document": document, "stored": 0}, 202)
+        removed_web = data.get("removed_web")
+        if not isinstance(removed_web, list):
+            removed_web = []  # absent, or an empty Lua table encoded as an object
         from ... import annotations
         device = data.get("device_id") or data.get("device")
         stored, removed = annotations.replace_koreader(user.id, book_id, items,
-                                                       device if isinstance(device, str) else None)
+                                                       device if isinstance(device, str) else None, removed_web)
         ub.session.commit()
         log.info(f"Stored {stored} KOReader highlights for user {user.id}, book {book_id} ({removed} removed)")
         return create_sync_response({"document": document, "calibre_book_id": book_id, "stored": stored})
@@ -858,6 +865,49 @@ def update_annotations():
         return handle_sync_error(e)
     except SQLAlchemyError as e:
         log.error(f"update_annotations: Database error: {str(e)}")
+        ub.session.rollback()
+        return handle_sync_error(KOSyncError(ERROR_INTERNAL, "Database error"))
+
+
+@kosync.route("/kosync/syncs/annotations/<document>", methods=["GET"])
+def get_annotations(document: str):
+    """
+    The highlights made in the built-in reader for a book, for the KOReader plugin to add (Scriptorium extension).
+
+    Response format:
+        {
+            "document": "abc123...",
+            "calibre_book_id": 42,
+            "annotations": [{"id": "web:12", "text": "...", "note": "...", "color": "yellow", "chapter": "...",
+                             "datetime": "2026-10-28 21:15:03", "pos0": "/body/DocFragment[3]/body/p[4]"}]
+        }
+
+    pos0, where KOReader should find the words, is left out when it cannot be worked out.
+    Returns 202 with no highlights when the document is not a book of this library.
+    """
+    try:
+        blocked = _require_kosync_enabled()
+        if blocked:
+            return blocked
+        user = authenticate_user()
+        if not user:
+            raise KOSyncError(ERROR_UNAUTHORIZED_USER, "Unauthorized")
+        if not is_valid_key_field(document):
+            raise KOSyncError(ERROR_DOCUMENT_FIELD_MISSING, "Invalid document field")
+        book_id = get_book_by_checksum(document)[0]
+        if not book_id:
+            return create_sync_response({"document": document, "annotations": []}, 202)
+        from ... import annotations, calibre_db, web_reader
+        book = calibre_db.get_book(book_id)
+        path = None
+        if book is not None:
+            path = web_reader.book_file(book, "epub") or web_reader.book_file(book, "kepub")
+        items = annotations.web_for_koreader(user.id, book_id, path)
+        return create_sync_response({"document": document, "calibre_book_id": book_id, "annotations": items})
+    except KOSyncError as e:
+        return handle_sync_error(e)
+    except SQLAlchemyError as e:
+        log.error(f"get_annotations: Database error: {str(e)}")
         ub.session.rollback()
         return handle_sync_error(KOSyncError(ERROR_INTERNAL, "Database error"))
 

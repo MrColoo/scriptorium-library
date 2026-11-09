@@ -146,6 +146,58 @@ class TestKOReader:
         assert annotations.normalize_koreader({"text": "no id or position"}) is None
 
 
+class TestBuiltInReaderOnKOReader:
+    """Highlights made in the browser go to KOReader, and what happens to them there comes back."""
+
+    def _web(self, session, cfi="epubcfi(/6/4!/4,/6/1:0,/8/1:10)", text="Call me Ishmael. Some years", note=None):
+        row = annotations.ub.ReaderAnnotation(user_id=1, book_id=7, source="web", source_id=cfi, text=text,
+                                              note=note, color="yellow", position=cfi)
+        session.add(row)
+        session.commit()
+        return row
+
+    def test_they_are_listed_for_the_plugin(self, session, monkeypatch):
+        from cps import epub_positions
+        monkeypatch.setattr(epub_positions, "range_xpointers",
+                            lambda path, cfi: ("/body/DocFragment[2]/body/p[1]/text().0", "/body/DocFragment[2]/body/p[2]/text().10"))
+        row = self._web(session, note="A good start")
+        self._web(session, cfi="epubcfi(/6/2!/4/2,/1:0,/1:3)", text=None)  # nothing to find in the book
+        items = annotations.web_for_koreader(1, 7, "book.epub")
+        assert len(items) == 1
+        assert items[0]["id"] == "web:{}".format(row.id)
+        assert (items[0]["text"], items[0]["note"], items[0]["pos0"], items[0]["pos1"]) == \
+            ("Call me Ishmael. Some years", "A good start", "/body/DocFragment[2]/body/p[1]/text().0",
+             "/body/DocFragment[2]/body/p[2]/text().10")
+        assert "pos0" not in annotations.web_for_koreader(1, 7, None)[0]
+
+    def test_coming_back_they_stay_the_readers(self, session):
+        row = self._web(session)
+        sent = [{"scriptorium_id": "web:{}".format(row.id), "id": "x", "text": row.text, "note": "Noted on the Kobo",
+                 "color": "green", "pos": "/body/DocFragment[2]/body/p[1]/text().0"},
+                {"id": "own", "text": "Made on the device", "pos": "/body/p[9]"}]
+        assert annotations.replace_koreader(1, 7, sent, device="libra") == (1, 0)
+        session.commit()
+        assert [(r.source, r.note, r.color) for r in _rows(session)] == \
+            [("koreader", None, None), ("web", "Noted on the Kobo", "green")]
+
+    def test_colours_the_reader_does_not_have_are_not_taken(self, session):
+        row = self._web(session)
+        annotations.replace_koreader(1, 7, [{"scriptorium_id": "web:{}".format(row.id), "color": "red"}], device="libra")
+        assert row.color == "yellow"
+        assert annotations.reader_color("red") == "pink" and annotations.reader_color(None) == "yellow"
+
+    def test_deleted_on_the_device_is_deleted_here(self, session):
+        kept, gone = self._web(session), self._web(session, cfi="epubcfi(/6/2!/4/2,/1:0,/1:9)")
+        other_book = annotations.ub.ReaderAnnotation(user_id=1, book_id=8, source="web", source_id="c", text="t")
+        session.add(other_book)
+        session.commit()
+        sent = [{"scriptorium_id": "web:{}".format(kept.id), "note": ""}]
+        assert annotations.replace_koreader(1, 7, sent, device="libra",
+                                            removed_web=["web:{}".format(gone.id), "web:{}".format(other_book.id), "nonsense"]) == (0, 1)
+        session.commit()
+        assert sorted(r.id for r in _rows(session, "web")) == sorted([kept.id, other_book.id])
+
+
 def test_markdown_export():
     book = SimpleNamespace(title="Dune", authors=[SimpleNamespace(name="Frank Herbert")])
     rows = [SimpleNamespace(chapter="Book One", text="Fear is the mind-killer.\nI will face my fear.", note=None),
