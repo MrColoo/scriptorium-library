@@ -420,6 +420,10 @@
           {%- endif %}
         {%- endfor %}
         <label class="check"><input type="checkbox" name="Show_detail_random" form="user-form" {% if content.show_detail_random() %}checked{% endif %}><span>{{ _('Show Random Books in Detail View') }}</span></label>
+        {%- if profile and not is_anon %}
+        <input type="hidden" name="passage_setting" value="1" form="user-form">
+        <label class="check"><input type="checkbox" name="show_passage" form="user-form" {% if shows_passage(content) %}checked{% endif %}><span>{{ _('Show a passage of the day from your highlights on the home page') }}</span></label>
+        {%- endif %}
       </div>
     </div>
     {%- if is_admin_view and not new_user and not simple %}

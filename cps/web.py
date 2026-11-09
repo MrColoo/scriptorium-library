@@ -543,7 +543,8 @@ def render_books_list(data, sort_param, book_id, page):
         if website == "newest" and page == 1 and not current_user.is_anonymous:
             continue_reading = reading_overview.get_continue_reading(current_user.id)
             from . import annotations
-            passage = annotations.passage_of_the_day(current_user.id)
+            if annotations.shows_passage(current_user):
+                passage = annotations.passage_of_the_day(current_user.id)
             from . import devices
             if devices.shows(current_user, "kobo"):
                 kobo_last_sync = reading_overview.humanize_since(reading_overview.get_kobo_last_sync(current_user.id))
@@ -2583,6 +2584,11 @@ def change_profile(kobo_support, hardcover_support, local_oauth_check, oauth_sta
                     ub.session.delete(hidden)
                     log.info(f"User {current_user.id} unhid custom shelf {hidden.shelf_id}")
         
+        # Passage of the day on the home page (the profile form says it carries the switch)
+        if to_save.get("passage_setting"):
+            from . import annotations
+            annotations.set_passage(current_user, to_save.get("show_passage") == "on")
+
         # Theme change (force dark)
         if 'theme' in to_save:
             try:

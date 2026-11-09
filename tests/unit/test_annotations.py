@@ -237,3 +237,13 @@ class TestPassageOfTheDay:
 
     def test_none_without_highlights(self, session, library):
         assert annotations.passage_of_the_day(1) is None
+
+
+def test_the_passage_of_the_day_can_be_turned_off(monkeypatch):
+    monkeypatch.setattr("sqlalchemy.orm.attributes.flag_modified", lambda *a: None)
+    user = SimpleNamespace(view_settings={"theme": "dark"})
+    assert annotations.shows_passage(user) and annotations.shows_passage(SimpleNamespace(view_settings=None))
+    annotations.set_passage(user, False)
+    assert not annotations.shows_passage(user) and user.view_settings["theme"] == "dark"
+    annotations.set_passage(user, True)
+    assert annotations.shows_passage(user) and annotations.PASSAGE_KEY not in user.view_settings

@@ -302,6 +302,12 @@ def outdated_koreader_plugins_global(user):
     return outdated_koreader_plugins(user)
 
 
+@jinjia.app_template_global('shows_passage')
+def shows_passage_global(user):
+    from .annotations import shows_passage
+    return shows_passage(user)
+
+
 @jinjia.app_template_global('avatar_url')
 def avatar_url_global(user):
     """URL of the user's profile picture, or None when they have none."""

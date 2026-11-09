@@ -330,8 +330,26 @@ def grouped(user_id, book_id=None, query=None):
     return groups
 
 
+PASSAGE_KEY = "passage_of_the_day"  # in the user's view settings: False hides it
 PASSAGE_MIN = 40     # shorter ones are a word or a name, not a passage
 PASSAGE_MAX = 700    # longer ones do not read well as a quote
+
+
+def shows_passage(user):
+    """Whether the home page shows this user a passage of the day (on unless turned off in the profile)."""
+    return (getattr(user, "view_settings", None) or {}).get(PASSAGE_KEY) is not False
+
+
+def set_passage(user, show):
+    """Turn the passage of the day on or off for a user. The caller commits."""
+    from sqlalchemy.orm.attributes import flag_modified
+    settings = dict(user.view_settings or {})
+    if show:
+        settings.pop(PASSAGE_KEY, None)
+    else:
+        settings[PASSAGE_KEY] = False
+    user.view_settings = settings
+    flag_modified(user, "view_settings")
 
 
 def passage_of_the_day(user_id, today=None):
