@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-09 16:11+0100\n"
+"POT-Creation-Date: 2026-11-09 16:17+0100\n"
 "PO-Revision-Date: 2025-09-08 00:53+0900\n"
 "Last-Translator: limeade23 <admin@limeade.me>\n"
 "Language-Team: Korean <>\n"
@@ -1320,7 +1320,7 @@ msgid "File to be uploaded must have an extension"
 msgstr "확장자가 없는 파일은 업로드할 수 없습니다."
 
 #: cps/editbooks.py:861 cps/editbooks.py:1483 cps/web.py:685 cps/web.py:2878
-#: cps/web.py:2970 cps/web.py:3048
+#: cps/web.py:2971 cps/web.py:3049
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr "선택한 책을 사용할 수 없습니다. 파일이 없거나 접근할 수 없습니다."
@@ -2663,7 +2663,7 @@ msgstr "프로필이 업데이트되었습니다."
 msgid "Oops! An account already exists for this Email."
 msgstr "이미 등록된 이메일 주소입니다."
 
-#: cps/web.py:2983
+#: cps/web.py:2984
 msgid "Invalid book ID."
 msgstr "잘못된 "
 
@@ -7731,25 +7731,25 @@ msgstr "한쪽 보기"
 msgid "Reflow text when sidebars are open."
 msgstr "사이드바가 열릴 경우 텍스트를 재정렬합니다."
 
-#: cps/templates/read.html:129
+#: cps/templates/read.html:130
 msgid "This EPUB could not be opened. It may be damaged or DRM-protected."
 msgstr ""
 
-#: cps/templates/read.html:129
-msgid "Something went wrong while loading this book."
-msgstr ""
-
 #: cps/templates/read.html:130
-#, python-format
-msgid "Continuing where you left off on your Kobo (%(percent)s)."
+msgid "Something went wrong while loading this book."
 msgstr ""
 
 #: cps/templates/read.html:131
 #, python-format
-msgid "Continuing where you left off in KOReader (%(percent)s)."
+msgid "Continuing where you left off on your Kobo (%(percent)s)."
 msgstr ""
 
 #: cps/templates/read.html:132
+#, python-format
+msgid "Continuing where you left off in KOReader (%(percent)s)."
+msgstr ""
+
+#: cps/templates/read.html:133
 msgid "The highlight could not be saved. Check your connection."
 msgstr ""
 
@@ -8958,8 +8958,8 @@ msgstr ""
 #: cps/templates/user_edit.html:277
 #, python-format
 msgid ""
-"Version %(version)s brings reading statistics and fixes. These devices still "
-"use an older one: %(devices)s."
+"Version %(version)s of the plugin is out, with new features and fixes. These "
+"devices still use an older one: %(devices)s."
 msgstr ""
 
 #: cps/templates/user_edit.html:278

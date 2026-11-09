@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Calibre-Web Automated\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-09 16:11+0100\n"
+"POT-Creation-Date: 2026-11-09 16:17+0100\n"
 "PO-Revision-Date: 2026-07-20 20:00+0000\n"
 "Last-Translator: Krux86Language-Team: German\n"
 "Language-Team: de <LL@li.org>\n"
@@ -1356,7 +1356,7 @@ msgid "File to be uploaded must have an extension"
 msgstr "Dateien müssen eine Erweiterung haben, um hochgeladen zu werden"
 
 #: cps/editbooks.py:861 cps/editbooks.py:1483 cps/web.py:685 cps/web.py:2878
-#: cps/web.py:2970 cps/web.py:3048
+#: cps/web.py:2971 cps/web.py:3049
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr ""
@@ -2755,7 +2755,7 @@ msgstr "Erfolg! Profil aktualisiert"
 msgid "Oops! An account already exists for this Email."
 msgstr "Ups! Es existiert bereits ein Benutzer für diese E-Mail-Adresse."
 
-#: cps/web.py:2983
+#: cps/web.py:2984
 msgid "Invalid book ID."
 msgstr "Ungültige Buch-ID."
 
@@ -7869,25 +7869,25 @@ msgstr "Eine Spalte"
 msgid "Reflow text when sidebars are open."
 msgstr "Text umbrechen, wenn Seitenleiste geöffnet ist."
 
-#: cps/templates/read.html:129
+#: cps/templates/read.html:130
 msgid "This EPUB could not be opened. It may be damaged or DRM-protected."
 msgstr ""
 
-#: cps/templates/read.html:129
-msgid "Something went wrong while loading this book."
-msgstr ""
-
 #: cps/templates/read.html:130
-#, python-format
-msgid "Continuing where you left off on your Kobo (%(percent)s)."
+msgid "Something went wrong while loading this book."
 msgstr ""
 
 #: cps/templates/read.html:131
 #, python-format
-msgid "Continuing where you left off in KOReader (%(percent)s)."
+msgid "Continuing where you left off on your Kobo (%(percent)s)."
 msgstr ""
 
 #: cps/templates/read.html:132
+#, python-format
+msgid "Continuing where you left off in KOReader (%(percent)s)."
+msgstr ""
+
+#: cps/templates/read.html:133
 msgid "The highlight could not be saved. Check your connection."
 msgstr ""
 
@@ -9104,8 +9104,8 @@ msgstr ""
 #: cps/templates/user_edit.html:277
 #, python-format
 msgid ""
-"Version %(version)s brings reading statistics and fixes. These devices still "
-"use an older one: %(devices)s."
+"Version %(version)s of the plugin is out, with new features and fixes. These "
+"devices still use an older one: %(devices)s."
 msgstr ""
 
 #: cps/templates/user_edit.html:278

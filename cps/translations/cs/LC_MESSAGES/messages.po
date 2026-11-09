@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  CWA\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-09 16:11+0100\n"
+"POT-Creation-Date: 2026-11-09 16:17+0100\n"
 "PO-Revision-Date: 2026-10-15 00:00+0000\n"
 "Last-Translator: PetriiCzech <petriiczech@gmail.com>\n"
 "Language-Team: \n"
@@ -1330,7 +1330,7 @@ msgid "File to be uploaded must have an extension"
 msgstr "Soubor, který má být odeslán musí mít příponu"
 
 #: cps/editbooks.py:861 cps/editbooks.py:1483 cps/web.py:685 cps/web.py:2878
-#: cps/web.py:2970 cps/web.py:3048
+#: cps/web.py:2971 cps/web.py:3049
 msgid ""
 "Oops! Selected book is unavailable. File does not exist or is not accessible"
 msgstr ""
@@ -2699,7 +2699,7 @@ msgstr "Profil aktualizován"
 msgid "Oops! An account already exists for this Email."
 msgstr "Byl nalezen existující účet pro tuto e-mailovou adresu."
 
-#: cps/web.py:2983
+#: cps/web.py:2984
 msgid "Invalid book ID."
 msgstr "Neplatné ID knihy."
 
@@ -7804,25 +7804,25 @@ msgstr "Jeden sloupec"
 msgid "Reflow text when sidebars are open."
 msgstr "Po otevření postranních panelů přeformátujte text."
 
-#: cps/templates/read.html:129
+#: cps/templates/read.html:130
 msgid "This EPUB could not be opened. It may be damaged or DRM-protected."
 msgstr ""
 
-#: cps/templates/read.html:129
-msgid "Something went wrong while loading this book."
-msgstr ""
-
 #: cps/templates/read.html:130
-#, python-format
-msgid "Continuing where you left off on your Kobo (%(percent)s)."
+msgid "Something went wrong while loading this book."
 msgstr ""
 
 #: cps/templates/read.html:131
 #, python-format
-msgid "Continuing where you left off in KOReader (%(percent)s)."
+msgid "Continuing where you left off on your Kobo (%(percent)s)."
 msgstr ""
 
 #: cps/templates/read.html:132
+#, python-format
+msgid "Continuing where you left off in KOReader (%(percent)s)."
+msgstr ""
+
+#: cps/templates/read.html:133
 msgid "The highlight could not be saved. Check your connection."
 msgstr ""
 
@@ -9038,8 +9038,8 @@ msgstr ""
 #: cps/templates/user_edit.html:277
 #, python-format
 msgid ""
-"Version %(version)s brings reading statistics and fixes. These devices still "
-"use an older one: %(devices)s."
+"Version %(version)s of the plugin is out, with new features and fixes. These "
+"devices still use an older one: %(devices)s."
 msgstr ""
 
 #: cps/templates/user_edit.html:278
