@@ -81,6 +81,19 @@ With KOReader on more than one device, for example a Kobo and a phone, each devi
 kept side by side: a sync from one never removes the other's. Version 1.2 of the plugin tells two
 devices of the same model apart too.
 
+### Highlights between KOReader and the built-in reader
+
+- **KOReader → browser**: your KOReader highlights are drawn in the built-in reader, on the same
+  words. Tap one there to read its note; change it in KOReader.
+- **Browser → KOReader** (plugin 1.3): highlights made in the built-in reader are added to the book
+  in KOReader when you open it with the network on, or when you pull progress. The plugin looks for
+  their words in the book, so they land in the right place even in a KEPUB or another copy; one
+  whose words are not in that copy is left out. A few are added at each sync, as each search reads
+  the whole book.
+- A note or colour you change on one side follows on the other. Colours KOReader has and the
+  browser does not, such as orange, stay on the device.
+- Delete one on either side and it is deleted on the other, without coming back.
+
 ## Reading statistics
 
 KOReader measures how long you read every page. Scriptorium can share those statistics between all

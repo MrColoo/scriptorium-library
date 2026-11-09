@@ -156,8 +156,10 @@ time. Nothing is locked in.
 **Your reading life**
 - **Your year in books**: a full-screen story of your reading year (books, hours, authors, genres,
   streaks, your reading clock, the book you lived in, the line you kept) with a poster to save and share.
-- **Highlights**: every passage and note from your Kobo or KOReader on one page, searchable and
-  exportable to Markdown for Obsidian, Notion or Readwise.
+- **Highlights**: every passage and note from your Kobo, KOReader or the built-in reader on one page,
+  searchable and exportable to Markdown for Obsidian, Notion or Readwise. Device highlights show in
+  the built-in reader, browser highlights reach KOReader, and the home page opens with a passage of
+  the day.
 - **Reading statistics**: time read, streaks, a calendar of your year and your habits, shared
   between all your KOReader devices.
 - **Import from Goodreads or The StoryGraph**: finished books with their dates, what you are reading

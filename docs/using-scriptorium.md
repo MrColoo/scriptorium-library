@@ -111,7 +111,11 @@ The EPUB reader is one of your reading devices, like a Kobo or KOReader:
   is followed to the paragraph. It works the other way too: the book page, *Continue reading* and
   your Kobo see where you are, and KOReader offers to continue from there at its next sync.
 - **Highlights**: select some text, pick a colour, and add a note if you like. Tap a highlight to
-  change its colour, edit the note or remove it. They appear on the [Highlights](#highlights) page.
+  change its colour, edit the note or remove it. They appear on the [Highlights](#highlights) page,
+  and in KOReader too with plugin 1.3.
+- **Your devices' highlights** are drawn in the book as well, found by their words. Tap one to read
+  where it comes from and its note; change it on the device it was made on. A highlight made in
+  another edition of the book, whose words are not in this file, only shows on the Highlights page.
 - **Reading time** is measured page by page and counts in [Reading statistics](#reading-statistics)
   and [Your year in books](#your-year-in-books), together with KOReader.
 
@@ -124,6 +128,8 @@ sync.
 <img src="screenshots/highlights-light.png" alt="Highlights page: passages and notes grouped by book and chapter, with search and Markdown export" width="100%">
 
 - Search across everything you have marked.
+- The home page opens with a **passage of the day**: one of your highlights, a different one each
+  day, with its book and your note.
 - Open a book to see only its highlights.
 - **Export as Markdown** gives you a file ready for Obsidian, Notion or Readwise.
 
